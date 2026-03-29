@@ -1,0 +1,27 @@
+# ── Serveur ───────────────────────────────────────────────────────────────────
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+
+# ── WebRTC ────────────────────────────────────────────────────────────────────
+aiortc>=1.9.0
+av>=12.0.0          # frames audio/vidéo pour aiortc
+
+# ── Audio / VAD ───────────────────────────────────────────────────────────────
+numpy>=1.26.0
+soundfile>=0.12.1
+onnxruntime>=1.18.0 # Silero VAD ONNX
+silero-vad>=5.1.0   # pour récupérer le modèle ONNX facilement
+noisereduce>=3.0.0  # fallback denoising (optionnel si arnndn via ffmpeg)
+
+# ── STT ───────────────────────────────────────────────────────────────────────
+httpx>=0.27.0       # client HTTP async pour Whisper
+
+# ── LLM ───────────────────────────────────────────────────────────────────────
+ollama>=0.2.0       # client Ollama officiel (AsyncClient)
+
+# ── TTS ───────────────────────────────────────────────────────────────────────
+kokoro-onnx>=0.3.0
+
+# ── Tests ─────────────────────────────────────────────────────────────────────
+pytest>=8.0.0
+pytest-asyncio>=0.23.0

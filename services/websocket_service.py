@@ -1,0 +1,220 @@
+"""
+services/websocket_service.py
+Gestion du signaling WebSocket.
+
+Responsabilité :
+  - Accepter les connexions WebSocket
+  - Maintenir le registre des sessions actives
+  - Router les messages entrants vers WebRTCService
+  - Envoyer des événements au client (transcript, réponse LLM, erreurs)
+
+Protocole de signaling (client → serveur) :
+  {"type": "offer",  "sdp": "..."}          → WebRTCService.handle_offer()
+  {"type": "ice",    "candidate": {...}}     → WebRTCService.add_ice_candidate()
+  {"type": "start"}                          → WebRTCService.create_peer() si besoin
+  {"type": "stop"}                           → cleanup()
+
+Protocole de signaling (serveur → client) :
+  {"type": "answer",     "sdp": "..."}
+  {"type": "ice",        "candidate": {...}}
+  {"type": "transcript", "text": "..."}      → texte STT reçu
+  {"type": "response",   "text": "..."}      → fragment de réponse LLM
+  {"type": "interrupted"}                    → TTS interrompu
+  {"type": "error",      "message": "..."}
+"""
+from __future__ import annotations
+
+import logging
+import uuid
+from typing import TYPE_CHECKING
+
+from fastapi import WebSocket, WebSocketDisconnect
+
+from models.session import Session
+
+if TYPE_CHECKING:
+    from services.webrtc_service import WebRTCService
+
+
+logger = logging.getLogger(__name__)
+
+
+class WebSocketService:
+    """
+    Singleton. Injecté dans les routes FastAPI (main.py).
+    """
+
+    def __init__(self, webrtc: "WebRTCService"):
+        self.webrtc = webrtc
+        # Registre de toutes les sessions actives
+        self._sessions: dict[str, Session] = {}
+
+    # ── Connexion ─────────────────────────────────────────────────────────────
+
+    async def connect(self, websocket: WebSocket) -> Session:
+        """
+        Accepter la connexion WebSocket.
+        Créer une Session avec un client_id unique (UUID4).
+        Enregistrer dans self._sessions.
+        Retourner la session créée.
+        """
+        await websocket.accept()
+        client_id = str(uuid.uuid4())
+        session = Session(client_id=client_id, websocket=websocket)
+        self._sessions[client_id] = session
+        logger.info("WS connected client_id=%s", client_id)
+        return session
+
+    async def disconnect(self, session: Session) -> None:
+        """
+        Nettoyer proprement à la déconnexion.
+        Actions :
+          1. Supprimer de self._sessions
+          2. webrtc.cleanup(session)
+          3. Logger la déconnexion
+        """
+        self._sessions.pop(session.client_id, None)
+        try:
+            await self.webrtc.cleanup(session)
+        except Exception:
+            logger.exception("Error during WebRTC cleanup client_id=%s", session.client_id)
+        logger.info("WS disconnected client_id=%s", session.client_id)
+
+    # ── Boucle de messages ────────────────────────────────────────────────────
+
+    async def listen(self, session: Session) -> None:
+        """
+        Boucle principale de réception des messages WebSocket.
+        Appelée depuis la route FastAPI après connect().
+
+        while True:
+            data = await session.websocket.receive_json()
+            await handle_message(session, data)
+
+        Capturer WebSocketDisconnect → appeler disconnect(session).
+        Capturer toute autre exception → logger + disconnect(session).
+        """
+        try:
+            while True:
+                data = await session.websocket.receive_json()
+                if not isinstance(data, dict):
+                    await self.send_error(session, "invalid message")
+                    continue
+                await self.handle_message(session, data)
+        except WebSocketDisconnect:
+            pass
+        except Exception:
+            logger.exception("WS listen error client_id=%s", session.client_id)
+        finally:
+            await self.disconnect(session)
+
+    async def handle_message(self, session: Session, message: dict) -> None:
+        """
+        Router un message entrant selon son type.
+
+        "offer"  → sdp = webrtc.handle_offer(session, message["sdp"])
+                    send(session, {"type": "answer", "sdp": sdp})
+
+        "ice"    → webrtc.add_ice_candidate(session, message["candidate"])
+
+        "start"  → logger + éventuellement créer le peer à l'avance
+
+        "stop"   → webrtc.cleanup(session)
+
+        Inconnu → send(session, {"type": "error", "message": "unknown type"})
+        """
+        msg_type = message.get("type")
+        if msg_type == "offer":
+            sdp = message.get("sdp")
+            if not isinstance(sdp, str) or not sdp.strip():
+                await self.send_error(session, "missing sdp")
+                return
+            try:
+                answer_sdp = await self.webrtc.handle_offer(session, sdp)
+            except Exception as exc:
+                logger.exception("handle_offer failed client_id=%s", session.client_id)
+                await self.send_error(session, f"offer failed: {exc}")
+                return
+            await self.send(session, {"type": "answer", "sdp": answer_sdp})
+            return
+
+        if msg_type == "ice":
+            candidate = message.get("candidate")
+            if candidate is None:
+                # end-of-candidates support
+                return
+            if not isinstance(candidate, dict):
+                await self.send_error(session, "invalid candidate")
+                return
+            try:
+                await self.webrtc.add_ice_candidate(session, candidate)
+            except Exception as exc:
+                logger.exception("add_ice_candidate failed client_id=%s", session.client_id)
+                await self.send_error(session, f"ice failed: {exc}")
+            return
+
+        if msg_type == "start":
+            # Optionnel : pré-créer le peer côté serveur avant offer.
+            if session.peer is None:
+                try:
+                    await self.webrtc.create_peer(session)
+                except Exception as exc:
+                    logger.exception("create_peer failed client_id=%s", session.client_id)
+                    await self.send_error(session, f"start failed: {exc}")
+                    return
+            await self.send(session, {"type": "started"})
+            return
+
+        if msg_type == "stop":
+            await self.webrtc.cleanup(session)
+            await self.send(session, {"type": "stopped"})
+            return
+
+        await self.send_error(session, "unknown type")
+
+    # ── Envoi ─────────────────────────────────────────────────────────────────
+
+    async def send(self, session: Session, data: dict) -> None:
+        """
+        Envoyer un message JSON au client de cette session.
+        Ignorer silencieusement si la connexion est fermée.
+        """
+        try:
+            await session.websocket.send_json(data)
+        except Exception:
+            # La connexion peut être fermée / en erreur.
+            return
+
+    async def send_transcript(self, session: Session, text: str) -> None:
+        """Raccourci : envoyer le transcript STT au client."""
+        await self.send(session, {"type": "transcript", "text": text})
+
+    async def send_response_chunk(self, session: Session, text: str) -> None:
+        """Raccourci : envoyer un fragment de réponse LLM au client."""
+        await self.send(session, {"type": "response", "text": text})
+
+    async def send_error(self, session: Session, message: str) -> None:
+        """Raccourci : envoyer une erreur au client."""
+        await self.send(session, {"type": "error", "message": message})
+
+    # ── Utilitaires ──────────────────────────────────────────────────────────
+
+    def get_session(self, client_id: str) -> Session | None:
+        return self._sessions.get(client_id)
+
+    @property
+    def active_sessions(self) -> int:
+        return len(self._sessions)
+
+    @property
+    def active_webrtc_peers(self) -> int:
+        """
+        Nombre de sessions ayant un RTCPeerConnection actif.
+        """
+        return sum(1 for s in self._sessions.values() if getattr(s, "peer", None) is not None)
+
+    async def health_check(self) -> bool:
+        """
+        Health check local: le serveur WS est "up" si ce service est instancié.
+        """
+        return True

@@ -1,0 +1,407 @@
+intent,example
+start_navigation,Start navigation to the next stop
+start_navigation,Start navigation to the next delivery point
+start_navigation,Start route to the next order
+start_navigation,Start driving to the next customer
+start_navigation,Go to the next delivery stop
+start_navigation,Go to the next assigned delivery
+start_navigation,Go to the next pickup location
+start_navigation,Go to the drop-off point
+start_navigation,Navigate to the next stop
+start_navigation,Navigate to the next delivery address
+start_navigation,Navigate to the next order location
+start_navigation,Navigate to the pickup address
+start_navigation,Take me to the next stop
+start_navigation,Take me to the next delivery
+start_navigation,Take me to the next customer
+start_navigation,Take me to the pickup location
+start_navigation,Route me to the next stop
+start_navigation,Route me to the next delivery
+start_navigation,Route me to the next order
+start_navigation,Route me to the pickup point
+start_navigation,Begin navigation to the next stop
+start_navigation,Begin route to the next delivery
+start_navigation,Begin driving to the next customer
+start_navigation,Begin navigation to the pickup
+start_navigation,Drive to the next delivery point
+start_navigation,Drive to the next stop
+start_navigation,Drive to the customer location
+start_navigation,Drive to the pickup address
+start_navigation,Head to the next stop
+start_navigation,Head to the next delivery
+start_navigation,Head to the next customer
+start_navigation,Head to the pickup point
+start_navigation,Proceed to the next stop
+start_navigation,Proceed to the delivery address
+start_navigation,Proceed to the next order
+start_navigation,Proceed to the pickup location
+start_navigation,Move to the next stop
+start_navigation,Move to the next delivery
+start_navigation,Move to the next customer
+start_navigation,Move to the drop-off location
+start_navigation,Let’s go to the next stop
+start_navigation,Let’s go to the next delivery
+start_navigation,I’m going to the next customer
+start_navigation,I’m heading to the next stop
+start_navigation,I need to go to the next delivery
+start_navigation,Can you take me to the next stop
+start_navigation,Can you navigate to the next delivery
+start_navigation,Send me to the next stop
+start_navigation,Send me to the next delivery point
+start_navigation,Take me over to the next customer
+start_navigation,Alright go to the next stop
+start_navigation,Let’s head to the next delivery
+start_navigation,Let’s continue to the next stop
+start_navigation,Take me where I need to deliver
+start_navigation,I’m on my way to the next stop
+start_navigation,Going to the next delivery now
+start_navigation,Heading to the pickup now
+start_navigation,Let’s move to the next stop
+start_navigation,Bring me to the next delivery
+start_navigation,Go ahead to the next stop
+start_navigation,Start the fastest route to the next stop
+start_navigation,Take the best route to the next delivery
+start_navigation,Navigate using the quickest path to the customer
+start_navigation,Start navigation avoiding traffic to the next stop
+start_navigation,Route to the nearest delivery point
+start_navigation,Find the fastest way to the next order
+start_navigation,Start optimized route to the next stop
+start_navigation,Take the shortest path to the delivery
+show_deliveries,Show my deliveries
+show_deliveries,Show all deliveries
+show_deliveries,Show my delivery list
+show_deliveries,Show the list of deliveries
+show_deliveries,Display my deliveries
+show_deliveries,Display all deliveries
+show_deliveries,Display the delivery list
+show_deliveries,Open my deliveries
+show_deliveries,Open the delivery list
+show_deliveries,Open all deliveries
+show_deliveries,Get my deliveries
+show_deliveries,Get all deliveries
+show_deliveries,Get the delivery list
+show_deliveries,List my deliveries
+show_deliveries,List all deliveries
+show_deliveries,List the delivery tasks
+show_deliveries,View my deliveries
+show_deliveries,View all deliveries
+show_deliveries,View the delivery list
+show_deliveries,Check my deliveries
+show_deliveries,Check all deliveries
+show_deliveries,Check the delivery list
+show_deliveries,Show my assigned deliveries
+show_deliveries,Show my delivery tasks
+show_deliveries,Display assigned deliveries
+show_deliveries,Open assigned deliveries
+show_deliveries,Get assigned deliveries
+show_deliveries,List assigned deliveries
+show_deliveries,View assigned deliveries
+show_deliveries,What deliveries do I have
+show_deliveries,What are my deliveries
+show_deliveries,What’s on my delivery list
+show_deliveries,Do I have any deliveries
+show_deliveries,Let me see my deliveries
+show_deliveries,Can you show my deliveries
+show_deliveries,Can I see my delivery list
+show_deliveries,I want to see my deliveries
+show_deliveries,Show me what I need to deliver
+show_deliveries,Show me my delivery tasks
+show_deliveries,Let me check my deliveries
+show_deliveries,I need to see my deliveries
+show_deliveries,Bring up my deliveries
+show_deliveries,Pull up my delivery list
+show_deliveries,Show me all my orders
+show_deliveries,What orders do I have
+show_deliveries,Let’s see my deliveries
+show_deliveries,Can you list my deliveries
+show_deliveries,Show my current deliveries
+show_deliveries,What deliveries are assigned to me
+show_deliveries,Show my assigned orders
+show_deliveries,Display my current orders
+show_deliveries,Open my delivery tasks
+show_deliveries,List my delivery jobs
+show_deliveries,Show my active deliveries
+show_deliveries,Get my active orders
+show_deliveries,View my current delivery tasks
+show_deliveries,Show pending deliveries
+show_deliveries,List pending orders
+show_deliveries,Display delivery assignments
+repeat_last_sentence,Repeat the last sentence
+repeat_last_sentence,Repeat that sentence
+repeat_last_sentence,Say that again
+repeat_last_sentence,Repeat what you just said
+repeat_last_sentence,Repeat the last message
+repeat_last_sentence,Repeat your last sentence
+repeat_last_sentence,Say the last sentence again
+repeat_last_sentence,Repeat the previous sentence
+repeat_last_sentence,Repeat that again
+repeat_last_sentence,Repeat the last thing you said
+repeat_last_sentence,Say that one more time
+repeat_last_sentence,Repeat your last message
+repeat_last_sentence,Repeat the previous message
+repeat_last_sentence,Repeat what you said
+repeat_last_sentence,Repeat the last response
+repeat_last_sentence,Say the previous sentence again
+repeat_last_sentence,Repeat your last statement
+repeat_last_sentence,Repeat that message
+repeat_last_sentence,Repeat the last output
+repeat_last_sentence,Say that again please
+repeat_last_sentence,Repeat it again
+repeat_last_sentence,Repeat that please
+repeat_last_sentence,Repeat the last line
+repeat_last_sentence,Repeat the last instruction
+repeat_last_sentence,Repeat the last info
+repeat_last_sentence,Repeat the last detail
+repeat_last_sentence,Repeat the last phrase
+repeat_last_sentence,Say that sentence again
+repeat_last_sentence,Repeat your previous response
+repeat_last_sentence,Repeat the last thing
+repeat_last_sentence,Can you say that again
+repeat_last_sentence,Could you repeat that
+repeat_last_sentence,I didn’t catch that repeat please
+repeat_last_sentence,Sorry repeat that
+repeat_last_sentence,Can you repeat what you said
+repeat_last_sentence,I missed that can you repeat
+repeat_last_sentence,Repeat that I didn’t hear it
+repeat_last_sentence,Can you say it again please
+repeat_last_sentence,Repeat again please
+repeat_last_sentence,One more time please
+repeat_last_sentence,Can you repeat the last part
+repeat_last_sentence,Repeat that last part
+repeat_last_sentence,I didn’t get that repeat it
+repeat_last_sentence,Please repeat the last sentence
+repeat_last_sentence,Repeat what you just said please
+repeat_last_sentence,Can you go over that again
+repeat_last_sentence,Repeat that slowly
+repeat_last_sentence,Say that again I missed it
+repeat_last_sentence,Repeat the last bit
+repeat_last_sentence,Can you repeat that for me
+repeat_last_sentence,Can you say that again
+repeat_last_sentence,Could you repeat that
+repeat_last_sentence,I didn’t catch that repeat please
+repeat_last_sentence,Sorry repeat that
+repeat_last_sentence,Can you repeat what you said
+repeat_last_sentence,I missed that can you repeat
+repeat_last_sentence,Repeat that I didn’t hear it
+repeat_last_sentence,Can you say it again please
+repeat_last_sentence,Repeat again please
+repeat_last_sentence,One more time please
+repeat_last_sentence,Can you repeat the last part
+repeat_last_sentence,Repeat that last part
+repeat_last_sentence,I didn’t get that repeat it
+repeat_last_sentence,Please repeat the last sentence
+repeat_last_sentence,Repeat what you just said please
+repeat_last_sentence,Can you go over that again
+repeat_last_sentence,Repeat that slowly
+repeat_last_sentence,Say that again I missed it
+repeat_last_sentence,Repeat the last bit
+repeat_last_sentence,Can you repeat that for me
+repeat_last_sentence,What did you just say
+repeat_last_sentence,What was that
+repeat_last_sentence,Can you say that again more clearly
+repeat_last_sentence,I didn’t understand repeat that
+repeat_last_sentence,Repeat that clearly
+repeat_last_sentence,Say that again more slowly
+repeat_last_sentence,Repeat the last part clearly
+repeat_last_sentence,Go over that again
+repeat_last_sentence,Can you repeat that slowly
+repeat_last_sentence,Repeat that one more time
+get_next_client_name,Who is the next client
+get_next_client_name,Get the next client name
+get_next_client_name,Show the next client
+get_next_client_name,Display the next client name
+get_next_client_name,Give me the next client
+get_next_client_name,Tell me the next client name
+get_next_client_name,Who is my next customer
+get_next_client_name,Get my next customer
+get_next_client_name,Show my next customer
+get_next_client_name,Display my next customer name
+get_next_client_name,Give me my next customer
+get_next_client_name,Tell me who the next customer is
+get_next_client_name,Who is the next delivery client
+get_next_client_name,Get the name of the next delivery client
+get_next_client_name,Show the next delivery customer
+get_next_client_name,Display the next delivery client name
+get_next_client_name,Give me the next delivery client
+get_next_client_name,Tell me the next delivery customer
+get_next_client_name,Who is next on my route
+get_next_client_name,Who is the next stop customer
+get_next_client_name,Who’s next
+get_next_client_name,Who do I have next
+get_next_client_name,Who is my next stop
+get_next_client_name,Who’s my next customer
+get_next_client_name,Who am I delivering to next
+get_next_client_name,Who do I deliver to next
+get_next_client_name,Who’s the next delivery for
+get_next_client_name,Who’s the next client on the list
+get_next_client_name,Who’s next on my deliveries
+get_next_client_name,Who is the next person
+get_next_client_name,Who do I go to next
+get_next_client_name,Who’s my next delivery
+get_next_client_name,Next client please
+get_next_client_name,Give me the next client
+get_next_client_name,Who’s coming up next
+get_next_client_name,Who is next in line
+get_next_client_name,Who’s the next stop for delivery
+get_next_client_name,Who’s the next customer on route
+get_next_client_name,Who is my next delivery client
+get_next_client_name,Next customer name
+get_next_client_name,Show the customer for the next stop
+get_next_client_name,Display the client for the upcoming delivery
+get_next_client_name,Get the customer assigned to the next stop
+get_next_client_name,Who is assigned to the next delivery
+get_next_client_name,Show the next assigned client
+get_next_client_name,Display the next assigned customer
+get_next_client_name,Get the next delivery customer name
+get_next_client_name,Who is the client for the next order
+get_next_client_name,Show the next order customer
+get_next_client_name,Display the client for the next order
+get_next_delivery_address,Get the next delivery address
+get_next_delivery_address,Show the next delivery address
+get_next_delivery_address,Display the next delivery address
+get_next_delivery_address,Give me the next delivery address
+get_next_delivery_address,Tell me the next delivery address
+get_next_delivery_address,What is the next delivery address
+get_next_delivery_address,Show the address for the next delivery
+get_next_delivery_address,Display the address of the next stop
+get_next_delivery_address,Get the address for the next order
+get_next_delivery_address,Show the next stop address
+get_next_delivery_address,Display the next stop address
+get_next_delivery_address,Give me the next stop address
+get_next_delivery_address,Tell me the address of the next delivery
+get_next_delivery_address,What is the address of the next stop
+get_next_delivery_address,Get the address of the next delivery point
+get_next_delivery_address,Show the delivery address for the next order
+get_next_delivery_address,Display the delivery address for the next stop
+get_next_delivery_address,Give me the delivery address for the next order
+get_next_delivery_address,Tell me the delivery location for the next stop
+get_next_delivery_address,What is the delivery location for the next order
+get_next_delivery_address,Where is the next delivery
+get_next_delivery_address,Where do I go next
+get_next_delivery_address,What’s the next address
+get_next_delivery_address,Where is my next stop
+get_next_delivery_address,Where is the next drop-off
+get_next_delivery_address,Where am I delivering next
+get_next_delivery_address,Where is the next order located
+get_next_delivery_address,Where do I need to deliver next
+get_next_delivery_address,What’s the address for my next delivery
+get_next_delivery_address,Where is the next delivery location
+get_next_delivery_address,Next delivery address please
+get_next_delivery_address,Give me the next address
+get_next_delivery_address,Where’s the next stop
+get_next_delivery_address,Where is my next delivery point
+get_next_delivery_address,Where is the next destination
+get_next_delivery_address,Where do I head next
+get_next_delivery_address,Where is the next customer located
+get_next_delivery_address,Where is the next drop point
+get_next_delivery_address,Where is the next delivery address
+get_next_delivery_address,Where am I going next for delivery
+get_next_delivery_address,Show the address for the upcoming delivery
+get_next_delivery_address,Display the location of the next stop
+get_next_delivery_address,Get the address assigned to the next delivery
+get_next_delivery_address,Show the next assigned delivery address
+get_next_delivery_address,Display the address for the next order
+get_next_delivery_address,Get the delivery location for the next stop
+get_next_delivery_address,Show the next stop delivery location
+get_next_delivery_address,Display the next order address
+get_next_delivery_address,Get the address for the next delivery task
+get_next_delivery_address,Show the delivery address for the upcoming stop
+get_possible_delivery_failure_reason,Show delivery failure reasons
+get_possible_delivery_failure_reason,Show possible delivery failure reasons
+get_possible_delivery_failure_reason,Display delivery failure reasons
+get_possible_delivery_failure_reason,List delivery failure reasons
+get_possible_delivery_failure_reason,Get delivery failure reasons
+get_possible_delivery_failure_reason,Show available failure reasons
+get_possible_delivery_failure_reason,Display available delivery failure reasons
+get_possible_delivery_failure_reason,List available failure reasons
+get_possible_delivery_failure_reason,Get possible failure reasons
+get_possible_delivery_failure_reason,Show predefined delivery failure reasons
+get_possible_delivery_failure_reason,Display predefined failure reasons
+get_possible_delivery_failure_reason,List predefined delivery failure reasons
+get_possible_delivery_failure_reason,Get predefined failure reasons
+get_possible_delivery_failure_reason,Show default failure reasons
+get_possible_delivery_failure_reason,Display default delivery failure reasons
+get_possible_delivery_failure_reason,List default failure reasons
+get_possible_delivery_failure_reason,Get default delivery failure reasons
+get_possible_delivery_failure_reason,Show failure reason options
+get_possible_delivery_failure_reason,Display failure reason options
+get_possible_delivery_failure_reason,List failure reason options
+get_possible_delivery_failure_reason,What are the failure reasons
+get_possible_delivery_failure_reason,What reasons can I choose for failure
+get_possible_delivery_failure_reason,What are the delivery failure options
+get_possible_delivery_failure_reason,What can I select as a failure reason
+get_possible_delivery_failure_reason,Which failure reasons are available
+get_possible_delivery_failure_reason,What are my options for delivery failure
+get_possible_delivery_failure_reason,What reasons are there for failed delivery
+get_possible_delivery_failure_reason,Show me the failure reasons
+get_possible_delivery_failure_reason,Let me see the failure reasons
+get_possible_delivery_failure_reason,What failure reasons do I have
+get_possible_delivery_failure_reason,What are the possible failure reasons
+get_possible_delivery_failure_reason,Give me the list of failure reasons
+get_possible_delivery_failure_reason,Can you show failure reasons
+get_possible_delivery_failure_reason,I need the failure reason options
+get_possible_delivery_failure_reason,What can I pick as a failure reason
+get_possible_delivery_failure_reason,What are the default failure reasons
+get_possible_delivery_failure_reason,Show me the available reasons for failure
+get_possible_delivery_failure_reason,What reasons can I use for delivery failure
+get_possible_delivery_failure_reason,List the reasons for failed delivery
+get_possible_delivery_failure_reason,What are the predefined failure reasons
+get_possible_delivery_failure_reason,Show failure reasons for this delivery
+get_possible_delivery_failure_reason,Display failure options for the current order
+get_possible_delivery_failure_reason,Get failure reasons for this task
+get_possible_delivery_failure_reason,Show available reasons for this delivery failure
+get_possible_delivery_failure_reason,Display predefined reasons for this order failure
+get_possible_delivery_failure_reason,List failure reasons for the current delivery
+get_possible_delivery_failure_reason,Get available failure reasons for this stop
+get_possible_delivery_failure_reason,Show failure reason options for this order
+get_possible_delivery_failure_reason,Display delivery failure reason list for this task
+get_possible_delivery_failure_reason,Get predefined failure options for this delivery
+stop_listening,Stop listening
+stop_listening,Stop the microphone
+stop_listening,Turn off listening
+stop_listening,Turn off the microphone
+stop_listening,Disable listening
+stop_listening,Disable the microphone
+stop_listening,Stop audio input
+stop_listening,Mute listening
+stop_listening,Mute the microphone
+stop_listening,End listening
+stop_listening,Stop voice recognition
+stop_listening,Turn off voice input
+stop_listening,Stop audio capture
+stop_listening,Stop recording
+stop_listening,Disable audio input
+stop_listening,Mute audio input
+stop_listening,Mute the mic
+stop_listening,Stop the voice assistant from listening
+stop_listening,Stop assistant listening
+stop_listening,Turn off assistant listening
+stop_listening,Shut up
+stop_listening,Stop talking
+stop_listening,Stop the mic
+stop_listening,Quiet down
+stop_listening,Mute yourself
+stop_listening,Don’t listen
+stop_listening,Stop the assistant
+stop_listening,Stop hearing me
+stop_listening,Stop voice detection
+stop_listening,Mute listening now
+stop_listening,Silence the assistant
+stop_listening,Turn mic off
+stop_listening,Stop capturing audio
+stop_listening,Stop listening please
+stop_listening,Mute voice input
+stop_listening,Stop assistant voice input
+stop_listening,End mic listening
+stop_listening,Disable assistant listening
+stop_listening,Stop the audio
+stop_listening,Stop listening due to noise
+stop_listening,Turn off mic because of call
+stop_listening,Disable audio input temporarily
+stop_listening,Mute microphone during call
+stop_listening,Pause listening for a moment
+stop_listening,Stop voice input due to interference
+stop_listening,Turn off listening in noisy environment
+stop_listening,Stop capturing audio during call
+stop_listening,Temporarily mute assistant listening
+stop_listening,Disable assistant audio input

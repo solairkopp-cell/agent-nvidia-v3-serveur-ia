@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Server – Test Micro/WebRTC</title>
+    <style>
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 24px; max-width: 900px; }
+      .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+      button { padding: 10px 14px; border-radius: 10px; border: 1px solid #ddd; background: #f7f7f7; cursor: pointer; }
+      button.primary { background: #111827; color: white; border-color: #111827; }
+      button:disabled { opacity: 0.5; cursor: not-allowed; }
+      input { padding: 10px 12px; border-radius: 10px; border: 1px solid #ddd; width: 320px; }
+      .card { border: 1px solid #eee; border-radius: 12px; padding: 14px; margin-top: 14px; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; white-space: pre-wrap; }
+      .label { color: #6b7280; font-size: 12px; }
+      .status { font-weight: 600; }
+    </style>
+  </head>
+  <body>
+    <h2>AI Server – WebRTC + Micro</h2>
+    <div class="row">
+      <div>
+        <div class="label">WebSocket URL</div>
+        <input id="wsUrl" />
+      </div>
+      <button id="connectBtn" class="primary">Connecter</button>
+      <button id="disconnectBtn" disabled>Déconnecter</button>
+      <span class="status" id="status">offline</span>
+    </div>
+
+    <div class="card">
+      <div class="row">
+        <button id="startBtn" class="primary" disabled>Démarrer (micro)</button>
+        <button id="stopBtn" disabled>Stop</button>
+        <span class="label">Audio sortie (TTS)</span>
+        <audio id="remoteAudio" autoplay playsinline controls></audio>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="label">Transcript</div>
+      <div id="transcript" class="mono"></div>
+    </div>
+
+    <div class="card">
+      <div class="label">Intent détecté</div>
+      <div id="intent" class="mono"></div>
+    </div>
+
+    <div class="card">
+      <div class="label">Réponse (stream)</div>
+      <div id="response" class="mono"></div>
+    </div>
+
+    <div class="card">
+      <div class="label">Logs</div>
+      <div id="logs" class="mono"></div>
+    </div>
+
+    <script>
+      const $ = (id) => document.getElementById(id);
+      const log = (msg) => {
+        const el = $("logs");
+        el.textContent += msg + "\\n";
+        el.scrollTop = el.scrollHeight;
+      };
+
+      function defaultWsUrl() {
+        const proto = location.protocol === "https:" ? "wss" : "ws";
+        return `${proto}://${location.host}/ws`;
+      }
+
+      $("wsUrl").value = defaultWsUrl();
+
+      let ws = null;
+      let pc = null;
+      let localStream = null;
+
+      function setStatus(text) {
+        $("status").textContent = text;
+      }
+
+      function setButtons({ connected, started }) {
+        $("connectBtn").disabled = connected;
+        $("disconnectBtn").disabled = !connected;
+        $("startBtn").disabled = !connected || started;
+        $("stopBtn").disabled = !connected || !started;
+      }
+
+      setButtons({ connected: false, started: false });
+
+      async function connect() {
+        const url = $("wsUrl").value.trim();
+        ws = new WebSocket(url);
+
+        ws.onopen = () => {
+          setStatus("ws connected");
+          setButtons({ connected: true, started: false });
+          log("WS open");
+        };
+
+        ws.onclose = () => {
+          setStatus("offline");
+          setButtons({ connected: false, started: false });
+          log("WS closed");
+        };
+
+        ws.onerror = (e) => {
+          log("WS error");
+        };
+
+        ws.onmessage = async (ev) => {
+          let msg = null;
+          try { msg = JSON.parse(ev.data); } catch { return; }
+          if (!msg || !msg.type) return;
+
+          if (msg.type === "answer") {
+            await pc.setRemoteDescription({ type: "answer", sdp: msg.sdp });
+            log("SDP answer set");
+            setStatus("webrtc negotiating");
+            return;
+          }
+
+          if (msg.type === "ice") {
+            if (!msg.candidate) return;
+            try {
+              await pc.addIceCandidate(msg.candidate);
+            } catch (e) {
+              log("addIceCandidate error: " + e);
+            }
+            return;
+          }
+
+          if (msg.type === "transcript") {
+            $("transcript").textContent = msg.text || "";
+            $("intent").textContent = "";
+            $("response").textContent = "";
+            return;
+          }
+
+          if (msg.type === "response") {
+            $("response").textContent += (msg.text || "");
+            return;
+          }
+
+          if (msg.type === "intent") {
+            $("intent").textContent = msg.intent || "";
+            log("Intent: " + msg.intent);
+            return;
+          }
+
+          if (msg.type === "vad") {
+            log(`VAD ${msg.event} p=${msg.p ?? ""} samples=${msg.samples ?? ""}`);
+            return;
+          }
+
+          if (msg.type === "stt_empty") {
+            log("STT: empty transcript");
+            return;
+          }
+
+          if (msg.type === "error") {
+            log("Server error: " + msg.message);
+            return;
+          }
+
+          log("Server msg: " + ev.data);
+        };
+      }
+
+      async function disconnect() {
+        await stop();
+        if (ws) {
+          ws.close();
+          ws = null;
+        }
+      }
+
+      async function start() {
+        $("transcript").textContent = "";
+        $("intent").textContent = "";
+        $("response").textContent = "";
+
+        if (!ws || ws.readyState !== 1) throw new Error("WS not connected");
+
+        ws.send(JSON.stringify({ type: "start" }));
+
+        pc = new RTCPeerConnection({
+          iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
+        });
+
+        pc.onicecandidate = (ev) => {
+          if (!ev.candidate) return;
+          ws.send(JSON.stringify({
+            type: "ice",
+            candidate: {
+              candidate: ev.candidate.candidate,
+              sdpMid: ev.candidate.sdpMid,
+              sdpMLineIndex: ev.candidate.sdpMLineIndex,
+            }
+          }));
+        };
+
+      pc.onconnectionstatechange = () => {
+          log("pc state: " + pc.connectionState);
+          if (pc.connectionState === "connected") setStatus("webrtc connected");
+          else if (pc.connectionState === "connecting") setStatus("webrtc negotiating");
+          else setStatus("webrtc " + pc.connectionState);
+        };
+
+        pc.oniceconnectionstatechange = () => {
+          log("ice state: " + pc.iceConnectionState);
+        };
+
+        pc.onsignalingstatechange = () => {
+          log("signaling state: " + pc.signalingState);
+        };
+
+        pc.ontrack = (ev) => {
+          log("remote track: " + ev.track.kind);
+          const stream = ev.streams[0];
+          if (stream) {
+            const audioEl = $("remoteAudio");
+            audioEl.srcObject = stream;
+            audioEl.muted = false;
+            const playPromise = audioEl.play();
+            if (playPromise && typeof playPromise.catch === "function") {
+              playPromise.catch((e) => log("remote audio play blocked: " + e));
+            }
+          }
+        };
+
+        localStream = await navigator.mediaDevices.getUserMedia({
+          audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true },
+          video: false,
+        });
+
+        for (const track of localStream.getTracks()) {
+          pc.addTrack(track, localStream);
+        }
+
+        const offer = await pc.createOffer();
+        await pc.setLocalDescription(offer);
+
+        ws.send(JSON.stringify({ type: "offer", sdp: pc.localDescription.sdp }));
+        log("offer sent");
+
+        setButtons({ connected: true, started: true });
+        setStatus("webrtc negotiating");
+      }
+
+      async function stop() {
+        if (ws && ws.readyState === 1) {
+          try { ws.send(JSON.stringify({ type: "stop" })); } catch {}
+        }
+
+        if (localStream) {
+          for (const t of localStream.getTracks()) t.stop();
+          localStream = null;
+        }
+        if (pc) {
+          try { pc.close(); } catch {}
+          pc = null;
+        }
+
+        if (ws && ws.readyState === 1) setStatus("ws connected");
+        setButtons({ connected: !!ws && ws.readyState === 1, started: false });
+      }
+
+      $("connectBtn").onclick = () => connect().catch(e => log(String(e)));
+      $("disconnectBtn").onclick = () => disconnect().catch(e => log(String(e)));
+      $("startBtn").onclick = () => start().catch(e => log(String(e)));
+      $("stopBtn").onclick = () => stop().catch(e => log(String(e)));
+    </script>
+  </body>
+</html>
