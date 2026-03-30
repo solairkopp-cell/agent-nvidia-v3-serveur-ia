@@ -41,6 +41,7 @@ from services.vad_service import VADService
 from services.whisper_service import WhisperService
 from services.ollama_service import OllamaService
 from services.intent_service import IntentService
+from services.action_service import ActionService
 from services.piper_tts_service import PiperTTSService
 from services.agent_service import AgentService
 from services.denoise_service import DenoiseService
@@ -60,6 +61,7 @@ vad_service      = VADService()
 whisper_service  = WhisperService()
 ollama_service   = OllamaService()
 intent_service   = IntentService()
+action_service   = ActionService()
 piper_service   = PiperTTSService()
 denoise_service  = DenoiseService(audio=audio_service)
 
@@ -69,6 +71,7 @@ agent_service    = AgentService(
     tts=piper_service,
     audio=audio_service,
     intent=intent_service,
+    action=action_service,
     denoise=denoise_service,
 )
 
@@ -143,6 +146,7 @@ async def lifespan(app: FastAPI):
     await whisper_service.startup()
     await ollama_service.startup()
     await intent_service.startup()
+    await action_service.startup()
     await piper_service.startup()
     await denoise_service.startup()
     await prewarm_services()
@@ -153,6 +157,7 @@ async def lifespan(app: FastAPI):
     # ── Shutdown ─────────────────────────────────────────────────────────────
     await piper_service.shutdown()
     await denoise_service.shutdown()
+    await action_service.shutdown()
     await intent_service.shutdown()
     await ollama_service.shutdown()
     await whisper_service.shutdown()
@@ -201,6 +206,7 @@ async def health():
             "whisper": await whisper_service.health_check(),
             "ollama":  await ollama_service.health_check(),
             "intent":  await intent_service.health_check(),
+            "action":  await action_service.health_check(),
             "piper":   await piper_service.health_check(),
             "denoise": await denoise_service.health_check(),
         }

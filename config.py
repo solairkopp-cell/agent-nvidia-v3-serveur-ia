@@ -75,6 +75,15 @@ CONTINUATION_WORDS_EN = _parse_env_words(
     "also,and,plus,additionally,actually,wait and",
 )
 
+# ── Action Service ───────────────────────────────────────────────────────────
+# Intentions connues qui sont exécutées localement sans passer par le LLM
+ACTION_KNOWN_INTENTS = _parse_env_words(
+    "ACTION_KNOWN_INTENTS",
+    "start_navigation,show_deliveries,repeat_last_sentence,get_next_client_name,get_next_delivery_address,get_possible_delivery_failure_reason,stop_listening",
+)
+# Si true : les intentions connues ne sont PAS envoyées au LLM (économie de ressources)
+ACTION_SKIP_LLM_FOR_KNOWN_INTENTS = os.getenv("ACTION_SKIP_LLM_FOR_KNOWN_INTENTS", "true").strip().lower() in ("1", "true", "yes", "on")
+
 # ── Piper TTS ──────────────────────────────────────────────────────────────────
 PIPER_MODEL_PATH = os.getenv("PIPER_MODEL_PATH", "assets/models/en_US-danny-low.onnx")
 PIPER_CONFIG_PATH = os.getenv("PIPER_CONFIG_PATH", "assets/models/en_US-danny-low.onnx.json")

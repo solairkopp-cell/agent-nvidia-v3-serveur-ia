@@ -97,3 +97,348 @@ Traceback (most recent call last):
 RuntimeError: cannot reuse already awaited coroutine
 2026-03-30 20:42:22,718 INFO uvicorn.error: Application shutdown complete.
 2026-03-30 20:42:22,719 INFO uvicorn.error: Finished server process [2389]
+2026-03-30 21:14:07,822 INFO uvicorn.error: Started server process [3628]
+2026-03-30 21:14:07,823 INFO uvicorn.error: Waiting for application startup.
+2026-03-30 21:14:12,307 INFO httpx: HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-30 21:14:12,308 INFO services.ollama_service: System prompt loaded from system_prompt.md (239 chars)
+2026-03-30 21:14:14,322 INFO intent_detection.intent_interview: Intent model source=paraphrase-multilingual-MiniLM-L12-v2 local_only=False cache_dir=<default>
+2026-03-30 21:14:14,324 INFO sentence_transformers.SentenceTransformer: Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2026-03-30 21:14:23,756 INFO services.action_service: ActionService started
+2026-03-30 21:14:25,543 INFO services.piper_tts_service: Piper loaded in 1.79s (sample_rate=16000)
+2026-03-30 21:14:25,544 INFO services.denoise_service: Denoise disabled
+2026-03-30 21:14:25,544 INFO main: Warmup started
+2026-03-30 21:14:25,549 INFO main: Warmup vad ok in 0.01s
+2026-03-30 21:14:25,550 INFO faster_whisper: Processing audio with duration 00:01.000
+2026-03-30 21:14:25,601 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-30 21:14:26,268 INFO main: Warmup stt ok in 0.72s
+2026-03-30 21:14:26,379 INFO main: Warmup intent ok in 0.11s
+2026-03-30 21:14:28,449 INFO httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-30 21:14:28,548 INFO main: Warmup llm ok in 2.17s
+2026-03-30 21:14:28,664 INFO main: Warmup tts ok in 0.12s
+2026-03-30 21:14:28,664 INFO main: Warmup finished
+2026-03-30 21:14:28,664 INFO uvicorn.error: Application startup complete.
+2026-03-30 21:14:28,666 INFO uvicorn.error: Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-03-30 21:15:30,573 INFO uvicorn.access: 127.0.0.1:54648 - "GET / HTTP/1.1" 200
+2026-03-30 21:15:32,197 INFO uvicorn.error: 127.0.0.1:54672 - "WebSocket /ws" [accepted]
+2026-03-30 21:15:32,199 INFO services.websocket_service: WS connected client_id=7353d130-b5c2-4786-a644-307f0cc18b2d
+2026-03-30 21:15:32,201 INFO uvicorn.error: connection open
+2026-03-30 21:15:33,459 INFO services.webrtc_service: WebRTC peer created client_id=7353d130-b5c2-4786-a644-307f0cc18b2d
+2026-03-30 21:15:33,743 INFO services.webrtc_service: Audio track received client_id=7353d130-b5c2-4786-a644-307f0cc18b2d
+2026-03-30 21:15:33,800 INFO services.webrtc_service: ICE state client_id=7353d130-b5c2-4786-a644-307f0cc18b2d state=checking
+2026-03-30 21:15:33,801 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 40075) -> ('192.168.56.1', 64325)) State.FROZEN -> State.WAITING
+2026-03-30 21:15:33,802 INFO aioice.ice: Connection(0) Check CandidatePair(('172.17.0.1', 50228) -> ('192.168.56.1', 64325)) State.FROZEN -> State.WAITING
+2026-03-30 21:15:33,802 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 40075) -> ('192.168.1.8', 64326)) State.FROZEN -> State.WAITING
+2026-03-30 21:15:33,802 INFO services.webrtc_service: WebRTC state client_id=7353d130-b5c2-4786-a644-307f0cc18b2d state=connecting
+2026-03-30 21:15:33,802 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 40075) -> ('192.168.56.1', 64325)) State.WAITING -> State.IN_PROGRESS
+2026-03-30 21:15:33,822 INFO aioice.ice: Connection(0) Check CandidatePair(('172.17.0.1', 50228) -> ('192.168.56.1', 64325)) State.WAITING -> State.IN_PROGRESS
+2026-03-30 21:15:33,843 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 40075) -> ('192.168.1.8', 64326)) State.WAITING -> State.IN_PROGRESS
+2026-03-30 21:15:33,864 INFO aioice.ice: Connection(0) Check CandidatePair(('172.17.0.1', 50228) -> ('192.168.1.8', 64326)) State.FROZEN -> State.IN_PROGRESS
+2026-03-30 21:15:33,884 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 40075) -> ('197.17.19.238', 64326)) State.FROZEN -> State.IN_PROGRESS
+2026-03-30 21:15:33,903 INFO aioice.ice: Connection(0) Check CandidatePair(('172.17.0.1', 50228) -> ('197.17.19.238', 64326)) State.FROZEN -> State.IN_PROGRESS
+2026-03-30 21:15:34,348 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 40075) -> ('192.168.1.8', 64326)) State.IN_PROGRESS -> State.SUCCEEDED
+2026-03-30 21:15:34,348 INFO aioice.ice: Connection(0) ICE completed
+2026-03-30 21:15:34,351 INFO services.webrtc_service: ICE state client_id=7353d130-b5c2-4786-a644-307f0cc18b2d state=completed
+2026-03-30 21:15:34,377 INFO services.webrtc_service: WebRTC state client_id=7353d130-b5c2-4786-a644-307f0cc18b2d state=connected
+2026-03-30 21:15:35,458 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=50 rate=16000 n=304 rms=0.0010
+2026-03-30 21:15:36,460 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=100 rate=16000 n=304 rms=0.0004
+2026-03-30 21:15:37,459 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=150 rate=16000 n=304 rms=0.0005
+2026-03-30 21:15:38,459 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=200 rate=16000 n=304 rms=0.0005
+2026-03-30 21:15:38,779 INFO services.webrtc_service: VAD speech_start client_id=7353d130-b5c2-4786-a644-307f0cc18b2d p=0.899
+2026-03-30 21:15:39,462 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=250 rate=16000 n=304 rms=0.0816
+2026-03-30 21:15:40,459 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=300 rate=16000 n=304 rms=0.0009
+2026-03-30 21:15:40,659 INFO services.webrtc_service: Utterance end client_id=7353d130-b5c2-4786-a644-307f0cc18b2d samples=33280
+2026-03-30 21:15:40,662 INFO services.agent_service: STT raw input client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ms=2080 rms=0.0760 peak=0.5213 n=33280 sr=16000
+2026-03-30 21:15:40,663 INFO faster_whisper: Processing audio with duration 00:02.080
+2026-03-30 21:15:40,698 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-30 21:15:41,018 INFO services.agent_service: STT transcript client_id=7353d130-b5c2-4786-a644-307f0cc18b2d text_len=23
+2026-03-30 21:15:41,368 INFO services.action_service: Intent INCONNU → forward to LLM client_id=7353d130-b5c2-4786-a644-307f0cc18b2d text='Hello, can you hear me?'
+2026-03-30 21:15:41,368 INFO services.agent_service: Action result client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ActionResult(handled=False, intent='INCONNU', text_to_llm='Hello, can you hear me?', response=None)
+2026-03-30 21:15:41,460 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=350 rate=16000 n=304 rms=0.0002
+2026-03-30 21:15:41,696 INFO httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-30 21:15:42,152 INFO services.agent_service: TTS audio client_id=7353d130-b5c2-4786-a644-307f0cc18b2d phrase_len=22 src_rate=16000 out_rate=48000 samples=28977 frames=91
+2026-03-30 21:15:42,457 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=400 rate=16000 n=304 rms=0.0000
+2026-03-30 21:15:43,458 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=450 rate=16000 n=304 rms=0.0012
+2026-03-30 21:15:44,461 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=500 rate=16000 n=304 rms=0.0003
+2026-03-30 21:15:45,458 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=550 rate=16000 n=304 rms=0.0004
+2026-03-30 21:15:46,457 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=600 rate=16000 n=304 rms=0.0005
+2026-03-30 21:15:47,460 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=650 rate=16000 n=304 rms=0.0008
+2026-03-30 21:15:48,459 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=700 rate=16000 n=304 rms=0.0007
+2026-03-30 21:15:49,460 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=750 rate=16000 n=304 rms=0.0003
+2026-03-30 21:15:50,344 INFO services.webrtc_service: VAD speech_start client_id=7353d130-b5c2-4786-a644-307f0cc18b2d p=0.672
+2026-03-30 21:15:50,461 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=800 rate=16000 n=304 rms=0.0071
+2026-03-30 21:15:51,461 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=850 rate=16000 n=304 rms=0.0647
+2026-03-30 21:15:52,282 INFO services.webrtc_service: Utterance end client_id=7353d130-b5c2-4786-a644-307f0cc18b2d samples=34304
+2026-03-30 21:15:52,289 INFO services.agent_service: STT raw input client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ms=2144 rms=0.0375 peak=0.2481 n=34304 sr=16000
+2026-03-30 21:15:52,290 INFO faster_whisper: Processing audio with duration 00:02.144
+2026-03-30 21:15:52,310 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-30 21:15:52,456 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=900 rate=16000 n=304 rms=0.0002
+2026-03-30 21:15:52,599 INFO services.agent_service: STT transcript client_id=7353d130-b5c2-4786-a644-307f0cc18b2d text_len=24
+2026-03-30 21:15:52,953 INFO services.action_service: Intent INCONNU → forward to LLM client_id=7353d130-b5c2-4786-a644-307f0cc18b2d text='Okay, what is your name?'
+2026-03-30 21:15:52,954 INFO services.agent_service: Action result client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ActionResult(handled=False, intent='INCONNU', text_to_llm='Okay, what is your name?', response=None)
+2026-03-30 21:15:53,273 INFO httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-30 21:15:53,504 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=950 rate=16000 n=304 rms=0.0003
+2026-03-30 21:15:53,605 INFO services.agent_service: TTS audio client_id=7353d130-b5c2-4786-a644-307f0cc18b2d phrase_len=17 src_rate=16000 out_rate=48000 samples=23296 frames=73
+2026-03-30 21:15:54,457 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=1000 rate=16000 n=304 rms=0.0000
+2026-03-30 21:15:55,460 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=1050 rate=16000 n=304 rms=0.0001
+2026-03-30 21:15:56,460 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=1100 rate=16000 n=304 rms=0.0002
+2026-03-30 21:15:58,010 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=1150 rate=16000 n=304 rms=0.0002
+2026-03-30 21:15:58,758 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=1200 rate=16000 n=304 rms=0.0008
+2026-03-30 21:15:59,759 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=1250 rate=16000 n=304 rms=0.0002
+2026-03-30 21:16:00,759 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=1300 rate=16000 n=304 rms=0.0005
+2026-03-30 21:16:01,760 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=1350 rate=16000 n=304 rms=0.0002
+2026-03-30 21:16:02,759 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=1400 rate=16000 n=304 rms=0.0002
+2026-03-30 21:16:03,759 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=1450 rate=16000 n=304 rms=0.0968
+2026-03-30 21:16:03,780 INFO services.webrtc_service: VAD speech_start client_id=7353d130-b5c2-4786-a644-307f0cc18b2d p=0.846
+2026-03-30 21:16:04,760 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=1500 rate=16000 n=304 rms=0.0820
+2026-03-30 21:16:05,759 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=1550 rate=16000 n=304 rms=0.0003
+2026-03-30 21:16:05,962 INFO services.webrtc_service: Utterance end client_id=7353d130-b5c2-4786-a644-307f0cc18b2d samples=37888
+2026-03-30 21:16:05,968 INFO services.agent_service: STT raw input client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ms=2368 rms=0.0473 peak=0.2854 n=37888 sr=16000
+2026-03-30 21:16:05,969 INFO faster_whisper: Processing audio with duration 00:02.368
+2026-03-30 21:16:06,001 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-30 21:16:06,287 INFO services.agent_service: STT transcript client_id=7353d130-b5c2-4786-a644-307f0cc18b2d text_len=29
+2026-03-30 21:16:06,736 INFO services.action_service: Intent connue [start_navigation] → exécution locale client_id=7353d130-b5c2-4786-a644-307f0cc18b2d
+2026-03-30 21:16:06,736 INFO services.action_service: ACTION: start_navigation
+2026-03-30 21:16:06,736 INFO services.agent_service: Action result client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ActionResult(handled=True, intent='start_navigation', text_to_llm=None, response='Starting navigation to the next destination.')
+2026-03-30 21:16:06,929 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=1600 rate=16000 n=304 rms=0.0002
+2026-03-30 21:16:07,758 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=1650 rate=16000 n=304 rms=0.0000
+2026-03-30 21:16:08,760 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=1700 rate=16000 n=304 rms=0.0001
+2026-03-30 21:16:09,758 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=1750 rate=16000 n=304 rms=0.0001
+2026-03-30 21:16:10,759 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=1800 rate=16000 n=304 rms=0.0003
+2026-03-30 21:16:11,758 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=1850 rate=16000 n=304 rms=0.0005
+2026-03-30 21:16:12,759 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=1900 rate=16000 n=304 rms=0.0036
+2026-03-30 21:16:13,759 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=1950 rate=16000 n=304 rms=0.0004
+2026-03-30 21:16:14,760 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=2000 rate=16000 n=304 rms=0.0002
+2026-03-30 21:16:15,760 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=2050 rate=16000 n=304 rms=0.0003
+2026-03-30 21:16:16,760 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=2100 rate=16000 n=304 rms=0.0010
+2026-03-30 21:16:17,760 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=2150 rate=16000 n=304 rms=0.0002
+2026-03-30 21:16:18,757 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=2200 rate=16000 n=304 rms=0.0003
+2026-03-30 21:16:19,763 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=2250 rate=16000 n=304 rms=0.0002
+2026-03-30 21:16:20,760 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=2300 rate=16000 n=304 rms=0.0004
+2026-03-30 21:16:21,778 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=2350 rate=16000 n=304 rms=0.0023
+2026-03-30 21:16:22,759 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=2400 rate=16000 n=304 rms=0.0002
+2026-03-30 21:16:23,760 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=2450 rate=16000 n=304 rms=0.0004
+2026-03-30 21:16:24,160 INFO services.webrtc_service: VAD speech_start client_id=7353d130-b5c2-4786-a644-307f0cc18b2d p=0.712
+2026-03-30 21:16:24,756 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=2500 rate=16000 n=304 rms=0.0940
+2026-03-30 21:16:25,760 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=2550 rate=16000 n=304 rms=0.0649
+2026-03-30 21:16:26,761 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=2600 rate=16000 n=304 rms=0.0829
+2026-03-30 21:16:27,721 INFO services.webrtc_service: Utterance end client_id=7353d130-b5c2-4786-a644-307f0cc18b2d samples=58880
+2026-03-30 21:16:27,725 INFO services.agent_service: STT raw input client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ms=3680 rms=0.0624 peak=0.3449 n=58880 sr=16000
+2026-03-30 21:16:27,727 INFO faster_whisper: Processing audio with duration 00:03.680
+2026-03-30 21:16:27,754 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-30 21:16:27,771 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=2650 rate=16000 n=304 rms=0.0003
+2026-03-30 21:16:28,086 INFO services.agent_service: STT transcript client_id=7353d130-b5c2-4786-a644-307f0cc18b2d text_len=39
+2026-03-30 21:16:28,213 INFO services.action_service: Intent connue [show_deliveries] → exécution locale client_id=7353d130-b5c2-4786-a644-307f0cc18b2d
+2026-03-30 21:16:28,213 INFO services.action_service: ACTION: show_deliveries
+2026-03-30 21:16:28,214 INFO services.agent_service: Action result client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ActionResult(handled=True, intent='show_deliveries', text_to_llm=None, response='Here is the list of your deliveries.')
+2026-03-30 21:16:28,757 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=2700 rate=16000 n=304 rms=0.0002
+2026-03-30 21:16:29,758 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=2750 rate=16000 n=304 rms=0.0001
+2026-03-30 21:16:30,757 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=2800 rate=16000 n=304 rms=0.0002
+2026-03-30 21:16:31,759 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=2850 rate=16000 n=304 rms=0.0003
+2026-03-30 21:16:32,760 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=2900 rate=16000 n=304 rms=0.0001
+2026-03-30 21:16:33,759 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=2950 rate=16000 n=304 rms=0.0004
+2026-03-30 21:16:34,759 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=3000 rate=16000 n=304 rms=0.0003
+2026-03-30 21:16:35,757 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=3050 rate=16000 n=304 rms=0.0003
+2026-03-30 21:16:36,757 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=3100 rate=16000 n=304 rms=0.0008
+2026-03-30 21:16:37,758 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=3150 rate=16000 n=304 rms=0.0003
+2026-03-30 21:16:38,759 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=3200 rate=16000 n=304 rms=0.0001
+2026-03-30 21:16:39,760 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=3250 rate=16000 n=304 rms=0.0001
+2026-03-30 21:16:40,758 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=3300 rate=16000 n=304 rms=0.0007
+2026-03-30 21:16:41,000 INFO services.webrtc_service: VAD speech_start client_id=7353d130-b5c2-4786-a644-307f0cc18b2d p=0.676
+2026-03-30 21:16:41,759 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=3350 rate=16000 n=304 rms=0.0775
+2026-03-30 21:16:42,760 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=3400 rate=16000 n=304 rms=0.0002
+2026-03-30 21:16:43,759 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=3450 rate=16000 n=304 rms=0.1003
+2026-03-30 21:16:44,702 INFO services.webrtc_service: Utterance end client_id=7353d130-b5c2-4786-a644-307f0cc18b2d samples=60928
+2026-03-30 21:16:44,706 INFO services.agent_service: STT raw input client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ms=3808 rms=0.0663 peak=0.3912 n=60928 sr=16000
+2026-03-30 21:16:44,707 INFO faster_whisper: Processing audio with duration 00:03.808
+2026-03-30 21:16:44,756 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-30 21:16:44,777 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=3500 rate=16000 n=304 rms=0.0003
+2026-03-30 21:16:45,102 INFO services.agent_service: STT transcript client_id=7353d130-b5c2-4786-a644-307f0cc18b2d text_len=48
+2026-03-30 21:16:45,232 INFO services.action_service: Intent INCONNU → forward to LLM client_id=7353d130-b5c2-4786-a644-307f0cc18b2d text="There is too much noise. Please don't miss them."
+2026-03-30 21:16:45,232 INFO services.agent_service: Action result client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ActionResult(handled=False, intent='INCONNU', text_to_llm="There is too much noise. Please don't miss them.", response=None)
+2026-03-30 21:16:45,539 INFO httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-30 21:16:45,757 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=3550 rate=16000 n=304 rms=0.0002
+2026-03-30 21:16:46,846 INFO services.agent_service: TTS audio client_id=7353d130-b5c2-4786-a644-307f0cc18b2d phrase_len=114 src_rate=16000 out_rate=48000 samples=99283 frames=311
+2026-03-30 21:16:46,869 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=3600 rate=16000 n=304 rms=0.0005
+2026-03-30 21:16:47,759 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=3650 rate=16000 n=304 rms=0.0002
+2026-03-30 21:16:48,756 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=3700 rate=16000 n=304 rms=0.0002
+2026-03-30 21:16:49,756 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=3750 rate=16000 n=304 rms=0.0001
+2026-03-30 21:16:50,757 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=3800 rate=16000 n=304 rms=0.0001
+2026-03-30 21:16:51,757 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=3850 rate=16000 n=304 rms=0.0002
+2026-03-30 21:16:52,762 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=3900 rate=16000 n=304 rms=0.0001
+2026-03-30 21:16:53,759 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=3950 rate=16000 n=304 rms=0.0001
+2026-03-30 21:16:53,960 INFO services.webrtc_service: VAD speech_start client_id=7353d130-b5c2-4786-a644-307f0cc18b2d p=0.779
+2026-03-30 21:16:54,638 INFO services.webrtc_service: VAD short_utterance_ignored client_id=7353d130-b5c2-4786-a644-307f0cc18b2d speech_chunks=0
+2026-03-30 21:16:54,763 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=4000 rate=16000 n=304 rms=0.0017
+2026-03-30 21:16:55,200 INFO services.webrtc_service: VAD speech_start client_id=7353d130-b5c2-4786-a644-307f0cc18b2d p=0.872
+2026-03-30 21:16:55,760 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=4050 rate=16000 n=304 rms=0.0064
+2026-03-30 21:16:56,719 INFO services.webrtc_service: Utterance end client_id=7353d130-b5c2-4786-a644-307f0cc18b2d samples=27648
+2026-03-30 21:16:56,726 INFO services.agent_service: STT raw input client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ms=1728 rms=0.0427 peak=0.2633 n=27648 sr=16000
+2026-03-30 21:16:56,727 INFO faster_whisper: Processing audio with duration 00:01.728
+2026-03-30 21:16:56,748 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-30 21:16:56,776 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=4100 rate=16000 n=304 rms=0.0002
+2026-03-30 21:16:57,017 INFO services.agent_service: STT transcript client_id=7353d130-b5c2-4786-a644-307f0cc18b2d text_len=21
+2026-03-30 21:16:57,074 INFO services.action_service: Intent INCONNU → forward to LLM client_id=7353d130-b5c2-4786-a644-307f0cc18b2d text="just don't miss them."
+2026-03-30 21:16:57,074 INFO services.agent_service: Action result client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ActionResult(handled=False, intent='INCONNU', text_to_llm="just don't miss them.", response=None)
+2026-03-30 21:16:57,414 INFO httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-30 21:16:57,738 INFO services.agent_service: TTS audio client_id=7353d130-b5c2-4786-a644-307f0cc18b2d phrase_len=21 src_rate=16000 out_rate=48000 samples=26368 frames=83
+2026-03-30 21:16:57,989 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=4150 rate=16000 n=304 rms=0.0002
+2026-03-30 21:16:58,979 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=4200 rate=16000 n=304 rms=0.0001
+2026-03-30 21:16:59,977 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=4250 rate=16000 n=304 rms=0.0002
+2026-03-30 21:17:00,977 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=4300 rate=16000 n=304 rms=0.0003
+2026-03-30 21:17:01,978 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=4350 rate=16000 n=304 rms=0.0085
+2026-03-30 21:17:02,976 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=4400 rate=16000 n=304 rms=0.0002
+2026-03-30 21:17:03,978 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=4450 rate=16000 n=304 rms=0.0001
+2026-03-30 21:17:04,976 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=4500 rate=16000 n=304 rms=0.0003
+2026-03-30 21:17:05,438 INFO services.webrtc_service: VAD speech_start client_id=7353d130-b5c2-4786-a644-307f0cc18b2d p=0.890
+2026-03-30 21:17:05,977 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=4550 rate=16000 n=304 rms=0.0948
+2026-03-30 21:17:06,740 INFO services.webrtc_service: Utterance end client_id=7353d130-b5c2-4786-a644-307f0cc18b2d samples=24576
+2026-03-30 21:17:06,746 INFO services.agent_service: STT raw input client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ms=1536 rms=0.0467 peak=0.4362 n=24576 sr=16000
+2026-03-30 21:17:06,747 INFO faster_whisper: Processing audio with duration 00:01.536
+2026-03-30 21:17:06,791 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-30 21:17:06,977 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=4600 rate=16000 n=304 rms=0.0002
+2026-03-30 21:17:07,067 INFO services.agent_service: STT transcript client_id=7353d130-b5c2-4786-a644-307f0cc18b2d text_len=18
+2026-03-30 21:17:07,237 INFO services.action_service: Intent INCONNU → forward to LLM client_id=7353d130-b5c2-4786-a644-307f0cc18b2d text='Stop, please move.'
+2026-03-30 21:17:07,237 INFO services.agent_service: Action result client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ActionResult(handled=False, intent='INCONNU', text_to_llm='Stop, please move.', response=None)
+2026-03-30 21:17:07,604 INFO httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-30 21:17:07,965 INFO services.agent_service: TTS audio client_id=7353d130-b5c2-4786-a644-307f0cc18b2d phrase_len=18 src_rate=16000 out_rate=48000 samples=23040 frames=72
+2026-03-30 21:17:07,978 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=4650 rate=16000 n=304 rms=0.0002
+2026-03-30 21:17:08,976 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=4700 rate=16000 n=304 rms=0.0001
+2026-03-30 21:17:09,977 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=4750 rate=16000 n=304 rms=0.0002
+2026-03-30 21:17:10,978 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=4800 rate=16000 n=304 rms=0.0003
+2026-03-30 21:17:11,399 INFO services.webrtc_service: VAD speech_start client_id=7353d130-b5c2-4786-a644-307f0cc18b2d p=0.851
+2026-03-30 21:17:11,976 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=4850 rate=16000 n=304 rms=0.0943
+2026-03-30 21:17:12,840 INFO services.webrtc_service: Utterance end client_id=7353d130-b5c2-4786-a644-307f0cc18b2d samples=26624
+2026-03-30 21:17:12,846 INFO services.agent_service: STT raw input client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ms=1664 rms=0.0475 peak=0.3633 n=26624 sr=16000
+2026-03-30 21:17:12,847 INFO faster_whisper: Processing audio with duration 00:01.664
+2026-03-30 21:17:12,869 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-30 21:17:12,977 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=4900 rate=16000 n=304 rms=0.0002
+2026-03-30 21:17:13,120 INFO services.agent_service: STT transcript client_id=7353d130-b5c2-4786-a644-307f0cc18b2d text_len=15
+2026-03-30 21:17:13,228 INFO services.action_service: Intent connue [stop_listening] → exécution locale client_id=7353d130-b5c2-4786-a644-307f0cc18b2d
+2026-03-30 21:17:13,228 INFO services.action_service: ACTION: stop_listening
+2026-03-30 21:17:13,228 INFO services.agent_service: Action result client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ActionResult(handled=True, intent='stop_listening', text_to_llm=None, response='Disabling listening.')
+2026-03-30 21:17:13,978 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=4950 rate=16000 n=304 rms=0.0002
+2026-03-30 21:17:14,976 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=5000 rate=16000 n=304 rms=0.0001
+2026-03-30 21:17:15,978 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=5050 rate=16000 n=304 rms=0.0002
+2026-03-30 21:17:16,537 INFO services.webrtc_service: VAD speech_start client_id=7353d130-b5c2-4786-a644-307f0cc18b2d p=0.764
+2026-03-30 21:17:16,977 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=5100 rate=16000 n=304 rms=0.0006
+2026-03-30 21:17:17,217 INFO services.webrtc_service: VAD short_utterance_ignored client_id=7353d130-b5c2-4786-a644-307f0cc18b2d speech_chunks=0
+2026-03-30 21:17:17,979 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=5150 rate=16000 n=304 rms=0.0012
+2026-03-30 21:17:18,975 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=5200 rate=16000 n=304 rms=0.0002
+2026-03-30 21:17:19,977 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=5250 rate=16000 n=304 rms=0.0002
+2026-03-30 21:17:20,979 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=5300 rate=16000 n=304 rms=0.0003
+2026-03-30 21:17:21,977 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=5350 rate=16000 n=304 rms=0.0002
+2026-03-30 21:17:22,978 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=5400 rate=16000 n=304 rms=0.0002
+2026-03-30 21:17:23,978 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=5450 rate=16000 n=304 rms=0.0002
+2026-03-30 21:17:24,977 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=5500 rate=16000 n=304 rms=0.0001
+2026-03-30 21:17:25,977 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=5550 rate=16000 n=304 rms=0.0002
+2026-03-30 21:17:26,757 INFO services.webrtc_service: VAD speech_start client_id=7353d130-b5c2-4786-a644-307f0cc18b2d p=0.735
+2026-03-30 21:17:26,977 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=5600 rate=16000 n=304 rms=0.0590
+2026-03-30 21:17:27,976 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=5650 rate=16000 n=304 rms=0.0924
+2026-03-30 21:17:28,977 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=5700 rate=16000 n=304 rms=0.0480
+2026-03-30 21:17:29,978 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=5750 rate=16000 n=304 rms=0.0088
+2026-03-30 21:17:30,977 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=5800 rate=16000 n=304 rms=0.0003
+2026-03-30 21:17:31,001 INFO services.webrtc_service: Utterance end client_id=7353d130-b5c2-4786-a644-307f0cc18b2d samples=69120
+2026-03-30 21:17:31,006 INFO services.agent_service: STT raw input client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ms=4320 rms=0.0493 peak=0.2855 n=69120 sr=16000
+2026-03-30 21:17:31,007 INFO faster_whisper: Processing audio with duration 00:04.320
+2026-03-30 21:17:31,029 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-30 21:17:31,344 INFO services.agent_service: STT transcript client_id=7353d130-b5c2-4786-a644-307f0cc18b2d text_len=57
+2026-03-30 21:17:31,460 INFO services.action_service: Intent connue [get_possible_delivery_failure_reason] → exécution locale client_id=7353d130-b5c2-4786-a644-307f0cc18b2d
+2026-03-30 21:17:31,461 INFO services.action_service: ACTION: get_possible_delivery_failure_reason
+2026-03-30 21:17:31,461 INFO services.agent_service: Action result client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ActionResult(handled=True, intent='get_possible_delivery_failure_reason', text_to_llm=None, response='Here are the possible reasons for delivery failure.')
+2026-03-30 21:17:31,978 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=5850 rate=16000 n=304 rms=0.0007
+2026-03-30 21:17:32,976 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=5900 rate=16000 n=304 rms=0.0002
+2026-03-30 21:17:33,975 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=5950 rate=16000 n=304 rms=0.0001
+2026-03-30 21:17:34,978 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=6000 rate=16000 n=304 rms=0.0001
+2026-03-30 21:17:35,978 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=6050 rate=16000 n=304 rms=0.0002
+2026-03-30 21:17:36,976 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=6100 rate=16000 n=304 rms=0.0001
+2026-03-30 21:17:37,556 INFO services.webrtc_service: VAD speech_start client_id=7353d130-b5c2-4786-a644-307f0cc18b2d p=0.820
+2026-03-30 21:17:37,978 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=6150 rate=16000 n=304 rms=0.1012
+2026-03-30 21:17:38,146 INFO services.webrtc_service: VAD short_utterance_ignored client_id=7353d130-b5c2-4786-a644-307f0cc18b2d speech_chunks=0
+2026-03-30 21:17:38,440 INFO services.webrtc_service: VAD speech_start client_id=7353d130-b5c2-4786-a644-307f0cc18b2d p=0.626
+2026-03-30 21:17:38,977 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=6200 rate=16000 n=304 rms=0.0622
+2026-03-30 21:17:39,978 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=6250 rate=16000 n=304 rms=0.0790
+2026-03-30 21:17:40,977 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=6300 rate=16000 n=304 rms=0.0036
+2026-03-30 21:17:41,396 INFO services.webrtc_service: Utterance end client_id=7353d130-b5c2-4786-a644-307f0cc18b2d samples=49664
+2026-03-30 21:17:41,400 INFO services.agent_service: STT raw input client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ms=3104 rms=0.0696 peak=0.4030 n=49664 sr=16000
+2026-03-30 21:17:41,401 INFO faster_whisper: Processing audio with duration 00:03.104
+2026-03-30 21:17:41,442 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-30 21:17:41,751 INFO services.agent_service: STT transcript client_id=7353d130-b5c2-4786-a644-307f0cc18b2d text_len=36
+2026-03-30 21:17:41,892 INFO services.action_service: Intent connue [get_possible_delivery_failure_reason] → exécution locale client_id=7353d130-b5c2-4786-a644-307f0cc18b2d
+2026-03-30 21:17:41,893 INFO services.action_service: ACTION: get_possible_delivery_failure_reason
+2026-03-30 21:17:41,893 INFO services.agent_service: Action result client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ActionResult(handled=True, intent='get_possible_delivery_failure_reason', text_to_llm=None, response='Here are the possible reasons for delivery failure.')
+2026-03-30 21:17:42,043 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=6350 rate=16000 n=304 rms=0.0002
+2026-03-30 21:17:42,975 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=6400 rate=16000 n=304 rms=0.0002
+2026-03-30 21:17:43,976 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=6450 rate=16000 n=304 rms=0.0001
+2026-03-30 21:17:44,975 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=6500 rate=16000 n=304 rms=0.0001
+2026-03-30 21:17:45,976 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=6550 rate=16000 n=304 rms=0.0012
+2026-03-30 21:17:46,978 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=6600 rate=16000 n=304 rms=0.0003
+2026-03-30 21:17:47,976 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=6650 rate=16000 n=304 rms=0.0003
+2026-03-30 21:17:48,718 INFO services.webrtc_service: VAD speech_start client_id=7353d130-b5c2-4786-a644-307f0cc18b2d p=0.830
+2026-03-30 21:17:48,980 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=6700 rate=16000 n=304 rms=0.0020
+2026-03-30 21:17:49,977 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=6750 rate=16000 n=304 rms=0.0168
+2026-03-30 21:17:50,501 INFO services.webrtc_service: Utterance end client_id=7353d130-b5c2-4786-a644-307f0cc18b2d samples=31744
+2026-03-30 21:17:50,508 INFO services.agent_service: STT raw input client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ms=1984 rms=0.0463 peak=0.4237 n=31744 sr=16000
+2026-03-30 21:17:50,509 INFO faster_whisper: Processing audio with duration 00:01.984
+2026-03-30 21:17:50,531 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-30 21:17:50,810 INFO services.agent_service: STT transcript client_id=7353d130-b5c2-4786-a644-307f0cc18b2d text_len=12
+2026-03-30 21:17:50,946 INFO services.action_service: Intent connue [start_navigation] → exécution locale client_id=7353d130-b5c2-4786-a644-307f0cc18b2d
+2026-03-30 21:17:50,947 INFO services.action_service: ACTION: start_navigation
+2026-03-30 21:17:50,947 INFO services.agent_service: Action result client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ActionResult(handled=True, intent='start_navigation', text_to_llm=None, response='Starting navigation to the next destination.')
+2026-03-30 21:17:51,019 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=6800 rate=16000 n=304 rms=0.0004
+2026-03-30 21:17:51,979 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=6850 rate=16000 n=304 rms=0.0003
+2026-03-30 21:17:52,978 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=6900 rate=16000 n=304 rms=0.0002
+2026-03-30 21:17:53,979 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=6950 rate=16000 n=304 rms=0.0001
+2026-03-30 21:17:54,981 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=7000 rate=16000 n=304 rms=0.0016
+2026-03-30 21:17:55,921 INFO services.webrtc_service: VAD speech_start client_id=7353d130-b5c2-4786-a644-307f0cc18b2d p=0.842
+2026-03-30 21:17:55,978 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=7050 rate=16000 n=304 rms=0.1078
+2026-03-30 21:17:56,980 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=7100 rate=16000 n=304 rms=0.0297
+2026-03-30 21:17:58,202 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=7150 rate=16000 n=304 rms=0.0579
+2026-03-30 21:17:59,002 INFO services.webrtc_service: Utterance end client_id=7353d130-b5c2-4786-a644-307f0cc18b2d samples=48128
+2026-03-30 21:17:59,005 INFO services.agent_service: STT raw input client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ms=3008 rms=0.0638 peak=0.3334 n=48128 sr=16000
+2026-03-30 21:17:59,008 INFO faster_whisper: Processing audio with duration 00:03.008
+2026-03-30 21:17:59,033 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-30 21:17:59,201 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=7200 rate=16000 n=304 rms=0.0107
+2026-03-30 21:17:59,361 INFO services.agent_service: STT transcript client_id=7353d130-b5c2-4786-a644-307f0cc18b2d text_len=37
+2026-03-30 21:17:59,545 INFO services.action_service: Intent connue [show_deliveries] → exécution locale client_id=7353d130-b5c2-4786-a644-307f0cc18b2d
+2026-03-30 21:17:59,545 INFO services.action_service: ACTION: show_deliveries
+2026-03-30 21:17:59,545 INFO services.agent_service: Action result client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ActionResult(handled=True, intent='show_deliveries', text_to_llm=None, response='Here is the list of your deliveries.')
+2026-03-30 21:18:00,202 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=7250 rate=16000 n=304 rms=0.0004
+2026-03-30 21:18:01,204 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=7300 rate=16000 n=304 rms=0.0003
+2026-03-30 21:18:02,201 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=7350 rate=16000 n=304 rms=0.0003
+2026-03-30 21:18:03,203 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=7400 rate=16000 n=304 rms=0.0030
+2026-03-30 21:18:03,584 INFO services.webrtc_service: VAD speech_start client_id=7353d130-b5c2-4786-a644-307f0cc18b2d p=0.910
+2026-03-30 21:18:04,203 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=7450 rate=16000 n=304 rms=0.0703
+2026-03-30 21:18:05,202 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=7500 rate=16000 n=304 rms=0.0038
+2026-03-30 21:18:05,204 INFO services.webrtc_service: Utterance end client_id=7353d130-b5c2-4786-a644-307f0cc18b2d samples=29184
+2026-03-30 21:18:05,210 INFO services.agent_service: STT raw input client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ms=1824 rms=0.0527 peak=0.3630 n=29184 sr=16000
+2026-03-30 21:18:05,211 INFO faster_whisper: Processing audio with duration 00:01.824
+2026-03-30 21:18:05,222 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-30 21:18:05,494 INFO services.agent_service: STT transcript client_id=7353d130-b5c2-4786-a644-307f0cc18b2d text_len=19
+2026-03-30 21:18:05,639 INFO services.action_service: Intent INCONNU → forward to LLM client_id=7353d130-b5c2-4786-a644-307f0cc18b2d text='Nice one, nice one.'
+2026-03-30 21:18:05,640 INFO services.agent_service: Action result client_id=7353d130-b5c2-4786-a644-307f0cc18b2d ActionResult(handled=False, intent='INCONNU', text_to_llm='Nice one, nice one.', response=None)
+2026-03-30 21:18:05,996 INFO httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-30 21:18:06,203 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=7550 rate=16000 n=304 rms=0.0041
+2026-03-30 21:18:07,612 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=7600 rate=16000 n=304 rms=0.0027
+2026-03-30 21:18:07,744 INFO services.agent_service: TTS audio client_id=7353d130-b5c2-4786-a644-307f0cc18b2d phrase_len=113 src_rate=16000 out_rate=48000 samples=133888 frames=419
+2026-03-30 21:18:08,202 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=7650 rate=16000 n=304 rms=0.0125
+2026-03-30 21:18:09,203 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=7700 rate=16000 n=304 rms=0.0007
+2026-03-30 21:18:10,204 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=7750 rate=16000 n=304 rms=0.0009
+2026-03-30 21:18:11,205 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=7800 rate=16000 n=304 rms=0.0005
+2026-03-30 21:18:12,202 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=7850 rate=16000 n=304 rms=0.0005
+2026-03-30 21:18:13,207 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=7900 rate=16000 n=304 rms=0.0007
+2026-03-30 21:18:14,204 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=7950 rate=16000 n=304 rms=0.0005
+2026-03-30 21:18:15,208 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=8000 rate=16000 n=304 rms=0.0005
+2026-03-30 21:18:16,205 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=8050 rate=16000 n=304 rms=0.0007
+2026-03-30 21:18:17,205 INFO services.webrtc_service: Audio in client_id=7353d130-b5c2-4786-a644-307f0cc18b2d frame=8100 rate=16000 n=304 rms=0.0004
+2026-03-30 21:18:17,818 INFO services.webrtc_service: Audio track ended client_id=7353d130-b5c2-4786-a644-307f0cc18b2d
+2026-03-30 21:18:17,820 INFO services.webrtc_service: ICE state client_id=7353d130-b5c2-4786-a644-307f0cc18b2d state=closed
+2026-03-30 21:18:17,820 INFO services.webrtc_service: WebRTC state client_id=7353d130-b5c2-4786-a644-307f0cc18b2d state=None
+2026-03-30 21:18:17,821 INFO services.webrtc_service: WebRTC cleaned up client_id=7353d130-b5c2-4786-a644-307f0cc18b2d
+2026-03-30 21:18:28,403 INFO uvicorn.error: Shutting down
+2026-03-30 21:18:28,409 INFO services.webrtc_service: WebRTC cleaned up client_id=7353d130-b5c2-4786-a644-307f0cc18b2d
+2026-03-30 21:18:28,409 INFO services.websocket_service: WS disconnected client_id=7353d130-b5c2-4786-a644-307f0cc18b2d
+2026-03-30 21:18:28,410 INFO uvicorn.error: connection closed
+2026-03-30 21:18:28,508 INFO uvicorn.error: Waiting for application shutdown.
+2026-03-30 21:18:28,968 INFO services.action_service: ActionService shutdown
+2026-03-30 21:18:30,067 INFO uvicorn.error: Application shutdown complete.
+2026-03-30 21:18:30,069 INFO uvicorn.error: Finished server process [3628]

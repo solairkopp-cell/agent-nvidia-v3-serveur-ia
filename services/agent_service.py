@@ -35,6 +35,7 @@ if TYPE_CHECKING:
     from services.audio_service import AudioService
     from services.websocket_service import WebSocketService
     from services.intent_service import IntentService
+    from services.action_service import ActionService
     from services.denoise_service import DenoiseService
 
 import config
@@ -52,6 +53,7 @@ class AgentService:
         tts: "PiperTTSService",
         audio: "AudioService",
         intent: "IntentService | None" = None,
+        action: "ActionService | None" = None,
         denoise: "DenoiseService | None" = None,
     ):
         self.stt = stt
@@ -59,6 +61,7 @@ class AgentService:
         self.tts = tts
         self.audio = audio
         self.intent = intent
+        self.action = action
         self.denoise = denoise
         # Référence optionnelle au WebSocketService pour envoyer
         # des événements texte au client (transcript, réponse LLM)
@@ -239,6 +242,71 @@ class AgentService:
                 session.clear_active_user_turn()
                 return
 
+        # Action service : exécuter les actions connues localement
+        action_result = None
+        if self.action is not None and detected_intent:
+            try:
+                action_result = await self.action.execute(
+                    session=session,
+                    intent=detected_intent,
+                    transcription=effective_transcript,
+                )
+                logger.info("Action result client_id=%s %s", session.client_id, action_result)
+            except Exception:
+                logger.exception("Action execution error client_id=%s", session.client_id)
+                action_result = None
+
+        # Si l'action a été traitée localement → TTS direct sans LLM
+        if action_result is not None and action_result.handled:
+            # Ajouter le message utilisateur à l'historique
+            if session.active_user_message_index is None:
+                session.conversation_history.append({"role": "user", "content": effective_transcript})
+                session.mark_active_user_turn(
+                    request_id=request_id,
+                    index=len(session.conversation_history) - 1,
+                    text=effective_transcript,
+                )
+            else:
+                session.mark_active_user_turn(
+                    request_id=request_id,
+                    index=session.active_user_message_index,
+                    text=effective_transcript,
+                )
+
+            # Synthétiser la réponse de l'action directement
+            if action_result.response:
+                session.tts_playing = True
+                session.reset_tts_output_state()
+                session.tts_started_at = time.monotonic()
+
+                try:
+                    samples, rate = await self.tts.synthesize(action_result.response)
+
+                    if not session.cancel_flag and session.current_request_id == request_id:
+                        frames = self.audio.array_to_av_frames(
+                            samples,
+                            source_rate=rate,
+                            target_rate=config.AUDIO_OUTPUT_SAMPLE_RATE,
+                        )
+                        for frame in frames:
+                            await session.tts_track.feed(frame)
+                            await asyncio.sleep(0.02)
+
+                        if self.ws_service is not None:
+                            await self.ws_service.send_response_chunk(session, action_result.response)
+                except Exception:
+                    logger.exception("TTS action response error client_id=%s", session.client_id)
+                finally:
+                    session.tts_playing = False
+                    session.reset_tts_output_state()
+                    session.tts_started_at = 0.0
+
+            session.conversation_history.append({"role": "assistant", "content": action_result.response or ""})
+            session.trim_history(config.MAX_HISTORY, config.TRIM_TO)
+            session.clear_active_user_turn()
+            return
+
+        # Action non traitée → envoyer au LLM
         if session.active_user_message_index is None:
             session.conversation_history.append({"role": "user", "content": effective_transcript})
             session.mark_active_user_turn(
