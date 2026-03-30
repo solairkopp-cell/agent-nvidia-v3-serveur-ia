@@ -106,6 +106,7 @@ DENOISE_FOR_STT = os.getenv("DENOISE_FOR_STT", "false").strip().lower() in ("1",
 
 # ── Audio / VAD ───────────────────────────────────────────────────────────────
 SAMPLE_RATE = 16000
+AUDIO_OUTPUT_SAMPLE_RATE = int(os.getenv("AUDIO_OUTPUT_SAMPLE_RATE", "48000"))
 VAD_CHUNK_MS = 32                   # ms par chunk Silero
 VAD_SILENCE_THRESHOLD = 0.6         # seuil probabilité vocale
 # Seuil de continuation (hysteresis) : avec RNNoise, garder un seuil plus bas

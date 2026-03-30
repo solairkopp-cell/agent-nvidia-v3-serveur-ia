@@ -61,53 +61,37 @@ logger = logging.getLogger(__name__)
 
 class TTSAudioTrack(MediaStreamTrack):
     """
-    AudioStreamTrack custom pour envoyer l'audio TTS généré
-    vers le client WebRTC.
-
-    aiortc appelle recv() en boucle à la fréquence d'horloge média.
-    On bloque sur la queue jusqu'à ce qu'un frame soit disponible.
-
-    Usage :
-      track = TTSAudioTrack()
-      pc.addTrack(track)              # avant la négociation SDP
-      await track.feed(av_frame)      # depuis AgentService
+    AudioStreamTrack ultra-simple pour TTS.
+    Le buffer WebRTC du navigateur gère la lecture fluide.
     """
     kind = "audio"
 
     def __init__(self):
         super().__init__()
+        # Grande queue pour tout stocker
         self._queue: asyncio.Queue = asyncio.Queue()
-        self._staged: deque = deque()
-        self._buffer_cond = asyncio.Condition()
-        self._buffered_samples: int = 0
-        self._pts: int = 0              # presentation timestamp cumulé
-        self._sample_rate: int = config.SAMPLE_RATE
+        self._pts: int = 0
+        self._sample_rate: int = config.AUDIO_OUTPUT_SAMPLE_RATE  # 48kHz
         self._samples_per_frame: int = max(1, int(self._sample_rate * 0.02))  # 20ms
-        prebuffer_ms = max(0, int(getattr(config, "TTS_PLAYBACK_PREBUFFER_MS", 0)))
-        self._prebuffer_frames: int = max(1, int(math.ceil(prebuffer_ms / 20.0))) if prebuffer_ms > 0 else 1
-        self._prebuffer_timeout_sec: float = max(0.0, prebuffer_ms / 1000.0)
-        self._queue_timeout_sec: float = 0.2
-        self._started: bool = self._prebuffer_frames <= 1
 
     async def recv(self):
         """
-        Appelé par aiortc pour obtenir le prochain frame audio.
-        Bloque jusqu'à ce que la queue ait un frame.
-        Si la queue est vide depuis trop longtemps → générer du silence.
-
-        Retourne : av.AudioFrame
+        Appelé par aiortc ~50 fois par seconde.
+        Bloque jusqu'à ce qu'un frame soit disponible.
         """
-        frame = await self._next_frame()
+        frame = await self._queue.get()
 
-        # Normaliser pts / time_base
+        # Normaliser sample_rate / time_base
         if getattr(frame, "sample_rate", None) is None:
             frame.sample_rate = self._sample_rate
-        if getattr(frame, "pts", None) is None:
-            frame.pts = self._pts
         if getattr(frame, "time_base", None) is None:
             frame.time_base = Fraction(1, self._sample_rate)
+        
+        # Set PTS si pas déjà défini (frames venant de array_to_av_frame n'ont pas de PTS)
+        if getattr(frame, "pts", None) is None:
+            frame.pts = self._pts
 
-        # Avancer l'horloge sur la base du nombre de samples du frame
+        # Avancer l'horloge pour le PROCHAIN frame
         samples = getattr(frame, "samples", None)
         if isinstance(samples, int) and samples > 0:
             self._pts += samples
@@ -117,118 +101,16 @@ class TTSAudioTrack(MediaStreamTrack):
         return frame
 
     async def feed(self, frame) -> None:
-        """
-        Ajouter un av.AudioFrame dans la queue.
-        Appelé depuis AgentService._stream_response().
-        """
-        await self._increase_buffered(self._frame_samples(frame))
+        """Ajouter un frame à la queue."""
         await self._queue.put(frame)
 
     async def clear(self) -> None:
-        """
-        Vider la queue (interruption).
-        Appelé depuis AgentService.interrupt().
-        """
-        self._staged.clear()
+        """Vider la queue (interruption)."""
         while not self._queue.empty():
             try:
                 self._queue.get_nowait()
             except asyncio.QueueEmpty:
                 break
-        self._started = self._prebuffer_frames <= 1
-        await self._set_buffered(0)
-
-    def buffered_ms(self) -> float:
-        return float(self._buffered_samples / float(self._sample_rate) * 1000.0)
-
-    async def wait_until_buffer_below(self, threshold_ms: float) -> None:
-        threshold = max(0, int(self._sample_rate * (max(0.0, float(threshold_ms)) / 1000.0)))
-        async with self._buffer_cond:
-            while self._buffered_samples > threshold:
-                await self._buffer_cond.wait()
-
-    async def _next_frame(self):
-        if self._staged:
-            frame = self._staged.popleft()
-            await self._decrease_buffered(self._frame_samples(frame))
-            return frame
-
-        if not self._started:
-            primed = await self._prime_playback()
-            if primed is not None:
-                return primed
-
-        try:
-            frame = await asyncio.wait_for(self._queue.get(), timeout=self._queue_timeout_sec)
-            await self._decrease_buffered(self._frame_samples(frame))
-            return frame
-        except asyncio.TimeoutError:
-            # Si le buffer se vide, repasser par une phase de prébuffer
-            # pour lisser la reprise du segment suivant.
-            self._started = self._prebuffer_frames <= 1
-            return self._silence_frame()
-
-    async def _prime_playback(self):
-        try:
-            first = await asyncio.wait_for(self._queue.get(), timeout=self._queue_timeout_sec)
-        except asyncio.TimeoutError:
-            return None
-
-        self._staged.append(first)
-        if self._prebuffer_frames > 1 and self._prebuffer_timeout_sec > 0:
-            loop = asyncio.get_running_loop()
-            deadline = loop.time() + self._prebuffer_timeout_sec
-            while len(self._staged) < self._prebuffer_frames:
-                remaining = deadline - loop.time()
-                if remaining <= 0:
-                    break
-                try:
-                    self._staged.append(await asyncio.wait_for(self._queue.get(), timeout=remaining))
-                except asyncio.TimeoutError:
-                    break
-
-        self._started = True
-        frame = self._staged.popleft()
-        await self._decrease_buffered(self._frame_samples(frame))
-        return frame
-
-    async def _increase_buffered(self, samples: int) -> None:
-        if samples <= 0:
-            return
-        async with self._buffer_cond:
-            self._buffered_samples += int(samples)
-            self._buffer_cond.notify_all()
-
-    async def _decrease_buffered(self, samples: int) -> None:
-        if samples <= 0:
-            return
-        async with self._buffer_cond:
-            self._buffered_samples = max(0, self._buffered_samples - int(samples))
-            self._buffer_cond.notify_all()
-
-    async def _set_buffered(self, samples: int) -> None:
-        async with self._buffer_cond:
-            self._buffered_samples = max(0, int(samples))
-            self._buffer_cond.notify_all()
-
-    def _frame_samples(self, frame) -> int:
-        samples = getattr(frame, "samples", None)
-        if isinstance(samples, int) and samples > 0:
-            return samples
-        return self._samples_per_frame
-
-    def _silence_frame(self) -> object:
-        """
-        Générer un frame de silence (samples=0).
-        Utilisé quand la queue est vide.
-        """
-        frame = av.AudioFrame(format="s16", layout="mono", samples=self._samples_per_frame)
-        frame.sample_rate = self._sample_rate
-        frame.pts = self._pts
-        frame.time_base = Fraction(1, self._sample_rate)
-        for plane in frame.planes:
-            plane.update(b"\x00" * plane.buffer_size)
-        return frame
 
 
 # ── WebRTCService ─────────────────────────────────────────────────────────────

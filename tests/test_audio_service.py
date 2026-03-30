@@ -23,6 +23,13 @@ class TestResample:
         assert len(result) == 1600
         assert result.dtype == np.float32
 
+    def test_resample_16k_to_48k(self, audio):
+        """1600 samples @ 16kHz → 4800 samples @ 48kHz (TTS output upsampling)."""
+        samples = np.ones(1600, dtype=np.float32)
+        result = audio.resample(samples, source_rate=16000, target_rate=48000)
+        assert len(result) == 4800
+        assert result.dtype == np.float32
+
     def test_resample_identity(self, audio):
         """Même sample rate → retourner tel quel."""
         samples = np.ones(1600, dtype=np.float32)

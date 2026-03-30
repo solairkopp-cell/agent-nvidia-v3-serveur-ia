@@ -72,10 +72,11 @@ class PiperTTSService:
         async with self._lock:
             def _do():
                 # Piper outputs iterator of AudioChunk objects
+                # length_scale est défini dans le fichier JSON du modèle
                 chunks = list(self._voice.synthesize(text))
                 if not chunks:
                     return np.array([], dtype=np.float32), self._sample_rate
-                
+
                 audio_bytes = b"".join(chunk.audio_int16_bytes for chunk in chunks)
                 samples = np.frombuffer(audio_bytes, dtype=np.int16).astype(np.float32) / 32768.0
                 return samples, self._sample_rate

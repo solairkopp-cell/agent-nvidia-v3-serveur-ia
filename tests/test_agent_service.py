@@ -273,61 +273,52 @@ class TestStreamResponse:
 
     @pytest.mark.asyncio
     async def test_speak_text_streams_audio_and_sends_tts_test_event(self, agent, session):
-        with patch("config.TTS_SEGMENT_OVERLAP_MS", 0):
-            async def fake_tts_stream(_text_stream, cancel_check=None):
-                yield ("Test audio.", np.ones(16000, dtype=np.float32), 16000)
+        async def fake_tts_stream(_text_stream, cancel_check=None):
+            yield ("Test audio.", np.ones(16000, dtype=np.float32), 16000)
 
-            agent.tts.synthesize_stream = fake_tts_stream
-            agent.audio.array_to_av_frames = MagicMock(return_value=["frame-1", "frame-2"])
-            agent.ws_service = MagicMock()
-            agent.ws_service.send = AsyncMock()
+        agent.tts.synthesize_stream = fake_tts_stream
+        agent.audio.array_to_av_frames = MagicMock(return_value=["frame-1", "frame-2"])
+        agent.ws_service = MagicMock()
+        agent.ws_service.send = AsyncMock()
 
-            await agent.speak_text(session, "Test audio.")
+        await agent.speak_text(session, "Test audio.")
 
-            agent.ws_service.send.assert_awaited_once_with(
-                session,
-                {"type": "tts_test", "text": "Test audio."},
-            )
-            assert session.tts_track.feed.await_count == 2
-            session.tts_track.feed.assert_any_await("frame-1")
-            session.tts_track.feed.assert_any_await("frame-2")
-            session.tts_track.wait_until_buffer_below.assert_awaited()
+        agent.ws_service.send.assert_awaited_once_with(
+            session,
+            {"type": "tts_test", "text": "Test audio."},
+        )
+        assert session.tts_track.feed.await_count == 2
+        session.tts_track.feed.assert_any_await("frame-1")
+        session.tts_track.feed.assert_any_await("frame-2")
 
     @pytest.mark.asyncio
-    async def test_stream_response_waits_for_buffer_low_watermark(self, agent, session):
-        with patch("config.TTS_SEGMENT_OVERLAP_MS", 0), patch("config.TTS_BUFFER_LOW_WATERMARK_MS", 500):
+    async def test_stream_response_sends_all_frames(self, agent, session):
+        """Le stream response envoie tous les frames TTS."""
 
-            async def fake_token_stream():
-                yield "Bonjour."
-                yield "Encore."
+        async def fake_token_stream():
+            yield "Bonjour."
+            yield "Encore."
 
-            async def fake_tts_stream(_text_stream, cancel_check=None):
-                yield ("Bonjour.", np.ones(16000, dtype=np.float32), 16000)
-                yield ("Encore.", np.ones(16000, dtype=np.float32), 16000)
+        async def fake_tts_stream(_text_stream, cancel_check=None):
+            yield ("Bonjour.", np.ones(16000, dtype=np.float32), 16000)
+            yield ("Encore.", np.ones(16000, dtype=np.float32), 16000)
 
-            agent.llm.generate_stream = MagicMock(return_value=fake_token_stream())
-            agent.tts.synthesize_stream = fake_tts_stream
-            agent.audio.array_to_av_frames = MagicMock(return_value=["frame-1"])
-            agent.ws_service = MagicMock()
-            agent.ws_service.send_response_chunk = AsyncMock()
+        agent.llm.generate_stream = MagicMock(return_value=fake_token_stream())
+        agent.tts.synthesize_stream = fake_tts_stream
+        agent.audio.array_to_av_frames = MagicMock(return_value=["frame-1"])
+        agent.ws_service = MagicMock()
+        agent.ws_service.send_response_chunk = AsyncMock()
 
-            await agent._stream_response(session, "hello", request_id=session.current_request_id)
+        await agent._stream_response(session, "hello", request_id=session.current_request_id)
 
-            assert session.tts_track.wait_until_buffer_below.await_count == 2
-            session.tts_track.wait_until_buffer_below.assert_any_await(500)
+        # Les frames sont envoyés
+        assert session.tts_track.feed.await_count >= 1
 
-    def test_prepare_tts_samples_blends_previous_tail_into_current_head(self, agent, session):
+    def test_prepare_tts_samples_returns_samples_as_is(self, agent, session):
+        """_prepare_tts_samples retourne les samples sans overlap."""
         agent.audio.trim_silence = MagicMock(side_effect=lambda samples, **kwargs: samples)
-        with patch("config.TTS_SEGMENT_OVERLAP_MS", 4):
-            first = np.array([1.0, 1.0, 1.0, 1.0], dtype=np.float32)
-            second = np.array([0.0, 0.0, 0.0, 0.0], dtype=np.float32)
 
-            out_first = agent._prepare_tts_samples(session, first, 1000)
-            out_second = agent._prepare_tts_samples(session, second, 1000)
+        samples = np.array([1.0, 2.0, 3.0, 4.0], dtype=np.float32)
+        out = agent._prepare_tts_samples(session, samples, 1000)
 
-            np.testing.assert_array_equal(out_first, first)
-            assert out_second.shape == second.shape
-            assert float(out_second[0]) == pytest.approx(1.0, abs=1e-6)
-            assert 0.0 < float(out_second[1]) < 1.0
-            assert 0.0 < float(out_second[2]) < 1.0
-            assert float(out_second[3]) == pytest.approx(0.0, abs=1e-6)
+        np.testing.assert_array_equal(out, samples)

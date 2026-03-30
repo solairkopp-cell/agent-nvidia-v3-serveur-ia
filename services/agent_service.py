@@ -271,15 +271,24 @@ class AgentService:
     async def interrupt(self, session: "Session", *, event_type: str = "interrupted") -> None:
         """
         Annuler le traitement en cours pour cette session.
-        
+
         Actions :
           1. session.cancel_flag = True
           2. Vider la queue du TTSAudioTrack si il existe
           3. Notifier le client via WebSocket {"type": "interrupted"}
-        
+
         Appelé par WebRTCService quand une nouvelle utterance est détectée
         pendant qu'une réponse TTS est en cours de diffusion.
         """
+        logger = logging.getLogger(__name__)
+        logger.warning(
+            "INTERRUPT called! client_id=%s tts_playing=%s processing_lock=%s cancel_flag=%s",
+            session.client_id,
+            session.tts_playing,
+            session.processing_lock.locked(),
+            session.cancel_flag,
+        )
+
         session.cancel_flag = True
         if session.tts_track is not None:
             try:
@@ -361,53 +370,58 @@ class AgentService:
         request_id: int,
     ) -> str:
         """
-        LLM streaming → TTS streaming → TTSAudioTrack.
+        LLM streaming → TTS **non-streaming** (tout générer d'un coup) → TTSAudioTrack.
 
-        Algorithme :
-          1. Créer un token_stream = OllamaService.generate_stream(user_text, history)
-          2. Passer token_stream à PiperTTSService.synthesize_stream(
-               token_stream,
-               cancel_check=lambda: session.cancel_flag or session.current_request_id != request_id
-             )
-          3. Pour chaque (phrase, samples, rate) yielded :
-               - Vérifier cancel_flag + request_id
-               - audio_service.array_to_av_frame(samples, rate)
-               - session.tts_track.feed(av_frame)
-               - Optionnel : notifier le client du texte via WebSocket
-          4. Retourner le texte complet généré
-
-        Retourne le texte complet (pour l'historique).
+        Simplification : on attend que tout le TTS soit généré avant de jouer.
         """
         logger = logging.getLogger(__name__)
         if session.tts_track is None:
             return ""
 
         history = session.conversation_history
-        token_stream = self.llm.generate_stream(user_text, history)
+        
+        # 1. Générer tout le texte du LLM
+        full_reply = ""
+        async for token in self.llm.generate_stream(user_text, history):
+            if session.cancel_flag or session.current_request_id != request_id:
+                return ""
+            full_reply += token
 
-        full_text_parts: list[str] = []
+        if not full_reply.strip():
+            return ""
+
+        # 2. Synthétiser TTS en un seul bloc
         session.tts_playing = True
         session.reset_tts_output_state()
         session.tts_started_at = time.monotonic()
+        
         try:
-            await self._play_tts_stream(
+            samples, rate = await self.tts.synthesize(full_reply)
+            
+            if session.cancel_flag or session.current_request_id != request_id:
+                return full_reply
+            
+            # 3. Envoyer tous les frames d'un coup
+            await self._emit_tts_audio(
                 session=session,
-                request_id=request_id,
-                stream=self.tts.synthesize_stream(
-                    token_stream,
-                    cancel_check=lambda: session.cancel_flag or session.current_request_id != request_id,
-                ),
+                phrase_text=full_reply,
+                samples=samples,
+                rate=rate,
                 client_event_type="response",
-                full_text_parts=full_text_parts,
             )
+            
+            # Notifier le client
+            if self.ws_service is not None:
+                await self.ws_service.send_response_chunk(session, full_reply)
+                
         except Exception:
-            logger.exception("Stream response error client_id=%s", session.client_id)
+            logger.exception("TTS synthesis error client_id=%s", session.client_id)
         finally:
             session.tts_playing = False
             session.reset_tts_output_state()
             session.tts_started_at = 0.0
 
-        return " ".join("".join(full_text_parts).split()).strip()
+        return full_reply
 
     async def _play_tts_stream(
         self,
@@ -454,7 +468,6 @@ class AgentService:
                     rate=rate,
                     client_event_type=client_event_type,
                 )
-                await self._wait_for_tts_buffer_window(session, request_id)
         finally:
             if not producer_task.done():
                 producer_task.cancel()
@@ -484,7 +497,7 @@ class AgentService:
         frames = self.audio.array_to_av_frames(
             samples,
             source_rate=rate,
-            target_rate=config.SAMPLE_RATE,
+            target_rate=config.AUDIO_OUTPUT_SAMPLE_RATE,  # 48kHz pour WebRTC
         )
         if samples is not None and len(samples) > 0:
             logger.info(
@@ -492,14 +505,21 @@ class AgentService:
                 session.client_id,
                 len(phrase_text or ""),
                 int(rate),
-                int(config.SAMPLE_RATE),
+                int(config.AUDIO_OUTPUT_SAMPLE_RATE),
                 int(len(samples)),
                 len(frames),
             )
+        
+        # Envoyer les frames au rythme réel (1 frame toutes les 20ms)
         for frame in frames:
             await session.tts_track.feed(frame)
+            await asyncio.sleep(0.02)  # 20ms entre chaque frame
 
     def _prepare_tts_samples(self, session: "Session", samples, rate: int):
+        """
+        Prépare les samples TTS : trim_silence optionnel.
+        Pas d'overlap : envoi direct.
+        """
         logger = logging.getLogger(__name__)
         import numpy as np
 
@@ -511,6 +531,7 @@ class AgentService:
         if samples.size == 0:
             return samples
 
+        # Trim silence optionnel
         try:
             samples = self.audio.trim_silence(
                 samples,
@@ -526,26 +547,7 @@ class AgentService:
 
         if samples.size == 0:
             session.reset_tts_output_state()
-            return samples
 
-        overlap_ms = max(0.0, float(getattr(config, "TTS_SEGMENT_OVERLAP_MS", 0.0)))
-        overlap_samples = int(int(rate) * (overlap_ms / 1000.0)) if overlap_ms > 0 and rate > 0 else 0
-
-        prev_tail = session.tts_overlap_tail
-        prev_rate = int(getattr(session, "tts_overlap_rate", 0) or 0)
-        if isinstance(prev_tail, np.ndarray) and prev_tail.size > 0 and prev_rate == int(rate) and overlap_samples > 0:
-            n = min(int(prev_tail.size), int(samples.size), overlap_samples)
-            if n > 0:
-                fade_out = np.linspace(1.0, 0.0, num=n, dtype=np.float32)
-                fade_in = 1.0 - fade_out
-                samples = samples.copy()
-                samples[:n] = (prev_tail[-n:] * fade_out) + (samples[:n] * fade_in)
-
-        if overlap_samples > 0:
-            session.tts_overlap_tail = samples[-overlap_samples:].copy()
-            session.tts_overlap_rate = int(rate)
-        else:
-            session.reset_tts_output_state()
         return samples
 
     async def _wait_for_tts_buffer_window(self, session: "Session", request_id: int) -> None:
