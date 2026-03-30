@@ -75,18 +75,9 @@ CONTINUATION_WORDS_EN = _parse_env_words(
     "also,and,plus,additionally,actually,wait and",
 )
 
-# ── Piper TTS (Primary) ───────────────────────────────────────────────────────
+# ── Piper TTS ──────────────────────────────────────────────────────────────────
 PIPER_MODEL_PATH = os.getenv("PIPER_MODEL_PATH", "assets/models/en_US-danny-low.onnx")
 PIPER_CONFIG_PATH = os.getenv("PIPER_CONFIG_PATH", "assets/models/en_US-danny-low.onnx.json")
-
-# ── Kokoro TTS (Legacy / Optional) ───────────────────────────────────────────
-KOKORO_MODEL_PATH = os.getenv("KOKORO_MODEL_PATH", "assets/models/kokoro-v1.0.onnx")
-KOKORO_VOICES_PATH = os.getenv("KOKORO_VOICES_PATH", "assets/models/voices-v1.0.bin")
-KOKORO_VOICE = os.getenv("KOKORO_VOICE", "af_heart")
-KOKORO_LANG = os.getenv("KOKORO_LANG", "en-us")
-KOKORO_SPEED = float(os.getenv("KOKORO_SPEED", "1.0"))
-# Kokoro sur Orin : forcer CUDA pour utiliser les Tensor cores
-KOKORO_DEVICE = os.getenv("KOKORO_DEVICE", "cuda")
 
 # ── TTS Common Settings ──────────────────────────────────────────────────────
 # Streaming TTS : commencer à parler avant la fin de la phrase complète.

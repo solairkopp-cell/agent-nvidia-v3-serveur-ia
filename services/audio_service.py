@@ -90,7 +90,7 @@ class AudioService:
     def wav_bytes_to_array(self, wav_bytes: bytes) -> tuple[np.ndarray, int]:
         """
         WAV bytes → (numpy float32, sample_rate).
-        Utilisé pour lire la réponse audio de Kokoro.
+        Utilisé pour lire la réponse audio du TTS.
         """
         if not wav_bytes:
             return np.array([], dtype=np.float32), TARGET_SAMPLE_RATE

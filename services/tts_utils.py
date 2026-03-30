@@ -1,6 +1,6 @@
 """
 services/tts_utils.py
-Common text segmentation utilities for TTS services (Kokoro, Piper, etc.).
+Common text segmentation utilities for TTS services (Piper, etc.).
 """
 import re
 import config

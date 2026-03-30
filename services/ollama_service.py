@@ -109,7 +109,7 @@ class OllamaService:
 
         En cas d'erreur réseau → yield "" et logger.
 
-        Utilisé par AgentService pour alimenter KokoroPhraseService
+        Utilisé par AgentService pour alimenter le service TTS.
         en temps réel (token par token).
         """
         logger = logging.getLogger(__name__)

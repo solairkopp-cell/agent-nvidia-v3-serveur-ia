@@ -89,7 +89,7 @@ class PiperTTSService:
     ) -> AsyncIterator[tuple[str, np.ndarray, int]]:
         """
         Mode streaming : consomme les tokens LLM au fur et à mesure.
-        Reprend la logique de KokoroTTSService pour la segmentation.
+        Segmentation sur frontières naturelles.
         """
         buffer = ""
         queue: asyncio.Queue[Optional[tuple[str, np.ndarray, int]]] = asyncio.Queue(maxsize=3)
