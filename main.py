@@ -13,7 +13,7 @@ Ordre de démarrage (startup) :
   2. VADService          (charge Silero ONNX)
   3. WhisperService      (crée client HTTP, health check)
   4. OllamaService       (crée client, vérifie modèle)
-  5. KokoroTTSService    (charge modèle ONNX)
+  5. PiperTTSService     (charge modèle ONNX)
   6. AgentService        (injection des 4 précédents)
   7. WebRTCService       (injection VAD + Agent + Audio)
   8. WebSocketService    (injection WebRTC)
@@ -41,7 +41,7 @@ from services.vad_service import VADService
 from services.whisper_service import WhisperService
 from services.ollama_service import OllamaService
 from services.intent_service import IntentService
-from services.kokoro_tts_service import KokoroTTSService
+from services.piper_tts_service import PiperTTSService
 from services.agent_service import AgentService
 from services.denoise_service import DenoiseService
 from services.webrtc_service import WebRTCService
@@ -60,13 +60,13 @@ vad_service      = VADService()
 whisper_service  = WhisperService()
 ollama_service   = OllamaService()
 intent_service   = IntentService()
-kokoro_service   = KokoroTTSService()
+piper_service   = PiperTTSService()
 denoise_service  = DenoiseService(audio=audio_service)
 
 agent_service    = AgentService(
     stt=whisper_service,
     llm=ollama_service,
-    tts=kokoro_service,
+    tts=piper_service,
     audio=audio_service,
     intent=intent_service,
     denoise=denoise_service,
@@ -120,7 +120,7 @@ async def prewarm_services() -> None:
         await ollama_service.generate(config.PREWARM_LLM_TEXT, [])
 
     async def _warm_tts():
-        await kokoro_service.synthesize(config.PREWARM_TTS_TEXT)
+        await piper_service.synthesize(config.PREWARM_TTS_TEXT)
 
     for name, op in (
         ("vad", _warm_vad),
@@ -143,7 +143,7 @@ async def lifespan(app: FastAPI):
     await whisper_service.startup()
     await ollama_service.startup()
     await intent_service.startup()
-    await kokoro_service.startup()
+    await piper_service.startup()
     await denoise_service.startup()
     await prewarm_services()
     # AudioService et WebRTCService/WebSocketService n'ont pas de startup async
@@ -151,7 +151,7 @@ async def lifespan(app: FastAPI):
     yield  # L'application tourne ici
 
     # ── Shutdown ─────────────────────────────────────────────────────────────
-    await kokoro_service.shutdown()
+    await piper_service.shutdown()
     await denoise_service.shutdown()
     await intent_service.shutdown()
     await ollama_service.shutdown()
@@ -187,7 +187,7 @@ async def health():
         "services": {
             "whisper": true/false,
             "ollama": true/false,
-            "kokoro": true/false,
+            "piper": true/false,
         }
     }
     """
@@ -201,7 +201,7 @@ async def health():
             "whisper": await whisper_service.health_check(),
             "ollama":  await ollama_service.health_check(),
             "intent":  await intent_service.health_check(),
-            "kokoro":  await kokoro_service.health_check(),
+            "piper":   await piper_service.health_check(),
             "denoise": await denoise_service.health_check(),
         }
     }

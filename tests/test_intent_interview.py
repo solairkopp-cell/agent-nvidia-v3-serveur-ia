@@ -47,3 +47,35 @@ def test_shutdown_clears_loaded_state():
     assert detector._example_embeddings is None
     assert detector._labels == []
     assert detector._examples == []
+
+
+def test_find_local_snapshot_uses_main_ref(tmp_path):
+    hub_root = tmp_path / "huggingface" / "hub"
+    repo_dir = hub_root / "models--sentence-transformers--paraphrase-multilingual-MiniLM-L12-v2"
+    snap = repo_dir / "snapshots" / "rev123"
+    snap.mkdir(parents=True)
+    (repo_dir / "refs").mkdir(parents=True)
+    (repo_dir / "refs" / "main").write_text("rev123", encoding="utf-8")
+
+    found = IntentInterview._find_local_snapshot(
+        "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+        cache_dir=str(tmp_path / "huggingface"),
+    )
+
+    assert found == snap
+
+
+def test_resolve_model_source_prefers_explicit_local_dir(tmp_path):
+    local_dir = tmp_path / "intent-model"
+    local_dir.mkdir()
+
+    detector = IntentInterview(
+        csv_path="intent_detection/intentions.csv",
+        model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+        local_dir=str(local_dir),
+    )
+
+    source, local_only = detector._resolve_model_source()
+
+    assert source == str(local_dir)
+    assert local_only is True

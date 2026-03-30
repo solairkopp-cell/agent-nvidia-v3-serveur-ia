@@ -13,17 +13,22 @@ Protocole de signaling (client → serveur) :
   {"type": "ice",    "candidate": {...}}     → WebRTCService.add_ice_candidate()
   {"type": "start"}                          → WebRTCService.create_peer() si besoin
   {"type": "stop"}                           → cleanup()
+  {"type": "test_tts", "text": "..."}        → lire un texte via le TTS sans micro
 
 Protocole de signaling (serveur → client) :
   {"type": "answer",     "sdp": "..."}
   {"type": "ice",        "candidate": {...}}
   {"type": "transcript", "text": "..."}      → texte STT reçu
   {"type": "response",   "text": "..."}      → fragment de réponse LLM
+  {"type": "tts_test",   "text": "..."}      → fragment de texte joué par le test TTS
+  {"type": "tts_stop_now"}                   → couper immédiatement la lecture côté client
+  {"type": "interruption_decision", ...}     → décision continuation / interruption
   {"type": "interrupted"}                    → TTS interrompu
   {"type": "error",      "message": "..."}
 """
 from __future__ import annotations
 
+import asyncio
 import logging
 import uuid
 from typing import TYPE_CHECKING
@@ -168,6 +173,17 @@ class WebSocketService:
         if msg_type == "stop":
             await self.webrtc.cleanup(session)
             await self.send(session, {"type": "stopped"})
+            return
+
+        if msg_type == "test_tts":
+            text = message.get("text")
+            if not isinstance(text, str) or not text.strip():
+                await self.send_error(session, "missing test tts text")
+                return
+            if session.tts_track is None:
+                await self.send_error(session, "tts not ready: start webrtc first")
+                return
+            asyncio.create_task(self.webrtc.agent.speak_text(session, text))
             return
 
         await self.send_error(session, "unknown type")

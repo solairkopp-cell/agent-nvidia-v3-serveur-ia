@@ -19,6 +19,7 @@ TTSAudioTrack est défini ici car il est étroitement lié à aiortc.
 from __future__ import annotations
 
 import asyncio
+from collections import deque
 import logging
 import math
 from fractions import Fraction
@@ -76,9 +77,17 @@ class TTSAudioTrack(MediaStreamTrack):
     def __init__(self):
         super().__init__()
         self._queue: asyncio.Queue = asyncio.Queue()
+        self._staged: deque = deque()
+        self._buffer_cond = asyncio.Condition()
+        self._buffered_samples: int = 0
         self._pts: int = 0              # presentation timestamp cumulé
         self._sample_rate: int = config.SAMPLE_RATE
         self._samples_per_frame: int = max(1, int(self._sample_rate * 0.02))  # 20ms
+        prebuffer_ms = max(0, int(getattr(config, "TTS_PLAYBACK_PREBUFFER_MS", 0)))
+        self._prebuffer_frames: int = max(1, int(math.ceil(prebuffer_ms / 20.0))) if prebuffer_ms > 0 else 1
+        self._prebuffer_timeout_sec: float = max(0.0, prebuffer_ms / 1000.0)
+        self._queue_timeout_sec: float = 0.2
+        self._started: bool = self._prebuffer_frames <= 1
 
     async def recv(self):
         """
@@ -88,10 +97,7 @@ class TTSAudioTrack(MediaStreamTrack):
 
         Retourne : av.AudioFrame
         """
-        try:
-            frame = await asyncio.wait_for(self._queue.get(), timeout=0.2)
-        except asyncio.TimeoutError:
-            frame = self._silence_frame()
+        frame = await self._next_frame()
 
         # Normaliser pts / time_base
         if getattr(frame, "sample_rate", None) is None:
@@ -115,6 +121,7 @@ class TTSAudioTrack(MediaStreamTrack):
         Ajouter un av.AudioFrame dans la queue.
         Appelé depuis AgentService._stream_response().
         """
+        await self._increase_buffered(self._frame_samples(frame))
         await self._queue.put(frame)
 
     async def clear(self) -> None:
@@ -122,11 +129,93 @@ class TTSAudioTrack(MediaStreamTrack):
         Vider la queue (interruption).
         Appelé depuis AgentService.interrupt().
         """
+        self._staged.clear()
         while not self._queue.empty():
             try:
                 self._queue.get_nowait()
             except asyncio.QueueEmpty:
                 break
+        self._started = self._prebuffer_frames <= 1
+        await self._set_buffered(0)
+
+    def buffered_ms(self) -> float:
+        return float(self._buffered_samples / float(self._sample_rate) * 1000.0)
+
+    async def wait_until_buffer_below(self, threshold_ms: float) -> None:
+        threshold = max(0, int(self._sample_rate * (max(0.0, float(threshold_ms)) / 1000.0)))
+        async with self._buffer_cond:
+            while self._buffered_samples > threshold:
+                await self._buffer_cond.wait()
+
+    async def _next_frame(self):
+        if self._staged:
+            frame = self._staged.popleft()
+            await self._decrease_buffered(self._frame_samples(frame))
+            return frame
+
+        if not self._started:
+            primed = await self._prime_playback()
+            if primed is not None:
+                return primed
+
+        try:
+            frame = await asyncio.wait_for(self._queue.get(), timeout=self._queue_timeout_sec)
+            await self._decrease_buffered(self._frame_samples(frame))
+            return frame
+        except asyncio.TimeoutError:
+            # Si le buffer se vide, repasser par une phase de prébuffer
+            # pour lisser la reprise du segment suivant.
+            self._started = self._prebuffer_frames <= 1
+            return self._silence_frame()
+
+    async def _prime_playback(self):
+        try:
+            first = await asyncio.wait_for(self._queue.get(), timeout=self._queue_timeout_sec)
+        except asyncio.TimeoutError:
+            return None
+
+        self._staged.append(first)
+        if self._prebuffer_frames > 1 and self._prebuffer_timeout_sec > 0:
+            loop = asyncio.get_running_loop()
+            deadline = loop.time() + self._prebuffer_timeout_sec
+            while len(self._staged) < self._prebuffer_frames:
+                remaining = deadline - loop.time()
+                if remaining <= 0:
+                    break
+                try:
+                    self._staged.append(await asyncio.wait_for(self._queue.get(), timeout=remaining))
+                except asyncio.TimeoutError:
+                    break
+
+        self._started = True
+        frame = self._staged.popleft()
+        await self._decrease_buffered(self._frame_samples(frame))
+        return frame
+
+    async def _increase_buffered(self, samples: int) -> None:
+        if samples <= 0:
+            return
+        async with self._buffer_cond:
+            self._buffered_samples += int(samples)
+            self._buffer_cond.notify_all()
+
+    async def _decrease_buffered(self, samples: int) -> None:
+        if samples <= 0:
+            return
+        async with self._buffer_cond:
+            self._buffered_samples = max(0, self._buffered_samples - int(samples))
+            self._buffer_cond.notify_all()
+
+    async def _set_buffered(self, samples: int) -> None:
+        async with self._buffer_cond:
+            self._buffered_samples = max(0, int(samples))
+            self._buffer_cond.notify_all()
+
+    def _frame_samples(self, frame) -> int:
+        samples = getattr(frame, "samples", None)
+        if isinstance(samples, int) and samples > 0:
+            return samples
+        return self._samples_per_frame
 
     def _silence_frame(self) -> object:
         """
@@ -339,6 +428,7 @@ class WebRTCService:
             logger.exception("Error closing peer client_id=%s", session.client_id)
 
         session.reset_audio_buffer()
+        session.reset_tts_output_state()
         session.tts_playing = False
         logger.info("WebRTC cleaned up client_id=%s", session.client_id)
 
@@ -428,6 +518,10 @@ class WebRTCService:
                             vad_result.speech_prob,
                         )
                         try:
+                            await self.agent.on_user_speech_start(session)
+                        except Exception:
+                            logger.exception("Speech-start interruption handling failed client_id=%s", session.client_id)
+                        try:
                             await session.websocket.send_json(
                                 {"type": "vad", "event": "speech_start", "p": vad_result.speech_prob}
                             )
@@ -459,7 +553,7 @@ class WebRTCService:
                         pass
 
                     # Interruption si un pipeline est déjà en cours
-                    if session.processing_lock.locked():
+                    if session.processing_lock.locked() and not session.cancel_flag:
                         await self.agent.interrupt(session)
 
                     # PCM direct -> STT (recommandé)

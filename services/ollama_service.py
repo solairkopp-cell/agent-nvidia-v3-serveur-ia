@@ -41,6 +41,11 @@ class OllamaService:
             "num_ctx": config.OLLAMA_CONTEXT_WINDOW,
             "num_predict": config.OLLAMA_NUM_PREDICT,
             "temperature": config.OLLAMA_TEMPERATURE,
+            "presence_penalty": config.OLLAMA_PRESENCE_PENALTY,
+            "repeat_penalty": config.OLLAMA_REPEAT_PENALTY,
+            "top_k": config.OLLAMA_TOP_K,
+            "top_p": config.OLLAMA_TOP_P,
+            "stop": list(config.OLLAMA_STOP) if config.OLLAMA_STOP else None,
         }
         self._think = _parse_think(config.OLLAMA_THINK)
 

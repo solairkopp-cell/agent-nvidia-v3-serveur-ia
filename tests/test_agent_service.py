@@ -21,6 +21,7 @@ def session():
     s.tts_track = AsyncMock()
     s.tts_track.clear = AsyncMock()
     s.tts_track.feed = AsyncMock()
+    s.tts_track.wait_until_buffer_below = AsyncMock()
     return s
 
 
@@ -30,6 +31,7 @@ def agent():
     llm = AsyncMock()
     tts = AsyncMock()
     audio = MagicMock()
+    audio.trim_silence = MagicMock(side_effect=lambda samples, **kwargs: samples)
     denoise = MagicMock()
     denoise.process_utterance = AsyncMock()
     return AgentService(stt=stt, llm=llm, tts=tts, audio=audio, denoise=denoise)
@@ -158,31 +160,174 @@ class TestInterrupt:
         await agent.interrupt(session)
         session.tts_track.clear.assert_called_once()
 
+    @pytest.mark.asyncio
+    async def test_on_user_speech_start_stops_tts_immediately(self, agent, session):
+        agent.ws_service = MagicMock()
+        agent.ws_service.send = AsyncMock()
+        session.tts_playing = True
+        session.tts_started_at = 1.0
+
+        with patch("time.monotonic", return_value=1.4):
+            await agent.on_user_speech_start(session)
+
+        assert session.interruption_pending is True
+        assert session.interruption_elapsed_ms == pytest.approx(400.0, abs=1e-6)
+        session.tts_track.clear.assert_awaited_once()
+        agent.ws_service.send.assert_awaited_once_with(session, {"type": "tts_stop_now"})
+
+
+class TestTranscriptionInterruption:
+
+    @pytest.mark.asyncio
+    async def test_process_transcription_continuation_merges_active_user_turn(self, agent, session):
+        agent.ws_service = MagicMock()
+        agent.ws_service.send = AsyncMock()
+        agent.ws_service.send_transcript = AsyncMock()
+        agent._stream_response = AsyncMock(return_value="")
+        session.conversation_history = [{"role": "user", "content": "hello"}]
+        session.mark_active_user_turn(request_id=1, index=0, text="hello")
+        session.current_request_id = 2
+        session.interruption_pending = True
+        session.interruption_elapsed_ms = 200.0
+
+        await agent._process_transcription(session, 2, "there")
+
+        assert session.conversation_history == [{"role": "user", "content": "hello there"}]
+        agent._stream_response.assert_awaited_once_with(
+            session=session,
+            user_text="hello there",
+            request_id=2,
+        )
+        assert session.active_user_message_index is None
+
+    @pytest.mark.asyncio
+    async def test_process_transcription_interruption_replaces_active_user_turn(self, agent, session):
+        agent.ws_service = MagicMock()
+        agent.ws_service.send = AsyncMock()
+        agent.ws_service.send_transcript = AsyncMock()
+        agent._stream_response = AsyncMock(return_value="")
+        session.conversation_history = [{"role": "user", "content": "hello"}]
+        session.mark_active_user_turn(request_id=1, index=0, text="hello")
+        session.current_request_id = 2
+        session.interruption_pending = True
+        session.interruption_elapsed_ms = 1400.0
+
+        await agent._process_transcription(session, 2, "new request")
+
+        assert session.conversation_history == [{"role": "user", "content": "new request"}]
+        agent._stream_response.assert_awaited_once_with(
+            session=session,
+            user_text="new request",
+            request_id=2,
+        )
+        assert session.active_user_message_index is None
+
+    def test_decide_interruption_mode_uses_configured_thresholds_and_words(self, agent, session):
+        session.interruption_elapsed_ms = 200.0
+
+        with (
+            patch("config.INTERRUPTION_SHORT_THRESHOLD_MS", 250.0),
+            patch("config.INTERRUPTION_WORDS_EN", ("halt", "cancel that")),
+            patch("config.CONTINUATION_WORDS_EN", ("carry on", "also")),
+        ):
+            assert agent._decide_interruption_mode(session, "carry on please") == "continuation"
+            assert agent._decide_interruption_mode(session, "halt now") == "interruption"
+
+        session.interruption_elapsed_ms = 400.0
+        with (
+            patch("config.INTERRUPTION_SHORT_THRESHOLD_MS", 250.0),
+            patch("config.INTERRUPTION_WORDS_EN", ("halt",)),
+            patch("config.CONTINUATION_WORDS_EN", ("carry on",)),
+        ):
+            assert agent._decide_interruption_mode(session, "neutral words only") == "interruption"
+
 
 class TestStreamResponse:
 
     @pytest.mark.asyncio
     async def test_stream_response_sends_all_audio_frames(self, agent, session):
         """Le flux TTS est découpé en frames et poussé intégralement vers la track."""
+        with patch("config.TTS_SEGMENT_OVERLAP_MS", 0):
 
-        async def fake_token_stream():
-            yield "Bonjour."
+            async def fake_token_stream():
+                yield "Bonjour."
 
-        async def fake_tts_stream(_text_stream, cancel_check=None):
-            yield ("Bonjour.", np.ones(24000, dtype=np.float32), 24000)
+            async def fake_tts_stream(_text_stream, cancel_check=None):
+                yield ("Bonjour.", np.ones(24000, dtype=np.float32), 24000)
 
-        agent.llm.generate_stream = MagicMock(return_value=fake_token_stream())
-        agent.tts.synthesize_stream = fake_tts_stream
-        agent.audio.array_to_av_frames = MagicMock(return_value=["frame-1", "frame-2", "frame-3"])
-        agent.ws_service = MagicMock()
-        agent.ws_service.send_response_chunk = AsyncMock()
+            agent.llm.generate_stream = MagicMock(return_value=fake_token_stream())
+            agent.tts.synthesize_stream = fake_tts_stream
+            agent.audio.array_to_av_frames = MagicMock(return_value=["frame-1", "frame-2", "frame-3"])
+            agent.ws_service = MagicMock()
+            agent.ws_service.send_response_chunk = AsyncMock()
 
-        reply = await agent._stream_response(session, "hello", request_id=session.current_request_id)
+            reply = await agent._stream_response(session, "hello", request_id=session.current_request_id)
 
-        assert reply == "Bonjour."
-        agent.audio.array_to_av_frames.assert_called_once()
-        assert session.tts_track.feed.await_count == 3
-        session.tts_track.feed.assert_any_await("frame-1")
-        session.tts_track.feed.assert_any_await("frame-2")
-        session.tts_track.feed.assert_any_await("frame-3")
-        agent.ws_service.send_response_chunk.assert_awaited_once_with(session, "Bonjour.")
+            assert reply == "Bonjour."
+            agent.audio.array_to_av_frames.assert_called_once()
+            assert session.tts_track.feed.await_count == 3
+            session.tts_track.feed.assert_any_await("frame-1")
+            session.tts_track.feed.assert_any_await("frame-2")
+            session.tts_track.feed.assert_any_await("frame-3")
+            agent.ws_service.send_response_chunk.assert_awaited_once_with(session, "Bonjour.")
+
+    @pytest.mark.asyncio
+    async def test_speak_text_streams_audio_and_sends_tts_test_event(self, agent, session):
+        with patch("config.TTS_SEGMENT_OVERLAP_MS", 0):
+            async def fake_tts_stream(_text_stream, cancel_check=None):
+                yield ("Test audio.", np.ones(16000, dtype=np.float32), 16000)
+
+            agent.tts.synthesize_stream = fake_tts_stream
+            agent.audio.array_to_av_frames = MagicMock(return_value=["frame-1", "frame-2"])
+            agent.ws_service = MagicMock()
+            agent.ws_service.send = AsyncMock()
+
+            await agent.speak_text(session, "Test audio.")
+
+            agent.ws_service.send.assert_awaited_once_with(
+                session,
+                {"type": "tts_test", "text": "Test audio."},
+            )
+            assert session.tts_track.feed.await_count == 2
+            session.tts_track.feed.assert_any_await("frame-1")
+            session.tts_track.feed.assert_any_await("frame-2")
+            session.tts_track.wait_until_buffer_below.assert_awaited()
+
+    @pytest.mark.asyncio
+    async def test_stream_response_waits_for_buffer_low_watermark(self, agent, session):
+        with patch("config.TTS_SEGMENT_OVERLAP_MS", 0), patch("config.TTS_BUFFER_LOW_WATERMARK_MS", 500):
+
+            async def fake_token_stream():
+                yield "Bonjour."
+                yield "Encore."
+
+            async def fake_tts_stream(_text_stream, cancel_check=None):
+                yield ("Bonjour.", np.ones(16000, dtype=np.float32), 16000)
+                yield ("Encore.", np.ones(16000, dtype=np.float32), 16000)
+
+            agent.llm.generate_stream = MagicMock(return_value=fake_token_stream())
+            agent.tts.synthesize_stream = fake_tts_stream
+            agent.audio.array_to_av_frames = MagicMock(return_value=["frame-1"])
+            agent.ws_service = MagicMock()
+            agent.ws_service.send_response_chunk = AsyncMock()
+
+            await agent._stream_response(session, "hello", request_id=session.current_request_id)
+
+            assert session.tts_track.wait_until_buffer_below.await_count == 2
+            session.tts_track.wait_until_buffer_below.assert_any_await(500)
+
+    def test_prepare_tts_samples_blends_previous_tail_into_current_head(self, agent, session):
+        agent.audio.trim_silence = MagicMock(side_effect=lambda samples, **kwargs: samples)
+        with patch("config.TTS_SEGMENT_OVERLAP_MS", 4):
+            first = np.array([1.0, 1.0, 1.0, 1.0], dtype=np.float32)
+            second = np.array([0.0, 0.0, 0.0, 0.0], dtype=np.float32)
+
+            out_first = agent._prepare_tts_samples(session, first, 1000)
+            out_second = agent._prepare_tts_samples(session, second, 1000)
+
+            np.testing.assert_array_equal(out_first, first)
+            assert out_second.shape == second.shape
+            assert float(out_second[0]) == pytest.approx(1.0, abs=1e-6)
+            assert 0.0 < float(out_second[1]) < 1.0
+            assert 0.0 < float(out_second[2]) < 1.0
+            assert float(out_second[3]) == pytest.approx(0.0, abs=1e-6)

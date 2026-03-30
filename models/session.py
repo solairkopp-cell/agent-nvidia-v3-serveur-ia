@@ -47,6 +47,16 @@ class Session:
     # ── Contrôle TTS ─────────────────────────────────────────────────────────
     # True si le client est en train de lire du TTS
     tts_playing: bool = False
+    processing_started_at: float = 0.0
+    tts_started_at: float = 0.0
+    # Fin du segment TTS précédent, gardée pour lisser le début du suivant.
+    tts_overlap_tail: object | None = None
+    tts_overlap_rate: int = 0
+    active_user_message_index: Optional[int] = None
+    active_user_request_id: int = 0
+    active_user_text: str = ""
+    interruption_pending: bool = False
+    interruption_elapsed_ms: float = 0.0
     # Permet d'annuler la génération en cours
     current_request_id: int = 0
     cancel_flag: bool = False
@@ -69,6 +79,25 @@ class Session:
 
     def reset_conversation(self):
         self.conversation_history.clear()
+
+    def reset_tts_output_state(self):
+        self.tts_overlap_tail = None
+        self.tts_overlap_rate = 0
+
+    def mark_active_user_turn(self, *, request_id: int, index: int, text: str) -> None:
+        self.active_user_request_id = int(request_id)
+        self.active_user_message_index = int(index)
+        self.active_user_text = str(text or "").strip()
+
+    def clear_active_user_turn(self) -> None:
+        self.active_user_request_id = 0
+        self.active_user_message_index = None
+        self.active_user_text = ""
+        self.processing_started_at = 0.0
+
+    def reset_interruption_state(self) -> None:
+        self.interruption_pending = False
+        self.interruption_elapsed_ms = 0.0
 
     def trim_history(self, max_size: int, trim_to: int):
         if len(self.conversation_history) > max_size:

@@ -25,28 +25,7 @@ from typing import AsyncIterator, Optional
 import numpy as np
 
 import config
-
-
-PUNCTUATION = set(",.!?:;")
-
-
-def split_into_phrases(text: str) -> list[str]:
-    """
-    Découpe un texte en phrases sur la ponctuation.
-    Protège les nombres décimaux (3.14 → non découpé).
-    Filtre les fragments vides.
-    """
-    # Protéger les décimaux
-    text = re.sub(r"(\d)\.(\d)", r"\1<DOT>\2", text)
-    segments = re.split(r"([,.!?:;])", text)
-    phrases = []
-    for i in range(0, len(segments), 2):
-        base = segments[i]
-        punct = segments[i + 1] if i + 1 < len(segments) else ""
-        phrase = (base + punct).strip().replace("<DOT>", ".")
-        if phrase and not re.fullmatch(r"[,.!?:;]+", phrase):
-            phrases.append(phrase)
-    return phrases
+from services.tts_utils import extract_tts_ready_segments
 
 
 class KokoroTTSService:
@@ -92,6 +71,15 @@ class KokoroTTSService:
 
         def _load():
             from kokoro_onnx import Kokoro  # type: ignore
+            import onnxruntime as ort
+
+            providers = ["CPUExecutionProvider"]
+            available = ort.get_available_providers()
+            # Sur Orin Nano 8GB, CUDA est préférable à TensorRT pour éviter les pics de RAM au démarrage
+            if "CUDAExecutionProvider" in available:
+                providers.insert(0, "CUDAExecutionProvider")
+            if "TensorrtExecutionProvider" in available:
+                providers.append("TensorrtExecutionProvider")
 
             return Kokoro(
                 model_path=str(model_path),
@@ -157,39 +145,59 @@ class KokoroTTSService:
         Yield : (phrase_text, audio_samples, sample_rate)
         """
         buffer = ""
+        # Look-ahead logic: synthesis N+1 while delivering N
+        queue: asyncio.Queue[Optional[tuple[str, np.ndarray, int]]] = asyncio.Queue(maxsize=3)
+        loop = asyncio.get_running_loop()
 
-        async for token in text_stream:
-            if cancel_check is not None and cancel_check():
-                fade_text = buffer.strip()
-                if fade_text:
-                    samples, rate = await self.synthesize_fade_out(fade_text)
-                    yield (fade_text, samples, rate)
-                return
+        async def _synthesizer():
+            nonlocal buffer
+            try:
+                # 1. Consommer le flux de texte
+                async for token in text_stream:
+                    if cancel_check is not None and cancel_check():
+                        break
+                    if not token:
+                        continue
+                    buffer += token
 
-            if not token:
-                continue
-            buffer += token
+                    ready_segments, buffer = extract_tts_ready_segments(buffer, final=False)
+                    for phrase in ready_segments:
+                        if cancel_check is not None and cancel_check():
+                            break
+                        samples, rate = await self.synthesize(phrase)
+                        await queue.put((phrase, samples, rate))
 
-            cut = _last_punctuation_index(buffer)
-            if cut == -1:
-                continue
-
-            to_flush = buffer[: cut + 1]
-            buffer = buffer[cut + 1 :]
-
-            for phrase in split_into_phrases(to_flush):
+                # 2. Flush du reste
+                if not (cancel_check is not None and cancel_check()):
+                    ready_segments, _ = extract_tts_ready_segments(buffer, final=True)
+                    for phrase in ready_segments:
+                        samples, rate = await self.synthesize(phrase)
+                        await queue.put((phrase, samples, rate))
+            except Exception as e:
+                logging.getLogger(__name__).exception("TTS Stream Synthesizer error")
+            finally:
+                # Gestion du fade-out en cas d'annulation
                 if cancel_check is not None and cancel_check():
-                    samples, rate = await self.synthesize_fade_out(phrase)
-                    yield (phrase, samples, rate)
-                    return
-                samples, rate = await self.synthesize(phrase)
-                yield (phrase, samples, rate)
+                    fade_text = buffer.strip()
+                    if fade_text:
+                        samples, rate = await self.synthesize_fade_out(fade_text)
+                        await queue.put((fade_text, samples, rate))
+                
+                await queue.put(None) # Sentinel
 
-        # fin de stream : flush du reste
-        rest = buffer.strip()
-        if rest:
-            samples, rate = await self.synthesize(rest)
-            yield (rest, samples, rate)
+        synth_task = asyncio.create_task(_synthesizer())
+
+        try:
+            while True:
+                item = await queue.get()
+                if item is None:
+                    break
+                yield item
+        finally:
+            if not synth_task.done():
+                synth_task.cancel()
+            with suppress(asyncio.CancelledError):
+                await synth_task
 
     async def synthesize_fade_out(self, text: str, duration_ms: int = 150) -> tuple[np.ndarray, int]:
         """
@@ -236,8 +244,3 @@ class KokoroTTSService:
             return False
 
 
-def _last_punctuation_index(text: str) -> int:
-    for i in range(len(text) - 1, -1, -1):
-        if text[i] in PUNCTUATION:
-            return i
-    return -1

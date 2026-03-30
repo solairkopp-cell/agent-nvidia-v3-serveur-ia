@@ -111,3 +111,63 @@ class TestArrayToAvFrames:
         assert all(frame.format.name == "s16" for frame in frames)
         assert all(frame.layout.name == "mono" for frame in frames)
         assert sum(frame.samples for frame in frames) == 16000
+
+
+class TestTrimSilence:
+
+    def test_trim_silence_removes_leading_and_trailing_quiet_parts(self, audio):
+        samples = np.concatenate([
+            np.zeros(1600, dtype=np.float32),
+            np.ones(200, dtype=np.float32) * 0.02,
+            np.zeros(1600, dtype=np.float32),
+        ])
+
+        trimmed = audio.trim_silence(
+            samples,
+            sample_rate=16000,
+            threshold=0.001,
+            pad_ms=0,
+            min_silence_ms=80,
+        )
+
+        assert 190 <= trimmed.size <= 210
+        assert float(trimmed[0]) > 0.0
+        assert float(trimmed[-1]) > 0.0
+
+    def test_trim_silence_keeps_short_quiet_attack(self, audio):
+        samples = np.concatenate([
+            np.zeros(120, dtype=np.float32),
+            np.ones(200, dtype=np.float32) * 0.02,
+            np.zeros(120, dtype=np.float32),
+        ])
+
+        trimmed = audio.trim_silence(
+            samples,
+            sample_rate=16000,
+            threshold=0.001,
+            pad_ms=0,
+            min_silence_ms=80,
+        )
+
+        assert trimmed.size == samples.size
+
+    def test_trim_silence_can_keep_leading_and_trim_only_trailing(self, audio):
+        samples = np.concatenate([
+            np.zeros(1600, dtype=np.float32),
+            np.ones(200, dtype=np.float32) * 0.02,
+            np.zeros(1600, dtype=np.float32),
+        ])
+
+        trimmed = audio.trim_silence(
+            samples,
+            sample_rate=16000,
+            threshold=0.001,
+            pad_ms=0,
+            min_silence_ms=80,
+            trim_leading=False,
+            trim_trailing=True,
+        )
+
+        assert trimmed.size > 1700
+        assert float(trimmed[0]) == 0.0
+        assert float(trimmed[-1]) > 0.0

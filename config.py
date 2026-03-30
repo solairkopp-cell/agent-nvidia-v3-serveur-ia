@@ -4,6 +4,11 @@ Centralise toutes les constantes et variables d'environnement.
 """
 import os
 
+
+def _parse_env_words(name: str, default: str) -> tuple[str, ...]:
+    raw = os.getenv(name, default)
+    return tuple(word.strip() for word in raw.split(",") if word.strip())
+
 # ── Logging ──────────────────────────────────────────────────────────────────
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
 LOG_FILE_PATH = os.getenv("LOG_FILE_PATH", "logs/server.log")
@@ -22,21 +27,26 @@ WHISPER_TIMEOUT = int(os.getenv("WHISPER_TIMEOUT", "30"))                  # uti
 WHISPER_LANGUAGE = os.getenv("WHISPER_LANGUAGE", "fr")  # ou "en", ou None (auto)
 
 # faster-whisper (embedded)
-WHISPER_MODEL = os.getenv("WHISPER_MODEL", "small.en")        # ex: tiny, base, small, medium, large-v3
-WHISPER_DEVICE = os.getenv("WHISPER_DEVICE", "cuda")       # "cuda" ou "cpu"
-WHISPER_COMPUTE_TYPE = os.getenv("WHISPER_COMPUTE_TYPE", "int8_float16")
+WHISPER_MODEL = os.getenv("WHISPER_MODEL", "base.en")        # ex: tiny, base, small, medium, large-v3
+WHISPER_DEVICE = os.getenv("WHISPER_DEVICE", "cuda")       # "cpu" pour maximiser la stabilité Jetson
+WHISPER_COMPUTE_TYPE = os.getenv("WHISPER_COMPUTE_TYPE", "int8")
 WHISPER_BEAM_SIZE = int(os.getenv("WHISPER_BEAM_SIZE", "1"))
 # Backend STT embarqué :
 # - "whisper"        : OpenAI Whisper (PyTorch, GPU ok)
-# - "faster-whisper" : faster-whisper (CTranslate2)
-WHISPER_BACKEND = os.getenv("WHISPER_BACKEND", "whisper")
+# - "faster-whisper" : faster-whisper (CTranslate2, beaucoup plus léger sur Jetson)
+WHISPER_BACKEND = os.getenv("WHISPER_BACKEND", "faster-whisper")
 
 # ── LLM ──────────────────────────────────────────────────────────────────────
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "qwen3:0.6b-q4_K_M")
 OLLAMA_CONTEXT_WINDOW = int(os.getenv("OLLAMA_CONTEXT_WINDOW", "2048"))
 OLLAMA_NUM_PREDICT = int(os.getenv("OLLAMA_NUM_PREDICT", "150"))
-OLLAMA_TEMPERATURE = float(os.getenv("OLLAMA_TEMPERATURE", "0.3"))
+OLLAMA_TEMPERATURE = float(os.getenv("OLLAMA_TEMPERATURE", "0.6"))
+OLLAMA_REPEAT_PENALTY = float(os.getenv("OLLAMA_REPEAT_PENALTY", "1.0"))
+OLLAMA_STOP = _parse_env_words("OLLAMA_STOP", "<|im_start|>,<|im_end|>")
+OLLAMA_PRESENCE_PENALTY = float(os.getenv("OLLAMA_PRESENCE_PENALTY", "0.0"))
+OLLAMA_TOP_K = int(os.getenv("OLLAMA_TOP_K", "20"))
+OLLAMA_TOP_P = float(os.getenv("OLLAMA_TOP_P", "0.95"))
 SYSTEM_PROMPT_PATH = os.getenv("SYSTEM_PROMPT_PATH", "system_prompt.md")
 # Désactiver le mode "thinking" (si supporté par Ollama / modèle)
 OLLAMA_THINK = os.getenv("OLLAMA_THINK", "false")
@@ -45,21 +55,56 @@ OLLAMA_THINK = os.getenv("OLLAMA_THINK", "false")
 # Intentions stockées dans un CSV (colonnes : intent, example)
 INTENT_CSV_PATH = os.getenv("INTENT_CSV_PATH", "intent_detection/intentions.csv")
 INTENT_EMBED_MODEL = os.getenv("INTENT_EMBED_MODEL", "paraphrase-multilingual-MiniLM-L12-v2")
-# Intent detection peut tourner sur CPU (recommandé sur Orin pour éviter la pression VRAM).
-# Valeurs: "cpu" | "cuda" | "auto"
-INTENT_DEVICE = os.getenv("INTENT_DEVICE", "cuda")
+# Intent detection sur Orin : forcer CPU pour économiser la VRAM.
+INTENT_DEVICE = os.getenv("INTENT_DEVICE", "cpu")
 INTENT_THRESHOLD = float(os.getenv("INTENT_THRESHOLD", "0.70"))
+INTENT_EMBED_LOCAL_DIR = os.getenv("INTENT_EMBED_LOCAL_DIR", "")
+INTENT_EMBED_CACHE_DIR = os.getenv("INTENT_EMBED_CACHE_DIR", "")
+INTENT_EMBED_DOWNLOAD_ON_STARTUP = os.getenv("INTENT_EMBED_DOWNLOAD_ON_STARTUP", "false").strip().lower() in ("1", "true", "yes", "on")
 # Si true: si un intent connu est détecté, ne pas appeler le LLM (le client gère l'action)
 INTENT_GATE_LLM = os.getenv("INTENT_GATE_LLM", "false")
 
-# ── TTS ──────────────────────────────────────────────────────────────────────
+# ── Interruptions / Barge-in ────────────────────────────────────────────────
+INTERRUPTION_SHORT_THRESHOLD_MS = float(os.getenv("INTERRUPTION_SHORT_THRESHOLD_MS", "1000"))
+INTERRUPTION_WORDS_EN = _parse_env_words(
+    "INTERRUPTION_WORDS_EN",
+    "no,stop,wait,cancel,forget,never mind",
+)
+CONTINUATION_WORDS_EN = _parse_env_words(
+    "CONTINUATION_WORDS_EN",
+    "also,and,plus,additionally,actually,wait and",
+)
+
+# ── Piper TTS (Primary) ───────────────────────────────────────────────────────
+PIPER_MODEL_PATH = os.getenv("PIPER_MODEL_PATH", "assets/models/en_US-danny-low.onnx")
+PIPER_CONFIG_PATH = os.getenv("PIPER_CONFIG_PATH", "assets/models/en_US-danny-low.onnx.json")
+
+# ── Kokoro TTS (Legacy / Optional) ───────────────────────────────────────────
 KOKORO_MODEL_PATH = os.getenv("KOKORO_MODEL_PATH", "assets/models/kokoro-v1.0.onnx")
 KOKORO_VOICES_PATH = os.getenv("KOKORO_VOICES_PATH", "assets/models/voices-v1.0.bin")
 KOKORO_VOICE = os.getenv("KOKORO_VOICE", "af_heart")
 KOKORO_LANG = os.getenv("KOKORO_LANG", "en-us")
 KOKORO_SPEED = float(os.getenv("KOKORO_SPEED", "1.0"))
-# Kokoro sur Orin : forcer CPU si GPU provoque des erreurs mémoire NvMap
-KOKORO_DEVICE = os.getenv("KOKORO_DEVICE", "cpu")  # "cpu" ou "cuda" (selon build)
+# Kokoro sur Orin : forcer CUDA pour utiliser les Tensor cores
+KOKORO_DEVICE = os.getenv("KOKORO_DEVICE", "cuda")
+
+# ── TTS Common Settings ──────────────────────────────────────────────────────
+# Streaming TTS : commencer à parler avant la fin de la phrase complète.
+# Sur Orin Nano, on peut descendre à 4 mots sans perdre trop de fluidité.
+TTS_STREAM_WORD_CHUNK_SIZE = int(os.getenv("TTS_STREAM_WORD_CHUNK_SIZE", "4"))
+# Fondu/crossfade léger entre segments. Accepte les décimales.
+TTS_SEGMENT_OVERLAP_MS = float(os.getenv("TTS_SEGMENT_OVERLAP_MS", "0.1"))
+TTS_SEGMENT_QUEUE_MAXSIZE = int(os.getenv("TTS_SEGMENT_QUEUE_MAXSIZE", "3"))
+# Petit tampon de lecture avant de lancer le son.
+TTS_PLAYBACK_PREBUFFER_MS = int(os.getenv("TTS_PLAYBACK_PREBUFFER_MS", "200"))
+# Déclencher la synthèse/livraison du segment suivant quand il reste peu d'audio
+# en file côté serveur.
+TTS_BUFFER_LOW_WATERMARK_MS = int(os.getenv("TTS_BUFFER_LOW_WATERMARK_MS", "500"))
+TTS_TRIM_SILENCE_THRESHOLD = float(os.getenv("TTS_TRIM_SILENCE_THRESHOLD", "0.001"))
+TTS_TRIM_SILENCE_PAD_MS = int(os.getenv("TTS_TRIM_SILENCE_PAD_MS", "48"))
+TTS_TRIM_MIN_SILENCE_MS = int(os.getenv("TTS_TRIM_MIN_SILENCE_MS", "80"))
+TTS_TRIM_LEADING = os.getenv("TTS_TRIM_LEADING", "false").strip().lower() in ("1", "true", "yes", "on")
+TTS_TRIM_TRAILING = os.getenv("TTS_TRIM_TRAILING", "true").strip().lower() in ("1", "true", "yes", "on")
 
 # ── Denoising ────────────────────────────────────────────────────────────────
 DENOISE_ENABLED = os.getenv("DENOISE_ENABLED", "false").strip().lower() in ("1", "true", "yes", "on")
@@ -75,13 +120,14 @@ VAD_SILENCE_THRESHOLD = 0.6         # seuil probabilité vocale
 # Seuil de continuation (hysteresis) : avec RNNoise, garder un seuil plus bas
 # aide beaucoup à ne pas casser les phrases courtes après un speech_start.
 VAD_CONTINUE_THRESHOLD = float(os.getenv("VAD_CONTINUE_THRESHOLD", "0.70"))
-VAD_SILENCE_DURATION_MS = int(os.getenv("VAD_SILENCE_DURATION_MS", "480"))
+# Réduire le délai de silence pour une réponse plus nerveuse.
+VAD_SILENCE_DURATION_MS = int(os.getenv("VAD_SILENCE_DURATION_MS", "300"))
 # Plus permissif pour laisser passer les commandes très courtes.
 VAD_MIN_SPEECH_MS = int(os.getenv("VAD_MIN_SPEECH_MS", "160"))
-# Garder un peu d'audio brut avant speech_start pour éviter de couper le début des mots.
-VAD_PRE_ROLL_MS = int(os.getenv("VAD_PRE_ROLL_MS", "320"))
-# Conserver un peu de silence après la fin détectée pour éviter les coupures trop sèches.
-VAD_POST_ROLL_MS = int(os.getenv("VAD_POST_ROLL_MS", "640"))
+# Garder moins d'audio brut avant speech_start (réduction de buffer).
+VAD_PRE_ROLL_MS = int(os.getenv("VAD_PRE_ROLL_MS", "240"))
+# Réduire le silence post-roll pour éviter de traîner sur la fin.
+VAD_POST_ROLL_MS = int(os.getenv("VAD_POST_ROLL_MS", "200"))
 # Garde-fou : forcer une fin d'utterance après N ms même sans silence net
 VAD_MAX_UTTERANCE_MS = int(os.getenv("VAD_MAX_UTTERANCE_MS", "6000"))
 SILERO_MODEL_PATH = os.getenv(
@@ -103,5 +149,5 @@ PREWARM_LLM_TEXT = os.getenv("PREWARM_LLM_TEXT", "Reply only with ok.")
 PREWARM_TTS_TEXT = os.getenv("PREWARM_TTS_TEXT", "Warmup.")
 
 # ── Conversation ─────────────────────────────────────────────────────────────
-MAX_HISTORY = int(os.getenv("MAX_HISTORY", "50"))
+MAX_HISTORY = int(os.getenv("MAX_HISTORY", "6"))
 TRIM_TO = int(os.getenv("TRIM_TO", "30"))

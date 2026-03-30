@@ -27,12 +27,18 @@ class IntentService:
         self._model_name: str = getattr(config, "INTENT_EMBED_MODEL", "paraphrase-multilingual-MiniLM-L12-v2")
         self._device: str = getattr(config, "INTENT_DEVICE", "auto")
         self._threshold: float = float(getattr(config, "INTENT_THRESHOLD", 0.40))
+        self._local_dir: str = getattr(config, "INTENT_EMBED_LOCAL_DIR", "")
+        self._cache_dir: str = getattr(config, "INTENT_EMBED_CACHE_DIR", "")
+        self._download_on_startup: bool = bool(getattr(config, "INTENT_EMBED_DOWNLOAD_ON_STARTUP", False))
 
         self._detector = IntentInterview(
             csv_path=self._csv_path,
             model_name=self._model_name,
             device=self._device,
             threshold=self._threshold,
+            local_dir=self._local_dir,
+            cache_dir=self._cache_dir,
+            download_on_startup=self._download_on_startup,
         )
         self._ready: bool = False
 

@@ -225,6 +225,50 @@ class AudioService:
         gain = 0.95 / peak
         return (samples * gain).astype(np.float32, copy=False)
 
+    def trim_silence(
+        self,
+        samples: np.ndarray,
+        *,
+        sample_rate: int,
+        threshold: float,
+        pad_ms: int = 0,
+        min_silence_ms: int = 0,
+        trim_leading: bool = True,
+        trim_trailing: bool = True,
+    ) -> np.ndarray:
+        """
+        Retirer un peu de silence en tête et en queue d'un segment TTS.
+        Garde un léger padding pour éviter une coupe trop sèche.
+        """
+        if not isinstance(samples, np.ndarray):
+            samples = np.asarray(samples, dtype=np.float32)
+        samples = samples.astype(np.float32, copy=False).reshape(-1)
+        if samples.size == 0:
+            return samples
+
+        abs_samples = np.abs(samples)
+        idx = np.flatnonzero(abs_samples > float(threshold))
+        if idx.size == 0:
+            return samples
+
+        pad = max(0, int(int(sample_rate) * (max(0, int(pad_ms)) / 1000.0)))
+        min_silence = max(0, int(int(sample_rate) * (max(0, int(min_silence_ms)) / 1000.0)))
+
+        first = int(idx[0])
+        last = int(idx[-1])
+
+        if trim_leading and first > min_silence:
+            start = max(0, first - pad)
+        else:
+            start = 0
+
+        trailing = int(samples.size - (last + 1))
+        if trim_trailing and trailing > min_silence:
+            end = min(samples.size, last + pad + 1)
+        else:
+            end = samples.size
+        return samples[start:end].astype(np.float32, copy=False)
+
     # ── Utilitaires ──────────────────────────────────────────────────────────
 
     def concat(self, chunks: list[np.ndarray]) -> np.ndarray:

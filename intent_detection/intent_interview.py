@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import gc
+import logging
 import os
 import sys
 from dataclasses import dataclass
@@ -36,6 +37,9 @@ class IntentInterview:
         model_name: str = "paraphrase-multilingual-MiniLM-L12-v2",
         device: str = "auto",
         threshold: float = 0.40,
+        local_dir: str = "",
+        cache_dir: str = "",
+        download_on_startup: bool = False,
     ):
         os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 
@@ -44,6 +48,9 @@ class IntentInterview:
         self.model_name = model_name
         self.device = device
         self.threshold = float(threshold)
+        self.local_dir = str(local_dir or "").strip()
+        self.cache_dir = str(cache_dir or "").strip()
+        self.download_on_startup = bool(download_on_startup)
 
         self._model = None
         self._labels: list[str] = []
@@ -55,6 +62,7 @@ class IntentInterview:
         Charger le modèle et encoder les exemples du CSV.
         Méthode sync (à lancer dans un thread si besoin).
         """
+        logger = logging.getLogger(__name__)
         try:
             import torch
             import pandas as pd
@@ -70,7 +78,18 @@ class IntentInterview:
         else:
             device = self.device
 
-        model = SentenceTransformer(self.model_name, device=device)
+        source, local_files_only = self._resolve_model_source()
+        load_kwargs = {"device": device}
+        if self.cache_dir:
+            load_kwargs["cache_folder"] = self.cache_dir
+
+        logger.info(
+            "Intent model source=%s local_only=%s cache_dir=%s",
+            source,
+            local_files_only,
+            self.cache_dir or "<default>",
+        )
+        model = SentenceTransformer(source, local_files_only=local_files_only, **load_kwargs)
 
         csv_file = Path(self.csv_path)
         if not csv_file.exists():
@@ -95,6 +114,108 @@ class IntentInterview:
         self._labels = labels
         self._examples = examples
         self._example_embeddings = example_embeddings.astype(np.float32, copy=False)
+
+    def _resolve_model_source(self) -> tuple[str, bool]:
+        explicit_local = self._existing_model_dir(self.local_dir)
+        if explicit_local is not None:
+            return str(explicit_local), True
+
+        cached_snapshot = self._find_local_snapshot(self.model_name, cache_dir=self.cache_dir)
+        if cached_snapshot is not None:
+            return str(cached_snapshot), True
+
+        if self.download_on_startup:
+            downloaded = self._download_model_snapshot()
+            if downloaded is not None:
+                return str(downloaded), True
+
+        return self.model_name, False
+
+    def _download_model_snapshot(self) -> Optional[Path]:
+        try:
+            from huggingface_hub import snapshot_download
+        except Exception:
+            return None
+
+        kwargs = {
+            "repo_id": self.model_name,
+            "local_files_only": False,
+        }
+        if self.cache_dir:
+            kwargs["cache_dir"] = self.cache_dir
+
+        try:
+            snapshot_path = snapshot_download(**kwargs)
+        except Exception:
+            logging.getLogger(__name__).exception("Intent model predownload failed repo=%s", self.model_name)
+            return None
+        return Path(snapshot_path)
+
+    @staticmethod
+    def _existing_model_dir(path_value: str) -> Optional[Path]:
+        path = Path(path_value).expanduser() if path_value else None
+        if path is None:
+            return None
+        if path.exists() and path.is_dir():
+            return path
+        return None
+
+    @staticmethod
+    def _find_local_snapshot(model_name: str, *, cache_dir: str = "") -> Optional[Path]:
+        slug = model_name.replace("/", "--")
+        candidates = IntentInterview._cache_roots(cache_dir)
+        for root in candidates:
+            repo_dir = root / f"models--{slug}"
+            snapshot = IntentInterview._latest_snapshot(repo_dir)
+            if snapshot is not None:
+                return snapshot
+        return None
+
+    @staticmethod
+    def _cache_roots(cache_dir: str = "") -> list[Path]:
+        roots: list[Path] = []
+
+        if cache_dir:
+            base = Path(cache_dir).expanduser()
+            if base.name == "hub":
+                roots.append(base)
+            else:
+                roots.append(base / "hub")
+
+        hf_home = os.getenv("HF_HOME", "").strip()
+        if hf_home:
+            roots.append(Path(hf_home).expanduser() / "hub")
+
+        roots.append(Path.home() / ".cache" / "huggingface" / "hub")
+
+        unique: list[Path] = []
+        seen: set[str] = set()
+        for root in roots:
+            key = str(root)
+            if key not in seen:
+                seen.add(key)
+                unique.append(root)
+        return unique
+
+    @staticmethod
+    def _latest_snapshot(repo_dir: Path) -> Optional[Path]:
+        snapshots_dir = repo_dir / "snapshots"
+        if not snapshots_dir.exists():
+            return None
+
+        main_ref = repo_dir / "refs" / "main"
+        if main_ref.exists():
+            revision = main_ref.read_text(encoding="utf-8").strip()
+            if revision:
+                candidate = snapshots_dir / revision
+                if candidate.exists():
+                    return candidate
+
+        snapshots = [path for path in snapshots_dir.iterdir() if path.is_dir()]
+        if not snapshots:
+            return None
+        snapshots.sort(key=lambda path: path.stat().st_mtime, reverse=True)
+        return snapshots[0]
 
     def classify(self, text: str, *, threshold: Optional[float] = None) -> IntentResult:
         """

@@ -91,9 +91,17 @@ class VADService:
                     "or place the model at the default location (assets/models/silero_vad.onnx)."
                 )
 
+            providers = ["CPUExecutionProvider"]
+            available = ort.get_available_providers()
+            # Sur Orin Nano 8GB, CUDA est préférable à TensorRT pour éviter les pics de RAM au démarrage
+            if "CUDAExecutionProvider" in available:
+                providers.insert(0, "CUDAExecutionProvider")
+            if "TensorrtExecutionProvider" in available:
+                providers.append("TensorrtExecutionProvider")
+
             return ort.InferenceSession(
                 config.SILERO_MODEL_PATH,
-                providers=["CPUExecutionProvider"],
+                providers=providers,
             )
 
         # Charger en thread pour ne pas bloquer l'event loop.
