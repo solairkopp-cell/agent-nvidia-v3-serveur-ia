@@ -72,6 +72,8 @@ class TTSAudioTrack(MediaStreamTrack):
         self._queue: asyncio.Queue = asyncio.Queue()
         self._pts: int = 0
         self._sample_rate: int = config.AUDIO_OUTPUT_SAMPLE_RATE  # 22.05kHz (Piper native)
+        # 20ms = vitesse normale. Plus grand = audio ralenti.
+        # Pour Internet, on augmente légèrement la queue mais pas la frame duration.
         self._samples_per_frame: int = max(1, int(self._sample_rate * 0.02))  # 20ms (~441 samples @ 22.05kHz)
 
     async def recv(self):

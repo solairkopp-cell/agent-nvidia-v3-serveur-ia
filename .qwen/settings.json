@@ -4,7 +4,8 @@
       "Bash(python *)",
       "Bash(chmod *)",
       "Bash(bash *)",
-      "Bash(python3 *)"
+      "Bash(python3 *)",
+      "Bash(pgrep *)"
     ]
   },
   "$version": 3

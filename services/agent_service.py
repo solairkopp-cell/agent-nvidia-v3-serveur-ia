@@ -657,10 +657,12 @@ class AgentService:
                 len(frames),
             )
         
-        # Envoyer les frames au rythme réel (1 frame toutes les 20ms)
+        # Envoyer les frames au rythme réel (1 frame toutes les 40ms pour Internet)
+        # Pour les connexions Internet, un intervalle plus grand absorbe mieux le jitter
+        frame_interval_ms = max(20, int(getattr(config, "TTS_FRAME_INTERVAL_MS", "40")))
         for frame in frames:
             await session.tts_track.feed(frame)
-            await asyncio.sleep(0.02)  # 20ms entre chaque frame
+            await asyncio.sleep(frame_interval_ms / 1000.0)  # 40ms entre chaque frame par défaut
 
     def _prepare_tts_samples(self, session: "Session", samples, rate: int):
         """

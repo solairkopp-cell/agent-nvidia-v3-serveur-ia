@@ -103,17 +103,25 @@ KOKORO_SPEED = float(os.getenv("KOKORO_SPEED", "1.0"))  # 1.0 = normal, >1 = fas
 TTS_STREAM_WORD_CHUNK_SIZE = int(os.getenv("TTS_STREAM_WORD_CHUNK_SIZE", "4"))
 # Fondu/crossfade léger entre segments. Accepte les décimales.
 TTS_SEGMENT_OVERLAP_MS = float(os.getenv("TTS_SEGMENT_OVERLAP_MS", "0.1"))
-TTS_SEGMENT_QUEUE_MAXSIZE = int(os.getenv("TTS_SEGMENT_QUEUE_MAXSIZE", "3"))
+# Buffer segments TTS : 5 est un bon compromis vitesse/fluidité
+TTS_SEGMENT_QUEUE_MAXSIZE = int(os.getenv("TTS_SEGMENT_QUEUE_MAXSIZE", "5"))
 # Petit tampon de lecture avant de lancer le son.
-TTS_PLAYBACK_PREBUFFER_MS = int(os.getenv("TTS_PLAYBACK_PREBUFFER_MS", "200"))
+# 300ms = compromis pour Internet (démarrage rapide + absorption jitter)
+TTS_PLAYBACK_PREBUFFER_MS = int(os.getenv("TTS_PLAYBACK_PREBUFFER_MS", "300"))
 # Déclencher la synthèse/livraison du segment suivant quand il reste peu d'audio
 # en file côté serveur.
-TTS_BUFFER_LOW_WATERMARK_MS = int(os.getenv("TTS_BUFFER_LOW_WATERMARK_MS", "500"))
+TTS_BUFFER_LOW_WATERMARK_MS = int(os.getenv("TTS_BUFFER_LOW_WATERMARK_MS", "600"))
+# Intervalle entre les frames audio WebRTC (ms).
+# IMPORTANT : doit correspondre à la durée réelle des frames (voir webrtc_service.py)
+# 20ms = vitesse normale, 40ms = ralenti. On garde 20ms pour vitesse normale.
+TTS_FRAME_INTERVAL_MS = int(os.getenv("TTS_FRAME_INTERVAL_MS", "20"))
+# Trim silence : désactivé en tête pour éviter de couper le début des mots
 TTS_TRIM_SILENCE_THRESHOLD = float(os.getenv("TTS_TRIM_SILENCE_THRESHOLD", "0.001"))
 TTS_TRIM_SILENCE_PAD_MS = int(os.getenv("TTS_TRIM_SILENCE_PAD_MS", "48"))
 TTS_TRIM_MIN_SILENCE_MS = int(os.getenv("TTS_TRIM_MIN_SILENCE_MS", "80"))
 TTS_TRIM_LEADING = os.getenv("TTS_TRIM_LEADING", "false").strip().lower() in ("1", "true", "yes", "on")
-TTS_TRIM_TRAILING = os.getenv("TTS_TRIM_TRAILING", "true").strip().lower() in ("1", "true", "yes", "on")
+# Désactivé pour éviter de couper les fins de phrases
+TTS_TRIM_TRAILING = os.getenv("TTS_TRIM_TRAILING", "false").strip().lower() in ("1", "true", "yes", "on")
 
 # ── Denoising ────────────────────────────────────────────────────────────────
 DENOISE_ENABLED = os.getenv("DENOISE_ENABLED", "false").strip().lower() in ("1", "true", "yes", "on")
