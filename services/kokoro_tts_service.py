@@ -1,13 +1,12 @@
 """
-services/piper_tts_service.py
-Synthèse vocale via Piper ONNX (local, optimized for CPU).
+services/kokoro_tts_service.py
+Synthèse vocale via Kokoro-82M ONNX (CPU, lightweight).
 """
 from __future__ import annotations
 
 import asyncio
 import logging
 import time
-import json
 from pathlib import Path
 from typing import AsyncIterator, Optional
 
@@ -15,55 +14,62 @@ import numpy as np
 import config
 from services.tts_utils import extract_tts_ready_segments
 
-class PiperTTSService:
+
+class KokoroTTSService:
     """
     Singleton. Injecté dans AgentService.
+    Utilise Kokoro-82M via kokoro-onnx (CPU optimized).
     """
 
     def __init__(self):
-        self._voice = None          # piper.PiperVoice loaded in startup()
-        self._lock = asyncio.Lock() # protects the model
-        self._model_path = config.PIPER_MODEL_PATH
-        self._config_path = config.PIPER_CONFIG_PATH
-        self._sample_rate = 16000   # default, will be updated from config
+        self._kokoro = None       # kokoro_onnx.Kokoro loaded in startup()
+        self._lock = asyncio.Lock()  # protects the model
+        self._model_path = config.KOKORO_MODEL_PATH
+        self._voices_path = config.KOKORO_VOICES_PATH
+        self._voice = config.KOKORO_VOICE  # default: "af_sarah"
+        self._language = config.KOKORO_LANGUAGE  # default: "en-us"
+        self._speed = config.KOKORO_SPEED  # default: 1.0
+        self._sample_rate = 24000   # Kokoro output sample rate
 
     async def startup(self):
         """
-        Charger Piper depuis config.PIPER_MODEL_PATH.
+        Charger Kokoro depuis les fichiers ONNX.
         """
         logger = logging.getLogger(__name__)
         model_path = Path(self._model_path)
-        config_path = Path(self._config_path)
+        voices_path = Path(self._voices_path)
 
         if not model_path.exists():
-            raise FileNotFoundError(f"Piper model not found at '{model_path}'")
-        if not config_path.exists():
-            raise FileNotFoundError(f"Piper config not found at '{config_path}'")
+            raise FileNotFoundError(f"Kokoro model not found at '{model_path}'")
+        if not voices_path.exists():
+            raise FileNotFoundError(f"Kokoro voices not found at '{voices_path}'")
 
         def _load():
-            from piper import PiperVoice
-            return PiperVoice.load(str(model_path), str(config_path))
+            from kokoro_onnx import Kokoro
+            return Kokoro(str(model_path), str(voices_path))
 
         start = time.perf_counter()
-        self._voice = await asyncio.to_thread(_load)
-        
-        # Load sample rate from config
-        with open(config_path, 'r') as f:
-            cfg = json.load(f)
-            self._sample_rate = cfg.get("audio", {}).get("sample_rate", 22050)
+        self._kokoro = await asyncio.to_thread(_load)
 
-        logger.info("Piper loaded in %.2fs (sample_rate=%d)", time.perf_counter() - start, self._sample_rate)
+        logger.info(
+            "Kokoro loaded in %.2fs (voice=%s, lang=%s, speed=%.1f, sample_rate=%d)",
+            time.perf_counter() - start,
+            self._voice,
+            self._language,
+            self._speed,
+            self._sample_rate,
+        )
 
     async def shutdown(self):
-        self._voice = None
+        self._kokoro = None
 
     async def synthesize(self, text: str) -> tuple[np.ndarray, int]:
         """
         Synthétiser un texte complet.
         Retourne (samples float32, sample_rate).
         """
-        if self._voice is None:
-            raise RuntimeError("PiperTTSService not started")
+        if self._kokoro is None:
+            raise RuntimeError("KokoroTTSService not started")
 
         text = (text or "").strip()
         if not text:
@@ -71,14 +77,19 @@ class PiperTTSService:
 
         async with self._lock:
             def _do():
-                # Piper outputs iterator of AudioChunk objects
-                chunks = list(self._voice.synthesize(text))
-                if not chunks:
-                    return np.array([], dtype=np.float32), self._sample_rate
-
-                audio_bytes = b"".join(chunk.audio_int16_bytes for chunk in chunks)
-                samples = np.frombuffer(audio_bytes, dtype=np.int16).astype(np.float32) / 32768.0
-                return samples, self._sample_rate
+                # Kokoro outputs (samples: np.ndarray, sample_rate: int)
+                samples, rate = self._kokoro.create(
+                    text,
+                    voice=self._voice,
+                    speed=self._speed,
+                    lang=self._language,
+                )
+                # Convert to float32 normalized [-1, 1]
+                if samples.dtype == np.int16:
+                    samples = samples.astype(np.float32) / 32768.0
+                elif samples.dtype != np.float32:
+                    samples = samples.astype(np.float32)
+                return samples, rate
 
             return await asyncio.to_thread(_do)
 
@@ -117,14 +128,14 @@ class PiperTTSService:
                         samples, rate = await self.synthesize(phrase)
                         await queue.put((phrase, samples, rate))
             except Exception:
-                logging.getLogger(__name__).exception("Piper TTS Stream Synthesizer error")
+                logging.getLogger(__name__).exception("Kokoro TTS Stream Synthesizer error")
             finally:
                 if cancel_check is not None and cancel_check():
                     fade_text = buffer.strip()
                     if fade_text:
                         samples, rate = await self.synthesize_fade_out(fade_text)
                         await queue.put((fade_text, samples, rate))
-                
+
                 await queue.put(None)
 
         synth_task = asyncio.create_task(_synthesizer())

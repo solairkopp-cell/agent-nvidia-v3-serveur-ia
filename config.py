@@ -27,7 +27,7 @@ WHISPER_TIMEOUT = int(os.getenv("WHISPER_TIMEOUT", "30"))                  # uti
 WHISPER_LANGUAGE = os.getenv("WHISPER_LANGUAGE", "fr")  # ou "en", ou None (auto)
 
 # faster-whisper (embedded)
-WHISPER_MODEL = os.getenv("WHISPER_MODEL", "base.en")        # ex: tiny, base, small, medium, large-v3
+WHISPER_MODEL = os.getenv("WHISPER_MODEL", "small.en")        # ex: tiny, base, small, medium, large-v3
 WHISPER_DEVICE = os.getenv("WHISPER_DEVICE", "cuda")       # "cpu" pour maximiser la stabilité Jetson
 WHISPER_COMPUTE_TYPE = os.getenv("WHISPER_COMPUTE_TYPE", "int8")
 WHISPER_BEAM_SIZE = int(os.getenv("WHISPER_BEAM_SIZE", "1"))
@@ -88,6 +88,15 @@ ACTION_SKIP_LLM_FOR_KNOWN_INTENTS = os.getenv("ACTION_SKIP_LLM_FOR_KNOWN_INTENTS
 PIPER_MODEL_PATH = os.getenv("PIPER_MODEL_PATH", "assets/models/en_US-ljspeech-high.onnx")
 PIPER_CONFIG_PATH = os.getenv("PIPER_CONFIG_PATH", "assets/models/en_US-ljspeech-high.onnx.json")
 
+# ── Kokoro TTS ─────────────────────────────────────────────────────────────────
+# Kokoro-82M ONNX model (CPU optimized)
+KOKORO_MODEL_PATH = os.getenv("KOKORO_MODEL_PATH", "assets/models/kokoro-v1.0.int8.onnx")
+KOKORO_VOICES_PATH = os.getenv("KOKORO_VOICES_PATH", "assets/models/voices-v1.0.bin")
+# Voix disponibles : af_sarah (US female), af_bella (US female), am_adam (US male), etc.
+KOKORO_VOICE = os.getenv("KOKORO_VOICE", "af_sarah")
+KOKORO_LANGUAGE = os.getenv("KOKORO_LANGUAGE", "en-us")
+KOKORO_SPEED = float(os.getenv("KOKORO_SPEED", "1.0"))  # 1.0 = normal, >1 = faster
+
 # ── TTS Common Settings ──────────────────────────────────────────────────────
 # Streaming TTS : commencer à parler avant la fin de la phrase complète.
 # Sur Orin Nano, on peut descendre à 4 mots sans perdre trop de fluidité.
@@ -115,14 +124,14 @@ DENOISE_FOR_STT = os.getenv("DENOISE_FOR_STT", "false").strip().lower() in ("1",
 
 # ── Audio / VAD ───────────────────────────────────────────────────────────────
 SAMPLE_RATE = 16000
-AUDIO_OUTPUT_SAMPLE_RATE = int(os.getenv("AUDIO_OUTPUT_SAMPLE_RATE", "48000"))
+AUDIO_OUTPUT_SAMPLE_RATE = int(os.getenv("AUDIO_OUTPUT_SAMPLE_RATE", "16000"))  # 16kHz = SAMPLE_RATE (pas de resampling)
 VAD_CHUNK_MS = 32                   # ms par chunk Silero
 VAD_SILENCE_THRESHOLD = 0.6         # seuil probabilité vocale
 # Seuil de continuation (hysteresis) : avec RNNoise, garder un seuil plus bas
 # aide beaucoup à ne pas casser les phrases courtes après un speech_start.
-VAD_CONTINUE_THRESHOLD = float(os.getenv("VAD_CONTINUE_THRESHOLD", "0.70"))
+VAD_CONTINUE_THRESHOLD = float(os.getenv("VAD_CONTINUE_THRESHOLD", "0.5"))
 # Réduire le délai de silence pour une réponse plus nerveuse.
-VAD_SILENCE_DURATION_MS = int(os.getenv("VAD_SILENCE_DURATION_MS", "300"))
+VAD_SILENCE_DURATION_MS = int(os.getenv("VAD_SILENCE_DURATION_MS", "250"))
 # Plus permissif pour laisser passer les commandes très courtes.
 VAD_MIN_SPEECH_MS = int(os.getenv("VAD_MIN_SPEECH_MS", "160"))
 # Garder moins d'audio brut avant speech_start (réduction de buffer).

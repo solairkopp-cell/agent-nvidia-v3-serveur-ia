@@ -61,6 +61,12 @@ class Session:
     current_request_id: int = 0
     cancel_flag: bool = False
 
+    # ── Delivery State Machine ───────────────────────────────────────────────
+    # Serial du driver (pour delivery completion flow)
+    driver_serial: Optional[str] = None
+    # ID du trip en cours de complétion
+    current_trip_id: Optional[str] = None
+
     # ── Synchronisation ───────────────────────────────────────────────────────
     # Verrou pour éviter deux traitements STT→LLM→TTS simultanés
     processing_lock: asyncio.Lock = field(default_factory=asyncio.Lock)

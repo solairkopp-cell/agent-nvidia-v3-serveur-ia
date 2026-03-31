@@ -7,15 +7,19 @@ Responsabilité :
   - Si intention = "INCONNU" → retourner la transcription pour le LLM
   - Si intention = action connue (start_navigation, show_deliveries, etc.) → exécuter l'action localement
   - Ne PAS envoyer les actions connues au LLM (économie de ressources)
+  - Envoyer des événements external_control au client pour les actions de navigation
 
 Flux :
   transcription + intention → ActionService.execute()
     → Si INCONNU : retourne {"action": "forward_to_llm", "text": transcription}
     → Si action connue : exécute l'action, retourne {"action": "handled", "intent": "...", "response": "..."}
+    → Envoie événement external_control au client via WebSocket
 """
 from __future__ import annotations
 
+import json
 import logging
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -33,6 +37,12 @@ class ActionService:
     def __init__(self):
         self._known_intents = self._load_known_intents()
         self._logger = logging.getLogger(__name__)
+        self._ws_service = None
+        self._data_file = Path("data.json")
+
+    def set_ws_service(self, ws_service) -> None:
+        """Injection tardive de WebSocketService pour envoyer des événements."""
+        self._ws_service = ws_service
 
     def _load_known_intents(self) -> tuple[str, ...]:
         """
@@ -122,7 +132,6 @@ class ActionService:
         self._logger.info("ACTION: %s", intent)
 
         # Réponses par défaut pour chaque intention
-        # À personnaliser selon tes besoins réels (appels API, base de données, etc.)
         responses = {
             "start_navigation": "Starting navigation to the next destination.",
             "show_deliveries": "Here is the list of your deliveries.",
@@ -135,13 +144,105 @@ class ActionService:
 
         response = responses.get(intent, f"Action {intent} exécutée.")
 
-        # Ici tu peux ajouter la logique réelle pour chaque intention :
-        # - Appeler une API de navigation
-        # - Interroger une base de données
-        # - Modifier l'état de la session
-        # - Envoyer un événement WebSocket au client
+        # Envoyer un événement external_control pour start_navigation
+        if intent == "start_navigation":
+            await self._send_start_navigation_event(session)
+
+        # Envoyer un événement external_control pour show_deliveries
+        if intent == "show_deliveries":
+            await self._send_show_deliveries_event(session)
 
         return response
+
+    async def _send_show_deliveries_event(self, session: Session) -> None:
+        """
+        Envoyer un événement external_control SHOW_DELIVERIES_LIST au client.
+        """
+        if self._ws_service is None:
+            self._logger.warning("WebSocketService not set, cannot send external_control event")
+            return
+
+        # Envoyer l'événement external_control
+        event = {
+            "type": "external_control",
+            "action": "com.avvc.maps.action.SHOW_DELIVERIES_LIST",
+            "extras": {},
+        }
+
+        await self._ws_service.send(session, event)
+        self._logger.info(
+            "📋 External control sent client_id=%s action=SHOW_DELIVERIES_LIST",
+            session.client_id,
+        )
+
+    async def _send_start_navigation_event(self, session: Session) -> None:
+        """
+        Envoyer un événement external_control START_NAVIGATION au client.
+        Lit le premier trip depuis data.json et envoie son ID.
+        """
+        if self._ws_service is None:
+            self._logger.warning("WebSocketService not set, cannot send external_control event")
+            return
+
+        # Lire le premier trip depuis data.json
+        trip_id = await self._get_first_trip_id()
+
+        if trip_id is None:
+            self._logger.warning("No trip found in data.json, cannot send start_navigation event")
+            return
+
+        # Envoyer l'événement external_control
+        event = {
+            "type": "external_control",
+            "action": "com.avvc.maps.action.START_NAVIGATION",
+            "extras": {
+                "id": trip_id,
+            },
+        }
+
+        await self._ws_service.send(session, event)
+        self._logger.info(
+            "🗺️ External control sent client_id=%s action=START_NAVIGATION trip_id=%s",
+            session.client_id,
+            trip_id,
+        )
+
+    async def _get_first_trip_id(self) -> str | None:
+        """
+        Lire le premier trip depuis data.json et retourner son ID.
+        """
+        try:
+            if not self._data_file.exists():
+                self._logger.warning("data.json not found")
+                return None
+
+            with open(self._data_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+
+            if not isinstance(data, list) or len(data) == 0:
+                self._logger.warning("data.json is empty or not a list")
+                return None
+
+            # Prendre le premier trip qui n'est pas complété
+            for trip in data:
+                status = trip.get("deliveryStatus", "")
+                if status != "COMPLETED":
+                    trip_id = trip.get("id")
+                    if trip_id:
+                        return trip_id
+
+            # Si tous sont complétés, prendre le premier quand même
+            if data and isinstance(data[0], dict):
+                return data[0].get("id")
+
+            return None
+
+        except json.JSONDecodeError as e:
+            self._logger.error("Failed to parse data.json: %s", e)
+            return None
+        except Exception as e:
+            self._logger.error("Error reading data.json: %s", e)
+            return None
 
     async def health_check(self) -> bool:
         """

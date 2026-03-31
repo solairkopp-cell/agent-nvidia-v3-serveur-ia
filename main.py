@@ -49,6 +49,7 @@ from services.agent_service import AgentService
 from services.denoise_service import DenoiseService
 from services.webrtc_service import WebRTCService
 from services.websocket_service import WebSocketService
+from services.delivery_state_machine import DeliveryStateMachine
 
 
 # ── Logging ───────────────────────────────────────────────────────────────────
@@ -66,8 +67,9 @@ intent_service   = IntentService()
 action_service   = ActionService()
 notification_service = NotificationService()
 delivery_service = DeliveryService()
-piper_service   = PiperTTSService()
+piper_service    = PiperTTSService()
 denoise_service  = DenoiseService(audio=audio_service)
+state_machine    = DeliveryStateMachine(intent_detector=intent_service)
 
 agent_service    = AgentService(
     stt=whisper_service,
@@ -77,6 +79,7 @@ agent_service    = AgentService(
     intent=intent_service,
     action=action_service,
     denoise=denoise_service,
+    state_machine=state_machine,
 )
 
 webrtc_service   = WebRTCService(
@@ -95,6 +98,9 @@ agent_service.set_ws_service(ws_service)
 
 # Résolution de la dépendance circulaire Notification ↔ WebSocket
 notification_service.set_ws_service(ws_service)
+
+# Injection du WebSocketService dans ActionService
+action_service.set_ws_service(ws_service)
 
 # Injection des services dans DeliveryService
 delivery_service.set_notification_service(notification_service)
@@ -167,6 +173,7 @@ async def lifespan(app: FastAPI):
     await action_service.startup()
     await notification_service.startup()
     await delivery_service.startup()
+    await state_machine.startup()
     await piper_service.startup()
     await denoise_service.startup()
     await prewarm_services()
@@ -178,6 +185,7 @@ async def lifespan(app: FastAPI):
     await piper_service.shutdown()
     await denoise_service.shutdown()
     await delivery_service.shutdown()
+    await state_machine.shutdown()
     await notification_service.shutdown()
     await action_service.shutdown()
     await intent_service.shutdown()
@@ -231,6 +239,7 @@ async def health():
             "action":  await action_service.health_check(),
             "notification": await notification_service.health_check(),
             "delivery": await delivery_service.health_check(),
+            "state_machine": True,  # Pas de health check nécessaire
             "piper":   await piper_service.health_check(),
             "denoise": await denoise_service.health_check(),
         }

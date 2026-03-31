@@ -16,7 +16,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Optional
 from pathlib import Path
 
 if TYPE_CHECKING:
@@ -98,6 +98,9 @@ class DeliveryService:
 
         # Sauvegarder l'association client_id -> driver_serial
         self._driver_sessions[session.client_id] = driver_serial
+
+        # Stocker dans la session pour la machine à états
+        session.driver_serial = driver_serial
 
         # Récupérer les trips
         try:
@@ -291,6 +294,71 @@ class DeliveryService:
         Vérifier si un driver est identifié.
         """
         return client_id in self._driver_sessions
+
+    async def start_delivery_completion(
+        self,
+        session: Session,
+        trip_id: Optional[str] = None,
+    ) -> None:
+        """
+        Démarrer le flux de complétion de livraison (MODE_1).
+        
+        Args:
+            session: Session courante
+            trip_id: ID du trip à compléter (optionnel, prend le premier si None)
+        """
+        from services.main import state_machine  # Import depuis main.py
+        
+        if state_machine is None:
+            logger.warning("State machine not available")
+            return
+        
+        driver_serial = self.get_driver_serial(session.client_id)
+        if not driver_serial:
+            logger.warning(
+                "Cannot start delivery completion: driver not identified client_id=%s",
+                session.client_id,
+            )
+            return
+        
+        # Si trip_id non spécifié, récupérer le premier trip non complété
+        if not trip_id:
+            trips = await self._get_trips(driver_serial)
+            for trip in trips:
+                status = getattr(trip, 'status', None)
+                if status != "COMPLETED":
+                    trip_id = getattr(trip, 'id', None)
+                    break
+        
+        if not trip_id:
+            logger.warning(
+                "No trip available for completion client_id=%s",
+                session.client_id,
+            )
+            return
+        
+        # Stocker le trip_id dans la session
+        session.current_trip_id = trip_id
+        
+        # Entrer dans MODE_1 → STATE_1
+        await state_machine.enter_mode_1(session, trip_id)
+        
+        # Envoyer la première question TTS
+        if self.notification_service is not None:
+            await self.notification_service.send(
+                session=session,
+                notification_type="state_machine_start",
+                data={
+                    "type": "tts_speak",
+                    "text": "Is the delivery completed?",
+                },
+            )
+        
+        logger.info(
+            "🚀 Delivery completion started client_id=%s trip_id=%s",
+            session.client_id,
+            trip_id,
+        )
 
     async def _handle_get_trips_wrapper(self, session: Session, message: dict) -> None:
         """

@@ -68,10 +68,10 @@ class TTSAudioTrack(MediaStreamTrack):
 
     def __init__(self):
         super().__init__()
-        # Grande queue pour tout stocker
+        # Queue pour stocker les frames audio TTS
         self._queue: asyncio.Queue = asyncio.Queue()
         self._pts: int = 0
-        self._sample_rate: int = config.AUDIO_OUTPUT_SAMPLE_RATE  # 48kHz
+        self._sample_rate: int = config.AUDIO_OUTPUT_SAMPLE_RATE  # 16kHz (same as input)
         self._samples_per_frame: int = max(1, int(self._sample_rate * 0.02))  # 20ms
 
     async def recv(self):
@@ -358,17 +358,6 @@ class WebRTCService:
                 # Conversion robuste via PyAV vers s16/mono/16k -> float32 [-1, 1].
                 samples = self.audio.av_frame_to_array(frame, target_rate=config.SAMPLE_RATE)
                 rate = config.SAMPLE_RATE
-
-                if frames_seen % 50 == 0:
-                    rms = float(np.sqrt(np.mean(samples * samples))) if samples.size else 0.0
-                    logger.info(
-                        "Audio in client_id=%s frame=%d rate=%d n=%d rms=%.4f",
-                        session.client_id,
-                        frames_seen,
-                        rate,
-                        int(samples.size),
-                        rms,
-                    )
 
                 # Accumuler et découper en chunks VAD
                 if buffer.size == 0:

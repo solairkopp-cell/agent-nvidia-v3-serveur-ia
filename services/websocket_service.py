@@ -214,6 +214,19 @@ class WebSocketService:
             await self.send(session, {"type": "stopped"})
             return
 
+        if msg_type == "arrived":
+            # Message direct: {"type": "arrived", "id": "trip_id"}
+            trip_id = message.get("id") or message.get("trip_id")
+            if not trip_id:
+                await self.send_error(session, "missing arrived trip id")
+                return
+            asyncio.create_task(
+                self.webrtc.agent.handle_external_control(
+                    session, "arrived", {"trip_id": trip_id}
+                )
+            )
+            return
+
         if msg_type == "test_tts":
             text = message.get("text")
             if not isinstance(text, str) or not text.strip():
@@ -223,6 +236,19 @@ class WebSocketService:
                 await self.send_error(session, "tts not ready: start webrtc first")
                 return
             asyncio.create_task(self.webrtc.agent.speak_text(session, text))
+            return
+
+        if msg_type == "external_control":
+            # Recevoir des événements de contrôle externe du client
+            # Ex: {"type": "external_control", "action": "arrived", "extras": {"trip_id": "..."}}
+            action = message.get("action")
+            extras = message.get("extras", {})
+            if not action:
+                await self.send_error(session, "missing external_control action")
+                return
+            asyncio.create_task(
+                self.webrtc.agent.handle_external_control(session, action, extras)
+            )
             return
 
         await self.send_error(session, "unknown type")

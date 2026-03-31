@@ -37,6 +37,7 @@ if TYPE_CHECKING:
     from services.intent_service import IntentService
     from services.action_service import ActionService
     from services.denoise_service import DenoiseService
+    from services.delivery_state_machine import DeliveryStateMachine
 
 import config
 
@@ -55,6 +56,7 @@ class AgentService:
         intent: "IntentService | None" = None,
         action: "ActionService | None" = None,
         denoise: "DenoiseService | None" = None,
+        state_machine: "DeliveryStateMachine | None" = None,
     ):
         self.stt = stt
         self.llm = llm
@@ -63,6 +65,7 @@ class AgentService:
         self.intent = intent
         self.action = action
         self.denoise = denoise
+        self.state_machine = state_machine
         # Référence optionnelle au WebSocketService pour envoyer
         # des événements texte au client (transcript, réponse LLM)
         self.ws_service: "WebSocketService | None" = None
@@ -187,7 +190,7 @@ class AgentService:
             return
 
         transcript = _normalize_spaces(text or "")
-        logger.info("STT transcript client_id=%s text_len=%d", session.client_id, len(transcript))
+        logger.info("STT transcript client_id=%s text=%r", session.client_id, transcript)
         if not transcript:
             if self.ws_service is not None:
                 await self.ws_service.send(session, {"type": "stt_empty"})
@@ -222,6 +225,64 @@ class AgentService:
             else:
                 self._discard_active_user_turn(session)
             session.reset_interruption_state()
+
+        # ── State Machine Processing (MODE_1) ─────────────────────────────────
+        # Si la machine à états est active, elle prioritaire sur le pipeline normal
+        # Mais on ignore les inputs pendant que le TTS parle (sauf interruption)
+        if self.state_machine is not None and self.state_machine.is_in_mode_1(session):
+            # Si le TTS est en train de parler, on ignore l'input utilisateur
+            # pour éviter de traiter des commandes parlées pendant la réponse
+            if session.tts_playing:
+                logger.info(
+                    "State machine: ignoring input during TTS client_id=%s transcript=%r",
+                    session.client_id,
+                    effective_transcript,
+                )
+                session.clear_active_user_turn()
+                return
+
+            try:
+                state_result = await self.state_machine.process_input(
+                    session=session,
+                    transcript=effective_transcript,
+                )
+
+                if state_result.should_handle:
+                    # La machine à états gère cet input
+                    if state_result.tts_response:
+                        # Envoyer la réponse TTS
+                        await self._speak_state_response(session, request_id, state_result.tts_response)
+
+                    if state_result.action == "update_trip":
+                        # Mettre à jour le trip via PlanningService
+                        await self._handle_update_trip_action(
+                            session,
+                            state_result.action_params,
+                        )
+
+                    if state_result.action == "exit_to_mode_0":
+                        # Retour au MODE_0
+                        session.clear_active_user_turn()
+                        return
+
+                    # Mettre à jour l'état de la session APRÈS le TTS
+                    # On applique la transition d'état retournée par la state machine
+                    if state_result.next_state is not None:
+                        ctx = self.state_machine._get_context(session)
+                        ctx.state = state_result.next_state
+                        logger.info(
+                            "State machine: transitioned to %s client_id=%s",
+                            state_result.next_state.value,
+                            session.client_id,
+                        )
+
+                    session.clear_active_user_turn()
+                    return
+                # else: should_handle=False → continuer avec le pipeline normal (MODE_0)
+                
+            except Exception:
+                logger.exception("State machine error client_id=%s", session.client_id)
+                # En cas d'erreur, on continue avec le pipeline normal
 
         # Intent detection (optionnel)
         detected_intent = None
@@ -300,6 +361,12 @@ class AgentService:
                     session.tts_playing = False
                     session.reset_tts_output_state()
                     session.tts_started_at = 0.0
+                    # Réinitialiser l'état VAD pour que la prochaine parole soit détectée
+                    session.reset_audio_buffer()
+                    if hasattr(session, "vad_h"):
+                        session.vad_h = None
+                    if hasattr(session, "vad_c"):
+                        session.vad_c = None
 
             session.conversation_history.append({"role": "assistant", "content": action_result.response or ""})
             session.trim_history(config.MAX_HISTORY, config.TRIM_TO)
@@ -428,6 +495,12 @@ class AgentService:
                 session.tts_playing = False
                 session.reset_tts_output_state()
                 session.tts_started_at = 0.0
+                # Réinitialiser l'état VAD pour que la prochaine parole soit détectée
+                session.reset_audio_buffer()
+                if hasattr(session, "vad_h"):
+                    session.vad_h = None
+                if hasattr(session, "vad_c"):
+                    session.vad_c = None
 
     # ── Pipeline interne ─────────────────────────────────────────────────────
 
@@ -488,6 +561,12 @@ class AgentService:
             session.tts_playing = False
             session.reset_tts_output_state()
             session.tts_started_at = 0.0
+            # Réinitialiser l'état VAD pour que la prochaine parole soit détectée
+            session.reset_audio_buffer()
+            if hasattr(session, "vad_h"):
+                session.vad_h = None
+            if hasattr(session, "vad_c"):
+                session.vad_c = None
 
         return full_reply
 
@@ -565,7 +644,7 @@ class AgentService:
         frames = self.audio.array_to_av_frames(
             samples,
             source_rate=rate,
-            target_rate=config.AUDIO_OUTPUT_SAMPLE_RATE,  # 48kHz pour WebRTC
+            target_rate=config.AUDIO_OUTPUT_SAMPLE_RATE,  # 16kHz (same as TTS output)
         )
         if samples is not None and len(samples) > 0:
             logger.info(
@@ -586,7 +665,7 @@ class AgentService:
     def _prepare_tts_samples(self, session: "Session", samples, rate: int):
         """
         Prépare les samples TTS : trim_silence optionnel.
-        Pas d'overlap : envoi direct.
+        Pas de resampling : TTS et WebRTC sont tous deux à 16kHz.
         """
         logger = logging.getLogger(__name__)
         import numpy as np
@@ -670,6 +749,223 @@ class AgentService:
         session.clear_active_user_turn()
 
     # ── Utilitaires ──────────────────────────────────────────────────────────
+
+    async def _speak_state_response(
+        self,
+        session: "Session",
+        request_id: int,
+        text: str,
+    ) -> None:
+        """
+        Synthétiser et envoyer une réponse TTS pour la machine à états.
+        """
+        logger = logging.getLogger(__name__)
+        if not text or session.tts_track is None:
+            return
+
+        session.tts_playing = True
+        session.reset_tts_output_state()
+        session.tts_started_at = time.monotonic()
+
+        try:
+            samples, rate = await self.tts.synthesize(text)
+
+            if not session.cancel_flag and session.current_request_id == request_id:
+                frames = self.audio.array_to_av_frames(
+                    samples,
+                    source_rate=rate,
+                    target_rate=config.AUDIO_OUTPUT_SAMPLE_RATE,
+                )
+                for frame in frames:
+                    await session.tts_track.feed(frame)
+                    await asyncio.sleep(0.02)
+
+                if self.ws_service is not None:
+                    await self.ws_service.send_response_chunk(session, text)
+        except Exception:
+            logger.exception("TTS state response error client_id=%s", session.client_id)
+        finally:
+            session.tts_playing = False
+            session.reset_tts_output_state()
+            session.tts_started_at = 0.0
+            # Réinitialiser l'état VAD pour que la prochaine parole soit détectée
+            session.reset_audio_buffer()
+            if hasattr(session, "vad_h"):
+                session.vad_h = None
+            if hasattr(session, "vad_c"):
+                session.vad_c = None
+
+    async def _handle_update_trip_action(
+        self,
+        session: "Session",
+        params: dict,
+    ) -> None:
+        """
+        Exécuter l'action update_trip depuis la machine à états.
+        """
+        logger = logging.getLogger(__name__)
+        if self.state_machine is None:
+            return
+
+        # Récupérer le driver_serial depuis la session
+        # (devrait être stocké dans la session ou le contexte)
+        driver_serial = getattr(session, "driver_serial", None)
+        if not driver_serial:
+            logger.warning(
+                "update_trip action: missing driver_serial client_id=%s",
+                session.client_id,
+            )
+            return
+
+        trip_id = getattr(session, "current_trip_id", None)
+        if not trip_id:
+            logger.warning(
+                "update_trip action: missing trip_id client_id=%s",
+                session.client_id,
+            )
+            return
+
+        status = params.get("status", "COMPLETED")
+        reason = params.get("reason")
+
+        success = await self.state_machine.update_trip_status(
+            driver_serial=driver_serial,
+            trip_id=trip_id,
+            status=status,
+            reason=reason,
+        )
+
+        if success:
+            logger.info(
+                "✅ Trip updated client_id=%s trip_id=%s status=%s",
+                session.client_id,
+                trip_id,
+                status,
+            )
+        else:
+            logger.error(
+                "❌ Trip update failed client_id=%s trip_id=%s",
+                session.client_id,
+                trip_id,
+            )
+
+    async def handle_external_control(
+        self,
+        session: "Session",
+        action: str,
+        extras: dict,
+    ) -> None:
+        """
+        Gérer les événements external_control reçus du client.
+        
+        Actions supportées :
+        - arrived: Le driver est arrivé sur place
+        - started_navigation: Navigation démarrée
+        - completed_delivery: Livraison terminée
+        """
+        logger = logging.getLogger(__name__)
+        logger.info(
+            "📮 EXTERNAL CONTROL REÇU client_id=%s action=%s extras=%r",
+            session.client_id,
+            action,
+            extras,
+        )
+        
+        if action == "arrived":
+            logger.info("✅ Traitement action arrived pour client_id=%s", session.client_id)
+            await self._handle_arrived_action(session, extras)
+        elif action == "started_navigation":
+            logger.info("✅ Traitement action started_navigation pour client_id=%s", session.client_id)
+            await self._handle_started_navigation_action(session, extras)
+        elif action == "completed_delivery":
+            logger.info("✅ Traitement action completed_delivery pour client_id=%s", session.client_id)
+            await self._handle_completed_delivery_action(session, extras)
+        else:
+            logger.warning("❌ Action external_control inconnue: %s", action)
+
+    async def _handle_arrived_action(
+        self,
+        session: "Session",
+        extras: dict,
+    ) -> None:
+        """
+        Gérer l'action "arrived" : le driver est arrivé sur place.
+        Démarre automatiquement le flux de complétion (MODE_1).
+        """
+        logger = logging.getLogger(__name__)
+        trip_id = extras.get("trip_id")
+        
+        if not trip_id:
+            logger.warning("⚠️ arrived action: missing trip_id client_id=%s", session.client_id)
+            return
+        
+        logger.info("🚚 DRIVER ARRIVÉ client_id=%s trip_id=%s", session.client_id, trip_id)
+        
+        # Stocker le trip_id dans la session pour la state machine
+        session.current_trip_id = trip_id
+        
+        # Démarrer la machine à états (MODE_1 → STATE_1)
+        if self.state_machine is not None:
+            logger.info("🚀 Démarrage de la state machine pour client_id=%s", session.client_id)
+            await self.state_machine.enter_mode_1(session, trip_id)
+            
+            # Envoyer la première question TTS
+            logger.info("🗣️ Envoi question TTS: 'Is the delivery completed?'")
+            await self.speak_text(session, "Is the delivery completed?")
+        else:
+            logger.warning("⚠️ State machine non disponible client_id=%s", session.client_id)
+
+    async def _handle_started_navigation_action(
+        self,
+        session: "Session",
+        extras: dict,
+    ) -> None:
+        """
+        Gérer l'action "started_navigation" : navigation démarrée.
+        """
+        logger = logging.getLogger(__name__)
+        trip_id = extras.get("trip_id")
+        
+        logger.info(
+            "🗺️ Navigation started client_id=%s trip_id=%s",
+            session.client_id,
+            trip_id or "N/A",
+        )
+
+    async def _handle_completed_delivery_action(
+        self,
+        session: "Session",
+        extras: dict,
+    ) -> None:
+        """
+        Gérer l'action "completed_delivery" : livraison terminée.
+        """
+        logger = logging.getLogger(__name__)
+        trip_id = extras.get("trip_id")
+        status = extras.get("status", "COMPLETED")
+        reason = extras.get("reason")
+        
+        if not trip_id:
+            logger.warning("completed_delivery action: missing trip_id client_id=%s", session.client_id)
+            return
+        
+        logger.info(
+            "✅ Delivery completed client_id=%s trip_id=%s status=%s",
+            session.client_id,
+            trip_id,
+            status,
+        )
+        
+        # Mettre à jour le statut via PlanningService
+        if self.state_machine is not None:
+            success = await self.state_machine.update_trip_status(
+                driver_serial=session.driver_serial,
+                trip_id=trip_id,
+                status=status,
+                reason=reason,
+            )
+            if success:
+                logger.info("✅ Trip status updated client_id=%s trip_id=%s", session.client_id, trip_id)
 
     def set_ws_service(self, ws_service: "WebSocketService") -> None:
         """Injection tardive pour éviter la dépendance circulaire."""
