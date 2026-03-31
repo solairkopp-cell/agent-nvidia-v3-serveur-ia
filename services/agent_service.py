@@ -637,36 +637,40 @@ class AgentService:
             else:
                 await self.ws_service.send(session, {"type": client_event_type, "text": phrase_text})
 
+        # Préparation minimale pour qualité audio maximale
         samples = self._prepare_tts_samples(session, samples, int(rate))
         if samples is None or len(samples) == 0:
             return
 
-        frames = self.audio.array_to_av_frames(
+        # Appliquer crossfade pour éviter les coupures sèches
+        overlap_ms = int(getattr(config, "TTS_SEGMENT_OVERLAP_MS", 30))
+        samples = self._apply_crossfade(samples, int(rate), overlap_ms)
+
+        # Conversion directe sans resampling si sample_rate identique
+        frames = self.audio.array_to_av_frames_direct(
             samples,
-            source_rate=rate,
-            target_rate=config.AUDIO_OUTPUT_SAMPLE_RATE,  # 22.05kHz (Piper native)
+            sample_rate=int(rate),
+            frame_ms=int(getattr(config, "TTS_FRAME_INTERVAL_MS", "10")),
         )
         if samples is not None and len(samples) > 0:
             logger.info(
-                "TTS audio client_id=%s phrase_len=%d src_rate=%d out_rate=%d samples=%d frames=%d",
+                "TTS audio client_id=%s phrase_len=%d rate=%d samples=%d frames=%d",
                 session.client_id,
                 len(phrase_text or ""),
                 int(rate),
-                int(config.AUDIO_OUTPUT_SAMPLE_RATE),
                 int(len(samples)),
                 len(frames),
             )
-        
-        # Envoyer les frames au rythme réel (1 frame toutes les 40ms pour Internet)
-        # Pour les connexions Internet, un intervalle plus grand absorbe mieux le jitter
-        frame_interval_ms = max(20, int(getattr(config, "TTS_FRAME_INTERVAL_MS", "40")))
+
+        # Envoyer les frames au rythme réel
+        frame_interval_ms = max(10, int(getattr(config, "TTS_FRAME_INTERVAL_MS", "10")))
         for frame in frames:
             await session.tts_track.feed(frame)
-            await asyncio.sleep(frame_interval_ms / 1000.0)  # 40ms entre chaque frame par défaut
+            await asyncio.sleep(frame_interval_ms / 1000.0)
 
     def _prepare_tts_samples(self, session: "Session", samples, rate: int):
         """
-        Prépare les samples TTS : trim_silence optionnel.
+        Prépare les samples TTS : trim_silence optionnel + crossfade.
         Pas de resampling : TTS (22.05kHz) et WebRTC (22.05kHz) sont identiques.
         """
         logger = logging.getLogger(__name__)
@@ -680,23 +684,52 @@ class AgentService:
         if samples.size == 0:
             return samples
 
-        # Trim silence optionnel
-        try:
-            samples = self.audio.trim_silence(
-                samples,
-                sample_rate=int(rate),
-                threshold=float(getattr(config, "TTS_TRIM_SILENCE_THRESHOLD", 0.003)),
-                pad_ms=int(getattr(config, "TTS_TRIM_SILENCE_PAD_MS", 18)),
-                min_silence_ms=int(getattr(config, "TTS_TRIM_MIN_SILENCE_MS", 80)),
-                trim_leading=bool(getattr(config, "TTS_TRIM_LEADING", False)),
-                trim_trailing=bool(getattr(config, "TTS_TRIM_TRAILING", True)),
-            )
-        except Exception:
-            logger.debug("TTS trim_silence skipped", exc_info=True)
+        # Trim silence avec seuil très bas et padding généreux
+        if getattr(config, "TTS_TRIM_TRAILING", False):
+            try:
+                samples = self.audio.trim_silence(
+                    samples,
+                    sample_rate=int(rate),
+                    threshold=float(getattr(config, "TTS_TRIM_SILENCE_THRESHOLD", 0.0001)),
+                    pad_ms=int(getattr(config, "TTS_TRIM_SILENCE_PAD_MS", 80)),
+                    min_silence_ms=int(getattr(config, "TTS_TRIM_MIN_SILENCE_MS", 150)),
+                    trim_leading=bool(getattr(config, "TTS_TRIM_LEADING", False)),
+                    trim_trailing=True,
+                )
+            except Exception:
+                logger.debug("TTS trim_silence skipped", exc_info=True)
 
         if samples.size == 0:
             session.reset_tts_output_state()
 
+        return samples
+
+    def _apply_crossfade(self, samples: np.ndarray, rate: int, overlap_ms: int = 30) -> np.ndarray:
+        """
+        Applique un fondu enchaîné (crossfade) entre les segments TTS pour éviter
+        les coupures sèches qui créent des artefacts de type 'clic'.
+        Force la waveform à zéro aux extrémités pour éviter les discontinuités de phase.
+        """
+        import numpy as np
+        
+        if not isinstance(samples, np.ndarray):
+            samples = np.asarray(samples, dtype=np.float32)
+        if samples.size == 0:
+            return samples
+        
+        overlap_samples = int(rate * (overlap_ms / 1000.0))
+        if overlap_samples <= 0 or overlap_samples >= len(samples) // 2:
+            return samples
+        
+        # Force waveform à zéro aux extrémités + fade
+        # Fade-in au début (part de 0)
+        fade_in = np.linspace(0.0, 1.0, overlap_samples, dtype=np.float32) ** 2  # Courbe exponentielle
+        samples[:overlap_samples] *= fade_in
+        
+        # Fade-out à la fin (revient à 0)
+        fade_out = np.linspace(1.0, 0.0, overlap_samples, dtype=np.float32) ** 2  # Courbe exponentielle
+        samples[-overlap_samples:] *= fade_out
+        
         return samples
 
     async def _wait_for_tts_buffer_window(self, session: "Session", request_id: int) -> None:

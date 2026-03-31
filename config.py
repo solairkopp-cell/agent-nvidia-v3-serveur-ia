@@ -99,10 +99,10 @@ KOKORO_SPEED = float(os.getenv("KOKORO_SPEED", "1.0"))  # 1.0 = normal, >1 = fas
 
 # ── TTS Common Settings ──────────────────────────────────────────────────────
 # Streaming TTS : commencer à parler avant la fin de la phrase complète.
-# Sur Orin Nano, on peut descendre à 4 mots sans perdre trop de fluidité.
-TTS_STREAM_WORD_CHUNK_SIZE = int(os.getenv("TTS_STREAM_WORD_CHUNK_SIZE", "4"))
-# Fondu/crossfade léger entre segments. Accepte les décimales.
-TTS_SEGMENT_OVERLAP_MS = float(os.getenv("TTS_SEGMENT_OVERLAP_MS", "0.1"))
+# Augmenté à 8 mots pour des phrases plus naturelles et moins de coupures
+TTS_STREAM_WORD_CHUNK_SIZE = int(os.getenv("TTS_STREAM_WORD_CHUNK_SIZE", "8"))
+# Fondu/crossfade entre segments pour éviter les coupures sèches (100ms)
+TTS_SEGMENT_OVERLAP_MS = float(os.getenv("TTS_SEGMENT_OVERLAP_MS", "100"))
 # Buffer segments TTS : 5 est un bon compromis vitesse/fluidité
 TTS_SEGMENT_QUEUE_MAXSIZE = int(os.getenv("TTS_SEGMENT_QUEUE_MAXSIZE", "5"))
 # Petit tampon de lecture avant de lancer le son.
@@ -115,10 +115,10 @@ TTS_BUFFER_LOW_WATERMARK_MS = int(os.getenv("TTS_BUFFER_LOW_WATERMARK_MS", "1200
 # IMPORTANT : doit correspondre à la durée réelle des frames (voir webrtc_service.py)
 # 10ms = latence minimale, 20ms = compromis, 40ms = ralenti
 TTS_FRAME_INTERVAL_MS = int(os.getenv("TTS_FRAME_INTERVAL_MS", "10"))
-# Trim silence : désactivé en tête pour éviter de couper le début des mots
-TTS_TRIM_SILENCE_THRESHOLD = float(os.getenv("TTS_TRIM_SILENCE_THRESHOLD", "0.001"))
-TTS_TRIM_SILENCE_PAD_MS = int(os.getenv("TTS_TRIM_SILENCE_PAD_MS", "48"))
-TTS_TRIM_MIN_SILENCE_MS = int(os.getenv("TTS_TRIM_MIN_SILENCE_MS", "80"))
+# Trim silence : seuil très bas pour éviter de couper
+TTS_TRIM_SILENCE_THRESHOLD = float(os.getenv("TTS_TRIM_SILENCE_THRESHOLD", "0.0001"))
+TTS_TRIM_SILENCE_PAD_MS = int(os.getenv("TTS_TRIM_SILENCE_PAD_MS", "80"))
+TTS_TRIM_MIN_SILENCE_MS = int(os.getenv("TTS_TRIM_MIN_SILENCE_MS", "150"))
 TTS_TRIM_LEADING = os.getenv("TTS_TRIM_LEADING", "false").strip().lower() in ("1", "true", "yes", "on")
 # Désactivé pour éviter de couper les fins de phrases
 TTS_TRIM_TRAILING = os.getenv("TTS_TRIM_TRAILING", "false").strip().lower() in ("1", "true", "yes", "on")

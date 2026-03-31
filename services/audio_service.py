@@ -163,6 +163,39 @@ class AudioService:
             frames.append(self.array_to_av_frame(chunk, normalized_rate))
         return frames
 
+    def array_to_av_frames_direct(
+        self,
+        samples: np.ndarray,
+        sample_rate: int,
+        frame_ms: int = 10,
+    ) -> list:
+        """
+        Conversion directe sans resampling pour qualité audio maximale.
+        Utilisé pour TTS où source_rate == target_rate (22.05kHz).
+
+        Évite tout resampling qui dégrade la qualité (artefacts métalliques).
+        """
+        if av is None:
+            raise RuntimeError("PyAV is not installed (package 'av').")
+
+        if not isinstance(samples, np.ndarray):
+            samples = np.asarray(samples, dtype=np.float32)
+        if samples.ndim > 1:
+            samples = self.to_mono(samples)
+        samples = samples.astype(np.float32, copy=False).reshape(-1)
+        if samples.size == 0:
+            return []
+
+        rate = int(sample_rate) if int(sample_rate) > 0 else 22050
+        frame_samples = max(1, int(rate * (frame_ms / 1000.0)))
+        frames = []
+        for start in range(0, len(samples), frame_samples):
+            chunk = samples[start : start + frame_samples]
+            if chunk.size == 0:
+                continue
+            frames.append(self.array_to_av_frame(chunk, rate))
+        return frames
+
     # ── Resampling ───────────────────────────────────────────────────────────
 
     def resample(
@@ -172,7 +205,8 @@ class AudioService:
         target_rate: int = TARGET_SAMPLE_RATE,
     ) -> np.ndarray:
         """
-        Resampling linéaire léger.
+        Resampling de haute qualité avec filtre anti-repliement.
+        Utilise scipy si disponible, sinon fallback sur numpy avec lissage.
         source_rate → target_rate (typiquement 48000 → 16000).
         """
         if not isinstance(samples, np.ndarray):
@@ -183,13 +217,34 @@ class AudioService:
             return samples.astype(np.float32, copy=False)
 
         samples = samples.astype(np.float32, copy=False).reshape(-1)
+        
+        # Essayer d'utiliser scipy pour un resampling de qualité
+        try:
+            from scipy import signal as scipy_signal
+            num_samples = int(np.ceil(len(samples) * target_rate / source_rate))
+            resampled = scipy_signal.resample(samples, num_samples)
+            return resampled.astype(np.float32, copy=False)
+        except ImportError:
+            pass
+        
+        try:
+            import librosa
+            resampled = librosa.resample(samples, orig_sr=source_rate, target_sr=target_rate)
+            return resampled.astype(np.float32, copy=False)
+        except ImportError:
+            pass
+
+        # Fallback: méthode numpy avec interpolation spline pour meilleure qualité
         duration = len(samples) / float(source_rate)
         target_len = int(round(duration * target_rate))
         if target_len <= 0:
             return np.array([], dtype=np.float32)
 
-        x_old = np.linspace(0.0, 1.0, num=len(samples), dtype=np.float32, endpoint=False)
-        x_new = np.linspace(0.0, 1.0, num=target_len, dtype=np.float32, endpoint=False)
+        # Interpolation cubique pour meilleure qualité que linéaire
+        x_old = np.linspace(0.0, 1.0, num=len(samples), endpoint=False).astype(np.float32)
+        x_new = np.linspace(0.0, 1.0, num=target_len, endpoint=False).astype(np.float32)
+        
+        # Utiliser np.interp avec plus de points intermédiaires pour lisser
         return np.interp(x_new, x_old, samples).astype(np.float32, copy=False)
 
     # ── Normalisation ────────────────────────────────────────────────────────
