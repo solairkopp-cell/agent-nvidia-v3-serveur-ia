@@ -106,15 +106,15 @@ TTS_SEGMENT_OVERLAP_MS = float(os.getenv("TTS_SEGMENT_OVERLAP_MS", "0.1"))
 # Buffer segments TTS : 5 est un bon compromis vitesse/fluidité
 TTS_SEGMENT_QUEUE_MAXSIZE = int(os.getenv("TTS_SEGMENT_QUEUE_MAXSIZE", "5"))
 # Petit tampon de lecture avant de lancer le son.
-# 300ms = compromis pour Internet (démarrage rapide + absorption jitter)
-TTS_PLAYBACK_PREBUFFER_MS = int(os.getenv("TTS_PLAYBACK_PREBUFFER_MS", "300"))
+# 1500ms = buffer confortable pour Internet (fluide mais ~1.5s de latence)
+TTS_PLAYBACK_PREBUFFER_MS = int(os.getenv("TTS_PLAYBACK_PREBUFFER_MS", "1500"))
 # Déclencher la synthèse/livraison du segment suivant quand il reste peu d'audio
 # en file côté serveur.
-TTS_BUFFER_LOW_WATERMARK_MS = int(os.getenv("TTS_BUFFER_LOW_WATERMARK_MS", "600"))
+TTS_BUFFER_LOW_WATERMARK_MS = int(os.getenv("TTS_BUFFER_LOW_WATERMARK_MS", "1200"))
 # Intervalle entre les frames audio WebRTC (ms).
 # IMPORTANT : doit correspondre à la durée réelle des frames (voir webrtc_service.py)
-# 20ms = vitesse normale, 40ms = ralenti. On garde 20ms pour vitesse normale.
-TTS_FRAME_INTERVAL_MS = int(os.getenv("TTS_FRAME_INTERVAL_MS", "20"))
+# 10ms = latence minimale, 20ms = compromis, 40ms = ralenti
+TTS_FRAME_INTERVAL_MS = int(os.getenv("TTS_FRAME_INTERVAL_MS", "10"))
 # Trim silence : désactivé en tête pour éviter de couper le début des mots
 TTS_TRIM_SILENCE_THRESHOLD = float(os.getenv("TTS_TRIM_SILENCE_THRESHOLD", "0.001"))
 TTS_TRIM_SILENCE_PAD_MS = int(os.getenv("TTS_TRIM_SILENCE_PAD_MS", "48"))

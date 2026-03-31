@@ -821,3 +821,520 @@ RuntimeError: CUDA failed with error out of memory
 2026-03-31 18:48:12,477 INFO services.agent_service: TTS audio client_id=576155e6-8f0f-485f-89d9-382f250aec81 phrase_len=31 src_rate=22050 out_rate=22050 samples=49408 frames=113
 2026-03-31 18:48:17,652 INFO services.agent_service: TTS audio client_id=576155e6-8f0f-485f-89d9-382f250aec81 phrase_len=33 src_rate=22050 out_rate=22050 samples=56832 frames=129
 2026-03-31 18:48:20,629 INFO services.agent_service: TTS audio client_id=576155e6-8f0f-485f-89d9-382f250aec81 phrase_len=17 src_rate=22050 out_rate=22050 samples=23040 frames=53
+2026-03-31 18:50:49,650 INFO uvicorn.error: Shutting down
+2026-03-31 18:50:49,652 INFO uvicorn.error: connection closed
+2026-03-31 18:50:49,653 INFO services.webrtc_service: Audio track ended client_id=576155e6-8f0f-485f-89d9-382f250aec81
+2026-03-31 18:50:49,655 INFO services.webrtc_service: ICE state client_id=576155e6-8f0f-485f-89d9-382f250aec81 state=closed
+2026-03-31 18:50:49,655 INFO services.webrtc_service: WebRTC state client_id=576155e6-8f0f-485f-89d9-382f250aec81 state=None
+2026-03-31 18:50:49,656 INFO services.webrtc_service: WebRTC cleaned up client_id=576155e6-8f0f-485f-89d9-382f250aec81
+2026-03-31 18:50:49,656 INFO services.websocket_service: WS disconnected client_id=576155e6-8f0f-485f-89d9-382f250aec81
+2026-03-31 18:50:49,752 INFO uvicorn.error: Waiting for application shutdown.
+2026-03-31 18:50:50,226 INFO services.delivery_service: DeliveryService shutdown
+2026-03-31 18:50:50,227 INFO services.delivery_state_machine: DeliveryStateMachine shutdown
+2026-03-31 18:50:50,227 INFO services.notification_service: NotificationService shutdown
+2026-03-31 18:50:50,227 INFO services.action_service: ActionService shutdown
+2026-03-31 18:50:51,482 INFO uvicorn.error: Application shutdown complete.
+2026-03-31 18:50:51,482 INFO uvicorn.error: Finished server process [22304]
+2026-03-31 18:51:43,060 INFO services.notification_service: Handler registered for message type: identify_driver
+2026-03-31 18:51:43,061 INFO services.notification_service: Handler registered for message type: get_trips
+2026-03-31 18:51:43,105 INFO uvicorn.error: Started server process [70339]
+2026-03-31 18:51:43,106 INFO uvicorn.error: Waiting for application startup.
+2026-03-31 18:51:49,429 INFO httpx: HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-31 18:51:49,432 INFO services.ollama_service: System prompt loaded from system_prompt.md (239 chars)
+2026-03-31 18:51:51,441 INFO intent_detection.intent_interview: Intent model source=paraphrase-multilingual-MiniLM-L12-v2 local_only=False cache_dir=<default>
+2026-03-31 18:51:51,444 INFO sentence_transformers.SentenceTransformer: Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2026-03-31 18:52:01,577 INFO services.action_service: ActionService started
+2026-03-31 18:52:01,578 INFO services.notification_service: NotificationService started
+2026-03-31 18:52:01,578 INFO services.delivery_service: DeliveryService started
+2026-03-31 18:52:01,578 INFO services.delivery_state_machine: DeliveryStateMachine started
+2026-03-31 18:52:04,024 INFO services.piper_tts_service: Piper loaded in 2.45s (sample_rate=22050)
+2026-03-31 18:52:04,024 INFO services.denoise_service: Denoise disabled
+2026-03-31 18:52:04,024 INFO main: Warmup started
+2026-03-31 18:52:04,028 INFO main: Warmup vad ok in 0.00s
+2026-03-31 18:52:04,029 INFO faster_whisper: Processing audio with duration 00:01.000
+2026-03-31 18:52:04,075 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-31 18:52:05,131 INFO main: Warmup stt ok in 1.10s
+2026-03-31 18:52:05,219 INFO main: Warmup intent ok in 0.09s
+2026-03-31 18:52:05,464 INFO httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-31 18:52:05,522 INFO main: Warmup llm ok in 0.30s
+2026-03-31 18:52:05,805 INFO main: Warmup tts ok in 0.28s
+2026-03-31 18:52:05,805 INFO main: Warmup finished
+2026-03-31 18:52:05,805 INFO uvicorn.error: Application startup complete.
+2026-03-31 18:52:05,806 INFO uvicorn.error: Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-03-31 18:52:16,833 INFO uvicorn.error: 197.17.19.238:0 - "WebSocket /ws" [accepted]
+2026-03-31 18:52:16,835 INFO services.websocket_service: WS connected client_id=59411a29-b007-44bd-8e40-3cf154667128
+2026-03-31 18:52:16,838 INFO uvicorn.error: connection open
+2026-03-31 18:52:16,935 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=59411a29-b007-44bd-8e40-3cf154667128 type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-03-31 18:52:16,936 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=59411a29-b007-44bd-8e40-3cf154667128 type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-03-31 18:52:16,936 INFO services.delivery_service: 🚚 Identifying driver client_id=59411a29-b007-44bd-8e40-3cf154667128 serial=000
+2026-03-31 18:52:17,111 INFO cli_logger: ✅ SUCCÈS: Token valide jusqu'au 2026-03-31 23:31:05
+2026-03-31 18:52:17,111 INFO cli_logger: Récupération des trips pour le driver: 000
+2026-03-31 18:52:17,112 INFO cli_logger: Recherche du driver par query: 000
+2026-03-31 18:52:17,112 INFO cli_logger: Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-03-31 18:52:17,392 INFO cli_logger: ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 18:52:17,393 INFO cli_logger: ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 18:52:17,393 INFO cli_logger: Recherche des schedules par driver serial number: 000
+2026-03-31 18:52:17,393 INFO cli_logger: Recherche du driver par query: 000
+2026-03-31 18:52:17,393 INFO cli_logger: Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-03-31 18:52:17,438 INFO cli_logger: ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 18:52:17,438 INFO cli_logger: Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-03-31 18:52:17,438 INFO cli_logger: Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-03-31 18:52:17,489 INFO cli_logger: 2 schedule(s) trouvé(s) sur 8 entité(s)
+2026-03-31 18:52:17,490 INFO cli_logger: ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-03-31 18:52:17,490 INFO cli_logger: Recherche des packages pour le schedule: 69cb8451fb98e15a3cf5351c
+2026-03-31 18:52:17,491 INFO cli_logger: Recherche par référence: field=schedule_id, value=69cb8451fb98e15a3cf5351c
+2026-03-31 18:52:17,537 INFO cli_logger: ✅ SUCCÈS: 3 package(s) trouvé(s) pour le schedule 69cb8451fb98e15a3cf5351c
+2026-03-31 18:52:17,537 INFO cli_logger: Récupération du package par ID: 69cb1e55fb98e15a3cf53513
+2026-03-31 18:52:17,537 INFO cli_logger: Récupération de l'instance: 69cb1e55fb98e15a3cf53513
+2026-03-31 18:52:17,578 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-03-31 18:52:17,662 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cb1e55fb98e15a3cf53513
+2026-03-31 18:52:17,663 INFO cli_logger: Package: 69cb1e55fb98e15a3cf53513, address field: 69cb1e55fb98e15a3cf53512
+2026-03-31 18:52:17,663 INFO cli_logger: Récupération adresse: 69cb1e55fb98e15a3cf53512
+2026-03-31 18:52:17,663 INFO cli_logger: Récupération de l'adresse par ID: 69cb1e55fb98e15a3cf53512
+2026-03-31 18:52:17,663 INFO cli_logger: Récupération de l'instance: 69cb1e55fb98e15a3cf53512
+2026-03-31 18:52:17,701 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: 69cb1e55fb98e15a3cf53512
+2026-03-31 18:52:17,702 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-03-31 18:52:17,702 INFO cli_logger: Trip créé: id=69cb1e55fb98e15a3cf53513, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276553, lng=10.1949951
+2026-03-31 18:52:17,702 INFO cli_logger: Récupération du package par ID: 69cb1e68fb98e15a3cf53515
+2026-03-31 18:52:17,703 INFO cli_logger: Récupération de l'instance: 69cb1e68fb98e15a3cf53515
+2026-03-31 18:52:17,744 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-03-31 18:52:17,791 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cb1e68fb98e15a3cf53515
+2026-03-31 18:52:17,792 INFO cli_logger: Package: 69cb1e68fb98e15a3cf53515, address field: 69cb1e68fb98e15a3cf53514
+2026-03-31 18:52:17,792 INFO cli_logger: Récupération adresse: 69cb1e68fb98e15a3cf53514
+2026-03-31 18:52:17,792 INFO cli_logger: Récupération de l'adresse par ID: 69cb1e68fb98e15a3cf53514
+2026-03-31 18:52:17,792 INFO cli_logger: Récupération de l'instance: 69cb1e68fb98e15a3cf53514
+2026-03-31 18:52:17,834 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: 69cb1e68fb98e15a3cf53514
+2026-03-31 18:52:17,834 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: Menzah, Avenue Belgique, Iberia, Bni Idder, arrondissement de Tanger-Medina, Tanger, Pachalik de Tanger, Préfecture de Tanger-Assilah, Tanger-Tétouan-Al Hoceïma, 90030, Maroc
+2026-03-31 18:52:17,834 INFO cli_logger: Trip créé: id=69cb1e68fb98e15a3cf53515, name=Menzah, Avenue Belgique, Iberia, Bni Idder, arrondissement de Tanger-Medina, Tanger, Pachalik de Tanger, Préfecture de Tanger-Assilah, Tanger-Tétouan-Al Hoceïma, 90030, Maroc, lat=35.7809598, lng=-5.8159402
+2026-03-31 18:52:17,835 INFO cli_logger: Récupération du package par ID: 69cb1e8efb98e15a3cf53517
+2026-03-31 18:52:17,835 INFO cli_logger: Récupération de l'instance: 69cb1e8efb98e15a3cf53517
+2026-03-31 18:52:17,877 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-03-31 18:52:17,922 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cb1e8efb98e15a3cf53517
+2026-03-31 18:52:17,922 INFO cli_logger: Package: 69cb1e8efb98e15a3cf53517, address field: 69cb1e8efb98e15a3cf53516
+2026-03-31 18:52:17,922 INFO cli_logger: Récupération adresse: 69cb1e8efb98e15a3cf53516
+2026-03-31 18:52:17,922 INFO cli_logger: Récupération de l'adresse par ID: 69cb1e8efb98e15a3cf53516
+2026-03-31 18:52:17,923 INFO cli_logger: Récupération de l'instance: 69cb1e8efb98e15a3cf53516
+2026-03-31 18:52:17,962 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: 69cb1e8efb98e15a3cf53516
+2026-03-31 18:52:17,962 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: Loki, Yumbe, Northern Region, Ouganda
+2026-03-31 18:52:17,962 INFO cli_logger: Trip créé: id=69cb1e8efb98e15a3cf53517, name=Loki, Yumbe, Northern Region, Ouganda, lat=3.4385983, lng=31.1551433
+2026-03-31 18:52:17,963 INFO cli_logger: ✅ SUCCÈS: 3 trip(s) créé(s) et ordonné(s) par position
+2026-03-31 18:52:17,965 INFO cli_logger: ✅ SUCCÈS: 3 trip(s) exporté(s) vers data.json
+2026-03-31 18:52:17,967 INFO cli_logger: ✅ SUCCÈS: Token valide jusqu'au 2026-03-31 23:31:05
+2026-03-31 18:52:17,967 INFO cli_logger: Recherche du driver par query: 000
+2026-03-31 18:52:17,967 INFO cli_logger: Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-03-31 18:52:18,133 INFO cli_logger: ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 18:52:18,138 INFO services.delivery_service: ✅ Found 3 trips for driver vivien (000)
+2026-03-31 18:52:18,138 INFO services.notification_service: 📤 NOTIFICATION SENT client_id=59411a29-b007-44bd-8e40-3cf154667128 type=trips_list data={'driver_serial': '000', 'trip_count': 3, 'trips': [{'id': '69cb1e55fb98e15a3cf53513', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276553, 'longitude': 10.1949951, 'clientName': 'test1', 'packageInfo': 'car', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69cb1e68fb98e15a3cf53515', 'name': 'Menzah, Avenue Belgique, Iberia, Bni Idder, arrondissement de Tanger-Medina, Tanger, Pachalik de Tanger, Préfecture de Tanger-Assilah, Tanger-Tétouan-Al Hoceïma, 90030, Maroc', 'latitude': 35.7809598, 'longitude': -5.8159402, 'clientName': 'test2', 'packageInfo': 'yop', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69cb1e8efb98e15a3cf53517', 'name': 'Loki, Yumbe, Northern Region, Ouganda', 'latitude': 3.4385983, 'longitude': 31.1551433, 'clientName': 'test3', 'packageInfo': 'banana', 'deliveryStatus': 'planned', 'isFragile': False}]}
+2026-03-31 18:52:18,140 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=59411a29-b007-44bd-8e40-3cf154667128 type=start data={'type': 'start'}
+2026-03-31 18:52:18,141 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=59411a29-b007-44bd-8e40-3cf154667128 type=start data={'type': 'start'}
+2026-03-31 18:52:18,160 INFO services.webrtc_service: WebRTC peer created client_id=59411a29-b007-44bd-8e40-3cf154667128
+2026-03-31 18:52:18,225 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=59411a29-b007-44bd-8e40-3cf154667128 type=offer data={'type': 'offer', 'sdp': 'v=0\r\no=- 4224424474483505546 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 102 0 8 13 110 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:ljmV\r\na=ice-pwd:fZqAhZJDf0QFjQCW/k3fam5c\r\na=ice-options:trickle renomination\r\na=fingerprint:sha-256 0C:24:85:CF:12:16:D7:5A:14:B3:1A:24:52:3F:10:B0:61:BA:2E:01:75:9D:90:24:7A:C5:D0:9C:D3:B4:7A:92\r\na=setup:actpass\r\na=mid:0\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=sendrecv\r\na=msid:- audio_label\r\na=rtcp-mux\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1\r\na=rtpmap:63 red/48000/2\r\na=fmtp:63 111/111\r\na=rtpmap:9 G722/8000\r\na=rtpmap:102 ILBC/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:110 telephone-event/48000\r\na=rtpmap:126 telephone-event/8000\r\na=ssrc:699147093 cname:WGjFIA+Yr353ZcB4\r\na=ssrc:699147093 msid:- audio_label\r\n'}
+2026-03-31 18:52:18,226 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=59411a29-b007-44bd-8e40-3cf154667128 type=offer data={'type': 'offer', 'sdp': 'v=0\r\no=- 4224424474483505546 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 102 0 8 13 110 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:ljmV\r\na=ice-pwd:fZqAhZJDf0QFjQCW/k3fam5c\r\na=ice-options:trickle renomination\r\na=fingerprint:sha-256 0C:24:85:CF:12:16:D7:5A:14:B3:1A:24:52:3F:10:B0:61:BA:2E:01:75:9D:90:24:7A:C5:D0:9C:D3:B4:7A:92\r\na=setup:actpass\r\na=mid:0\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=sendrecv\r\na=msid:- audio_label\r\na=rtcp-mux\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1\r\na=rtpmap:63 red/48000/2\r\na=fmtp:63 111/111\r\na=rtpmap:9 G722/8000\r\na=rtpmap:102 ILBC/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:110 telephone-event/48000\r\na=rtpmap:126 telephone-event/8000\r\na=ssrc:699147093 cname:WGjFIA+Yr353ZcB4\r\na=ssrc:699147093 msid:- audio_label\r\n'}
+2026-03-31 18:52:18,234 INFO services.webrtc_service: Audio track received client_id=59411a29-b007-44bd-8e40-3cf154667128
+2026-03-31 18:52:18,284 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=59411a29-b007-44bd-8e40-3cf154667128 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:1770595968 1 udp 2122260223 192.168.1.3 46536 typ host generation 0 ufrag ljmV network-id 4 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-03-31 18:52:18,284 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=59411a29-b007-44bd-8e40-3cf154667128 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:1770595968 1 udp 2122260223 192.168.1.3 46536 typ host generation 0 ufrag ljmV network-id 4 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-03-31 18:52:18,286 INFO services.webrtc_service: ICE state client_id=59411a29-b007-44bd-8e40-3cf154667128 state=checking
+2026-03-31 18:52:18,286 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 42209) -> ('192.168.1.3', 46536)) State.FROZEN -> State.WAITING
+2026-03-31 18:52:18,287 INFO aioice.ice: Connection(0) Check CandidatePair(('172.17.0.1', 49298) -> ('192.168.1.3', 46536)) State.FROZEN -> State.WAITING
+2026-03-31 18:52:18,287 INFO services.webrtc_service: WebRTC state client_id=59411a29-b007-44bd-8e40-3cf154667128 state=connecting
+2026-03-31 18:52:18,287 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 42209) -> ('192.168.1.3', 46536)) State.WAITING -> State.IN_PROGRESS
+2026-03-31 18:52:18,290 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 42209) -> ('192.168.1.3', 46536)) State.IN_PROGRESS -> State.SUCCEEDED
+2026-03-31 18:52:18,295 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=59411a29-b007-44bd-8e40-3cf154667128 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:736073670 1 udp 1686052607 197.17.19.238 46536 typ srflx raddr 192.168.1.3 rport 46536 generation 0 ufrag ljmV network-id 4 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-03-31 18:52:18,295 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=59411a29-b007-44bd-8e40-3cf154667128 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:736073670 1 udp 1686052607 197.17.19.238 46536 typ srflx raddr 192.168.1.3 rport 46536 generation 0 ufrag ljmV network-id 4 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-03-31 18:52:18,308 INFO aioice.ice: Connection(0) Check CandidatePair(('172.17.0.1', 49298) -> ('192.168.1.3', 46536)) State.WAITING -> State.IN_PROGRESS
+2026-03-31 18:52:18,312 INFO aioice.ice: Connection(0) Check CandidatePair(('172.17.0.1', 49298) -> ('192.168.1.3', 46536)) State.IN_PROGRESS -> State.SUCCEEDED
+2026-03-31 18:52:18,316 INFO aioice.ice: Connection(0) Check CandidatePair(('172.17.0.1', 49298) -> ('197.17.19.238', 46536)) State.FROZEN -> State.WAITING
+2026-03-31 18:52:18,322 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 42209) -> ('197.17.19.238', 46536)) State.FROZEN -> State.FAILED
+2026-03-31 18:52:18,322 INFO aioice.ice: Connection(0) Check CandidatePair(('172.17.0.1', 49298) -> ('197.17.19.238', 46536)) State.WAITING -> State.FAILED
+2026-03-31 18:52:18,323 INFO aioice.ice: Connection(0) ICE completed
+2026-03-31 18:52:18,329 INFO services.webrtc_service: ICE state client_id=59411a29-b007-44bd-8e40-3cf154667128 state=completed
+2026-03-31 18:52:18,341 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=59411a29-b007-44bd-8e40-3cf154667128 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:132624062 1 tcp 1518214911 10.9.49.188 9 typ host tcptype active generation 0 ufrag ljmV network-id 1 network-cost 900","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-03-31 18:52:18,341 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=59411a29-b007-44bd-8e40-3cf154667128 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:132624062 1 tcp 1518214911 10.9.49.188 9 typ host tcptype active generation 0 ufrag ljmV network-id 1 network-cost 900","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-03-31 18:52:18,356 INFO services.webrtc_service: WebRTC state client_id=59411a29-b007-44bd-8e40-3cf154667128 state=connected
+2026-03-31 18:52:18,356 INFO services.webrtc_service: 🔊 Sending pending voice summary client_id=59411a29-b007-44bd-8e40-3cf154667128
+2026-03-31 18:52:19,836 INFO services.agent_service: TTS audio client_id=59411a29-b007-44bd-8e40-3cf154667128 phrase_len=31 src_rate=22050 out_rate=22050 samples=46592 frames=106
+2026-03-31 18:52:24,654 INFO services.agent_service: TTS audio client_id=59411a29-b007-44bd-8e40-3cf154667128 phrase_len=33 src_rate=22050 out_rate=22050 samples=52480 frames=120
+2026-03-31 18:52:27,393 INFO services.agent_service: TTS audio client_id=59411a29-b007-44bd-8e40-3cf154667128 phrase_len=17 src_rate=22050 out_rate=22050 samples=23552 frames=54
+2026-03-31 18:54:05,994 INFO uvicorn.error: Shutting down
+2026-03-31 18:54:05,999 INFO uvicorn.error: connection closed
+2026-03-31 18:54:06,003 INFO services.webrtc_service: Audio track ended client_id=59411a29-b007-44bd-8e40-3cf154667128
+2026-03-31 18:54:06,005 INFO services.webrtc_service: ICE state client_id=59411a29-b007-44bd-8e40-3cf154667128 state=closed
+2026-03-31 18:54:06,006 INFO services.webrtc_service: WebRTC state client_id=59411a29-b007-44bd-8e40-3cf154667128 state=None
+2026-03-31 18:54:06,006 INFO services.webrtc_service: WebRTC cleaned up client_id=59411a29-b007-44bd-8e40-3cf154667128
+2026-03-31 18:54:06,007 INFO services.websocket_service: WS disconnected client_id=59411a29-b007-44bd-8e40-3cf154667128
+2026-03-31 18:54:06,097 INFO uvicorn.error: Waiting for application shutdown.
+2026-03-31 18:54:06,575 INFO services.delivery_service: DeliveryService shutdown
+2026-03-31 18:54:06,575 INFO services.delivery_state_machine: DeliveryStateMachine shutdown
+2026-03-31 18:54:06,575 INFO services.notification_service: NotificationService shutdown
+2026-03-31 18:54:06,575 INFO services.action_service: ActionService shutdown
+2026-03-31 18:54:07,765 INFO uvicorn.error: Application shutdown complete.
+2026-03-31 18:54:07,767 INFO uvicorn.error: Finished server process [70339]
+2026-03-31 18:54:44,205 INFO services.notification_service: Handler registered for message type: identify_driver
+2026-03-31 18:54:44,205 INFO services.notification_service: Handler registered for message type: get_trips
+2026-03-31 18:54:44,250 INFO uvicorn.error: Started server process [102980]
+2026-03-31 18:54:44,250 INFO uvicorn.error: Waiting for application startup.
+2026-03-31 18:54:49,528 INFO httpx: HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-31 18:54:49,532 INFO services.ollama_service: System prompt loaded from system_prompt.md (239 chars)
+2026-03-31 18:54:51,545 INFO intent_detection.intent_interview: Intent model source=paraphrase-multilingual-MiniLM-L12-v2 local_only=False cache_dir=<default>
+2026-03-31 18:54:51,547 INFO sentence_transformers.SentenceTransformer: Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2026-03-31 18:55:01,872 INFO services.action_service: ActionService started
+2026-03-31 18:55:01,872 INFO services.notification_service: NotificationService started
+2026-03-31 18:55:01,873 INFO services.delivery_service: DeliveryService started
+2026-03-31 18:55:01,873 INFO services.delivery_state_machine: DeliveryStateMachine started
+2026-03-31 18:55:04,367 INFO services.piper_tts_service: Piper loaded in 2.49s (sample_rate=22050)
+2026-03-31 18:55:04,368 INFO services.denoise_service: Denoise disabled
+2026-03-31 18:55:04,368 INFO main: Warmup started
+2026-03-31 18:55:04,371 INFO main: Warmup vad ok in 0.00s
+2026-03-31 18:55:04,372 INFO faster_whisper: Processing audio with duration 00:01.000
+2026-03-31 18:55:04,397 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-31 18:55:05,440 INFO main: Warmup stt ok in 1.07s
+2026-03-31 18:55:05,551 INFO main: Warmup intent ok in 0.11s
+2026-03-31 18:55:05,802 INFO httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-31 18:55:05,858 INFO main: Warmup llm ok in 0.31s
+2026-03-31 18:55:06,165 INFO main: Warmup tts ok in 0.31s
+2026-03-31 18:55:06,166 INFO main: Warmup finished
+2026-03-31 18:55:06,166 INFO uvicorn.error: Application startup complete.
+2026-03-31 18:55:06,167 INFO uvicorn.error: Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-03-31 18:55:13,405 INFO uvicorn.error: 197.17.19.238:0 - "WebSocket /ws" [accepted]
+2026-03-31 18:55:13,407 INFO services.websocket_service: WS connected client_id=49317ac9-b1e8-4d41-b75a-935c4e4eb6c2
+2026-03-31 18:55:13,410 INFO uvicorn.error: connection open
+2026-03-31 18:55:13,499 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=49317ac9-b1e8-4d41-b75a-935c4e4eb6c2 type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-03-31 18:55:13,499 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=49317ac9-b1e8-4d41-b75a-935c4e4eb6c2 type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-03-31 18:55:13,500 INFO services.delivery_service: 🚚 Identifying driver client_id=49317ac9-b1e8-4d41-b75a-935c4e4eb6c2 serial=000
+2026-03-31 18:55:13,667 INFO cli_logger: ✅ SUCCÈS: Token valide jusqu'au 2026-03-31 23:31:05
+2026-03-31 18:55:13,668 INFO cli_logger: Récupération des trips pour le driver: 000
+2026-03-31 18:55:13,668 INFO cli_logger: Recherche du driver par query: 000
+2026-03-31 18:55:13,668 INFO cli_logger: Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-03-31 18:55:13,945 INFO cli_logger: ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 18:55:13,946 INFO cli_logger: ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 18:55:13,946 INFO cli_logger: Recherche des schedules par driver serial number: 000
+2026-03-31 18:55:13,946 INFO cli_logger: Recherche du driver par query: 000
+2026-03-31 18:55:13,946 INFO cli_logger: Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-03-31 18:55:13,991 INFO cli_logger: ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 18:55:13,991 INFO cli_logger: Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-03-31 18:55:13,991 INFO cli_logger: Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-03-31 18:55:14,040 INFO cli_logger: 2 schedule(s) trouvé(s) sur 8 entité(s)
+2026-03-31 18:55:14,041 INFO cli_logger: ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-03-31 18:55:14,041 INFO cli_logger: Recherche des packages pour le schedule: 69cb8451fb98e15a3cf5351c
+2026-03-31 18:55:14,041 INFO cli_logger: Recherche par référence: field=schedule_id, value=69cb8451fb98e15a3cf5351c
+2026-03-31 18:55:14,088 INFO cli_logger: ✅ SUCCÈS: 3 package(s) trouvé(s) pour le schedule 69cb8451fb98e15a3cf5351c
+2026-03-31 18:55:14,088 INFO cli_logger: Récupération du package par ID: 69cb1e55fb98e15a3cf53513
+2026-03-31 18:55:14,089 INFO cli_logger: Récupération de l'instance: 69cb1e55fb98e15a3cf53513
+2026-03-31 18:55:14,132 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-03-31 18:55:14,216 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cb1e55fb98e15a3cf53513
+2026-03-31 18:55:14,216 INFO cli_logger: Package: 69cb1e55fb98e15a3cf53513, address field: 69cb1e55fb98e15a3cf53512
+2026-03-31 18:55:14,217 INFO cli_logger: Récupération adresse: 69cb1e55fb98e15a3cf53512
+2026-03-31 18:55:14,217 INFO cli_logger: Récupération de l'adresse par ID: 69cb1e55fb98e15a3cf53512
+2026-03-31 18:55:14,217 INFO cli_logger: Récupération de l'instance: 69cb1e55fb98e15a3cf53512
+2026-03-31 18:55:14,261 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: 69cb1e55fb98e15a3cf53512
+2026-03-31 18:55:14,262 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-03-31 18:55:14,262 INFO cli_logger: Trip créé: id=69cb1e55fb98e15a3cf53513, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276553, lng=10.1949951
+2026-03-31 18:55:14,263 INFO cli_logger: Récupération du package par ID: 69cb1e68fb98e15a3cf53515
+2026-03-31 18:55:14,263 INFO cli_logger: Récupération de l'instance: 69cb1e68fb98e15a3cf53515
+2026-03-31 18:55:14,304 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-03-31 18:55:14,350 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cb1e68fb98e15a3cf53515
+2026-03-31 18:55:14,351 INFO cli_logger: Package: 69cb1e68fb98e15a3cf53515, address field: 69cb1e68fb98e15a3cf53514
+2026-03-31 18:55:14,351 INFO cli_logger: Récupération adresse: 69cb1e68fb98e15a3cf53514
+2026-03-31 18:55:14,351 INFO cli_logger: Récupération de l'adresse par ID: 69cb1e68fb98e15a3cf53514
+2026-03-31 18:55:14,351 INFO cli_logger: Récupération de l'instance: 69cb1e68fb98e15a3cf53514
+2026-03-31 18:55:14,393 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: 69cb1e68fb98e15a3cf53514
+2026-03-31 18:55:14,394 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: Menzah, Avenue Belgique, Iberia, Bni Idder, arrondissement de Tanger-Medina, Tanger, Pachalik de Tanger, Préfecture de Tanger-Assilah, Tanger-Tétouan-Al Hoceïma, 90030, Maroc
+2026-03-31 18:55:14,394 INFO cli_logger: Trip créé: id=69cb1e68fb98e15a3cf53515, name=Menzah, Avenue Belgique, Iberia, Bni Idder, arrondissement de Tanger-Medina, Tanger, Pachalik de Tanger, Préfecture de Tanger-Assilah, Tanger-Tétouan-Al Hoceïma, 90030, Maroc, lat=35.7809598, lng=-5.8159402
+2026-03-31 18:55:14,394 INFO cli_logger: Récupération du package par ID: 69cb1e8efb98e15a3cf53517
+2026-03-31 18:55:14,394 INFO cli_logger: Récupération de l'instance: 69cb1e8efb98e15a3cf53517
+2026-03-31 18:55:14,436 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-03-31 18:55:14,481 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cb1e8efb98e15a3cf53517
+2026-03-31 18:55:14,482 INFO cli_logger: Package: 69cb1e8efb98e15a3cf53517, address field: 69cb1e8efb98e15a3cf53516
+2026-03-31 18:55:14,482 INFO cli_logger: Récupération adresse: 69cb1e8efb98e15a3cf53516
+2026-03-31 18:55:14,482 INFO cli_logger: Récupération de l'adresse par ID: 69cb1e8efb98e15a3cf53516
+2026-03-31 18:55:14,482 INFO cli_logger: Récupération de l'instance: 69cb1e8efb98e15a3cf53516
+2026-03-31 18:55:14,526 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: 69cb1e8efb98e15a3cf53516
+2026-03-31 18:55:14,527 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: Loki, Yumbe, Northern Region, Ouganda
+2026-03-31 18:55:14,527 INFO cli_logger: Trip créé: id=69cb1e8efb98e15a3cf53517, name=Loki, Yumbe, Northern Region, Ouganda, lat=3.4385983, lng=31.1551433
+2026-03-31 18:55:14,527 INFO cli_logger: ✅ SUCCÈS: 3 trip(s) créé(s) et ordonné(s) par position
+2026-03-31 18:55:14,529 INFO cli_logger: ✅ SUCCÈS: 3 trip(s) exporté(s) vers data.json
+2026-03-31 18:55:14,531 INFO cli_logger: ✅ SUCCÈS: Token valide jusqu'au 2026-03-31 23:31:05
+2026-03-31 18:55:14,532 INFO cli_logger: Recherche du driver par query: 000
+2026-03-31 18:55:14,532 INFO cli_logger: Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-03-31 18:55:14,696 INFO cli_logger: ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 18:55:14,700 INFO services.delivery_service: ✅ Found 3 trips for driver vivien (000)
+2026-03-31 18:55:14,701 INFO services.notification_service: 📤 NOTIFICATION SENT client_id=49317ac9-b1e8-4d41-b75a-935c4e4eb6c2 type=trips_list data={'driver_serial': '000', 'trip_count': 3, 'trips': [{'id': '69cb1e55fb98e15a3cf53513', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276553, 'longitude': 10.1949951, 'clientName': 'test1', 'packageInfo': 'car', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69cb1e68fb98e15a3cf53515', 'name': 'Menzah, Avenue Belgique, Iberia, Bni Idder, arrondissement de Tanger-Medina, Tanger, Pachalik de Tanger, Préfecture de Tanger-Assilah, Tanger-Tétouan-Al Hoceïma, 90030, Maroc', 'latitude': 35.7809598, 'longitude': -5.8159402, 'clientName': 'test2', 'packageInfo': 'yop', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69cb1e8efb98e15a3cf53517', 'name': 'Loki, Yumbe, Northern Region, Ouganda', 'latitude': 3.4385983, 'longitude': 31.1551433, 'clientName': 'test3', 'packageInfo': 'banana', 'deliveryStatus': 'planned', 'isFragile': False}]}
+2026-03-31 18:55:14,703 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=49317ac9-b1e8-4d41-b75a-935c4e4eb6c2 type=start data={'type': 'start'}
+2026-03-31 18:55:14,703 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=49317ac9-b1e8-4d41-b75a-935c4e4eb6c2 type=start data={'type': 'start'}
+2026-03-31 18:55:14,722 INFO services.webrtc_service: WebRTC peer created client_id=49317ac9-b1e8-4d41-b75a-935c4e4eb6c2
+2026-03-31 18:55:14,725 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=49317ac9-b1e8-4d41-b75a-935c4e4eb6c2 type=offer data={'type': 'offer', 'sdp': 'v=0\r\no=- 7443149230068001807 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 102 0 8 13 110 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:x5a5\r\na=ice-pwd:1nmpJIxUHalzXOLnOvzDy/w1\r\na=ice-options:trickle renomination\r\na=fingerprint:sha-256 91:86:7B:14:AB:2F:37:3E:38:1C:97:E3:3C:51:BE:80:B9:A3:72:6B:5D:06:66:A0:6A:99:F0:C3:EF:27:44:7B\r\na=setup:actpass\r\na=mid:0\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=sendrecv\r\na=msid:- audio_label\r\na=rtcp-mux\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1\r\na=rtpmap:63 red/48000/2\r\na=fmtp:63 111/111\r\na=rtpmap:9 G722/8000\r\na=rtpmap:102 ILBC/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:110 telephone-event/48000\r\na=rtpmap:126 telephone-event/8000\r\na=ssrc:1286262633 cname:Gzp9WuLyLcP/Bw9g\r\na=ssrc:1286262633 msid:- audio_label\r\n'}
+2026-03-31 18:55:14,725 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=49317ac9-b1e8-4d41-b75a-935c4e4eb6c2 type=offer data={'type': 'offer', 'sdp': 'v=0\r\no=- 7443149230068001807 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 102 0 8 13 110 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:x5a5\r\na=ice-pwd:1nmpJIxUHalzXOLnOvzDy/w1\r\na=ice-options:trickle renomination\r\na=fingerprint:sha-256 91:86:7B:14:AB:2F:37:3E:38:1C:97:E3:3C:51:BE:80:B9:A3:72:6B:5D:06:66:A0:6A:99:F0:C3:EF:27:44:7B\r\na=setup:actpass\r\na=mid:0\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=sendrecv\r\na=msid:- audio_label\r\na=rtcp-mux\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1\r\na=rtpmap:63 red/48000/2\r\na=fmtp:63 111/111\r\na=rtpmap:9 G722/8000\r\na=rtpmap:102 ILBC/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:110 telephone-event/48000\r\na=rtpmap:126 telephone-event/8000\r\na=ssrc:1286262633 cname:Gzp9WuLyLcP/Bw9g\r\na=ssrc:1286262633 msid:- audio_label\r\n'}
+2026-03-31 18:55:14,733 INFO services.webrtc_service: Audio track received client_id=49317ac9-b1e8-4d41-b75a-935c4e4eb6c2
+2026-03-31 18:55:14,774 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=49317ac9-b1e8-4d41-b75a-935c4e4eb6c2 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:1187345937 1 udp 2122260223 192.168.1.3 51527 typ host generation 0 ufrag x5a5 network-id 4 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-03-31 18:55:14,775 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=49317ac9-b1e8-4d41-b75a-935c4e4eb6c2 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:1187345937 1 udp 2122260223 192.168.1.3 51527 typ host generation 0 ufrag x5a5 network-id 4 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-03-31 18:55:14,776 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=49317ac9-b1e8-4d41-b75a-935c4e4eb6c2 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:3360420566 1 tcp 1518214911 10.9.49.188 9 typ host tcptype active generation 0 ufrag x5a5 network-id 1 network-cost 900","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-03-31 18:55:14,776 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=49317ac9-b1e8-4d41-b75a-935c4e4eb6c2 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:3360420566 1 tcp 1518214911 10.9.49.188 9 typ host tcptype active generation 0 ufrag x5a5 network-id 1 network-cost 900","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-03-31 18:55:14,776 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=49317ac9-b1e8-4d41-b75a-935c4e4eb6c2 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:1629508765 1 udp 1686052607 197.17.19.238 51527 typ srflx raddr 192.168.1.3 rport 51527 generation 0 ufrag x5a5 network-id 4 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-03-31 18:55:14,776 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=49317ac9-b1e8-4d41-b75a-935c4e4eb6c2 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:1629508765 1 udp 1686052607 197.17.19.238 51527 typ srflx raddr 192.168.1.3 rport 51527 generation 0 ufrag x5a5 network-id 4 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-03-31 18:55:14,778 INFO services.webrtc_service: ICE state client_id=49317ac9-b1e8-4d41-b75a-935c4e4eb6c2 state=checking
+2026-03-31 18:55:14,779 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 36629) -> ('192.168.1.3', 51527)) State.FROZEN -> State.WAITING
+2026-03-31 18:55:14,779 INFO aioice.ice: Connection(0) Check CandidatePair(('172.17.0.1', 43440) -> ('192.168.1.3', 51527)) State.FROZEN -> State.WAITING
+2026-03-31 18:55:14,779 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 36629) -> ('197.17.19.238', 51527)) State.FROZEN -> State.WAITING
+2026-03-31 18:55:14,779 INFO services.webrtc_service: WebRTC state client_id=49317ac9-b1e8-4d41-b75a-935c4e4eb6c2 state=connecting
+2026-03-31 18:55:14,780 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 36629) -> ('192.168.1.3', 51527)) State.WAITING -> State.IN_PROGRESS
+2026-03-31 18:55:14,799 INFO aioice.ice: Connection(0) Check CandidatePair(('172.17.0.1', 43440) -> ('192.168.1.3', 51527)) State.WAITING -> State.IN_PROGRESS
+2026-03-31 18:55:14,819 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 36629) -> ('197.17.19.238', 51527)) State.WAITING -> State.IN_PROGRESS
+2026-03-31 18:55:14,839 INFO aioice.ice: Connection(0) Check CandidatePair(('172.17.0.1', 43440) -> ('197.17.19.238', 51527)) State.FROZEN -> State.IN_PROGRESS
+2026-03-31 18:55:45,650 INFO services.webrtc_service: ICE state client_id=49317ac9-b1e8-4d41-b75a-935c4e4eb6c2 state=closed
+2026-03-31 18:55:45,653 INFO uvicorn.error: connection closed
+2026-03-31 18:55:45,654 INFO services.webrtc_service: WebRTC state client_id=49317ac9-b1e8-4d41-b75a-935c4e4eb6c2 state=None
+2026-03-31 18:55:45,655 INFO services.webrtc_service: WebRTC cleaned up client_id=49317ac9-b1e8-4d41-b75a-935c4e4eb6c2
+2026-03-31 18:55:45,655 INFO services.websocket_service: WS disconnected client_id=49317ac9-b1e8-4d41-b75a-935c4e4eb6c2
+2026-03-31 18:55:57,113 INFO uvicorn.error: 197.17.19.238:0 - "WebSocket /ws" [accepted]
+2026-03-31 18:55:57,116 INFO services.websocket_service: WS connected client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c
+2026-03-31 18:55:57,119 INFO uvicorn.error: connection open
+2026-03-31 18:55:57,215 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-03-31 18:55:57,217 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-03-31 18:55:57,217 INFO services.delivery_service: 🚚 Identifying driver client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c serial=000
+2026-03-31 18:55:57,219 INFO cli_logger: ✅ SUCCÈS: Token valide jusqu'au 2026-03-31 23:31:05
+2026-03-31 18:55:57,219 INFO cli_logger: Récupération des trips pour le driver: 000
+2026-03-31 18:55:57,220 INFO cli_logger: Recherche du driver par query: 000
+2026-03-31 18:55:57,220 INFO cli_logger: Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-03-31 18:55:57,373 INFO cli_logger: ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 18:55:57,374 INFO cli_logger: ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 18:55:57,374 INFO cli_logger: Recherche des schedules par driver serial number: 000
+2026-03-31 18:55:57,375 INFO cli_logger: Recherche du driver par query: 000
+2026-03-31 18:55:57,375 INFO cli_logger: Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-03-31 18:55:57,419 INFO cli_logger: ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 18:55:57,419 INFO cli_logger: Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-03-31 18:55:57,419 INFO cli_logger: Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-03-31 18:55:57,467 INFO cli_logger: 2 schedule(s) trouvé(s) sur 8 entité(s)
+2026-03-31 18:55:57,468 INFO cli_logger: ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-03-31 18:55:57,468 INFO cli_logger: Recherche des packages pour le schedule: 69cb8451fb98e15a3cf5351c
+2026-03-31 18:55:57,468 INFO cli_logger: Recherche par référence: field=schedule_id, value=69cb8451fb98e15a3cf5351c
+2026-03-31 18:55:57,515 INFO cli_logger: ✅ SUCCÈS: 3 package(s) trouvé(s) pour le schedule 69cb8451fb98e15a3cf5351c
+2026-03-31 18:55:57,516 INFO cli_logger: Récupération du package par ID: 69cb1e55fb98e15a3cf53513
+2026-03-31 18:55:57,516 INFO cli_logger: Récupération de l'instance: 69cb1e55fb98e15a3cf53513
+2026-03-31 18:55:57,555 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-03-31 18:55:57,645 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cb1e55fb98e15a3cf53513
+2026-03-31 18:55:57,646 INFO cli_logger: Package: 69cb1e55fb98e15a3cf53513, address field: 69cb1e55fb98e15a3cf53512
+2026-03-31 18:55:57,646 INFO cli_logger: Récupération adresse: 69cb1e55fb98e15a3cf53512
+2026-03-31 18:55:57,646 INFO cli_logger: Récupération de l'adresse par ID: 69cb1e55fb98e15a3cf53512
+2026-03-31 18:55:57,646 INFO cli_logger: Récupération de l'instance: 69cb1e55fb98e15a3cf53512
+2026-03-31 18:55:57,688 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: 69cb1e55fb98e15a3cf53512
+2026-03-31 18:55:57,688 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-03-31 18:55:57,689 INFO cli_logger: Trip créé: id=69cb1e55fb98e15a3cf53513, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276553, lng=10.1949951
+2026-03-31 18:55:57,689 INFO cli_logger: Récupération du package par ID: 69cb1e68fb98e15a3cf53515
+2026-03-31 18:55:57,689 INFO cli_logger: Récupération de l'instance: 69cb1e68fb98e15a3cf53515
+2026-03-31 18:55:57,730 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-03-31 18:55:57,778 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cb1e68fb98e15a3cf53515
+2026-03-31 18:55:57,778 INFO cli_logger: Package: 69cb1e68fb98e15a3cf53515, address field: 69cb1e68fb98e15a3cf53514
+2026-03-31 18:55:57,778 INFO cli_logger: Récupération adresse: 69cb1e68fb98e15a3cf53514
+2026-03-31 18:55:57,779 INFO cli_logger: Récupération de l'adresse par ID: 69cb1e68fb98e15a3cf53514
+2026-03-31 18:55:57,779 INFO cli_logger: Récupération de l'instance: 69cb1e68fb98e15a3cf53514
+2026-03-31 18:55:57,820 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: 69cb1e68fb98e15a3cf53514
+2026-03-31 18:55:57,820 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: Menzah, Avenue Belgique, Iberia, Bni Idder, arrondissement de Tanger-Medina, Tanger, Pachalik de Tanger, Préfecture de Tanger-Assilah, Tanger-Tétouan-Al Hoceïma, 90030, Maroc
+2026-03-31 18:55:57,820 INFO cli_logger: Trip créé: id=69cb1e68fb98e15a3cf53515, name=Menzah, Avenue Belgique, Iberia, Bni Idder, arrondissement de Tanger-Medina, Tanger, Pachalik de Tanger, Préfecture de Tanger-Assilah, Tanger-Tétouan-Al Hoceïma, 90030, Maroc, lat=35.7809598, lng=-5.8159402
+2026-03-31 18:55:57,821 INFO cli_logger: Récupération du package par ID: 69cb1e8efb98e15a3cf53517
+2026-03-31 18:55:57,821 INFO cli_logger: Récupération de l'instance: 69cb1e8efb98e15a3cf53517
+2026-03-31 18:55:57,863 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-03-31 18:55:57,908 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cb1e8efb98e15a3cf53517
+2026-03-31 18:55:57,908 INFO cli_logger: Package: 69cb1e8efb98e15a3cf53517, address field: 69cb1e8efb98e15a3cf53516
+2026-03-31 18:55:57,908 INFO cli_logger: Récupération adresse: 69cb1e8efb98e15a3cf53516
+2026-03-31 18:55:57,909 INFO cli_logger: Récupération de l'adresse par ID: 69cb1e8efb98e15a3cf53516
+2026-03-31 18:55:57,909 INFO cli_logger: Récupération de l'instance: 69cb1e8efb98e15a3cf53516
+2026-03-31 18:55:57,949 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: 69cb1e8efb98e15a3cf53516
+2026-03-31 18:55:57,949 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: Loki, Yumbe, Northern Region, Ouganda
+2026-03-31 18:55:57,949 INFO cli_logger: Trip créé: id=69cb1e8efb98e15a3cf53517, name=Loki, Yumbe, Northern Region, Ouganda, lat=3.4385983, lng=31.1551433
+2026-03-31 18:55:57,950 INFO cli_logger: ✅ SUCCÈS: 3 trip(s) créé(s) et ordonné(s) par position
+2026-03-31 18:55:57,952 INFO cli_logger: ✅ SUCCÈS: 3 trip(s) exporté(s) vers data.json
+2026-03-31 18:55:57,953 INFO cli_logger: ✅ SUCCÈS: Token valide jusqu'au 2026-03-31 23:31:05
+2026-03-31 18:55:57,954 INFO cli_logger: Recherche du driver par query: 000
+2026-03-31 18:55:57,954 INFO cli_logger: Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-03-31 18:55:58,097 INFO cli_logger: ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 18:55:58,100 INFO services.delivery_service: ✅ Found 3 trips for driver vivien (000)
+2026-03-31 18:55:58,101 INFO services.notification_service: 📤 NOTIFICATION SENT client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c type=trips_list data={'driver_serial': '000', 'trip_count': 3, 'trips': [{'id': '69cb1e55fb98e15a3cf53513', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276553, 'longitude': 10.1949951, 'clientName': 'test1', 'packageInfo': 'car', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69cb1e68fb98e15a3cf53515', 'name': 'Menzah, Avenue Belgique, Iberia, Bni Idder, arrondissement de Tanger-Medina, Tanger, Pachalik de Tanger, Préfecture de Tanger-Assilah, Tanger-Tétouan-Al Hoceïma, 90030, Maroc', 'latitude': 35.7809598, 'longitude': -5.8159402, 'clientName': 'test2', 'packageInfo': 'yop', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69cb1e8efb98e15a3cf53517', 'name': 'Loki, Yumbe, Northern Region, Ouganda', 'latitude': 3.4385983, 'longitude': 31.1551433, 'clientName': 'test3', 'packageInfo': 'banana', 'deliveryStatus': 'planned', 'isFragile': False}]}
+2026-03-31 18:55:58,103 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c type=start data={'type': 'start'}
+2026-03-31 18:55:58,103 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c type=start data={'type': 'start'}
+2026-03-31 18:55:58,109 INFO services.webrtc_service: WebRTC peer created client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c
+2026-03-31 18:55:58,110 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c type=offer data={'type': 'offer', 'sdp': 'v=0\r\no=- 6713836342223546211 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 102 0 8 13 110 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:WloM\r\na=ice-pwd:MhTyqiTxVlGS4L3zwbJbUn4c\r\na=ice-options:trickle renomination\r\na=fingerprint:sha-256 1F:E4:3B:76:2F:C3:DA:F8:C4:A9:30:52:F2:23:39:4E:5D:C4:4C:F9:98:9E:69:EF:35:8B:4C:BB:AD:7F:64:91\r\na=setup:actpass\r\na=mid:0\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=sendrecv\r\na=msid:- audio_label\r\na=rtcp-mux\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1\r\na=rtpmap:63 red/48000/2\r\na=fmtp:63 111/111\r\na=rtpmap:9 G722/8000\r\na=rtpmap:102 ILBC/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:110 telephone-event/48000\r\na=rtpmap:126 telephone-event/8000\r\na=ssrc:2547641294 cname:yP/baWGnwAVg+d/l\r\na=ssrc:2547641294 msid:- audio_label\r\n'}
+2026-03-31 18:55:58,110 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c type=offer data={'type': 'offer', 'sdp': 'v=0\r\no=- 6713836342223546211 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 102 0 8 13 110 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:WloM\r\na=ice-pwd:MhTyqiTxVlGS4L3zwbJbUn4c\r\na=ice-options:trickle renomination\r\na=fingerprint:sha-256 1F:E4:3B:76:2F:C3:DA:F8:C4:A9:30:52:F2:23:39:4E:5D:C4:4C:F9:98:9E:69:EF:35:8B:4C:BB:AD:7F:64:91\r\na=setup:actpass\r\na=mid:0\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=sendrecv\r\na=msid:- audio_label\r\na=rtcp-mux\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1\r\na=rtpmap:63 red/48000/2\r\na=fmtp:63 111/111\r\na=rtpmap:9 G722/8000\r\na=rtpmap:102 ILBC/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:110 telephone-event/48000\r\na=rtpmap:126 telephone-event/8000\r\na=ssrc:2547641294 cname:yP/baWGnwAVg+d/l\r\na=ssrc:2547641294 msid:- audio_label\r\n'}
+2026-03-31 18:55:58,116 INFO services.webrtc_service: Audio track received client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c
+2026-03-31 18:55:58,155 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:892499557 1 udp 2122260223 192.168.1.3 51194 typ host generation 0 ufrag WloM network-id 4 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-03-31 18:55:58,155 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:892499557 1 udp 2122260223 192.168.1.3 51194 typ host generation 0 ufrag WloM network-id 4 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-03-31 18:55:58,156 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:3508231244 1 udp 1686052607 197.17.19.238 51194 typ srflx raddr 192.168.1.3 rport 51194 generation 0 ufrag WloM network-id 4 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-03-31 18:55:58,156 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:3508231244 1 udp 1686052607 197.17.19.238 51194 typ srflx raddr 192.168.1.3 rport 51194 generation 0 ufrag WloM network-id 4 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-03-31 18:55:58,157 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:817672178 1 tcp 1518214911 10.9.49.188 9 typ host tcptype active generation 0 ufrag WloM network-id 1 network-cost 900","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-03-31 18:55:58,157 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:817672178 1 tcp 1518214911 10.9.49.188 9 typ host tcptype active generation 0 ufrag WloM network-id 1 network-cost 900","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-03-31 18:55:58,158 INFO services.webrtc_service: ICE state client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c state=checking
+2026-03-31 18:55:58,158 INFO aioice.ice: Connection(1) Check CandidatePair(('192.168.1.2', 34297) -> ('192.168.1.3', 51194)) State.FROZEN -> State.WAITING
+2026-03-31 18:55:58,159 INFO aioice.ice: Connection(1) Check CandidatePair(('172.17.0.1', 41141) -> ('192.168.1.3', 51194)) State.FROZEN -> State.WAITING
+2026-03-31 18:55:58,159 INFO aioice.ice: Connection(1) Check CandidatePair(('192.168.1.2', 34297) -> ('197.17.19.238', 51194)) State.FROZEN -> State.WAITING
+2026-03-31 18:55:58,159 INFO services.webrtc_service: WebRTC state client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c state=connecting
+2026-03-31 18:55:58,159 INFO aioice.ice: Connection(1) Check CandidatePair(('192.168.1.2', 34297) -> ('192.168.1.3', 51194)) State.WAITING -> State.IN_PROGRESS
+2026-03-31 18:55:58,179 INFO aioice.ice: Connection(1) Check CandidatePair(('172.17.0.1', 41141) -> ('192.168.1.3', 51194)) State.WAITING -> State.IN_PROGRESS
+2026-03-31 18:55:58,200 INFO aioice.ice: Connection(1) Check CandidatePair(('192.168.1.2', 34297) -> ('197.17.19.238', 51194)) State.WAITING -> State.IN_PROGRESS
+2026-03-31 18:55:58,206 INFO aioice.ice: Connection(1) Check CandidatePair(('192.168.1.2', 34297) -> ('192.168.1.3', 51194)) State.IN_PROGRESS -> State.SUCCEEDED
+2026-03-31 18:55:58,207 INFO aioice.ice: Connection(1) Check CandidatePair(('172.17.0.1', 41141) -> ('197.17.19.238', 51194)) State.FROZEN -> State.FAILED
+2026-03-31 18:55:58,207 INFO aioice.ice: Connection(1) ICE completed
+2026-03-31 18:55:58,208 INFO aioice.ice: Connection(1) Check CandidatePair(('172.17.0.1', 41141) -> ('192.168.1.3', 51194)) State.IN_PROGRESS -> State.SUCCEEDED
+2026-03-31 18:55:58,222 INFO services.webrtc_service: ICE state client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c state=completed
+2026-03-31 18:55:58,252 INFO services.webrtc_service: WebRTC state client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c state=connected
+2026-03-31 18:55:58,252 INFO services.webrtc_service: 🔊 Sending pending voice summary client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c
+2026-03-31 18:55:59,412 INFO services.agent_service: TTS audio client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c phrase_len=31 src_rate=22050 out_rate=22050 samples=45824 frames=104
+2026-03-31 18:56:03,823 INFO services.agent_service: TTS audio client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c phrase_len=33 src_rate=22050 out_rate=22050 samples=57344 frames=131
+2026-03-31 18:56:06,720 INFO services.agent_service: TTS audio client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c phrase_len=17 src_rate=22050 out_rate=22050 samples=22784 frames=52
+2026-03-31 18:56:10,664 INFO services.webrtc_service: VAD speech_start client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c p=0.651
+2026-03-31 18:56:12,747 INFO services.webrtc_service: Utterance end client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c samples=36352
+2026-03-31 18:56:12,752 INFO services.agent_service: STT raw input client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c ms=2272 rms=0.1989 peak=0.8749 n=36352 sr=16000
+2026-03-31 18:56:12,753 INFO faster_whisper: Processing audio with duration 00:02.272
+2026-03-31 18:56:12,773 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-31 18:56:13,520 INFO services.agent_service: STT transcript client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c text='Hello, can you hear me?'
+2026-03-31 18:56:13,687 INFO services.action_service: Intent INCONNU → forward to LLM client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c text='Hello, can you hear me?'
+2026-03-31 18:56:13,688 INFO services.agent_service: Action result client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c ActionResult(handled=False, intent='INCONNU', text_to_llm='Hello, can you hear me?', response=None)
+2026-03-31 18:56:13,982 INFO httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-31 18:56:15,319 INFO services.agent_service: TTS audio client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c phrase_len=23 src_rate=22050 out_rate=22050 samples=32000 frames=73
+2026-03-31 18:56:18,282 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 36629) -> ('192.168.1.3', 51527)) State.IN_PROGRESS -> State.FAILED
+2026-03-31 18:56:18,302 INFO aioice.ice: Connection(0) Check CandidatePair(('172.17.0.1', 43440) -> ('192.168.1.3', 51527)) State.IN_PROGRESS -> State.FAILED
+2026-03-31 18:56:18,320 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 36629) -> ('197.17.19.238', 51527)) State.IN_PROGRESS -> State.FAILED
+2026-03-31 18:56:18,341 INFO aioice.ice: Connection(0) Check CandidatePair(('172.17.0.1', 43440) -> ('197.17.19.238', 51527)) State.IN_PROGRESS -> State.FAILED
+2026-03-31 18:56:18,341 INFO aioice.ice: Connection(0) ICE failed
+2026-03-31 18:56:19,060 INFO services.webrtc_service: VAD speech_start client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c p=0.964
+2026-03-31 18:56:20,654 INFO services.webrtc_service: Utterance end client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c samples=29184
+2026-03-31 18:56:20,662 INFO services.agent_service: STT raw input client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c ms=1824 rms=0.1440 peak=0.8055 n=29184 sr=16000
+2026-03-31 18:56:20,663 INFO faster_whisper: Processing audio with duration 00:01.824
+2026-03-31 18:56:20,675 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-31 18:56:21,413 INFO services.agent_service: STT transcript client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c text='Yes, I can hear you.'
+2026-03-31 18:56:21,603 INFO services.action_service: Intent INCONNU → forward to LLM client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c text='Yes, I can hear you.'
+2026-03-31 18:56:21,604 INFO services.agent_service: Action result client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c ActionResult(handled=False, intent='INCONNU', text_to_llm='Yes, I can hear you.', response=None)
+2026-03-31 18:56:21,878 INFO httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-31 18:56:23,207 INFO services.agent_service: TTS audio client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c phrase_len=20 src_rate=22050 out_rate=22050 samples=36608 frames=84
+2026-03-31 18:56:26,737 INFO services.webrtc_service: VAD speech_start client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c p=0.742
+2026-03-31 18:56:30,132 INFO services.webrtc_service: Utterance end client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c samples=56832
+2026-03-31 18:56:30,136 INFO services.agent_service: STT raw input client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c ms=3552 rms=0.1065 peak=0.8124 n=56832 sr=16000
+2026-03-31 18:56:30,138 INFO faster_whisper: Processing audio with duration 00:03.552
+2026-03-31 18:56:30,163 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-31 18:56:30,903 INFO services.agent_service: STT transcript client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c text='Okay, how many deliveries do I have?'
+2026-03-31 18:56:31,103 INFO services.action_service: Intent connue [show_deliveries] → exécution locale client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c
+2026-03-31 18:56:31,104 INFO services.action_service: ACTION: show_deliveries
+2026-03-31 18:56:31,104 INFO services.action_service: 📋 External control sent client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c action=SHOW_DELIVERIES_LIST
+2026-03-31 18:56:31,104 INFO services.agent_service: Action result client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c ActionResult(handled=True, intent='show_deliveries', text_to_llm=None, response='Here is the list of your deliveries.')
+2026-03-31 18:56:41,204 INFO services.webrtc_service: VAD speech_start client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c p=0.655
+2026-03-31 18:56:42,008 INFO services.webrtc_service: Utterance end client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c samples=16896
+2026-03-31 18:56:42,010 INFO services.agent_service: STT raw input client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c ms=1056 rms=0.0824 peak=0.6459 n=16896 sr=16000
+2026-03-31 18:56:42,012 INFO faster_whisper: Processing audio with duration 00:01.056
+2026-03-31 18:56:42,046 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-31 18:56:42,683 INFO services.agent_service: STT transcript client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c text='Bye!'
+2026-03-31 18:56:42,868 INFO services.action_service: Intent INCONNU → forward to LLM client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c text='Bye!'
+2026-03-31 18:56:42,868 INFO services.agent_service: Action result client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c ActionResult(handled=False, intent='INCONNU', text_to_llm='Bye!', response=None)
+2026-03-31 18:56:43,221 INFO httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-31 18:56:43,752 INFO services.agent_service: TTS audio client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c phrase_len=4 src_rate=22050 out_rate=22050 samples=10240 frames=24
+2026-03-31 18:56:45,300 INFO services.webrtc_service: VAD speech_start client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c p=0.692
+2026-03-31 18:56:47,485 INFO services.webrtc_service: Utterance end client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c samples=37888
+2026-03-31 18:56:47,490 INFO services.agent_service: STT raw input client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c ms=2368 rms=0.0974 peak=0.7918 n=37888 sr=16000
+2026-03-31 18:56:47,492 INFO faster_whisper: Processing audio with duration 00:02.368
+2026-03-31 18:56:47,556 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-31 18:56:48,209 INFO services.agent_service: STT transcript client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c text='turn on the navigation'
+2026-03-31 18:56:48,368 INFO services.action_service: Intent connue [start_navigation] → exécution locale client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c
+2026-03-31 18:56:48,368 INFO services.action_service: ACTION: start_navigation
+2026-03-31 18:56:48,369 INFO services.action_service: 🗺️ External control sent client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c action=START_NAVIGATION trip_id=69cb1e55fb98e15a3cf53513
+2026-03-31 18:56:48,369 INFO services.agent_service: Action result client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c ActionResult(handled=True, intent='start_navigation', text_to_llm=None, response='Starting navigation to the next destination.')
+2026-03-31 18:56:49,164 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c type=arrived data={'type': 'arrived', 'id': '69cb1e55fb98e15a3cf53513'}
+2026-03-31 18:56:49,165 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c type=arrived data={'type': 'arrived', 'id': '69cb1e55fb98e15a3cf53513'}
+2026-03-31 18:56:49,645 INFO services.agent_service: 📮 EXTERNAL CONTROL REÇU client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c action=arrived extras={'trip_id': '69cb1e55fb98e15a3cf53513'}
+2026-03-31 18:56:49,645 INFO services.agent_service: ✅ Traitement action arrived pour client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c
+2026-03-31 18:56:49,646 INFO services.agent_service: 🚚 DRIVER ARRIVÉ client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c trip_id=69cb1e55fb98e15a3cf53513
+2026-03-31 18:56:49,646 INFO services.agent_service: 🚀 Démarrage de la state machine pour client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c
+2026-03-31 18:56:49,646 INFO services.delivery_state_machine: State machine: entered MODE_1 → STATE_1 client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c trip_id=69cb1e55fb98e15a3cf53513
+2026-03-31 18:56:49,646 INFO services.agent_service: 🗣️ Envoi question TTS: 'Is the delivery completed?'
+2026-03-31 18:56:49,646 WARNING services.agent_service: INTERRUPT called! client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c tts_playing=True processing_lock=True cancel_flag=False
+2026-03-31 18:56:51,175 ERROR asyncio: Task was destroyed but it is pending!
+task: <Task pending name='Task-23' coro=<WebRTCService._process_audio_track() running at /home/server/aiserver/services/webrtc_service.py:357> wait_for=<Future pending cb=[Task.task_wakeup()]>>
+2026-03-31 18:56:51,414 INFO services.agent_service: TTS audio client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c phrase_len=26 src_rate=22050 out_rate=22050 samples=33792 frames=77
+2026-03-31 18:56:57,812 INFO services.webrtc_service: VAD speech_start client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c p=0.730
+2026-03-31 18:56:58,512 INFO services.webrtc_service: Utterance end client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c samples=15360
+2026-03-31 18:56:58,516 INFO services.agent_service: STT raw input client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c ms=960 rms=0.1512 peak=0.8890 n=15360 sr=16000
+2026-03-31 18:56:58,517 INFO faster_whisper: Processing audio with duration 00:00.960
+2026-03-31 18:56:58,539 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-31 18:56:59,174 INFO services.agent_service: STT transcript client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c text='nope'
+2026-03-31 18:56:59,175 INFO services.delivery_state_machine: STATE_1: NO detected client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c → STATE_2
+2026-03-31 18:57:01,236 INFO services.agent_service: State machine: transitioned to state_2 client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c
+2026-03-31 18:57:04,954 INFO services.webrtc_service: VAD speech_start client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c p=0.887
+2026-03-31 18:57:09,385 INFO services.webrtc_service: Utterance end client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c samples=71680
+2026-03-31 18:57:09,391 INFO services.agent_service: STT raw input client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c ms=4480 rms=0.1326 peak=0.7208 n=71680 sr=16000
+2026-03-31 18:57:09,393 INFO faster_whisper: Processing audio with duration 00:04.480
+2026-03-31 18:57:09,420 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-31 18:57:10,165 INFO services.agent_service: STT transcript client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c text='Can you list me the delivery failure results?'
+2026-03-31 18:57:10,230 INFO services.delivery_state_machine: STATE_2: failure reason list requested via intent client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c
+2026-03-31 18:57:29,695 INFO services.agent_service: State machine: transitioned to state_2 client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c
+2026-03-31 18:57:32,777 INFO services.webrtc_service: VAD speech_start client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c p=0.928
+2026-03-31 18:57:35,229 INFO services.webrtc_service: Utterance end client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c samples=41984
+2026-03-31 18:57:35,230 INFO services.agent_service: STT raw input client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c ms=2624 rms=0.1589 peak=0.8581 n=41984 sr=16000
+2026-03-31 18:57:35,232 INFO faster_whisper: Processing audio with duration 00:02.624
+2026-03-31 18:57:35,279 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-31 18:57:35,971 INFO services.agent_service: STT transcript client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c text='Okay, number one.'
+2026-03-31 18:57:36,111 INFO services.delivery_state_machine: STATE_2: reason selected #1: Customer not available client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c
+2026-03-31 18:57:40,071 ERROR services.delivery_state_machine: Failed to update trip status: 'PlanningService' object has no attribute 'update_trip_status'
+Traceback (most recent call last):
+  File "/home/server/aiserver/services/delivery_state_machine.py", line 567, in update_trip_status
+    result = await planning_service.update_trip_status(
+AttributeError: 'PlanningService' object has no attribute 'update_trip_status'. Did you mean: 'update_package_status'?
+2026-03-31 18:57:40,081 ERROR services.agent_service: ❌ Trip update failed client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c trip_id=69cb1e55fb98e15a3cf53513
+2026-03-31 18:57:40,082 INFO services.agent_service: State machine: transitioned to state_5 client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c
+2026-03-31 18:58:25,233 INFO services.webrtc_service: VAD speech_start client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c p=0.601
+2026-03-31 18:58:26,467 INFO services.webrtc_service: Utterance end client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c samples=23552
+2026-03-31 18:58:26,469 INFO services.agent_service: STT raw input client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c ms=1472 rms=0.0536 peak=0.2786 n=23552 sr=16000
+2026-03-31 18:58:26,469 INFO faster_whisper: Processing audio with duration 00:01.472
+2026-03-31 18:58:26,495 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-31 18:58:29,363 ERROR services.whisper_service: Whisper (faster) transcribe failed
+Traceback (most recent call last):
+  File "/home/server/aiserver/services/whisper_service.py", line 240, in _transcribe_embedded_pcm
+    text, detected_language = await asyncio.to_thread(_do_transcribe_faster)
+  File "/usr/lib/python3.10/asyncio/threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/server/aiserver/services/whisper_service.py", line 235, in _do_transcribe_faster
+    text = "".join(getattr(seg, "text", "") for seg in segments).strip()
+  File "/home/server/aiserver/services/whisper_service.py", line 235, in <genexpr>
+    text = "".join(getattr(seg, "text", "") for seg in segments).strip()
+  File "/home/server/.local/lib/python3.10/site-packages/faster_whisper/transcribe.py", line 1213, in generate_segments
+    ) = self.generate_with_fallback(encoder_output, prompt, tokenizer, options)
+  File "/home/server/.local/lib/python3.10/site-packages/faster_whisper/transcribe.py", line 1446, in generate_with_fallback
+    result = self.model.generate(
+RuntimeError: CUDA failed with error out of memory
+2026-03-31 18:58:29,365 INFO services.agent_service: STT transcript client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c text=''
+2026-03-31 18:58:34,861 INFO services.webrtc_service: VAD speech_start client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c p=0.835
+2026-03-31 18:58:36,023 INFO services.webrtc_service: Utterance end client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c samples=22528
+2026-03-31 18:58:36,027 INFO services.agent_service: STT raw input client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c ms=1408 rms=0.0851 peak=0.4911 n=22528 sr=16000
+2026-03-31 18:58:36,028 INFO faster_whisper: Processing audio with duration 00:01.408
+2026-03-31 18:58:36,063 WARNING faster_whisper: The current model is English-only but the language parameter is set to 'fr'; using 'en' instead.
+2026-03-31 18:58:36,789 ERROR services.whisper_service: Whisper (faster) transcribe failed
+Traceback (most recent call last):
+  File "/home/server/aiserver/services/whisper_service.py", line 240, in _transcribe_embedded_pcm
+    text, detected_language = await asyncio.to_thread(_do_transcribe_faster)
+  File "/usr/lib/python3.10/asyncio/threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/server/aiserver/services/whisper_service.py", line 235, in _do_transcribe_faster
+    text = "".join(getattr(seg, "text", "") for seg in segments).strip()
+  File "/home/server/aiserver/services/whisper_service.py", line 235, in <genexpr>
+    text = "".join(getattr(seg, "text", "") for seg in segments).strip()
+  File "/home/server/.local/lib/python3.10/site-packages/faster_whisper/transcribe.py", line 1213, in generate_segments
+    ) = self.generate_with_fallback(encoder_output, prompt, tokenizer, options)
+  File "/home/server/.local/lib/python3.10/site-packages/faster_whisper/transcribe.py", line 1446, in generate_with_fallback
+    result = self.model.generate(
+RuntimeError: CUDA failed with error out of memory
+2026-03-31 18:58:36,790 INFO services.agent_service: STT transcript client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c text=''
+2026-03-31 18:58:40,920 INFO services.webrtc_service: VAD speech_start client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c p=0.627
+2026-03-31 18:58:41,500 INFO services.webrtc_service: VAD short_utterance_ignored client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c speech_chunks=0
+2026-03-31 18:58:50,890 INFO uvicorn.error: Shutting down
+2026-03-31 18:58:50,895 INFO uvicorn.error: connection closed
+2026-03-31 18:58:50,900 INFO services.webrtc_service: Audio track ended client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c
+2026-03-31 18:58:50,904 INFO services.webrtc_service: ICE state client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c state=closed
+2026-03-31 18:58:50,905 INFO services.webrtc_service: WebRTC state client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c state=None
+2026-03-31 18:58:50,906 INFO services.webrtc_service: WebRTC cleaned up client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c
+2026-03-31 18:58:50,906 INFO services.websocket_service: WS disconnected client_id=67e6af9e-59ef-4291-ab15-abf3f2bfca0c
+2026-03-31 18:58:50,993 INFO uvicorn.error: Waiting for application shutdown.
+2026-03-31 18:58:51,497 INFO services.delivery_service: DeliveryService shutdown
+2026-03-31 18:58:51,497 INFO services.delivery_state_machine: DeliveryStateMachine shutdown
+2026-03-31 18:58:51,497 INFO services.notification_service: NotificationService shutdown
+2026-03-31 18:58:51,497 INFO services.action_service: ActionService shutdown
+2026-03-31 18:58:52,597 INFO uvicorn.error: Application shutdown complete.
+2026-03-31 18:58:52,598 INFO uvicorn.error: Finished server process [102980]
