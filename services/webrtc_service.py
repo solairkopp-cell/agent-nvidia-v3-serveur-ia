@@ -71,8 +71,8 @@ class TTSAudioTrack(MediaStreamTrack):
         # Queue pour stocker les frames audio TTS
         self._queue: asyncio.Queue = asyncio.Queue()
         self._pts: int = 0
-        self._sample_rate: int = config.AUDIO_OUTPUT_SAMPLE_RATE  # 16kHz (same as input)
-        self._samples_per_frame: int = max(1, int(self._sample_rate * 0.02))  # 20ms
+        self._sample_rate: int = config.AUDIO_OUTPUT_SAMPLE_RATE  # 22.05kHz (Piper native)
+        self._samples_per_frame: int = max(1, int(self._sample_rate * 0.02))  # 20ms (~441 samples @ 22.05kHz)
 
     async def recv(self):
         """
@@ -459,10 +459,59 @@ class WebRTCService:
         """
         Appelé quand connectionstate change.
         Si "failed" ou "closed" → cleanup(session).
+        Si "connected" → envoyer le résumé vocal en attente (delivery_service).
         Logger tous les changements d'état.
         """
         pc = session.peer
         state = getattr(pc, "connectionState", None) if pc is not None else None
         logger.info("WebRTC state client_id=%s state=%s", session.client_id, state)
+        
+        if state == "connected":
+            # WebRTC prêt → envoyer le résumé vocal en attente si disponible
+            pending_summary = getattr(session, "_pending_voice_summary", None)
+            if pending_summary is not None:
+                logger.info(
+                    "🔊 Sending pending voice summary client_id=%s",
+                    session.client_id,
+                )
+                try:
+                    trips = pending_summary.get("trips", [])
+                    driver_name = pending_summary.get("driver_name", "Driver")
+                    no_trips = pending_summary.get("no_trips", False)
+                    voice_message = pending_summary.get("voice_message")
+                    
+                    if no_trips and voice_message:
+                        # Cas "no trips" - utiliser le message pré-construit
+                        if self.agent is not None:
+                            await self.agent.speak_text(session, voice_message)
+                    elif trips and len(trips) > 0:
+                        # Cas avec trips - construire le message
+                        first_trip = trips[0]
+                        client_name = getattr(first_trip, 'client_name', None) or getattr(first_trip, 'get_client_name', lambda: None)()
+                        package_info = getattr(first_trip, 'package_info', None) or getattr(first_trip, 'get_package_info', lambda: None)()
+                        
+                        if client_name and package_info:
+                            summary_text = (
+                                f"Hello {driver_name}, you have {len(trips)} trips. "
+                                f"The first one is a {package_info} for {client_name}. "
+                                f"Have a great day."
+                            )
+                        elif client_name:
+                            summary_text = (
+                                f"Hello {driver_name}, you have {len(trips)} trips. "
+                                f"The first one is for {client_name}. "
+                                f"Have a great day."
+                            )
+                        else:
+                            summary_text = f"Hello {driver_name}, you have {len(trips)} trips. Have a great day."
+                        
+                        if self.agent is not None:
+                            await self.agent.speak_text(session, summary_text)
+                except Exception as e:
+                    logger.exception("Error sending pending voice summary: %s", e)
+                finally:
+                    # Nettoyer le pending
+                    session._pending_voice_summary = None
+        
         if state in ("failed", "closed"):
             await self.cleanup(session)

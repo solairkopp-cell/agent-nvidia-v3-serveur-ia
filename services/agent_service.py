@@ -644,7 +644,7 @@ class AgentService:
         frames = self.audio.array_to_av_frames(
             samples,
             source_rate=rate,
-            target_rate=config.AUDIO_OUTPUT_SAMPLE_RATE,  # 16kHz (same as TTS output)
+            target_rate=config.AUDIO_OUTPUT_SAMPLE_RATE,  # 22.05kHz (Piper native)
         )
         if samples is not None and len(samples) > 0:
             logger.info(
@@ -665,7 +665,7 @@ class AgentService:
     def _prepare_tts_samples(self, session: "Session", samples, rate: int):
         """
         Prépare les samples TTS : trim_silence optionnel.
-        Pas de resampling : TTS et WebRTC sont tous deux à 16kHz.
+        Pas de resampling : TTS (22.05kHz) et WebRTC (22.05kHz) sont identiques.
         """
         logger = logging.getLogger(__name__)
         import numpy as np

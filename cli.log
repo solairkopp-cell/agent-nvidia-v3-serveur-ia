@@ -206,3 +206,283 @@
 2026-03-31 15:08:42 - INFO - Trip créé: id=69cb1e8efb98e15a3cf53517, name=Loki, Yumbe, Northern Region, Ouganda, lat=3.4385983, lng=31.1551433
 2026-03-31 15:08:42 - INFO - ✅ SUCCÈS: 3 trip(s) créé(s) et ordonné(s) par position
 2026-03-31 15:08:42 - INFO - ✅ SUCCÈS: 3 trip(s) exporté(s) vers data.json
+2026-03-31 15:35:03 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-03-31 23:31:05
+2026-03-31 15:35:03 - INFO - Récupération des trips pour le driver: 000
+2026-03-31 15:35:03 - INFO - Recherche du driver par query: 000
+2026-03-31 15:35:03 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-03-31 15:35:04 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 15:35:04 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 15:35:04 - INFO - Recherche des schedules par driver serial number: 000
+2026-03-31 15:35:04 - INFO - Recherche du driver par query: 000
+2026-03-31 15:35:04 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-03-31 15:35:04 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 15:35:04 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-03-31 15:35:04 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-03-31 15:35:04 - INFO - 2 schedule(s) trouvé(s) sur 8 entité(s)
+2026-03-31 15:35:04 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-03-31 15:35:04 - INFO - Recherche des packages pour le schedule: 69cb8451fb98e15a3cf5351c
+2026-03-31 15:35:04 - INFO - Recherche par référence: field=schedule_id, value=69cb8451fb98e15a3cf5351c
+2026-03-31 15:35:04 - INFO - ✅ SUCCÈS: 3 package(s) trouvé(s) pour le schedule 69cb8451fb98e15a3cf5351c
+2026-03-31 15:35:04 - INFO - Récupération du package par ID: 69cb1e55fb98e15a3cf53513
+2026-03-31 15:35:04 - INFO - Récupération de l'instance: 69cb1e55fb98e15a3cf53513
+2026-03-31 15:35:04 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-03-31 15:35:05 - INFO - ✅ SUCCÈS: Package trouvé: 69cb1e55fb98e15a3cf53513
+2026-03-31 15:35:05 - INFO - Package: 69cb1e55fb98e15a3cf53513, address field: 69cb1e55fb98e15a3cf53512
+2026-03-31 15:35:05 - INFO - Récupération adresse: 69cb1e55fb98e15a3cf53512
+2026-03-31 15:35:05 - INFO - Récupération de l'adresse par ID: 69cb1e55fb98e15a3cf53512
+2026-03-31 15:35:05 - INFO - Récupération de l'instance: 69cb1e55fb98e15a3cf53512
+2026-03-31 15:35:05 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cb1e55fb98e15a3cf53512
+2026-03-31 15:35:05 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-03-31 15:35:05 - INFO - Trip créé: id=69cb1e55fb98e15a3cf53513, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276553, lng=10.1949951
+2026-03-31 15:35:05 - INFO - Récupération du package par ID: 69cb1e68fb98e15a3cf53515
+2026-03-31 15:35:05 - INFO - Récupération de l'instance: 69cb1e68fb98e15a3cf53515
+2026-03-31 15:35:05 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-03-31 15:35:05 - INFO - ✅ SUCCÈS: Package trouvé: 69cb1e68fb98e15a3cf53515
+2026-03-31 15:35:05 - INFO - Package: 69cb1e68fb98e15a3cf53515, address field: 69cb1e68fb98e15a3cf53514
+2026-03-31 15:35:05 - INFO - Récupération adresse: 69cb1e68fb98e15a3cf53514
+2026-03-31 15:35:05 - INFO - Récupération de l'adresse par ID: 69cb1e68fb98e15a3cf53514
+2026-03-31 15:35:05 - INFO - Récupération de l'instance: 69cb1e68fb98e15a3cf53514
+2026-03-31 15:35:05 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cb1e68fb98e15a3cf53514
+2026-03-31 15:35:05 - INFO - ✅ SUCCÈS: Adresse trouvée: Menzah, Avenue Belgique, Iberia, Bni Idder, arrondissement de Tanger-Medina, Tanger, Pachalik de Tanger, Préfecture de Tanger-Assilah, Tanger-Tétouan-Al Hoceïma, 90030, Maroc
+2026-03-31 15:35:05 - INFO - Trip créé: id=69cb1e68fb98e15a3cf53515, name=Menzah, Avenue Belgique, Iberia, Bni Idder, arrondissement de Tanger-Medina, Tanger, Pachalik de Tanger, Préfecture de Tanger-Assilah, Tanger-Tétouan-Al Hoceïma, 90030, Maroc, lat=35.7809598, lng=-5.8159402
+2026-03-31 15:35:05 - INFO - Récupération du package par ID: 69cb1e8efb98e15a3cf53517
+2026-03-31 15:35:05 - INFO - Récupération de l'instance: 69cb1e8efb98e15a3cf53517
+2026-03-31 15:35:05 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-03-31 15:35:05 - INFO - ✅ SUCCÈS: Package trouvé: 69cb1e8efb98e15a3cf53517
+2026-03-31 15:35:05 - INFO - Package: 69cb1e8efb98e15a3cf53517, address field: 69cb1e8efb98e15a3cf53516
+2026-03-31 15:35:05 - INFO - Récupération adresse: 69cb1e8efb98e15a3cf53516
+2026-03-31 15:35:05 - INFO - Récupération de l'adresse par ID: 69cb1e8efb98e15a3cf53516
+2026-03-31 15:35:05 - INFO - Récupération de l'instance: 69cb1e8efb98e15a3cf53516
+2026-03-31 15:35:05 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cb1e8efb98e15a3cf53516
+2026-03-31 15:35:05 - INFO - ✅ SUCCÈS: Adresse trouvée: Loki, Yumbe, Northern Region, Ouganda
+2026-03-31 15:35:05 - INFO - Trip créé: id=69cb1e8efb98e15a3cf53517, name=Loki, Yumbe, Northern Region, Ouganda, lat=3.4385983, lng=31.1551433
+2026-03-31 15:35:05 - INFO - ✅ SUCCÈS: 3 trip(s) créé(s) et ordonné(s) par position
+2026-03-31 15:35:05 - INFO - ✅ SUCCÈS: 3 trip(s) exporté(s) vers data.json
+2026-03-31 15:35:05 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-03-31 23:31:05
+2026-03-31 15:35:05 - INFO - Recherche du driver par query: 000
+2026-03-31 15:35:05 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-03-31 15:35:05 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 15:40:04 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-03-31 23:31:05
+2026-03-31 15:40:04 - INFO - Récupération des trips pour le driver: 000
+2026-03-31 15:40:04 - INFO - Recherche du driver par query: 000
+2026-03-31 15:40:04 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-03-31 15:40:04 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 15:40:04 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 15:40:04 - INFO - Recherche des schedules par driver serial number: 000
+2026-03-31 15:40:04 - INFO - Recherche du driver par query: 000
+2026-03-31 15:40:04 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-03-31 15:40:04 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 15:40:04 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-03-31 15:40:04 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-03-31 15:40:04 - INFO - 2 schedule(s) trouvé(s) sur 8 entité(s)
+2026-03-31 15:40:04 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-03-31 15:40:04 - INFO - Recherche des packages pour le schedule: 69cb8451fb98e15a3cf5351c
+2026-03-31 15:40:04 - INFO - Recherche par référence: field=schedule_id, value=69cb8451fb98e15a3cf5351c
+2026-03-31 15:40:04 - INFO - ✅ SUCCÈS: 3 package(s) trouvé(s) pour le schedule 69cb8451fb98e15a3cf5351c
+2026-03-31 15:40:04 - INFO - Récupération du package par ID: 69cb1e55fb98e15a3cf53513
+2026-03-31 15:40:04 - INFO - Récupération de l'instance: 69cb1e55fb98e15a3cf53513
+2026-03-31 15:40:05 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-03-31 15:40:05 - INFO - ✅ SUCCÈS: Package trouvé: 69cb1e55fb98e15a3cf53513
+2026-03-31 15:40:05 - INFO - Package: 69cb1e55fb98e15a3cf53513, address field: 69cb1e55fb98e15a3cf53512
+2026-03-31 15:40:05 - INFO - Récupération adresse: 69cb1e55fb98e15a3cf53512
+2026-03-31 15:40:05 - INFO - Récupération de l'adresse par ID: 69cb1e55fb98e15a3cf53512
+2026-03-31 15:40:05 - INFO - Récupération de l'instance: 69cb1e55fb98e15a3cf53512
+2026-03-31 15:40:05 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cb1e55fb98e15a3cf53512
+2026-03-31 15:40:05 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-03-31 15:40:05 - INFO - Trip créé: id=69cb1e55fb98e15a3cf53513, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276553, lng=10.1949951
+2026-03-31 15:40:05 - INFO - Récupération du package par ID: 69cb1e68fb98e15a3cf53515
+2026-03-31 15:40:05 - INFO - Récupération de l'instance: 69cb1e68fb98e15a3cf53515
+2026-03-31 15:40:05 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-03-31 15:40:05 - INFO - ✅ SUCCÈS: Package trouvé: 69cb1e68fb98e15a3cf53515
+2026-03-31 15:40:05 - INFO - Package: 69cb1e68fb98e15a3cf53515, address field: 69cb1e68fb98e15a3cf53514
+2026-03-31 15:40:05 - INFO - Récupération adresse: 69cb1e68fb98e15a3cf53514
+2026-03-31 15:40:05 - INFO - Récupération de l'adresse par ID: 69cb1e68fb98e15a3cf53514
+2026-03-31 15:40:05 - INFO - Récupération de l'instance: 69cb1e68fb98e15a3cf53514
+2026-03-31 15:40:05 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cb1e68fb98e15a3cf53514
+2026-03-31 15:40:05 - INFO - ✅ SUCCÈS: Adresse trouvée: Menzah, Avenue Belgique, Iberia, Bni Idder, arrondissement de Tanger-Medina, Tanger, Pachalik de Tanger, Préfecture de Tanger-Assilah, Tanger-Tétouan-Al Hoceïma, 90030, Maroc
+2026-03-31 15:40:05 - INFO - Trip créé: id=69cb1e68fb98e15a3cf53515, name=Menzah, Avenue Belgique, Iberia, Bni Idder, arrondissement de Tanger-Medina, Tanger, Pachalik de Tanger, Préfecture de Tanger-Assilah, Tanger-Tétouan-Al Hoceïma, 90030, Maroc, lat=35.7809598, lng=-5.8159402
+2026-03-31 15:40:05 - INFO - Récupération du package par ID: 69cb1e8efb98e15a3cf53517
+2026-03-31 15:40:05 - INFO - Récupération de l'instance: 69cb1e8efb98e15a3cf53517
+2026-03-31 15:40:05 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-03-31 15:40:05 - INFO - ✅ SUCCÈS: Package trouvé: 69cb1e8efb98e15a3cf53517
+2026-03-31 15:40:05 - INFO - Package: 69cb1e8efb98e15a3cf53517, address field: 69cb1e8efb98e15a3cf53516
+2026-03-31 15:40:05 - INFO - Récupération adresse: 69cb1e8efb98e15a3cf53516
+2026-03-31 15:40:05 - INFO - Récupération de l'adresse par ID: 69cb1e8efb98e15a3cf53516
+2026-03-31 15:40:05 - INFO - Récupération de l'instance: 69cb1e8efb98e15a3cf53516
+2026-03-31 15:40:05 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cb1e8efb98e15a3cf53516
+2026-03-31 15:40:05 - INFO - ✅ SUCCÈS: Adresse trouvée: Loki, Yumbe, Northern Region, Ouganda
+2026-03-31 15:40:05 - INFO - Trip créé: id=69cb1e8efb98e15a3cf53517, name=Loki, Yumbe, Northern Region, Ouganda, lat=3.4385983, lng=31.1551433
+2026-03-31 15:40:05 - INFO - ✅ SUCCÈS: 3 trip(s) créé(s) et ordonné(s) par position
+2026-03-31 15:40:05 - INFO - ✅ SUCCÈS: 3 trip(s) exporté(s) vers data.json
+2026-03-31 15:40:05 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-03-31 23:31:05
+2026-03-31 15:40:05 - INFO - Recherche du driver par query: 000
+2026-03-31 15:40:05 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-03-31 15:40:06 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 15:45:02 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-03-31 23:31:05
+2026-03-31 15:45:02 - INFO - Récupération des trips pour le driver: 000
+2026-03-31 15:45:02 - INFO - Recherche du driver par query: 000
+2026-03-31 15:45:02 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-03-31 15:45:02 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 15:45:02 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 15:45:02 - INFO - Recherche des schedules par driver serial number: 000
+2026-03-31 15:45:02 - INFO - Recherche du driver par query: 000
+2026-03-31 15:45:02 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-03-31 15:45:02 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 15:45:02 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-03-31 15:45:02 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-03-31 15:45:02 - INFO - 2 schedule(s) trouvé(s) sur 8 entité(s)
+2026-03-31 15:45:02 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-03-31 15:45:02 - INFO - Recherche des packages pour le schedule: 69cb8451fb98e15a3cf5351c
+2026-03-31 15:45:02 - INFO - Recherche par référence: field=schedule_id, value=69cb8451fb98e15a3cf5351c
+2026-03-31 15:45:02 - INFO - ✅ SUCCÈS: 3 package(s) trouvé(s) pour le schedule 69cb8451fb98e15a3cf5351c
+2026-03-31 15:45:02 - INFO - Récupération du package par ID: 69cb1e55fb98e15a3cf53513
+2026-03-31 15:45:02 - INFO - Récupération de l'instance: 69cb1e55fb98e15a3cf53513
+2026-03-31 15:45:03 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-03-31 15:45:03 - INFO - ✅ SUCCÈS: Package trouvé: 69cb1e55fb98e15a3cf53513
+2026-03-31 15:45:03 - INFO - Package: 69cb1e55fb98e15a3cf53513, address field: 69cb1e55fb98e15a3cf53512
+2026-03-31 15:45:03 - INFO - Récupération adresse: 69cb1e55fb98e15a3cf53512
+2026-03-31 15:45:03 - INFO - Récupération de l'adresse par ID: 69cb1e55fb98e15a3cf53512
+2026-03-31 15:45:03 - INFO - Récupération de l'instance: 69cb1e55fb98e15a3cf53512
+2026-03-31 15:45:03 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cb1e55fb98e15a3cf53512
+2026-03-31 15:45:03 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-03-31 15:45:03 - INFO - Trip créé: id=69cb1e55fb98e15a3cf53513, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276553, lng=10.1949951
+2026-03-31 15:45:03 - INFO - Récupération du package par ID: 69cb1e68fb98e15a3cf53515
+2026-03-31 15:45:03 - INFO - Récupération de l'instance: 69cb1e68fb98e15a3cf53515
+2026-03-31 15:45:03 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-03-31 15:45:03 - INFO - ✅ SUCCÈS: Package trouvé: 69cb1e68fb98e15a3cf53515
+2026-03-31 15:45:03 - INFO - Package: 69cb1e68fb98e15a3cf53515, address field: 69cb1e68fb98e15a3cf53514
+2026-03-31 15:45:03 - INFO - Récupération adresse: 69cb1e68fb98e15a3cf53514
+2026-03-31 15:45:03 - INFO - Récupération de l'adresse par ID: 69cb1e68fb98e15a3cf53514
+2026-03-31 15:45:03 - INFO - Récupération de l'instance: 69cb1e68fb98e15a3cf53514
+2026-03-31 15:45:03 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cb1e68fb98e15a3cf53514
+2026-03-31 15:45:03 - INFO - ✅ SUCCÈS: Adresse trouvée: Menzah, Avenue Belgique, Iberia, Bni Idder, arrondissement de Tanger-Medina, Tanger, Pachalik de Tanger, Préfecture de Tanger-Assilah, Tanger-Tétouan-Al Hoceïma, 90030, Maroc
+2026-03-31 15:45:03 - INFO - Trip créé: id=69cb1e68fb98e15a3cf53515, name=Menzah, Avenue Belgique, Iberia, Bni Idder, arrondissement de Tanger-Medina, Tanger, Pachalik de Tanger, Préfecture de Tanger-Assilah, Tanger-Tétouan-Al Hoceïma, 90030, Maroc, lat=35.7809598, lng=-5.8159402
+2026-03-31 15:45:03 - INFO - Récupération du package par ID: 69cb1e8efb98e15a3cf53517
+2026-03-31 15:45:03 - INFO - Récupération de l'instance: 69cb1e8efb98e15a3cf53517
+2026-03-31 15:45:03 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-03-31 15:45:03 - INFO - ✅ SUCCÈS: Package trouvé: 69cb1e8efb98e15a3cf53517
+2026-03-31 15:45:03 - INFO - Package: 69cb1e8efb98e15a3cf53517, address field: 69cb1e8efb98e15a3cf53516
+2026-03-31 15:45:03 - INFO - Récupération adresse: 69cb1e8efb98e15a3cf53516
+2026-03-31 15:45:03 - INFO - Récupération de l'adresse par ID: 69cb1e8efb98e15a3cf53516
+2026-03-31 15:45:03 - INFO - Récupération de l'instance: 69cb1e8efb98e15a3cf53516
+2026-03-31 15:45:03 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cb1e8efb98e15a3cf53516
+2026-03-31 15:45:03 - INFO - ✅ SUCCÈS: Adresse trouvée: Loki, Yumbe, Northern Region, Ouganda
+2026-03-31 15:45:03 - INFO - Trip créé: id=69cb1e8efb98e15a3cf53517, name=Loki, Yumbe, Northern Region, Ouganda, lat=3.4385983, lng=31.1551433
+2026-03-31 15:45:03 - INFO - ✅ SUCCÈS: 3 trip(s) créé(s) et ordonné(s) par position
+2026-03-31 15:45:03 - INFO - ✅ SUCCÈS: 3 trip(s) exporté(s) vers data.json
+2026-03-31 15:45:03 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-03-31 23:31:05
+2026-03-31 15:45:03 - INFO - Recherche du driver par query: 000
+2026-03-31 15:45:03 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-03-31 15:45:03 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 15:48:57 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-03-31 23:31:05
+2026-03-31 15:48:57 - INFO - Récupération des trips pour le driver: 000
+2026-03-31 15:48:57 - INFO - Recherche du driver par query: 000
+2026-03-31 15:48:57 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-03-31 15:48:57 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 15:48:57 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 15:48:57 - INFO - Recherche des schedules par driver serial number: 000
+2026-03-31 15:48:57 - INFO - Recherche du driver par query: 000
+2026-03-31 15:48:57 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-03-31 15:48:57 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 15:48:57 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-03-31 15:48:57 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-03-31 15:48:57 - INFO - 2 schedule(s) trouvé(s) sur 8 entité(s)
+2026-03-31 15:48:57 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-03-31 15:48:57 - INFO - Recherche des packages pour le schedule: 69cb8451fb98e15a3cf5351c
+2026-03-31 15:48:57 - INFO - Recherche par référence: field=schedule_id, value=69cb8451fb98e15a3cf5351c
+2026-03-31 15:48:57 - INFO - ✅ SUCCÈS: 3 package(s) trouvé(s) pour le schedule 69cb8451fb98e15a3cf5351c
+2026-03-31 15:48:57 - INFO - Récupération du package par ID: 69cb1e55fb98e15a3cf53513
+2026-03-31 15:48:57 - INFO - Récupération de l'instance: 69cb1e55fb98e15a3cf53513
+2026-03-31 15:48:57 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-03-31 15:48:58 - INFO - ✅ SUCCÈS: Package trouvé: 69cb1e55fb98e15a3cf53513
+2026-03-31 15:48:58 - INFO - Package: 69cb1e55fb98e15a3cf53513, address field: 69cb1e55fb98e15a3cf53512
+2026-03-31 15:48:58 - INFO - Récupération adresse: 69cb1e55fb98e15a3cf53512
+2026-03-31 15:48:58 - INFO - Récupération de l'adresse par ID: 69cb1e55fb98e15a3cf53512
+2026-03-31 15:48:58 - INFO - Récupération de l'instance: 69cb1e55fb98e15a3cf53512
+2026-03-31 15:48:58 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cb1e55fb98e15a3cf53512
+2026-03-31 15:48:58 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-03-31 15:48:58 - INFO - Trip créé: id=69cb1e55fb98e15a3cf53513, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276553, lng=10.1949951
+2026-03-31 15:48:58 - INFO - Récupération du package par ID: 69cb1e68fb98e15a3cf53515
+2026-03-31 15:48:58 - INFO - Récupération de l'instance: 69cb1e68fb98e15a3cf53515
+2026-03-31 15:48:58 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-03-31 15:48:58 - INFO - ✅ SUCCÈS: Package trouvé: 69cb1e68fb98e15a3cf53515
+2026-03-31 15:48:58 - INFO - Package: 69cb1e68fb98e15a3cf53515, address field: 69cb1e68fb98e15a3cf53514
+2026-03-31 15:48:58 - INFO - Récupération adresse: 69cb1e68fb98e15a3cf53514
+2026-03-31 15:48:58 - INFO - Récupération de l'adresse par ID: 69cb1e68fb98e15a3cf53514
+2026-03-31 15:48:58 - INFO - Récupération de l'instance: 69cb1e68fb98e15a3cf53514
+2026-03-31 15:48:58 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cb1e68fb98e15a3cf53514
+2026-03-31 15:48:58 - INFO - ✅ SUCCÈS: Adresse trouvée: Menzah, Avenue Belgique, Iberia, Bni Idder, arrondissement de Tanger-Medina, Tanger, Pachalik de Tanger, Préfecture de Tanger-Assilah, Tanger-Tétouan-Al Hoceïma, 90030, Maroc
+2026-03-31 15:48:58 - INFO - Trip créé: id=69cb1e68fb98e15a3cf53515, name=Menzah, Avenue Belgique, Iberia, Bni Idder, arrondissement de Tanger-Medina, Tanger, Pachalik de Tanger, Préfecture de Tanger-Assilah, Tanger-Tétouan-Al Hoceïma, 90030, Maroc, lat=35.7809598, lng=-5.8159402
+2026-03-31 15:48:58 - INFO - Récupération du package par ID: 69cb1e8efb98e15a3cf53517
+2026-03-31 15:48:58 - INFO - Récupération de l'instance: 69cb1e8efb98e15a3cf53517
+2026-03-31 15:48:58 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-03-31 15:48:58 - INFO - ✅ SUCCÈS: Package trouvé: 69cb1e8efb98e15a3cf53517
+2026-03-31 15:48:58 - INFO - Package: 69cb1e8efb98e15a3cf53517, address field: 69cb1e8efb98e15a3cf53516
+2026-03-31 15:48:58 - INFO - Récupération adresse: 69cb1e8efb98e15a3cf53516
+2026-03-31 15:48:58 - INFO - Récupération de l'adresse par ID: 69cb1e8efb98e15a3cf53516
+2026-03-31 15:48:58 - INFO - Récupération de l'instance: 69cb1e8efb98e15a3cf53516
+2026-03-31 15:48:58 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cb1e8efb98e15a3cf53516
+2026-03-31 15:48:58 - INFO - ✅ SUCCÈS: Adresse trouvée: Loki, Yumbe, Northern Region, Ouganda
+2026-03-31 15:48:58 - INFO - Trip créé: id=69cb1e8efb98e15a3cf53517, name=Loki, Yumbe, Northern Region, Ouganda, lat=3.4385983, lng=31.1551433
+2026-03-31 15:48:58 - INFO - ✅ SUCCÈS: 3 trip(s) créé(s) et ordonné(s) par position
+2026-03-31 15:48:58 - INFO - ✅ SUCCÈS: 3 trip(s) exporté(s) vers data.json
+2026-03-31 15:48:58 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-03-31 23:31:05
+2026-03-31 15:48:58 - INFO - Recherche du driver par query: 000
+2026-03-31 15:48:58 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-03-31 15:48:58 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 15:57:48 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-03-31 23:31:05
+2026-03-31 15:57:48 - INFO - Récupération des trips pour le driver: 000
+2026-03-31 15:57:48 - INFO - Recherche du driver par query: 000
+2026-03-31 15:57:48 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-03-31 15:57:49 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 15:57:49 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 15:57:49 - INFO - Recherche des schedules par driver serial number: 000
+2026-03-31 15:57:49 - INFO - Recherche du driver par query: 000
+2026-03-31 15:57:49 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-03-31 15:57:49 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-03-31 15:57:49 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-03-31 15:57:49 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-03-31 15:57:49 - INFO - 2 schedule(s) trouvé(s) sur 8 entité(s)
+2026-03-31 15:57:49 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-03-31 15:57:49 - INFO - Recherche des packages pour le schedule: 69cb8451fb98e15a3cf5351c
+2026-03-31 15:57:49 - INFO - Recherche par référence: field=schedule_id, value=69cb8451fb98e15a3cf5351c
+2026-03-31 15:57:49 - INFO - ✅ SUCCÈS: 3 package(s) trouvé(s) pour le schedule 69cb8451fb98e15a3cf5351c
+2026-03-31 15:57:49 - INFO - Récupération du package par ID: 69cb1e55fb98e15a3cf53513
+2026-03-31 15:57:49 - INFO - Récupération de l'instance: 69cb1e55fb98e15a3cf53513
+2026-03-31 15:57:49 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-03-31 15:57:49 - INFO - ✅ SUCCÈS: Package trouvé: 69cb1e55fb98e15a3cf53513
+2026-03-31 15:57:49 - INFO - Package: 69cb1e55fb98e15a3cf53513, address field: 69cb1e55fb98e15a3cf53512
+2026-03-31 15:57:49 - INFO - Récupération adresse: 69cb1e55fb98e15a3cf53512
+2026-03-31 15:57:49 - INFO - Récupération de l'adresse par ID: 69cb1e55fb98e15a3cf53512
+2026-03-31 15:57:49 - INFO - Récupération de l'instance: 69cb1e55fb98e15a3cf53512
+2026-03-31 15:57:49 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cb1e55fb98e15a3cf53512
+2026-03-31 15:57:49 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-03-31 15:57:49 - INFO - Trip créé: id=69cb1e55fb98e15a3cf53513, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276553, lng=10.1949951
+2026-03-31 15:57:49 - INFO - Récupération du package par ID: 69cb1e68fb98e15a3cf53515
+2026-03-31 15:57:49 - INFO - Récupération de l'instance: 69cb1e68fb98e15a3cf53515
+2026-03-31 15:57:49 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-03-31 15:57:49 - INFO - ✅ SUCCÈS: Package trouvé: 69cb1e68fb98e15a3cf53515
+2026-03-31 15:57:49 - INFO - Package: 69cb1e68fb98e15a3cf53515, address field: 69cb1e68fb98e15a3cf53514
+2026-03-31 15:57:49 - INFO - Récupération adresse: 69cb1e68fb98e15a3cf53514
+2026-03-31 15:57:49 - INFO - Récupération de l'adresse par ID: 69cb1e68fb98e15a3cf53514
+2026-03-31 15:57:49 - INFO - Récupération de l'instance: 69cb1e68fb98e15a3cf53514
+2026-03-31 15:57:49 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cb1e68fb98e15a3cf53514
+2026-03-31 15:57:49 - INFO - ✅ SUCCÈS: Adresse trouvée: Menzah, Avenue Belgique, Iberia, Bni Idder, arrondissement de Tanger-Medina, Tanger, Pachalik de Tanger, Préfecture de Tanger-Assilah, Tanger-Tétouan-Al Hoceïma, 90030, Maroc
+2026-03-31 15:57:49 - INFO - Trip créé: id=69cb1e68fb98e15a3cf53515, name=Menzah, Avenue Belgique, Iberia, Bni Idder, arrondissement de Tanger-Medina, Tanger, Pachalik de Tanger, Préfecture de Tanger-Assilah, Tanger-Tétouan-Al Hoceïma, 90030, Maroc, lat=35.7809598, lng=-5.8159402
+2026-03-31 15:57:49 - INFO - Récupération du package par ID: 69cb1e8efb98e15a3cf53517
+2026-03-31 15:57:49 - INFO - Récupération de l'instance: 69cb1e8efb98e15a3cf53517
+2026-03-31 15:57:49 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-03-31 15:57:49 - INFO - ✅ SUCCÈS: Package trouvé: 69cb1e8efb98e15a3cf53517
+2026-03-31 15:57:49 - INFO - Package: 69cb1e8efb98e15a3cf53517, address field: 69cb1e8efb98e15a3cf53516
+2026-03-31 15:57:49 - INFO - Récupération adresse: 69cb1e8efb98e15a3cf53516
+2026-03-31 15:57:49 - INFO - Récupération de l'adresse par ID: 69cb1e8efb98e15a3cf53516
+2026-03-31 15:57:49 - INFO - Récupération de l'instance: 69cb1e8efb98e15a3cf53516
+2026-03-31 15:57:49 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cb1e8efb98e15a3cf53516
+2026-03-31 15:57:49 - INFO - ✅ SUCCÈS: Adresse trouvée: Loki, Yumbe, Northern Region, Ouganda
+2026-03-31 15:57:49 - INFO - Trip créé: id=69cb1e8efb98e15a3cf53517, name=Loki, Yumbe, Northern Region, Ouganda, lat=3.4385983, lng=31.1551433
+2026-03-31 15:57:49 - INFO - ✅ SUCCÈS: 3 trip(s) créé(s) et ordonné(s) par position
+2026-03-31 15:57:49 - INFO - ✅ SUCCÈS: 3 trip(s) exporté(s) vers data.json
+2026-03-31 15:57:49 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-03-31 23:31:05
+2026-03-31 15:57:49 - INFO - Recherche du driver par query: 000
+2026-03-31 15:57:49 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-03-31 15:57:49 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
