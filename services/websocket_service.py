@@ -39,6 +39,7 @@ from models.session import Session
 
 if TYPE_CHECKING:
     from services.webrtc_service import WebRTCService
+    from services.notification_service import NotificationService
 
 
 logger = logging.getLogger(__name__)
@@ -49,8 +50,13 @@ class WebSocketService:
     Singleton. Injecté dans les routes FastAPI (main.py).
     """
 
-    def __init__(self, webrtc: "WebRTCService"):
+    def __init__(
+        self,
+        webrtc: "WebRTCService",
+        notification: "NotificationService | None" = None,
+    ):
         self.webrtc = webrtc
+        self.notification = notification
         # Registre de toutes les sessions actives
         self._sessions: dict[str, Session] = {}
 
@@ -101,10 +107,33 @@ class WebSocketService:
         """
         try:
             while True:
-                data = await session.websocket.receive_json()
+                try:
+                    message = await session.websocket.receive()
+                except RuntimeError as e:
+                    # Client déconnecté immédiatement après connexion
+                    logger.debug("Receive failed (client disconnected) client_id=%s: %s", session.client_id, e)
+                    break
+
+                # Ignorer les messages binaires ou de contrôle
+                if message.get("type") not in ("websocket.receive", "websocket.connect"):
+                    continue
+
+                # Parser le JSON manuellement
+                text = message.get("text")
+                if not text:
+                    continue
+
+                try:
+                    import json
+                    data = json.loads(text)
+                except (json.JSONDecodeError, ValueError):
+                    await self.send_error(session, "invalid JSON")
+                    continue
+
                 if not isinstance(data, dict):
                     await self.send_error(session, "invalid message")
                     continue
+
                 await self.handle_message(session, data)
         except WebSocketDisconnect:
             pass
@@ -126,9 +155,19 @@ class WebSocketService:
 
         "stop"   → webrtc.cleanup(session)
 
+        Types notification → notification.on_message(session, message)
+
         Inconnu → send(session, {"type": "error", "message": "unknown type"})
         """
         msg_type = message.get("type")
+        
+        # Log tous les messages reçus
+        logger.info("📨 WS MESSAGE RECEIVED client_id=%s type=%s data=%r", 
+                    session.client_id, msg_type, message)
+
+        # Notification : laisser le notification_service traiter en premier
+        if self.notification is not None:
+            await self.notification.on_message(session, message)
         if msg_type == "offer":
             sdp = message.get("sdp")
             if not isinstance(sdp, str) or not sdp.strip():
@@ -196,6 +235,8 @@ class WebSocketService:
         Ignorer silencieusement si la connexion est fermée.
         """
         try:
+            logger.debug("📤 WS MESSAGE SENT client_id=%s type=%s data=%r", 
+                        session.client_id, data.get("type"), data)
             await session.websocket.send_json(data)
         except Exception:
             # La connexion peut être fermée / en erreur.

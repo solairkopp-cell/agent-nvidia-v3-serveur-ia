@@ -85,8 +85,8 @@ ACTION_KNOWN_INTENTS = _parse_env_words(
 ACTION_SKIP_LLM_FOR_KNOWN_INTENTS = os.getenv("ACTION_SKIP_LLM_FOR_KNOWN_INTENTS", "true").strip().lower() in ("1", "true", "yes", "on")
 
 # ── Piper TTS ──────────────────────────────────────────────────────────────────
-PIPER_MODEL_PATH = os.getenv("PIPER_MODEL_PATH", "assets/models/en_US-danny-low.onnx")
-PIPER_CONFIG_PATH = os.getenv("PIPER_CONFIG_PATH", "assets/models/en_US-danny-low.onnx.json")
+PIPER_MODEL_PATH = os.getenv("PIPER_MODEL_PATH", "assets/models/en_US-ljspeech-high.onnx")
+PIPER_CONFIG_PATH = os.getenv("PIPER_CONFIG_PATH", "assets/models/en_US-ljspeech-high.onnx.json")
 
 # ── TTS Common Settings ──────────────────────────────────────────────────────
 # Streaming TTS : commencer à parler avant la fin de la phrase complète.

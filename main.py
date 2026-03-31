@@ -42,6 +42,8 @@ from services.whisper_service import WhisperService
 from services.ollama_service import OllamaService
 from services.intent_service import IntentService
 from services.action_service import ActionService
+from services.notification_service import NotificationService
+from services.delivery_service import DeliveryService
 from services.piper_tts_service import PiperTTSService
 from services.agent_service import AgentService
 from services.denoise_service import DenoiseService
@@ -62,6 +64,8 @@ whisper_service  = WhisperService()
 ollama_service   = OllamaService()
 intent_service   = IntentService()
 action_service   = ActionService()
+notification_service = NotificationService()
+delivery_service = DeliveryService()
 piper_service   = PiperTTSService()
 denoise_service  = DenoiseService(audio=audio_service)
 
@@ -81,10 +85,24 @@ webrtc_service   = WebRTCService(
     audio=audio_service,
 )
 
-ws_service       = WebSocketService(webrtc=webrtc_service)
+ws_service       = WebSocketService(
+    webrtc=webrtc_service,
+    notification=notification_service,
+)
 
 # Résolution de la dépendance circulaire Agent ↔ WebSocket
 agent_service.set_ws_service(ws_service)
+
+# Résolution de la dépendance circulaire Notification ↔ WebSocket
+notification_service.set_ws_service(ws_service)
+
+# Injection des services dans DeliveryService
+delivery_service.set_notification_service(notification_service)
+delivery_service.set_ws_service(ws_service)
+
+# Enregistrement des handlers de notifications
+notification_service.register_handler("identify_driver", delivery_service.identify_driver)
+notification_service.register_handler("get_trips", delivery_service._handle_get_trips_wrapper)
 
 
 async def _run_warmup_step(name: str, op) -> None:
@@ -147,6 +165,8 @@ async def lifespan(app: FastAPI):
     await ollama_service.startup()
     await intent_service.startup()
     await action_service.startup()
+    await notification_service.startup()
+    await delivery_service.startup()
     await piper_service.startup()
     await denoise_service.startup()
     await prewarm_services()
@@ -157,6 +177,8 @@ async def lifespan(app: FastAPI):
     # ── Shutdown ─────────────────────────────────────────────────────────────
     await piper_service.shutdown()
     await denoise_service.shutdown()
+    await delivery_service.shutdown()
+    await notification_service.shutdown()
     await action_service.shutdown()
     await intent_service.shutdown()
     await ollama_service.shutdown()
@@ -207,6 +229,8 @@ async def health():
             "ollama":  await ollama_service.health_check(),
             "intent":  await intent_service.health_check(),
             "action":  await action_service.health_check(),
+            "notification": await notification_service.health_check(),
+            "delivery": await delivery_service.health_check(),
             "piper":   await piper_service.health_check(),
             "denoise": await denoise_service.health_check(),
         }
@@ -223,6 +247,42 @@ async def websocket_endpoint(websocket: WebSocket):
     """
     session = await ws_service.connect(websocket)
     await ws_service.listen(session)
+
+
+# ── API Notifications ─────────────────────────────────────────────────────────
+
+@app.post("/notifications/send/{client_id}")
+async def send_notification(client_id: str, notification_type: str, data: dict | None = None):
+    """
+    Envoyer une notification à un client spécifique.
+
+    - client_id: ID du client cible
+    - notification_type: Type de notification (ex: "new_delivery")
+    - data: Données JSON de la notification
+
+    Retourne:
+    {"sent": true/false, "message": "..."}
+    """
+    success = await notification_service.send_to_client(client_id, notification_type, data)
+    if success:
+        return {"sent": True, "message": "Notification sent"}
+    else:
+        return {"sent": False, "message": "Client not found"}, 404
+
+
+@app.post("/notifications/broadcast")
+async def broadcast_notification(notification_type: str, data: dict | None = None):
+    """
+    Envoyer une notification à tous les clients connectés.
+
+    - notification_type: Type de notification
+    - data: Données JSON de la notification
+
+    Retourne:
+    {"sent": true, "count": N}
+    """
+    await notification_service.broadcast(notification_type, data)
+    return {"sent": True, "count": notification_service.ws_service.active_sessions if notification_service.ws_service else 0}
 
 
 # ── Entrée ────────────────────────────────────────────────────────────────────
