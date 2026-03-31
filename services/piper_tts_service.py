@@ -10,6 +10,7 @@ import time
 import json
 from pathlib import Path
 from typing import AsyncIterator, Optional
+import soxr
 
 import numpy as np
 import config
@@ -59,29 +60,57 @@ class PiperTTSService:
 
     async def synthesize(self, text: str) -> tuple[np.ndarray, int]:
         """
-        Synthétiser un texte complet.
-        Retourne (samples float32, sample_rate).
+        Synthétiser un texte complet avec upsampling à 48kHz pour WebRTC.
         """
         if self._voice is None:
             raise RuntimeError("PiperTTSService not started")
 
+        target_rate = 48000 # Standard WebRTC/Opus
         text = (text or "").strip()
         if not text:
-            return np.array([], dtype=np.float32), self._sample_rate
+            return np.array([], dtype=np.float32), target_rate
 
         async with self._lock:
             def _do():
                 # Piper outputs iterator of AudioChunk objects
                 chunks = list(self._voice.synthesize(text))
                 if not chunks:
-                    return np.array([], dtype=np.float32), self._sample_rate
+                    return np.array([], dtype=np.float32), target_rate
 
+                # 1. Récupération du raw int16
                 audio_bytes = b"".join(chunk.audio_int16_bytes for chunk in chunks)
+
+                # 2. Conversion en float32 (22050 Hz)
                 samples = np.frombuffer(audio_bytes, dtype=np.int16).astype(np.float32) / 32768.0
-                return samples, self._sample_rate
+
+                # 3. UPSAMPLING CRITIQUE : 22050 -> 48000 (WebRTC/Opus standard)
+                # Utilise soxr (haute qualité) avec fallbacks
+                try:
+                    import soxr
+                    samples_48k = soxr.resample(samples, self._sample_rate, target_rate)
+                except ImportError:
+                    # Fallback scipy
+                    try:
+                        from scipy import signal as scipy_signal
+                        num_samples = int(np.ceil(len(samples) * target_rate / self._sample_rate))
+                        samples_48k = scipy_signal.resample(samples, num_samples).astype(np.float32, copy=False)
+                    except ImportError:
+                        # Fallback librosa
+                        try:
+                            import librosa
+                            samples_48k = librosa.resample(samples, orig_sr=self._sample_rate, target_sr=target_rate)
+                        except ImportError:
+                            # Fallback numpy (moins bon)
+                            duration = len(samples) / float(self._sample_rate)
+                            target_len = int(round(duration * target_rate))
+                            x_old = np.linspace(0.0, 1.0, num=len(samples), endpoint=False)
+                            x_new = np.linspace(0.0, 1.0, num=target_len, endpoint=False)
+                            samples_48k = np.interp(x_new, x_old, samples).astype(np.float32, copy=False)
+
+                return samples_48k, target_rate
 
             return await asyncio.to_thread(_do)
-
+            
     async def synthesize_stream(
         self,
         text_stream: AsyncIterator[str],

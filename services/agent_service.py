@@ -344,10 +344,9 @@ class AgentService:
                     samples, rate = await self.tts.synthesize(action_result.response)
 
                     if not session.cancel_flag and session.current_request_id == request_id:
-                        frames = self.audio.array_to_av_frames(
+                        frames = self.audio.array_to_av_frames_direct(
                             samples,
-                            source_rate=rate,
-                            target_rate=config.AUDIO_OUTPUT_SAMPLE_RATE,
+                            sample_rate=rate,
                         )
                         for frame in frames:
                             await session.tts_track.feed(frame)
@@ -642,15 +641,10 @@ class AgentService:
         if samples is None or len(samples) == 0:
             return
 
-        # Appliquer crossfade pour éviter les coupures sèches
-        overlap_ms = int(getattr(config, "TTS_SEGMENT_OVERLAP_MS", 30))
-        samples = self._apply_crossfade(samples, int(rate), overlap_ms)
-
-        # Conversion directe sans resampling si sample_rate identique
+        # Conversion directe 48k - frames fixes 20ms (960 samples)
         frames = self.audio.array_to_av_frames_direct(
             samples,
             sample_rate=int(rate),
-            frame_ms=int(getattr(config, "TTS_FRAME_INTERVAL_MS", "10")),
         )
         if samples is not None and len(samples) > 0:
             logger.info(
@@ -662,16 +656,15 @@ class AgentService:
                 len(frames),
             )
 
-        # Envoyer les frames au rythme réel
-        frame_interval_ms = max(10, int(getattr(config, "TTS_FRAME_INTERVAL_MS", "10")))
+        # Envoyer les frames au rythme réel (20ms = standard WebRTC/Opus)
         for frame in frames:
             await session.tts_track.feed(frame)
-            await asyncio.sleep(frame_interval_ms / 1000.0)
+            await asyncio.sleep(0.02)  # 20ms
 
     def _prepare_tts_samples(self, session: "Session", samples, rate: int):
         """
-        Prépare les samples TTS : trim_silence optionnel + crossfade.
-        Pas de resampling : TTS (22.05kHz) et WebRTC (22.05kHz) sont identiques.
+        Prépare les samples TTS : trim_silence optionnel.
+        Pas de resampling : TTS sort déjà en 48kHz et WebRTC attend 48kHz.
         """
         logger = logging.getLogger(__name__)
         import numpy as np
@@ -806,10 +799,9 @@ class AgentService:
             samples, rate = await self.tts.synthesize(text)
 
             if not session.cancel_flag and session.current_request_id == request_id:
-                frames = self.audio.array_to_av_frames(
+                frames = self.audio.array_to_av_frames_direct(
                     samples,
-                    source_rate=rate,
-                    target_rate=config.AUDIO_OUTPUT_SAMPLE_RATE,
+                    sample_rate=rate,
                 )
                 for frame in frames:
                     await session.tts_track.feed(frame)

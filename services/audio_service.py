@@ -18,7 +18,7 @@ except Exception:  # pragma: no cover
 
 
 # ── Constantes ────────────────────────────────────────────────────────────────
-TARGET_SAMPLE_RATE = 16000
+TARGET_SAMPLE_RATE = 48000   # WebRTC/Opus native sample rate
 TARGET_CHANNELS = 1          # mono
 
 
@@ -135,9 +135,8 @@ class AudioService:
         """
         numpy float32 → liste de `av.AudioFrame` mono/s16 à fréquence fixe.
 
-        Utilisé pour la sortie TTS WebRTC afin de garder un flux stable :
-        - resample si nécessaire
-        - découpage en petites frames régulières
+        Validation stricte : source_rate DOIT être 48000 Hz.
+        Aucun resampling automatique - les erreurs doivent être détectées.
         """
         if av is None:
             raise RuntimeError("PyAV is not installed (package 'av').")
@@ -151,8 +150,12 @@ class AudioService:
             return []
 
         normalized_rate = int(target_rate) if int(target_rate) > 0 else TARGET_SAMPLE_RATE
-        if int(source_rate) > 0 and int(source_rate) != normalized_rate:
-            samples = self.resample(samples, int(source_rate), normalized_rate)
+        
+        # Validation stricte : 48k requis, pas de resampling automatique
+        if int(source_rate) > 0 and int(source_rate) != 48000:
+            raise ValueError(f"Sample rate invalide: {source_rate}, attendu 48000")
+        if normalized_rate != 48000:
+            raise ValueError(f"Target rate invalide: {normalized_rate}, attendu 48000")
 
         frame_samples = max(1, int(normalized_rate * (frame_ms / 1000.0)))
         frames = []
@@ -167,13 +170,13 @@ class AudioService:
         self,
         samples: np.ndarray,
         sample_rate: int,
-        frame_ms: int = 10,
+        frame_ms: int = 20,
     ) -> list:
         """
         Conversion directe sans resampling pour qualité audio maximale.
-        Utilisé pour TTS où source_rate == target_rate (22.05kHz).
-
-        Évite tout resampling qui dégrade la qualité (artefacts métalliques).
+        Utilisé pour TTS où source_rate == target_rate (48kHz).
+        
+        Frame fixe : 20ms = 960 samples @ 48kHz (standard WebRTC/Opus)
         """
         if av is None:
             raise RuntimeError("PyAV is not installed (package 'av').")
@@ -186,8 +189,14 @@ class AudioService:
         if samples.size == 0:
             return []
 
-        rate = int(sample_rate) if int(sample_rate) > 0 else 22050
-        frame_samples = max(1, int(rate * (frame_ms / 1000.0)))
+        # Validation stricte : 48k requis
+        rate = int(sample_rate) if int(sample_rate) > 0 else 48000
+        if rate != 48000:
+            raise ValueError(f"Sample rate invalide: {rate}, attendu 48000")
+        
+        # 20ms = 960 samples @ 48kHz (WebRTC/Opus standard)
+        frame_samples = 960  # int(48000 * 20 / 1000) = 960
+        
         frames = []
         for start in range(0, len(samples), frame_samples):
             chunk = samples[start : start + frame_samples]
@@ -205,9 +214,8 @@ class AudioService:
         target_rate: int = TARGET_SAMPLE_RATE,
     ) -> np.ndarray:
         """
-        Resampling de haute qualité avec filtre anti-repliement.
-        Utilise scipy si disponible, sinon fallback sur numpy avec lissage.
-        source_rate → target_rate (typiquement 48000 → 16000).
+        Resampling de haute qualité avec soxr.
+        source_rate → target_rate (typiquement 22050 → 48000).
         """
         if not isinstance(samples, np.ndarray):
             samples = np.asarray(samples, dtype=np.float32)
@@ -217,8 +225,16 @@ class AudioService:
             return samples.astype(np.float32, copy=False)
 
         samples = samples.astype(np.float32, copy=False).reshape(-1)
-        
-        # Essayer d'utiliser scipy pour un resampling de qualité
+
+        # soxr en premier - qualité professionnelle
+        try:
+            import soxr
+            resampled = soxr.resample(samples, source_rate, target_rate)
+            return resampled.astype(np.float32, copy=False)
+        except ImportError:
+            pass
+
+        # Fallback scipy
         try:
             from scipy import signal as scipy_signal
             num_samples = int(np.ceil(len(samples) * target_rate / source_rate))
@@ -226,7 +242,8 @@ class AudioService:
             return resampled.astype(np.float32, copy=False)
         except ImportError:
             pass
-        
+
+        # Fallback librosa
         try:
             import librosa
             resampled = librosa.resample(samples, orig_sr=source_rate, target_sr=target_rate)
