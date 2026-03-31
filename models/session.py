@@ -60,6 +60,8 @@ class Session:
     # Permet d'annuler la génération en cours
     current_request_id: int = 0
     cancel_flag: bool = False
+    # Queue audio pour le scheduler TTS (frames int16 de 960 samples)
+    tts_audio_queue: asyncio.Queue = field(default_factory=lambda: asyncio.Queue(maxsize=50))
 
     # ── Delivery State Machine ───────────────────────────────────────────────
     # Serial du driver (pour delivery completion flow)
@@ -82,6 +84,12 @@ class Session:
         self.is_speaking = False
         self.silence_chunks = 0
         self.speech_chunks = 0
+        # Vider la queue audio TTS
+        while not self.tts_audio_queue.empty():
+            try:
+                self.tts_audio_queue.get_nowait()
+            except asyncio.QueueEmpty:
+                break
 
     def reset_conversation(self):
         self.conversation_history.clear()

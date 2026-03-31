@@ -6,7 +6,8 @@
       "Bash(bash *)",
       "Bash(python3 *)",
       "Bash(pgrep *)",
-      "Bash(cat *)"
+      "Bash(cat *)",
+      "Bash(huggingface-cli *)"
     ]
   },
   "$version": 3

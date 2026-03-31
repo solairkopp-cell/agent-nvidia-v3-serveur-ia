@@ -13,7 +13,7 @@ Flux principal :
   wav_bytes → WhisperService.transcribe()
             → OllamaService.generate_stream()
             → PiperTTSService.synthesize_stream()
-            → Session.tts_track.feed(samples)
+            → Queue audio → Scheduler (20ms) → TTSAudioTrack
 
 Le lock session.processing_lock garantit qu'un seul pipeline
 s'exécute par session à la fois.
@@ -26,8 +26,9 @@ import logging
 import time
 from typing import TYPE_CHECKING
 
+import numpy as np
+
 if TYPE_CHECKING:
-    import numpy as np
     from models.session import Session
     from services.whisper_service import WhisperService
     from services.ollama_service import OllamaService
@@ -340,23 +341,45 @@ class AgentService:
                 session.reset_tts_output_state()
                 session.tts_started_at = time.monotonic()
 
+                # Démarrer le scheduler
+                scheduler_task = asyncio.create_task(
+                    self._tts_scheduler(session, request_id),
+                    name=f"tts-scheduler-{session.client_id}"
+                )
+
                 try:
                     samples, rate = await self.tts.synthesize(action_result.response)
 
                     if not session.cancel_flag and session.current_request_id == request_id:
-                        frames = self.audio.array_to_av_frames_direct(
-                            samples,
-                            sample_rate=rate,
+                        # Envoyer via queue (avec prébuffer et découpage)
+                        await self._emit_tts_audio(
+                            session=session,
+                            phrase_text=action_result.response,
+                            samples=samples,
+                            rate=rate,
+                            client_event_type="response",
                         )
-                        for frame in frames:
-                            await session.tts_track.feed(frame)
-                            await asyncio.sleep(0.02)
 
                         if self.ws_service is not None:
                             await self.ws_service.send_response_chunk(session, action_result.response)
+
+                        # Attendre que la queue soit presque vide
+                        await self._wait_queue_empty(session, request_id, timeout=5.0)
+
+                        # Flush de fin : 100ms de silence
+                        await self._flush_tts_queue(session, request_id, silence_frames=5)
+
+                        # Attendre que le flush soit consommé
+                        await asyncio.sleep(0.15)
                 except Exception:
                     logger.exception("TTS action response error client_id=%s", session.client_id)
                 finally:
+                    # Arrêter le scheduler
+                    if not scheduler_task.done():
+                        scheduler_task.cancel()
+                    with suppress(asyncio.CancelledError):
+                        await scheduler_task
+                        
                     session.tts_playing = False
                     session.reset_tts_output_state()
                     session.tts_started_at = 0.0
@@ -510,16 +533,18 @@ class AgentService:
         request_id: int,
     ) -> str:
         """
-        LLM streaming → TTS **non-streaming** (tout générer d'un coup) → TTSAudioTrack.
-
-        Simplification : on attend que tout le TTS soit généré avant de jouer.
+        LLM streaming → TTS non-streaming → TTSAudioTrack via queue + scheduler.
+        
+        Architecture :
+          - Scheduler : consomme tts_audio_queue → envoie frames à intervalle fixe (20ms)
+          - Flush : ajoute 100ms de silence à la fin
         """
         logger = logging.getLogger(__name__)
         if session.tts_track is None:
             return ""
 
         history = session.conversation_history
-        
+
         # 1. Générer tout le texte du LLM
         full_reply = ""
         async for token in self.llm.generate_stream(user_text, history):
@@ -534,14 +559,20 @@ class AgentService:
         session.tts_playing = True
         session.reset_tts_output_state()
         session.tts_started_at = time.monotonic()
-        
+
+        # Démarrer le scheduler
+        scheduler_task = asyncio.create_task(
+            self._tts_scheduler(session, request_id),
+            name=f"tts-scheduler-{session.client_id}"
+        )
+
         try:
             samples, rate = await self.tts.synthesize(full_reply)
-            
+
             if session.cancel_flag or session.current_request_id != request_id:
                 return full_reply
-            
-            # 3. Envoyer tous les frames d'un coup
+
+            # 3. Envoyer via queue (avec prébuffer et découpage)
             await self._emit_tts_audio(
                 session=session,
                 phrase_text=full_reply,
@@ -549,14 +580,29 @@ class AgentService:
                 rate=rate,
                 client_event_type="response",
             )
-            
+
             # Notifier le client
             if self.ws_service is not None:
                 await self.ws_service.send_response_chunk(session, full_reply)
-                
+
+            # Attendre que la queue soit presque vide
+            await self._wait_queue_empty(session, request_id, timeout=5.0)
+
+            # Flush de fin : 100ms de silence
+            await self._flush_tts_queue(session, request_id, silence_frames=5)
+            
+            # Attendre que le flush soit consommé
+            await asyncio.sleep(0.15)
+
         except Exception:
             logger.exception("TTS synthesis error client_id=%s", session.client_id)
         finally:
+            # Arrêter le scheduler
+            if not scheduler_task.done():
+                scheduler_task.cancel()
+            with suppress(asyncio.CancelledError):
+                await scheduler_task
+                
             session.tts_playing = False
             session.reset_tts_output_state()
             session.tts_started_at = 0.0
@@ -578,35 +624,31 @@ class AgentService:
         client_event_type: str | None,
         full_text_parts: list[str] | None,
     ) -> None:
+        """
+        Jouer le flux TTS avec scheduler temps réel et queue audio.
+        
+        Architecture :
+          - Producer : synthétise les segments TTS → met dans session.tts_audio_queue
+          - Scheduler : consomme la queue → envoie frames à intervalle fixe (20ms)
+          - Flush : ajoute 100ms de silence à la fin
+        """
         logger = logging.getLogger(__name__)
-        queue_maxsize = max(1, int(getattr(config, "TTS_SEGMENT_QUEUE_MAXSIZE", 3)))
-        queue: asyncio.Queue = asyncio.Queue(maxsize=queue_maxsize)
-        sentinel = object()
-
-        async def _producer() -> None:
-            try:
-                async for phrase_text, samples, rate in stream:
-                    if session.cancel_flag or session.current_request_id != request_id:
-                        break
-                    await queue.put((phrase_text, samples, rate))
-            except Exception:
-                logger.exception("TTS segment producer error client_id=%s", session.client_id)
-            finally:
-                await queue.put(sentinel)
-
-        producer_task = asyncio.create_task(_producer())
-
+        
+        # Démarrer le scheduler en tâche de fond
+        scheduler_task = asyncio.create_task(
+            self._tts_scheduler(session, request_id),
+            name=f"tts-scheduler-{session.client_id}"
+        )
+        
         try:
-            while True:
-                item = await queue.get()
-                if item is sentinel:
-                    break
-
-                phrase_text, samples, rate = item
+            # Traiter chaque segment du flux TTS
+            async for phrase_text, samples, rate in stream:
                 if session.cancel_flag or session.current_request_id != request_id:
                     break
+                    
                 if full_text_parts is not None and phrase_text:
                     full_text_parts.append(phrase_text)
+                    
                 await self._emit_tts_audio(
                     session=session,
                     phrase_text=phrase_text,
@@ -614,11 +656,24 @@ class AgentService:
                     rate=rate,
                     client_event_type=client_event_type,
                 )
+                
+        except Exception:
+            logger.exception("TTS stream playback error client_id=%s", session.client_id)
         finally:
-            if not producer_task.done():
-                producer_task.cancel()
+            # Attendre que la queue soit presque vide
+            await self._wait_queue_empty(session, request_id, timeout=5.0)
+            
+            # Flush de fin : 100ms de silence (5 frames)
+            await self._flush_tts_queue(session, request_id, silence_frames=5)
+            
+            # Attendre que le flush soit consommé
+            await asyncio.sleep(0.15)
+            
+            # Arrêter le scheduler
+            if not scheduler_task.done():
+                scheduler_task.cancel()
             with suppress(asyncio.CancelledError):
-                await producer_task
+                await scheduler_task
 
     async def _emit_tts_audio(
         self,
@@ -629,6 +684,15 @@ class AgentService:
         *,
         client_event_type: str | None,
     ) -> None:
+        """
+        Émettre l'audio TTS via une queue avec scheduler temps réel stable.
+        
+        Pipeline :
+          1. S'assurer que samples est float32
+          2. Découpage en frames strictes de 960 samples (20ms @ 48k)
+          3. Mettre dans tts_audio_queue (float32)
+          4. Le scheduler convertit float32→int16 et envoie à intervalle fixe
+        """
         logger = logging.getLogger(__name__)
         if phrase_text and self.ws_service is not None and client_event_type is not None:
             if client_event_type == "response":
@@ -636,30 +700,53 @@ class AgentService:
             else:
                 await self.ws_service.send(session, {"type": client_event_type, "text": phrase_text})
 
-        # Préparation minimale pour qualité audio maximale
+        # Préparation samples
         samples = self._prepare_tts_samples(session, samples, int(rate))
         if samples is None or len(samples) == 0:
             return
 
-        # Conversion directe 48k - frames fixes 20ms (960 samples)
-        frames = self.audio.array_to_av_frames_direct(
-            samples,
-            sample_rate=int(rate),
-        )
-        if samples is not None and len(samples) > 0:
-            logger.info(
-                "TTS audio client_id=%s phrase_len=%d rate=%d samples=%d frames=%d",
-                session.client_id,
-                len(phrase_text or ""),
-                int(rate),
-                int(len(samples)),
-                len(frames),
-            )
+        # S'assurer qu'on a du float32
+        if samples.dtype != np.float32:
+            samples = samples.astype(np.float32)
 
-        # Envoyer les frames au rythme réel (20ms = standard WebRTC/Opus)
-        for frame in frames:
-            await session.tts_track.feed(frame)
-            await asyncio.sleep(0.02)  # 20ms
+        samples = samples.reshape(-1)
+
+        if samples.size == 0:
+            return
+
+        logger.info(
+            "TTS audio client_id=%s phrase_len=%d rate=%d samples=%d dtype=%s",
+            session.client_id,
+            len(phrase_text or ""),
+            int(rate),
+            int(len(samples)),
+            samples.dtype,
+        )
+
+        # Découpage strict en frames de 960 samples
+        FRAME_SIZE = 960
+        idx = 0
+        frames_count = 0
+        
+        while idx + FRAME_SIZE <= len(samples):
+            frame = samples[idx:idx + FRAME_SIZE].copy()
+            await session.tts_audio_queue.put(frame)
+            idx += FRAME_SIZE
+            frames_count += 1
+
+        # Reste (si < 960 samples) → compléter avec silence
+        remainder = len(samples) - idx
+        if remainder > 0:
+            frame = np.zeros(FRAME_SIZE, dtype=np.float32)
+            frame[:remainder] = samples[idx:]
+            await session.tts_audio_queue.put(frame)
+            frames_count += 1
+
+        logger.info(
+            "TTS frames queued client_id=%s frames=%d",
+            session.client_id,
+            frames_count,
+        )
 
     def _prepare_tts_samples(self, session: "Session", samples, rate: int):
         """
@@ -724,6 +811,78 @@ class AgentService:
         samples[-overlap_samples:] *= fade_out
         
         return samples
+
+    async def _tts_scheduler(self, session: "Session", request_id: int) -> None:
+        """
+        Scheduler temps réel pour envoyer les frames audio à intervalle fixe.
+
+        Utilise un accumulateur de temps pour éviter le drift.
+        Fallback silence si la queue est vide.
+        """
+        logger = logging.getLogger(__name__)
+        FRAME_DURATION = 0.02  # 20ms
+        FRAME_SIZE = 960
+
+        loop = asyncio.get_event_loop()
+        next_time = loop.time()
+
+        # Silence frame en float32 (coherent avec la queue)
+        silence_frame = np.zeros(FRAME_SIZE, dtype=np.float32)
+
+        try:
+            while not session.cancel_flag and session.current_request_id == request_id:
+                try:
+                    # Attendre une frame avec timeout
+                    frame = await asyncio.wait_for(
+                        session.tts_audio_queue.get(),
+                        timeout=FRAME_DURATION
+                    )
+                except asyncio.TimeoutError:
+                    # Timeout → frame silence pour éviter les trous
+                    frame = silence_frame
+
+                # Envoyer la frame au track (array_to_av_frame convertit float32→int16)
+                if session.tts_track is not None:
+                    av_frame = self.audio.array_to_av_frame(frame, sample_rate=48000)
+                    await session.tts_track.feed(av_frame)
+
+                # Scheduler : attendre le bon moment
+                next_time += FRAME_DURATION
+                sleep_time = next_time - loop.time()
+
+                if sleep_time > 0:
+                    await asyncio.sleep(sleep_time)
+
+        except Exception:
+            logger.exception("TTS scheduler error client_id=%s", session.client_id)
+        finally:
+            logger.info("TTS scheduler stopped client_id=%s", session.client_id)
+
+    async def _flush_tts_queue(self, session: "Session", request_id: int, silence_frames: int = 5) -> None:
+        """
+        Ajouter un flush de silence à la fin du TTS (100ms = 5 frames).
+        Permet d'éviter la coupure brutale du dernier son.
+        """
+        FRAME_SIZE = 960
+        # Silence en float32 (coherent avec la queue)
+        silence_frame = np.zeros(FRAME_SIZE, dtype=np.float32)
+        
+        for _ in range(silence_frames):
+            if session.cancel_flag or session.current_request_id != request_id:
+                break
+            await session.tts_audio_queue.put(silence_frame.copy())
+
+    async def _wait_queue_empty(self, session: "Session", request_id: int, timeout: float = 2.0) -> None:
+        """
+        Attendre que la queue audio soit presque vide avant de continuer.
+        """
+        start = time.monotonic()
+        while time.monotonic() - start < timeout:
+            if session.cancel_flag or session.current_request_id != request_id:
+                break
+            if session.tts_audio_queue.qsize() <= 1:
+                break
+            await asyncio.sleep(0.01)
 
     async def _wait_for_tts_buffer_window(self, session: "Session", request_id: int) -> None:
         if session.cancel_flag or session.current_request_id != request_id:
@@ -795,23 +954,45 @@ class AgentService:
         session.reset_tts_output_state()
         session.tts_started_at = time.monotonic()
 
+        # Démarrer le scheduler
+        scheduler_task = asyncio.create_task(
+            self._tts_scheduler(session, request_id),
+            name=f"tts-scheduler-{session.client_id}"
+        )
+
         try:
             samples, rate = await self.tts.synthesize(text)
 
             if not session.cancel_flag and session.current_request_id == request_id:
-                frames = self.audio.array_to_av_frames_direct(
-                    samples,
-                    sample_rate=rate,
+                # Envoyer via queue (avec prébuffer et découpage)
+                await self._emit_tts_audio(
+                    session=session,
+                    phrase_text=text,
+                    samples=samples,
+                    rate=rate,
+                    client_event_type="response",
                 )
-                for frame in frames:
-                    await session.tts_track.feed(frame)
-                    await asyncio.sleep(0.02)
 
                 if self.ws_service is not None:
                     await self.ws_service.send_response_chunk(session, text)
+
+                # Attendre que la queue soit presque vide
+                await self._wait_queue_empty(session, request_id, timeout=5.0)
+
+                # Flush de fin : 100ms de silence
+                await self._flush_tts_queue(session, request_id, silence_frames=5)
+
+                # Attendre que le flush soit consommé
+                await asyncio.sleep(0.15)
         except Exception:
             logger.exception("TTS state response error client_id=%s", session.client_id)
         finally:
+            # Arrêter le scheduler
+            if not scheduler_task.done():
+                scheduler_task.cancel()
+            with suppress(asyncio.CancelledError):
+                await scheduler_task
+                
             session.tts_playing = False
             session.reset_tts_output_state()
             session.tts_started_at = 0.0
