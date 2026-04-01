@@ -93,6 +93,10 @@ ws_service       = WebSocketService(
     notification=notification_service,
 )
 
+# Injection des dépendances dans la state machine
+state_machine._ws_service = ws_service
+state_machine._agent_service = agent_service
+
 # Résolution de la dépendance circulaire Agent ↔ WebSocket
 agent_service.set_ws_service(ws_service)
 

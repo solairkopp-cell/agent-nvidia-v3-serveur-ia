@@ -25,6 +25,7 @@ class Session:
     websocket: "WebSocket"
     peer: Optional["RTCPeerConnection"] = None
     tts_track: Optional["TTSAudioTrack"] = None
+    _ping_task: Optional[asyncio.Task] = None  # Tâche de keep-alive WebSocket
 
     # ── Pipeline audio ────────────────────────────────────────────────────────
     # Buffer PCM brut accumulé entre deux silences (VAD)

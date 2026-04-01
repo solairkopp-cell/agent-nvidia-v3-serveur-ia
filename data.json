@@ -16,14 +16,5 @@
     "clientName": "test2",
     "packageInfo": "yop",
     "deliveryStatus": "planned"
-  },
-  {
-    "id": "69cb1e8efb98e15a3cf53517",
-    "name": "Loki, Yumbe, Northern Region, Ouganda",
-    "latitude": 3.4385983,
-    "longitude": 31.1551433,
-    "clientName": "test3",
-    "packageInfo": "banana",
-    "deliveryStatus": "planned"
   }
 ]

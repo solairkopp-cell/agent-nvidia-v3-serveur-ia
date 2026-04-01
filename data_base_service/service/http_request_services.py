@@ -1,7 +1,7 @@
 import aiohttp
 from typing import Optional, Dict, Any, List
 
-from .logger_service import log_info, log_error, log_debug
+from .logger_service import log_info, log_error, log_debug, log_success, log_warning
 
 
 class HttpRequestServices:

@@ -429,6 +429,7 @@ class WebRTCService:
                         await self.agent.interrupt(session)
 
                     # PCM direct -> STT (recommandé)
+                    # Sera traité après que le lock soit libéré
                     asyncio.create_task(
                         self.agent.process_utterance_pcm(session, vad_result.audio, config.SAMPLE_RATE)
                     )

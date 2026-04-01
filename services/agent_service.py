@@ -487,6 +487,7 @@ class AgentService:
             logger.warning("TTS test requested without active tts_track client_id=%s", session.client_id)
             return
 
+        # Interruption si un pipeline est en cours
         if session.processing_lock.locked():
             await self.interrupt(session)
 
@@ -660,18 +661,31 @@ class AgentService:
         except Exception:
             logger.exception("TTS stream playback error client_id=%s", session.client_id)
         finally:
-            # Attendre que la queue soit presque vide
-            await self._wait_queue_empty(session, request_id, timeout=5.0)
+            # Si annulé, sortir immédiatement sans attendre
+            if session.cancel_flag or session.current_request_id != request_id:
+                # Vider la queue
+                while not session.tts_audio_queue.empty():
+                    try:
+                        session.tts_audio_queue.get_nowait()
+                    except asyncio.QueueEmpty:
+                        break
+                # Annuler le scheduler
+                if scheduler_task and not scheduler_task.done():
+                    scheduler_task.cancel()
+            else:
+                # Attendre que la queue soit presque vide
+                await self._wait_queue_empty(session, request_id, timeout=5.0)
+
+                # Flush de fin : 100ms de silence (5 frames)
+                await self._flush_tts_queue(session, request_id, silence_frames=5)
+
+                # Attendre que le flush soit consommé
+                await asyncio.sleep(0.15)
+
+                # Arrêter le scheduler
+                if scheduler_task and not scheduler_task.done():
+                    scheduler_task.cancel()
             
-            # Flush de fin : 100ms de silence (5 frames)
-            await self._flush_tts_queue(session, request_id, silence_frames=5)
-            
-            # Attendre que le flush soit consommé
-            await asyncio.sleep(0.15)
-            
-            # Arrêter le scheduler
-            if not scheduler_task.done():
-                scheduler_task.cancel()
             with suppress(asyncio.CancelledError):
                 await scheduler_task
 
@@ -1065,11 +1079,13 @@ class AgentService:
     ) -> None:
         """
         Gérer les événements external_control reçus du client.
-        
+
         Actions supportées :
         - arrived: Le driver est arrivé sur place
         - started_navigation: Navigation démarrée
         - completed_delivery: Livraison terminée
+        - photo_taken: Photo prise (response à ask_photo_event)
+        - photo_not_taken: Photo non prise (response à ask_photo_event)
         """
         logger = logging.getLogger(__name__)
         logger.info(
@@ -1078,7 +1094,7 @@ class AgentService:
             action,
             extras,
         )
-        
+
         if action == "arrived":
             logger.info("✅ Traitement action arrived pour client_id=%s", session.client_id)
             await self._handle_arrived_action(session, extras)
@@ -1088,8 +1104,32 @@ class AgentService:
         elif action == "completed_delivery":
             logger.info("✅ Traitement action completed_delivery pour client_id=%s", session.client_id)
             await self._handle_completed_delivery_action(session, extras)
+        elif action == "photo_taken":
+            logger.info("✅ Traitement action photo_taken pour client_id=%s", session.client_id)
+            await self._handle_photo_taken_action(session, photo_taken=True)
+        elif action == "photo_not_taken":
+            logger.info("✅ Traitement action photo_not_taken pour client_id=%s", session.client_id)
+            await self._handle_photo_taken_action(session, photo_taken=False)
         else:
             logger.warning("❌ Action external_control inconnue: %s", action)
+
+    async def _handle_photo_taken_action(
+        self,
+        session: "Session",
+        photo_taken: bool,
+    ) -> None:
+        """
+        Gérer la réponse photo_taken ou photo_not_taken.
+        Appelle la state machine pour traiter la réponse.
+        """
+        logger = logging.getLogger(__name__)
+        
+        if self.state_machine is None:
+            logger.warning("⚠️ State machine non disponible client_id=%s", session.client_id)
+            return
+        
+        # Appeler le handler de la state machine
+        await self.state_machine.handle_photo_response(session, photo_taken)
 
     async def _handle_arrived_action(
         self,

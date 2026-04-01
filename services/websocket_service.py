@@ -73,17 +73,44 @@ class WebSocketService:
         client_id = str(uuid.uuid4())
         session = Session(client_id=client_id, websocket=websocket)
         self._sessions[client_id] = session
+        
+        # Démarrer une tâche de ping keep-alive (toutes les 10 secondes)
+        session._ping_task = asyncio.create_task(self._ping_keepalive(session))
+        
         logger.info("WS connected client_id=%s", client_id)
         return session
+
+    async def _ping_keepalive(self, session: Session, interval: float = 10.0) -> None:
+        """
+        Envoyer un ping WebSocket périodique pour garder la connexion active.
+        Utilise le ping natif WebSocket (pas un message JSON).
+        """
+        try:
+            while True:
+                await asyncio.sleep(interval)
+                # Ping natif WebSocket (le client répond automatiquement avec un pong)
+                await session.websocket.ping()
+        except Exception:
+            # Task annulée quand la session se déconnecte
+            pass
 
     async def disconnect(self, session: Session) -> None:
         """
         Nettoyer proprement à la déconnexion.
         Actions :
-          1. Supprimer de self._sessions
-          2. webrtc.cleanup(session)
-          3. Logger la déconnexion
+          1. Annuler la tâche de ping
+          2. Supprimer de self._sessions
+          3. webrtc.cleanup(session)
+          4. Logger la déconnexion
         """
+        # Annuler le ping keep-alive
+        if session._ping_task is not None and not session._ping_task.done():
+            session._ping_task.cancel()
+            try:
+                await session._ping_task
+            except asyncio.CancelledError:
+                pass
+        
         self._sessions.pop(session.client_id, None)
         try:
             await self.webrtc.cleanup(session)
@@ -223,6 +250,24 @@ class WebSocketService:
             asyncio.create_task(
                 self.webrtc.agent.handle_external_control(
                     session, "arrived", {"trip_id": trip_id}
+                )
+            )
+            return
+
+        if msg_type == "photo_taken":
+            # Réponse à ask_photo_event : photo prise avec succès
+            asyncio.create_task(
+                self.webrtc.agent.handle_external_control(
+                    session, "photo_taken", message
+                )
+            )
+            return
+
+        if msg_type == "photo_not_taken":
+            # Réponse à ask_photo_event : photo non prise
+            asyncio.create_task(
+                self.webrtc.agent.handle_external_control(
+                    session, "photo_not_taken", message
                 )
             )
             return

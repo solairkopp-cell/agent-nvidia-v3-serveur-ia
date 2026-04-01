@@ -238,6 +238,14 @@ class WhisperService:
 
             try:
                 text, detected_language = await asyncio.to_thread(_do_transcribe_faster)
+                
+                # Garbage collection CUDA pour éviter l'OOM
+                if str(self._device).startswith("cuda"):
+                    import torch
+                    import gc
+                    if hasattr(torch.cuda, "empty_cache"):
+                        torch.cuda.empty_cache()
+                    gc.collect()
             except Exception:
                 logger.exception("Whisper (faster) transcribe failed")
                 return TranscriptionResult(text="")
