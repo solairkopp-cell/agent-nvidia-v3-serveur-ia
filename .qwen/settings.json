@@ -8,7 +8,10 @@
       "Bash(pgrep *)",
       "Bash(cat *)",
       "Bash(huggingface-cli *)",
-      "Bash(sed *)"
+      "Bash(sed *)",
+      "Bash(tar *)",
+      "Bash(piper *)",
+      "Bash(pip install *)"
     ]
   },
   "$version": 3

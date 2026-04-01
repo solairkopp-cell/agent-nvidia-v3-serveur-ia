@@ -149,8 +149,9 @@ class AgentService:
                     int(sample_rate),
                 )
 
+            # Appliquer le denoise sur l'audio avant STT
             stt_samples = samples
-            if _parse_bool(getattr(config, "DENOISE_FOR_STT", False)) and self.denoise is not None:
+            if self.denoise is not None:
                 try:
                     denoised = await self.denoise.process_utterance(samples, sample_rate=int(sample_rate))
                     if getattr(denoised, "size", 0):

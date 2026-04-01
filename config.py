@@ -27,7 +27,7 @@ WHISPER_TIMEOUT = int(os.getenv("WHISPER_TIMEOUT", "30"))                  # uti
 WHISPER_LANGUAGE = os.getenv("WHISPER_LANGUAGE", "fr")  # ou "en", ou None (auto)
 
 # faster-whisper (embedded)
-WHISPER_MODEL = os.getenv("WHISPER_MODEL", "small.en")        # ex: tiny, base, small, medium, large-v3
+WHISPER_MODEL = os.getenv("WHISPER_MODEL", "base.en")        # ex: tiny, base, small, medium, large-v3
 WHISPER_DEVICE = os.getenv("WHISPER_DEVICE", "cuda")       # "cpu" pour maximiser la stabilité Jetson
 WHISPER_COMPUTE_TYPE = os.getenv("WHISPER_COMPUTE_TYPE", "int8")  # "int8" pour les modèles quantifiés (ex: small.en), "float16" pour les modèles non quantifiés (ex: medium)
 WHISPER_BEAM_SIZE = int(os.getenv("WHISPER_BEAM_SIZE", "1"))
@@ -39,7 +39,7 @@ WHISPER_BACKEND = os.getenv("WHISPER_BACKEND", "faster-whisper")
 # ── LLM ──────────────────────────────────────────────────────────────────────
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "qwen3:0.6b-q4_K_M")
-OLLAMA_CONTEXT_WINDOW = int(os.getenv("OLLAMA_CONTEXT_WINDOW", "0"))
+OLLAMA_CONTEXT_WINDOW = int(os.getenv("OLLAMA_CONTEXT_WINDOW", "1024"))
 OLLAMA_NUM_PREDICT = int(os.getenv("OLLAMA_NUM_PREDICT", "150"))
 OLLAMA_TEMPERATURE = float(os.getenv("OLLAMA_TEMPERATURE", "0.6"))
 OLLAMA_REPEAT_PENALTY = float(os.getenv("OLLAMA_REPEAT_PENALTY", "1.0"))
@@ -85,8 +85,8 @@ ACTION_KNOWN_INTENTS = _parse_env_words(
 ACTION_SKIP_LLM_FOR_KNOWN_INTENTS = os.getenv("ACTION_SKIP_LLM_FOR_KNOWN_INTENTS", "true").strip().lower() in ("1", "true", "yes", "on")
 
 # ── Piper TTS ──────────────────────────────────────────────────────────────────
-PIPER_MODEL_PATH = os.getenv("PIPER_MODEL_PATH", "assets/models/en_US-norman-medium.onnx")
-PIPER_CONFIG_PATH = os.getenv("PIPER_CONFIG_PATH", "assets/models/en_US-norman-medium.onnx.json")
+PIPER_MODEL_PATH = os.getenv("PIPER_MODEL_PATH", "assets/models/en_US-hfc_female-medium.onnx")
+PIPER_CONFIG_PATH = os.getenv("PIPER_CONFIG_PATH", "assets/models/en_US-hfc_female-medium.onnx.json")
 
 # ── Kokoro TTS ─────────────────────────────────────────────────────────────────
 # Kokoro-82M ONNX model (CPU optimized)
@@ -124,11 +124,9 @@ TTS_TRIM_LEADING = os.getenv("TTS_TRIM_LEADING", "false").strip().lower() in ("1
 TTS_TRIM_TRAILING = os.getenv("TTS_TRIM_TRAILING", "false").strip().lower() in ("1", "true", "yes", "on")
 
 # ── Denoising ────────────────────────────────────────────────────────────────
-DENOISE_ENABLED = os.getenv("DENOISE_ENABLED", "false").strip().lower() in ("1", "true", "yes", "on")
-DENOISE_BACKEND = os.getenv("DENOISE_BACKEND", "rnnoise").strip().lower()
-# Appliquer le denoise seulement sur l'audio final envoyé au STT.
-# Désactivé par défaut pour privilégier la précision des commandes courtes.
-DENOISE_FOR_STT = os.getenv("DENOISE_FOR_STT", "false").strip().lower() in ("1", "true", "yes", "on")
+# Denoise appliqué sur l'audio entrant (avant VAD et STT) pour filtrer le bruit.
+DENOISE_ENABLED = os.getenv("DENOISE_ENABLED", "true").strip().lower() in ("1", "true", "yes", "on")
+DENOISE_BACKEND = os.getenv("DENOISE_BACKEND", "deepfilternet").strip().lower()
 
 # ── Audio / VAD ───────────────────────────────────────────────────────────────
 SAMPLE_RATE = 16000

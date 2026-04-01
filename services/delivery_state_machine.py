@@ -49,12 +49,12 @@ class StateMachineConfig:
     fallback_tts: str = "Sorry, an error occurred. Let's start over."
     
     # STATE_1
-    ask_completion_tts: str = "Is the delivery completed?"
+    ask_completion_tts: str = "you have arrived at the destination. may I ask if the delivery is completed?"
     yes_patterns: tuple = ("yes", "yep", "yeah")
     no_patterns: tuple = ("no", "nope")
     
     # STATE_2
-    ask_reason_tts: str = "Can you tell me why?"
+    ask_reason_tts: str = "Can you give me a reason ? You can say 'list' to hear the options or ask for it ."
     list_trigger: str = "list"
     reason_list: tuple = (
         "Customer not available",
@@ -303,7 +303,7 @@ class DeliveryStateMachine:
                 
                 # Annoncer la prochaine livraison
                 announcement = (
-                    f"the delivery has been marked as completed. "
+                    f"the delivery is now completed. "
                     f"You are now heading to {next_address}. "
                     f"The client is {next_client_name}."
                 )
@@ -475,7 +475,7 @@ class DeliveryStateMachine:
 
                     # Annoncer la prochaine livraison
                     announcement = (
-                        f"Delivery has been marked as failure. "
+                        f"Delivery is a failure. "
                         f"You are now heading to {next_address}. "
                         f"The client is {next_client_name}."
                     )

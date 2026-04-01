@@ -1,20 +1,11 @@
 [
   {
-    "id": "69cb1e55fb98e15a3cf53513",
-    "name": "Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie",
-    "latitude": 36.8276553,
-    "longitude": 10.1949951,
-    "clientName": "test1",
-    "packageInfo": "car",
-    "deliveryStatus": "planned"
-  },
-  {
-    "id": "69cb1e68fb98e15a3cf53515",
-    "name": "Menzah, Avenue Belgique, Iberia, Bni Idder, arrondissement de Tanger-Medina, Tanger, Pachalik de Tanger, Préfecture de Tanger-Assilah, Tanger-Tétouan-Al Hoceïma, 90030, Maroc",
-    "latitude": 35.7809598,
-    "longitude": -5.8159402,
-    "clientName": "test2",
-    "packageInfo": "yop",
+    "id": "69cb1e8efb98e15a3cf53517",
+    "name": "Loki, Yumbe, Northern Region, Ouganda",
+    "latitude": 3.4385983,
+    "longitude": 31.1551433,
+    "clientName": "test3",
+    "packageInfo": "banana",
     "deliveryStatus": "planned"
   }
 ]
