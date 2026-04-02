@@ -483,14 +483,22 @@ class DeliveryStateMachine:
                     await self._send_mark_failed_event(session, ctx.current_trip_id)
 
                 if next_trip_info:
-                    next_trip_id, next_address, next_client_name = next_trip_info
+                    next_trip_id, next_address, next_client_name, is_last = next_trip_info
 
                     # Annoncer la prochaine livraison
-                    announcement = (
-                        f"Delivery is a failure. "
-                        f"You are now heading to {next_address}. "
-                        f"The client is {next_client_name}."
-                    )
+                    if is_last:
+                        announcement = (
+                            f"Delivery is a failure. "
+                            f"You are now heading to {next_address}. "
+                            f"The client is {next_client_name}. "
+                            f"This is your last delivery."
+                        )
+                    else:
+                        announcement = (
+                            f"Delivery is a failure. "
+                            f"You are now heading to {next_address}. "
+                            f"The client is {next_client_name}."
+                        )
 
                     logger.info(
                         "STATE_2: next trip announced after failure client_id=%s trip_id=%s address=%s client=%s",
@@ -608,23 +616,23 @@ class DeliveryStateMachine:
         """
         STATE_6: ASK_PHOTO
 
-        Envoie ask_photo_event au client et attend photo_taken ou photo_not_taken.
+        La demande photo a déjà été envoyée lors de l'entrée dans cet état.
+        Ici, on ignore simplement les transcripts STT tant qu'on attend
+        `photo_taken` ou `photo_not_taken`, pour éviter de rouvrir la caméra
+        ou de rejouer le flow par erreur.
         """
         logger.info(
-            "STATE_6: asking for photo client_id=%s",
+            "STATE_6: ignoring transcript while waiting photo event client_id=%s transcript=%r",
             session.client_id,
+            transcript,
         )
-        
-        # Envoyer l'événement ask_photo_event au client
-        await self._send_ask_photo_event(session, ctx)
-        
-        # Retourner None pour attendre un événement (pas de réponse TTS)
-        # Le client répondra avec photo_taken ou photo_not_taken
+
         return self.ProcessResult(
             should_handle=True,
-            tts_response=None,  # Pas de TTS, on attend l'événement
-            next_state=State.STATE_6,  # Reste dans STATE_6 jusqu'à réponse
+            tts_response=None,
+            next_state=State.STATE_6,
             action=None,
+            interruptible=False,
         )
 
     async def _send_ask_photo_event(self, session: "Session", ctx: StateContext) -> None:

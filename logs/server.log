@@ -825,3 +825,1110 @@
 2026-04-02 20:40:14,579 INFO services.agent_service: TTS frames queued client_id=f3c20ef2-8c7e-44ae-a95b-4da5d10d69f9 frames=95
 2026-04-02 20:40:14,580 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f3c20ef2-8c7e-44ae-a95b-4da5d10d69f9 type=response data={'type': 'response', 'text': 'Here is the list of your deliveries.'}
 2026-04-02 20:40:15,717 INFO services.agent_service: TTS scheduler stopped client_id=f3c20ef2-8c7e-44ae-a95b-4da5d10d69f9
+2026-04-02 20:42:35,663 INFO uvicorn.error: Shutting down
+2026-04-02 20:42:35,666 INFO uvicorn.error: connection closed
+2026-04-02 20:42:35,667 INFO services.webrtc_service: Audio track ended client_id=f3c20ef2-8c7e-44ae-a95b-4da5d10d69f9
+2026-04-02 20:42:35,669 INFO services.webrtc_service: ICE state client_id=f3c20ef2-8c7e-44ae-a95b-4da5d10d69f9 state=closed
+2026-04-02 20:42:35,669 INFO services.webrtc_service: WebRTC state client_id=f3c20ef2-8c7e-44ae-a95b-4da5d10d69f9 state=None
+2026-04-02 20:42:35,670 INFO services.webrtc_service: WebRTC cleaned up client_id=f3c20ef2-8c7e-44ae-a95b-4da5d10d69f9
+2026-04-02 20:42:35,670 INFO services.websocket_service: WS disconnected client_id=f3c20ef2-8c7e-44ae-a95b-4da5d10d69f9
+2026-04-02 20:42:35,766 INFO uvicorn.error: Waiting for application shutdown.
+2026-04-02 20:42:36,212 INFO services.delivery_service: DeliveryService shutdown
+2026-04-02 20:42:36,212 INFO services.delivery_state_machine: DeliveryStateMachine shutdown
+2026-04-02 20:42:36,212 INFO services.notification_service: NotificationService shutdown
+2026-04-02 20:42:36,212 INFO services.action_service: ActionService shutdown
+2026-04-02 20:42:37,338 INFO uvicorn.error: Application shutdown complete.
+2026-04-02 20:42:37,339 INFO uvicorn.error: Finished server process [72158]
+2026-04-02 20:46:06,573 INFO services.notification_service: Handler registered for message type: identify_driver
+2026-04-02 20:46:06,573 INFO services.notification_service: Handler registered for message type: get_trips
+2026-04-02 20:46:06,618 INFO uvicorn.error: Started server process [141876]
+2026-04-02 20:46:06,619 INFO uvicorn.error: Waiting for application startup.
+2026-04-02 20:46:09,629 INFO httpx: HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-04-02 20:46:09,632 INFO services.ollama_service: System prompt loaded from system_prompt.md (556 chars)
+2026-04-02 20:46:11,644 INFO intent_detection.intent_interview: Intent model source=paraphrase-multilingual-MiniLM-L12-v2 local_only=False cache_dir=<default>
+2026-04-02 20:46:11,647 INFO sentence_transformers.SentenceTransformer: Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2026-04-02 20:46:20,256 INFO services.action_service: ActionService started
+2026-04-02 20:46:20,257 INFO services.notification_service: NotificationService started
+2026-04-02 20:46:20,257 INFO services.delivery_service: DeliveryService started
+2026-04-02 20:46:20,257 INFO services.delivery_state_machine: DeliveryStateMachine started
+2026-04-02 20:46:21,995 INFO services.piper_tts_service: Piper loaded in 1.74s (sample_rate=22050)
+2026-04-02 20:46:21,995 INFO services.denoise_service: Denoise disabled
+2026-04-02 20:46:21,996 INFO main: Warmup started
+2026-04-02 20:46:21,998 INFO main: Warmup vad ok in 0.00s
+2026-04-02 20:46:21,999 INFO faster_whisper: Processing audio with duration 00:01.000
+2026-04-02 20:46:23,339 INFO main: Warmup stt ok in 1.34s
+2026-04-02 20:46:23,442 INFO main: Warmup intent ok in 0.10s
+2026-04-02 20:46:26,041 INFO httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-02 20:46:26,476 INFO main: Warmup llm ok in 3.03s
+2026-04-02 20:46:26,619 INFO main: Warmup tts ok in 0.14s
+2026-04-02 20:46:26,619 INFO main: Warmup finished
+2026-04-02 20:46:26,619 INFO uvicorn.error: Application startup complete.
+2026-04-02 20:46:26,620 INFO uvicorn.error: Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-04-02 20:46:39,936 INFO uvicorn.error: 100.82.137.115:39240 - "WebSocket /ws" [accepted]
+2026-04-02 20:46:39,939 INFO services.websocket_service: WS connected client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1
+2026-04-02 20:46:39,940 INFO uvicorn.error: connection open
+2026-04-02 20:46:39,955 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-04-02 20:46:39,956 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-04-02 20:46:39,956 INFO services.delivery_service: 🚚 Identifying driver client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 serial=000
+2026-04-02 20:46:40,127 INFO cli_logger: ✅ SUCCÈS: Token valide jusqu'au 2026-04-03 00:08:14
+2026-04-02 20:46:40,127 INFO cli_logger: Récupération des trips pour le driver: 000
+2026-04-02 20:46:40,127 INFO cli_logger: Recherche du driver par query: 000
+2026-04-02 20:46:40,127 INFO cli_logger: Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-02 20:46:40,494 INFO cli_logger: ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-02 20:46:40,496 INFO cli_logger: ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-02 20:46:40,496 INFO cli_logger: Recherche des schedules par driver serial number: 000
+2026-04-02 20:46:40,496 INFO cli_logger: Recherche du driver par query: 000
+2026-04-02 20:46:40,496 INFO cli_logger: Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-02 20:46:40,595 INFO cli_logger: ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-02 20:46:40,596 INFO cli_logger: Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-02 20:46:40,596 INFO cli_logger: Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-02 20:46:40,644 INFO cli_logger: 2 schedule(s) trouvé(s) sur 10 entité(s)
+2026-04-02 20:46:40,645 INFO cli_logger: ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-02 20:46:40,646 INFO cli_logger: Recherche des packages pour le schedule: 69cec73dfb98e15a3cf5356f
+2026-04-02 20:46:40,646 INFO cli_logger: Recherche par référence: field=schedule_id, value=69cec73dfb98e15a3cf5356f
+2026-04-02 20:46:40,697 INFO cli_logger: ✅ SUCCÈS: 4 package(s) trouvé(s) pour le schedule 69cec73dfb98e15a3cf5356f
+2026-04-02 20:46:40,697 INFO cli_logger: Récupération du package par ID: 69cea258fb98e15a3cf53554
+2026-04-02 20:46:40,698 INFO cli_logger: Récupération de l'instance: 69cea258fb98e15a3cf53554
+2026-04-02 20:46:40,742 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-02 20:46:40,831 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cea258fb98e15a3cf53554
+2026-04-02 20:46:40,833 INFO cli_logger: Package: 69cea258fb98e15a3cf53554, address field: 69cea258fb98e15a3cf53553
+2026-04-02 20:46:40,833 INFO cli_logger: Récupération adresse: 69cea258fb98e15a3cf53553
+2026-04-02 20:46:40,833 INFO cli_logger: Récupération de l'adresse par ID: 69cea258fb98e15a3cf53553
+2026-04-02 20:46:40,833 INFO cli_logger: Récupération de l'instance: 69cea258fb98e15a3cf53553
+2026-04-02 20:46:40,919 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: 69cea258fb98e15a3cf53553
+2026-04-02 20:46:40,919 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-02 20:46:40,920 INFO cli_logger: Trip créé: id=69cea258fb98e15a3cf53554, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276926, lng=10.1950475
+2026-04-02 20:46:40,920 INFO cli_logger: Récupération du package par ID: 69cea26efb98e15a3cf53556
+2026-04-02 20:46:40,920 INFO cli_logger: Récupération de l'instance: 69cea26efb98e15a3cf53556
+2026-04-02 20:46:40,967 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-02 20:46:41,012 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cea26efb98e15a3cf53556
+2026-04-02 20:46:41,012 INFO cli_logger: Package: 69cea26efb98e15a3cf53556, address field: 69cea26efb98e15a3cf53555
+2026-04-02 20:46:41,013 INFO cli_logger: Récupération adresse: 69cea26efb98e15a3cf53555
+2026-04-02 20:46:41,013 INFO cli_logger: Récupération de l'adresse par ID: 69cea26efb98e15a3cf53555
+2026-04-02 20:46:41,013 INFO cli_logger: Récupération de l'instance: 69cea26efb98e15a3cf53555
+2026-04-02 20:46:41,056 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: 69cea26efb98e15a3cf53555
+2026-04-02 20:46:41,057 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-02 20:46:41,057 INFO cli_logger: Trip créé: id=69cea26efb98e15a3cf53556, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276926, lng=10.1950475
+2026-04-02 20:46:41,057 INFO cli_logger: Récupération du package par ID: 69cea28ffb98e15a3cf53558
+2026-04-02 20:46:41,057 INFO cli_logger: Récupération de l'instance: 69cea28ffb98e15a3cf53558
+2026-04-02 20:46:41,100 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-02 20:46:41,144 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cea28ffb98e15a3cf53558
+2026-04-02 20:46:41,145 INFO cli_logger: Package: 69cea28ffb98e15a3cf53558, address field: 69cea28ffb98e15a3cf53557
+2026-04-02 20:46:41,145 INFO cli_logger: Récupération adresse: 69cea28ffb98e15a3cf53557
+2026-04-02 20:46:41,145 INFO cli_logger: Récupération de l'adresse par ID: 69cea28ffb98e15a3cf53557
+2026-04-02 20:46:41,145 INFO cli_logger: Récupération de l'instance: 69cea28ffb98e15a3cf53557
+2026-04-02 20:46:41,186 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: 69cea28ffb98e15a3cf53557
+2026-04-02 20:46:41,186 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-02 20:46:41,186 INFO cli_logger: Trip créé: id=69cea28ffb98e15a3cf53558, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276926, lng=10.1950475
+2026-04-02 20:46:41,186 INFO cli_logger: Récupération du package par ID: 69cea29efb98e15a3cf5355a
+2026-04-02 20:46:41,187 INFO cli_logger: Récupération de l'instance: 69cea29efb98e15a3cf5355a
+2026-04-02 20:46:41,227 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-02 20:46:41,268 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cea29efb98e15a3cf5355a
+2026-04-02 20:46:41,268 INFO cli_logger: Package: 69cea29efb98e15a3cf5355a, address field: 69cea29efb98e15a3cf53559
+2026-04-02 20:46:41,269 INFO cli_logger: Récupération adresse: 69cea29efb98e15a3cf53559
+2026-04-02 20:46:41,269 INFO cli_logger: Récupération de l'adresse par ID: 69cea29efb98e15a3cf53559
+2026-04-02 20:46:41,269 INFO cli_logger: Récupération de l'instance: 69cea29efb98e15a3cf53559
+2026-04-02 20:46:41,308 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: 69cea29efb98e15a3cf53559
+2026-04-02 20:46:41,308 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-02 20:46:41,308 INFO cli_logger: Trip créé: id=69cea29efb98e15a3cf5355a, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276926, lng=10.1950475
+2026-04-02 20:46:41,309 INFO cli_logger: ✅ SUCCÈS: 4 trip(s) créé(s) et ordonné(s) par position
+2026-04-02 20:46:41,311 INFO cli_logger: ✅ SUCCÈS: 4 trip(s) exporté(s) vers data.json
+2026-04-02 20:46:41,312 INFO cli_logger: ✅ SUCCÈS: Token valide jusqu'au 2026-04-03 00:08:14
+2026-04-02 20:46:41,313 INFO cli_logger: Recherche du driver par query: 000
+2026-04-02 20:46:41,313 INFO cli_logger: Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-02 20:46:41,463 INFO cli_logger: ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-02 20:46:41,467 INFO services.delivery_service: ✅ Found 4 trips for driver vivien (000)
+2026-04-02 20:46:41,467 INFO services.notification_service: 📤 NOTIFICATION SENT client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=trips_list data={'driver_serial': '000', 'trip_count': 4, 'trips': [{'id': '69cea258fb98e15a3cf53554', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276926, 'longitude': 10.1950475, 'clientName': 'osias', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69cea26efb98e15a3cf53556', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276926, 'longitude': 10.1950475, 'clientName': 'jhon', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69cea28ffb98e15a3cf53558', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276926, 'longitude': 10.1950475, 'clientName': 'jack', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69cea29efb98e15a3cf5355a', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276926, 'longitude': 10.1950475, 'clientName': 'avrel', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}]}
+2026-04-02 20:46:41,468 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=notification data={'type': 'notification', 'notification_type': 'trips_list', 'data': {'driver_serial': '000', 'trip_count': 4, 'trips': [{'id': '69cea258fb98e15a3cf53554', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276926, 'longitude': 10.1950475, 'clientName': 'osias', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69cea26efb98e15a3cf53556', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276926, 'longitude': 10.1950475, 'clientName': 'jhon', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69cea28ffb98e15a3cf53558', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276926, 'longitude': 10.1950475, 'clientName': 'jack', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69cea29efb98e15a3cf5355a', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276926, 'longitude': 10.1950475, 'clientName': 'avrel', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}]}}
+2026-04-02 20:46:41,469 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=error data={'type': 'error', 'message': 'unknown type'}
+2026-04-02 20:46:41,470 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=photo_not_taken data={'type': 'photo_not_taken', 'trip_id': '69cea28ffb98e15a3cf53558', 'delivery_id': '69cea28ffb98e15a3cf53558'}
+2026-04-02 20:46:41,470 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=photo_not_taken data={'type': 'photo_not_taken', 'trip_id': '69cea28ffb98e15a3cf53558', 'delivery_id': '69cea28ffb98e15a3cf53558'}
+2026-04-02 20:46:41,471 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=start data={'type': 'start'}
+2026-04-02 20:46:41,471 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=start data={'type': 'start'}
+2026-04-02 20:46:41,490 INFO services.webrtc_service: WebRTC peer created client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1
+2026-04-02 20:46:41,492 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=started data={'type': 'started'}
+2026-04-02 20:46:41,493 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=offer data={'type': 'offer', 'sdp': 'v=0\r\no=- 1093187216726312 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 102 0 8 13 110 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:b7Qi\r\na=ice-pwd:Fj5uuP+4UZEK/nZYBK0OB95t\r\na=ice-options:trickle renomination\r\na=fingerprint:sha-256 C3:9E:B2:7C:AA:71:77:36:0E:22:D1:EB:89:8E:7A:1C:A9:86:EE:1C:0D:45:21:B7:97:18:62:8E:DB:A0:97:3C\r\na=setup:actpass\r\na=mid:0\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=sendrecv\r\na=msid:- audio_label\r\na=rtcp-mux\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1\r\na=rtpmap:63 red/48000/2\r\na=fmtp:63 111/111\r\na=rtpmap:9 G722/8000\r\na=rtpmap:102 ILBC/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:110 telephone-event/48000\r\na=rtpmap:126 telephone-event/8000\r\na=ssrc:1013980582 cname:udJQ7qKeSL+5mOeR\r\na=ssrc:1013980582 msid:- audio_label\r\n'}
+2026-04-02 20:46:41,493 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=offer data={'type': 'offer', 'sdp': 'v=0\r\no=- 1093187216726312 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 102 0 8 13 110 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:b7Qi\r\na=ice-pwd:Fj5uuP+4UZEK/nZYBK0OB95t\r\na=ice-options:trickle renomination\r\na=fingerprint:sha-256 C3:9E:B2:7C:AA:71:77:36:0E:22:D1:EB:89:8E:7A:1C:A9:86:EE:1C:0D:45:21:B7:97:18:62:8E:DB:A0:97:3C\r\na=setup:actpass\r\na=mid:0\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=sendrecv\r\na=msid:- audio_label\r\na=rtcp-mux\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1\r\na=rtpmap:63 red/48000/2\r\na=fmtp:63 111/111\r\na=rtpmap:9 G722/8000\r\na=rtpmap:102 ILBC/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:110 telephone-event/48000\r\na=rtpmap:126 telephone-event/8000\r\na=ssrc:1013980582 cname:udJQ7qKeSL+5mOeR\r\na=ssrc:1013980582 msid:- audio_label\r\n'}
+2026-04-02 20:46:41,498 INFO services.agent_service: 📮 EXTERNAL CONTROL REÇU client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 action=photo_not_taken extras={'type': 'photo_not_taken', 'trip_id': '69cea28ffb98e15a3cf53558', 'delivery_id': '69cea28ffb98e15a3cf53558'}
+2026-04-02 20:46:41,499 INFO services.agent_service: ✅ Traitement action photo_not_taken pour client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1
+2026-04-02 20:46:41,499 INFO services.delivery_state_machine: 📸 Photo response received client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 photo_taken=False
+2026-04-02 20:46:41,500 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=emotion data={'type': 'emotion', 'name': 'sad'}
+2026-04-02 20:46:41,501 INFO services.delivery_state_machine: 😊 Emotion sent client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 name=sad
+2026-04-02 20:46:41,501 INFO services.delivery_state_machine: 📢 Next trip announced client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 address=Cité El Khadra, client=osias is_last=False
+2026-04-02 20:46:41,501 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:46:41,507 INFO services.webrtc_service: Audio track received client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1
+2026-04-02 20:46:41,741 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=tts_test data={'type': 'tts_test', 'text': 'Delivery has been marked as failure.'}
+2026-04-02 20:46:41,743 INFO services.agent_service: TTS audio client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 phrase_len=36 rate=48000 samples=104768 dtype=float32
+2026-04-02 20:46:42,904 INFO services.agent_service: TTS frames queued client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 frames=110
+2026-04-02 20:46:42,907 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=tts_test data={'type': 'tts_test', 'text': 'You are now heading to Cité El Khadra,.'}
+2026-04-02 20:46:42,909 INFO services.agent_service: TTS audio client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 phrase_len=39 rate=48000 samples=96967 dtype=float32
+2026-04-02 20:46:44,943 INFO services.agent_service: TTS frames queued client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 frames=102
+2026-04-02 20:46:44,944 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=tts_test data={'type': 'tts_test', 'text': 'The client is osias.'}
+2026-04-02 20:46:44,946 INFO services.agent_service: TTS audio client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 phrase_len=20 rate=48000 samples=70217 dtype=float32
+2026-04-02 20:46:46,423 INFO services.agent_service: TTS frames queued client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 frames=74
+2026-04-02 20:46:46,539 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=answer data={'type': 'answer', 'sdp': 'v=0\r\no=- 3984148001 3984148001 IN IP4 0.0.0.0\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=msid-semantic:WMS *\r\nm=audio 39638 UDP/TLS/RTP/SAVPF 111 9 0 8\r\nc=IN IP4 192.168.1.2\r\na=sendrecv\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=mid:0\r\na=msid:f75abfea-a938-4983-a10e-387b65b5a0d7 d304820c-0c2a-4f08-93c2-b5b06faa84a4\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=rtcp-mux\r\na=ssrc:307697688 cname:227b3d19-f87f-4c30-b07b-32cd502306d7\r\na=rtpmap:111 opus/48000/2\r\na=rtpmap:9 G722/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=candidate:e2aea8ef0c61df57b654b7125d14184e 1 udp 2130706431 192.168.1.2 39638 typ host\r\na=candidate:bb690d67fe7212620db03dd870f9e88c 1 udp 2130706431 100.115.140.52 33418 typ host\r\na=candidate:7b29ffc97bc5f5ca4db0cbe5623d884d 1 udp 1694498815 197.17.19.238 39638 typ srflx raddr 192.168.1.2 rport 39638\r\na=end-of-candidates\r\na=ice-ufrag:RtTr\r\na=ice-pwd:XX2dUi9u8kLajS9inx5Ahy\r\na=fingerprint:sha-256 0A:1C:9A:E6:E6:0A:34:84:14:F2:40:04:91:D7:E7:8F:97:7F:F7:3D:BD:DE:80:DC:AA:EE:FF:01:64:82:D6:6D\r\na=fingerprint:sha-384 94:90:9E:F2:CB:8C:B2:4F:E2:B3:DF:D2:3E:E4:99:C2:FE:F1:0A:16:3F:57:14:AC:1E:3A:4E:DE:00:02:64:B2:EE:B7:38:19:63:5D:A9:E6:E6:72:17:07:0D:13:DE:33\r\na=fingerprint:sha-512 91:48:94:98:79:FC:BF:87:6A:C7:7D:F0:F6:EB:05:69:39:1C:4A:10:F1:44:AD:45:A8:7B:C3:62:14:76:A4:F4:47:7D:04:A8:39:2C:4C:19:3F:0A:2E:D7:47:59:20:37:EE:2B:D4:9B:EA:E1:F5:6C:D2:4D:1A:4F:B2:33:DC:88\r\na=setup:active\r\n'}
+2026-04-02 20:46:46,542 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:3724281206 1 udp 2121932543 192.168.1.3 46180 typ host generation 0 ufrag b7Qi network-id 6 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:46:46,542 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:3724281206 1 udp 2121932543 192.168.1.3 46180 typ host generation 0 ufrag b7Qi network-id 6 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:46:46,543 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:970272607 1 udp 1685724927 197.17.19.238 46180 typ srflx raddr 192.168.1.3 rport 46180 generation 0 ufrag b7Qi network-id 6 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:46:46,543 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:970272607 1 udp 1685724927 197.17.19.238 46180 typ srflx raddr 192.168.1.3 rport 46180 generation 0 ufrag b7Qi network-id 6 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:46:46,544 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:2738087918 1 tcp 1518280447 192.168.1.3 9 typ host tcptype active generation 0 ufrag b7Qi network-id 8 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:46:46,544 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:2738087918 1 tcp 1518280447 192.168.1.3 9 typ host tcptype active generation 0 ufrag b7Qi network-id 8 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:46:46,544 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:3767444319 1 tcp 1518149375 10.222.225.225 9 typ host tcptype active generation 0 ufrag b7Qi network-id 1 network-cost 900","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:46:46,545 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:3767444319 1 tcp 1518149375 10.222.225.225 9 typ host tcptype active generation 0 ufrag b7Qi network-id 1 network-cost 900","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:46:46,545 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:1661717790 1 tcp 1518083839 10.129.238.70 9 typ host tcptype active generation 0 ufrag b7Qi network-id 3 network-cost 900","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:46:46,545 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:1661717790 1 tcp 1518083839 10.129.238.70 9 typ host tcptype active generation 0 ufrag b7Qi network-id 3 network-cost 900","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:46:46,546 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:1282268247 1 tcp 1518217471 2c0f:f698:c140:5107:18a2:95b6:ce4c:baba 9 typ host tcptype active generation 0 ufrag b7Qi network-id 2 network-cost 900","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:46:46,546 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:1282268247 1 tcp 1518217471 2c0f:f698:c140:5107:18a2:95b6:ce4c:baba 9 typ host tcptype active generation 0 ufrag b7Qi network-id 2 network-cost 900","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:46:46,548 INFO services.webrtc_service: ICE state client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 state=checking
+2026-04-02 20:46:46,549 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 39638) -> ('192.168.1.3', 46180)) State.FROZEN -> State.WAITING
+2026-04-02 20:46:46,560 INFO aioice.ice: Connection(0) Check CandidatePair(('100.115.140.52', 33418) -> ('192.168.1.3', 46180)) State.FROZEN -> State.WAITING
+2026-04-02 20:46:46,560 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 39638) -> ('197.17.19.238', 46180)) State.FROZEN -> State.WAITING
+2026-04-02 20:46:46,560 INFO services.webrtc_service: WebRTC state client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 state=connecting
+2026-04-02 20:46:46,561 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 39638) -> ('192.168.1.3', 46180)) State.WAITING -> State.IN_PROGRESS
+2026-04-02 20:46:46,570 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 39638) -> ('192.168.1.3', 46180)) State.IN_PROGRESS -> State.SUCCEEDED
+2026-04-02 20:46:46,570 INFO aioice.ice: Connection(0) Check CandidatePair(('100.115.140.52', 33418) -> ('192.168.1.3', 46180)) State.WAITING -> State.FAILED
+2026-04-02 20:46:46,570 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 39638) -> ('197.17.19.238', 46180)) State.WAITING -> State.FAILED
+2026-04-02 20:46:46,570 INFO aioice.ice: Connection(0) Check CandidatePair(('100.115.140.52', 33418) -> ('197.17.19.238', 46180)) State.FROZEN -> State.FAILED
+2026-04-02 20:46:46,571 INFO aioice.ice: Connection(0) ICE completed
+2026-04-02 20:46:46,581 INFO services.webrtc_service: ICE state client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 state=completed
+2026-04-02 20:46:46,617 INFO services.webrtc_service: WebRTC state client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 state=connected
+2026-04-02 20:46:46,617 INFO services.webrtc_service: 🔊 Sending pending voice summary client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1
+2026-04-02 20:46:46,618 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=emotion data={'type': 'emotion', 'name': 'greeting'}
+2026-04-02 20:46:46,619 INFO services.webrtc_service: 😊 Emotion greeting sent client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1
+2026-04-02 20:46:46,619 WARNING services.agent_service: INTERRUPT called! client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 tts_playing=True processing_lock=True cancel_flag=False
+2026-04-02 20:46:46,621 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=interrupted data={'type': 'interrupted'}
+2026-04-02 20:46:46,623 INFO services.agent_service: TTS scheduler stopped client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1
+2026-04-02 20:46:46,773 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:46:47,031 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=tts_test data={'type': 'tts_test', 'text': 'Hello vivien, you have 4 trips.'}
+2026-04-02 20:46:47,032 INFO services.agent_service: TTS audio client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 phrase_len=31 rate=48000 samples=109784 dtype=float32
+2026-04-02 20:46:48,217 INFO services.agent_service: TTS frames queued client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 frames=115
+2026-04-02 20:46:48,218 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=tts_test data={'type': 'tts_test', 'text': 'The first one is for osias.'}
+2026-04-02 20:46:48,218 INFO services.agent_service: TTS audio client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 phrase_len=27 rate=48000 samples=83592 dtype=float32
+2026-04-02 20:46:49,781 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.START_NAVIGATION', 'extras': {'id': '69cea258fb98e15a3cf53554'}}
+2026-04-02 20:46:49,782 INFO services.delivery_state_machine: 🗺️ Auto start_navigation sent client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 trip_id=69cea258fb98e15a3cf53554
+2026-04-02 20:46:49,853 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=arrived data={'type': 'arrived', 'id': '69cea258fb98e15a3cf53554'}
+2026-04-02 20:46:49,855 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=arrived data={'type': 'arrived', 'id': '69cea258fb98e15a3cf53554'}
+2026-04-02 20:46:49,856 INFO services.agent_service: 📮 EXTERNAL CONTROL REÇU client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 action=arrived extras={'trip_id': '69cea258fb98e15a3cf53554'}
+2026-04-02 20:46:49,856 INFO services.agent_service: ✅ Traitement action arrived pour client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1
+2026-04-02 20:46:49,856 INFO services.agent_service: 🚚 DRIVER ARRIVÉ client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 trip_id=69cea258fb98e15a3cf53554
+2026-04-02 20:46:49,857 INFO services.agent_service: 🔇 Interrupting current TTS before arrived action client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1
+2026-04-02 20:46:49,857 WARNING services.agent_service: INTERRUPT called! client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 tts_playing=True processing_lock=True cancel_flag=False
+2026-04-02 20:46:49,857 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=tts_stop_now data={'type': 'tts_stop_now'}
+2026-04-02 20:46:49,859 INFO services.agent_service: 🚀 Démarrage de la state machine pour client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1
+2026-04-02 20:46:49,859 INFO services.delivery_state_machine: State machine: entered MODE_1 → STATE_1 client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 trip_id=69cea258fb98e15a3cf53554
+2026-04-02 20:46:49,859 INFO services.agent_service: 🗣️ Envoi question TTS: 'Is the delivery completed?' (NON-INTERRUPTIBLE)
+2026-04-02 20:46:49,859 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:46:49,861 INFO services.agent_service: TTS scheduler stopped client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1
+2026-04-02 20:46:50,115 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 type=tts_test data={'type': 'tts_test', 'text': 'Is the delivery completed?'}
+2026-04-02 20:46:50,116 INFO services.agent_service: TTS audio client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 phrase_len=26 rate=48000 samples=70774 dtype=float32
+2026-04-02 20:46:50,133 INFO services.agent_service: TTS frames queued client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 frames=88
+2026-04-02 20:46:50,463 INFO services.agent_service: TTS frames queued client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 frames=74
+2026-04-02 20:46:51,604 INFO services.agent_service: TTS scheduler stopped client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1
+2026-04-02 20:47:01,486 INFO services.webrtc_service: Audio track ended client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1
+2026-04-02 20:47:01,491 INFO services.webrtc_service: ICE state client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 state=closed
+2026-04-02 20:47:01,492 INFO services.webrtc_service: WebRTC state client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1 state=closed
+2026-04-02 20:47:01,493 INFO services.webrtc_service: WebRTC cleaned up client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1
+2026-04-02 20:47:01,494 INFO services.websocket_service: WS disconnected client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1
+2026-04-02 20:47:01,494 INFO uvicorn.error: connection closed
+2026-04-02 20:47:01,495 INFO services.webrtc_service: WebRTC cleaned up client_id=b8cabc7c-eee5-4c5c-be3c-308bf8c5e7b1
+2026-04-02 20:47:06,854 INFO uvicorn.error: 100.82.137.115:56132 - "WebSocket /ws" [accepted]
+2026-04-02 20:47:06,857 INFO services.websocket_service: WS connected client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:47:06,859 INFO uvicorn.error: connection open
+2026-04-02 20:47:06,876 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-04-02 20:47:06,876 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-04-02 20:47:06,877 INFO services.delivery_service: 🚚 Identifying driver client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d serial=000
+2026-04-02 20:47:06,878 INFO cli_logger: ✅ SUCCÈS: Token valide jusqu'au 2026-04-03 00:08:14
+2026-04-02 20:47:06,879 INFO cli_logger: Récupération des trips pour le driver: 000
+2026-04-02 20:47:06,879 INFO cli_logger: Recherche du driver par query: 000
+2026-04-02 20:47:06,879 INFO cli_logger: Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-02 20:47:12,031 INFO cli_logger: ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-02 20:47:12,033 INFO cli_logger: ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-02 20:47:12,033 INFO cli_logger: Recherche des schedules par driver serial number: 000
+2026-04-02 20:47:12,033 INFO cli_logger: Recherche du driver par query: 000
+2026-04-02 20:47:12,033 INFO cli_logger: Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-02 20:47:12,078 INFO cli_logger: ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-02 20:47:12,078 INFO cli_logger: Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-02 20:47:12,078 INFO cli_logger: Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-02 20:47:12,127 INFO cli_logger: 2 schedule(s) trouvé(s) sur 10 entité(s)
+2026-04-02 20:47:12,127 INFO cli_logger: ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-02 20:47:12,128 INFO cli_logger: Recherche des packages pour le schedule: 69cec73dfb98e15a3cf5356f
+2026-04-02 20:47:12,128 INFO cli_logger: Recherche par référence: field=schedule_id, value=69cec73dfb98e15a3cf5356f
+2026-04-02 20:47:12,178 INFO cli_logger: ✅ SUCCÈS: 4 package(s) trouvé(s) pour le schedule 69cec73dfb98e15a3cf5356f
+2026-04-02 20:47:12,179 INFO cli_logger: Récupération du package par ID: 69cea258fb98e15a3cf53554
+2026-04-02 20:47:12,179 INFO cli_logger: Récupération de l'instance: 69cea258fb98e15a3cf53554
+2026-04-02 20:47:12,219 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-02 20:47:12,304 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cea258fb98e15a3cf53554
+2026-04-02 20:47:12,304 INFO cli_logger: Package: 69cea258fb98e15a3cf53554, address field: 69cea258fb98e15a3cf53553
+2026-04-02 20:47:12,304 INFO cli_logger: Récupération adresse: 69cea258fb98e15a3cf53553
+2026-04-02 20:47:12,305 INFO cli_logger: Récupération de l'adresse par ID: 69cea258fb98e15a3cf53553
+2026-04-02 20:47:12,305 INFO cli_logger: Récupération de l'instance: 69cea258fb98e15a3cf53553
+2026-04-02 20:47:12,346 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: 69cea258fb98e15a3cf53553
+2026-04-02 20:47:12,347 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-02 20:47:12,348 INFO cli_logger: Trip créé: id=69cea258fb98e15a3cf53554, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276926, lng=10.1950475
+2026-04-02 20:47:12,348 INFO cli_logger: Récupération du package par ID: 69cea26efb98e15a3cf53556
+2026-04-02 20:47:12,349 INFO cli_logger: Récupération de l'instance: 69cea26efb98e15a3cf53556
+2026-04-02 20:47:12,389 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-02 20:47:12,441 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cea26efb98e15a3cf53556
+2026-04-02 20:47:12,442 INFO cli_logger: Package: 69cea26efb98e15a3cf53556, address field: 69cea26efb98e15a3cf53555
+2026-04-02 20:47:12,442 INFO cli_logger: Récupération adresse: 69cea26efb98e15a3cf53555
+2026-04-02 20:47:12,442 INFO cli_logger: Récupération de l'adresse par ID: 69cea26efb98e15a3cf53555
+2026-04-02 20:47:12,442 INFO cli_logger: Récupération de l'instance: 69cea26efb98e15a3cf53555
+2026-04-02 20:47:12,483 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: 69cea26efb98e15a3cf53555
+2026-04-02 20:47:12,484 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-02 20:47:12,484 INFO cli_logger: Trip créé: id=69cea26efb98e15a3cf53556, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276926, lng=10.1950475
+2026-04-02 20:47:12,484 INFO cli_logger: Récupération du package par ID: 69cea28ffb98e15a3cf53558
+2026-04-02 20:47:12,484 INFO cli_logger: Récupération de l'instance: 69cea28ffb98e15a3cf53558
+2026-04-02 20:47:12,527 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-02 20:47:12,574 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cea28ffb98e15a3cf53558
+2026-04-02 20:47:12,575 INFO cli_logger: Package: 69cea28ffb98e15a3cf53558, address field: 69cea28ffb98e15a3cf53557
+2026-04-02 20:47:12,575 INFO cli_logger: Récupération adresse: 69cea28ffb98e15a3cf53557
+2026-04-02 20:47:12,575 INFO cli_logger: Récupération de l'adresse par ID: 69cea28ffb98e15a3cf53557
+2026-04-02 20:47:12,576 INFO cli_logger: Récupération de l'instance: 69cea28ffb98e15a3cf53557
+2026-04-02 20:47:12,616 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: 69cea28ffb98e15a3cf53557
+2026-04-02 20:47:12,616 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-02 20:47:12,616 INFO cli_logger: Trip créé: id=69cea28ffb98e15a3cf53558, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276926, lng=10.1950475
+2026-04-02 20:47:12,617 INFO cli_logger: Récupération du package par ID: 69cea29efb98e15a3cf5355a
+2026-04-02 20:47:12,617 INFO cli_logger: Récupération de l'instance: 69cea29efb98e15a3cf5355a
+2026-04-02 20:47:12,659 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-02 20:47:12,705 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cea29efb98e15a3cf5355a
+2026-04-02 20:47:12,706 INFO cli_logger: Package: 69cea29efb98e15a3cf5355a, address field: 69cea29efb98e15a3cf53559
+2026-04-02 20:47:12,706 INFO cli_logger: Récupération adresse: 69cea29efb98e15a3cf53559
+2026-04-02 20:47:12,706 INFO cli_logger: Récupération de l'adresse par ID: 69cea29efb98e15a3cf53559
+2026-04-02 20:47:12,706 INFO cli_logger: Récupération de l'instance: 69cea29efb98e15a3cf53559
+2026-04-02 20:47:12,748 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: 69cea29efb98e15a3cf53559
+2026-04-02 20:47:12,749 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-02 20:47:12,749 INFO cli_logger: Trip créé: id=69cea29efb98e15a3cf5355a, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276926, lng=10.1950475
+2026-04-02 20:47:12,749 INFO cli_logger: ✅ SUCCÈS: 4 trip(s) créé(s) et ordonné(s) par position
+2026-04-02 20:47:12,751 INFO cli_logger: ✅ SUCCÈS: 4 trip(s) exporté(s) vers data.json
+2026-04-02 20:47:12,753 INFO cli_logger: ✅ SUCCÈS: Token valide jusqu'au 2026-04-03 00:08:14
+2026-04-02 20:47:12,754 INFO cli_logger: Recherche du driver par query: 000
+2026-04-02 20:47:12,754 INFO cli_logger: Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-02 20:47:12,898 INFO cli_logger: ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-02 20:47:12,901 INFO services.delivery_service: ✅ Found 4 trips for driver vivien (000)
+2026-04-02 20:47:12,901 INFO services.notification_service: 📤 NOTIFICATION SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=trips_list data={'driver_serial': '000', 'trip_count': 4, 'trips': [{'id': '69cea258fb98e15a3cf53554', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276926, 'longitude': 10.1950475, 'clientName': 'osias', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69cea26efb98e15a3cf53556', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276926, 'longitude': 10.1950475, 'clientName': 'jhon', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69cea28ffb98e15a3cf53558', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276926, 'longitude': 10.1950475, 'clientName': 'jack', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69cea29efb98e15a3cf5355a', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276926, 'longitude': 10.1950475, 'clientName': 'avrel', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}]}
+2026-04-02 20:47:12,901 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=notification data={'type': 'notification', 'notification_type': 'trips_list', 'data': {'driver_serial': '000', 'trip_count': 4, 'trips': [{'id': '69cea258fb98e15a3cf53554', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276926, 'longitude': 10.1950475, 'clientName': 'osias', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69cea26efb98e15a3cf53556', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276926, 'longitude': 10.1950475, 'clientName': 'jhon', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69cea28ffb98e15a3cf53558', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276926, 'longitude': 10.1950475, 'clientName': 'jack', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69cea29efb98e15a3cf5355a', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276926, 'longitude': 10.1950475, 'clientName': 'avrel', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}]}}
+2026-04-02 20:47:12,902 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=error data={'type': 'error', 'message': 'unknown type'}
+2026-04-02 20:47:12,903 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=start data={'type': 'start'}
+2026-04-02 20:47:12,903 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=start data={'type': 'start'}
+2026-04-02 20:47:12,907 INFO services.webrtc_service: WebRTC peer created client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:47:12,907 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=started data={'type': 'started'}
+2026-04-02 20:47:12,907 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=offer data={'type': 'offer', 'sdp': 'v=0\r\no=- 1664549221967524268 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 102 0 8 13 110 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:l7L6\r\na=ice-pwd:QYvjJjdQ78ROBTVb4DOwdInG\r\na=ice-options:trickle renomination\r\na=fingerprint:sha-256 EB:A7:B8:6D:FA:5F:85:B9:9C:2C:F9:2E:D6:B6:E7:47:06:1D:44:DF:7B:7E:B7:AD:86:94:02:CA:80:28:8B:26\r\na=setup:actpass\r\na=mid:0\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=sendrecv\r\na=msid:- audio_label\r\na=rtcp-mux\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1\r\na=rtpmap:63 red/48000/2\r\na=fmtp:63 111/111\r\na=rtpmap:9 G722/8000\r\na=rtpmap:102 ILBC/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:110 telephone-event/48000\r\na=rtpmap:126 telephone-event/8000\r\na=ssrc:1584990931 cname:6lHvAh68sJv8g+Er\r\na=ssrc:1584990931 msid:- audio_label\r\n'}
+2026-04-02 20:47:12,908 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=offer data={'type': 'offer', 'sdp': 'v=0\r\no=- 1664549221967524268 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 102 0 8 13 110 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:l7L6\r\na=ice-pwd:QYvjJjdQ78ROBTVb4DOwdInG\r\na=ice-options:trickle renomination\r\na=fingerprint:sha-256 EB:A7:B8:6D:FA:5F:85:B9:9C:2C:F9:2E:D6:B6:E7:47:06:1D:44:DF:7B:7E:B7:AD:86:94:02:CA:80:28:8B:26\r\na=setup:actpass\r\na=mid:0\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=sendrecv\r\na=msid:- audio_label\r\na=rtcp-mux\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1\r\na=rtpmap:63 red/48000/2\r\na=fmtp:63 111/111\r\na=rtpmap:9 G722/8000\r\na=rtpmap:102 ILBC/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:110 telephone-event/48000\r\na=rtpmap:126 telephone-event/8000\r\na=ssrc:1584990931 cname:6lHvAh68sJv8g+Er\r\na=ssrc:1584990931 msid:- audio_label\r\n'}
+2026-04-02 20:47:12,913 INFO services.webrtc_service: Audio track received client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:47:17,923 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=answer data={'type': 'answer', 'sdp': 'v=0\r\no=- 3984148032 3984148032 IN IP4 0.0.0.0\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=msid-semantic:WMS *\r\nm=audio 54188 UDP/TLS/RTP/SAVPF 111 9 0 8\r\nc=IN IP4 192.168.1.2\r\na=sendrecv\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=mid:0\r\na=msid:3a503370-dd00-4cc3-af17-4096c232dd4a 1bb87355-8df1-4df5-8929-42c9c6346ae8\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=rtcp-mux\r\na=ssrc:2107961892 cname:daf4ef27-8cde-45ff-b7ce-f51d5521012d\r\na=rtpmap:111 opus/48000/2\r\na=rtpmap:9 G722/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=candidate:e2aea8ef0c61df57b654b7125d14184e 1 udp 2130706431 192.168.1.2 54188 typ host\r\na=candidate:bb690d67fe7212620db03dd870f9e88c 1 udp 2130706431 100.115.140.52 46138 typ host\r\na=candidate:7b29ffc97bc5f5ca4db0cbe5623d884d 1 udp 1694498815 197.17.19.238 54188 typ srflx raddr 192.168.1.2 rport 54188\r\na=end-of-candidates\r\na=ice-ufrag:e5oV\r\na=ice-pwd:T9bBCr6JY9kqrhBMXfhH1w\r\na=fingerprint:sha-256 28:6D:68:40:CF:9C:35:E3:3E:27:D5:E9:90:7C:7B:20:71:F2:30:F6:B0:52:35:3D:A8:95:EB:3F:DD:0F:DA:7C\r\na=fingerprint:sha-384 74:89:D5:CE:D0:1A:CB:70:4F:87:6B:33:7C:A5:AD:77:61:3D:DF:4E:14:D6:C5:A1:A5:67:69:52:EF:7B:85:39:B1:C6:B9:54:F6:85:54:52:0E:7F:3C:96:9B:5C:2B:2B\r\na=fingerprint:sha-512 3F:50:5C:38:52:1F:3A:25:B8:E9:91:BC:46:A4:24:EA:3C:47:75:AD:17:4E:31:23:92:B9:05:0F:4E:A2:6C:5B:4C:05:CD:33:DF:EB:B4:DC:DC:68:88:97:F9:59:94:E6:48:6A:22:3C:89:DA:8C:C9:65:1B:74:1F:CF:1A:46:86\r\na=setup:active\r\n'}
+2026-04-02 20:47:17,928 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:3970153609 1 udp 2121932543 192.168.1.3 37477 typ host generation 0 ufrag l7L6 network-id 6 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:47:17,928 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:3970153609 1 udp 2121932543 192.168.1.3 37477 typ host generation 0 ufrag l7L6 network-id 6 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:47:17,929 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:2935295439 1 udp 1685724927 197.17.19.238 37477 typ srflx raddr 192.168.1.3 rport 37477 generation 0 ufrag l7L6 network-id 6 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:47:17,929 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:2935295439 1 udp 1685724927 197.17.19.238 37477 typ srflx raddr 192.168.1.3 rport 37477 generation 0 ufrag l7L6 network-id 6 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:47:17,930 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:302606365 1 tcp 1518280447 192.168.1.3 9 typ host tcptype active generation 0 ufrag l7L6 network-id 8 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:47:17,930 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:302606365 1 tcp 1518280447 192.168.1.3 9 typ host tcptype active generation 0 ufrag l7L6 network-id 8 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:47:17,931 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:2922141251 1 tcp 1518149375 10.222.225.225 9 typ host tcptype active generation 0 ufrag l7L6 network-id 1 network-cost 900","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:47:17,931 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:2922141251 1 tcp 1518149375 10.222.225.225 9 typ host tcptype active generation 0 ufrag l7L6 network-id 1 network-cost 900","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:47:17,931 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:2943656491 1 tcp 1518083839 10.129.238.70 9 typ host tcptype active generation 0 ufrag l7L6 network-id 3 network-cost 900","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:47:17,931 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:2943656491 1 tcp 1518083839 10.129.238.70 9 typ host tcptype active generation 0 ufrag l7L6 network-id 3 network-cost 900","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:47:17,932 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:2690333966 1 tcp 1518217471 2c0f:f698:c140:5107:18a2:95b6:ce4c:baba 9 typ host tcptype active generation 0 ufrag l7L6 network-id 2 network-cost 900","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:47:17,932 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:2690333966 1 tcp 1518217471 2c0f:f698:c140:5107:18a2:95b6:ce4c:baba 9 typ host tcptype active generation 0 ufrag l7L6 network-id 2 network-cost 900","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:47:17,934 INFO services.webrtc_service: ICE state client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d state=checking
+2026-04-02 20:47:17,935 INFO aioice.ice: Connection(1) Check CandidatePair(('192.168.1.2', 54188) -> ('192.168.1.3', 37477)) State.FROZEN -> State.WAITING
+2026-04-02 20:47:17,935 INFO aioice.ice: Connection(1) Check CandidatePair(('100.115.140.52', 46138) -> ('192.168.1.3', 37477)) State.FROZEN -> State.WAITING
+2026-04-02 20:47:17,935 INFO aioice.ice: Connection(1) Check CandidatePair(('192.168.1.2', 54188) -> ('197.17.19.238', 37477)) State.FROZEN -> State.WAITING
+2026-04-02 20:47:17,935 INFO services.webrtc_service: WebRTC state client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d state=connecting
+2026-04-02 20:47:17,936 INFO aioice.ice: Connection(1) Check CandidatePair(('192.168.1.2', 54188) -> ('192.168.1.3', 37477)) State.WAITING -> State.IN_PROGRESS
+2026-04-02 20:47:17,941 INFO aioice.ice: Connection(1) Check CandidatePair(('192.168.1.2', 54188) -> ('192.168.1.3', 37477)) State.IN_PROGRESS -> State.SUCCEEDED
+2026-04-02 20:47:17,949 INFO aioice.ice: Connection(1) Check CandidatePair(('100.115.140.52', 46138) -> ('192.168.1.3', 37477)) State.WAITING -> State.FAILED
+2026-04-02 20:47:17,949 INFO aioice.ice: Connection(1) Check CandidatePair(('192.168.1.2', 54188) -> ('197.17.19.238', 37477)) State.WAITING -> State.FAILED
+2026-04-02 20:47:17,949 INFO aioice.ice: Connection(1) Check CandidatePair(('100.115.140.52', 46138) -> ('197.17.19.238', 37477)) State.FROZEN -> State.FAILED
+2026-04-02 20:47:17,950 INFO aioice.ice: Connection(1) ICE completed
+2026-04-02 20:47:17,956 INFO services.webrtc_service: ICE state client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d state=completed
+2026-04-02 20:47:17,980 INFO services.webrtc_service: WebRTC state client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d state=connected
+2026-04-02 20:47:17,981 INFO services.webrtc_service: 🔊 Sending pending voice summary client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:47:17,981 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=emotion data={'type': 'emotion', 'name': 'greeting'}
+2026-04-02 20:47:17,982 INFO services.webrtc_service: 😊 Emotion greeting sent client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:47:17,982 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:47:18,218 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=tts_test data={'type': 'tts_test', 'text': 'Hello vivien, you have 4 trips.'}
+2026-04-02 20:47:18,220 INFO services.agent_service: TTS audio client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d phrase_len=31 rate=48000 samples=104211 dtype=float32
+2026-04-02 20:47:19,265 INFO services.agent_service: TTS frames queued client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d frames=109
+2026-04-02 20:47:19,266 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=tts_test data={'type': 'tts_test', 'text': 'The first one is for osias.'}
+2026-04-02 20:47:19,268 INFO services.agent_service: TTS audio client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d phrase_len=27 rate=48000 samples=85821 dtype=float32
+2026-04-02 20:47:21,064 INFO services.agent_service: TTS frames queued client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d frames=90
+2026-04-02 20:47:21,066 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=tts_test data={'type': 'tts_test', 'text': 'Have a great day.'}
+2026-04-02 20:47:21,067 INFO services.agent_service: TTS audio client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d phrase_len=17 rate=48000 samples=54613 dtype=float32
+2026-04-02 20:47:22,204 INFO services.agent_service: TTS frames queued client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d frames=57
+2026-04-02 20:47:23,352 INFO services.agent_service: TTS scheduler stopped client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:47:27,870 INFO services.webrtc_service: VAD speech_start client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d p=0.861
+2026-04-02 20:47:30,708 INFO services.webrtc_service: Utterance end client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d samples=50176
+2026-04-02 20:47:30,710 INFO services.agent_service: STT raw input client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d ms=3136 rms=0.1026 peak=0.7880 n=50176 sr=16000
+2026-04-02 20:47:30,711 INFO services.agent_service: STT denoised input client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d ms=3136 rms=0.1026 peak=0.7880 n=50176 sr=16000
+2026-04-02 20:47:30,712 INFO faster_whisper: Processing audio with duration 00:03.136
+2026-04-02 20:47:31,796 INFO services.agent_service: STT transcript client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d text='Hello, start the navigation.'
+2026-04-02 20:47:31,797 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=transcript data={'type': 'transcript', 'text': 'Hello, start the navigation.'}
+2026-04-02 20:47:32,371 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=intent data={'type': 'intent', 'intent': 'start_navigation'}
+2026-04-02 20:47:32,371 INFO services.action_service: Intent connue [start_navigation] → exécution locale client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:47:32,372 INFO services.action_service: ACTION: start_navigation
+2026-04-02 20:47:32,372 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.START_NAVIGATION', 'extras': {'id': '69cea258fb98e15a3cf53554'}}
+2026-04-02 20:47:32,372 INFO services.action_service: 🗺️ External control sent client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d action=START_NAVIGATION trip_id=69cea258fb98e15a3cf53554
+2026-04-02 20:47:32,372 INFO services.agent_service: Action result client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d ActionResult(handled=True, intent='start_navigation', text_to_llm=None, response='Starting navigation to the next destination.')
+2026-04-02 20:47:32,373 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:47:32,694 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=arrived data={'type': 'arrived', 'id': '69cea258fb98e15a3cf53554'}
+2026-04-02 20:47:32,694 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=arrived data={'type': 'arrived', 'id': '69cea258fb98e15a3cf53554'}
+2026-04-02 20:47:32,696 INFO services.agent_service: 📮 EXTERNAL CONTROL REÇU client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d action=arrived extras={'trip_id': '69cea258fb98e15a3cf53554'}
+2026-04-02 20:47:32,696 INFO services.agent_service: ✅ Traitement action arrived pour client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:47:32,696 INFO services.agent_service: 🚚 DRIVER ARRIVÉ client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d trip_id=69cea258fb98e15a3cf53554
+2026-04-02 20:47:32,697 INFO services.agent_service: 🔇 Interrupting current TTS before arrived action client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:47:32,697 WARNING services.agent_service: INTERRUPT called! client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d tts_playing=True processing_lock=True cancel_flag=False
+2026-04-02 20:47:32,697 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=tts_stop_now data={'type': 'tts_stop_now'}
+2026-04-02 20:47:32,698 INFO services.agent_service: 🚀 Démarrage de la state machine pour client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:47:32,698 INFO services.delivery_state_machine: State machine: entered MODE_1 → STATE_1 client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d trip_id=69cea258fb98e15a3cf53554
+2026-04-02 20:47:32,698 INFO services.agent_service: 🗣️ Envoi question TTS: 'Is the delivery completed?' (NON-INTERRUPTIBLE)
+2026-04-02 20:47:32,698 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:47:32,731 INFO services.agent_service: TTS scheduler stopped client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:47:32,969 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=tts_test data={'type': 'tts_test', 'text': 'Is the delivery completed?'}
+2026-04-02 20:47:32,970 INFO services.agent_service: TTS audio client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d phrase_len=26 rate=48000 samples=75233 dtype=float32
+2026-04-02 20:47:33,327 INFO services.agent_service: TTS frames queued client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d frames=79
+2026-04-02 20:47:34,469 INFO services.agent_service: TTS scheduler stopped client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:47:38,073 INFO services.webrtc_service: VAD speech_start client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d p=0.857
+2026-04-02 20:47:39,289 INFO services.webrtc_service: Utterance end client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d samples=25088
+2026-04-02 20:47:39,295 INFO services.agent_service: STT raw input client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d ms=1568 rms=0.1282 peak=0.8404 n=25088 sr=16000
+2026-04-02 20:47:39,296 INFO services.agent_service: STT denoised input client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d ms=1568 rms=0.1282 peak=0.8404 n=25088 sr=16000
+2026-04-02 20:47:39,297 INFO faster_whisper: Processing audio with duration 00:01.568
+2026-04-02 20:47:40,251 INFO services.agent_service: STT transcript client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d text='Yes.'
+2026-04-02 20:47:40,251 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=transcript data={'type': 'transcript', 'text': 'Yes.'}
+2026-04-02 20:47:40,252 INFO services.delivery_state_machine: STATE_1: YES detected client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:47:40,252 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.MARK_DELIVERED', 'extras': {'com.avvc.maps.extra.DESTINATION_ID': '69cea258fb98e15a3cf53554'}}
+2026-04-02 20:47:40,252 INFO services.delivery_state_machine: 📍 MARK_DELIVERED sent client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d trip_id=69cea258fb98e15a3cf53554
+2026-04-02 20:47:40,253 INFO services.delivery_state_machine: STATE_1: next trip announced client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d trip_id=69cea26efb98e15a3cf53556 address=Cité El Khadra, client=jhon is_last=False
+2026-04-02 20:47:40,253 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:47:40,881 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=response data={'type': 'response', 'text': 'the delivery is now completed. You are now heading to Cité El Khadra,. The client is jhon.'}
+2026-04-02 20:47:40,882 INFO services.agent_service: TTS audio client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d phrase_len=90 rate=48000 samples=244645 dtype=float32
+2026-04-02 20:47:43,256 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.START_NAVIGATION', 'extras': {'id': '69cea26efb98e15a3cf53556'}}
+2026-04-02 20:47:43,259 INFO services.delivery_state_machine: 🗺️ Auto start_navigation sent client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d trip_id=69cea26efb98e15a3cf53556
+2026-04-02 20:47:43,394 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=arrived data={'type': 'arrived', 'id': '69cea26efb98e15a3cf53556'}
+2026-04-02 20:47:43,395 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=arrived data={'type': 'arrived', 'id': '69cea26efb98e15a3cf53556'}
+2026-04-02 20:47:43,396 INFO services.agent_service: 📮 EXTERNAL CONTROL REÇU client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d action=arrived extras={'trip_id': '69cea26efb98e15a3cf53556'}
+2026-04-02 20:47:43,396 INFO services.agent_service: ✅ Traitement action arrived pour client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:47:43,397 INFO services.agent_service: 🚚 DRIVER ARRIVÉ client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d trip_id=69cea26efb98e15a3cf53556
+2026-04-02 20:47:43,397 INFO services.agent_service: ⏸️ arrived deferred while MODE_1 active client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d active_trip_id=69cea258fb98e15a3cf53554 pending_trip_id=69cea26efb98e15a3cf53556
+2026-04-02 20:47:44,361 INFO services.agent_service: TTS frames queued client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d frames=255
+2026-04-02 20:47:44,362 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=response data={'type': 'response', 'text': 'the delivery is now completed. You are now heading to Cité El Khadra,. The client is jhon.'}
+2026-04-02 20:47:45,496 INFO services.agent_service: TTS scheduler stopped client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:47:45,500 INFO cli_logger: ✅ SUCCÈS: Token valide jusqu'au 2026-04-03 00:08:14
+2026-04-02 20:47:45,501 INFO cli_logger: Mise à jour du package 69cea258fb98e15a3cf53554 vers: delivered_successfully
+2026-04-02 20:47:45,502 INFO cli_logger: Récupération du package par ID: 69cea258fb98e15a3cf53554
+2026-04-02 20:47:45,502 INFO cli_logger: Récupération de l'instance: 69cea258fb98e15a3cf53554
+2026-04-02 20:47:46,026 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-02 20:47:46,364 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cea258fb98e15a3cf53554
+2026-04-02 20:47:46,366 INFO cli_logger: Mise à jour de l'instance: 69cea258fb98e15a3cf53554
+2026-04-02 20:47:46,448 INFO cli_logger: ✅ SUCCÈS: Instance 69cea258fb98e15a3cf53554 mise à jour
+2026-04-02 20:47:46,449 INFO cli_logger: ✅ SUCCÈS: Package 69cea258fb98e15a3cf53554 mis à jour: planned -> delivered_successfully
+2026-04-02 20:47:46,451 INFO cli_logger: ✅ SUCCÈS: Package 69cea258fb98e15a3cf53554 supprimé de data.json
+2026-04-02 20:47:46,451 INFO services.delivery_state_machine: Package 69cea258fb98e15a3cf53554 updated: status=COMPLETED, reason=N/A
+2026-04-02 20:47:46,453 INFO services.agent_service: ✅ Trip updated client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d trip_id=69cea258fb98e15a3cf53554 status=COMPLETED
+2026-04-02 20:47:46,453 INFO services.agent_service: State machine: transitioned to state_5 client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:47:46,454 INFO services.agent_service: State machine: auto-reset to MODE_0 after terminal transition client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:47:46,454 INFO services.agent_service: ▶️ consuming deferred arrived client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d trip_id=69cea26efb98e15a3cf53556
+2026-04-02 20:47:46,454 INFO services.agent_service: 🚚 DRIVER ARRIVÉ client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d trip_id=69cea26efb98e15a3cf53556
+2026-04-02 20:47:46,454 INFO services.agent_service: 🔇 Interrupting current TTS before arrived action client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:47:46,455 WARNING services.agent_service: INTERRUPT called! client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d tts_playing=False processing_lock=True cancel_flag=False
+2026-04-02 20:47:46,455 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=tts_stop_now data={'type': 'tts_stop_now'}
+2026-04-02 20:47:46,456 INFO services.agent_service: 🚀 Démarrage de la state machine pour client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:47:46,456 INFO services.delivery_state_machine: State machine: entered MODE_1 → STATE_1 client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d trip_id=69cea26efb98e15a3cf53556
+2026-04-02 20:47:46,456 INFO services.agent_service: 🗣️ Envoi question TTS: 'Is the delivery completed?' (NON-INTERRUPTIBLE)
+2026-04-02 20:47:46,457 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:47:46,712 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=tts_test data={'type': 'tts_test', 'text': 'Is the delivery completed?'}
+2026-04-02 20:47:46,712 INFO services.agent_service: TTS audio client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d phrase_len=26 rate=48000 samples=74675 dtype=float32
+2026-04-02 20:47:47,061 INFO services.agent_service: TTS frames queued client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d frames=78
+2026-04-02 20:47:48,194 INFO services.agent_service: TTS scheduler stopped client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:47:50,742 INFO services.webrtc_service: VAD speech_start client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d p=0.856
+2026-04-02 20:47:51,506 INFO services.webrtc_service: Utterance end client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d samples=18944
+2026-04-02 20:47:51,507 INFO services.agent_service: STT raw input client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d ms=1184 rms=0.1783 peak=0.6887 n=18944 sr=16000
+2026-04-02 20:47:51,508 INFO services.agent_service: STT denoised input client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d ms=1184 rms=0.1783 peak=0.6887 n=18944 sr=16000
+2026-04-02 20:47:51,510 INFO faster_whisper: Processing audio with duration 00:01.184
+2026-04-02 20:47:52,257 ERROR services.whisper_service: Whisper (faster) transcribe failed
+Traceback (most recent call last):
+  File "/home/server/aiserver/services/whisper_service.py", line 240, in _transcribe_embedded_pcm
+    text, detected_language = await asyncio.to_thread(_do_transcribe_faster)
+  File "/usr/lib/python3.10/asyncio/threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/server/aiserver/services/whisper_service.py", line 235, in _do_transcribe_faster
+    text = "".join(getattr(seg, "text", "") for seg in segments).strip()
+  File "/home/server/aiserver/services/whisper_service.py", line 235, in <genexpr>
+    text = "".join(getattr(seg, "text", "") for seg in segments).strip()
+  File "/home/server/.local/lib/python3.10/site-packages/faster_whisper/transcribe.py", line 1213, in generate_segments
+    ) = self.generate_with_fallback(encoder_output, prompt, tokenizer, options)
+  File "/home/server/.local/lib/python3.10/site-packages/faster_whisper/transcribe.py", line 1446, in generate_with_fallback
+    result = self.model.generate(
+RuntimeError: CUDA failed with error out of memory
+2026-04-02 20:47:52,266 INFO services.agent_service: STT transcript client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d text=''
+2026-04-02 20:47:52,266 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=stt_empty data={'type': 'stt_empty'}
+2026-04-02 20:47:59,671 INFO services.webrtc_service: VAD speech_start client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d p=0.864
+2026-04-02 20:48:00,450 INFO services.webrtc_service: Utterance end client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d samples=18944
+2026-04-02 20:48:00,452 INFO services.agent_service: STT raw input client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d ms=1184 rms=0.1984 peak=0.8061 n=18944 sr=16000
+2026-04-02 20:48:00,453 INFO services.agent_service: STT denoised input client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d ms=1184 rms=0.1984 peak=0.8061 n=18944 sr=16000
+2026-04-02 20:48:00,454 INFO faster_whisper: Processing audio with duration 00:01.184
+2026-04-02 20:48:03,167 INFO services.agent_service: STT transcript client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d text='No.'
+2026-04-02 20:48:03,167 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=transcript data={'type': 'transcript', 'text': 'No.'}
+2026-04-02 20:48:03,168 INFO services.delivery_state_machine: STATE_1: NO detected client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d → STATE_2
+2026-04-02 20:48:03,168 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:48:03,712 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=response data={'type': 'response', 'text': "Can you give me a reason ? You can say 'list' to hear the options or ask for it ."}
+2026-04-02 20:48:03,713 INFO services.agent_service: TTS audio client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d phrase_len=81 rate=48000 samples=211209 dtype=float32
+2026-04-02 20:48:06,592 INFO services.agent_service: TTS frames queued client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d frames=221
+2026-04-02 20:48:06,593 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=response data={'type': 'response', 'text': "Can you give me a reason ? You can say 'list' to hear the options or ask for it ."}
+2026-04-02 20:48:07,727 INFO services.agent_service: TTS scheduler stopped client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:48:07,731 INFO services.agent_service: State machine: transitioned to state_2 client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:48:11,127 INFO services.webrtc_service: VAD speech_start client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d p=0.926
+2026-04-02 20:48:12,426 INFO services.webrtc_service: Utterance end client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d samples=27136
+2026-04-02 20:48:12,431 INFO services.agent_service: STT raw input client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d ms=1696 rms=0.1346 peak=0.7118 n=27136 sr=16000
+2026-04-02 20:48:12,432 INFO services.agent_service: STT denoised input client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d ms=1696 rms=0.1346 peak=0.7118 n=27136 sr=16000
+2026-04-02 20:48:12,433 INFO faster_whisper: Processing audio with duration 00:01.696
+2026-04-02 20:48:13,392 INFO services.agent_service: STT transcript client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d text='Number one'
+2026-04-02 20:48:13,392 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=transcript data={'type': 'transcript', 'text': 'Number one'}
+2026-04-02 20:48:13,459 INFO services.delivery_state_machine: STATE_2: reason selected #1: Customer not available client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:48:13,459 INFO services.delivery_state_machine: STATE_2: reason 1 selected → requesting photo client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:48:13,459 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=ask_photo_event data={'type': 'ask_photo_event', 'trip_id': '69cea26efb98e15a3cf53556', 'delivery_id': '69cea26efb98e15a3cf53556', 'address': 'the delivery location', 'timestamp': '2026-04-02T19:48:13.459655'}
+2026-04-02 20:48:13,460 INFO services.delivery_state_machine: 📸 ask_photo_event sent client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d trip_id=69cea26efb98e15a3cf53556
+2026-04-02 20:48:13,460 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:48:13,827 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=response data={'type': 'response', 'text': 'Can you please take a photo of the package?'}
+2026-04-02 20:48:13,828 INFO services.agent_service: TTS audio client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d phrase_len=43 rate=48000 samples=95295 dtype=float32
+2026-04-02 20:48:14,471 INFO services.agent_service: TTS frames queued client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d frames=100
+2026-04-02 20:48:14,472 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=response data={'type': 'response', 'text': 'Can you please take a photo of the package?'}
+2026-04-02 20:48:15,614 INFO services.agent_service: TTS scheduler stopped client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:48:15,618 INFO services.agent_service: State machine: transitioned to state_6 client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:48:17,948 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=photo_taken data={'type': 'photo_taken', 'trip_id': '69cea26efb98e15a3cf53556', 'delivery_id': '69cea26efb98e15a3cf53556'}
+2026-04-02 20:48:17,949 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=photo_taken data={'type': 'photo_taken', 'trip_id': '69cea26efb98e15a3cf53556', 'delivery_id': '69cea26efb98e15a3cf53556'}
+2026-04-02 20:48:17,949 INFO services.agent_service: 📮 EXTERNAL CONTROL REÇU client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d action=photo_taken extras={'type': 'photo_taken', 'trip_id': '69cea26efb98e15a3cf53556', 'delivery_id': '69cea26efb98e15a3cf53556'}
+2026-04-02 20:48:17,949 INFO services.agent_service: ✅ Traitement action photo_taken pour client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:48:17,949 INFO services.delivery_state_machine: 📸 Photo response received client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d photo_taken=True
+2026-04-02 20:48:17,950 INFO cli_logger: ✅ SUCCÈS: Token valide jusqu'au 2026-04-03 00:08:14
+2026-04-02 20:48:17,950 INFO cli_logger: Mise à jour du package 69cea26efb98e15a3cf53556 vers: delivered_successfully
+2026-04-02 20:48:17,951 INFO cli_logger: Récupération du package par ID: 69cea26efb98e15a3cf53556
+2026-04-02 20:48:17,951 INFO cli_logger: Récupération de l'instance: 69cea26efb98e15a3cf53556
+2026-04-02 20:48:18,113 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-02 20:48:18,204 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cea26efb98e15a3cf53556
+2026-04-02 20:48:18,207 INFO cli_logger: Mise à jour de l'instance: 69cea26efb98e15a3cf53556
+2026-04-02 20:48:18,258 INFO cli_logger: ✅ SUCCÈS: Instance 69cea26efb98e15a3cf53556 mise à jour
+2026-04-02 20:48:18,259 INFO cli_logger: ✅ SUCCÈS: Package 69cea26efb98e15a3cf53556 mis à jour: planned -> delivered_successfully
+2026-04-02 20:48:18,263 INFO cli_logger: ✅ SUCCÈS: Package 69cea26efb98e15a3cf53556 supprimé de data.json
+2026-04-02 20:48:18,263 INFO services.delivery_state_machine: Package 69cea26efb98e15a3cf53556 updated: status=COMPLETED, reason=N/A
+2026-04-02 20:48:18,277 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.MARK_DELIVERED', 'extras': {'com.avvc.maps.extra.DESTINATION_ID': '69cea26efb98e15a3cf53556'}}
+2026-04-02 20:48:18,278 INFO services.delivery_state_machine: 📍 MARK_DELIVERED sent client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d trip_id=69cea26efb98e15a3cf53556
+2026-04-02 20:48:18,279 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=emotion data={'type': 'emotion', 'name': 'happy'}
+2026-04-02 20:48:18,280 INFO services.delivery_state_machine: 😊 Emotion sent client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d name=happy
+2026-04-02 20:48:18,280 INFO services.delivery_state_machine: 📢 Next trip announced client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d address=Cité El Khadra, client=jack is_last=False
+2026-04-02 20:48:18,280 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:48:18,633 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=tts_test data={'type': 'tts_test', 'text': 'Delivery completed successfully.'}
+2026-04-02 20:48:18,634 INFO services.agent_service: TTS audio client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d phrase_len=32 rate=48000 samples=91951 dtype=float32
+2026-04-02 20:48:19,242 INFO services.agent_service: TTS frames queued client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d frames=96
+2026-04-02 20:48:19,243 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=tts_test data={'type': 'tts_test', 'text': 'You are now heading to Cité El Khadra,.'}
+2026-04-02 20:48:19,244 INFO services.agent_service: TTS audio client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d phrase_len=39 rate=48000 samples=99196 dtype=float32
+2026-04-02 20:48:21,322 INFO services.agent_service: TTS frames queued client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d frames=104
+2026-04-02 20:48:21,323 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=tts_test data={'type': 'tts_test', 'text': 'The client is jack.'}
+2026-04-02 20:48:21,323 INFO services.agent_service: TTS audio client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d phrase_len=19 rate=48000 samples=61301 dtype=float32
+2026-04-02 20:48:22,603 INFO services.agent_service: TTS frames queued client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d frames=64
+2026-04-02 20:48:23,735 INFO services.agent_service: TTS scheduler stopped client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:48:26,741 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.START_NAVIGATION', 'extras': {'id': '69cea28ffb98e15a3cf53558'}}
+2026-04-02 20:48:26,744 INFO services.delivery_state_machine: 🗺️ Auto start_navigation sent client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d trip_id=69cea28ffb98e15a3cf53558
+2026-04-02 20:48:26,886 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=arrived data={'type': 'arrived', 'id': '69cea28ffb98e15a3cf53558'}
+2026-04-02 20:48:26,888 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=arrived data={'type': 'arrived', 'id': '69cea28ffb98e15a3cf53558'}
+2026-04-02 20:48:26,889 INFO services.agent_service: 📮 EXTERNAL CONTROL REÇU client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d action=arrived extras={'trip_id': '69cea28ffb98e15a3cf53558'}
+2026-04-02 20:48:26,890 INFO services.agent_service: ✅ Traitement action arrived pour client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:48:26,890 INFO services.agent_service: 🚚 DRIVER ARRIVÉ client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d trip_id=69cea28ffb98e15a3cf53558
+2026-04-02 20:48:26,890 INFO services.agent_service: 🚀 Démarrage de la state machine pour client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:48:26,891 INFO services.delivery_state_machine: State machine: entered MODE_1 → STATE_1 client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d trip_id=69cea28ffb98e15a3cf53558
+2026-04-02 20:48:26,891 INFO services.agent_service: 🗣️ Envoi question TTS: 'Is the delivery completed?' (NON-INTERRUPTIBLE)
+2026-04-02 20:48:26,892 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:48:27,137 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=tts_test data={'type': 'tts_test', 'text': 'Is the delivery completed?'}
+2026-04-02 20:48:27,137 INFO services.agent_service: TTS audio client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d phrase_len=26 rate=48000 samples=71889 dtype=float32
+2026-04-02 20:48:27,416 INFO services.agent_service: TTS frames queued client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d frames=75
+2026-04-02 20:48:28,547 INFO services.agent_service: TTS scheduler stopped client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:48:44,025 INFO services.webrtc_service: VAD speech_start client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d p=0.878
+2026-04-02 20:48:44,822 INFO services.webrtc_service: Utterance end client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d samples=18944
+2026-04-02 20:48:44,827 INFO services.agent_service: STT raw input client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d ms=1184 rms=0.1263 peak=0.8167 n=18944 sr=16000
+2026-04-02 20:48:44,831 INFO services.agent_service: STT denoised input client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d ms=1184 rms=0.1263 peak=0.8167 n=18944 sr=16000
+2026-04-02 20:48:44,832 INFO faster_whisper: Processing audio with duration 00:01.184
+2026-04-02 20:48:45,763 INFO services.agent_service: STT transcript client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d text='NO'
+2026-04-02 20:48:45,763 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=transcript data={'type': 'transcript', 'text': 'NO'}
+2026-04-02 20:48:45,764 INFO services.delivery_state_machine: STATE_1: NO detected client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d → STATE_2
+2026-04-02 20:48:45,764 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:48:46,280 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=response data={'type': 'response', 'text': "Can you give me a reason ? You can say 'list' to hear the options or ask for it ."}
+2026-04-02 20:48:46,282 INFO services.agent_service: TTS audio client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d phrase_len=81 rate=48000 samples=196162 dtype=float32
+2026-04-02 20:48:48,867 INFO services.agent_service: TTS frames queued client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d frames=205
+2026-04-02 20:48:48,869 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=response data={'type': 'response', 'text': "Can you give me a reason ? You can say 'list' to hear the options or ask for it ."}
+2026-04-02 20:48:50,013 INFO services.agent_service: TTS scheduler stopped client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:48:50,013 INFO services.agent_service: State machine: transitioned to state_2 client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:48:53,007 INFO services.webrtc_service: VAD speech_start client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d p=0.819
+2026-04-02 20:48:54,652 INFO services.webrtc_service: Utterance end client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d samples=32256
+2026-04-02 20:48:54,653 INFO services.agent_service: STT raw input client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d ms=2016 rms=0.0921 peak=0.5731 n=32256 sr=16000
+2026-04-02 20:48:54,653 INFO services.agent_service: STT denoised input client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d ms=2016 rms=0.0921 peak=0.5731 n=32256 sr=16000
+2026-04-02 20:48:54,654 INFO faster_whisper: Processing audio with duration 00:02.016
+2026-04-02 20:48:55,585 INFO services.agent_service: STT transcript client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d text='Number 3'
+2026-04-02 20:48:55,585 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=transcript data={'type': 'transcript', 'text': 'Number 3'}
+2026-04-02 20:48:55,634 INFO services.delivery_state_machine: STATE_2: reason selected #3: Package damaged client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:48:55,635 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.MARK_FAILED', 'extras': {'com.avvc.maps.extra.DESTINATION_ID': '69cea28ffb98e15a3cf53558'}}
+2026-04-02 20:48:55,636 INFO services.delivery_state_machine: ❌ MARK_FAILED sent client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d trip_id=69cea28ffb98e15a3cf53558
+2026-04-02 20:48:55,636 ERROR services.agent_service: State machine error client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+Traceback (most recent call last):
+  File "/home/server/aiserver/services/agent_service.py", line 247, in _process_transcription
+    state_result = await self.state_machine.process_input(
+  File "/home/server/aiserver/services/delivery_state_machine.py", line 260, in process_input
+    return await self._handle_state_2(session, ctx, transcript)
+  File "/home/server/aiserver/services/delivery_state_machine.py", line 486, in _handle_state_2
+    next_trip_id, next_address, next_client_name = next_trip_info
+ValueError: too many values to unpack (expected 3)
+2026-04-02 20:48:56,229 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=intent data={'type': 'intent', 'intent': 'INCONNU'}
+2026-04-02 20:48:56,230 INFO services.action_service: Intent INCONNU → forward to LLM client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d text='Number 3'
+2026-04-02 20:48:56,230 INFO services.agent_service: Action result client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d ActionResult(handled=False, intent='INCONNU', text_to_llm='Number 3', response=None)
+2026-04-02 20:48:56,572 INFO httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-02 20:48:57,077 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:48:57,078 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=response data={'type': 'response', 'text': 'Starting navigation to Number 3.'}
+2026-04-02 20:48:57,078 INFO services.agent_service: TTS audio client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d phrase_len=32 rate=48000 samples=94180 dtype=float32
+2026-04-02 20:48:57,829 INFO services.agent_service: TTS frames queued client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d frames=99
+2026-04-02 20:48:57,831 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d type=response data={'type': 'response', 'text': 'Starting navigation to Number 3.'}
+2026-04-02 20:48:58,963 INFO services.agent_service: TTS scheduler stopped client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:50:08,593 INFO uvicorn.error: Shutting down
+2026-04-02 20:50:08,597 INFO uvicorn.error: connection closed
+2026-04-02 20:50:08,598 INFO services.webrtc_service: Audio track ended client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:50:08,601 INFO services.webrtc_service: ICE state client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d state=closed
+2026-04-02 20:50:08,602 INFO services.webrtc_service: WebRTC state client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d state=None
+2026-04-02 20:50:08,603 INFO services.webrtc_service: WebRTC cleaned up client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:50:08,603 INFO services.websocket_service: WS disconnected client_id=f0a9a51a-f904-407b-a0c9-caf4a4639d7d
+2026-04-02 20:50:08,695 INFO uvicorn.error: Waiting for application shutdown.
+2026-04-02 20:50:09,162 INFO services.delivery_service: DeliveryService shutdown
+2026-04-02 20:50:09,162 INFO services.delivery_state_machine: DeliveryStateMachine shutdown
+2026-04-02 20:50:09,162 INFO services.notification_service: NotificationService shutdown
+2026-04-02 20:50:09,162 INFO services.action_service: ActionService shutdown
+2026-04-02 20:50:10,231 INFO uvicorn.error: Application shutdown complete.
+2026-04-02 20:50:10,232 INFO uvicorn.error: Finished server process [141876]
+2026-04-02 20:50:54,907 INFO services.notification_service: Handler registered for message type: identify_driver
+2026-04-02 20:50:54,907 INFO services.notification_service: Handler registered for message type: get_trips
+2026-04-02 20:50:54,960 INFO uvicorn.error: Started server process [197318]
+2026-04-02 20:50:54,961 INFO uvicorn.error: Waiting for application startup.
+2026-04-02 20:50:57,795 INFO httpx: HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-04-02 20:50:57,798 INFO services.ollama_service: System prompt loaded from system_prompt.md (556 chars)
+2026-04-02 20:50:59,807 INFO intent_detection.intent_interview: Intent model source=paraphrase-multilingual-MiniLM-L12-v2 local_only=False cache_dir=<default>
+2026-04-02 20:50:59,809 INFO sentence_transformers.SentenceTransformer: Load pretrained SentenceTransformer: paraphrase-multilingual-MiniLM-L12-v2
+2026-04-02 20:51:08,097 INFO services.action_service: ActionService started
+2026-04-02 20:51:08,097 INFO services.notification_service: NotificationService started
+2026-04-02 20:51:08,097 INFO services.delivery_service: DeliveryService started
+2026-04-02 20:51:08,097 INFO services.delivery_state_machine: DeliveryStateMachine started
+2026-04-02 20:51:09,818 INFO services.piper_tts_service: Piper loaded in 1.72s (sample_rate=22050)
+2026-04-02 20:51:09,818 INFO services.denoise_service: Denoise disabled
+2026-04-02 20:51:09,819 INFO main: Warmup started
+2026-04-02 20:51:09,832 INFO main: Warmup vad ok in 0.01s
+2026-04-02 20:51:09,833 INFO faster_whisper: Processing audio with duration 00:01.000
+2026-04-02 20:51:11,160 INFO main: Warmup stt ok in 1.33s
+2026-04-02 20:51:11,244 INFO main: Warmup intent ok in 0.08s
+2026-04-02 20:51:11,501 INFO httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-02 20:51:12,099 INFO main: Warmup llm ok in 0.85s
+2026-04-02 20:51:12,217 INFO main: Warmup tts ok in 0.12s
+2026-04-02 20:51:12,218 INFO main: Warmup finished
+2026-04-02 20:51:12,218 INFO uvicorn.error: Application startup complete.
+2026-04-02 20:51:12,219 INFO uvicorn.error: Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-04-02 20:52:30,972 INFO uvicorn.error: 100.82.137.115:49514 - "WebSocket /ws" [accepted]
+2026-04-02 20:52:30,974 INFO services.websocket_service: WS connected client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:52:30,976 INFO uvicorn.error: connection open
+2026-04-02 20:52:30,991 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-04-02 20:52:30,992 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-04-02 20:52:30,992 INFO services.delivery_service: 🚚 Identifying driver client_id=66166271-8507-402b-8629-4105df6046d4 serial=000
+2026-04-02 20:52:31,158 INFO cli_logger: ✅ SUCCÈS: Token valide jusqu'au 2026-04-03 00:08:14
+2026-04-02 20:52:31,159 INFO cli_logger: Récupération des trips pour le driver: 000
+2026-04-02 20:52:31,159 INFO cli_logger: Recherche du driver par query: 000
+2026-04-02 20:52:31,159 INFO cli_logger: Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-02 20:52:31,590 INFO cli_logger: ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-02 20:52:31,591 INFO cli_logger: ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-02 20:52:31,591 INFO cli_logger: Recherche des schedules par driver serial number: 000
+2026-04-02 20:52:31,592 INFO cli_logger: Recherche du driver par query: 000
+2026-04-02 20:52:31,592 INFO cli_logger: Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-02 20:52:31,637 INFO cli_logger: ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-02 20:52:31,638 INFO cli_logger: Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-02 20:52:31,639 INFO cli_logger: Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-02 20:52:31,690 INFO cli_logger: 2 schedule(s) trouvé(s) sur 10 entité(s)
+2026-04-02 20:52:31,691 INFO cli_logger: ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-02 20:52:31,691 INFO cli_logger: Recherche des packages pour le schedule: 69cec8c6fb98e15a3cf53574
+2026-04-02 20:52:31,692 INFO cli_logger: Recherche par référence: field=schedule_id, value=69cec8c6fb98e15a3cf53574
+2026-04-02 20:52:31,745 INFO cli_logger: ✅ SUCCÈS: 4 package(s) trouvé(s) pour le schedule 69cec8c6fb98e15a3cf53574
+2026-04-02 20:52:31,745 INFO cli_logger: Récupération du package par ID: 69cea258fb98e15a3cf53554
+2026-04-02 20:52:31,745 INFO cli_logger: Récupération de l'instance: 69cea258fb98e15a3cf53554
+2026-04-02 20:52:31,787 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-02 20:52:31,877 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cea258fb98e15a3cf53554
+2026-04-02 20:52:31,878 INFO cli_logger: Package: 69cea258fb98e15a3cf53554, address field: 69cea258fb98e15a3cf53553
+2026-04-02 20:52:31,878 INFO cli_logger: Récupération adresse: 69cea258fb98e15a3cf53553
+2026-04-02 20:52:31,879 INFO cli_logger: Récupération de l'adresse par ID: 69cea258fb98e15a3cf53553
+2026-04-02 20:52:31,879 INFO cli_logger: Récupération de l'instance: 69cea258fb98e15a3cf53553
+2026-04-02 20:52:31,926 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: 69cea258fb98e15a3cf53553
+2026-04-02 20:52:31,927 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-02 20:52:31,928 INFO cli_logger: Trip créé: id=69cea258fb98e15a3cf53554, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276926, lng=10.1950475
+2026-04-02 20:52:31,928 INFO cli_logger: Récupération du package par ID: 69cea26efb98e15a3cf53556
+2026-04-02 20:52:31,928 INFO cli_logger: Récupération de l'instance: 69cea26efb98e15a3cf53556
+2026-04-02 20:52:31,973 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-02 20:52:32,018 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cea26efb98e15a3cf53556
+2026-04-02 20:52:32,020 INFO cli_logger: Package: 69cea26efb98e15a3cf53556, address field: 69cea26efb98e15a3cf53555
+2026-04-02 20:52:32,020 INFO cli_logger: Récupération adresse: 69cea26efb98e15a3cf53555
+2026-04-02 20:52:32,020 INFO cli_logger: Récupération de l'adresse par ID: 69cea26efb98e15a3cf53555
+2026-04-02 20:52:32,020 INFO cli_logger: Récupération de l'instance: 69cea26efb98e15a3cf53555
+2026-04-02 20:52:32,064 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: 69cea26efb98e15a3cf53555
+2026-04-02 20:52:32,065 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-02 20:52:32,066 INFO cli_logger: Trip créé: id=69cea26efb98e15a3cf53556, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276926, lng=10.1950475
+2026-04-02 20:52:32,066 INFO cli_logger: Récupération du package par ID: 69cea28ffb98e15a3cf53558
+2026-04-02 20:52:32,066 INFO cli_logger: Récupération de l'instance: 69cea28ffb98e15a3cf53558
+2026-04-02 20:52:32,109 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-02 20:52:32,154 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cea28ffb98e15a3cf53558
+2026-04-02 20:52:32,154 INFO cli_logger: Package: 69cea28ffb98e15a3cf53558, address field: 69cea28ffb98e15a3cf53557
+2026-04-02 20:52:32,154 INFO cli_logger: Récupération adresse: 69cea28ffb98e15a3cf53557
+2026-04-02 20:52:32,155 INFO cli_logger: Récupération de l'adresse par ID: 69cea28ffb98e15a3cf53557
+2026-04-02 20:52:32,155 INFO cli_logger: Récupération de l'instance: 69cea28ffb98e15a3cf53557
+2026-04-02 20:52:32,193 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: 69cea28ffb98e15a3cf53557
+2026-04-02 20:52:32,193 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-02 20:52:32,194 INFO cli_logger: Trip créé: id=69cea28ffb98e15a3cf53558, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276926, lng=10.1950475
+2026-04-02 20:52:32,194 INFO cli_logger: Récupération du package par ID: 69cea29efb98e15a3cf5355a
+2026-04-02 20:52:32,194 INFO cli_logger: Récupération de l'instance: 69cea29efb98e15a3cf5355a
+2026-04-02 20:52:32,239 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-02 20:52:32,282 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cea29efb98e15a3cf5355a
+2026-04-02 20:52:32,283 INFO cli_logger: Package: 69cea29efb98e15a3cf5355a, address field: 69cea29efb98e15a3cf53559
+2026-04-02 20:52:32,283 INFO cli_logger: Récupération adresse: 69cea29efb98e15a3cf53559
+2026-04-02 20:52:32,283 INFO cli_logger: Récupération de l'adresse par ID: 69cea29efb98e15a3cf53559
+2026-04-02 20:52:32,283 INFO cli_logger: Récupération de l'instance: 69cea29efb98e15a3cf53559
+2026-04-02 20:52:32,330 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: 69cea29efb98e15a3cf53559
+2026-04-02 20:52:32,331 INFO cli_logger: ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-02 20:52:32,331 INFO cli_logger: Trip créé: id=69cea29efb98e15a3cf5355a, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276926, lng=10.1950475
+2026-04-02 20:52:32,331 INFO cli_logger: ✅ SUCCÈS: 4 trip(s) créé(s) et ordonné(s) par position
+2026-04-02 20:52:32,333 INFO cli_logger: ✅ SUCCÈS: 4 trip(s) exporté(s) vers data.json
+2026-04-02 20:52:32,335 INFO cli_logger: ✅ SUCCÈS: Token valide jusqu'au 2026-04-03 00:08:14
+2026-04-02 20:52:32,336 INFO cli_logger: Recherche du driver par query: 000
+2026-04-02 20:52:32,336 INFO cli_logger: Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-02 20:52:32,487 INFO cli_logger: ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-02 20:52:32,491 INFO services.delivery_service: ✅ Found 4 trips for driver vivien (000)
+2026-04-02 20:52:32,491 INFO services.notification_service: 📤 NOTIFICATION SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=trips_list data={'driver_serial': '000', 'trip_count': 4, 'trips': [{'id': '69cea258fb98e15a3cf53554', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276926, 'longitude': 10.1950475, 'clientName': 'osias', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69cea26efb98e15a3cf53556', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276926, 'longitude': 10.1950475, 'clientName': 'jhon', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69cea28ffb98e15a3cf53558', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276926, 'longitude': 10.1950475, 'clientName': 'jack', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69cea29efb98e15a3cf5355a', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276926, 'longitude': 10.1950475, 'clientName': 'avrel', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}]}
+2026-04-02 20:52:32,492 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=notification data={'type': 'notification', 'notification_type': 'trips_list', 'data': {'driver_serial': '000', 'trip_count': 4, 'trips': [{'id': '69cea258fb98e15a3cf53554', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276926, 'longitude': 10.1950475, 'clientName': 'osias', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69cea26efb98e15a3cf53556', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276926, 'longitude': 10.1950475, 'clientName': 'jhon', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69cea28ffb98e15a3cf53558', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276926, 'longitude': 10.1950475, 'clientName': 'jack', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69cea29efb98e15a3cf5355a', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8276926, 'longitude': 10.1950475, 'clientName': 'avrel', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}]}}
+2026-04-02 20:52:32,494 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=error data={'type': 'error', 'message': 'unknown type'}
+2026-04-02 20:52:32,494 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=start data={'type': 'start'}
+2026-04-02 20:52:32,495 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=start data={'type': 'start'}
+2026-04-02 20:52:32,515 INFO services.webrtc_service: WebRTC peer created client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:52:32,517 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=started data={'type': 'started'}
+2026-04-02 20:52:32,518 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=offer data={'type': 'offer', 'sdp': 'v=0\r\no=- 6685098115667547689 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 102 0 8 13 110 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:Z8fH\r\na=ice-pwd:T/bbunkk9O6/4fW2fyDH0haS\r\na=ice-options:trickle renomination\r\na=fingerprint:sha-256 C5:B1:6C:59:3C:F5:34:1E:DA:D7:8C:50:28:0A:D9:36:CE:C4:BA:27:8D:4D:5F:D2:BC:C6:C8:0B:E6:75:45:6E\r\na=setup:actpass\r\na=mid:0\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=sendrecv\r\na=msid:- audio_label\r\na=rtcp-mux\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1\r\na=rtpmap:63 red/48000/2\r\na=fmtp:63 111/111\r\na=rtpmap:9 G722/8000\r\na=rtpmap:102 ILBC/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:110 telephone-event/48000\r\na=rtpmap:126 telephone-event/8000\r\na=ssrc:2347540289 cname:sRFmOVf0+d4jyNxq\r\na=ssrc:2347540289 msid:- audio_label\r\n'}
+2026-04-02 20:52:32,519 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=offer data={'type': 'offer', 'sdp': 'v=0\r\no=- 6685098115667547689 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 102 0 8 13 110 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:Z8fH\r\na=ice-pwd:T/bbunkk9O6/4fW2fyDH0haS\r\na=ice-options:trickle renomination\r\na=fingerprint:sha-256 C5:B1:6C:59:3C:F5:34:1E:DA:D7:8C:50:28:0A:D9:36:CE:C4:BA:27:8D:4D:5F:D2:BC:C6:C8:0B:E6:75:45:6E\r\na=setup:actpass\r\na=mid:0\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=sendrecv\r\na=msid:- audio_label\r\na=rtcp-mux\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1\r\na=rtpmap:63 red/48000/2\r\na=fmtp:63 111/111\r\na=rtpmap:9 G722/8000\r\na=rtpmap:102 ILBC/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:110 telephone-event/48000\r\na=rtpmap:126 telephone-event/8000\r\na=ssrc:2347540289 cname:sRFmOVf0+d4jyNxq\r\na=ssrc:2347540289 msid:- audio_label\r\n'}
+2026-04-02 20:52:32,527 INFO services.webrtc_service: Audio track received client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:52:37,540 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=answer data={'type': 'answer', 'sdp': 'v=0\r\no=- 3984148352 3984148352 IN IP4 0.0.0.0\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=msid-semantic:WMS *\r\nm=audio 42002 UDP/TLS/RTP/SAVPF 111 9 0 8\r\nc=IN IP4 192.168.1.2\r\na=sendrecv\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=mid:0\r\na=msid:9bbf679d-02ea-44ec-9688-d4fbf1f6237f 85b8bd76-384e-42e6-b6f6-8caa22c56a20\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=rtcp-mux\r\na=ssrc:1234805143 cname:02282cd9-5f59-4162-8721-a56a3356baf8\r\na=rtpmap:111 opus/48000/2\r\na=rtpmap:9 G722/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=candidate:e2aea8ef0c61df57b654b7125d14184e 1 udp 2130706431 192.168.1.2 42002 typ host\r\na=candidate:bb690d67fe7212620db03dd870f9e88c 1 udp 2130706431 100.115.140.52 46653 typ host\r\na=candidate:7b29ffc97bc5f5ca4db0cbe5623d884d 1 udp 1694498815 197.17.19.238 42002 typ srflx raddr 192.168.1.2 rport 42002\r\na=end-of-candidates\r\na=ice-ufrag:KNKn\r\na=ice-pwd:TaRXgZAIWFx4FtlRtHiNfp\r\na=fingerprint:sha-256 04:FD:98:85:A0:A8:A6:8E:13:B6:84:13:FD:5C:2F:6B:39:45:6E:99:94:2F:1F:BE:1F:99:2B:2C:E6:62:F5:22\r\na=fingerprint:sha-384 EC:86:67:63:37:F7:62:48:1F:C7:1D:CE:D2:EC:1F:D6:67:C5:A3:8D:AC:4B:04:5A:40:09:BF:C5:A1:FF:4C:A4:08:78:BB:D3:49:8C:B3:9D:32:B0:16:B8:49:91:CF:14\r\na=fingerprint:sha-512 38:0F:9C:03:AE:A3:09:AB:35:AB:C0:53:D4:44:E5:1D:76:4F:DA:08:FF:46:1B:90:30:EC:88:89:1C:05:9B:E4:0F:A9:A2:63:0B:61:A3:88:C3:AC:46:4F:0E:FF:D6:09:49:75:BC:93:51:19:5B:12:97:B5:79:1D:C0:C7:61:A1\r\na=setup:active\r\n'}
+2026-04-02 20:52:37,543 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:4120595976 1 udp 2121932543 192.168.1.3 42563 typ host generation 0 ufrag Z8fH network-id 6 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:52:37,543 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:4120595976 1 udp 2121932543 192.168.1.3 42563 typ host generation 0 ufrag Z8fH network-id 6 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:52:37,544 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:3083730766 1 udp 1685724927 197.17.19.238 42563 typ srflx raddr 192.168.1.3 rport 42563 generation 0 ufrag Z8fH network-id 6 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:52:37,545 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:3083730766 1 udp 1685724927 197.17.19.238 42563 typ srflx raddr 192.168.1.3 rport 42563 generation 0 ufrag Z8fH network-id 6 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:52:37,545 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:187800220 1 tcp 1518280447 192.168.1.3 9 typ host tcptype active generation 0 ufrag Z8fH network-id 8 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:52:37,545 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:187800220 1 tcp 1518280447 192.168.1.3 9 typ host tcptype active generation 0 ufrag Z8fH network-id 8 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:52:37,546 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:3071583426 1 tcp 1518149375 10.222.225.225 9 typ host tcptype active generation 0 ufrag Z8fH network-id 1 network-cost 900","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:52:37,546 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:3071583426 1 tcp 1518149375 10.222.225.225 9 typ host tcptype active generation 0 ufrag Z8fH network-id 1 network-cost 900","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:52:37,546 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:3058454698 1 tcp 1518083839 10.129.238.70 9 typ host tcptype active generation 0 ufrag Z8fH network-id 3 network-cost 900","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:52:37,547 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:3058454698 1 tcp 1518083839 10.129.238.70 9 typ host tcptype active generation 0 ufrag Z8fH network-id 3 network-cost 900","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:52:37,547 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:3110326159 1 tcp 1518217471 2c0f:f698:c140:5107:18a2:95b6:ce4c:baba 9 typ host tcptype active generation 0 ufrag Z8fH network-id 2 network-cost 900","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:52:37,547 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:3110326159 1 tcp 1518217471 2c0f:f698:c140:5107:18a2:95b6:ce4c:baba 9 typ host tcptype active generation 0 ufrag Z8fH network-id 2 network-cost 900","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-02 20:52:37,549 INFO services.webrtc_service: ICE state client_id=66166271-8507-402b-8629-4105df6046d4 state=checking
+2026-04-02 20:52:37,550 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 42002) -> ('192.168.1.3', 42563)) State.FROZEN -> State.WAITING
+2026-04-02 20:52:37,550 INFO aioice.ice: Connection(0) Check CandidatePair(('100.115.140.52', 46653) -> ('192.168.1.3', 42563)) State.FROZEN -> State.WAITING
+2026-04-02 20:52:37,551 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 42002) -> ('197.17.19.238', 42563)) State.FROZEN -> State.WAITING
+2026-04-02 20:52:37,551 INFO services.webrtc_service: WebRTC state client_id=66166271-8507-402b-8629-4105df6046d4 state=connecting
+2026-04-02 20:52:37,551 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 42002) -> ('192.168.1.3', 42563)) State.WAITING -> State.IN_PROGRESS
+2026-04-02 20:52:37,571 INFO aioice.ice: Connection(0) Check CandidatePair(('100.115.140.52', 46653) -> ('192.168.1.3', 42563)) State.WAITING -> State.IN_PROGRESS
+2026-04-02 20:52:37,591 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 42002) -> ('197.17.19.238', 42563)) State.WAITING -> State.IN_PROGRESS
+2026-04-02 20:52:37,611 INFO aioice.ice: Connection(0) Check CandidatePair(('100.115.140.52', 46653) -> ('197.17.19.238', 42563)) State.FROZEN -> State.IN_PROGRESS
+2026-04-02 20:52:37,650 INFO aioice.ice: Connection(0) Check CandidatePair(('192.168.1.2', 42002) -> ('192.168.1.3', 42563)) State.IN_PROGRESS -> State.SUCCEEDED
+2026-04-02 20:52:37,651 INFO aioice.ice: Connection(0) Check CandidatePair(('100.115.140.52', 46653) -> ('192.168.1.3', 42563)) failed : source address mismatch
+2026-04-02 20:52:37,652 INFO aioice.ice: Connection(0) Check CandidatePair(('100.115.140.52', 46653) -> ('192.168.1.3', 42563)) State.IN_PROGRESS -> State.FAILED
+2026-04-02 20:52:37,655 INFO aioice.ice: Connection(0) Discovered peer reflexive candidate Candidate(WTr7LA3C3i 1 udp 1853497087 100.82.137.115 42563 typ prflx)
+2026-04-02 20:52:37,655 INFO aioice.ice: Connection(0) Check CandidatePair(('100.115.140.52', 46653) -> ('100.82.137.115', 42563)) State.WAITING -> State.IN_PROGRESS
+2026-04-02 20:52:37,670 INFO aioice.ice: Connection(0) Check CandidatePair(('100.115.140.52', 46653) -> ('100.82.137.115', 42563)) State.IN_PROGRESS -> State.SUCCEEDED
+2026-04-02 20:52:37,670 INFO aioice.ice: Connection(0) ICE completed
+2026-04-02 20:52:37,673 INFO services.webrtc_service: ICE state client_id=66166271-8507-402b-8629-4105df6046d4 state=completed
+2026-04-02 20:52:37,713 INFO services.webrtc_service: WebRTC state client_id=66166271-8507-402b-8629-4105df6046d4 state=connected
+2026-04-02 20:52:37,714 INFO services.webrtc_service: 🔊 Sending pending voice summary client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:52:37,714 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=emotion data={'type': 'emotion', 'name': 'greeting'}
+2026-04-02 20:52:37,724 INFO services.webrtc_service: 😊 Emotion greeting sent client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:52:37,724 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:52:38,019 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=tts_test data={'type': 'tts_test', 'text': 'Hello vivien, you have 4 trips.'}
+2026-04-02 20:52:38,020 INFO services.agent_service: TTS audio client_id=66166271-8507-402b-8629-4105df6046d4 phrase_len=31 rate=48000 samples=109784 dtype=float32
+2026-04-02 20:52:39,207 INFO services.agent_service: TTS frames queued client_id=66166271-8507-402b-8629-4105df6046d4 frames=115
+2026-04-02 20:52:39,208 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=tts_test data={'type': 'tts_test', 'text': 'The first one is for osias.'}
+2026-04-02 20:52:39,210 INFO services.agent_service: TTS audio client_id=66166271-8507-402b-8629-4105df6046d4 phrase_len=27 rate=48000 samples=78576 dtype=float32
+2026-04-02 20:52:40,847 INFO services.agent_service: TTS frames queued client_id=66166271-8507-402b-8629-4105df6046d4 frames=82
+2026-04-02 20:52:40,849 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=tts_test data={'type': 'tts_test', 'text': 'Have a great day.'}
+2026-04-02 20:52:40,850 INFO services.agent_service: TTS audio client_id=66166271-8507-402b-8629-4105df6046d4 phrase_len=17 rate=48000 samples=49598 dtype=float32
+2026-04-02 20:52:41,886 INFO services.agent_service: TTS frames queued client_id=66166271-8507-402b-8629-4105df6046d4 frames=52
+2026-04-02 20:52:43,018 INFO services.agent_service: TTS scheduler stopped client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:52:46,706 INFO services.webrtc_service: VAD speech_start client_id=66166271-8507-402b-8629-4105df6046d4 p=0.811
+2026-04-02 20:52:50,267 INFO services.webrtc_service: Utterance end client_id=66166271-8507-402b-8629-4105df6046d4 samples=61440
+2026-04-02 20:52:50,272 INFO services.agent_service: STT raw input client_id=66166271-8507-402b-8629-4105df6046d4 ms=3840 rms=0.0978 peak=0.7721 n=61440 sr=16000
+2026-04-02 20:52:50,273 INFO services.agent_service: STT denoised input client_id=66166271-8507-402b-8629-4105df6046d4 ms=3840 rms=0.0978 peak=0.7721 n=61440 sr=16000
+2026-04-02 20:52:50,274 INFO faster_whisper: Processing audio with duration 00:03.840
+2026-04-02 20:52:51,334 INFO services.agent_service: STT transcript client_id=66166271-8507-402b-8629-4105df6046d4 text='Hello, please start the navigation.'
+2026-04-02 20:52:51,334 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=transcript data={'type': 'transcript', 'text': 'Hello, please start the navigation.'}
+2026-04-02 20:52:51,479 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=intent data={'type': 'intent', 'intent': 'start_navigation'}
+2026-04-02 20:52:51,479 INFO services.action_service: Intent connue [start_navigation] → exécution locale client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:52:51,479 INFO services.action_service: ACTION: start_navigation
+2026-04-02 20:52:51,480 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.START_NAVIGATION', 'extras': {'id': '69cea258fb98e15a3cf53554'}}
+2026-04-02 20:52:51,480 INFO services.action_service: 🗺️ External control sent client_id=66166271-8507-402b-8629-4105df6046d4 action=START_NAVIGATION trip_id=69cea258fb98e15a3cf53554
+2026-04-02 20:52:51,480 INFO services.agent_service: Action result client_id=66166271-8507-402b-8629-4105df6046d4 ActionResult(handled=True, intent='start_navigation', text_to_llm=None, response='Starting navigation to the next destination.')
+2026-04-02 20:52:51,480 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:52:51,815 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=response data={'type': 'response', 'text': 'Starting navigation to the next destination.'}
+2026-04-02 20:52:51,816 INFO services.agent_service: TTS audio client_id=66166271-8507-402b-8629-4105df6046d4 phrase_len=44 rate=48000 samples=117029 dtype=float32
+2026-04-02 20:52:51,872 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=arrived data={'type': 'arrived', 'id': '69cea258fb98e15a3cf53554'}
+2026-04-02 20:52:51,873 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=arrived data={'type': 'arrived', 'id': '69cea258fb98e15a3cf53554'}
+2026-04-02 20:52:51,883 INFO services.agent_service: 📮 EXTERNAL CONTROL REÇU client_id=66166271-8507-402b-8629-4105df6046d4 action=arrived extras={'trip_id': '69cea258fb98e15a3cf53554'}
+2026-04-02 20:52:51,883 INFO services.agent_service: ✅ Traitement action arrived pour client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:52:51,883 INFO services.agent_service: 🚚 DRIVER ARRIVÉ client_id=66166271-8507-402b-8629-4105df6046d4 trip_id=69cea258fb98e15a3cf53554
+2026-04-02 20:52:51,884 INFO services.agent_service: 🔇 Interrupting current TTS before arrived action client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:52:51,884 WARNING services.agent_service: INTERRUPT called! client_id=66166271-8507-402b-8629-4105df6046d4 tts_playing=True processing_lock=True cancel_flag=False
+2026-04-02 20:52:51,884 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=tts_stop_now data={'type': 'tts_stop_now'}
+2026-04-02 20:52:51,884 INFO services.agent_service: 🚀 Démarrage de la state machine pour client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:52:51,884 INFO services.delivery_state_machine: State machine: entered MODE_1 → STATE_1 client_id=66166271-8507-402b-8629-4105df6046d4 trip_id=69cea258fb98e15a3cf53554
+2026-04-02 20:52:51,884 INFO services.agent_service: 🗣️ Envoi question TTS: 'Is the delivery completed?' (NON-INTERRUPTIBLE)
+2026-04-02 20:52:51,884 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:52:51,893 INFO services.agent_service: TTS scheduler stopped client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:52:52,219 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=tts_test data={'type': 'tts_test', 'text': 'Is the delivery completed?'}
+2026-04-02 20:52:52,219 INFO services.agent_service: TTS audio client_id=66166271-8507-402b-8629-4105df6046d4 phrase_len=26 rate=48000 samples=70217 dtype=float32
+2026-04-02 20:52:53,808 INFO services.agent_service: TTS frames queued client_id=66166271-8507-402b-8629-4105df6046d4 frames=122
+2026-04-02 20:52:53,810 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=response data={'type': 'response', 'text': 'Starting navigation to the next destination.'}
+2026-04-02 20:52:53,815 INFO services.agent_service: TTS frames queued client_id=66166271-8507-402b-8629-4105df6046d4 frames=74
+2026-04-02 20:52:54,552 INFO services.agent_service: TTS scheduler stopped client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:52:59,897 INFO services.webrtc_service: VAD speech_start client_id=66166271-8507-402b-8629-4105df6046d4 p=0.869
+2026-04-02 20:53:00,939 INFO services.webrtc_service: Utterance end client_id=66166271-8507-402b-8629-4105df6046d4 samples=23552
+2026-04-02 20:53:00,945 INFO services.agent_service: STT raw input client_id=66166271-8507-402b-8629-4105df6046d4 ms=1472 rms=0.1855 peak=0.8551 n=23552 sr=16000
+2026-04-02 20:53:00,946 INFO services.agent_service: STT denoised input client_id=66166271-8507-402b-8629-4105df6046d4 ms=1472 rms=0.1855 peak=0.8551 n=23552 sr=16000
+2026-04-02 20:53:00,947 INFO faster_whisper: Processing audio with duration 00:01.472
+2026-04-02 20:53:01,891 INFO services.agent_service: STT transcript client_id=66166271-8507-402b-8629-4105df6046d4 text='Yes.'
+2026-04-02 20:53:01,891 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=transcript data={'type': 'transcript', 'text': 'Yes.'}
+2026-04-02 20:53:01,892 INFO services.delivery_state_machine: STATE_1: YES detected client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:53:01,892 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.MARK_DELIVERED', 'extras': {'com.avvc.maps.extra.DESTINATION_ID': '69cea258fb98e15a3cf53554'}}
+2026-04-02 20:53:01,892 INFO services.delivery_state_machine: 📍 MARK_DELIVERED sent client_id=66166271-8507-402b-8629-4105df6046d4 trip_id=69cea258fb98e15a3cf53554
+2026-04-02 20:53:01,893 INFO services.delivery_state_machine: STATE_1: next trip announced client_id=66166271-8507-402b-8629-4105df6046d4 trip_id=69cea26efb98e15a3cf53556 address=Cité El Khadra, client=jhon is_last=False
+2026-04-02 20:53:01,893 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:53:02,549 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=response data={'type': 'response', 'text': 'the delivery is now completed. You are now heading to Cité El Khadra,. The client is jhon.'}
+2026-04-02 20:53:02,550 INFO services.agent_service: TTS audio client_id=66166271-8507-402b-8629-4105df6046d4 phrase_len=90 rate=48000 samples=254676 dtype=float32
+2026-04-02 20:53:04,899 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.START_NAVIGATION', 'extras': {'id': '69cea26efb98e15a3cf53556'}}
+2026-04-02 20:53:04,904 INFO services.delivery_state_machine: 🗺️ Auto start_navigation sent client_id=66166271-8507-402b-8629-4105df6046d4 trip_id=69cea26efb98e15a3cf53556
+2026-04-02 20:53:04,982 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=arrived data={'type': 'arrived', 'id': '69cea26efb98e15a3cf53556'}
+2026-04-02 20:53:04,986 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=arrived data={'type': 'arrived', 'id': '69cea26efb98e15a3cf53556'}
+2026-04-02 20:53:04,988 INFO services.agent_service: 📮 EXTERNAL CONTROL REÇU client_id=66166271-8507-402b-8629-4105df6046d4 action=arrived extras={'trip_id': '69cea26efb98e15a3cf53556'}
+2026-04-02 20:53:04,989 INFO services.agent_service: ✅ Traitement action arrived pour client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:53:04,989 INFO services.agent_service: 🚚 DRIVER ARRIVÉ client_id=66166271-8507-402b-8629-4105df6046d4 trip_id=69cea26efb98e15a3cf53556
+2026-04-02 20:53:04,990 INFO services.agent_service: ⏸️ arrived deferred while MODE_1 active client_id=66166271-8507-402b-8629-4105df6046d4 active_trip_id=69cea258fb98e15a3cf53554 pending_trip_id=69cea26efb98e15a3cf53556
+2026-04-02 20:53:06,236 INFO services.agent_service: TTS frames queued client_id=66166271-8507-402b-8629-4105df6046d4 frames=266
+2026-04-02 20:53:06,238 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=response data={'type': 'response', 'text': 'the delivery is now completed. You are now heading to Cité El Khadra,. The client is jhon.'}
+2026-04-02 20:53:07,372 INFO services.agent_service: TTS scheduler stopped client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:53:07,373 INFO cli_logger: ✅ SUCCÈS: Token valide jusqu'au 2026-04-03 00:08:14
+2026-04-02 20:53:07,373 INFO cli_logger: Mise à jour du package 69cea258fb98e15a3cf53554 vers: delivered_successfully
+2026-04-02 20:53:07,374 INFO cli_logger: Récupération du package par ID: 69cea258fb98e15a3cf53554
+2026-04-02 20:53:07,374 INFO cli_logger: Récupération de l'instance: 69cea258fb98e15a3cf53554
+2026-04-02 20:53:07,567 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-02 20:53:07,785 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cea258fb98e15a3cf53554
+2026-04-02 20:53:07,786 INFO cli_logger: Mise à jour de l'instance: 69cea258fb98e15a3cf53554
+2026-04-02 20:53:07,835 INFO cli_logger: ✅ SUCCÈS: Instance 69cea258fb98e15a3cf53554 mise à jour
+2026-04-02 20:53:07,836 INFO cli_logger: ✅ SUCCÈS: Package 69cea258fb98e15a3cf53554 mis à jour: planned -> delivered_successfully
+2026-04-02 20:53:07,838 INFO cli_logger: ✅ SUCCÈS: Package 69cea258fb98e15a3cf53554 supprimé de data.json
+2026-04-02 20:53:07,838 INFO services.delivery_state_machine: Package 69cea258fb98e15a3cf53554 updated: status=COMPLETED, reason=N/A
+2026-04-02 20:53:07,839 INFO services.agent_service: ✅ Trip updated client_id=66166271-8507-402b-8629-4105df6046d4 trip_id=69cea258fb98e15a3cf53554 status=COMPLETED
+2026-04-02 20:53:07,839 INFO services.agent_service: State machine: transitioned to state_5 client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:53:07,840 INFO services.agent_service: State machine: auto-reset to MODE_0 after terminal transition client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:53:07,840 INFO services.agent_service: ▶️ consuming deferred arrived client_id=66166271-8507-402b-8629-4105df6046d4 trip_id=69cea26efb98e15a3cf53556
+2026-04-02 20:53:07,840 INFO services.agent_service: 🚚 DRIVER ARRIVÉ client_id=66166271-8507-402b-8629-4105df6046d4 trip_id=69cea26efb98e15a3cf53556
+2026-04-02 20:53:07,840 INFO services.agent_service: 🔇 Interrupting current TTS before arrived action client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:53:07,840 WARNING services.agent_service: INTERRUPT called! client_id=66166271-8507-402b-8629-4105df6046d4 tts_playing=False processing_lock=True cancel_flag=False
+2026-04-02 20:53:07,840 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=tts_stop_now data={'type': 'tts_stop_now'}
+2026-04-02 20:53:07,841 INFO services.agent_service: 🚀 Démarrage de la state machine pour client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:53:07,841 INFO services.delivery_state_machine: State machine: entered MODE_1 → STATE_1 client_id=66166271-8507-402b-8629-4105df6046d4 trip_id=69cea26efb98e15a3cf53556
+2026-04-02 20:53:07,841 INFO services.agent_service: 🗣️ Envoi question TTS: 'Is the delivery completed?' (NON-INTERRUPTIBLE)
+2026-04-02 20:53:07,841 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:53:08,066 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=tts_test data={'type': 'tts_test', 'text': 'Is the delivery completed?'}
+2026-04-02 20:53:08,066 INFO services.agent_service: TTS audio client_id=66166271-8507-402b-8629-4105df6046d4 phrase_len=26 rate=48000 samples=72446 dtype=float32
+2026-04-02 20:53:08,391 INFO services.agent_service: TTS frames queued client_id=66166271-8507-402b-8629-4105df6046d4 frames=76
+2026-04-02 20:53:09,519 INFO services.agent_service: TTS scheduler stopped client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:53:11,964 INFO services.webrtc_service: VAD speech_start client_id=66166271-8507-402b-8629-4105df6046d4 p=0.853
+2026-04-02 20:53:12,967 INFO services.webrtc_service: Utterance end client_id=66166271-8507-402b-8629-4105df6046d4 samples=22528
+2026-04-02 20:53:12,972 INFO services.agent_service: STT raw input client_id=66166271-8507-402b-8629-4105df6046d4 ms=1408 rms=0.1583 peak=0.8618 n=22528 sr=16000
+2026-04-02 20:53:12,973 INFO services.agent_service: STT denoised input client_id=66166271-8507-402b-8629-4105df6046d4 ms=1408 rms=0.1583 peak=0.8618 n=22528 sr=16000
+2026-04-02 20:53:12,974 INFO faster_whisper: Processing audio with duration 00:01.408
+2026-04-02 20:53:13,948 INFO services.agent_service: STT transcript client_id=66166271-8507-402b-8629-4105df6046d4 text='Nope.'
+2026-04-02 20:53:13,948 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=transcript data={'type': 'transcript', 'text': 'Nope.'}
+2026-04-02 20:53:13,949 INFO services.delivery_state_machine: STATE_1: NO detected client_id=66166271-8507-402b-8629-4105df6046d4 → STATE_2
+2026-04-02 20:53:13,949 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:53:14,494 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=response data={'type': 'response', 'text': "Can you give me a reason ? You can say 'list' to hear the options or ask for it ."}
+2026-04-02 20:53:14,495 INFO services.agent_service: TTS audio client_id=66166271-8507-402b-8629-4105df6046d4 phrase_len=81 rate=48000 samples=198949 dtype=float32
+2026-04-02 20:53:17,115 INFO services.agent_service: TTS frames queued client_id=66166271-8507-402b-8629-4105df6046d4 frames=208
+2026-04-02 20:53:17,116 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=response data={'type': 'response', 'text': "Can you give me a reason ? You can say 'list' to hear the options or ask for it ."}
+2026-04-02 20:53:18,247 INFO services.agent_service: TTS scheduler stopped client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:53:18,248 INFO services.agent_service: State machine: transitioned to state_2 client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:53:22,254 INFO services.webrtc_service: VAD speech_start client_id=66166271-8507-402b-8629-4105df6046d4 p=0.877
+2026-04-02 20:53:23,183 INFO services.webrtc_service: Utterance end client_id=66166271-8507-402b-8629-4105df6046d4 samples=22016
+2026-04-02 20:53:23,187 INFO services.agent_service: STT raw input client_id=66166271-8507-402b-8629-4105df6046d4 ms=1376 rms=0.1092 peak=0.6981 n=22016 sr=16000
+2026-04-02 20:53:23,188 INFO services.agent_service: STT denoised input client_id=66166271-8507-402b-8629-4105df6046d4 ms=1376 rms=0.1092 peak=0.6981 n=22016 sr=16000
+2026-04-02 20:53:23,189 INFO faster_whisper: Processing audio with duration 00:01.376
+2026-04-02 20:53:30,265 INFO services.webrtc_service: VAD speech_start client_id=66166271-8507-402b-8629-4105df6046d4 p=0.928
+2026-04-02 20:53:30,265 INFO services.agent_service: 🔇 Interruption blocked (MODE_1 active) client_id=66166271-8507-402b-8629-4105df6046d4 state=state_2
+2026-04-02 20:53:31,258 INFO services.webrtc_service: Utterance end client_id=66166271-8507-402b-8629-4105df6046d4 samples=22016
+2026-04-02 20:53:31,259 WARNING services.agent_service: INTERRUPT called! client_id=66166271-8507-402b-8629-4105df6046d4 tts_playing=False processing_lock=True cancel_flag=False
+2026-04-02 20:53:31,259 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=interrupted data={'type': 'interrupted'}
+2026-04-02 20:53:34,445 INFO services.webrtc_service: VAD speech_start client_id=66166271-8507-402b-8629-4105df6046d4 p=0.946
+2026-04-02 20:53:34,446 INFO services.agent_service: 🔇 Interruption blocked (MODE_1 active) client_id=66166271-8507-402b-8629-4105df6046d4 state=state_2
+2026-04-02 20:53:35,504 INFO services.webrtc_service: Utterance end client_id=66166271-8507-402b-8629-4105df6046d4 samples=23040
+2026-04-02 20:53:39,521 INFO services.agent_service: STT raw input client_id=66166271-8507-402b-8629-4105df6046d4 ms=1376 rms=0.1127 peak=0.6570 n=22016 sr=16000
+2026-04-02 20:53:39,522 INFO services.agent_service: STT denoised input client_id=66166271-8507-402b-8629-4105df6046d4 ms=1376 rms=0.1127 peak=0.6570 n=22016 sr=16000
+2026-04-02 20:53:39,523 INFO faster_whisper: Processing audio with duration 00:01.376
+2026-04-02 20:53:40,483 INFO services.agent_service: STT transcript client_id=66166271-8507-402b-8629-4105df6046d4 text='Zazot'
+2026-04-02 20:53:40,483 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=transcript data={'type': 'transcript', 'text': 'Zazot'}
+2026-04-02 20:53:40,551 INFO services.delivery_state_machine: STATE_2: no number detected (retry 1) client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:53:40,551 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:53:40,979 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=response data={'type': 'response', 'text': "Sorry, I didn't understand. Could you repeat?"}
+2026-04-02 20:53:40,980 INFO services.agent_service: TTS audio client_id=66166271-8507-402b-8629-4105df6046d4 phrase_len=45 rate=48000 samples=131518 dtype=float32
+2026-04-02 20:53:42,316 INFO services.agent_service: TTS frames queued client_id=66166271-8507-402b-8629-4105df6046d4 frames=137
+2026-04-02 20:53:42,316 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=response data={'type': 'response', 'text': "Sorry, I didn't understand. Could you repeat?"}
+2026-04-02 20:53:43,449 INFO services.agent_service: TTS scheduler stopped client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:53:43,450 INFO services.agent_service: State machine: transitioned to state_2 client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:53:43,451 INFO services.agent_service: STT raw input client_id=66166271-8507-402b-8629-4105df6046d4 ms=1440 rms=0.1637 peak=0.8266 n=23040 sr=16000
+2026-04-02 20:53:43,451 INFO services.agent_service: STT denoised input client_id=66166271-8507-402b-8629-4105df6046d4 ms=1440 rms=0.1637 peak=0.8266 n=23040 sr=16000
+2026-04-02 20:53:43,452 INFO faster_whisper: Processing audio with duration 00:01.440
+2026-04-02 20:53:44,387 INFO services.agent_service: STT transcript client_id=66166271-8507-402b-8629-4105df6046d4 text='Maybe'
+2026-04-02 20:53:44,388 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=transcript data={'type': 'transcript', 'text': 'Maybe'}
+2026-04-02 20:53:44,438 INFO services.delivery_state_machine: STATE_2: no number detected (retry 2) client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:53:44,439 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:53:44,966 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=response data={'type': 'response', 'text': "Sorry, I didn't understand. Could you repeat?"}
+2026-04-02 20:53:44,970 INFO services.agent_service: TTS audio client_id=66166271-8507-402b-8629-4105df6046d4 phrase_len=45 rate=48000 samples=137091 dtype=float32
+2026-04-02 20:53:46,318 INFO services.agent_service: TTS frames queued client_id=66166271-8507-402b-8629-4105df6046d4 frames=143
+2026-04-02 20:53:46,320 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=response data={'type': 'response', 'text': "Sorry, I didn't understand. Could you repeat?"}
+2026-04-02 20:53:47,463 INFO services.agent_service: TTS scheduler stopped client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:53:47,464 INFO services.agent_service: State machine: transitioned to state_2 client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:53:56,846 INFO services.webrtc_service: VAD speech_start client_id=66166271-8507-402b-8629-4105df6046d4 p=0.814
+2026-04-02 20:53:57,869 INFO services.webrtc_service: Utterance end client_id=66166271-8507-402b-8629-4105df6046d4 samples=22528
+2026-04-02 20:53:57,874 INFO services.agent_service: STT raw input client_id=66166271-8507-402b-8629-4105df6046d4 ms=1408 rms=0.0622 peak=0.5099 n=22528 sr=16000
+2026-04-02 20:53:57,874 INFO services.agent_service: STT denoised input client_id=66166271-8507-402b-8629-4105df6046d4 ms=1408 rms=0.0622 peak=0.5099 n=22528 sr=16000
+2026-04-02 20:53:57,875 INFO faster_whisper: Processing audio with duration 00:01.408
+2026-04-02 20:53:58,840 INFO services.agent_service: STT transcript client_id=66166271-8507-402b-8629-4105df6046d4 text='list.'
+2026-04-02 20:53:58,840 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=transcript data={'type': 'transcript', 'text': 'list.'}
+2026-04-02 20:53:58,893 INFO services.delivery_state_machine: STATE_2: list requested (fallback) client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:53:58,894 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:54:00,375 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=response data={'type': 'response', 'text': 'Failure reasons: 1. Customer not available, 2. Wrong address, 3. Package damaged, 4. Access denied, 5. Vehicle breakdown, 6. Other'}
+2026-04-02 20:54:00,377 INFO services.agent_service: TTS audio client_id=66166271-8507-402b-8629-4105df6046d4 phrase_len=130 rate=48000 samples=479260 dtype=float32
+2026-04-02 20:54:07,937 INFO services.agent_service: TTS frames queued client_id=66166271-8507-402b-8629-4105df6046d4 frames=500
+2026-04-02 20:54:07,939 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=response data={'type': 'response', 'text': 'Failure reasons: 1. Customer not available, 2. Wrong address, 3. Package damaged, 4. Access denied, 5. Vehicle breakdown, 6. Other'}
+2026-04-02 20:54:09,069 INFO services.agent_service: TTS scheduler stopped client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:54:09,069 INFO services.agent_service: State machine: transitioned to state_2 client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:54:13,851 INFO services.webrtc_service: VAD speech_start client_id=66166271-8507-402b-8629-4105df6046d4 p=0.825
+2026-04-02 20:54:15,188 INFO services.webrtc_service: Utterance end client_id=66166271-8507-402b-8629-4105df6046d4 samples=27136
+2026-04-02 20:54:15,192 INFO services.agent_service: STT raw input client_id=66166271-8507-402b-8629-4105df6046d4 ms=1696 rms=0.1138 peak=0.7230 n=27136 sr=16000
+2026-04-02 20:54:15,193 INFO services.agent_service: STT denoised input client_id=66166271-8507-402b-8629-4105df6046d4 ms=1696 rms=0.1138 peak=0.7230 n=27136 sr=16000
+2026-04-02 20:54:15,194 INFO faster_whisper: Processing audio with duration 00:01.696
+2026-04-02 20:54:16,165 INFO services.agent_service: STT transcript client_id=66166271-8507-402b-8629-4105df6046d4 text='Number one'
+2026-04-02 20:54:16,165 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=transcript data={'type': 'transcript', 'text': 'Number one'}
+2026-04-02 20:54:16,222 INFO services.delivery_state_machine: STATE_2: reason selected #1: Customer not available client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:54:16,223 INFO services.delivery_state_machine: STATE_2: reason 1 selected → requesting photo client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:54:16,223 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=ask_photo_event data={'type': 'ask_photo_event', 'trip_id': '69cea26efb98e15a3cf53556', 'delivery_id': '69cea26efb98e15a3cf53556', 'address': 'the delivery location', 'timestamp': '2026-04-02T19:54:16.223359'}
+2026-04-02 20:54:16,223 INFO services.delivery_state_machine: 📸 ask_photo_event sent client_id=66166271-8507-402b-8629-4105df6046d4 trip_id=69cea26efb98e15a3cf53556
+2026-04-02 20:54:16,224 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:54:16,576 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=response data={'type': 'response', 'text': 'Can you please take a photo of the package?'}
+2026-04-02 20:54:16,576 INFO services.agent_service: TTS audio client_id=66166271-8507-402b-8629-4105df6046d4 phrase_len=43 rate=48000 samples=96967 dtype=float32
+2026-04-02 20:54:17,267 INFO services.agent_service: TTS frames queued client_id=66166271-8507-402b-8629-4105df6046d4 frames=102
+2026-04-02 20:54:17,267 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=response data={'type': 'response', 'text': 'Can you please take a photo of the package?'}
+2026-04-02 20:54:18,405 INFO services.agent_service: TTS scheduler stopped client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:54:18,407 INFO services.agent_service: State machine: transitioned to state_6 client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:54:20,033 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=photo_taken data={'type': 'photo_taken', 'trip_id': '69cea26efb98e15a3cf53556', 'delivery_id': '69cea26efb98e15a3cf53556'}
+2026-04-02 20:54:20,034 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=photo_taken data={'type': 'photo_taken', 'trip_id': '69cea26efb98e15a3cf53556', 'delivery_id': '69cea26efb98e15a3cf53556'}
+2026-04-02 20:54:20,035 INFO services.agent_service: 📮 EXTERNAL CONTROL REÇU client_id=66166271-8507-402b-8629-4105df6046d4 action=photo_taken extras={'type': 'photo_taken', 'trip_id': '69cea26efb98e15a3cf53556', 'delivery_id': '69cea26efb98e15a3cf53556'}
+2026-04-02 20:54:20,036 INFO services.agent_service: ✅ Traitement action photo_taken pour client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:54:20,036 INFO services.delivery_state_machine: 📸 Photo response received client_id=66166271-8507-402b-8629-4105df6046d4 photo_taken=True
+2026-04-02 20:54:20,038 INFO cli_logger: ✅ SUCCÈS: Token valide jusqu'au 2026-04-03 00:08:14
+2026-04-02 20:54:20,038 INFO cli_logger: Mise à jour du package 69cea26efb98e15a3cf53556 vers: delivered_successfully
+2026-04-02 20:54:20,039 INFO cli_logger: Récupération du package par ID: 69cea26efb98e15a3cf53556
+2026-04-02 20:54:20,039 INFO cli_logger: Récupération de l'instance: 69cea26efb98e15a3cf53556
+2026-04-02 20:54:20,397 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-02 20:54:20,492 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cea26efb98e15a3cf53556
+2026-04-02 20:54:20,494 INFO cli_logger: Mise à jour de l'instance: 69cea26efb98e15a3cf53556
+2026-04-02 20:54:20,549 INFO cli_logger: ✅ SUCCÈS: Instance 69cea26efb98e15a3cf53556 mise à jour
+2026-04-02 20:54:20,550 INFO cli_logger: ✅ SUCCÈS: Package 69cea26efb98e15a3cf53556 mis à jour: planned -> delivered_successfully
+2026-04-02 20:54:20,552 INFO cli_logger: ✅ SUCCÈS: Package 69cea26efb98e15a3cf53556 supprimé de data.json
+2026-04-02 20:54:20,552 INFO services.delivery_state_machine: Package 69cea26efb98e15a3cf53556 updated: status=COMPLETED, reason=N/A
+2026-04-02 20:54:20,554 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.MARK_DELIVERED', 'extras': {'com.avvc.maps.extra.DESTINATION_ID': '69cea26efb98e15a3cf53556'}}
+2026-04-02 20:54:20,555 INFO services.delivery_state_machine: 📍 MARK_DELIVERED sent client_id=66166271-8507-402b-8629-4105df6046d4 trip_id=69cea26efb98e15a3cf53556
+2026-04-02 20:54:20,556 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=emotion data={'type': 'emotion', 'name': 'happy'}
+2026-04-02 20:54:20,557 INFO services.delivery_state_machine: 😊 Emotion sent client_id=66166271-8507-402b-8629-4105df6046d4 name=happy
+2026-04-02 20:54:20,557 INFO services.delivery_state_machine: 📢 Next trip announced client_id=66166271-8507-402b-8629-4105df6046d4 address=Cité El Khadra, client=jack is_last=False
+2026-04-02 20:54:20,558 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:54:20,859 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=tts_test data={'type': 'tts_test', 'text': 'Delivery completed successfully.'}
+2026-04-02 20:54:20,860 INFO services.agent_service: TTS audio client_id=66166271-8507-402b-8629-4105df6046d4 phrase_len=32 rate=48000 samples=95295 dtype=float32
+2026-04-02 20:54:21,601 INFO services.agent_service: TTS frames queued client_id=66166271-8507-402b-8629-4105df6046d4 frames=100
+2026-04-02 20:54:21,601 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=tts_test data={'type': 'tts_test', 'text': 'You are now heading to Cité El Khadra,.'}
+2026-04-02 20:54:21,602 INFO services.agent_service: TTS audio client_id=66166271-8507-402b-8629-4105df6046d4 phrase_len=39 rate=48000 samples=101982 dtype=float32
+2026-04-02 20:54:23,760 INFO services.agent_service: TTS frames queued client_id=66166271-8507-402b-8629-4105df6046d4 frames=107
+2026-04-02 20:54:23,760 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=tts_test data={'type': 'tts_test', 'text': 'The client is jack.'}
+2026-04-02 20:54:23,760 INFO services.agent_service: TTS audio client_id=66166271-8507-402b-8629-4105df6046d4 phrase_len=19 rate=48000 samples=60186 dtype=float32
+2026-04-02 20:54:25,005 INFO services.agent_service: TTS frames queued client_id=66166271-8507-402b-8629-4105df6046d4 frames=63
+2026-04-02 20:54:26,144 INFO services.agent_service: TTS scheduler stopped client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:54:29,150 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.START_NAVIGATION', 'extras': {'id': '69cea28ffb98e15a3cf53558'}}
+2026-04-02 20:54:29,153 INFO services.delivery_state_machine: 🗺️ Auto start_navigation sent client_id=66166271-8507-402b-8629-4105df6046d4 trip_id=69cea28ffb98e15a3cf53558
+2026-04-02 20:54:29,211 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=arrived data={'type': 'arrived', 'id': '69cea28ffb98e15a3cf53558'}
+2026-04-02 20:54:29,211 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=arrived data={'type': 'arrived', 'id': '69cea28ffb98e15a3cf53558'}
+2026-04-02 20:54:29,211 INFO services.agent_service: 📮 EXTERNAL CONTROL REÇU client_id=66166271-8507-402b-8629-4105df6046d4 action=arrived extras={'trip_id': '69cea28ffb98e15a3cf53558'}
+2026-04-02 20:54:29,211 INFO services.agent_service: ✅ Traitement action arrived pour client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:54:29,212 INFO services.agent_service: 🚚 DRIVER ARRIVÉ client_id=66166271-8507-402b-8629-4105df6046d4 trip_id=69cea28ffb98e15a3cf53558
+2026-04-02 20:54:29,212 INFO services.agent_service: 🚀 Démarrage de la state machine pour client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:54:29,212 INFO services.delivery_state_machine: State machine: entered MODE_1 → STATE_1 client_id=66166271-8507-402b-8629-4105df6046d4 trip_id=69cea28ffb98e15a3cf53558
+2026-04-02 20:54:29,212 INFO services.agent_service: 🗣️ Envoi question TTS: 'Is the delivery completed?' (NON-INTERRUPTIBLE)
+2026-04-02 20:54:29,212 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:54:29,523 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=tts_test data={'type': 'tts_test', 'text': 'Is the delivery completed?'}
+2026-04-02 20:54:29,523 INFO services.agent_service: TTS audio client_id=66166271-8507-402b-8629-4105df6046d4 phrase_len=26 rate=48000 samples=69660 dtype=float32
+2026-04-02 20:54:29,775 INFO services.agent_service: TTS frames queued client_id=66166271-8507-402b-8629-4105df6046d4 frames=73
+2026-04-02 20:54:30,916 INFO services.agent_service: TTS scheduler stopped client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:54:33,202 INFO services.webrtc_service: VAD speech_start client_id=66166271-8507-402b-8629-4105df6046d4 p=0.882
+2026-04-02 20:54:33,936 INFO services.webrtc_service: VAD short_utterance_ignored client_id=66166271-8507-402b-8629-4105df6046d4 speech_chunks=0
+2026-04-02 20:55:08,188 INFO services.webrtc_service: VAD speech_start client_id=66166271-8507-402b-8629-4105df6046d4 p=0.912
+2026-04-02 20:55:09,446 INFO services.webrtc_service: Utterance end client_id=66166271-8507-402b-8629-4105df6046d4 samples=26112
+2026-04-02 20:55:09,449 INFO services.agent_service: STT raw input client_id=66166271-8507-402b-8629-4105df6046d4 ms=1632 rms=0.1284 peak=0.8502 n=26112 sr=16000
+2026-04-02 20:55:09,450 INFO services.agent_service: STT denoised input client_id=66166271-8507-402b-8629-4105df6046d4 ms=1632 rms=0.1284 peak=0.8502 n=26112 sr=16000
+2026-04-02 20:55:09,451 INFO faster_whisper: Processing audio with duration 00:01.632
+2026-04-02 20:55:10,468 INFO services.agent_service: STT transcript client_id=66166271-8507-402b-8629-4105df6046d4 text='I said no.'
+2026-04-02 20:55:10,469 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=transcript data={'type': 'transcript', 'text': 'I said no.'}
+2026-04-02 20:55:10,469 INFO services.delivery_state_machine: STATE_1: NO detected client_id=66166271-8507-402b-8629-4105df6046d4 → STATE_2
+2026-04-02 20:55:10,469 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:55:11,058 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=response data={'type': 'response', 'text': "Can you give me a reason ? You can say 'list' to hear the options or ask for it ."}
+2026-04-02 20:55:11,058 INFO services.agent_service: TTS audio client_id=66166271-8507-402b-8629-4105df6046d4 phrase_len=81 rate=48000 samples=201735 dtype=float32
+2026-04-02 20:55:13,721 INFO services.agent_service: TTS frames queued client_id=66166271-8507-402b-8629-4105df6046d4 frames=211
+2026-04-02 20:55:13,724 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=response data={'type': 'response', 'text': "Can you give me a reason ? You can say 'list' to hear the options or ask for it ."}
+2026-04-02 20:55:14,856 INFO services.agent_service: TTS scheduler stopped client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:55:14,856 INFO services.agent_service: State machine: transitioned to state_2 client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:55:22,776 INFO services.webrtc_service: VAD speech_start client_id=66166271-8507-402b-8629-4105df6046d4 p=0.833
+2026-04-02 20:55:24,299 INFO services.webrtc_service: Utterance end client_id=66166271-8507-402b-8629-4105df6046d4 samples=30208
+2026-04-02 20:55:24,300 INFO services.agent_service: STT raw input client_id=66166271-8507-402b-8629-4105df6046d4 ms=1888 rms=0.1262 peak=0.8428 n=30208 sr=16000
+2026-04-02 20:55:24,301 INFO services.agent_service: STT denoised input client_id=66166271-8507-402b-8629-4105df6046d4 ms=1888 rms=0.1262 peak=0.8428 n=30208 sr=16000
+2026-04-02 20:55:24,301 INFO faster_whisper: Processing audio with duration 00:01.888
+2026-04-02 20:55:25,347 INFO services.agent_service: STT transcript client_id=66166271-8507-402b-8629-4105df6046d4 text='Number four.'
+2026-04-02 20:55:25,348 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=transcript data={'type': 'transcript', 'text': 'Number four.'}
+2026-04-02 20:55:25,406 INFO services.delivery_state_machine: STATE_2: reason selected #4: Access denied client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:55:25,407 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.MARK_FAILED', 'extras': {'com.avvc.maps.extra.DESTINATION_ID': '69cea28ffb98e15a3cf53558'}}
+2026-04-02 20:55:25,408 INFO services.delivery_state_machine: ❌ MARK_FAILED sent client_id=66166271-8507-402b-8629-4105df6046d4 trip_id=69cea28ffb98e15a3cf53558
+2026-04-02 20:55:25,408 INFO services.delivery_state_machine: STATE_2: next trip announced after failure client_id=66166271-8507-402b-8629-4105df6046d4 trip_id=69cea29efb98e15a3cf5355a address=Cité El Khadra, client=avrel
+2026-04-02 20:55:25,408 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:55:26,446 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=response data={'type': 'response', 'text': 'Delivery is a failure. You are now heading to Cité El Khadra,. The client is avrel. This is your last delivery.'}
+2026-04-02 20:55:26,446 INFO services.agent_service: TTS audio client_id=66166271-8507-402b-8629-4105df6046d4 phrase_len=111 rate=48000 samples=295358 dtype=float32
+2026-04-02 20:55:28,428 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.START_NAVIGATION', 'extras': {'id': '69cea29efb98e15a3cf5355a'}}
+2026-04-02 20:55:28,431 INFO services.delivery_state_machine: 🗺️ Auto start_navigation sent client_id=66166271-8507-402b-8629-4105df6046d4 trip_id=69cea29efb98e15a3cf5355a
+2026-04-02 20:55:28,509 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=arrived data={'type': 'arrived', 'id': '69cea29efb98e15a3cf5355a'}
+2026-04-02 20:55:28,509 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=66166271-8507-402b-8629-4105df6046d4 type=arrived data={'type': 'arrived', 'id': '69cea29efb98e15a3cf5355a'}
+2026-04-02 20:55:28,510 INFO services.agent_service: 📮 EXTERNAL CONTROL REÇU client_id=66166271-8507-402b-8629-4105df6046d4 action=arrived extras={'trip_id': '69cea29efb98e15a3cf5355a'}
+2026-04-02 20:55:28,510 INFO services.agent_service: ✅ Traitement action arrived pour client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:55:28,510 INFO services.agent_service: 🚚 DRIVER ARRIVÉ client_id=66166271-8507-402b-8629-4105df6046d4 trip_id=69cea29efb98e15a3cf5355a
+2026-04-02 20:55:28,510 INFO services.agent_service: ⏸️ arrived deferred while MODE_1 active client_id=66166271-8507-402b-8629-4105df6046d4 active_trip_id=69cea28ffb98e15a3cf53558 pending_trip_id=69cea29efb98e15a3cf5355a
+2026-04-02 20:55:30,609 INFO services.agent_service: TTS frames queued client_id=66166271-8507-402b-8629-4105df6046d4 frames=308
+2026-04-02 20:55:30,609 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=response data={'type': 'response', 'text': 'Delivery is a failure. You are now heading to Cité El Khadra,. The client is avrel. This is your last delivery.'}
+2026-04-02 20:55:31,740 INFO services.agent_service: TTS scheduler stopped client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:55:31,745 INFO cli_logger: ✅ SUCCÈS: Token valide jusqu'au 2026-04-03 00:08:14
+2026-04-02 20:55:31,747 INFO cli_logger: Mise à jour du package 69cea28ffb98e15a3cf53558 vers: delivery_failure
+2026-04-02 20:55:31,747 INFO cli_logger: Récupération du package par ID: 69cea28ffb98e15a3cf53558
+2026-04-02 20:55:31,747 INFO cli_logger: Récupération de l'instance: 69cea28ffb98e15a3cf53558
+2026-04-02 20:55:32,080 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-02 20:55:32,164 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cea28ffb98e15a3cf53558
+2026-04-02 20:55:32,166 INFO cli_logger: Mise à jour de l'instance: 69cea28ffb98e15a3cf53558
+2026-04-02 20:55:32,215 INFO cli_logger: ✅ SUCCÈS: Instance 69cea28ffb98e15a3cf53558 mise à jour
+2026-04-02 20:55:32,215 INFO cli_logger: ✅ SUCCÈS: Package 69cea28ffb98e15a3cf53558 mis à jour: planned -> delivery_failure
+2026-04-02 20:55:32,216 INFO cli_logger: ✅ SUCCÈS: Package 69cea28ffb98e15a3cf53558 supprimé de data.json
+2026-04-02 20:55:32,216 INFO cli_logger: Ajout échec livraison pour 69cea28ffb98e15a3cf53558 (cause: 1)
+2026-04-02 20:55:32,216 INFO cli_logger: Récupération du package par ID: 69cea28ffb98e15a3cf53558
+2026-04-02 20:55:32,217 INFO cli_logger: Récupération de l'instance: 69cea28ffb98e15a3cf53558
+2026-04-02 20:55:32,259 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-02 20:55:32,309 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cea28ffb98e15a3cf53558
+2026-04-02 20:55:32,310 INFO cli_logger: Création d'un nouveau delivery failure
+2026-04-02 20:55:32,310 INFO cli_logger: Création d'une instance pour l'entité: 69bd7f7cfb98e15a3cf5337a
+2026-04-02 20:55:32,362 INFO cli_logger: ✅ SUCCÈS: Instance créée avec ID: 69cec9b4fb98e15a3cf53579
+2026-04-02 20:55:32,363 INFO cli_logger: ✅ SUCCÈS: Delivery failure créé avec ID: 69cec9b4fb98e15a3cf53579
+2026-04-02 20:55:32,364 INFO cli_logger: ✅ SUCCÈS: Échec de livraison ajouté pour le package 69cea28ffb98e15a3cf53558
+2026-04-02 20:55:32,365 INFO cli_logger: Mise à jour de l'instance: 69cea28ffb98e15a3cf53558
+2026-04-02 20:55:32,413 INFO cli_logger: ✅ SUCCÈS: Instance 69cea28ffb98e15a3cf53558 mise à jour
+2026-04-02 20:55:32,415 INFO services.delivery_state_machine: Package 69cea28ffb98e15a3cf53558 updated: status=FAILED, reason=Access denied
+2026-04-02 20:55:32,418 INFO services.agent_service: ✅ Trip updated client_id=66166271-8507-402b-8629-4105df6046d4 trip_id=69cea28ffb98e15a3cf53558 status=FAILED
+2026-04-02 20:55:32,418 INFO services.agent_service: State machine: transitioned to state_5 client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:55:32,419 INFO services.agent_service: State machine: auto-reset to MODE_0 after terminal transition client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:55:32,419 INFO services.agent_service: ▶️ consuming deferred arrived client_id=66166271-8507-402b-8629-4105df6046d4 trip_id=69cea29efb98e15a3cf5355a
+2026-04-02 20:55:32,419 INFO services.agent_service: 🚚 DRIVER ARRIVÉ client_id=66166271-8507-402b-8629-4105df6046d4 trip_id=69cea29efb98e15a3cf5355a
+2026-04-02 20:55:32,419 INFO services.agent_service: 🔇 Interrupting current TTS before arrived action client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:55:32,420 WARNING services.agent_service: INTERRUPT called! client_id=66166271-8507-402b-8629-4105df6046d4 tts_playing=False processing_lock=True cancel_flag=False
+2026-04-02 20:55:32,420 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=tts_stop_now data={'type': 'tts_stop_now'}
+2026-04-02 20:55:32,421 INFO services.agent_service: 🚀 Démarrage de la state machine pour client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:55:32,421 INFO services.delivery_state_machine: State machine: entered MODE_1 → STATE_1 client_id=66166271-8507-402b-8629-4105df6046d4 trip_id=69cea29efb98e15a3cf5355a
+2026-04-02 20:55:32,421 INFO services.agent_service: 🗣️ Envoi question TTS: 'Is the delivery completed?' (NON-INTERRUPTIBLE)
+2026-04-02 20:55:32,422 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:55:32,690 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=tts_test data={'type': 'tts_test', 'text': 'Is the delivery completed?'}
+2026-04-02 20:55:32,691 INFO services.agent_service: TTS audio client_id=66166271-8507-402b-8629-4105df6046d4 phrase_len=26 rate=48000 samples=73004 dtype=float32
+2026-04-02 20:55:32,988 INFO services.agent_service: TTS frames queued client_id=66166271-8507-402b-8629-4105df6046d4 frames=77
+2026-04-02 20:55:34,127 INFO services.agent_service: TTS scheduler stopped client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:55:36,347 INFO services.webrtc_service: VAD speech_start client_id=66166271-8507-402b-8629-4105df6046d4 p=0.969
+2026-04-02 20:55:37,481 INFO services.webrtc_service: Utterance end client_id=66166271-8507-402b-8629-4105df6046d4 samples=24064
+2026-04-02 20:55:37,487 INFO services.agent_service: STT raw input client_id=66166271-8507-402b-8629-4105df6046d4 ms=1504 rms=0.0604 peak=0.8314 n=24064 sr=16000
+2026-04-02 20:55:37,488 INFO services.agent_service: STT denoised input client_id=66166271-8507-402b-8629-4105df6046d4 ms=1504 rms=0.0604 peak=0.8314 n=24064 sr=16000
+2026-04-02 20:55:37,489 INFO faster_whisper: Processing audio with duration 00:01.504
+2026-04-02 20:55:38,495 INFO services.agent_service: STT transcript client_id=66166271-8507-402b-8629-4105df6046d4 text='Yes.'
+2026-04-02 20:55:38,496 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=transcript data={'type': 'transcript', 'text': 'Yes.'}
+2026-04-02 20:55:38,496 INFO services.delivery_state_machine: STATE_1: YES detected client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:55:38,496 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.MARK_DELIVERED', 'extras': {'com.avvc.maps.extra.DESTINATION_ID': '69cea29efb98e15a3cf5355a'}}
+2026-04-02 20:55:38,497 INFO services.delivery_state_machine: 📍 MARK_DELIVERED sent client_id=66166271-8507-402b-8629-4105df6046d4 trip_id=69cea29efb98e15a3cf5355a
+2026-04-02 20:55:38,497 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:55:38,865 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=response data={'type': 'response', 'text': 'the delivery has been marked as completed.'}
+2026-04-02 20:55:38,865 INFO services.agent_service: TTS audio client_id=66166271-8507-402b-8629-4105df6046d4 phrase_len=42 rate=48000 samples=108112 dtype=float32
+2026-04-02 20:55:39,766 INFO services.agent_service: TTS frames queued client_id=66166271-8507-402b-8629-4105df6046d4 frames=113
+2026-04-02 20:55:39,766 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=response data={'type': 'response', 'text': 'the delivery has been marked as completed.'}
+2026-04-02 20:55:40,892 INFO services.agent_service: TTS scheduler stopped client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:55:40,894 INFO cli_logger: ✅ SUCCÈS: Token valide jusqu'au 2026-04-03 00:08:14
+2026-04-02 20:55:40,895 INFO cli_logger: Mise à jour du package 69cea29efb98e15a3cf5355a vers: delivered_successfully
+2026-04-02 20:55:40,897 INFO cli_logger: Récupération du package par ID: 69cea29efb98e15a3cf5355a
+2026-04-02 20:55:40,897 INFO cli_logger: Récupération de l'instance: 69cea29efb98e15a3cf5355a
+2026-04-02 20:55:41,066 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-02 20:55:41,196 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cea29efb98e15a3cf5355a
+2026-04-02 20:55:41,197 INFO cli_logger: Mise à jour de l'instance: 69cea29efb98e15a3cf5355a
+2026-04-02 20:55:41,276 INFO cli_logger: ✅ SUCCÈS: Instance 69cea29efb98e15a3cf5355a mise à jour
+2026-04-02 20:55:41,276 INFO cli_logger: ✅ SUCCÈS: Package 69cea29efb98e15a3cf5355a mis à jour: planned -> delivered_successfully
+2026-04-02 20:55:41,279 INFO cli_logger: ✅ SUCCÈS: Package 69cea29efb98e15a3cf5355a supprimé de data.json
+2026-04-02 20:55:41,279 INFO services.delivery_state_machine: Package 69cea29efb98e15a3cf5355a updated: status=COMPLETED, reason=N/A
+2026-04-02 20:55:41,284 INFO services.agent_service: ✅ Trip updated client_id=66166271-8507-402b-8629-4105df6046d4 trip_id=69cea29efb98e15a3cf5355a status=COMPLETED
+2026-04-02 20:55:41,284 INFO services.agent_service: State machine: transitioned to state_5 client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:55:41,285 INFO services.agent_service: State machine: auto-reset to MODE_0 after terminal transition client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:55:49,721 INFO services.webrtc_service: VAD speech_start client_id=66166271-8507-402b-8629-4105df6046d4 p=0.955
+2026-04-02 20:55:52,152 INFO services.webrtc_service: Utterance end client_id=66166271-8507-402b-8629-4105df6046d4 samples=43520
+2026-04-02 20:55:52,155 INFO services.agent_service: STT raw input client_id=66166271-8507-402b-8629-4105df6046d4 ms=2720 rms=0.1006 peak=0.6288 n=43520 sr=16000
+2026-04-02 20:55:52,156 INFO services.agent_service: STT denoised input client_id=66166271-8507-402b-8629-4105df6046d4 ms=2720 rms=0.1006 peak=0.6288 n=43520 sr=16000
+2026-04-02 20:55:52,156 INFO faster_whisper: Processing audio with duration 00:02.720
+2026-04-02 20:55:53,170 INFO services.agent_service: STT transcript client_id=66166271-8507-402b-8629-4105df6046d4 text='Show me my deliveries'
+2026-04-02 20:55:53,170 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=transcript data={'type': 'transcript', 'text': 'Show me my deliveries'}
+2026-04-02 20:55:53,539 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=intent data={'type': 'intent', 'intent': 'show_deliveries'}
+2026-04-02 20:55:53,540 INFO services.action_service: Intent connue [show_deliveries] → exécution locale client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:55:53,540 INFO services.action_service: ACTION: show_deliveries
+2026-04-02 20:55:53,540 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.SHOW_DELIVERIES_LIST', 'extras': {}}
+2026-04-02 20:55:53,540 INFO services.action_service: 📋 External control sent client_id=66166271-8507-402b-8629-4105df6046d4 action=SHOW_DELIVERIES_LIST
+2026-04-02 20:55:53,540 INFO services.agent_service: Action result client_id=66166271-8507-402b-8629-4105df6046d4 ActionResult(handled=True, intent='show_deliveries', text_to_llm=None, response='Here is the list of your deliveries.')
+2026-04-02 20:55:53,541 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:55:54,235 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=response data={'type': 'response', 'text': 'Here is the list of your deliveries.'}
+2026-04-02 20:55:54,236 INFO services.agent_service: TTS audio client_id=66166271-8507-402b-8629-4105df6046d4 phrase_len=36 rate=48000 samples=90836 dtype=float32
+2026-04-02 20:55:54,562 INFO services.agent_service: TTS frames queued client_id=66166271-8507-402b-8629-4105df6046d4 frames=95
+2026-04-02 20:55:54,563 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=response data={'type': 'response', 'text': 'Here is the list of your deliveries.'}
+2026-04-02 20:55:55,698 INFO services.agent_service: TTS scheduler stopped client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:56:01,333 INFO services.webrtc_service: VAD speech_start client_id=66166271-8507-402b-8629-4105df6046d4 p=0.920
+2026-04-02 20:56:02,754 INFO services.webrtc_service: Utterance end client_id=66166271-8507-402b-8629-4105df6046d4 samples=28672
+2026-04-02 20:56:02,758 INFO services.agent_service: STT raw input client_id=66166271-8507-402b-8629-4105df6046d4 ms=1792 rms=0.0444 peak=0.3377 n=28672 sr=16000
+2026-04-02 20:56:02,759 INFO services.agent_service: STT denoised input client_id=66166271-8507-402b-8629-4105df6046d4 ms=1792 rms=0.0444 peak=0.3377 n=28672 sr=16000
+2026-04-02 20:56:02,760 INFO faster_whisper: Processing audio with duration 00:01.792
+2026-04-02 20:56:03,738 INFO services.agent_service: STT transcript client_id=66166271-8507-402b-8629-4105df6046d4 text='This is'
+2026-04-02 20:56:03,739 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=transcript data={'type': 'transcript', 'text': 'This is'}
+2026-04-02 20:56:04,222 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=intent data={'type': 'intent', 'intent': 'INCONNU'}
+2026-04-02 20:56:04,222 INFO services.action_service: Intent INCONNU → forward to LLM client_id=66166271-8507-402b-8629-4105df6046d4 text='This is'
+2026-04-02 20:56:04,222 INFO services.agent_service: Action result client_id=66166271-8507-402b-8629-4105df6046d4 ActionResult(handled=False, intent='INCONNU', text_to_llm='This is', response=None)
+2026-04-02 20:56:04,484 INFO httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-02 20:56:05,129 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 20:56:05,130 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=response data={'type': 'response', 'text': 'This is a list of your deliveries.'}
+2026-04-02 20:56:05,130 INFO services.agent_service: TTS audio client_id=66166271-8507-402b-8629-4105df6046d4 phrase_len=34 rate=48000 samples=98638 dtype=float32
+2026-04-02 20:56:05,379 INFO services.webrtc_service: VAD speech_start client_id=66166271-8507-402b-8629-4105df6046d4 p=0.965
+2026-04-02 20:56:05,380 WARNING services.agent_service: INTERRUPT called! client_id=66166271-8507-402b-8629-4105df6046d4 tts_playing=True processing_lock=True cancel_flag=False
+2026-04-02 20:56:05,380 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=tts_stop_now data={'type': 'tts_stop_now'}
+2026-04-02 20:56:05,381 INFO services.agent_service: TTS scheduler stopped client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:56:05,955 INFO services.webrtc_service: Audio track ended client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:56:05,959 INFO services.webrtc_service: ICE state client_id=66166271-8507-402b-8629-4105df6046d4 state=closed
+2026-04-02 20:56:05,959 INFO services.webrtc_service: WebRTC state client_id=66166271-8507-402b-8629-4105df6046d4 state=closed
+2026-04-02 20:56:05,960 INFO services.webrtc_service: WebRTC cleaned up client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:56:05,960 INFO services.agent_service: TTS frames queued client_id=66166271-8507-402b-8629-4105df6046d4 frames=103
+2026-04-02 20:56:05,961 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=66166271-8507-402b-8629-4105df6046d4 type=response data={'type': 'response', 'text': 'This is a list of your deliveries.'}
+2026-04-02 20:56:05,978 INFO services.webrtc_service: WebRTC cleaned up client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:56:05,979 INFO services.websocket_service: WS disconnected client_id=66166271-8507-402b-8629-4105df6046d4
+2026-04-02 20:56:05,979 INFO uvicorn.error: connection closed
