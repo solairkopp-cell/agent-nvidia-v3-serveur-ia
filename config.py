@@ -29,7 +29,7 @@ WHISPER_LANGUAGE = os.getenv("WHISPER_LANGUAGE", "en")  # ou "en", ou None (auto
 # faster-whisper (embedded)
 WHISPER_MODEL = os.getenv("WHISPER_MODEL", "small.en")        # ex: tiny, base, small, medium, large-v3
 WHISPER_DEVICE = os.getenv("WHISPER_DEVICE", "cuda")       # "cpu" pour maximiser la stabilité Jetson
-WHISPER_COMPUTE_TYPE = os.getenv("WHISPER_COMPUTE_TYPE", "float16")  # "int8" pour les modèles quantifiés (ex: small.en), "float16" pour les modèles non quantifiés (ex: medium)
+WHISPER_COMPUTE_TYPE = os.getenv("WHISPER_COMPUTE_TYPE", "int8")  # "int8" pour les modèles quantifiés (ex: small.en), "float16" pour les modèles non quantifiés (ex: medium)
 WHISPER_BEAM_SIZE = int(os.getenv("WHISPER_BEAM_SIZE", "1"))
 # Backend STT embarqué :
 # - "whisper"        : OpenAI Whisper (PyTorch, GPU ok)

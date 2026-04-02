@@ -40,6 +40,8 @@ if TYPE_CHECKING:
     from services.denoise_service import DenoiseService
     from services.delivery_state_machine import DeliveryStateMachine
 
+from services.delivery_state_machine import State
+
 import config
 
 
@@ -267,11 +269,6 @@ class AgentService:
                             state_result.action_params,
                         )
 
-                    if state_result.action == "exit_to_mode_0":
-                        # Retour au MODE_0
-                        session.clear_active_user_turn()
-                        return
-
                     # Mettre à jour l'état de la session APRÈS le TTS
                     # On applique la transition d'état retournée par la state machine
                     if state_result.next_state is not None:
@@ -283,10 +280,25 @@ class AgentService:
                             session.client_id,
                         )
 
+                        # Si transition vers STATE_5 (EXIT), sortir immédiatement de MODE_1
+                        if state_result.next_state == State.STATE_5:
+                            logger.info(
+                                "State machine: auto-exit to MODE_0 client_id=%s",
+                                session.client_id,
+                            )
+                            ctx.reset()
+                            session.clear_active_user_turn()
+                            return
+
+                    if state_result.action == "exit_to_mode_0":
+                        # Retour au MODE_0
+                        session.clear_active_user_turn()
+                        return
+
                     session.clear_active_user_turn()
                     return
                 # else: should_handle=False → continuer avec le pipeline normal (MODE_0)
-                
+
             except Exception:
                 logger.exception("State machine error client_id=%s", session.client_id)
                 # En cas d'erreur, on continue avec le pipeline normal
@@ -980,6 +992,7 @@ class AgentService:
         Attendre que la queue audio soit presque vide avant de continuer.
         Vérifie cancel_flag fréquemment pour sortir vite en cas d'interruption.
         """
+        logger = logging.getLogger(__name__)
         start = time.monotonic()
         while time.monotonic() - start < timeout:
             if session.cancel_flag or session.current_request_id != request_id:
@@ -1277,18 +1290,10 @@ class AgentService:
             # Notifier le client d'arrêter le TTS
             if self.ws_service is not None:
                 await self.ws_service.send(session, {"type": "tts_stop_now"})
-            
-            # Attendre que le lock se libère (max 3 secondes)
-            try:
-                await asyncio.wait_for(session.processing_lock.acquire(), timeout=3.0)
-                session.processing_lock.release()
-                logger.info("✅ Lock acquired after interruption client_id=%s", session.client_id)
-            except asyncio.TimeoutError:
-                logger.warning("⚠️ Timeout waiting for processing_lock release client_id=%s", session.client_id)
 
         # Reset complet de l'état TTS
         session.tts_playing = False
-        session.tts_interruptible = True
+        session.tts_interruptible = False  # Non interruptible pendant la question
         session.reset_tts_output_state()
         session.tts_started_at = 0.0
         session.cancel_flag = False
@@ -1301,15 +1306,10 @@ class AgentService:
             logger.info("🚀 Démarrage de la state machine pour client_id=%s", session.client_id)
             await self.state_machine.enter_mode_1(session, trip_id)
 
-            # 🚨 CRITIQUE: Poser la question TTS avec le lock pour éviter interruption
-            logger.info(
-                "⏳ Waiting for processing_lock to ask question client_id=%s",
-                session.client_id,
-            )
-            async with session.processing_lock:
-                logger.info("🗣️ Envoi question TTS: 'Is the delivery completed?' (NON-INTERRUPTIBLE)")
-                # Cette question est NON-INTERRUPTIBLE
-                await self._speak_text_internal(session, "Is the delivery completed?", interruptible=False)
+            # 🚨 CRITIQUE: Poser la question TTS SANS attendre le lock
+            # On utilise _speak_text_internal directement car c'est une action prioritaire
+            logger.info("🗣️ Envoi question TTS: 'Is the delivery completed?' (NON-INTERRUPTIBLE)")
+            await self._speak_text_internal(session, "Is the delivery completed?", interruptible=False)
         else:
             logger.warning("⚠️ State machine non disponible client_id=%s", session.client_id)
 

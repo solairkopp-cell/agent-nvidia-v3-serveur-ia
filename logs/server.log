@@ -1,119 +1,85 @@
-2026-04-02 19:17:11,225 INFO services.agent_service: TTS scheduler stopped client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:17:14,463 INFO services.webrtc_service: VAD speech_start client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 p=0.852
-2026-04-02 19:17:15,468 INFO services.webrtc_service: Utterance end client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 samples=23040
-2026-04-02 19:17:15,471 INFO services.agent_service: STT raw input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=1440 rms=0.1057 peak=0.6198 n=23040 sr=16000
-2026-04-02 19:17:15,471 INFO services.agent_service: STT denoised input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=1440 rms=0.1057 peak=0.6198 n=23040 sr=16000
-2026-04-02 19:17:15,473 INFO faster_whisper: Processing audio with duration 00:01.440
-2026-04-02 19:17:16,504 INFO services.agent_service: STT transcript client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 text='Hello?'
-2026-04-02 19:17:16,505 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=transcript data={'type': 'transcript', 'text': 'Hello?'}
-2026-04-02 19:17:17,177 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=intent data={'type': 'intent', 'intent': 'INCONNU'}
-2026-04-02 19:17:17,178 INFO services.action_service: Intent INCONNU → forward to LLM client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 text='Hello?'
-2026-04-02 19:17:17,178 INFO services.agent_service: Action result client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ActionResult(handled=False, intent='INCONNU', text_to_llm='Hello?', response=None)
-2026-04-02 19:17:17,503 INFO httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
-2026-04-02 19:17:18,148 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-02 19:17:18,149 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=response data={'type': 'response', 'text': 'Hello! How can I assist you today?'}
-2026-04-02 19:17:18,149 INFO services.agent_service: TTS audio client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 phrase_len=34 rate=48000 samples=104768 dtype=float32
-2026-04-02 19:17:19,085 INFO services.agent_service: TTS frames queued client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 frames=110
-2026-04-02 19:17:19,086 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=response data={'type': 'response', 'text': 'Hello! How can I assist you today?'}
-2026-04-02 19:17:20,223 INFO services.agent_service: TTS scheduler stopped client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:17:21,856 INFO services.webrtc_service: VAD speech_start client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 p=0.814
-2026-04-02 19:17:24,070 INFO services.webrtc_service: Utterance end client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 samples=40448
-2026-04-02 19:17:24,076 INFO services.agent_service: STT raw input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=2528 rms=0.1143 peak=0.8359 n=40448 sr=16000
-2026-04-02 19:17:24,077 INFO services.agent_service: STT denoised input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=2528 rms=0.1143 peak=0.8359 n=40448 sr=16000
-2026-04-02 19:17:24,078 INFO faster_whisper: Processing audio with duration 00:02.528
-2026-04-02 19:17:25,078 INFO services.agent_service: STT transcript client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 text='Start the navigation.'
-2026-04-02 19:17:25,078 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=transcript data={'type': 'transcript', 'text': 'Start the navigation.'}
-2026-04-02 19:17:25,659 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=intent data={'type': 'intent', 'intent': 'start_navigation'}
-2026-04-02 19:17:25,659 INFO services.action_service: Intent connue [start_navigation] → exécution locale client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:17:25,659 INFO services.action_service: ACTION: start_navigation
-2026-04-02 19:17:25,660 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.START_NAVIGATION', 'extras': {'id': '69cea258fb98e15a3cf53554'}}
-2026-04-02 19:17:25,660 INFO services.action_service: 🗺️ External control sent client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 action=START_NAVIGATION trip_id=69cea258fb98e15a3cf53554
-2026-04-02 19:17:25,660 INFO services.agent_service: Action result client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ActionResult(handled=True, intent='start_navigation', text_to_llm=None, response='Starting navigation to the next destination.')
-2026-04-02 19:17:25,660 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-02 19:17:25,886 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=arrived data={'type': 'arrived', 'id': '69cea258fb98e15a3cf53554'}
-2026-04-02 19:17:25,886 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=arrived data={'type': 'arrived', 'id': '69cea258fb98e15a3cf53554'}
-2026-04-02 19:17:25,886 INFO services.agent_service: 📮 EXTERNAL CONTROL REÇU client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 action=arrived extras={'trip_id': '69cea258fb98e15a3cf53554'}
-2026-04-02 19:17:25,887 INFO services.agent_service: ✅ Traitement action arrived pour client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:17:25,887 INFO services.agent_service: 🚚 DRIVER ARRIVÉ client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 trip_id=69cea258fb98e15a3cf53554
-2026-04-02 19:17:25,887 INFO services.agent_service: 🔇 Interrupting current TTS before arrived action client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:17:25,887 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=tts_stop_now data={'type': 'tts_stop_now'}
-2026-04-02 19:17:26,030 INFO services.agent_service: TTS scheduler stopped client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:17:26,161 INFO services.agent_service: ✅ Lock acquired after interruption client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:17:26,161 INFO services.agent_service: 🚀 Démarrage de la state machine pour client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:17:26,162 INFO services.delivery_state_machine: State machine: entered MODE_1 → STATE_1 client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 trip_id=69cea258fb98e15a3cf53554
-2026-04-02 19:17:26,162 INFO services.agent_service: ⏳ Waiting for processing_lock to ask question client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:17:26,162 INFO services.agent_service: 🗣️ Envoi question TTS: 'Is the delivery completed?' (NON-INTERRUPTIBLE)
-2026-04-02 19:17:26,162 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-02 19:17:26,519 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=tts_test data={'type': 'tts_test', 'text': 'Is the delivery completed?'}
-2026-04-02 19:17:26,520 INFO services.agent_service: TTS audio client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 phrase_len=26 rate=48000 samples=71332 dtype=float32
-2026-04-02 19:17:26,738 INFO services.agent_service: TTS frames queued client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 frames=75
-2026-04-02 19:17:27,874 INFO services.agent_service: TTS scheduler stopped client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:17:36,033 INFO services.webrtc_service: VAD speech_start client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 p=0.861
-2026-04-02 19:17:37,148 INFO services.webrtc_service: Utterance end client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 samples=24064
-2026-04-02 19:17:37,154 INFO services.agent_service: STT raw input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=1504 rms=0.0497 peak=0.4535 n=24064 sr=16000
-2026-04-02 19:17:37,155 INFO services.agent_service: STT denoised input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=1504 rms=0.0497 peak=0.4535 n=24064 sr=16000
-2026-04-02 19:17:37,156 INFO faster_whisper: Processing audio with duration 00:01.504
-2026-04-02 19:17:38,055 INFO services.agent_service: STT transcript client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 text='baby'
-2026-04-02 19:17:38,055 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=transcript data={'type': 'transcript', 'text': 'baby'}
-2026-04-02 19:17:38,056 INFO services.delivery_state_machine: STATE_1: invalid input (retry 1) client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:17:38,056 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-02 19:17:38,605 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=response data={'type': 'response', 'text': "Sorry, I didn't understand. Could you repeat?"}
-2026-04-02 19:17:38,606 INFO services.agent_service: TTS audio client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 phrase_len=45 rate=48000 samples=128174 dtype=float32
-2026-04-02 19:17:39,767 INFO services.agent_service: TTS frames queued client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 frames=134
-2026-04-02 19:17:39,767 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=response data={'type': 'response', 'text': "Sorry, I didn't understand. Could you repeat?"}
-2026-04-02 19:17:40,894 INFO services.agent_service: TTS scheduler stopped client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:17:40,895 INFO services.agent_service: State machine: transitioned to state_1 client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:18:06,015 INFO services.webrtc_service: VAD speech_start client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 p=0.890
-2026-04-02 19:18:07,131 INFO services.webrtc_service: Utterance end client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 samples=24064
-2026-04-02 19:18:07,133 INFO services.agent_service: STT raw input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=1504 rms=0.1808 peak=0.8524 n=24064 sr=16000
-2026-04-02 19:18:07,133 INFO services.agent_service: STT denoised input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=1504 rms=0.1808 peak=0.8524 n=24064 sr=16000
-2026-04-02 19:18:07,134 INFO faster_whisper: Processing audio with duration 00:01.504
-2026-04-02 19:18:08,092 INFO services.agent_service: STT transcript client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 text='Maybe?'
-2026-04-02 19:18:08,093 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=transcript data={'type': 'transcript', 'text': 'Maybe?'}
-2026-04-02 19:18:08,093 INFO services.delivery_state_machine: STATE_1: invalid input (retry 2) client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:18:08,093 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-02 19:18:08,587 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=response data={'type': 'response', 'text': "Sorry, I didn't understand. Could you repeat?"}
-2026-04-02 19:18:08,588 INFO services.agent_service: TTS audio client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 phrase_len=45 rate=48000 samples=135419 dtype=float32
-2026-04-02 19:18:09,943 INFO services.agent_service: TTS frames queued client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 frames=142
-2026-04-02 19:18:09,945 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=response data={'type': 'response', 'text': "Sorry, I didn't understand. Could you repeat?"}
-2026-04-02 19:18:11,073 INFO services.agent_service: TTS scheduler stopped client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:18:11,076 INFO services.agent_service: State machine: transitioned to state_1 client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:18:13,371 INFO services.webrtc_service: VAD speech_start client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 p=0.834
-2026-04-02 19:18:14,587 INFO services.webrtc_service: Utterance end client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 samples=25600
-2026-04-02 19:18:14,589 INFO services.agent_service: STT raw input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=1600 rms=0.1576 peak=0.7954 n=25600 sr=16000
-2026-04-02 19:18:14,590 INFO services.agent_service: STT denoised input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=1600 rms=0.1576 peak=0.7954 n=25600 sr=16000
-2026-04-02 19:18:14,590 INFO faster_whisper: Processing audio with duration 00:01.600
-2026-04-02 19:18:15,510 INFO services.agent_service: STT transcript client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 text='Baby'
-2026-04-02 19:18:15,510 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=transcript data={'type': 'transcript', 'text': 'Baby'}
-2026-04-02 19:18:15,511 INFO services.delivery_state_machine: STATE_1: invalid input (retry 3) client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:18:15,511 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-02 19:18:16,644 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=response data={'type': 'response', 'text': "Sorry, I didn't understand. Could you repeat?"}
-2026-04-02 19:18:16,645 INFO services.agent_service: TTS audio client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 phrase_len=45 rate=48000 samples=139320 dtype=float32
-2026-04-02 19:18:17,487 INFO services.agent_service: TTS frames queued client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 frames=146
-2026-04-02 19:18:17,487 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=response data={'type': 'response', 'text': "Sorry, I didn't understand. Could you repeat?"}
-2026-04-02 19:18:18,618 INFO services.agent_service: TTS scheduler stopped client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:18:18,619 INFO services.agent_service: State machine: transitioned to state_1 client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:18:19,994 INFO services.webrtc_service: VAD speech_start client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 p=0.872
-2026-04-02 19:18:20,912 INFO services.webrtc_service: Utterance end client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 samples=20992
-2026-04-02 19:18:20,917 INFO services.agent_service: STT raw input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=1312 rms=0.1207 peak=0.9334 n=20992 sr=16000
-2026-04-02 19:18:20,918 INFO services.agent_service: STT denoised input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=1312 rms=0.1207 peak=0.9334 n=20992 sr=16000
-2026-04-02 19:18:20,919 INFO faster_whisper: Processing audio with duration 00:01.312
-2026-04-02 19:18:21,871 INFO services.agent_service: STT transcript client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 text='No'
-2026-04-02 19:18:21,871 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=transcript data={'type': 'transcript', 'text': 'No'}
-2026-04-02 19:18:21,872 INFO services.delivery_state_machine: STATE_1: NO detected client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 → STATE_2
-2026-04-02 19:18:21,872 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-02 19:18:22,518 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=response data={'type': 'response', 'text': "Can you give me a reason ? You can say 'list' to hear the options or ask for it ."}
-2026-04-02 19:18:22,519 INFO services.agent_service: TTS audio client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 phrase_len=81 rate=48000 samples=196162 dtype=float32
-2026-04-02 19:18:24,976 INFO services.agent_service: TTS frames queued client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 frames=205
-2026-04-02 19:18:24,977 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=response data={'type': 'response', 'text': "Can you give me a reason ? You can say 'list' to hear the options or ask for it ."}
-2026-04-02 19:18:26,111 INFO services.agent_service: TTS scheduler stopped client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:18:26,113 INFO services.agent_service: State machine: transitioned to state_2 client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:18:28,131 INFO services.webrtc_service: VAD speech_start client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 p=0.859
-2026-04-02 19:18:29,260 INFO services.webrtc_service: Utterance end client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 samples=24576
-2026-04-02 19:18:29,262 INFO services.agent_service: STT raw input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=1536 rms=0.1048 peak=0.8193 n=24576 sr=16000
-2026-04-02 19:18:29,262 INFO services.agent_service: STT denoised input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=1536 rms=0.1048 peak=0.8193 n=24576 sr=16000
-2026-04-02 19:18:29,263 INFO faster_whisper: Processing audio with duration 00:01.536
-2026-04-02 19:18:30,169 ERROR services.whisper_service: Whisper (faster) transcribe failed
+2026-04-02 19:32:41,868 INFO services.webrtc_service: VAD speech_start client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 p=0.880
+2026-04-02 19:32:45,119 INFO services.webrtc_service: Utterance end client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 samples=51200
+2026-04-02 19:32:45,127 INFO services.agent_service: STT raw input client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 ms=3200 rms=0.1165 peak=0.7804 n=51200 sr=16000
+2026-04-02 19:32:45,128 INFO services.agent_service: STT denoised input client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 ms=3200 rms=0.1165 peak=0.7804 n=51200 sr=16000
+2026-04-02 19:32:45,129 INFO faster_whisper: Processing audio with duration 00:03.200
+2026-04-02 19:32:46,270 INFO services.agent_service: STT transcript client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 text='Hello, start the navigation.'
+2026-04-02 19:32:46,271 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 type=transcript data={'type': 'transcript', 'text': 'Hello, start the navigation.'}
+2026-04-02 19:32:46,586 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 type=intent data={'type': 'intent', 'intent': 'start_navigation'}
+2026-04-02 19:32:46,587 INFO services.action_service: Intent connue [start_navigation] → exécution locale client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6
+2026-04-02 19:32:46,587 INFO services.action_service: ACTION: start_navigation
+2026-04-02 19:32:46,587 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.START_NAVIGATION', 'extras': {'id': '69cea258fb98e15a3cf53554'}}
+2026-04-02 19:32:46,587 INFO services.action_service: 🗺️ External control sent client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 action=START_NAVIGATION trip_id=69cea258fb98e15a3cf53554
+2026-04-02 19:32:46,588 INFO services.agent_service: Action result client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 ActionResult(handled=True, intent='start_navigation', text_to_llm=None, response='Starting navigation to the next destination.')
+2026-04-02 19:32:46,588 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 19:32:47,015 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 type=arrived data={'type': 'arrived', 'id': '69cea258fb98e15a3cf53554'}
+2026-04-02 19:32:47,015 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 type=arrived data={'type': 'arrived', 'id': '69cea258fb98e15a3cf53554'}
+2026-04-02 19:32:47,039 INFO services.agent_service: 📮 EXTERNAL CONTROL REÇU client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 action=arrived extras={'trip_id': '69cea258fb98e15a3cf53554'}
+2026-04-02 19:32:47,040 INFO services.agent_service: ✅ Traitement action arrived pour client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6
+2026-04-02 19:32:47,040 INFO services.agent_service: 🚚 DRIVER ARRIVÉ client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 trip_id=69cea258fb98e15a3cf53554
+2026-04-02 19:32:47,040 INFO services.agent_service: 🔇 Interrupting current TTS before arrived action client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6
+2026-04-02 19:32:47,040 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 type=tts_stop_now data={'type': 'tts_stop_now'}
+2026-04-02 19:32:47,040 INFO services.agent_service: 🚀 Démarrage de la state machine pour client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6
+2026-04-02 19:32:47,040 INFO services.delivery_state_machine: State machine: entered MODE_1 → STATE_1 client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 trip_id=69cea258fb98e15a3cf53554
+2026-04-02 19:32:47,040 INFO services.agent_service: 🗣️ Envoi question TTS: 'Is the delivery completed?' (NON-INTERRUPTIBLE)
+2026-04-02 19:32:47,041 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 19:32:47,041 INFO services.agent_service: TTS scheduler stopped client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6
+2026-04-02 19:32:47,227 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 type=tts_test data={'type': 'tts_test', 'text': 'Is the delivery completed?'}
+2026-04-02 19:32:47,227 INFO services.agent_service: TTS audio client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 phrase_len=26 rate=48000 samples=72446 dtype=float32
+2026-04-02 19:32:47,670 INFO services.agent_service: TTS frames queued client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 frames=76
+2026-04-02 19:32:48,799 INFO services.agent_service: TTS scheduler stopped client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6
+2026-04-02 19:32:52,086 INFO services.webrtc_service: VAD speech_start client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 p=0.820
+2026-04-02 19:32:53,237 INFO services.webrtc_service: Utterance end client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 samples=24064
+2026-04-02 19:32:53,239 INFO services.agent_service: STT raw input client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 ms=1504 rms=0.0942 peak=0.8164 n=24064 sr=16000
+2026-04-02 19:32:53,240 INFO services.agent_service: STT denoised input client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 ms=1504 rms=0.0942 peak=0.8164 n=24064 sr=16000
+2026-04-02 19:32:53,240 INFO faster_whisper: Processing audio with duration 00:01.504
+2026-04-02 19:32:54,224 INFO services.agent_service: STT transcript client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 text='Yes.'
+2026-04-02 19:32:54,224 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 type=transcript data={'type': 'transcript', 'text': 'Yes.'}
+2026-04-02 19:32:54,225 INFO services.delivery_state_machine: STATE_1: YES detected client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6
+2026-04-02 19:32:54,225 INFO services.delivery_state_machine: STATE_1: next trip announced client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 trip_id=69cea26efb98e15a3cf53556 address=Cité El Khadra, client=jhon is_last=False
+2026-04-02 19:32:54,226 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 19:32:55,184 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 type=response data={'type': 'response', 'text': 'the delivery is now completed. You are now heading to Cité El Khadra,. The client is jhon.'}
+2026-04-02 19:32:55,185 INFO services.agent_service: TTS audio client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 phrase_len=90 rate=48000 samples=244645 dtype=float32
+2026-04-02 19:32:57,231 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.START_NAVIGATION', 'extras': {'id': '69cea26efb98e15a3cf53556'}}
+2026-04-02 19:32:57,233 INFO services.delivery_state_machine: 🗺️ Auto start_navigation sent client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 trip_id=69cea26efb98e15a3cf53556
+2026-04-02 19:32:57,326 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 type=arrived data={'type': 'arrived', 'id': '69cea26efb98e15a3cf53556'}
+2026-04-02 19:32:57,328 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 type=arrived data={'type': 'arrived', 'id': '69cea26efb98e15a3cf53556'}
+2026-04-02 19:32:57,329 INFO services.agent_service: 📮 EXTERNAL CONTROL REÇU client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 action=arrived extras={'trip_id': '69cea26efb98e15a3cf53556'}
+2026-04-02 19:32:57,329 INFO services.agent_service: ✅ Traitement action arrived pour client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6
+2026-04-02 19:32:57,329 INFO services.agent_service: 🚚 DRIVER ARRIVÉ client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 trip_id=69cea26efb98e15a3cf53556
+2026-04-02 19:32:57,330 INFO services.agent_service: 🔇 Interrupting current TTS before arrived action client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6
+2026-04-02 19:32:57,330 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 type=tts_stop_now data={'type': 'tts_stop_now'}
+2026-04-02 19:32:57,331 INFO services.agent_service: 🚀 Démarrage de la state machine pour client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6
+2026-04-02 19:32:57,331 INFO services.delivery_state_machine: State machine: entered MODE_1 → STATE_1 client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 trip_id=69cea26efb98e15a3cf53556
+2026-04-02 19:32:57,331 INFO services.agent_service: 🗣️ Envoi question TTS: 'Is the delivery completed?' (NON-INTERRUPTIBLE)
+2026-04-02 19:32:57,332 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 19:32:57,334 INFO services.agent_service: TTS scheduler stopped client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6
+2026-04-02 19:32:57,623 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 type=tts_test data={'type': 'tts_test', 'text': 'Is the delivery completed?'}
+2026-04-02 19:32:57,623 INFO services.agent_service: TTS audio client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 phrase_len=26 rate=48000 samples=72446 dtype=float32
+2026-04-02 19:32:59,294 INFO services.agent_service: TTS frames queued client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 frames=255
+2026-04-02 19:32:59,295 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 type=response data={'type': 'response', 'text': 'the delivery is now completed. You are now heading to Cité El Khadra,. The client is jhon.'}
+2026-04-02 19:32:59,450 INFO cli_logger: ✅ SUCCÈS: Token valide jusqu'au 2026-04-03 00:08:14
+2026-04-02 19:32:59,452 INFO cli_logger: Mise à jour du package 69cea26efb98e15a3cf53556 vers: delivered_successfully
+2026-04-02 19:32:59,452 INFO cli_logger: Récupération du package par ID: 69cea26efb98e15a3cf53556
+2026-04-02 19:32:59,452 INFO cli_logger: Récupération de l'instance: 69cea26efb98e15a3cf53556
+2026-04-02 19:32:59,459 INFO services.agent_service: TTS frames queued client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 frames=76
+2026-04-02 19:32:59,638 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-02 19:32:59,724 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cea26efb98e15a3cf53556
+2026-04-02 19:32:59,725 INFO cli_logger: Mise à jour de l'instance: 69cea26efb98e15a3cf53556
+2026-04-02 19:32:59,772 INFO cli_logger: ✅ SUCCÈS: Instance 69cea26efb98e15a3cf53556 mise à jour
+2026-04-02 19:32:59,773 INFO cli_logger: ✅ SUCCÈS: Package 69cea26efb98e15a3cf53556 mis à jour: planned -> delivered_successfully
+2026-04-02 19:32:59,775 INFO cli_logger: ✅ SUCCÈS: Package 69cea26efb98e15a3cf53556 supprimé de data.json
+2026-04-02 19:32:59,775 INFO services.delivery_state_machine: Package 69cea26efb98e15a3cf53556 updated: status=COMPLETED, reason=N/A
+2026-04-02 19:32:59,780 INFO services.agent_service: ✅ Trip updated client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 trip_id=69cea26efb98e15a3cf53556 status=COMPLETED
+2026-04-02 19:32:59,780 INFO services.agent_service: State machine: transitioned to state_5 client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6
+2026-04-02 19:32:59,780 INFO services.agent_service: State machine: auto-exit to MODE_0 client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6
+2026-04-02 19:33:00,005 INFO services.agent_service: TTS scheduler stopped client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6
+2026-04-02 19:33:03,727 INFO services.webrtc_service: VAD speech_start client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 p=0.919
+2026-04-02 19:33:04,565 INFO services.webrtc_service: Utterance end client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 samples=19456
+2026-04-02 19:33:04,566 INFO services.agent_service: STT raw input client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 ms=1216 rms=0.1669 peak=0.8948 n=19456 sr=16000
+2026-04-02 19:33:04,566 INFO services.agent_service: STT denoised input client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 ms=1216 rms=0.1669 peak=0.8948 n=19456 sr=16000
+2026-04-02 19:33:04,567 INFO faster_whisper: Processing audio with duration 00:01.216
+2026-04-02 19:33:05,367 ERROR services.whisper_service: Whisper (faster) transcribe failed
 Traceback (most recent call last):
   File "/home/server/aiserver/services/whisper_service.py", line 240, in _transcribe_embedded_pcm
     text, detected_language = await asyncio.to_thread(_do_transcribe_faster)
@@ -130,154 +96,24 @@ Traceback (most recent call last):
   File "/home/server/.local/lib/python3.10/site-packages/faster_whisper/transcribe.py", line 1446, in generate_with_fallback
     result = self.model.generate(
 RuntimeError: CUDA failed with error out of memory
-2026-04-02 19:18:30,172 INFO services.agent_service: STT transcript client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 text=''
-2026-04-02 19:18:30,172 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=stt_empty data={'type': 'stt_empty'}
-2026-04-02 19:18:33,806 INFO services.webrtc_service: VAD speech_start client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 p=0.828
-2026-04-02 19:18:34,898 INFO services.webrtc_service: Utterance end client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 samples=23552
-2026-04-02 19:18:34,903 INFO services.agent_service: STT raw input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=1472 rms=0.0933 peak=0.7192 n=23552 sr=16000
-2026-04-02 19:18:34,904 INFO services.agent_service: STT denoised input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=1472 rms=0.0933 peak=0.7192 n=23552 sr=16000
-2026-04-02 19:18:34,905 INFO faster_whisper: Processing audio with duration 00:01.472
-2026-04-02 19:18:35,820 INFO services.agent_service: STT transcript client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 text='least'
-2026-04-02 19:18:35,820 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=transcript data={'type': 'transcript', 'text': 'least'}
-2026-04-02 19:18:35,882 INFO services.delivery_state_machine: STATE_2: no number detected (retry 4) client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:18:35,883 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-02 19:18:36,458 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=response data={'type': 'response', 'text': "Sorry, I didn't understand. Could you repeat?"}
-2026-04-02 19:18:36,458 INFO services.agent_service: TTS audio client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 phrase_len=45 rate=48000 samples=120372 dtype=float32
-2026-04-02 19:18:37,432 INFO services.agent_service: TTS frames queued client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 frames=126
-2026-04-02 19:18:37,433 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=response data={'type': 'response', 'text': "Sorry, I didn't understand. Could you repeat?"}
-2026-04-02 19:18:38,587 INFO services.agent_service: TTS scheduler stopped client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:18:38,589 INFO services.agent_service: State machine: transitioned to state_2 client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:18:40,703 INFO services.webrtc_service: VAD speech_start client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 p=0.835
-2026-04-02 19:18:44,695 INFO services.webrtc_service: Utterance end client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 samples=67584
-2026-04-02 19:18:44,699 INFO services.agent_service: STT raw input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=4224 rms=0.1182 peak=0.7645 n=67584 sr=16000
-2026-04-02 19:18:44,700 INFO services.agent_service: STT denoised input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=4224 rms=0.1182 peak=0.7645 n=67584 sr=16000
-2026-04-02 19:18:44,700 INFO faster_whisper: Processing audio with duration 00:04.224
-2026-04-02 19:18:45,686 INFO services.agent_service: STT transcript client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 text='of the very final result.'
-2026-04-02 19:18:45,687 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=transcript data={'type': 'transcript', 'text': 'of the very final result.'}
-2026-04-02 19:18:45,762 INFO services.delivery_state_machine: STATE_2: no number detected (retry 5) client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:18:45,762 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-02 19:18:46,275 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=response data={'type': 'response', 'text': "Sorry, I didn't understand. Could you repeat?"}
-2026-04-02 19:18:46,276 INFO services.agent_service: TTS audio client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 phrase_len=45 rate=48000 samples=127060 dtype=float32
-2026-04-02 19:18:47,425 INFO services.agent_service: TTS frames queued client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 frames=133
-2026-04-02 19:18:47,427 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=response data={'type': 'response', 'text': "Sorry, I didn't understand. Could you repeat?"}
-2026-04-02 19:18:48,560 INFO services.agent_service: TTS scheduler stopped client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:18:48,562 INFO services.agent_service: State machine: transitioned to state_2 client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:19:06,545 INFO services.webrtc_service: VAD speech_start client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 p=0.872
-2026-04-02 19:19:11,422 INFO services.webrtc_service: Utterance end client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 samples=81408
-2026-04-02 19:19:11,425 INFO services.agent_service: STT raw input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=5088 rms=0.1167 peak=0.8336 n=81408 sr=16000
-2026-04-02 19:19:11,425 INFO services.agent_service: STT denoised input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=5088 rms=0.1167 peak=0.8336 n=81408 sr=16000
-2026-04-02 19:19:11,427 INFO faster_whisper: Processing audio with duration 00:05.088
-2026-04-02 19:19:12,425 INFO services.agent_service: STT transcript client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 text='Tell me if possible result of the very failure.'
-2026-04-02 19:19:12,426 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=transcript data={'type': 'transcript', 'text': 'Tell me if possible result of the very failure.'}
-2026-04-02 19:19:12,490 INFO services.delivery_state_machine: STATE_2: failure reason list requested via intent client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:19:12,490 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-02 19:19:14,055 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=response data={'type': 'response', 'text': 'Failure reasons: 1. Customer not available, 2. Wrong address, 3. Package damaged, 4. Access denied, 5. Vehicle breakdown, 6. Other'}
-2026-04-02 19:19:14,056 INFO services.agent_service: TTS audio client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 phrase_len=130 rate=48000 samples=485390 dtype=float32
-2026-04-02 19:19:21,646 INFO services.agent_service: TTS frames queued client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 frames=506
-2026-04-02 19:19:21,647 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=response data={'type': 'response', 'text': 'Failure reasons: 1. Customer not available, 2. Wrong address, 3. Package damaged, 4. Access denied, 5. Vehicle breakdown, 6. Other'}
-2026-04-02 19:19:22,782 INFO services.agent_service: TTS scheduler stopped client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:19:22,783 INFO services.agent_service: State machine: transitioned to state_2 client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:19:24,560 INFO services.webrtc_service: VAD speech_start client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 p=0.897
-2026-04-02 19:19:26,452 INFO services.webrtc_service: Utterance end client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 samples=36352
-2026-04-02 19:19:26,457 INFO services.agent_service: STT raw input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=2272 rms=0.1742 peak=0.8950 n=36352 sr=16000
-2026-04-02 19:19:26,458 INFO services.agent_service: STT denoised input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=2272 rms=0.1742 peak=0.8950 n=36352 sr=16000
-2026-04-02 19:19:26,459 INFO faster_whisper: Processing audio with duration 00:02.272
-2026-04-02 19:19:27,387 INFO services.agent_service: STT transcript client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 text='Number one.'
-2026-04-02 19:19:27,388 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=transcript data={'type': 'transcript', 'text': 'Number one.'}
-2026-04-02 19:19:27,442 INFO services.delivery_state_machine: STATE_2: reason selected #1: Customer not available client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:19:27,442 INFO services.delivery_state_machine: STATE_2: reason 1 selected → requesting photo client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:19:27,442 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=ask_photo_event data={'type': 'ask_photo_event', 'trip_id': '69cea258fb98e15a3cf53554', 'delivery_id': '69cea258fb98e15a3cf53554', 'address': 'the delivery location', 'timestamp': '2026-04-02T18:19:27.442608'}
-2026-04-02 19:19:27,443 INFO services.delivery_state_machine: 📸 ask_photo_event sent client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 trip_id=69cea258fb98e15a3cf53554
-2026-04-02 19:19:27,443 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-02 19:19:27,818 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=response data={'type': 'response', 'text': 'Can you please take a photo of the package?'}
-2026-04-02 19:19:27,820 INFO services.agent_service: TTS audio client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 phrase_len=43 rate=48000 samples=100310 dtype=float32
-2026-04-02 19:19:28,544 INFO services.agent_service: TTS frames queued client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 frames=105
-2026-04-02 19:19:28,545 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=response data={'type': 'response', 'text': 'Can you please take a photo of the package?'}
-2026-04-02 19:19:29,694 INFO services.agent_service: TTS scheduler stopped client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:19:29,696 INFO services.agent_service: State machine: transitioned to state_6 client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:19:32,373 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=photo_taken data={'type': 'photo_taken', 'trip_id': '69cea258fb98e15a3cf53554', 'delivery_id': '69cea258fb98e15a3cf53554'}
-2026-04-02 19:19:32,374 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=photo_taken data={'type': 'photo_taken', 'trip_id': '69cea258fb98e15a3cf53554', 'delivery_id': '69cea258fb98e15a3cf53554'}
-2026-04-02 19:19:32,375 INFO services.agent_service: 📮 EXTERNAL CONTROL REÇU client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 action=photo_taken extras={'type': 'photo_taken', 'trip_id': '69cea258fb98e15a3cf53554', 'delivery_id': '69cea258fb98e15a3cf53554'}
-2026-04-02 19:19:32,375 INFO services.agent_service: ✅ Traitement action photo_taken pour client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:19:32,375 INFO services.delivery_state_machine: 📸 Photo response received client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 photo_taken=True
-2026-04-02 19:19:32,378 INFO cli_logger: ✅ SUCCÈS: Token valide jusqu'au 2026-04-03 00:08:14
-2026-04-02 19:19:32,378 INFO cli_logger: Mise à jour du package 69cea258fb98e15a3cf53554 vers: delivered_successfully
-2026-04-02 19:19:32,378 INFO cli_logger: Récupération du package par ID: 69cea258fb98e15a3cf53554
-2026-04-02 19:19:32,379 INFO cli_logger: Récupération de l'instance: 69cea258fb98e15a3cf53554
-2026-04-02 19:19:32,729 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
-2026-04-02 19:19:32,823 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cea258fb98e15a3cf53554
-2026-04-02 19:19:32,824 INFO cli_logger: Mise à jour de l'instance: 69cea258fb98e15a3cf53554
-2026-04-02 19:19:32,874 INFO cli_logger: ✅ SUCCÈS: Instance 69cea258fb98e15a3cf53554 mise à jour
-2026-04-02 19:19:32,875 INFO cli_logger: ✅ SUCCÈS: Package 69cea258fb98e15a3cf53554 mis à jour: planned -> delivered_successfully
-2026-04-02 19:19:32,877 INFO cli_logger: ✅ SUCCÈS: Package 69cea258fb98e15a3cf53554 supprimé de data.json
-2026-04-02 19:19:32,877 INFO services.delivery_state_machine: Package 69cea258fb98e15a3cf53554 updated: status=COMPLETED, reason=N/A
-2026-04-02 19:19:32,895 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=emotion data={'type': 'emotion', 'name': 'happy'}
-2026-04-02 19:19:32,898 INFO services.delivery_state_machine: 😊 Emotion sent client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 name=happy
-2026-04-02 19:19:32,898 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=emotion data={'type': 'emotion', 'name': 'end'}
-2026-04-02 19:19:32,898 INFO services.delivery_state_machine: 😊 Emotion sent client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 name=end
-2026-04-02 19:19:32,898 INFO services.delivery_state_machine: 📢 Next trip announced client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 address=Cité El Khadra, client=avrel is_last=True
-2026-04-02 19:19:32,898 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-02 19:19:33,223 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=tts_test data={'type': 'tts_test', 'text': 'Delivery completed successfully.'}
-2026-04-02 19:19:33,223 INFO services.agent_service: TTS audio client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 phrase_len=32 rate=48000 samples=90836 dtype=float32
-2026-04-02 19:19:34,127 INFO services.agent_service: TTS frames queued client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 frames=95
-2026-04-02 19:19:34,128 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=tts_test data={'type': 'tts_test', 'text': 'You are now heading to Cité El Khadra,.'}
-2026-04-02 19:19:34,128 INFO services.agent_service: TTS audio client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 phrase_len=39 rate=48000 samples=95295 dtype=float32
-2026-04-02 19:19:35,819 INFO services.agent_service: TTS frames queued client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 frames=100
-2026-04-02 19:19:35,821 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=tts_test data={'type': 'tts_test', 'text': 'The client is avrel.'}
-2026-04-02 19:19:35,824 INFO services.agent_service: TTS audio client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 phrase_len=20 rate=48000 samples=60186 dtype=float32
-2026-04-02 19:19:37,082 INFO services.agent_service: TTS frames queued client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 frames=63
-2026-04-02 19:19:37,082 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=tts_test data={'type': 'tts_test', 'text': 'This is your last delivery.'}
-2026-04-02 19:19:37,083 INFO services.agent_service: TTS audio client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 phrase_len=27 rate=48000 samples=75233 dtype=float32
-2026-04-02 19:19:38,660 INFO services.agent_service: TTS frames queued client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 frames=79
-2026-04-02 19:19:39,803 INFO services.agent_service: TTS scheduler stopped client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:19:42,807 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.START_NAVIGATION', 'extras': {'id': '69cea29efb98e15a3cf5355a'}}
-2026-04-02 19:19:42,808 INFO services.delivery_state_machine: 🗺️ Auto start_navigation sent client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 trip_id=69cea29efb98e15a3cf5355a
-2026-04-02 19:19:42,857 INFO services.websocket_service: 📨 WS MESSAGE RECEIVED client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=arrived data={'type': 'arrived', 'id': '69cea29efb98e15a3cf5355a'}
-2026-04-02 19:19:42,859 INFO services.notification_service: 📨 NOTIFICATION RECEIVED client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=arrived data={'type': 'arrived', 'id': '69cea29efb98e15a3cf5355a'}
-2026-04-02 19:19:42,859 INFO services.agent_service: 📮 EXTERNAL CONTROL REÇU client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 action=arrived extras={'trip_id': '69cea29efb98e15a3cf5355a'}
-2026-04-02 19:19:42,860 INFO services.agent_service: ✅ Traitement action arrived pour client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:19:42,860 INFO services.agent_service: 🚚 DRIVER ARRIVÉ client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 trip_id=69cea29efb98e15a3cf5355a
-2026-04-02 19:19:42,860 INFO services.agent_service: 🚀 Démarrage de la state machine pour client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:19:42,861 INFO services.delivery_state_machine: State machine: entered MODE_1 → STATE_1 client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 trip_id=69cea29efb98e15a3cf5355a
-2026-04-02 19:19:42,861 INFO services.agent_service: ⏳ Waiting for processing_lock to ask question client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:19:42,862 INFO services.agent_service: 🗣️ Envoi question TTS: 'Is the delivery completed?' (NON-INTERRUPTIBLE)
-2026-04-02 19:19:42,862 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-02 19:19:43,084 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=tts_test data={'type': 'tts_test', 'text': 'Is the delivery completed?'}
-2026-04-02 19:19:43,085 INFO services.agent_service: TTS audio client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 phrase_len=26 rate=48000 samples=69660 dtype=float32
-2026-04-02 19:19:43,345 INFO services.agent_service: TTS frames queued client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 frames=73
-2026-04-02 19:19:44,487 INFO services.agent_service: TTS scheduler stopped client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:19:49,989 INFO services.webrtc_service: VAD speech_start client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 p=0.835
-2026-04-02 19:19:51,710 INFO services.webrtc_service: Utterance end client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 samples=33792
-2026-04-02 19:19:51,716 INFO services.agent_service: STT raw input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=2112 rms=0.1083 peak=0.8337 n=33792 sr=16000
-2026-04-02 19:19:51,717 INFO services.agent_service: STT denoised input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=2112 rms=0.1083 peak=0.8337 n=33792 sr=16000
-2026-04-02 19:19:51,718 INFO faster_whisper: Processing audio with duration 00:02.112
-2026-04-02 19:19:52,651 INFO services.agent_service: STT transcript client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 text='Yes, it is.'
-2026-04-02 19:19:52,651 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=transcript data={'type': 'transcript', 'text': 'Yes, it is.'}
-2026-04-02 19:19:52,652 INFO services.delivery_state_machine: STATE_1: YES detected client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:19:52,652 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-02 19:19:52,935 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=response data={'type': 'response', 'text': 'the delivery has been marked as completed.'}
-2026-04-02 19:19:52,935 INFO services.agent_service: TTS audio client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 phrase_len=42 rate=48000 samples=101425 dtype=float32
-2026-04-02 19:19:53,781 INFO services.agent_service: TTS frames queued client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 frames=106
-2026-04-02 19:19:53,782 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=response data={'type': 'response', 'text': 'the delivery has been marked as completed.'}
-2026-04-02 19:19:54,910 INFO services.agent_service: TTS scheduler stopped client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:19:54,915 INFO cli_logger: ✅ SUCCÈS: Token valide jusqu'au 2026-04-03 00:08:14
-2026-04-02 19:19:54,915 INFO cli_logger: Mise à jour du package 69cea29efb98e15a3cf5355a vers: delivered_successfully
-2026-04-02 19:19:54,916 INFO cli_logger: Récupération du package par ID: 69cea29efb98e15a3cf5355a
-2026-04-02 19:19:54,916 INFO cli_logger: Récupération de l'instance: 69cea29efb98e15a3cf5355a
-2026-04-02 19:19:55,065 INFO cli_logger: Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
-2026-04-02 19:19:55,154 INFO cli_logger: ✅ SUCCÈS: Package trouvé: 69cea29efb98e15a3cf5355a
-2026-04-02 19:19:55,156 INFO cli_logger: Mise à jour de l'instance: 69cea29efb98e15a3cf5355a
-2026-04-02 19:19:55,211 INFO cli_logger: ✅ SUCCÈS: Instance 69cea29efb98e15a3cf5355a mise à jour
-2026-04-02 19:19:55,213 INFO cli_logger: ✅ SUCCÈS: Package 69cea29efb98e15a3cf5355a mis à jour: planned -> delivered_successfully
-2026-04-02 19:19:55,217 INFO cli_logger: ✅ SUCCÈS: Package 69cea29efb98e15a3cf5355a supprimé de data.json
-2026-04-02 19:19:55,217 INFO services.delivery_state_machine: Package 69cea29efb98e15a3cf5355a updated: status=COMPLETED, reason=N/A
-2026-04-02 19:19:55,222 INFO services.agent_service: ✅ Trip updated client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 trip_id=69cea29efb98e15a3cf5355a status=COMPLETED
-2026-04-02 19:19:55,223 INFO services.agent_service: State machine: transitioned to state_5 client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
-2026-04-02 19:20:06,663 INFO services.webrtc_service: VAD speech_start client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 p=0.812
-2026-04-02 19:20:08,506 INFO services.webrtc_service: Utterance end client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 samples=34816
-2026-04-02 19:20:08,513 INFO services.agent_service: STT raw input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=2176 rms=0.0675 peak=0.5272 n=34816 sr=16000
-2026-04-02 19:20:08,514 INFO services.agent_service: STT denoised input client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 ms=2176 rms=0.0675 peak=0.5272 n=34816 sr=16000
-2026-04-02 19:20:08,515 INFO faster_whisper: Processing audio with duration 00:02.176
-2026-04-02 19:20:09,467 INFO services.agent_service: STT transcript client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 text='Thank you, what next?'
-2026-04-02 19:20:09,467 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556 type=transcript data={'type': 'transcript', 'text': 'Thank you, what next?'}
-2026-04-02 19:20:09,467 INFO services.delivery_state_machine: STATE_5: exiting to MODE_0 client_id=4fb4eefc-a05a-4c38-aa4d-370dbe592556
+2026-04-02 19:33:05,369 INFO services.agent_service: STT transcript client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 text=''
+2026-04-02 19:33:05,370 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 type=stt_empty data={'type': 'stt_empty'}
+2026-04-02 19:33:22,925 INFO services.webrtc_service: VAD speech_start client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 p=0.846
+2026-04-02 19:33:23,603 INFO services.webrtc_service: VAD short_utterance_ignored client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 speech_chunks=0
+2026-04-02 19:33:34,205 INFO services.webrtc_service: VAD speech_start client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 p=0.807
+2026-04-02 19:33:35,560 INFO services.webrtc_service: Utterance end client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 samples=26112
+2026-04-02 19:33:35,568 INFO services.agent_service: STT raw input client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 ms=1632 rms=0.1134 peak=0.8689 n=26112 sr=16000
+2026-04-02 19:33:35,569 INFO services.agent_service: STT denoised input client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 ms=1632 rms=0.1134 peak=0.8689 n=26112 sr=16000
+2026-04-02 19:33:35,570 INFO faster_whisper: Processing audio with duration 00:01.632
+2026-04-02 19:33:36,561 INFO services.agent_service: STT transcript client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 text='I said do.'
+2026-04-02 19:33:36,561 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 type=transcript data={'type': 'transcript', 'text': 'I said do.'}
+2026-04-02 19:33:37,535 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 type=intent data={'type': 'intent', 'intent': 'INCONNU'}
+2026-04-02 19:33:37,536 INFO services.action_service: Intent INCONNU → forward to LLM client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 text='I said do.'
+2026-04-02 19:33:37,536 INFO services.agent_service: Action result client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 ActionResult(handled=False, intent='INCONNU', text_to_llm='I said do.', response=None)
+2026-04-02 19:33:37,854 INFO httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-04-02 19:33:38,508 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-02 19:33:38,508 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 type=response data={'type': 'response', 'text': 'Start the navigation to the next destination.'}
+2026-04-02 19:33:38,509 INFO services.agent_service: TTS audio client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 phrase_len=45 rate=48000 samples=120372 dtype=float32
+2026-04-02 19:33:39,727 INFO services.agent_service: TTS frames queued client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 frames=126
+2026-04-02 19:33:39,728 INFO services.websocket_service: 📤 WS MESSAGE SENT client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6 type=response data={'type': 'response', 'text': 'Start the navigation to the next destination.'}
+2026-04-02 19:33:40,857 INFO services.agent_service: TTS scheduler stopped client_id=e65eeeb0-8671-4b61-8b0e-71ad38db90d6
