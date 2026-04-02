@@ -39,6 +39,7 @@ class ActionService:
         self._logger = logging.getLogger(__name__)
         self._ws_service = None
         self._data_file = Path("data.json")
+        self.start_navigation_in_progress = False  # Pour éviter les envois multiples d'événements start_navigation
 
     def set_ws_service(self, ws_service) -> None:
         """Injection tardive de WebSocketService pour envoyer des événements."""
@@ -158,7 +159,11 @@ class ActionService:
 
         # Envoyer un événement external_control pour start_navigation
         if intent == "start_navigation":
-            await self._send_start_navigation_event(session)
+            if not self.start_navigation_in_progress:
+                await self._send_start_navigation_event(session)
+                self.start_navigation_in_progress = True
+            else:
+                self._logger.info("Start navigation already in progress, skipping event send")
 
         # Envoyer un événement external_control pour show_deliveries
         if intent == "show_deliveries":

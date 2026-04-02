@@ -253,7 +253,12 @@ class AgentService:
                     # La machine à états gère cet input
                     if state_result.tts_response:
                         # Envoyer la réponse TTS
-                        await self._speak_state_response(session, request_id, state_result.tts_response)
+                        await self._speak_state_response(
+                            session,
+                            request_id,
+                            state_result.tts_response,
+                            interruptible=state_result.interruptible,
+                        )
 
                     if state_result.action == "update_trip":
                         # Mettre à jour le trip via PlanningService
@@ -372,7 +377,11 @@ class AgentService:
                             await self.ws_service.send_response_chunk(session, action_result.response)
 
                         # Attendre que la queue soit presque vide
-                        await self._wait_queue_empty(session, request_id, timeout=5.0)
+                        await self._wait_queue_empty(session, request_id, timeout=2.0)
+
+                        # Si annulé, sortir vite sans flush
+                        if session.cancel_flag or session.current_request_id != request_id:
+                            return
 
                         # Flush de fin : 100ms de silence
                         await self._flush_tts_queue(session, request_id, silence_frames=5)
@@ -386,7 +395,11 @@ class AgentService:
                     if not scheduler_task.done():
                         scheduler_task.cancel()
                     with suppress(asyncio.CancelledError):
-                        await scheduler_task
+                        # Attendre max 0.5s le scheduler pour éviter de bloquer trop longtemps
+                        try:
+                            await asyncio.wait_for(scheduler_task, timeout=0.5)
+                        except asyncio.TimeoutError:
+                            logger.warning("⚠️ Timeout waiting for scheduler task client_id=%s", session.client_id)
 
                     session.tts_playing = False
                     session.reset_tts_output_state()
@@ -470,6 +483,14 @@ class AgentService:
             return
         if not (session.tts_playing or session.processing_lock.locked()):
             return
+        
+        # Vérifier si le TTS en cours est interruptible
+        if not session.tts_interruptible:
+            logger.info(
+                "🔇 Interruption blocked (non-interruptible TTS) client_id=%s",
+                session.client_id,
+            )
+            return
 
         now = time.monotonic()
         reference = 0.0
@@ -482,10 +503,20 @@ class AgentService:
         session.interruption_elapsed_ms = elapsed_ms
         await self.interrupt(session, event_type="tts_stop_now")
 
-    async def speak_text(self, session: "Session", text: str) -> None:
+    async def speak_text(
+        self,
+        session: "Session",
+        text: str,
+        interruptible: bool = True,
+    ) -> None:
         """
         Jouer un texte arbitraire via le pipeline TTS, sans passer par STT/LLM.
         Utilisé pour le bouton de test TTS dans la page.
+
+        Args:
+            session: Session WebSocket
+            text: Texte à synthétiser
+            interruptible: Si True, l'utilisateur peut interrompre ce TTS
         """
         logger = logging.getLogger(__name__)
         text = (text or "").strip()
@@ -500,38 +531,65 @@ class AgentService:
             await self.interrupt(session)
 
         async with session.processing_lock:
-            request_id = session.next_request_id()
-            session.cancel_flag = False
+            await self._speak_text_internal(session, text, interruptible)
+
+    async def _speak_text_internal(
+        self,
+        session: "Session",
+        text: str,
+        interruptible: bool = True,
+    ) -> None:
+        """
+        Implémentation interne de speak_text, sans acquisition du lock.
+        À utiliser quand le lock est déjà acquis.
+
+        Args:
+            session: Session WebSocket
+            text: Texte à synthétiser
+            interruptible: Si True, l'utilisateur peut interrompre ce TTS
+        """
+        logger = logging.getLogger(__name__)
+        text = (text or "").strip()
+        if not text:
+            return
+        if session.tts_track is None:
+            logger.warning("TTS test requested without active tts_track client_id=%s", session.client_id)
+            return
+
+        request_id = session.next_request_id()
+        session.cancel_flag = False
+        session.reset_tts_output_state()
+        session.processing_started_at = time.monotonic()
+        session.tts_interruptible = interruptible  # Définir si interruptible
+
+        async def _text_stream():
+            yield text
+
+        session.tts_playing = True
+        try:
+            await self._play_tts_stream(
+                session=session,
+                request_id=request_id,
+                stream=self.tts.synthesize_stream(
+                    _text_stream(),
+                    cancel_check=lambda: session.cancel_flag or session.current_request_id != request_id,
+                ),
+                client_event_type="tts_test",
+                full_text_parts=None,
+            )
+        except Exception:
+            logger.exception("TTS test playback error client_id=%s", session.client_id)
+        finally:
+            session.tts_playing = False
             session.reset_tts_output_state()
-            session.processing_started_at = time.monotonic()
-
-            async def _text_stream():
-                yield text
-
-            session.tts_playing = True
-            try:
-                await self._play_tts_stream(
-                    session=session,
-                    request_id=request_id,
-                    stream=self.tts.synthesize_stream(
-                        _text_stream(),
-                        cancel_check=lambda: session.cancel_flag or session.current_request_id != request_id,
-                    ),
-                    client_event_type="tts_test",
-                    full_text_parts=None,
-                )
-            except Exception:
-                logger.exception("TTS test playback error client_id=%s", session.client_id)
-            finally:
-                session.tts_playing = False
-                session.reset_tts_output_state()
-                session.tts_started_at = 0.0
-                # Réinitialiser l'état VAD pour que la prochaine parole soit détectée
-                session.reset_audio_buffer()
-                if hasattr(session, "vad_h"):
-                    session.vad_h = None
-                if hasattr(session, "vad_c"):
-                    session.vad_c = None
+            session.tts_started_at = 0.0
+            session.tts_interruptible = True  # Reset à True par défaut
+            # Réinitialiser l'état VAD pour que la prochaine parole soit détectée
+            session.reset_audio_buffer()
+            if hasattr(session, "vad_h"):
+                session.vad_h = None
+            if hasattr(session, "vad_c"):
+                session.vad_c = None
 
     # ── Pipeline interne ─────────────────────────────────────────────────────
 
@@ -540,13 +598,20 @@ class AgentService:
         session: "Session",
         user_text: str,
         request_id: int,
+        interruptible: bool = True,
     ) -> str:
         """
         LLM streaming → TTS non-streaming → TTSAudioTrack via queue + scheduler.
-        
+
         Architecture :
           - Scheduler : consomme tts_audio_queue → envoie frames à intervalle fixe (20ms)
           - Flush : ajoute 100ms de silence à la fin
+          
+        Args:
+            session: Session WebSocket
+            user_text: Texte utilisateur
+            request_id: ID de requête
+            interruptible: Si True, l'utilisateur peut interrompre ce TTS
         """
         logger = logging.getLogger(__name__)
         if session.tts_track is None:
@@ -568,6 +633,7 @@ class AgentService:
         session.tts_playing = True
         session.reset_tts_output_state()
         session.tts_started_at = time.monotonic()
+        session.tts_interruptible = interruptible  # Définir si interruptible
 
         # Démarrer le scheduler
         scheduler_task = asyncio.create_task(
@@ -602,7 +668,7 @@ class AgentService:
                 await self.ws_service.send_response_chunk(session, full_reply)
 
             # Attendre que la queue soit presque vide
-            await self._wait_queue_empty(session, request_id, timeout=5.0)
+            await self._wait_queue_empty(session, request_id, timeout=2.0)
 
             # Flush de fin : 100ms de silence
             await self._flush_tts_queue(session, request_id, silence_frames=5)
@@ -618,10 +684,11 @@ class AgentService:
                 scheduler_task.cancel()
             with suppress(asyncio.CancelledError):
                 await scheduler_task
-                
+
             session.tts_playing = False
             session.reset_tts_output_state()
             session.tts_started_at = 0.0
+            session.tts_interruptible = True  # Reset à True par défaut
             # Réinitialiser l'état VAD pour que la prochaine parole soit détectée
             session.reset_audio_buffer()
             if hasattr(session, "vad_h"):
@@ -696,7 +763,7 @@ class AgentService:
                     scheduler_task.cancel()
             else:
                 # Attendre que la queue soit presque vide
-                await self._wait_queue_empty(session, request_id, timeout=5.0)
+                await self._wait_queue_empty(session, request_id, timeout=2.0)
 
                 # Flush de fin : 100ms de silence (5 frames)
                 await self._flush_tts_queue(session, request_id, silence_frames=5)
@@ -911,14 +978,17 @@ class AgentService:
     async def _wait_queue_empty(self, session: "Session", request_id: int, timeout: float = 2.0) -> None:
         """
         Attendre que la queue audio soit presque vide avant de continuer.
+        Vérifie cancel_flag fréquemment pour sortir vite en cas d'interruption.
         """
         start = time.monotonic()
         while time.monotonic() - start < timeout:
             if session.cancel_flag or session.current_request_id != request_id:
+                logger.debug("wait_queue_empty: cancelled client_id=%s", session.client_id)
                 break
             if session.tts_audio_queue.qsize() <= 1:
                 break
-            await asyncio.sleep(0.01)
+            # Vérifier toutes les 5ms pour sortir vite en cas d'interruption
+            await asyncio.sleep(0.005)
 
     async def _wait_for_tts_buffer_window(self, session: "Session", request_id: int) -> None:
         if session.cancel_flag or session.current_request_id != request_id:
@@ -978,9 +1048,16 @@ class AgentService:
         session: "Session",
         request_id: int,
         text: str,
+        interruptible: bool = True,
     ) -> None:
         """
         Synthétiser et envoyer une réponse TTS pour la machine à états.
+        
+        Args:
+            session: Session WebSocket
+            request_id: ID de requête
+            text: Texte à synthétiser
+            interruptible: Si True, l'utilisateur peut interrompre ce TTS
         """
         logger = logging.getLogger(__name__)
         if not text or session.tts_track is None:
@@ -989,6 +1066,7 @@ class AgentService:
         session.tts_playing = True
         session.reset_tts_output_state()
         session.tts_started_at = time.monotonic()
+        session.tts_interruptible = interruptible  # Définir si interruptible
 
         # Envoyer l'émotion "speaking" avant la réponse
         try:
@@ -1020,7 +1098,7 @@ class AgentService:
                     await self.ws_service.send_response_chunk(session, text)
 
                 # Attendre que la queue soit presque vide
-                await self._wait_queue_empty(session, request_id, timeout=5.0)
+                await self._wait_queue_empty(session, request_id, timeout=2.0)
 
                 # Flush de fin : 100ms de silence
                 await self._flush_tts_queue(session, request_id, silence_frames=5)
@@ -1035,10 +1113,11 @@ class AgentService:
                 scheduler_task.cancel()
             with suppress(asyncio.CancelledError):
                 await scheduler_task
-                
+
             session.tts_playing = False
             session.reset_tts_output_state()
             session.tts_started_at = 0.0
+            session.tts_interruptible = True  # Reset à True par défaut
             # Réinitialiser l'état VAD pour que la prochaine parole soit détectée
             session.reset_audio_buffer()
             if hasattr(session, "vad_h"):
@@ -1168,27 +1247,69 @@ class AgentService:
         """
         Gérer l'action "arrived" : le driver est arrivé sur place.
         Démarre automatiquement le flux de complétion (MODE_1).
+        PRIORITÉ ABSOLUE : cette question ne peut PAS être interrompue.
         """
         logger = logging.getLogger(__name__)
         trip_id = extras.get("trip_id")
-        
+
         if not trip_id:
             logger.warning("⚠️ arrived action: missing trip_id client_id=%s", session.client_id)
             return
-        
+
         logger.info("🚚 DRIVER ARRIVÉ client_id=%s trip_id=%s", session.client_id, trip_id)
-        
+
+        # ⚠️ INTERROMPRE tout TTS en cours avant de démarrer la state machine
+        if session.tts_playing or session.processing_lock.locked():
+            logger.info(
+                "🔇 Interrupting current TTS before arrived action client_id=%s",
+                session.client_id,
+            )
+            # CRITIQUE: Mettre cancel_flag EN PREMIER pour que l'ancienne tâche s'arrête vite
+            session.cancel_flag = True
+            
+            # Vider la queue TTS immédiatement
+            if session.tts_track is not None:
+                try:
+                    await session.tts_track.clear()
+                except Exception:
+                    pass
+            
+            # Notifier le client d'arrêter le TTS
+            if self.ws_service is not None:
+                await self.ws_service.send(session, {"type": "tts_stop_now"})
+            
+            # Attendre que le lock se libère (max 3 secondes)
+            try:
+                await asyncio.wait_for(session.processing_lock.acquire(), timeout=3.0)
+                session.processing_lock.release()
+                logger.info("✅ Lock acquired after interruption client_id=%s", session.client_id)
+            except asyncio.TimeoutError:
+                logger.warning("⚠️ Timeout waiting for processing_lock release client_id=%s", session.client_id)
+
+        # Reset complet de l'état TTS
+        session.tts_playing = False
+        session.tts_interruptible = True
+        session.reset_tts_output_state()
+        session.tts_started_at = 0.0
+        session.cancel_flag = False
+
         # Stocker le trip_id dans la session pour la state machine
         session.current_trip_id = trip_id
-        
+
         # Démarrer la machine à états (MODE_1 → STATE_1)
         if self.state_machine is not None:
             logger.info("🚀 Démarrage de la state machine pour client_id=%s", session.client_id)
             await self.state_machine.enter_mode_1(session, trip_id)
-            
-            # Envoyer la première question TTS
-            logger.info("🗣️ Envoi question TTS: 'Is the delivery completed?'")
-            await self.speak_text(session, "Is the delivery completed?")
+
+            # 🚨 CRITIQUE: Poser la question TTS avec le lock pour éviter interruption
+            logger.info(
+                "⏳ Waiting for processing_lock to ask question client_id=%s",
+                session.client_id,
+            )
+            async with session.processing_lock:
+                logger.info("🗣️ Envoi question TTS: 'Is the delivery completed?' (NON-INTERRUPTIBLE)")
+                # Cette question est NON-INTERRUPTIBLE
+                await self._speak_text_internal(session, "Is the delivery completed?", interruptible=False)
         else:
             logger.warning("⚠️ State machine non disponible client_id=%s", session.client_id)
 

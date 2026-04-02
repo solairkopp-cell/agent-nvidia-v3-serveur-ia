@@ -224,6 +224,7 @@ class DeliveryStateMachine:
         next_state: Optional[State]  # Prochain état
         action: Optional[str]  # Action à exécuter (ex: "update_trip")
         action_params: dict = field(default_factory=dict)  # Paramètres de l'action
+        interruptible: bool = True  # Si True, l'utilisateur peut interrompre ce TTS
     
     async def process_input(
         self,
@@ -297,37 +298,47 @@ class DeliveryStateMachine:
             # Trouver le trip suivant et préparer l'annonce
             next_trip_info = await self._get_next_trip_info(session)
             announcement = "the delivery has been marked as completed."
-            
+
             if next_trip_info:
-                next_trip_id, next_address, next_client_name = next_trip_info
-                
+                next_trip_id, next_address, next_client_name, is_last = next_trip_info
+
                 # Annoncer la prochaine livraison
-                announcement = (
-                    f"the delivery is now completed. "
-                    f"You are now heading to {next_address}. "
-                    f"The client is {next_client_name}."
-                )
-                
+                if is_last:
+                    announcement = (
+                        f"the delivery is now completed. "
+                        f"You are now heading to {next_address}. "
+                        f"The client is {next_client_name}. "
+                        f"This is your last delivery."
+                    )
+                else:
+                    announcement = (
+                        f"the delivery is now completed. "
+                        f"You are now heading to {next_address}. "
+                        f"The client is {next_client_name}."
+                    )
+
                 logger.info(
-                    "STATE_1: next trip announced client_id=%s trip_id=%s address=%s client=%s",
+                    "STATE_1: next trip announced client_id=%s trip_id=%s address=%s client=%s is_last=%s",
                     session.client_id,
                     next_trip_id,
                     next_address,
                     next_client_name,
+                    is_last,
                 )
-                
+
                 # Démarrer automatiquement la navigation (après le TTS)
                 # On utilise un call_later pour attendre la fin du TTS
                 asyncio.create_task(
                     self._trigger_start_navigation_delayed(session, next_trip_id, delay=3.0)
                 )
-            
+
             return self.ProcessResult(
                 should_handle=True,
                 tts_response=announcement,
                 next_state=State.STATE_5,
                 action="update_trip",
                 action_params={"status": self.config.success_status},
+                interruptible=False,  # Non interruptible - annonce importante
             )
 
         # Vérifier NO
@@ -341,30 +352,23 @@ class DeliveryStateMachine:
                 tts_response=self.config.ask_reason_tts,
                 next_state=State.STATE_2,
                 action=None,
+                interruptible=False,  # Non interruptible - question importante
             )
-        
-        # Input invalide → retry ou fallback
+
+        # Input invalide → retry (boucle infinie tant que condition non respectée)
         ctx.retry_count += 1
-        if ctx.retry_count <= self.config.max_retries:
-            logger.info(
-                "STATE_1: invalid input (retry %d/%d) client_id=%s",
-                ctx.retry_count,
-                self.config.max_retries,
-                session.client_id,
-            )
-            return self.ProcessResult(
-                should_handle=True,
-                tts_response=self.config.retry_tts,
-                next_state=State.STATE_1,
-                action=None,
-            )
-        
-        # Trop de retries → fallback
-        logger.warning(
-            "STATE_1: max retries exceeded client_id=%s",
+        logger.info(
+            "STATE_1: invalid input (retry %d) client_id=%s",
+            ctx.retry_count,
             session.client_id,
         )
-        return await self._trigger_fallback(session, ctx)
+        return self.ProcessResult(
+            should_handle=True,
+            tts_response=self.config.retry_tts,
+            next_state=State.STATE_1,
+            action=None,
+            interruptible=False,  # Non interruptible - demande de répétition
+        )
     
     async def _handle_state_2(
         self,
@@ -507,37 +511,31 @@ class DeliveryStateMachine:
                 # Numéro hors limite
                 invalid_msg = f"Please choose a number between 1 and {len(self.config.reason_list)}"
                 ctx.retry_count += 1
-                if ctx.retry_count <= self.config.max_retries:
-                    return self.ProcessResult(
-                        should_handle=True,
-                        tts_response=invalid_msg,
-                        next_state=State.STATE_2,
-                        action=None,
-                    )
-                return await self._trigger_fallback(session, ctx)
+                logger.info(
+                    "STATE_2: invalid number (retry %d) client_id=%s",
+                    ctx.retry_count,
+                    session.client_id,
+                )
+                return self.ProcessResult(
+                    should_handle=True,
+                    tts_response=invalid_msg,
+                    next_state=State.STATE_2,
+                    action=None,
+                )
         
-        # Pas de nombre détecté → retry
+        # Pas de nombre détecté → retry (boucle infinie tant que condition non respectée)
         ctx.retry_count += 1
-        if ctx.retry_count <= self.config.max_retries:
-            logger.info(
-                "STATE_2: no number detected (retry %d/%d) client_id=%s",
-                ctx.retry_count,
-                self.config.max_retries,
-                session.client_id,
-            )
-            return self.ProcessResult(
-                should_handle=True,
-                tts_response=self.config.retry_tts,
-                next_state=State.STATE_2,
-                action=None,
-            )
-        
-        # Trop de retries → fallback
-        logger.warning(
-            "STATE_2: max retries exceeded client_id=%s",
+        logger.info(
+            "STATE_2: no number detected (retry %d) client_id=%s",
+            ctx.retry_count,
             session.client_id,
         )
-        return await self._trigger_fallback(session, ctx)
+        return self.ProcessResult(
+            should_handle=True,
+            tts_response=self.config.retry_tts,
+            next_state=State.STATE_2,
+            action=None,
+        )
     
     async def _handle_state_4(
         self,

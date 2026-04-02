@@ -27,7 +27,7 @@ WHISPER_TIMEOUT = int(os.getenv("WHISPER_TIMEOUT", "30"))                  # uti
 WHISPER_LANGUAGE = os.getenv("WHISPER_LANGUAGE", "en")  # ou "en", ou None (auto)
 
 # faster-whisper (embedded)
-WHISPER_MODEL = os.getenv("WHISPER_MODEL", "base.en")        # ex: tiny, base, small, medium, large-v3
+WHISPER_MODEL = os.getenv("WHISPER_MODEL", "small.en")        # ex: tiny, base, small, medium, large-v3
 WHISPER_DEVICE = os.getenv("WHISPER_DEVICE", "cuda")       # "cpu" pour maximiser la stabilité Jetson
 WHISPER_COMPUTE_TYPE = os.getenv("WHISPER_COMPUTE_TYPE", "float16")  # "int8" pour les modèles quantifiés (ex: small.en), "float16" pour les modèles non quantifiés (ex: medium)
 WHISPER_BEAM_SIZE = int(os.getenv("WHISPER_BEAM_SIZE", "1"))
@@ -57,7 +57,7 @@ INTENT_CSV_PATH = os.getenv("INTENT_CSV_PATH", "intent_detection/intentions.csv"
 INTENT_EMBED_MODEL = os.getenv("INTENT_EMBED_MODEL", "paraphrase-multilingual-MiniLM-L12-v2")
 # Intent detection sur Orin : forcer CPU pour économiser la VRAM.
 INTENT_DEVICE = os.getenv("INTENT_DEVICE", "cpu")
-INTENT_THRESHOLD = float(os.getenv("INTENT_THRESHOLD", "0.7"))
+INTENT_THRESHOLD = float(os.getenv("INTENT_THRESHOLD", "0.70"))
 INTENT_EMBED_LOCAL_DIR = os.getenv("INTENT_EMBED_LOCAL_DIR", "")
 INTENT_EMBED_CACHE_DIR = os.getenv("INTENT_EMBED_CACHE_DIR", "")
 INTENT_EMBED_DOWNLOAD_ON_STARTUP = os.getenv("INTENT_EMBED_DOWNLOAD_ON_STARTUP", "false").strip().lower() in ("1", "true", "yes", "on")
@@ -125,7 +125,8 @@ TTS_TRIM_TRAILING = os.getenv("TTS_TRIM_TRAILING", "false").strip().lower() in (
 
 # ── Denoising ────────────────────────────────────────────────────────────────
 # Denoise appliqué sur l'audio entrant (avant VAD et STT) pour filtrer le bruit.
-DENOISE_ENABLED = os.getenv("DENOISE_ENABLED", "true").strip().lower() in ("1", "true", "yes", "on")
+# Mettre "false" pour désactiver le débruitage (audio brut)
+DENOISE_ENABLED = os.getenv("DENOISE_ENABLED", "false").strip().lower() in ("1", "true", "yes", "on")
 DENOISE_BACKEND = os.getenv("DENOISE_BACKEND", "deepfilternet").strip().lower()
 
 # ── Audio / VAD ───────────────────────────────────────────────────────────────
@@ -133,7 +134,7 @@ SAMPLE_RATE = 16000
 # 48kHz = standard WebRTC/Opus (évite le resampling interne métallique)
 AUDIO_OUTPUT_SAMPLE_RATE = int(os.getenv("AUDIO_OUTPUT_SAMPLE_RATE", "48000"))  # 48kHz = Opus native
 VAD_CHUNK_MS = 32                   # ms par chunk Silero
-VAD_SILENCE_THRESHOLD = 0.6         # seuil probabilité vocale
+VAD_SILENCE_THRESHOLD = 0.8         # seuil probabilité vocale
 # Seuil de continuation (hysteresis) : avec RNNoise, garder un seuil plus bas
 # aide beaucoup à ne pas casser les phrases courtes après un speech_start.
 VAD_CONTINUE_THRESHOLD = float(os.getenv("VAD_CONTINUE_THRESHOLD", "0.5"))

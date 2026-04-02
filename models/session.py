@@ -63,6 +63,8 @@ class Session:
     cancel_flag: bool = False
     # Queue audio pour le scheduler TTS (frames int16 de 960 samples)
     tts_audio_queue: asyncio.Queue = field(default_factory=lambda: asyncio.Queue(maxsize=50))
+    # True si le TTS en cours peut être interrompu par l'utilisateur
+    tts_interruptible: bool = True
 
     # ── Delivery State Machine ───────────────────────────────────────────────
     # Serial du driver (pour delivery completion flow)
