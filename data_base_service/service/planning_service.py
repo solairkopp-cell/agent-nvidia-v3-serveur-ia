@@ -170,33 +170,76 @@ class PlanningService:
     ) -> bool:
         """
         Met à jour le statut d'un package.
-        
+
         Args:
             package_id: ID du package
             new_status: Nouveau statut
-            
+
         Returns:
             True si la mise à jour a réussi
         """
         await self._init_services()
         log_info(f"Mise à jour du package {package_id} vers: {new_status.value}")
-        
+
         package = await self._crud.get_package_by_id(package_id)
         if not package:
             log_error(f"Package non trouvé: {package_id}")
             return False
-        
+
         old_status = package.status
         package.status = new_status
         success = await self._crud.update_package(package_id, package)
-        
+
         if success:
             log_success(f"Package {package_id} mis à jour: {old_status.value} -> {new_status.value}")
+            await self._remove_package_from_data_json(package_id)
+
         else:
             log_error(f"Échec de la mise à jour du package: {package_id}")
-        
+
         return success
     
+    async def _remove_package_from_data_json(self, package_id: str) -> None:
+        """
+        Supprime l'entrée du package dans data.json.
+
+        Args:
+            package_id: ID du package à supprimer
+        """
+        data_file = Path("data.json")
+        
+        try:
+            if not data_file.exists():
+                log_warning("data.json non trouvé, rien à supprimer")
+                return
+
+            import json
+
+            with open(data_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+
+            if not isinstance(data, list):
+                log_warning("data.json n'est pas une liste")
+                return
+
+            # Filtrer pour garder tous les éléments sauf celui avec cet ID
+            new_data = [item for item in data if item.get("id") != package_id]
+
+            if len(new_data) == len(data):
+                log_warning(f"Package {package_id} non trouvé dans data.json")
+                return
+
+            # Écrire le fichier mis à jour
+            with open(data_file, "w", encoding="utf-8") as f:
+                json.dump(new_data, f, indent=2, ensure_ascii=False)
+
+            log_success(f"Package {package_id} supprimé de data.json")
+
+        except json.JSONDecodeError as e:
+            log_error(f"Erreur de parsing de data.json: {e}")
+        except Exception as e:
+            log_error(f"Erreur lors de la suppression de {package_id} dans data.json: {e}")
+
     async def add_delivery_failure(
         self,
         package_id: str,

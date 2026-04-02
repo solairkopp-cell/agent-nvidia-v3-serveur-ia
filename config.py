@@ -24,7 +24,7 @@ PORT = int(os.getenv("PORT", "8000"))
 WHISPER_MODE = os.getenv("WHISPER_MODE", "embedded")
 WHISPER_URL = os.getenv("WHISPER_URL", "http://localhost:8080/inference")  # utilisé si WHISPER_MODE="http"
 WHISPER_TIMEOUT = int(os.getenv("WHISPER_TIMEOUT", "30"))                  # utilisé si WHISPER_MODE="http"
-WHISPER_LANGUAGE = os.getenv("WHISPER_LANGUAGE", "fr")  # ou "en", ou None (auto)
+WHISPER_LANGUAGE = os.getenv("WHISPER_LANGUAGE", "en")  # ou "en", ou None (auto)
 
 # faster-whisper (embedded)
 WHISPER_MODEL = os.getenv("WHISPER_MODEL", "base.en")        # ex: tiny, base, small, medium, large-v3
@@ -40,9 +40,9 @@ WHISPER_BACKEND = os.getenv("WHISPER_BACKEND", "faster-whisper")
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "qwen3:0.6b-q4_K_M")
 OLLAMA_CONTEXT_WINDOW = int(os.getenv("OLLAMA_CONTEXT_WINDOW", "1024"))
-OLLAMA_NUM_PREDICT = int(os.getenv("OLLAMA_NUM_PREDICT", "150"))
-OLLAMA_TEMPERATURE = float(os.getenv("OLLAMA_TEMPERATURE", "0.6"))
-OLLAMA_REPEAT_PENALTY = float(os.getenv("OLLAMA_REPEAT_PENALTY", "1.0"))
+OLLAMA_NUM_PREDICT = int(os.getenv("OLLAMA_NUM_PREDICT", "50"))
+OLLAMA_TEMPERATURE = float(os.getenv("OLLAMA_TEMPERATURE", "0.7"))
+OLLAMA_REPEAT_PENALTY = float(os.getenv("OLLAMA_REPEAT_PENALTY", "1.4"))
 OLLAMA_STOP = _parse_env_words("OLLAMA_STOP", "<|im_start|>,<|im_end|>")
 OLLAMA_PRESENCE_PENALTY = float(os.getenv("OLLAMA_PRESENCE_PENALTY", "0.0"))
 OLLAMA_TOP_K = int(os.getenv("OLLAMA_TOP_K", "20"))
@@ -57,7 +57,7 @@ INTENT_CSV_PATH = os.getenv("INTENT_CSV_PATH", "intent_detection/intentions.csv"
 INTENT_EMBED_MODEL = os.getenv("INTENT_EMBED_MODEL", "paraphrase-multilingual-MiniLM-L12-v2")
 # Intent detection sur Orin : forcer CPU pour économiser la VRAM.
 INTENT_DEVICE = os.getenv("INTENT_DEVICE", "cpu")
-INTENT_THRESHOLD = float(os.getenv("INTENT_THRESHOLD", "0.70"))
+INTENT_THRESHOLD = float(os.getenv("INTENT_THRESHOLD", "0.65"))
 INTENT_EMBED_LOCAL_DIR = os.getenv("INTENT_EMBED_LOCAL_DIR", "")
 INTENT_EMBED_CACHE_DIR = os.getenv("INTENT_EMBED_CACHE_DIR", "")
 INTENT_EMBED_DOWNLOAD_ON_STARTUP = os.getenv("INTENT_EMBED_DOWNLOAD_ON_STARTUP", "false").strip().lower() in ("1", "true", "yes", "on")
@@ -142,9 +142,9 @@ VAD_SILENCE_DURATION_MS = int(os.getenv("VAD_SILENCE_DURATION_MS", "250"))
 # Plus permissif pour laisser passer les commandes très courtes.
 VAD_MIN_SPEECH_MS = int(os.getenv("VAD_MIN_SPEECH_MS", "160"))
 # Garder moins d'audio brut avant speech_start (réduction de buffer).
-VAD_PRE_ROLL_MS = int(os.getenv("VAD_PRE_ROLL_MS", "240"))
+VAD_PRE_ROLL_MS = int(os.getenv("VAD_PRE_ROLL_MS", "400"))
 # Réduire le silence post-roll pour éviter de traîner sur la fin.
-VAD_POST_ROLL_MS = int(os.getenv("VAD_POST_ROLL_MS", "200"))
+VAD_POST_ROLL_MS = int(os.getenv("VAD_POST_ROLL_MS", "300"))
 # Garde-fou : forcer une fin d'utterance après N ms même sans silence net
 VAD_MAX_UTTERANCE_MS = int(os.getenv("VAD_MAX_UTTERANCE_MS", "6000"))
 SILERO_MODEL_PATH = os.getenv(
@@ -162,9 +162,9 @@ TURN_CREDENTIAL = os.getenv("TURN_CREDENTIAL", "")
 PREWARM_ON_STARTUP = os.getenv("PREWARM_ON_STARTUP", "true").strip().lower() in ("1", "true", "yes", "on")
 PREWARM_TIMEOUT_SEC = int(os.getenv("PREWARM_TIMEOUT_SEC", "20"))
 PREWARM_INTENT_TEXT = os.getenv("PREWARM_INTENT_TEXT", "bonjour")
-PREWARM_LLM_TEXT = os.getenv("PREWARM_LLM_TEXT", "Reply only with ok.")
+PREWARM_LLM_TEXT = os.getenv("PREWARM_LLM_TEXT", "hello what's your name?")
 PREWARM_TTS_TEXT = os.getenv("PREWARM_TTS_TEXT", "Warmup.")
 
 # ── Conversation ─────────────────────────────────────────────────────────────
-MAX_HISTORY = int(os.getenv("MAX_HISTORY", "6"))
+MAX_HISTORY = int(os.getenv("MAX_HISTORY", "3"))
 TRIM_TO = int(os.getenv("TRIM_TO", "30"))

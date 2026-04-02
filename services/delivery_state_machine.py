@@ -712,35 +712,52 @@ class DeliveryStateMachine:
         Annoncer la prochaine livraison et démarrer la navigation.
         """
         next_trip_info = await self._get_next_trip_info(session)
-        
+
         if next_trip_info:
-            next_trip_id, next_address, next_client_name = next_trip_info
-            
+            next_trip_id, next_address, next_client_name, is_last = next_trip_info
+
             # Annoncer
             if success:
-                announcement = (
-                    f"Delivery completed successfully. "
-                    f"You are now heading to {next_address}. "
-                    f"The client is {next_client_name}."
-                )
+                if is_last:
+                    announcement = (
+                        f"Delivery completed successfully. "
+                        f"You are now heading to {next_address}. "
+                        f"The client is {next_client_name}. "
+                        f"This is your last delivery."
+                    )
+                else:
+                    announcement = (
+                        f"Delivery completed successfully. "
+                        f"You are now heading to {next_address}. "
+                        f"The client is {next_client_name}."
+                    )
             else:
-                announcement = (
-                    f"Delivery has been marked as failure. "
-                    f"You are now heading to {next_address}. "
-                    f"The client is {next_client_name}."
-                )
-            
+                if is_last:
+                    announcement = (
+                        f"Delivery has been marked as failure. "
+                        f"You are now heading to {next_address}. "
+                        f"The client is {next_client_name}. "
+                        f"This is your last delivery."
+                    )
+                else:
+                    announcement = (
+                        f"Delivery has been marked as failure. "
+                        f"You are now heading to {next_address}. "
+                        f"The client is {next_client_name}."
+                    )
+
             logger.info(
-                "📢 Next trip announced client_id=%s address=%s client=%s",
+                "📢 Next trip announced client_id=%s address=%s client=%s is_last=%s",
                 session.client_id,
                 next_address,
                 next_client_name,
+                is_last,
             )
-            
+
             # Parler l'annonce via AgentService
             if self._agent_service:
                 await self._agent_service.speak_text(session, announcement)
-            
+
             # Démarrer navigation après le TTS (délai pour lecture annonce)
             asyncio.create_task(
                 self._trigger_start_navigation_delayed(session, next_trip_id, delay=3.0)
@@ -755,42 +772,42 @@ class DeliveryStateMachine:
     async def _get_next_trip_info(self, session: "Session") -> tuple | None:
         """
         Trouver le trip qui suit celui qui vient d'être complété.
-        
+
         Returns:
-            (trip_id, address, client_name) ou None
+            (trip_id, address, client_name, is_last) ou None
         """
         import json
         from pathlib import Path
-        
+
         data_file = Path("data.json")
-        
+
         try:
             if not data_file.exists():
                 return None
-            
+
             with open(data_file, "r", encoding="utf-8") as f:
                 trips = json.load(f)
-            
+
             if not isinstance(trips, list) or len(trips) == 0:
                 return None
-            
+
             # Trouver l'index du trip actuel
             current_trip_id = session.current_trip_id
             current_index = -1
-            
+
             for i, trip in enumerate(trips):
                 if trip.get("id") == current_trip_id:
                     current_index = i
                     break
-            
+
             # Le trip suivant est juste après
             next_index = current_index + 1
-            
+
             if next_index >= len(trips):
                 return None  # Dernier trip
-            
+
             next_trip = trips[next_index]
-            
+
             # Vérifier qu'il n'est pas complété
             status = next_trip.get("deliveryStatus", "")
             if status == "COMPLETED":
@@ -802,17 +819,24 @@ class DeliveryStateMachine:
                         break
                 else:
                     return None  # Tous complétés
-            
+
             trip_id = next_trip.get("id")
-            # Adresse : packageAddress → streetAddress ou deliveryAddress
-            address = next_trip.get("packageAddress", {}).get("streetAddress", "")
-            if not address:
-                address = next_trip.get("deliveryAddress", "unknown address")
-            
+            # Adresse : utiliser le champ name (3 premiers mots)
+            full_name = next_trip.get("name", "unknown address")
+            address = " ".join(full_name.split()[:3]) if full_name else "unknown address"
+
             client_name = next_trip.get("clientName", "unknown client")
-            
-            return (trip_id, address, client_name)
-            
+
+            # Vérifier si c'est le dernier trip (aucun trip non-complété après)
+            is_last = True
+            for j in range(current_index + 2, len(trips)):
+                trip = trips[j]
+                if trip.get("deliveryStatus", "") != "COMPLETED":
+                    is_last = False
+                    break
+
+            return (trip_id, address, client_name, is_last)
+
         except Exception as e:
             logger.error("Error getting next trip: %s", e)
             return None

@@ -136,11 +136,23 @@ class ActionService:
             "start_navigation": "Starting navigation to the next destination.",
             "show_deliveries": "Here is the list of your deliveries.",
             "repeat_last_sentence": "Repeating: " + (session.conversation_history[-1]["content"] if session.conversation_history else "nothing"),
-            "get_next_client_name": "Retrieving the next client's name.",
-            "get_next_delivery_address": "Retrieving the address of the next delivery.",
             "get_possible_delivery_failure_reason": "Here are the possible reasons for delivery failure.",
             "stop_listening": "Disabling listening.",
         }
+
+        # Gestion spécifique pour get_next_client_name
+        if intent == "get_next_client_name":
+            client_name = await self._get_next_client_name()
+            if client_name:
+                return f"Your next client is {client_name}."
+            return "No client found."
+
+        # Gestion spécifique pour get_next_delivery_address
+        if intent == "get_next_delivery_address":
+            address = await self._get_next_delivery_address()
+            if address:
+                return f"Your next delivery is at {address}."
+            return "No delivery address found."
 
         response = responses.get(intent, f"Action {intent} exécutée.")
 
@@ -234,6 +246,80 @@ class ActionService:
             # Si tous sont complétés, prendre le premier quand même
             if data and isinstance(data[0], dict):
                 return data[0].get("id")
+
+            return None
+
+        except json.JSONDecodeError as e:
+            self._logger.error("Failed to parse data.json: %s", e)
+            return None
+        except Exception as e:
+            self._logger.error("Error reading data.json: %s", e)
+            return None
+
+    async def _get_next_client_name(self) -> str | None:
+        """
+        Lire le premier client_name depuis data.json et retourner le nom.
+        """
+        try:
+            if not self._data_file.exists():
+                self._logger.warning("data.json not found")
+                return None
+
+            with open(self._data_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+
+            if not isinstance(data, list) or len(data) == 0:
+                self._logger.warning("data.json is empty or not a list")
+                return None
+
+            # Prendre le premier trip qui n'est pas complété
+            for trip in data:
+                status = trip.get("deliveryStatus", "")
+                if status != "COMPLETED":
+                    client_name = trip.get("clientName")
+                    if client_name:
+                        return client_name
+
+            # Si tous sont complétés, prendre le premier quand même
+            if data and isinstance(data[0], dict):
+                return data[0].get("clientName")
+
+            return None
+
+        except json.JSONDecodeError as e:
+            self._logger.error("Failed to parse data.json: %s", e)
+            return None
+        except Exception as e:
+            self._logger.error("Error reading data.json: %s", e)
+            return None
+
+    async def _get_next_delivery_address(self) -> str | None:
+        """
+        Lire le premier name (adresse) depuis data.json et retourner l'adresse.
+        """
+        try:
+            if not self._data_file.exists():
+                self._logger.warning("data.json not found")
+                return None
+
+            with open(self._data_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+
+            if not isinstance(data, list) or len(data) == 0:
+                self._logger.warning("data.json is empty or not a list")
+                return None
+
+            # Prendre le premier trip qui n'est pas complété
+            for trip in data:
+                status = trip.get("deliveryStatus", "")
+                if status != "COMPLETED":
+                    name = trip.get("name")
+                    if name:
+                        return name
+
+            # Si tous sont complétés, prendre le premier quand même
+            if data and isinstance(data[0], dict):
+                return data[0].get("name")
 
             return None
 
