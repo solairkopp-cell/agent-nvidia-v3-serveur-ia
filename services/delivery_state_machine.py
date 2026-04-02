@@ -294,7 +294,11 @@ class DeliveryStateMachine:
                 "STATE_1: YES detected client_id=%s",
                 session.client_id,
             )
-            
+
+            # Envoyer l'événement MARK_DELIVERED à l'application Android
+            if ctx.current_trip_id:
+                await self._send_mark_delivered_event(session, ctx.current_trip_id)
+
             # Trouver le trip suivant et préparer l'annonce
             next_trip_info = await self._get_next_trip_info(session)
             announcement = "the delivery has been marked as completed."
@@ -473,6 +477,10 @@ class DeliveryStateMachine:
                 # Trouver le trip suivant et préparer l'annonce
                 next_trip_info = await self._get_next_trip_info(session)
                 announcement = "Delivery has been marked as failure."
+
+                # Envoyer l'événement MARK_FAILED à l'application Android
+                if ctx.current_trip_id:
+                    await self._send_mark_failed_event(session, ctx.current_trip_id)
 
                 if next_trip_info:
                     next_trip_id, next_address, next_client_name = next_trip_info
@@ -654,7 +662,7 @@ class DeliveryStateMachine:
     async def _send_emotion(self, session: "Session", name: str) -> None:
         """
         Envoyer un événement émotion au client.
-        
+
         Args:
             session: Session WebSocket
             name: Nom de l'émotion ('happy', 'sad', 'greeting', 'speaking')
@@ -678,6 +686,66 @@ class DeliveryStateMachine:
         except Exception as e:
             logger.error("Error sending emotion: %s", e)
 
+    async def _send_mark_delivered_event(self, session: "Session", trip_id: str) -> None:
+        """
+        Envoyer l'événement MARK_DELIVERED à l'application Android.
+
+        Args:
+            session: Session WebSocket
+            trip_id: ID de la livraison
+        """
+        if self._ws_service is None:
+            logger.warning("WebSocketService not available for MARK_DELIVERED event")
+            return
+
+        event = {
+            "type": "external_control",
+            "action": "com.avvc.maps.action.MARK_DELIVERED",
+            "extras": {
+                "com.avvc.maps.extra.DESTINATION_ID": trip_id
+            }
+        }
+
+        try:
+            await self._ws_service.send(session, event)
+            logger.info(
+                "📍 MARK_DELIVERED sent client_id=%s trip_id=%s",
+                session.client_id,
+                trip_id,
+            )
+        except Exception as e:
+            logger.error("Error sending MARK_DELIVERED: %s", e)
+
+    async def _send_mark_failed_event(self, session: "Session", trip_id: str) -> None:
+        """
+        Envoyer l'événement MARK_FAILED à l'application Android.
+
+        Args:
+            session: Session WebSocket
+            trip_id: ID de la livraison
+        """
+        if self._ws_service is None:
+            logger.warning("WebSocketService not available for MARK_FAILED event")
+            return
+
+        event = {
+            "type": "external_control",
+            "action": "com.avvc.maps.action.MARK_FAILED",
+            "extras": {
+                "com.avvc.maps.extra.DESTINATION_ID": trip_id
+            }
+        }
+
+        try:
+            await self._ws_service.send(session, event)
+            logger.info(
+                "❌ MARK_FAILED sent client_id=%s trip_id=%s",
+                session.client_id,
+                trip_id,
+            )
+        except Exception as e:
+            logger.error("Error sending MARK_FAILED: %s", e)
+
     async def handle_photo_response(
         self,
         session: "Session",
@@ -691,13 +759,13 @@ class DeliveryStateMachine:
             session.client_id,
             photo_taken,
         )
-        
+
         ctx = self._get_context(session)
-        
+
         if photo_taken:
             # Photo prise → succès + annonce suite
             trip_id = ctx.photo_trip_id or ctx.current_trip_id
-            
+
             # Mettre à jour le trip
             if trip_id:
                 await self.update_trip_status(
@@ -705,14 +773,17 @@ class DeliveryStateMachine:
                     trip_id=trip_id,
                     status="COMPLETED",
                 )
-            
+                
+                # Envoyer l'événement MARK_DELIVERED à l'application Android
+                await self._send_mark_delivered_event(session, trip_id)
+
             # Annoncer la suite et démarrer navigation
             await self._announce_next_trip_and_start_navigation(session, success=True)
         else:
             # Photo non prise → échec + annonce suite
             trip_id = ctx.photo_trip_id or ctx.current_trip_id
             reason = ctx.failure_reason or "Other"
-            
+
             # Mettre à jour le trip en FAILED
             if trip_id:
                 await self.update_trip_status(
@@ -721,10 +792,13 @@ class DeliveryStateMachine:
                     status="FAILED",
                     reason=reason,
                 )
-            
+                
+                # Envoyer l'événement MARK_FAILED à l'application Android
+                await self._send_mark_failed_event(session, trip_id)
+
             # Annoncer la suite et démarrer navigation
             await self._announce_next_trip_and_start_navigation(session, success=False)
-        
+
         # Reset et retour à MODE_0
         ctx.reset()
 

@@ -1,28 +1,10 @@
 [
   {
-    "id": "69cea258fb98e15a3cf53554",
-    "name": "Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie",
-    "latitude": 36.8276926,
-    "longitude": 10.1950475,
-    "clientName": "osias",
-    "packageInfo": "",
-    "deliveryStatus": "planned"
-  },
-  {
     "id": "69cea28ffb98e15a3cf53558",
     "name": "Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie",
     "latitude": 36.8276926,
     "longitude": 10.1950475,
     "clientName": "jack",
-    "packageInfo": "",
-    "deliveryStatus": "planned"
-  },
-  {
-    "id": "69cea29efb98e15a3cf5355a",
-    "name": "Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie",
-    "latitude": 36.8276926,
-    "longitude": 10.1950475,
-    "clientName": "avrel",
     "packageInfo": "",
     "deliveryStatus": "planned"
   }

@@ -40,8 +40,6 @@ if TYPE_CHECKING:
     from services.denoise_service import DenoiseService
     from services.delivery_state_machine import DeliveryStateMachine
 
-from services.delivery_state_machine import State
-
 import config
 
 
@@ -280,18 +278,10 @@ class AgentService:
                             session.client_id,
                         )
 
-                        # Si transition vers STATE_5 (EXIT), sortir immédiatement de MODE_1
-                        if state_result.next_state == State.STATE_5:
-                            logger.info(
-                                "State machine: auto-exit to MODE_0 client_id=%s",
-                                session.client_id,
-                            )
-                            ctx.reset()
-                            session.clear_active_user_turn()
-                            return
-
                     if state_result.action == "exit_to_mode_0":
-                        # Retour au MODE_0
+                        # Retour au MODE_0 (sur input utilisateur en STATE_5)
+                        ctx = self.state_machine._get_context(session)
+                        ctx.reset()
                         session.clear_active_user_turn()
                         return
 
@@ -491,11 +481,12 @@ class AgentService:
         session.tts_started_at = 0.0
 
     async def on_user_speech_start(self, session: "Session") -> None:
+        logger = logging.getLogger(__name__)
         if session.interruption_pending:
             return
         if not (session.tts_playing or session.processing_lock.locked()):
             return
-        
+
         # Vérifier si le TTS en cours est interruptible
         if not session.tts_interruptible:
             logger.info(
