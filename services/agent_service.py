@@ -278,6 +278,18 @@ class AgentService:
                             session.client_id,
                         )
 
+                        # Si le flow est terminé, on sort immédiatement de MODE_1
+                        # sans attendre une nouvelle parole utilisateur. Cela évite
+                        # qu'un "arrived" suivant ou qu'une réponse tardive soit
+                        # interprété(e) par STATE_5 du cycle précédent.
+                        if state_result.next_state.value == "state_5":
+                            ctx.reset()
+                            logger.info(
+                                "State machine: auto-reset to MODE_0 after terminal transition client_id=%s",
+                                session.client_id,
+                            )
+                            await self._consume_pending_arrived(session)
+
                     if state_result.action == "exit_to_mode_0":
                         # Retour au MODE_0 (sur input utilisateur en STATE_5)
                         ctx = self.state_machine._get_context(session)
@@ -328,6 +340,7 @@ class AgentService:
 
         # Si l'action a été traitée localement → TTS direct sans LLM
         if action_result is not None and action_result.handled:
+            session.tts_interruptible = True
             # Ajouter le message utilisateur à l'historique
             if session.active_user_message_index is None:
                 session.conversation_history.append({"role": "user", "content": effective_transcript})
@@ -485,6 +498,16 @@ class AgentService:
         if session.interruption_pending:
             return
         if not (session.tts_playing or session.processing_lock.locked()):
+            return
+
+        # Si on est dans le flow de livraison, on ignore toute tentative
+        # d'interruption pendant la question/annonce critique.
+        if self.state_machine is not None and self.state_machine.is_in_mode_1(session):
+            logger.info(
+                "🔇 Interruption blocked (MODE_1 active) client_id=%s state=%s",
+                session.client_id,
+                self.state_machine.get_session_state(session)[1].value,
+            )
             return
 
         # Vérifier si le TTS en cours est interruptible
@@ -1242,6 +1265,7 @@ class AgentService:
         
         # Appeler le handler de la state machine
         await self.state_machine.handle_photo_response(session, photo_taken)
+        await self._consume_pending_arrived(session)
 
     async def _handle_arrived_action(
         self,
@@ -1262,31 +1286,37 @@ class AgentService:
 
         logger.info("🚚 DRIVER ARRIVÉ client_id=%s trip_id=%s", session.client_id, trip_id)
 
-        # ⚠️ INTERROMPRE tout TTS en cours avant de démarrer la state machine
+        # Si un flow de complétion est déjà en cours pour une autre livraison,
+        # on diffère l'événement "arrived" pour éviter le chevauchement.
+        if self.state_machine is not None and self.state_machine.is_in_mode_1(session):
+            active_trip_id = getattr(session, "current_trip_id", None)
+            if active_trip_id and active_trip_id != trip_id:
+                session.pending_arrived_trip_id = trip_id
+                logger.info(
+                    "⏸️ arrived deferred while MODE_1 active client_id=%s active_trip_id=%s pending_trip_id=%s",
+                    session.client_id,
+                    active_trip_id,
+                    trip_id,
+                )
+                return
+
+        # ⚠️ INTERROMPRE proprement tout pipeline/TTS en cours avant de démarrer
+        # la state machine, afin d'éviter qu'un ancien scheduler ou une ancienne
+        # réponse continue à tourner en arrière-plan.
         if session.tts_playing or session.processing_lock.locked():
             logger.info(
                 "🔇 Interrupting current TTS before arrived action client_id=%s",
                 session.client_id,
             )
-            # CRITIQUE: Mettre cancel_flag EN PREMIER pour que l'ancienne tâche s'arrête vite
-            session.cancel_flag = True
-            
-            # Vider la queue TTS immédiatement
-            if session.tts_track is not None:
-                try:
-                    await session.tts_track.clear()
-                except Exception:
-                    pass
-            
-            # Notifier le client d'arrêter le TTS
-            if self.ws_service is not None:
-                await self.ws_service.send(session, {"type": "tts_stop_now"})
+            await self.interrupt(session, event_type="tts_stop_now")
 
         # Reset complet de l'état TTS
         session.tts_playing = False
         session.tts_interruptible = False  # Non interruptible pendant la question
         session.reset_tts_output_state()
         session.tts_started_at = 0.0
+        session.interruption_pending = False
+        session.interruption_elapsed_ms = 0.0
         session.cancel_flag = False
 
         # Stocker le trip_id dans la session pour la state machine
@@ -1303,6 +1333,19 @@ class AgentService:
             await self._speak_text_internal(session, "Is the delivery completed?", interruptible=False)
         else:
             logger.warning("⚠️ State machine non disponible client_id=%s", session.client_id)
+
+    async def _consume_pending_arrived(self, session: "Session") -> None:
+        pending_trip_id = getattr(session, "pending_arrived_trip_id", None)
+        if not pending_trip_id:
+            return
+
+        session.pending_arrived_trip_id = None
+        logging.getLogger(__name__).info(
+            "▶️ consuming deferred arrived client_id=%s trip_id=%s",
+            session.client_id,
+            pending_trip_id,
+        )
+        await self._handle_arrived_action(session, {"trip_id": pending_trip_id})
 
     async def _handle_started_navigation_action(
         self,

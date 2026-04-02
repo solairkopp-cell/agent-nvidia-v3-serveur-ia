@@ -71,6 +71,8 @@ class Session:
     driver_serial: Optional[str] = None
     # ID du trip en cours de complétion
     current_trip_id: Optional[str] = None
+    # ID d'un événement "arrived" reçu pendant qu'un flow précédent est encore actif
+    pending_arrived_trip_id: Optional[str] = None
 
     # ── Synchronisation ───────────────────────────────────────────────────────
     # Verrou pour éviter deux traitements STT→LLM→TTS simultanés

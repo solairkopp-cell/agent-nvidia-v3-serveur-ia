@@ -514,6 +514,7 @@ class DeliveryStateMachine:
                         "status": self.config.failure_status,
                         "reason": reason,
                     },
+                    interruptible=False,
                 )
             else:
                 # Numéro hors limite
@@ -588,10 +589,9 @@ class DeliveryStateMachine:
             session.client_id,
         )
 
-        # Reset complet
-        ctx.reset()
-
-        # Pas d'annonce ici : déjà faite dans STATE_1 (YES) ou STATE_2 (NO)
+        # Sortie silencieuse: le reset est effectué par l'appelant quand la
+        # transition vers STATE_5 a déjà été consommée, ce qui évite de perdre
+        # prématurément le contexte avant la fin de l'action/update_trip.
         return self.ProcessResult(
             should_handle=True,
             tts_response=None,
@@ -861,20 +861,34 @@ class DeliveryStateMachine:
                 is_last,
             )
 
-            # Parler l'annonce via AgentService
+            # Parler l'annonce via AgentService en mode non interruptible pour
+            # préserver la cohérence du flow de fin de livraison.
             if self._agent_service:
-                await self._agent_service.speak_text(session, announcement)
+                await self._agent_service.speak_text(session, announcement, interruptible=False)
 
             # Démarrer navigation après le TTS (délai pour lecture annonce)
             asyncio.create_task(
                 self._trigger_start_navigation_delayed(session, next_trip_id, delay=3.0)
             )
         else:
-            # Pas de trip suivant
+            # Pas de trip suivant: sortir proprement du flow de livraison.
             logger.info(
                 "📢 No next trip client_id=%s",
                 session.client_id,
             )
+            if self._agent_service:
+                if success:
+                    await self._agent_service.speak_text(
+                        session,
+                        "Delivery completed successfully.",
+                        interruptible=False,
+                    )
+                else:
+                    await self._agent_service.speak_text(
+                        session,
+                        "Delivery has been marked as failure.",
+                        interruptible=False,
+                    )
 
     async def _get_next_trip_info(self, session: "Session") -> tuple | None:
         """
