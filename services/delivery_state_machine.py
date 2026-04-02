@@ -628,13 +628,13 @@ class DeliveryStateMachine:
         if self._ws_service is None:
             logger.warning("WebSocketService not available for ask_photo_event")
             return
-        
+
         from datetime import datetime
-        
+
         trip_id = ctx.photo_trip_id or ctx.current_trip_id
         delivery_id = ctx.photo_delivery_id or ctx.current_trip_id
         address = ctx.photo_address or "unknown"
-        
+
         event = {
             "type": "ask_photo_event",
             "trip_id": trip_id,
@@ -642,7 +642,7 @@ class DeliveryStateMachine:
             "address": address,
             "timestamp": datetime.utcnow().isoformat(),
         }
-        
+
         try:
             await self._ws_service.send(session, event)
             logger.info(
@@ -652,6 +652,33 @@ class DeliveryStateMachine:
             )
         except Exception as e:
             logger.error("Error sending ask_photo_event: %s", e)
+
+    async def _send_emotion(self, session: "Session", name: str) -> None:
+        """
+        Envoyer un événement émotion au client.
+        
+        Args:
+            session: Session WebSocket
+            name: Nom de l'émotion ('happy', 'sad', 'greeting', 'speaking')
+        """
+        if self._ws_service is None:
+            logger.warning("WebSocketService not available for emotion event")
+            return
+
+        event = {
+            "type": "emotion",
+            "name": name,
+        }
+
+        try:
+            await self._ws_service.send(session, event)
+            logger.info(
+                "😊 Emotion sent client_id=%s name=%s",
+                session.client_id,
+                name,
+            )
+        except Exception as e:
+            logger.error("Error sending emotion: %s", e)
 
     async def handle_photo_response(
         self,
@@ -715,6 +742,14 @@ class DeliveryStateMachine:
 
         if next_trip_info:
             next_trip_id, next_address, next_client_name, is_last = next_trip_info
+
+            # Envoyer l'émotion avant l'annonce
+            emotion = "happy" if success else "sad"
+            await self._send_emotion(session, emotion)
+
+            # Si c'est la dernière livraison, envoyer l'émotion "end"
+            if is_last:
+                await self._send_emotion(session, "end")
 
             # Annoncer
             if success:

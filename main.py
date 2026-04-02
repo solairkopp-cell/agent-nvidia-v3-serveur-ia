@@ -93,6 +93,9 @@ ws_service       = WebSocketService(
     notification=notification_service,
 )
 
+# Passer le ws_service au webrtc_service pour l'envoi des émotions
+webrtc_service._ws_service = ws_service
+
 # Injection des dépendances dans la state machine
 state_machine._ws_service = ws_service
 state_machine._agent_service = agent_service

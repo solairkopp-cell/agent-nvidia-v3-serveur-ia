@@ -52,6 +52,7 @@ if TYPE_CHECKING:
     from services.vad_service import VADService
     from services.agent_service import AgentService
     from services.audio_service import AudioService
+    from services.websocket_service import WebSocketService
 
 
 logger = logging.getLogger(__name__)
@@ -126,10 +127,12 @@ class WebRTCService:
         vad: "VADService",
         agent: "AgentService",
         audio: "AudioService",
+        ws: "WebSocketService | None" = None,
     ):
         self.vad = vad
         self.agent = agent
         self.audio = audio
+        self._ws_service = ws
         self._rtc_config = self._build_rtc_config()
 
     # ── Configuration ─────────────────────────────────────────────────────────
@@ -484,6 +487,13 @@ class WebRTCService:
                     
                     if no_trips and voice_message:
                         # Cas "no trips" - utiliser le message pré-construit
+                        # Envoyer l'émotion greeting avant le message vocal
+                        try:
+                            await self._ws_service.send(session, {"type": "emotion", "name": "greeting"})
+                            logger.info("😊 Emotion greeting sent client_id=%s", session.client_id)
+                        except Exception as e:
+                            logger.error("Could not send emotion greeting: %s", e)
+
                         if self.agent is not None:
                             await self.agent.speak_text(session, voice_message)
                     elif trips and len(trips) > 0:
@@ -491,7 +501,7 @@ class WebRTCService:
                         first_trip = trips[0]
                         client_name = getattr(first_trip, 'client_name', None) or getattr(first_trip, 'get_client_name', lambda: None)()
                         package_info = getattr(first_trip, 'package_info', None) or getattr(first_trip, 'get_package_info', lambda: None)()
-                        
+
                         if client_name and package_info:
                             summary_text = (
                                 f"Hello {driver_name}, you have {len(trips)} trips. "
@@ -506,7 +516,14 @@ class WebRTCService:
                             )
                         else:
                             summary_text = f"Hello {driver_name}, you have {len(trips)} trips. Have a great day."
-                        
+
+                        # Envoyer l'émotion greeting avant le message vocal
+                        try:
+                            await self._ws_service.send(session, {"type": "emotion", "name": "greeting"})
+                            logger.info("😊 Emotion greeting sent client_id=%s", session.client_id)
+                        except Exception as e:
+                            logger.error("Could not send emotion greeting: %s", e)
+
                         if self.agent is not None:
                             await self.agent.speak_text(session, summary_text)
                 except Exception as e:

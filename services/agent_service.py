@@ -342,6 +342,13 @@ class AgentService:
                 session.reset_tts_output_state()
                 session.tts_started_at = time.monotonic()
 
+                # Envoyer l'émotion "speaking" avant la réponse
+                try:
+                    if self.ws_service is not None:
+                        await self.ws_service.send(session, {"type": "emotion", "name": "speaking"})
+                except Exception:
+                    pass  # Ignorer silencieusement pour ne pas bloquer le TTS
+
                 # Démarrer le scheduler
                 scheduler_task = asyncio.create_task(
                     self._tts_scheduler(session, request_id),
@@ -380,7 +387,7 @@ class AgentService:
                         scheduler_task.cancel()
                     with suppress(asyncio.CancelledError):
                         await scheduler_task
-                        
+
                     session.tts_playing = False
                     session.reset_tts_output_state()
                     session.tts_started_at = 0.0
@@ -574,6 +581,13 @@ class AgentService:
             if session.cancel_flag or session.current_request_id != request_id:
                 return full_reply
 
+            # Envoyer l'émotion "speaking" avant la réponse
+            try:
+                if self.ws_service is not None:
+                    await self.ws_service.send(session, {"type": "emotion", "name": "speaking"})
+            except Exception:
+                pass  # Ignorer silencieusement pour ne pas bloquer le TTS
+
             # 3. Envoyer via queue (avec prébuffer et découpage)
             await self._emit_tts_audio(
                 session=session,
@@ -592,7 +606,7 @@ class AgentService:
 
             # Flush de fin : 100ms de silence
             await self._flush_tts_queue(session, request_id, silence_frames=5)
-            
+
             # Attendre que le flush soit consommé
             await asyncio.sleep(0.15)
 
@@ -628,14 +642,21 @@ class AgentService:
     ) -> None:
         """
         Jouer le flux TTS avec scheduler temps réel et queue audio.
-        
+
         Architecture :
           - Producer : synthétise les segments TTS → met dans session.tts_audio_queue
           - Scheduler : consomme la queue → envoie frames à intervalle fixe (20ms)
           - Flush : ajoute 100ms de silence à la fin
         """
         logger = logging.getLogger(__name__)
-        
+
+        # Envoyer l'émotion "speaking" au début de chaque prise de parole
+        try:
+            if self.ws_service is not None:
+                await self.ws_service.send(session, {"type": "emotion", "name": "speaking"})
+        except Exception:
+            pass  # Ignorer silencieusement pour ne pas bloquer le TTS
+
         # Démarrer le scheduler en tâche de fond
         scheduler_task = asyncio.create_task(
             self._tts_scheduler(session, request_id),
@@ -968,6 +989,13 @@ class AgentService:
         session.tts_playing = True
         session.reset_tts_output_state()
         session.tts_started_at = time.monotonic()
+
+        # Envoyer l'émotion "speaking" avant la réponse
+        try:
+            if self.ws_service is not None:
+                await self.ws_service.send(session, {"type": "emotion", "name": "speaking"})
+        except Exception:
+            pass  # Ignorer silencieusement pour ne pas bloquer le TTS
 
         # Démarrer le scheduler
         scheduler_task = asyncio.create_task(

@@ -272,18 +272,18 @@ class DeliveryService:
         """
         if self.ws_service is None:
             return
-        
+
         trip_count = len(trips)
-        
+
         # Récupérer les infos du premier trip
         first_trip = trips[0] if trips else None
         client_name = None
         package_info = None
-        
+
         if first_trip:
             client_name = getattr(first_trip, 'client_name', None) or getattr(first_trip, 'get_client_name', lambda: None)()
             package_info = getattr(first_trip, 'package_info', None) or getattr(first_trip, 'get_package_info', lambda: None)()
-        
+
         # Construire le message vocal
         if first_trip and client_name and package_info:
             summary_text = (
@@ -299,6 +299,13 @@ class DeliveryService:
             )
         else:
             summary_text = f"Hello {driver_name}, you have {trip_count} trips. Have a great day."
+
+        # Envoyer l'émotion greeting avant le message vocal
+        try:
+            await self.ws_service.send(session, {"type": "emotion", "name": "greeting"})
+            logger.info("😊 Emotion greeting sent client_id=%s", session.client_id)
+        except Exception as e:
+            logger.error("Could not send emotion greeting: %s", e)
 
         # Utiliser speak_text de AgentService pour parler directement
         try:
@@ -337,13 +344,21 @@ class DeliveryService:
 
         # Si WebRTC est déjà prêt, envoyer le message vocal immédiatement
         if session.tts_track is not None:
+            # Envoyer l'émotion greeting avant le message vocal
+            try:
+                if self.ws_service is not None:
+                    await self.ws_service.send(session, {"type": "emotion", "name": "greeting"})
+                    logger.info("😊 Emotion greeting sent client_id=%s", session.client_id)
+            except Exception as e:
+                logger.error("Could not send emotion greeting: %s", e)
+
             try:
                 if self.ws_service is not None and self.ws_service.webrtc is not None:
                     agent = self.ws_service.webrtc.agent
                     await agent.speak_text(session, voice_message)
                     logger.info("🔊 No trips voice message sent: %s", voice_message)
             except Exception as e:
-                logger.debug("Could not send no trips voice message: %s", e)
+                logger.error("Could not send no trips voice message: %s", e)
 
     async def _send_error_notification(self, session: Session, message: str) -> None:
         """

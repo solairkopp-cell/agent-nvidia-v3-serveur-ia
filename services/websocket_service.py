@@ -306,7 +306,8 @@ class WebSocketService:
         Ignorer silencieusement si la connexion est fermée.
         """
         try:
-            logger.debug("📤 WS MESSAGE SENT client_id=%s type=%s data=%r", 
+            # Log tous les envois (y compris émotions)
+            logger.info("📤 WS MESSAGE SENT client_id=%s type=%s data=%r",
                         session.client_id, data.get("type"), data)
             await session.websocket.send_json(data)
         except Exception:

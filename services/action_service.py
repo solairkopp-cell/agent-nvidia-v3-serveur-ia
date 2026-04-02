@@ -135,7 +135,7 @@ class ActionService:
         responses = {
             "start_navigation": "Starting navigation to the next destination.",
             "show_deliveries": "Here is the list of your deliveries.",
-            "repeat_last_sentence": "Repeating: " + (session.conversation_history[-1]["content"] if session.conversation_history else "nothing"),
+            "repeat_last_sentence":   (session.conversation_history[-1]["content"] if session.conversation_history else "nothing"),
             "get_possible_delivery_failure_reason": "Here are the possible reasons for delivery failure.",
             "stop_listening": "Disabling listening.",
         }
