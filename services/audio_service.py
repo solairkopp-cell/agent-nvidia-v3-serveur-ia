@@ -6,6 +6,7 @@ Pas d'état — toutes les fonctions sont pures ou stateless.
 from __future__ import annotations
 
 import io
+from pathlib import Path
 import numpy as np
 import soundfile as sf
 
@@ -100,6 +101,20 @@ class AudioService:
         if not isinstance(samples, np.ndarray):
             samples = np.asarray(samples, dtype=np.float32)
         return samples.astype(np.float32, copy=False).reshape(-1), int(rate)
+
+    def save_wav(self, path: str | Path, samples: np.ndarray, sample_rate: int = TARGET_SAMPLE_RATE) -> None:
+        """
+        Sauvegarde un buffer audio float32/mono en WAV PCM_16 sur disque.
+        """
+        if not isinstance(samples, np.ndarray):
+            samples = np.asarray(samples, dtype=np.float32)
+        if samples.ndim > 1:
+            samples = self.to_mono(samples)
+        samples = samples.astype(np.float32, copy=False).reshape(-1)
+
+        output_path = Path(path)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        sf.write(str(output_path), samples, int(sample_rate), format="WAV", subtype="PCM_16")
 
     def array_to_av_frame(self, samples: np.ndarray, sample_rate: int):
         """

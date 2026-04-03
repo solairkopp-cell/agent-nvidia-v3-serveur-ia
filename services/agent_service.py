@@ -23,8 +23,10 @@ from __future__ import annotations
 import asyncio
 from contextlib import suppress
 import logging
+from pathlib import Path
 import time
 from typing import TYPE_CHECKING
+import uuid
 
 import numpy as np
 
@@ -161,6 +163,9 @@ class AgentService:
                     int(sample_rate),
                 )
 
+            # Sauvegarde de référence du brut reçu côté WebRTC
+            raw_stt_samples = samples.copy()
+
             # Appliquer le denoise sur l'audio avant STT
             stt_samples = samples
             if apply_denoise and self.denoise is not None:
@@ -183,6 +188,8 @@ class AgentService:
                             )
                 except Exception:
                     logger.exception("STT utterance denoise failed client_id=%s", session.client_id)
+
+            self._save_debug_stt_audio(session, raw_stt_samples, stt_samples, int(sample_rate))
 
             # Normaliser (aide Whisper sur segments faibles)
             try:
@@ -1403,6 +1410,48 @@ class AgentService:
             )
             if success:
                 logger.info("✅ Trip status updated client_id=%s trip_id=%s", session.client_id, trip_id)
+
+    def _save_debug_stt_audio(
+        self,
+        session: "Session",
+        raw_samples: np.ndarray,
+        denoised_samples: np.ndarray,
+        sample_rate: int,
+    ) -> None:
+        """
+        Sauvegarde brute + débruitée de l'utterance réellement envoyée au pipeline STT
+        dans le flux normal WebRTC, pour comparaison A/B.
+        """
+        logger = logging.getLogger(__name__)
+
+        try:
+            recordings_dir = Path("assets/recordings")
+            recordings_dir.mkdir(parents=True, exist_ok=True)
+
+            utterance_id = uuid.uuid4().hex[:8]
+            client_id = str(getattr(session, "client_id", "unknown")).replace("/", "_")
+            prefix = f"webrtc_{client_id}_{utterance_id}"
+
+            raw_path = recordings_dir / f"{prefix}_raw.wav"
+            denoised_path = recordings_dir / f"{prefix}_denoised.wav"
+
+            self.audio.save_wav(raw_path, np.asarray(raw_samples, dtype=np.float32), sample_rate=sample_rate)
+            self.audio.save_wav(denoised_path, np.asarray(denoised_samples, dtype=np.float32), sample_rate=sample_rate)
+
+            raw_rms = float(np.sqrt(np.mean(raw_samples * raw_samples))) if raw_samples.size else 0.0
+            denoised_rms = float(np.sqrt(np.mean(denoised_samples * denoised_samples))) if denoised_samples.size else 0.0
+
+            logger.info(
+                "Saved WebRTC STT audio compare client_id=%s raw=%s denoised=%s raw_rms=%.6f denoised_rms=%.6f sr=%d",
+                session.client_id,
+                raw_path.name,
+                denoised_path.name,
+                raw_rms,
+                denoised_rms,
+                sample_rate,
+            )
+        except Exception:
+            logger.exception("Failed to save WebRTC STT comparison audio client_id=%s", session.client_id)
 
     def set_ws_service(self, ws_service: "WebSocketService") -> None:
         """Injection tardive pour éviter la dépendance circulaire."""

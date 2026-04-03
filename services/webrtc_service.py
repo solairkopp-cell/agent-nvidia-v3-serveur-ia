@@ -451,7 +451,7 @@ class WebRTCService:
                             session,
                             vad_result.audio,
                             config.SAMPLE_RATE,
-                            apply_denoise=False,
+                            apply_denoise=True,
                         )
                     )
 

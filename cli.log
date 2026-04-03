@@ -2319,3 +2319,421 @@
 2026-04-03 02:15:08 - INFO - ✅ SUCCÈS: Instance 69cea258fb98e15a3cf53554 mise à jour
 2026-04-03 02:15:08 - INFO - ✅ SUCCÈS: Package 69cea258fb98e15a3cf53554 mis à jour: planned -> delivered_successfully
 2026-04-03 02:15:08 - INFO - ✅ SUCCÈS: Package 69cea258fb98e15a3cf53554 supprimé de data.json
+2026-04-03 02:29:48 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 02:29:48 - INFO - Récupération des trips pour le driver: 000
+2026-04-03 02:29:48 - INFO - Recherche du driver par query: 000
+2026-04-03 02:29:48 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 02:29:48 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 02:29:48 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 02:29:48 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-03 02:29:48 - INFO - Recherche du driver par query: 000
+2026-04-03 02:29:48 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 02:29:48 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 02:29:48 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-03 02:29:48 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-03 02:29:48 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-03 02:29:48 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-03 02:29:48 - INFO - Recherche des packages pour le schedule: 69cf112dfb98e15a3cf53593
+2026-04-03 02:29:48 - INFO - Recherche par référence: field=schedule_id, value=69cf112dfb98e15a3cf53593
+2026-04-03 02:29:48 - INFO - ✅ SUCCÈS: 4 package(s) trouvé(s) pour le schedule 69cf112dfb98e15a3cf53593
+2026-04-03 02:29:48 - INFO - Récupération du package par ID: 69cea29efb98e15a3cf5355a
+2026-04-03 02:29:48 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf5355a
+2026-04-03 02:29:48 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 02:29:48 - INFO - ✅ SUCCÈS: Package trouvé: 69cea29efb98e15a3cf5355a
+2026-04-03 02:29:48 - INFO - Récupération du package par ID: 69cea28ffb98e15a3cf53558
+2026-04-03 02:29:48 - INFO - Récupération de l'instance: 69cea28ffb98e15a3cf53558
+2026-04-03 02:29:48 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 02:29:48 - INFO - ✅ SUCCÈS: Package trouvé: 69cea28ffb98e15a3cf53558
+2026-04-03 02:29:48 - INFO - Récupération du package par ID: 69cea26efb98e15a3cf53556
+2026-04-03 02:29:48 - INFO - Récupération de l'instance: 69cea26efb98e15a3cf53556
+2026-04-03 02:29:48 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 02:29:48 - INFO - ✅ SUCCÈS: Package trouvé: 69cea26efb98e15a3cf53556
+2026-04-03 02:29:48 - INFO - Récupération du package par ID: 69cea258fb98e15a3cf53554
+2026-04-03 02:29:48 - INFO - Récupération de l'instance: 69cea258fb98e15a3cf53554
+2026-04-03 02:29:48 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 02:29:48 - INFO - ✅ SUCCÈS: Package trouvé: 69cea258fb98e15a3cf53554
+2026-04-03 02:29:48 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 02:29:48 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 02:29:48 - INFO - Recherche du driver par query: 000
+2026-04-03 02:29:48 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 02:29:49 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 02:35:34 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 02:35:34 - INFO - Récupération des trips pour le driver: 000
+2026-04-03 02:35:34 - INFO - Recherche du driver par query: 000
+2026-04-03 02:35:34 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 02:35:34 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 02:35:34 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 02:35:34 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-03 02:35:34 - INFO - Recherche du driver par query: 000
+2026-04-03 02:35:34 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 02:35:34 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 02:35:34 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-03 02:35:34 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-03 02:35:35 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-03 02:35:35 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-03 02:35:35 - INFO - Recherche des packages pour le schedule: 69cf112dfb98e15a3cf53593
+2026-04-03 02:35:35 - INFO - Recherche par référence: field=schedule_id, value=69cf112dfb98e15a3cf53593
+2026-04-03 02:35:35 - INFO - ✅ SUCCÈS: 4 package(s) trouvé(s) pour le schedule 69cf112dfb98e15a3cf53593
+2026-04-03 02:35:35 - INFO - Récupération du package par ID: 69cea29efb98e15a3cf5355a
+2026-04-03 02:35:35 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf5355a
+2026-04-03 02:35:35 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 02:35:35 - INFO - ✅ SUCCÈS: Package trouvé: 69cea29efb98e15a3cf5355a
+2026-04-03 02:35:35 - INFO - Récupération du package par ID: 69cea28ffb98e15a3cf53558
+2026-04-03 02:35:35 - INFO - Récupération de l'instance: 69cea28ffb98e15a3cf53558
+2026-04-03 02:35:35 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 02:35:35 - INFO - ✅ SUCCÈS: Package trouvé: 69cea28ffb98e15a3cf53558
+2026-04-03 02:35:35 - INFO - Récupération du package par ID: 69cea26efb98e15a3cf53556
+2026-04-03 02:35:35 - INFO - Récupération de l'instance: 69cea26efb98e15a3cf53556
+2026-04-03 02:35:35 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 02:35:35 - INFO - ✅ SUCCÈS: Package trouvé: 69cea26efb98e15a3cf53556
+2026-04-03 02:35:35 - INFO - Récupération du package par ID: 69cea258fb98e15a3cf53554
+2026-04-03 02:35:35 - INFO - Récupération de l'instance: 69cea258fb98e15a3cf53554
+2026-04-03 02:35:35 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 02:35:35 - INFO - ✅ SUCCÈS: Package trouvé: 69cea258fb98e15a3cf53554
+2026-04-03 02:35:35 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 02:35:35 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 02:35:35 - INFO - Recherche du driver par query: 000
+2026-04-03 02:35:35 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 02:35:35 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 02:46:59 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 02:46:59 - INFO - Récupération des trips pour le driver: 000
+2026-04-03 02:46:59 - INFO - Recherche du driver par query: 000
+2026-04-03 02:46:59 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 02:46:59 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 02:46:59 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 02:46:59 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-03 02:46:59 - INFO - Recherche du driver par query: 000
+2026-04-03 02:46:59 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 02:46:59 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 02:46:59 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-03 02:46:59 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-03 02:46:59 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-03 02:46:59 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-03 02:46:59 - INFO - Recherche des packages pour le schedule: 69cf112dfb98e15a3cf53593
+2026-04-03 02:46:59 - INFO - Recherche par référence: field=schedule_id, value=69cf112dfb98e15a3cf53593
+2026-04-03 02:46:59 - INFO - ✅ SUCCÈS: 4 package(s) trouvé(s) pour le schedule 69cf112dfb98e15a3cf53593
+2026-04-03 02:46:59 - INFO - Récupération du package par ID: 69cea29efb98e15a3cf5355a
+2026-04-03 02:46:59 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf5355a
+2026-04-03 02:46:59 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 02:46:59 - INFO - ✅ SUCCÈS: Package trouvé: 69cea29efb98e15a3cf5355a
+2026-04-03 02:46:59 - INFO - Récupération du package par ID: 69cea28ffb98e15a3cf53558
+2026-04-03 02:46:59 - INFO - Récupération de l'instance: 69cea28ffb98e15a3cf53558
+2026-04-03 02:46:59 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 02:46:59 - INFO - ✅ SUCCÈS: Package trouvé: 69cea28ffb98e15a3cf53558
+2026-04-03 02:46:59 - INFO - Récupération du package par ID: 69cea26efb98e15a3cf53556
+2026-04-03 02:46:59 - INFO - Récupération de l'instance: 69cea26efb98e15a3cf53556
+2026-04-03 02:46:59 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 02:46:59 - INFO - ✅ SUCCÈS: Package trouvé: 69cea26efb98e15a3cf53556
+2026-04-03 02:46:59 - INFO - Récupération du package par ID: 69cea258fb98e15a3cf53554
+2026-04-03 02:46:59 - INFO - Récupération de l'instance: 69cea258fb98e15a3cf53554
+2026-04-03 02:47:00 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 02:47:00 - INFO - ✅ SUCCÈS: Package trouvé: 69cea258fb98e15a3cf53554
+2026-04-03 02:47:00 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 02:47:00 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 02:47:00 - INFO - Recherche du driver par query: 000
+2026-04-03 02:47:00 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 02:47:00 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 03:10:43 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 03:10:43 - INFO - Récupération des trips pour le driver: 000
+2026-04-03 03:10:43 - INFO - Recherche du driver par query: 000
+2026-04-03 03:10:43 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 03:10:44 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 03:10:44 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 03:10:44 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-03 03:10:44 - INFO - Recherche du driver par query: 000
+2026-04-03 03:10:44 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 03:10:44 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 03:10:44 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-03 03:10:44 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-03 03:10:44 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-03 03:10:44 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-03 03:10:44 - INFO - Recherche des packages pour le schedule: 69cf112dfb98e15a3cf53593
+2026-04-03 03:10:44 - INFO - Recherche par référence: field=schedule_id, value=69cf112dfb98e15a3cf53593
+2026-04-03 03:10:44 - INFO - ✅ SUCCÈS: 4 package(s) trouvé(s) pour le schedule 69cf112dfb98e15a3cf53593
+2026-04-03 03:10:44 - INFO - Récupération du package par ID: 69cea29efb98e15a3cf5355a
+2026-04-03 03:10:44 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf5355a
+2026-04-03 03:10:44 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 03:10:44 - INFO - ✅ SUCCÈS: Package trouvé: 69cea29efb98e15a3cf5355a
+2026-04-03 03:10:44 - INFO - Récupération du package par ID: 69cea28ffb98e15a3cf53558
+2026-04-03 03:10:44 - INFO - Récupération de l'instance: 69cea28ffb98e15a3cf53558
+2026-04-03 03:10:44 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 03:10:44 - INFO - ✅ SUCCÈS: Package trouvé: 69cea28ffb98e15a3cf53558
+2026-04-03 03:10:44 - INFO - Récupération du package par ID: 69cea26efb98e15a3cf53556
+2026-04-03 03:10:44 - INFO - Récupération de l'instance: 69cea26efb98e15a3cf53556
+2026-04-03 03:10:44 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 03:10:44 - INFO - ✅ SUCCÈS: Package trouvé: 69cea26efb98e15a3cf53556
+2026-04-03 03:10:44 - INFO - Récupération du package par ID: 69cea258fb98e15a3cf53554
+2026-04-03 03:10:44 - INFO - Récupération de l'instance: 69cea258fb98e15a3cf53554
+2026-04-03 03:10:44 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 03:10:45 - INFO - ✅ SUCCÈS: Package trouvé: 69cea258fb98e15a3cf53554
+2026-04-03 03:10:45 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 03:10:45 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 03:10:45 - INFO - Recherche du driver par query: 000
+2026-04-03 03:10:45 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 03:10:45 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 03:19:35 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 03:19:35 - INFO - Récupération des trips pour le driver: 000
+2026-04-03 03:19:35 - INFO - Recherche du driver par query: 000
+2026-04-03 03:19:35 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 03:19:41 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 03:19:41 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 03:19:41 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-03 03:19:41 - INFO - Recherche du driver par query: 000
+2026-04-03 03:19:41 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 03:19:41 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 03:19:41 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-03 03:19:41 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-03 03:19:41 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-03 03:19:41 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-03 03:19:41 - INFO - Recherche des packages pour le schedule: 69cf112dfb98e15a3cf53593
+2026-04-03 03:19:41 - INFO - Recherche par référence: field=schedule_id, value=69cf112dfb98e15a3cf53593
+2026-04-03 03:19:41 - INFO - ✅ SUCCÈS: 4 package(s) trouvé(s) pour le schedule 69cf112dfb98e15a3cf53593
+2026-04-03 03:19:41 - INFO - Récupération du package par ID: 69cea29efb98e15a3cf5355a
+2026-04-03 03:19:41 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf5355a
+2026-04-03 03:19:41 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 03:19:41 - INFO - ✅ SUCCÈS: Package trouvé: 69cea29efb98e15a3cf5355a
+2026-04-03 03:19:41 - INFO - Récupération du package par ID: 69cea28ffb98e15a3cf53558
+2026-04-03 03:19:41 - INFO - Récupération de l'instance: 69cea28ffb98e15a3cf53558
+2026-04-03 03:19:41 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 03:19:41 - INFO - ✅ SUCCÈS: Package trouvé: 69cea28ffb98e15a3cf53558
+2026-04-03 03:19:41 - INFO - Récupération du package par ID: 69cea26efb98e15a3cf53556
+2026-04-03 03:19:41 - INFO - Récupération de l'instance: 69cea26efb98e15a3cf53556
+2026-04-03 03:19:41 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 03:19:41 - INFO - ✅ SUCCÈS: Package trouvé: 69cea26efb98e15a3cf53556
+2026-04-03 03:19:41 - INFO - Récupération du package par ID: 69cea258fb98e15a3cf53554
+2026-04-03 03:19:41 - INFO - Récupération de l'instance: 69cea258fb98e15a3cf53554
+2026-04-03 03:19:41 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 03:19:41 - INFO - ✅ SUCCÈS: Package trouvé: 69cea258fb98e15a3cf53554
+2026-04-03 03:19:41 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 03:19:41 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 03:19:41 - INFO - Recherche du driver par query: 000
+2026-04-03 03:19:41 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 03:19:41 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 03:23:28 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 03:23:28 - INFO - Récupération des trips pour le driver: 000
+2026-04-03 03:23:28 - INFO - Recherche du driver par query: 000
+2026-04-03 03:23:28 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 03:23:29 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 03:23:29 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 03:23:29 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-03 03:23:29 - INFO - Recherche du driver par query: 000
+2026-04-03 03:23:29 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 03:23:29 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 03:23:29 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-03 03:23:29 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-03 03:23:29 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-03 03:23:29 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-03 03:23:29 - INFO - Recherche des packages pour le schedule: 69cf112dfb98e15a3cf53593
+2026-04-03 03:23:29 - INFO - Recherche par référence: field=schedule_id, value=69cf112dfb98e15a3cf53593
+2026-04-03 03:23:29 - INFO - ✅ SUCCÈS: 4 package(s) trouvé(s) pour le schedule 69cf112dfb98e15a3cf53593
+2026-04-03 03:23:29 - INFO - Récupération du package par ID: 69cea29efb98e15a3cf5355a
+2026-04-03 03:23:29 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf5355a
+2026-04-03 03:23:29 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 03:23:29 - INFO - ✅ SUCCÈS: Package trouvé: 69cea29efb98e15a3cf5355a
+2026-04-03 03:23:29 - INFO - Récupération du package par ID: 69cea28ffb98e15a3cf53558
+2026-04-03 03:23:29 - INFO - Récupération de l'instance: 69cea28ffb98e15a3cf53558
+2026-04-03 03:23:29 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 03:23:29 - INFO - ✅ SUCCÈS: Package trouvé: 69cea28ffb98e15a3cf53558
+2026-04-03 03:23:29 - INFO - Récupération du package par ID: 69cea26efb98e15a3cf53556
+2026-04-03 03:23:29 - INFO - Récupération de l'instance: 69cea26efb98e15a3cf53556
+2026-04-03 03:23:29 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 03:23:30 - INFO - ✅ SUCCÈS: Package trouvé: 69cea26efb98e15a3cf53556
+2026-04-03 03:23:30 - INFO - Récupération du package par ID: 69cea258fb98e15a3cf53554
+2026-04-03 03:23:30 - INFO - Récupération de l'instance: 69cea258fb98e15a3cf53554
+2026-04-03 03:23:30 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 03:23:30 - INFO - ✅ SUCCÈS: Package trouvé: 69cea258fb98e15a3cf53554
+2026-04-03 03:23:30 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 03:23:30 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 03:23:30 - INFO - Recherche du driver par query: 000
+2026-04-03 03:23:30 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 03:23:30 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 03:27:46 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 03:27:46 - INFO - Récupération des trips pour le driver: 000
+2026-04-03 03:27:46 - INFO - Recherche du driver par query: 000
+2026-04-03 03:27:46 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 03:27:46 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 03:27:46 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 03:27:46 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-03 03:27:46 - INFO - Recherche du driver par query: 000
+2026-04-03 03:27:46 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 03:27:47 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 03:27:47 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-03 03:27:47 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-03 03:27:47 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-03 03:27:47 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-03 03:27:47 - INFO - Recherche des packages pour le schedule: 69cf112dfb98e15a3cf53593
+2026-04-03 03:27:47 - INFO - Recherche par référence: field=schedule_id, value=69cf112dfb98e15a3cf53593
+2026-04-03 03:27:47 - INFO - ✅ SUCCÈS: 4 package(s) trouvé(s) pour le schedule 69cf112dfb98e15a3cf53593
+2026-04-03 03:27:47 - INFO - Récupération du package par ID: 69cea29efb98e15a3cf5355a
+2026-04-03 03:27:47 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf5355a
+2026-04-03 03:27:47 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 03:27:47 - INFO - ✅ SUCCÈS: Package trouvé: 69cea29efb98e15a3cf5355a
+2026-04-03 03:27:47 - INFO - Récupération du package par ID: 69cea28ffb98e15a3cf53558
+2026-04-03 03:27:47 - INFO - Récupération de l'instance: 69cea28ffb98e15a3cf53558
+2026-04-03 03:27:47 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 03:27:47 - INFO - ✅ SUCCÈS: Package trouvé: 69cea28ffb98e15a3cf53558
+2026-04-03 03:27:47 - INFO - Récupération du package par ID: 69cea26efb98e15a3cf53556
+2026-04-03 03:27:47 - INFO - Récupération de l'instance: 69cea26efb98e15a3cf53556
+2026-04-03 03:27:47 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 03:27:47 - INFO - ✅ SUCCÈS: Package trouvé: 69cea26efb98e15a3cf53556
+2026-04-03 03:27:47 - INFO - Récupération du package par ID: 69cea258fb98e15a3cf53554
+2026-04-03 03:27:47 - INFO - Récupération de l'instance: 69cea258fb98e15a3cf53554
+2026-04-03 03:27:47 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 03:27:47 - INFO - ✅ SUCCÈS: Package trouvé: 69cea258fb98e15a3cf53554
+2026-04-03 03:27:47 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 03:27:47 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 03:27:47 - INFO - Recherche du driver par query: 000
+2026-04-03 03:27:47 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 03:27:47 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 03:46:54 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 03:46:54 - INFO - Récupération des trips pour le driver: 000
+2026-04-03 03:46:54 - INFO - Recherche du driver par query: 000
+2026-04-03 03:46:54 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 03:46:55 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 03:46:55 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 03:46:55 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-03 03:46:55 - INFO - Recherche du driver par query: 000
+2026-04-03 03:46:55 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 03:46:55 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 03:46:55 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-03 03:46:55 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-03 03:46:55 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-03 03:46:55 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-03 03:46:55 - INFO - Recherche des packages pour le schedule: 69cf112dfb98e15a3cf53593
+2026-04-03 03:46:55 - INFO - Recherche par référence: field=schedule_id, value=69cf112dfb98e15a3cf53593
+2026-04-03 03:46:55 - INFO - ✅ SUCCÈS: 4 package(s) trouvé(s) pour le schedule 69cf112dfb98e15a3cf53593
+2026-04-03 03:46:55 - INFO - Récupération du package par ID: 69cea29efb98e15a3cf5355a
+2026-04-03 03:46:55 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf5355a
+2026-04-03 03:46:55 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 03:46:55 - INFO - ✅ SUCCÈS: Package trouvé: 69cea29efb98e15a3cf5355a
+2026-04-03 03:46:55 - INFO - Récupération du package par ID: 69cea28ffb98e15a3cf53558
+2026-04-03 03:46:55 - INFO - Récupération de l'instance: 69cea28ffb98e15a3cf53558
+2026-04-03 03:46:55 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 03:46:55 - INFO - ✅ SUCCÈS: Package trouvé: 69cea28ffb98e15a3cf53558
+2026-04-03 03:46:55 - INFO - Récupération du package par ID: 69cea26efb98e15a3cf53556
+2026-04-03 03:46:55 - INFO - Récupération de l'instance: 69cea26efb98e15a3cf53556
+2026-04-03 03:46:55 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 03:46:55 - INFO - ✅ SUCCÈS: Package trouvé: 69cea26efb98e15a3cf53556
+2026-04-03 03:46:55 - INFO - Récupération du package par ID: 69cea258fb98e15a3cf53554
+2026-04-03 03:46:55 - INFO - Récupération de l'instance: 69cea258fb98e15a3cf53554
+2026-04-03 03:46:55 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 03:46:55 - INFO - ✅ SUCCÈS: Package trouvé: 69cea258fb98e15a3cf53554
+2026-04-03 03:46:55 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 03:46:55 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 03:46:55 - INFO - Recherche du driver par query: 000
+2026-04-03 03:46:55 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 03:46:56 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 04:02:42 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 04:02:42 - INFO - Récupération des trips pour le driver: 000
+2026-04-03 04:02:42 - INFO - Recherche du driver par query: 000
+2026-04-03 04:02:42 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 04:02:42 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 04:02:42 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 04:02:42 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-03 04:02:42 - INFO - Recherche du driver par query: 000
+2026-04-03 04:02:42 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 04:02:43 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 04:02:43 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-03 04:02:43 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-03 04:02:43 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-03 04:02:43 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-03 04:02:43 - INFO - Recherche des packages pour le schedule: 69cf112dfb98e15a3cf53593
+2026-04-03 04:02:43 - INFO - Recherche par référence: field=schedule_id, value=69cf112dfb98e15a3cf53593
+2026-04-03 04:02:43 - INFO - ✅ SUCCÈS: 4 package(s) trouvé(s) pour le schedule 69cf112dfb98e15a3cf53593
+2026-04-03 04:02:43 - INFO - Récupération du package par ID: 69cea29efb98e15a3cf5355a
+2026-04-03 04:02:43 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf5355a
+2026-04-03 04:02:43 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 04:02:43 - INFO - ✅ SUCCÈS: Package trouvé: 69cea29efb98e15a3cf5355a
+2026-04-03 04:02:43 - INFO - Récupération du package par ID: 69cea28ffb98e15a3cf53558
+2026-04-03 04:02:43 - INFO - Récupération de l'instance: 69cea28ffb98e15a3cf53558
+2026-04-03 04:02:43 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 04:02:43 - INFO - ✅ SUCCÈS: Package trouvé: 69cea28ffb98e15a3cf53558
+2026-04-03 04:02:43 - INFO - Récupération du package par ID: 69cea26efb98e15a3cf53556
+2026-04-03 04:02:43 - INFO - Récupération de l'instance: 69cea26efb98e15a3cf53556
+2026-04-03 04:02:43 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 04:02:43 - INFO - ✅ SUCCÈS: Package trouvé: 69cea26efb98e15a3cf53556
+2026-04-03 04:02:43 - INFO - Récupération du package par ID: 69cea258fb98e15a3cf53554
+2026-04-03 04:02:43 - INFO - Récupération de l'instance: 69cea258fb98e15a3cf53554
+2026-04-03 04:02:43 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 04:02:43 - INFO - ✅ SUCCÈS: Package trouvé: 69cea258fb98e15a3cf53554
+2026-04-03 04:02:43 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 04:02:43 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 04:02:43 - INFO - Recherche du driver par query: 000
+2026-04-03 04:02:43 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 04:02:43 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 04:08:44 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 04:08:44 - INFO - Récupération des trips pour le driver: 000
+2026-04-03 04:08:44 - INFO - Recherche du driver par query: 000
+2026-04-03 04:08:44 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 04:08:45 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 04:08:45 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 04:08:45 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-03 04:08:45 - INFO - Recherche du driver par query: 000
+2026-04-03 04:08:45 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 04:08:45 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 04:08:45 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-03 04:08:45 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-03 04:08:45 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-03 04:08:45 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-03 04:08:45 - INFO - Recherche des packages pour le schedule: 69cf112dfb98e15a3cf53593
+2026-04-03 04:08:45 - INFO - Recherche par référence: field=schedule_id, value=69cf112dfb98e15a3cf53593
+2026-04-03 04:08:45 - INFO - ✅ SUCCÈS: 4 package(s) trouvé(s) pour le schedule 69cf112dfb98e15a3cf53593
+2026-04-03 04:08:45 - INFO - Récupération du package par ID: 69cea29efb98e15a3cf5355a
+2026-04-03 04:08:45 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf5355a
+2026-04-03 04:08:45 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 04:08:45 - INFO - ✅ SUCCÈS: Package trouvé: 69cea29efb98e15a3cf5355a
+2026-04-03 04:08:45 - INFO - Récupération du package par ID: 69cea28ffb98e15a3cf53558
+2026-04-03 04:08:45 - INFO - Récupération de l'instance: 69cea28ffb98e15a3cf53558
+2026-04-03 04:08:45 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 04:08:45 - INFO - ✅ SUCCÈS: Package trouvé: 69cea28ffb98e15a3cf53558
+2026-04-03 04:08:45 - INFO - Récupération du package par ID: 69cea26efb98e15a3cf53556
+2026-04-03 04:08:45 - INFO - Récupération de l'instance: 69cea26efb98e15a3cf53556
+2026-04-03 04:08:45 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 04:08:45 - INFO - ✅ SUCCÈS: Package trouvé: 69cea26efb98e15a3cf53556
+2026-04-03 04:08:45 - INFO - Récupération du package par ID: 69cea258fb98e15a3cf53554
+2026-04-03 04:08:45 - INFO - Récupération de l'instance: 69cea258fb98e15a3cf53554
+2026-04-03 04:08:45 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 04:08:45 - INFO - ✅ SUCCÈS: Package trouvé: 69cea258fb98e15a3cf53554
+2026-04-03 04:08:45 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 04:08:45 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 04:08:45 - INFO - Recherche du driver par query: 000
+2026-04-03 04:08:45 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 04:08:45 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 04:10:13 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 04:10:13 - INFO - Récupération des trips pour le driver: 000
+2026-04-03 04:10:13 - INFO - Recherche du driver par query: 000
+2026-04-03 04:10:13 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 04:10:13 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 04:10:13 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 04:10:13 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-03 04:10:13 - INFO - Recherche du driver par query: 000
+2026-04-03 04:10:13 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 04:10:13 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 04:10:13 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-03 04:10:13 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-03 04:10:13 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-03 04:10:13 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-03 04:10:13 - INFO - Recherche des packages pour le schedule: 69cf112dfb98e15a3cf53593
+2026-04-03 04:10:13 - INFO - Recherche par référence: field=schedule_id, value=69cf112dfb98e15a3cf53593
+2026-04-03 04:10:13 - INFO - ✅ SUCCÈS: 4 package(s) trouvé(s) pour le schedule 69cf112dfb98e15a3cf53593
+2026-04-03 04:10:13 - INFO - Récupération du package par ID: 69cea29efb98e15a3cf5355a
+2026-04-03 04:10:13 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf5355a
+2026-04-03 04:10:13 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 04:10:13 - INFO - ✅ SUCCÈS: Package trouvé: 69cea29efb98e15a3cf5355a
+2026-04-03 04:10:13 - INFO - Récupération du package par ID: 69cea28ffb98e15a3cf53558
+2026-04-03 04:10:13 - INFO - Récupération de l'instance: 69cea28ffb98e15a3cf53558
+2026-04-03 04:10:13 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 04:10:13 - INFO - ✅ SUCCÈS: Package trouvé: 69cea28ffb98e15a3cf53558
+2026-04-03 04:10:13 - INFO - Récupération du package par ID: 69cea26efb98e15a3cf53556
+2026-04-03 04:10:13 - INFO - Récupération de l'instance: 69cea26efb98e15a3cf53556
+2026-04-03 04:10:13 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 04:10:13 - INFO - ✅ SUCCÈS: Package trouvé: 69cea26efb98e15a3cf53556
+2026-04-03 04:10:13 - INFO - Récupération du package par ID: 69cea258fb98e15a3cf53554
+2026-04-03 04:10:13 - INFO - Récupération de l'instance: 69cea258fb98e15a3cf53554
+2026-04-03 04:10:13 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 04:10:13 - INFO - ✅ SUCCÈS: Package trouvé: 69cea258fb98e15a3cf53554
+2026-04-03 04:10:13 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 04:10:13 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 04:10:13 - INFO - Recherche du driver par query: 000
+2026-04-03 04:10:13 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 04:10:14 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)

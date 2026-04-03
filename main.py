@@ -246,11 +246,13 @@ async def list_recordings():
 @app.post("/api/save-audio-denoised")
 async def save_audio_denoised(request: dict):
     """
-    Sauvegarde l'audio débruité.
+    Sauvegarde l'audio débruité + métriques comparatives.
 
-    Pour préserver la qualité et éviter les phrases coupées, si `raw_audio`
-    est fourni, le backend applique un débruitage one-shot sur l'enregistrement
-    complet avant sauvegarde.
+    Si `raw_audio` est fourni, le backend :
+      - sauvegarde le brut
+      - applique le denoise one-shot
+      - sauvegarde le résultat débruité
+      - retourne des métriques simples avant/après
 
     Request:
     {
@@ -261,42 +263,105 @@ async def save_audio_denoised(request: dict):
     try:
         import wave
 
+        def _pcm16_to_float32(audio_bytes: bytes) -> np.ndarray:
+            return np.frombuffer(audio_bytes, dtype=np.int16).astype(np.float32) / 32768.0
+
+        def _float32_to_pcm16(samples: np.ndarray) -> bytes:
+            clipped = np.clip(np.asarray(samples, dtype=np.float32), -1.0, 1.0)
+            return (clipped * 32767.0).astype(np.int16).tobytes()
+
+        def _audio_metrics(samples: np.ndarray) -> dict:
+            samples = np.asarray(samples, dtype=np.float32).reshape(-1)
+            if samples.size == 0:
+                return {"samples": 0, "duration_ms": 0, "rms": 0.0, "peak": 0.0}
+            rms = float(np.sqrt(np.mean(samples * samples)))
+            peak = float(np.max(np.abs(samples)))
+            duration_ms = int(samples.size / 16000 * 1000)
+            return {
+                "samples": int(samples.size),
+                "duration_ms": duration_ms,
+                "rms": round(rms, 6),
+                "peak": round(peak, 6),
+            }
+
+        def _write_wav(path: Path, audio_bytes: bytes) -> None:
+            with wave.open(str(path), "wb") as wf:
+                wf.setnchannels(1)
+                wf.setsampwidth(2)
+                wf.setframerate(16000)
+                wf.writeframes(audio_bytes)
+
         raw_audio_base64 = request.get("raw_audio")
         denoised_audio_base64 = request.get("audio")
 
+        recordings_dir = Path("assets/recordings")
+        recordings_dir.mkdir(parents=True, exist_ok=True)
+        recording_id = uuid.uuid4().hex[:8]
+
+        raw_filename = None
+        raw_url = None
+        raw_metrics = None
+
         if raw_audio_base64:
             raw_audio_bytes = base64.b64decode(raw_audio_base64)
-            raw_samples = np.frombuffer(raw_audio_bytes, dtype=np.int16).astype(np.float32) / 32768.0
+            raw_samples = _pcm16_to_float32(raw_audio_bytes)
             denoised_samples = await denoise_service.process_utterance(raw_samples, sample_rate=16000)
-            audio_bytes = (np.clip(denoised_samples, -1.0, 1.0) * 32767.0).astype(np.int16).tobytes()
+            audio_bytes = _float32_to_pcm16(denoised_samples)
+
+            raw_metrics = _audio_metrics(raw_samples)
+            denoised_metrics = _audio_metrics(denoised_samples)
+
+            raw_filename = f"recording_{recording_id}_raw.wav"
+            raw_filepath = recordings_dir / raw_filename
+            _write_wav(raw_filepath, raw_audio_bytes)
+            raw_url = f"/assets/recordings/{raw_filename}"
+
             logger.info(
-                "Received raw audio for final denoise: input=%d bytes output=%d bytes",
+                "Denoise compare id=%s raw_rms=%.6f denoised_rms=%.6f raw_peak=%.6f denoised_peak=%.6f raw_ms=%d denoised_ms=%d",
+                recording_id,
+                raw_metrics["rms"],
+                denoised_metrics["rms"],
+                raw_metrics["peak"],
+                denoised_metrics["peak"],
+                raw_metrics["duration_ms"],
+                denoised_metrics["duration_ms"],
+            )
+            logger.info(
+                "Received raw audio for final denoise: id=%s input=%d bytes output=%d bytes",
+                recording_id,
                 len(raw_audio_bytes),
                 len(audio_bytes),
             )
         elif denoised_audio_base64:
             audio_bytes = base64.b64decode(denoised_audio_base64)
+            denoised_samples = _pcm16_to_float32(audio_bytes)
+            denoised_metrics = _audio_metrics(denoised_samples)
             logger.info("Received streamed denoised audio: %d bytes", len(audio_bytes))
         else:
             return JSONResponse({"error": "No audio data provided"}, status_code=400)
 
-        # Sauvegarder en WAV
-        filename = f"recording_{uuid.uuid4().hex[:8]}_denoised.wav"
-        recordings_dir = Path("assets/recordings")
-        recordings_dir.mkdir(parents=True, exist_ok=True)
-        filepath = recordings_dir / filename
+        denoised_filename = f"recording_{recording_id}_denoised.wav"
+        denoised_filepath = recordings_dir / denoised_filename
+        _write_wav(denoised_filepath, audio_bytes)
 
-        with wave.open(str(filepath), "wb") as wf:
-            wf.setnchannels(1)
-            wf.setsampwidth(2)
-            wf.setframerate(16000)
-            wf.writeframes(audio_bytes)
-
-        logger.info("Saved denoised audio: %s (%s bytes)", filepath, f"{filepath.stat().st_size:,}")
+        logger.info(
+            "Saved denoised audio: %s (%s bytes)",
+            denoised_filepath,
+            f"{denoised_filepath.stat().st_size:,}",
+        )
+        if raw_filename is not None:
+            logger.info("Saved raw reference audio: %s", recordings_dir / raw_filename)
 
         return JSONResponse({
-            "filename": filename,
-            "url": f"/assets/recordings/{filename}"
+            "id": recording_id,
+            "filename": denoised_filename,
+            "url": f"/assets/recordings/{denoised_filename}",
+            "raw_filename": raw_filename,
+            "raw_url": raw_url,
+            "metrics": {
+                "raw": raw_metrics,
+                "denoised": denoised_metrics,
+            },
         })
 
     except Exception as e:
