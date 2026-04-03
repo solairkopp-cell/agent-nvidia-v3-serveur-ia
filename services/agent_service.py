@@ -632,6 +632,7 @@ class AgentService:
                 session.vad_h = None
             if hasattr(session, "vad_c"):
                 session.vad_c = None
+            await self._send_emotion(session, "idle")
 
     # ── Pipeline interne ─────────────────────────────────────────────────────
 
@@ -733,6 +734,7 @@ class AgentService:
                 session.vad_h = None
             if hasattr(session, "vad_c"):
                 session.vad_c = None
+            await self._send_emotion(session, "idle")
 
         return full_reply
 
@@ -1160,6 +1162,7 @@ class AgentService:
                 session.vad_h = None
             if hasattr(session, "vad_c"):
                 session.vad_c = None
+            await self._send_emotion(session, "idle")
 
     async def _handle_update_trip_action(
         self,
@@ -1452,6 +1455,14 @@ class AgentService:
             )
         except Exception:
             logger.exception("Failed to save WebRTC STT comparison audio client_id=%s", session.client_id)
+
+    async def _send_emotion(self, session: "Session", name: str) -> None:
+        if self.ws_service is None:
+            return
+        try:
+            await self.ws_service.send(session, {"type": "emotion", "name": str(name)})
+        except Exception:
+            pass
 
     def set_ws_service(self, ws_service: "WebSocketService") -> None:
         """Injection tardive pour éviter la dépendance circulaire."""

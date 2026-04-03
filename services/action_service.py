@@ -17,6 +17,7 @@ Flux :
 """
 from __future__ import annotations
 
+import csv
 import json
 import logging
 from pathlib import Path
@@ -34,6 +35,16 @@ class ActionService:
     Placé entre IntentService et LLM.
     """
 
+    _SUPPORTED_LOCAL_INTENTS = (
+        "start_navigation",
+        "show_deliveries",
+        "get_next_client_name",
+        "get_next_delivery_address",
+        "get_possible_delivery_failure_reason",
+        "get_package_info",
+        "show_map",
+    )
+
     def __init__(self):
         self._known_intents = self._load_known_intents()
         self._logger = logging.getLogger(__name__)
@@ -47,18 +58,59 @@ class ActionService:
 
     def _load_known_intents(self) -> tuple[str, ...]:
         """
-        Charger la liste des intentions connues depuis config.
+        Charger les intentions exécutées localement.
+
+        On filtre la config sur :
+          - les actions réellement supportées par ActionService
+          - les intents encore présents dans le CSV d'intentions
         """
-        # Intentions connues qui ne doivent PAS être envoyées au LLM
-        return getattr(config, "ACTION_KNOWN_INTENTS", (
-            "start_navigation",
-            "show_deliveries",
-            "repeat_last_sentence",
-            "get_next_client_name",
-            "get_next_delivery_address",
-            "get_possible_delivery_failure_reason",
-            "stop_listening",
-        ))
+        logger = logging.getLogger(__name__)
+        configured = tuple(
+            str(intent).strip()
+            for intent in getattr(config, "ACTION_KNOWN_INTENTS", self._SUPPORTED_LOCAL_INTENTS)
+            if str(intent).strip()
+        )
+        available_from_csv = self._load_available_intents_from_csv()
+
+        filtered: list[str] = []
+        ignored: list[str] = []
+        for intent in configured:
+            if intent not in self._SUPPORTED_LOCAL_INTENTS:
+                ignored.append(intent)
+                continue
+            if available_from_csv and intent not in available_from_csv:
+                ignored.append(intent)
+                continue
+            filtered.append(intent)
+
+        if not filtered:
+            filtered = [
+                intent
+                for intent in self._SUPPORTED_LOCAL_INTENTS
+                if not available_from_csv or intent in available_from_csv
+            ]
+
+        if ignored:
+            logger.info("Ignored unsupported/stale action intents: %s", ", ".join(ignored))
+
+        return tuple(filtered)
+
+    def _load_available_intents_from_csv(self) -> set[str]:
+        csv_path = Path(getattr(config, "INTENT_CSV_PATH", "intent_detection/intentions.csv"))
+        try:
+            with csv_path.open("r", encoding="utf-8", newline="") as f:
+                reader = csv.DictReader(f)
+                return {
+                    str(row.get("intent", "")).strip()
+                    for row in reader
+                    if str(row.get("intent", "")).strip()
+                }
+        except FileNotFoundError:
+            logging.getLogger(__name__).warning("Intent CSV not found: %s", csv_path)
+            return set()
+        except Exception as exc:
+            logging.getLogger(__name__).warning("Failed to read intent CSV %s: %s", csv_path, exc)
+            return set()
 
     async def execute(self, session: Session, intent: str, transcription: str) -> ActionResult:
         """
@@ -136,9 +188,8 @@ class ActionService:
         responses = {
             "start_navigation": "Starting navigation to the next destination.",
             "show_deliveries": "Here is the list of your deliveries.",
-            "repeat_last_sentence":   (session.conversation_history[-1]["content"] if session.conversation_history else "nothing"),
             "get_possible_delivery_failure_reason": "Here are the possible reasons for delivery failure.",
-            "stop_listening": "Disabling listening.",
+            "show_map": "Centering the map.",
         }
 
         # Gestion spécifique pour get_next_client_name
@@ -154,6 +205,12 @@ class ActionService:
             if address:
                 return f"Your next delivery is at {address}."
             return "No delivery address found."
+
+        if intent == "get_package_info":
+            package_info = await self._get_package_info()
+            if package_info:
+                return f"Package info: {package_info}."
+            return "No package info found."
 
         response = responses.get(intent, f"Action {intent} exécutée.")
 
@@ -176,6 +233,10 @@ class ActionService:
         # Envoyer un événement external_control pour show_deliveries
         if intent == "show_deliveries":
             await self._send_show_deliveries_event(session)
+
+        # Recentrer la carte sur l'application Android
+        if intent == "show_map":
+            await self._send_show_map_event(session)
 
         return response
 
@@ -233,35 +294,64 @@ class ActionService:
         )
         return True
 
+    async def _send_show_map_event(self, session: Session) -> None:
+        """
+        Envoyer un événement external_control RECENTER au client.
+        """
+        if self._ws_service is None:
+            self._logger.warning("WebSocketService not set, cannot send external_control event")
+            return
+
+        event = {
+            "type": "external_control",
+            "action": "com.avvc.maps.action.RECENTER",
+            "extras": {},
+        }
+
+        await self._ws_service.send(session, event)
+        self._logger.info(
+            "🧭 External control sent client_id=%s action=RECENTER",
+            session.client_id,
+        )
+
+    def _read_trip_rows(self) -> list[dict]:
+        if not self._data_file.exists():
+            self._logger.warning("data.json not found")
+            return []
+
+        with open(self._data_file, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        if not isinstance(data, list):
+            self._logger.warning("data.json is not a list")
+            return []
+
+        return [trip for trip in data if isinstance(trip, dict)]
+
+    def _get_first_planned_trip(self) -> dict | None:
+        data = self._read_trip_rows()
+        if not data:
+            return None
+
+        for trip in data:
+            status = str(trip.get("deliveryStatus", "")).strip().lower()
+            if status == "planned":
+                return trip
+
+        for trip in data:
+            status = str(trip.get("deliveryStatus", "")).strip().upper()
+            if status != "COMPLETED":
+                return trip
+
+        return data[0] if data else None
+
     async def _get_first_trip_id(self) -> str | None:
         """
         Lire le premier trip depuis data.json et retourner son ID.
         """
         try:
-            if not self._data_file.exists():
-                self._logger.warning("data.json not found")
-                return None
-
-            with open(self._data_file, "r", encoding="utf-8") as f:
-                data = json.load(f)
-
-            if not isinstance(data, list) or len(data) == 0:
-                self._logger.warning("data.json is empty or not a list")
-                return None
-
-            # Prendre le premier trip qui n'est pas complété
-            for trip in data:
-                status = trip.get("deliveryStatus", "")
-                if status != "COMPLETED":
-                    trip_id = trip.get("id")
-                    if trip_id:
-                        return trip_id
-
-            # Si tous sont complétés, prendre le premier quand même
-            if data and isinstance(data[0], dict):
-                return data[0].get("id")
-
-            return None
+            trip = self._get_first_planned_trip()
+            return trip.get("id") if trip else None
 
         except json.JSONDecodeError as e:
             self._logger.error("Failed to parse data.json: %s", e)
@@ -279,30 +369,8 @@ class ActionService:
         Lire le premier client_name depuis data.json et retourner le nom.
         """
         try:
-            if not self._data_file.exists():
-                self._logger.warning("data.json not found")
-                return None
-
-            with open(self._data_file, "r", encoding="utf-8") as f:
-                data = json.load(f)
-
-            if not isinstance(data, list) or len(data) == 0:
-                self._logger.warning("data.json is empty or not a list")
-                return None
-
-            # Prendre le premier trip qui n'est pas complété
-            for trip in data:
-                status = trip.get("deliveryStatus", "")
-                if status != "COMPLETED":
-                    client_name = trip.get("clientName")
-                    if client_name:
-                        return client_name
-
-            # Si tous sont complétés, prendre le premier quand même
-            if data and isinstance(data[0], dict):
-                return data[0].get("clientName")
-
-            return None
+            trip = self._get_first_planned_trip()
+            return trip.get("clientName") if trip else None
 
         except json.JSONDecodeError as e:
             self._logger.error("Failed to parse data.json: %s", e)
@@ -316,30 +384,31 @@ class ActionService:
         Lire le premier name (adresse) depuis data.json et retourner l'adresse.
         """
         try:
-            if not self._data_file.exists():
-                self._logger.warning("data.json not found")
-                return None
+            trip = self._get_first_planned_trip()
+            return trip.get("name") if trip else None
 
-            with open(self._data_file, "r", encoding="utf-8") as f:
-                data = json.load(f)
-
-            if not isinstance(data, list) or len(data) == 0:
-                self._logger.warning("data.json is empty or not a list")
-                return None
-
-            # Prendre le premier trip qui n'est pas complété
-            for trip in data:
-                status = trip.get("deliveryStatus", "")
-                if status != "COMPLETED":
-                    name = trip.get("name")
-                    if name:
-                        return name
-
-            # Si tous sont complétés, prendre le premier quand même
-            if data and isinstance(data[0], dict):
-                return data[0].get("name")
-
+        except json.JSONDecodeError as e:
+            self._logger.error("Failed to parse data.json: %s", e)
             return None
+        except Exception as e:
+            self._logger.error("Error reading data.json: %s", e)
+            return None
+
+    async def _get_package_info(self) -> str | None:
+        """
+        Lire le `packageInfo` du premier trip `planned` depuis data.json.
+        """
+        try:
+            trip = self._get_first_planned_trip()
+            if not trip:
+                return None
+
+            package_info = trip.get("packageInfo")
+            if package_info is None:
+                return None
+
+            value = str(package_info).strip()
+            return value or None
 
         except json.JSONDecodeError as e:
             self._logger.error("Failed to parse data.json: %s", e)

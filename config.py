@@ -79,7 +79,7 @@ CONTINUATION_WORDS_EN = _parse_env_words(
 # Intentions connues qui sont exécutées localement sans passer par le LLM
 ACTION_KNOWN_INTENTS = _parse_env_words(
     "ACTION_KNOWN_INTENTS",
-    "start_navigation,show_deliveries,repeat_last_sentence,get_next_client_name,get_next_delivery_address,get_possible_delivery_failure_reason,stop_listening",
+    "start_navigation,show_deliveries,get_next_client_name,get_next_delivery_address,get_possible_delivery_failure_reason,get_package_info,show_map",
 )
 # Si true : les intentions connues ne sont PAS envoyées au LLM (économie de ressources)
 ACTION_SKIP_LLM_FOR_KNOWN_INTENTS = os.getenv("ACTION_SKIP_LLM_FOR_KNOWN_INTENTS", "true").strip().lower() in ("1", "true", "yes", "on")
@@ -126,7 +126,7 @@ TTS_TRIM_TRAILING = os.getenv("TTS_TRIM_TRAILING", "false").strip().lower() in (
 # ── Denoising ────────────────────────────────────────────────────────────────
 # Denoise global sur l'audio entrant.
 # Mettre "false" pour désactiver le débruitage (audio brut)
-DENOISE_ENABLED = os.getenv("DENOISE_ENABLED", "false").strip().lower() in ("1", "true", "yes", "on")
+DENOISE_ENABLED = os.getenv("DENOISE_ENABLED", "yes").strip().lower() in ("1", "true", "yes", "on")
 DENOISE_BACKEND = os.getenv("DENOISE_BACKEND", "deepfilternet").strip().lower()
 # IMPORTANT:
 # - False (défaut) = VAD sur audio brut, denoise seulement sur l'utterance finale
