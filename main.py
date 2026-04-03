@@ -24,15 +24,18 @@ Ordre d'arrêt (shutdown) : inverse du démarrage.
 
 from contextlib import asynccontextmanager
 import asyncio
+import base64
 import logging
 from pathlib import Path
 import time
+import uuid
 
 import numpy as np
 
 import uvicorn
 from fastapi import FastAPI, WebSocket
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 
 import config
 from logging_setup import setup_file_logging
@@ -47,6 +50,7 @@ from services.delivery_service import DeliveryService
 from services.piper_tts_service import PiperTTSService
 from services.agent_service import AgentService
 from services.denoise_service import DenoiseService
+from experimental.denoise_stream import create_denoise_stream_processor
 from services.webrtc_service import WebRTCService
 from services.websocket_service import WebSocketService
 from services.delivery_state_machine import DeliveryStateMachine
@@ -210,10 +214,94 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+# Mount static files for assets
+app.mount("/assets", StaticFiles(directory="assets"), name="assets")
+
 @app.get("/", include_in_schema=False)
 async def index():
     html = Path("web/index.html").read_text(encoding="utf-8")
     return HTMLResponse(html)
+
+
+@app.get("/record", include_in_schema=False)
+async def record_page():
+    """Page d'enregistrement audio avec DeepFilterNet"""
+    html = Path("web/record.html").read_text(encoding="utf-8")
+    return HTMLResponse(html)
+
+
+@app.get("/api/list-recordings")
+async def list_recordings():
+    """Liste les enregistrements sauvegardés"""
+    recordings_dir = Path("assets/recordings")
+    recordings_dir.mkdir(parents=True, exist_ok=True)
+    
+    files = sorted(
+        [f.name for f in recordings_dir.iterdir() if f.suffix in (".wav", ".webm", ".mp3")],
+        reverse=True
+    )
+    return JSONResponse({"files": files})
+
+
+@app.post("/api/save-audio-denoised")
+async def save_audio_denoised(request: dict):
+    """
+    Sauvegarde l'audio débruité.
+
+    Pour préserver la qualité et éviter les phrases coupées, si `raw_audio`
+    est fourni, le backend applique un débruitage one-shot sur l'enregistrement
+    complet avant sauvegarde.
+
+    Request:
+    {
+        "audio": "<base64 encoded denoised audio>",      # optionnel
+        "raw_audio": "<base64 encoded raw pcm 16kHz>"    # recommandé
+    }
+    """
+    try:
+        import wave
+
+        raw_audio_base64 = request.get("raw_audio")
+        denoised_audio_base64 = request.get("audio")
+
+        if raw_audio_base64:
+            raw_audio_bytes = base64.b64decode(raw_audio_base64)
+            raw_samples = np.frombuffer(raw_audio_bytes, dtype=np.int16).astype(np.float32) / 32768.0
+            denoised_samples = await denoise_service.process_utterance(raw_samples, sample_rate=16000)
+            audio_bytes = (np.clip(denoised_samples, -1.0, 1.0) * 32767.0).astype(np.int16).tobytes()
+            logger.info(
+                "Received raw audio for final denoise: input=%d bytes output=%d bytes",
+                len(raw_audio_bytes),
+                len(audio_bytes),
+            )
+        elif denoised_audio_base64:
+            audio_bytes = base64.b64decode(denoised_audio_base64)
+            logger.info("Received streamed denoised audio: %d bytes", len(audio_bytes))
+        else:
+            return JSONResponse({"error": "No audio data provided"}, status_code=400)
+
+        # Sauvegarder en WAV
+        filename = f"recording_{uuid.uuid4().hex[:8]}_denoised.wav"
+        recordings_dir = Path("assets/recordings")
+        recordings_dir.mkdir(parents=True, exist_ok=True)
+        filepath = recordings_dir / filename
+
+        with wave.open(str(filepath), "wb") as wf:
+            wf.setnchannels(1)
+            wf.setsampwidth(2)
+            wf.setframerate(16000)
+            wf.writeframes(audio_bytes)
+
+        logger.info("Saved denoised audio: %s (%s bytes)", filepath, f"{filepath.stat().st_size:,}")
+
+        return JSONResponse({
+            "filename": filename,
+            "url": f"/assets/recordings/{filename}"
+        })
+
+    except Exception as e:
+        logger.exception("Error saving denoised audio")
+        return JSONResponse({"error": str(e)}, status_code=500)
 
 
 # ── Routes ────────────────────────────────────────────────────────────────────
@@ -263,6 +351,58 @@ async def websocket_endpoint(websocket: WebSocket):
     """
     session = await ws_service.connect(websocket)
     await ws_service.listen(session)
+
+
+@app.websocket("/ws-denoise")
+async def websocket_denoise_endpoint(websocket: WebSocket):
+    """
+    WebSocket pour le débruitage audio en temps réel.
+    
+    Client envoie: {"audio": "<base64 raw pcm 16kHz>"}
+    Serveur retourne: {"status": "ok", "audio": "<base64 denoised pcm>"}
+    """
+    from fastapi import WebSocketDisconnect
+    
+    await websocket.accept()
+    
+    processor = create_denoise_stream_processor(denoise_service)
+    
+    # Startup si pas déjà fait
+    if not processor._ready:
+        if not processor.startup():
+            await websocket.send_json({"status": "error", "message": "DeepFilterNet not available"})
+            await websocket.close()
+            return
+    
+    try:
+        while True:
+            # Recevoir message
+            data = await websocket.receive_json()
+            
+            if "audio" in data:
+                # Traiter le chunk
+                result = await processor.process_chunk(data["audio"])
+                await websocket.send_json(result)
+            
+            elif "final" in data and data["final"]:
+                # Fin d'enregistrement, traiter le buffer restant
+                result = await processor.process_final()
+                await websocket.send_json(result)
+                processor.reset()
+            
+            elif "reset" in data and data["reset"]:
+                # Reset le buffer
+                processor.reset()
+                await websocket.send_json({"status": "ok", "message": "Buffer reset"})
+    
+    except WebSocketDisconnect:
+        logger.info("Denoise WebSocket disconnected")
+    except Exception as e:
+        logger.error(f"Denoise WebSocket error: {e}", exc_info=True)
+        try:
+            await websocket.send_json({"status": "error", "message": str(e)})
+        except:
+            pass
 
 
 # ── API Notifications ─────────────────────────────────────────────────────────

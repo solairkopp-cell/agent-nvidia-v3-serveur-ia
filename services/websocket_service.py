@@ -193,8 +193,12 @@ class WebSocketService:
                     session.client_id, msg_type, message)
 
         # Notification : laisser le notification_service traiter en premier
+        handled_by_notification = False
         if self.notification is not None:
-            await self.notification.on_message(session, message)
+            handled_by_notification = await self.notification.on_message(session, message)
+            if handled_by_notification:
+                return
+
         if msg_type == "offer":
             sdp = message.get("sdp")
             if not isinstance(sdp, str) or not sdp.strip():

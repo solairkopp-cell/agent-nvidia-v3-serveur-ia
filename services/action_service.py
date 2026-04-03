@@ -39,7 +39,7 @@ class ActionService:
         self._logger = logging.getLogger(__name__)
         self._ws_service = None
         self._data_file = Path("data.json")
-        self.start_navigation_in_progress = False  # Pour éviter les envois multiples d'événements start_navigation
+        self._start_navigation_in_progress_by_client: dict[str, bool] = {}
 
     def set_ws_service(self, ws_service) -> None:
         """Injection tardive de WebSocketService pour envoyer des événements."""
@@ -159,11 +159,19 @@ class ActionService:
 
         # Envoyer un événement external_control pour start_navigation
         if intent == "start_navigation":
-            if not self.start_navigation_in_progress:
-                await self._send_start_navigation_event(session)
-                self.start_navigation_in_progress = True
+            client_id = session.client_id
+            if not self._start_navigation_in_progress_by_client.get(client_id, False):
+                sent = await self._send_start_navigation_event(session)
+                if sent:
+                    self._start_navigation_in_progress_by_client[client_id] = True
+                else:
+                    response = "No trip found to start navigation."
             else:
-                self._logger.info("Start navigation already in progress, skipping event send")
+                self._logger.info(
+                    "Start navigation already in progress, skipping event send client_id=%s",
+                    client_id,
+                )
+                response = "Navigation is already in progress."
 
         # Envoyer un événement external_control pour show_deliveries
         if intent == "show_deliveries":
@@ -192,21 +200,21 @@ class ActionService:
             session.client_id,
         )
 
-    async def _send_start_navigation_event(self, session: Session) -> None:
+    async def _send_start_navigation_event(self, session: Session) -> bool:
         """
         Envoyer un événement external_control START_NAVIGATION au client.
         Lit le premier trip depuis data.json et envoie son ID.
         """
         if self._ws_service is None:
             self._logger.warning("WebSocketService not set, cannot send external_control event")
-            return
+            return False
 
         # Lire le premier trip depuis data.json
         trip_id = await self._get_first_trip_id()
 
         if trip_id is None:
             self._logger.warning("No trip found in data.json, cannot send start_navigation event")
-            return
+            return False
 
         # Envoyer l'événement external_control
         event = {
@@ -223,6 +231,7 @@ class ActionService:
             session.client_id,
             trip_id,
         )
+        return True
 
     async def _get_first_trip_id(self) -> str | None:
         """
@@ -260,6 +269,10 @@ class ActionService:
         except Exception as e:
             self._logger.error("Error reading data.json: %s", e)
             return None
+
+    def clear_start_navigation_in_progress(self, session: Session) -> None:
+        """Réinitialiser l'état start_navigation pour une session."""
+        self._start_navigation_in_progress_by_client.pop(session.client_id, None)
 
     async def _get_next_client_name(self) -> str | None:
         """

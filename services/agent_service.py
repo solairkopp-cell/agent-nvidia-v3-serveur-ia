@@ -114,9 +114,21 @@ class AgentService:
 
             await self._process_transcription(session, request_id, stt_result.text)
 
-    async def process_utterance_pcm(self, session: "Session", samples: "np.ndarray", sample_rate: int) -> None:
+    async def process_utterance_pcm(
+        self,
+        session: "Session",
+        samples: "np.ndarray",
+        sample_rate: int,
+        *,
+        apply_denoise: bool = True,
+    ) -> None:
         """
         Entrée PCM/NumPy (recommandée pour WebRTC).
+
+        Args:
+            apply_denoise: Si True, applique le denoise avant STT.
+                Mettre à False si le flux a déjà été débruité en amont
+                (ex: avant VAD dans WebRTCService).
         """
         logger = logging.getLogger(__name__)
         if session.processing_lock.locked():
@@ -151,7 +163,7 @@ class AgentService:
 
             # Appliquer le denoise sur l'audio avant STT
             stt_samples = samples
-            if self.denoise is not None:
+            if apply_denoise and self.denoise is not None:
                 try:
                     denoised = await self.denoise.process_utterance(samples, sample_rate=int(sample_rate))
                     if getattr(denoised, "size", 0):
@@ -387,9 +399,6 @@ class AgentService:
                             rate=rate,
                             client_event_type="response",
                         )
-
-                        if self.ws_service is not None:
-                            await self.ws_service.send_response_chunk(session, action_result.response)
 
                         # Attendre que la queue soit presque vide
                         await self._wait_queue_empty(session, request_id, timeout=2.0)
@@ -688,10 +697,6 @@ class AgentService:
                 rate=rate,
                 client_event_type="response",
             )
-
-            # Notifier le client
-            if self.ws_service is not None:
-                await self.ws_service.send_response_chunk(session, full_reply)
 
             # Attendre que la queue soit presque vide
             await self._wait_queue_empty(session, request_id, timeout=2.0)
@@ -1121,9 +1126,6 @@ class AgentService:
                     client_event_type="response",
                 )
 
-                if self.ws_service is not None:
-                    await self.ws_service.send_response_chunk(session, text)
-
                 # Attendre que la queue soit presque vide
                 await self._wait_queue_empty(session, request_id, timeout=2.0)
 
@@ -1363,6 +1365,9 @@ class AgentService:
             session.client_id,
             trip_id or "N/A",
         )
+
+        if self.action is not None and hasattr(self.action, "clear_start_navigation_in_progress"):
+            self.action.clear_start_navigation_in_progress(session)
 
     async def _handle_completed_delivery_action(
         self,

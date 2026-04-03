@@ -363,11 +363,24 @@ class WebRTCService:
                 samples = self.audio.av_frame_to_array(frame, target_rate=config.SAMPLE_RATE)
                 rate = config.SAMPLE_RATE
 
+                # Optionnel: débruitage en amont du VAD.
+                # Désactivé par défaut car DeepFilterNet chunk-par-chunk ajoute
+                # une latence perceptible sur la détection de parole.
+                denoised_samples = samples
+                denoise_service = getattr(self.agent, "denoise", None)
+                if getattr(config, "DENOISE_BEFORE_VAD", False) and denoise_service is not None:
+                    try:
+                        processed = await denoise_service.process(samples, sample_rate=rate)
+                        if getattr(processed, "size", 0):
+                            denoised_samples = processed.astype(np.float32, copy=False)
+                    except Exception:
+                        logger.exception("Realtime denoise before VAD failed client_id=%s", session.client_id)
+
                 # Accumuler et découper en chunks VAD
                 if buffer.size == 0:
-                    buffer = samples
+                    buffer = denoised_samples
                 else:
-                    buffer = np.concatenate([buffer, samples]).astype(np.float32, copy=False)
+                    buffer = np.concatenate([buffer, denoised_samples]).astype(np.float32, copy=False)
 
                 while buffer.size >= chunk_samples and chunk_samples > 0:
                     chunk = buffer[:chunk_samples]
@@ -434,7 +447,12 @@ class WebRTCService:
                     # PCM direct -> STT (recommandé)
                     # Sera traité après que le lock soit libéré
                     asyncio.create_task(
-                        self.agent.process_utterance_pcm(session, vad_result.audio, config.SAMPLE_RATE)
+                        self.agent.process_utterance_pcm(
+                            session,
+                            vad_result.audio,
+                            config.SAMPLE_RATE,
+                            apply_denoise=False,
+                        )
                     )
 
         except MediaStreamError:

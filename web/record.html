@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Recorder - Real-time DeepFilter</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 90%;
+        }
+        h1 { margin-bottom: 10px; font-size: 2rem; }
+        .subtitle { color: #a0a0a0; margin-bottom: 30px; font-size: 0.9rem; }
+        .visualizer {
+            width: 100%;
+            height: 120px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            position: relative;
+        }
+        #visualizerCanvas { width: 100%; height: 100%; }
+        .viz-label {
+            position: absolute;
+            top: 8px;
+            left: 12px;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        #recordBtn { background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; }
+        #recordBtn:hover:not(:disabled) { transform: scale(1.05); box-shadow: 0 5px 20px rgba(231, 76, 60, 0.4); }
+        #recordBtn.recording { animation: pulse 1.5s infinite; }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); }
+            50% { box-shadow: 0 0 0 15px rgba(231, 76, 60, 0); }
+        }
+        #stopBtn { background: linear-gradient(135deg, #3498db, #2980b9); color: white; }
+        #stopBtn:hover:not(:disabled) { transform: scale(1.05); box-shadow: 0 5px 20px rgba(52, 152, 219, 0.4); }
+        #saveBtn { background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; }
+        #saveBtn:hover:not(:disabled) { transform: scale(1.05); box-shadow: 0 5px 20px rgba(46, 204, 113, 0.4); }
+        button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+        .status { padding: 15px; border-radius: 10px; margin-top: 20px; font-size: 0.9rem; }
+        .status.info { background: rgba(52, 152, 219, 0.2); border: 1px solid rgba(52, 152, 219, 0.5); }
+        .status.success { background: rgba(46, 204, 113, 0.2); border: 1px solid rgba(46, 204, 113, 0.5); }
+        .status.error { background: rgba(231, 76, 60, 0.2); border: 1px solid rgba(231, 76, 60, 0.5); }
+        .status.processing { background: rgba(241, 196, 15, 0.2); border: 1px solid rgba(241, 196, 15, 0.5); }
+        .ws-status {
+            display: flex; align-items: center; justify-content: center;
+            gap: 8px; margin-bottom: 20px; font-size: 0.85rem;
+        }
+        .ws-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .ws-dot.connected { background: #2ecc71; box-shadow: 0 0 10px #2ecc71; animation: glow 2s infinite; }
+        .ws-dot.disconnected { background: #e74c3c; }
+        @keyframes glow { 0%, 100% { box-shadow: 0 0 5px #2ecc71; } 50% { box-shadow: 0 0 15px #2ecc71; } }
+        .recordings-list { margin-top: 30px; text-align: left; }
+        .recordings-list h3 { margin-bottom: 15px; font-size: 1.1rem; }
+        .recording-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px; border-radius: 10px; margin-bottom: 10px;
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 10px;
+        }
+        .recording-item audio { flex: 1; min-width: 200px; }
+        .recording-info { font-size: 0.85rem; color: #a0a0a0; margin-bottom: 5px; }
+        .badge {
+            display: inline-block; padding: 4px 10px; border-radius: 12px;
+            font-size: 0.75rem; font-weight: 600; margin-right: 8px;
+            background: rgba(46, 204, 113, 0.3); color: #a8e6cf;
+        }
+        .download-link {
+            color: #3498db; text-decoration: none; padding: 8px 15px;
+            background: rgba(52, 152, 219, 0.2); border-radius: 20px; transition: background 0.3s;
+        }
+        .download-link:hover { background: rgba(52, 152, 219, 0.4); }
+        .stats { font-size: 0.8rem; color: #a0a0a0; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎙️ Audio Recorder</h1>
+        <p class="subtitle">Real-time DeepFilter denoising</p>
+
+        <div class="ws-status">
+            <span class="ws-dot disconnected" id="wsIndicator"></span>
+            <span id="wsText">Connecting to DeepFilter...</span>
+        </div>
+
+        <div class="visualizer">
+            <span class="viz-label">✨ Denoised Audio</span>
+            <canvas id="visualizerCanvas"></canvas>
+        </div>
+
+        <div class="controls">
+            <button id="recordBtn">🔴 Record</button>
+            <button id="stopBtn" disabled>⏹️ Stop</button>
+            <button id="saveBtn" disabled>💾 Save Denoised</button>
+        </div>
+
+        <div id="status" class="status info" style="display: none;"></div>
+        <div class="stats" id="stats"></div>
+
+        <div class="recordings-list" id="recordingsList">
+            <h3>📁 Saved Recordings</h3>
+            <div id="recordingsContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        // State
+        let audioContext = null;
+        let analyser = null;
+        let microphone = null;
+        let scriptProcessor = null;
+        let isRecording = false;
+        let denoisedChunks = []; // PCM chunks débruités
+        let rawPCMChunks = []; // PCM chunks bruts (pour fallback)
+        let animationId = null;
+        let awaitingFinalChunk = false;
+
+        // WebSocket
+        let ws = null;
+        let wsConnected = false;
+        let chunksSent = 0;
+        let chunksReceived = 0;
+
+        // Elements
+        const recordBtn = document.getElementById('recordBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const saveBtn = document.getElementById('saveBtn');
+        const statusDiv = document.getElementById('status');
+        const wsIndicator = document.getElementById('wsIndicator');
+        const wsText = document.getElementById('wsText');
+        const canvas = document.getElementById('visualizerCanvas');
+        const canvasCtx = canvas.getContext('2d');
+        const recordingsContainer = document.getElementById('recordingsContainer');
+        const statsDiv = document.getElementById('stats');
+
+        // Resize canvas
+        function resizeCanvas() {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // WebSocket connection
+        function connectWebSocket() {
+            const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            ws = new WebSocket(`${protocol}//${window.location.host}/ws-denoise`);
+            ws.binaryType = 'arraybuffer';
+
+            ws.onopen = () => {
+                wsConnected = true;
+                wsIndicator.className = 'ws-dot connected';
+                wsText.textContent = 'DeepFilter ready';
+                showStatus('DeepFilter connected - Ready to record', 'success');
+            };
+
+            ws.onclose = () => {
+                wsConnected = false;
+                wsIndicator.className = 'ws-dot disconnected';
+                wsText.textContent = 'Reconnecting...';
+                setTimeout(connectWebSocket, 2000);
+            };
+
+            ws.onmessage = (event) => {
+                if (typeof event.data !== 'string') {
+                    return;
+                }
+
+                const data = JSON.parse(event.data);
+
+                if (data.status === 'ok' && data.audio) {
+                    // Audio débruité en base64
+                    const binary = atob(data.audio);
+                    const bytes = new Uint8Array(binary.length);
+                    for (let i = 0; i < binary.length; i++) {
+                        bytes[i] = binary.charCodeAt(i);
+                    }
+                    denoisedChunks.push(bytes.buffer);
+                    chunksReceived++;
+                    updateStats();
+                }
+
+                if (data.status === 'buffering') {
+                    showStatus(`Denoising buffer: ${data.buffered_ms} ms`, 'processing');
+                } else if (data.status === 'error') {
+                    showStatus(`Denoising error: ${data.message || 'Unknown error'}`, 'error');
+                    awaitingFinalChunk = false;
+                    saveBtn.disabled = denoisedChunks.length === 0;
+                } else if (data.final) {
+                    awaitingFinalChunk = false;
+                    saveBtn.disabled = denoisedChunks.length === 0;
+                    showStatus(`Recording complete! ${denoisedChunks.length} denoised chunks ready to save`, 'success');
+                }
+            };
+
+            ws.onerror = (error) => {
+                console.error('WebSocket error:', error);
+                wsText.textContent = 'Connection error';
+            };
+        }
+
+        function showStatus(message, type = 'info') {
+            statusDiv.textContent = message;
+            statusDiv.className = `status ${type}`;
+            statusDiv.style.display = 'block';
+        }
+
+        function updateStats() {
+            statsDiv.textContent = `Chunks sent: ${chunksSent} | Chunks received: ${chunksReceived} | Denoised: ${(denoisedChunks.length * 3200 / 1024).toFixed(1)} KB`;
+        }
+
+        function drawVisualizer() {
+            if (!isRecording) return;
+
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+            analyser.getByteFrequencyData(dataArray);
+
+            canvasCtx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+            canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const barWidth = (canvas.width / bufferLength) * 2.5;
+            let x = 0;
+
+            for (let i = 0; i < bufferLength; i++) {
+                const barHeight = (dataArray[i] / 255) * canvas.height;
+                const gradient = canvasCtx.createLinearGradient(0, canvas.height, 0, 0);
+                gradient.addColorStop(0, '#2ecc71');
+                gradient.addColorStop(1, '#27ae60');
+                canvasCtx.fillStyle = gradient;
+                canvasCtx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+                x += barWidth + 1;
+            }
+
+            animationId = requestAnimationFrame(drawVisualizer);
+        }
+
+        async function startRecording() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ 
+                    audio: {
+                        sampleRate: 16000,
+                        channelCount: 1,
+                        echoCancellation: true,
+                        noiseSuppression: false
+                    } 
+                });
+
+                audioContext = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 16000 });
+                analyser = audioContext.createAnalyser();
+                analyser.fftSize = 256;
+                microphone = audioContext.createMediaStreamSource(stream);
+                microphone.connect(analyser);
+
+                // ScriptProcessorNode pour capturer le PCM brut
+                // bufferSize = 4096 = ~256ms à 16kHz
+                const bufferSize = 4096;
+                scriptProcessor = audioContext.createScriptProcessor(bufferSize, 1, 1);
+                
+                scriptProcessor.onaudioprocess = (event) => {
+                    if (!isRecording) return;
+                    
+                    const inputBuffer = event.inputBuffer;
+                    const inputData = inputBuffer.getChannelData(0);
+                    
+                    // Convertir float32 [-1,1] -> int16
+                    const int16Data = new Int16Array(inputData.length);
+                    for (let i = 0; i < inputData.length; i++) {
+                        int16Data[i] = Math.max(-32768, Math.min(32767, inputData[i] * 32767));
+                    }
+                    
+                    // Créer une copie propre du buffer (évite les problèmes d'offset)
+                    const pcmCopy = new Uint8Array(int16Data.buffer.slice(int16Data.byteOffset, int16Data.byteOffset + int16Data.byteLength));
+                    rawPCMChunks.push(pcmCopy.buffer);
+                    
+                    // Envoyer au serveur pour denoise
+                    if (wsConnected && ws.readyState === WebSocket.OPEN) {
+                        const base64 = arrayBufferToBase64(pcmCopy.buffer);
+                        ws.send(JSON.stringify({ audio: base64 }));
+                        chunksSent++;
+                        updateStats();
+                    }
+                };
+                
+                microphone.connect(scriptProcessor);
+                // Connecter à la sortie pour éviter le mute (mais on ne veut pas de feedback)
+                // On utilise un gain à 0
+                const silentGain = audioContext.createGain();
+                silentGain.gain.value = 0;
+                scriptProcessor.connect(silentGain);
+                silentGain.connect(audioContext.destination);
+
+                denoisedChunks = [];
+                rawPCMChunks = [];
+                chunksSent = 0;
+                chunksReceived = 0;
+                awaitingFinalChunk = false;
+                isRecording = true;
+
+                recordBtn.textContent = '🔴 Recording...';
+                recordBtn.classList.add('recording');
+                recordBtn.disabled = true;
+                stopBtn.disabled = false;
+                saveBtn.disabled = true;
+
+                showStatus('Recording with real-time denoising...', 'info');
+                drawVisualizer();
+                updateStats();
+
+            } catch (err) {
+                console.error('Error accessing microphone:', err);
+                showStatus('Error: Could not access microphone.', 'error');
+            }
+        }
+
+        function stopRecording() {
+            if (!isRecording) return;
+            
+            isRecording = false;
+
+            if (scriptProcessor) {
+                scriptProcessor.disconnect();
+                scriptProcessor.onaudioprocess = null;
+                scriptProcessor = null;
+            }
+
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+            }
+
+            canvasCtx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+            canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Demander le traitement final
+            awaitingFinalChunk = true;
+            if (wsConnected && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({ final: true }));
+            } else {
+                awaitingFinalChunk = false;
+            }
+
+            recordBtn.textContent = '🔴 Record';
+            recordBtn.classList.remove('recording');
+            recordBtn.disabled = false;
+            stopBtn.disabled = true;
+            saveBtn.disabled = true;
+
+            if (awaitingFinalChunk) {
+                showStatus('Recording stopped. Waiting for final denoised audio...', 'processing');
+            } else {
+                saveBtn.disabled = denoisedChunks.length === 0;
+                showStatus(`Recording complete! ${denoisedChunks.length} denoised chunks ready to save`, 'success');
+            }
+        }
+
+        async function saveDenoised() {
+            if (awaitingFinalChunk) {
+                showStatus('Final denoised chunk is still processing. Please wait...', 'processing');
+                return;
+            }
+
+            if (denoisedChunks.length === 0) {
+                showStatus('No denoised audio to save!', 'error');
+                return;
+            }
+
+            showStatus('Saving denoised audio from full raw recording...', 'processing');
+            saveBtn.disabled = true;
+
+            try {
+                // Combiner tous les chunks PCM en un seul ArrayBuffer
+                const totalLength = denoisedChunks.reduce((sum, chunk) => sum + chunk.byteLength, 0);
+                const combined = new Uint8Array(totalLength);
+                let offset = 0;
+                for (const chunk of denoisedChunks) {
+                    combined.set(new Uint8Array(chunk), offset);
+                    offset += chunk.byteLength;
+                }
+
+                // Encoder en base64
+                const base64 = arrayBufferToBase64(combined.buffer);
+
+                const totalRawLength = rawPCMChunks.reduce((sum, chunk) => sum + chunk.byteLength, 0);
+                const combinedRaw = new Uint8Array(totalRawLength);
+                let rawOffset = 0;
+                for (const chunk of rawPCMChunks) {
+                    combinedRaw.set(new Uint8Array(chunk), rawOffset);
+                    rawOffset += chunk.byteLength;
+                }
+                const rawBase64 = arrayBufferToBase64(combinedRaw.buffer);
+
+                const response = await fetch('/api/save-audio-denoised', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ audio: base64, raw_audio: rawBase64 }),
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    showStatus(`Denoised audio saved: ${result.filename}`, 'success');
+                    addRecordingToList(result);
+                } else {
+                    showStatus(`Error: ${result.error}`, 'error');
+                }
+
+                saveBtn.disabled = false;
+
+            } catch (err) {
+                console.error('Error saving denoised audio:', err);
+                showStatus('Error saving denoised audio.', 'error');
+                saveBtn.disabled = false;
+            }
+        }
+
+        function arrayBufferToBase64(buffer) {
+            const bytes = new Uint8Array(buffer);
+            let binary = '';
+            for (let i = 0; i < bytes.byteLength; i++) {
+                binary += String.fromCharCode(bytes[i]);
+            }
+            return btoa(binary);
+        }
+
+        function addRecordingToList(result) {
+            const div = document.createElement('div');
+            div.className = 'recording-item';
+            const audioUrl = `/assets/recordings/${result.filename}`;
+            
+            div.innerHTML = `
+                <div style="flex: 1; min-width: 200px;">
+                    <div class="recording-info">
+                        <span class="badge">✨ DeepFilter</span>
+                        ${result.filename}
+                    </div>
+                    <audio controls src="${audioUrl}"></audio>
+                </div>
+                <a href="${audioUrl}" download="${result.filename}" class="download-link">⬇️ Download</a>
+            `;
+            
+            recordingsContainer.insertBefore(div, recordingsContainer.firstChild);
+        }
+
+        async function loadExistingRecordings() {
+            try {
+                const response = await fetch('/api/list-recordings');
+                const result = await response.json();
+                if (response.ok && result.files) {
+                    result.files.forEach(file => {
+                        addRecordingToList({ filename: file, url: `/assets/recordings/${file}` });
+                    });
+                }
+            } catch (err) {
+                console.error('Error loading recordings:', err);
+            }
+        }
+
+        // Event listeners
+        recordBtn.addEventListener('click', startRecording);
+        stopBtn.addEventListener('click', stopRecording);
+        saveBtn.addEventListener('click', saveDenoised);
+
+        // Init
+        connectWebSocket();
+        loadExistingRecordings();
+    </script>
+</body>
+</html>

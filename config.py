@@ -27,7 +27,7 @@ WHISPER_TIMEOUT = int(os.getenv("WHISPER_TIMEOUT", "30"))                  # uti
 WHISPER_LANGUAGE = os.getenv("WHISPER_LANGUAGE", "en")  # ou "en", ou None (auto)
 
 # faster-whisper (embedded)
-WHISPER_MODEL = os.getenv("WHISPER_MODEL", "small.en")        # ex: tiny, base, small, medium, large-v3
+WHISPER_MODEL = os.getenv("WHISPER_MODEL", "base.en")        # ex: tiny, base, small, medium, large-v3
 WHISPER_DEVICE = os.getenv("WHISPER_DEVICE", "cuda")       # "cpu" pour maximiser la stabilité Jetson
 WHISPER_COMPUTE_TYPE = os.getenv("WHISPER_COMPUTE_TYPE", "int8")  # "int8" pour les modèles quantifiés (ex: small.en), "float16" pour les modèles non quantifiés (ex: medium)
 WHISPER_BEAM_SIZE = int(os.getenv("WHISPER_BEAM_SIZE", "1"))
@@ -124,10 +124,15 @@ TTS_TRIM_LEADING = os.getenv("TTS_TRIM_LEADING", "false").strip().lower() in ("1
 TTS_TRIM_TRAILING = os.getenv("TTS_TRIM_TRAILING", "false").strip().lower() in ("1", "true", "yes", "on")
 
 # ── Denoising ────────────────────────────────────────────────────────────────
-# Denoise appliqué sur l'audio entrant (avant VAD et STT) pour filtrer le bruit.
+# Denoise global sur l'audio entrant.
 # Mettre "false" pour désactiver le débruitage (audio brut)
 DENOISE_ENABLED = os.getenv("DENOISE_ENABLED", "false").strip().lower() in ("1", "true", "yes", "on")
 DENOISE_BACKEND = os.getenv("DENOISE_BACKEND", "deepfilternet").strip().lower()
+# IMPORTANT:
+# - False (défaut) = VAD sur audio brut, denoise seulement sur l'utterance finale
+#   avant STT / sauvegarde → latence plus faible
+# - True = denoise chunk par chunk avant VAD → plus propre mais plus lent
+DENOISE_BEFORE_VAD = os.getenv("DENOISE_BEFORE_VAD", "false").strip().lower() in ("1", "true", "yes", "on")
 
 # ── Audio / VAD ───────────────────────────────────────────────────────────────
 SAMPLE_RATE = 16000
