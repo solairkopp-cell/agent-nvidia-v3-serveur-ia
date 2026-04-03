@@ -301,7 +301,10 @@ class DeliveryStateMachine:
 
             # Trouver le trip suivant et préparer l'annonce
             next_trip_info = await self._get_next_trip_info(session)
-            announcement = "the delivery has been marked as completed."
+            announcement = (
+                "The delivery has been marked as completed. "
+                "It was your last delivery. Good job."
+            )
 
             if next_trip_info:
                 next_trip_id, next_address, next_client_name, is_last = next_trip_info
@@ -888,7 +891,7 @@ class DeliveryStateMachine:
                 if success:
                     await self._agent_service.speak_text(
                         session,
-                        "Delivery completed successfully.",
+                        "Delivery completed successfully. It was your last delivery. Good job.",
                         interruptible=False,
                     )
                 else:

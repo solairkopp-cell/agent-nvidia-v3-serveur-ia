@@ -27,7 +27,7 @@ WHISPER_TIMEOUT = int(os.getenv("WHISPER_TIMEOUT", "30"))                  # uti
 WHISPER_LANGUAGE = os.getenv("WHISPER_LANGUAGE", "en")  # ou "en", ou None (auto)
 
 # faster-whisper (embedded)
-WHISPER_MODEL = os.getenv("WHISPER_MODEL", "base.en")        # ex: tiny, base, small, medium, large-v3
+WHISPER_MODEL = os.getenv("WHISPER_MODEL", "small.en")        # ex: tiny, base, small, medium, large-v3
 WHISPER_DEVICE = os.getenv("WHISPER_DEVICE", "cuda")       # "cpu" pour maximiser la stabilité Jetson
 WHISPER_COMPUTE_TYPE = os.getenv("WHISPER_COMPUTE_TYPE", "int8")  # "int8" pour les modèles quantifiés (ex: small.en), "float16" pour les modèles non quantifiés (ex: medium)
 WHISPER_BEAM_SIZE = int(os.getenv("WHISPER_BEAM_SIZE", "1"))
@@ -57,7 +57,7 @@ INTENT_CSV_PATH = os.getenv("INTENT_CSV_PATH", "intent_detection/intentions.csv"
 INTENT_EMBED_MODEL = os.getenv("INTENT_EMBED_MODEL", "paraphrase-multilingual-MiniLM-L12-v2")
 # Intent detection sur Orin : forcer CPU pour économiser la VRAM.
 INTENT_DEVICE = os.getenv("INTENT_DEVICE", "cpu")
-INTENT_THRESHOLD = float(os.getenv("INTENT_THRESHOLD", "0.70"))
+INTENT_THRESHOLD = float(os.getenv("INTENT_THRESHOLD", "0.60"))
 INTENT_EMBED_LOCAL_DIR = os.getenv("INTENT_EMBED_LOCAL_DIR", "")
 INTENT_EMBED_CACHE_DIR = os.getenv("INTENT_EMBED_CACHE_DIR", "")
 INTENT_EMBED_DOWNLOAD_ON_STARTUP = os.getenv("INTENT_EMBED_DOWNLOAD_ON_STARTUP", "false").strip().lower() in ("1", "true", "yes", "on")

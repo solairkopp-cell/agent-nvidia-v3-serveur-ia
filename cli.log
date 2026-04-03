@@ -2973,3 +2973,845 @@
 2026-04-03 06:11:12 - INFO - ✅ SUCCÈS: Échec de livraison ajouté pour le package 69cea258fb98e15a3cf53554
 2026-04-03 06:11:12 - INFO - Mise à jour de l'instance: 69cea258fb98e15a3cf53554
 2026-04-03 06:11:12 - INFO - ✅ SUCCÈS: Instance 69cea258fb98e15a3cf53554 mise à jour
+2026-04-03 06:20:46 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 06:20:46 - INFO - Récupération des trips pour le driver: 000
+2026-04-03 06:20:46 - INFO - Recherche du driver par query: 000
+2026-04-03 06:20:46 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 06:20:46 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 06:20:46 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 06:20:46 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-03 06:20:46 - INFO - Recherche du driver par query: 000
+2026-04-03 06:20:46 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 06:20:46 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 06:20:46 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-03 06:20:46 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-03 06:20:46 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-03 06:20:46 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-03 06:20:46 - INFO - Recherche des packages pour le schedule: 69cf4d8bfb98e15a3cf535a2
+2026-04-03 06:20:46 - INFO - Recherche par référence: field=schedule_id, value=69cf4d8bfb98e15a3cf535a2
+2026-04-03 06:20:46 - INFO - ✅ SUCCÈS: 2 package(s) trouvé(s) pour le schedule 69cf4d8bfb98e15a3cf535a2
+2026-04-03 06:20:46 - INFO - Récupération du package par ID: 69cf4d69fb98e15a3cf535a1
+2026-04-03 06:20:46 - INFO - Récupération de l'instance: 69cf4d69fb98e15a3cf535a1
+2026-04-03 06:20:46 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 06:20:46 - INFO - ✅ SUCCÈS: Package trouvé: 69cf4d69fb98e15a3cf535a1
+2026-04-03 06:20:46 - INFO - Package: 69cf4d69fb98e15a3cf535a1, address field: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:20:46 - INFO - Récupération adresse: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:20:46 - INFO - Récupération de l'adresse par ID: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:20:46 - INFO - Récupération de l'instance: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:20:46 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:20:46 - INFO - ✅ SUCCÈS: Adresse trouvée: Avenue Taib Sayala, Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-03 06:20:46 - INFO - Trip créé: id=69cf4d69fb98e15a3cf535a1, name=Avenue Taib Sayala, Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276115, lng=10.1967637
+2026-04-03 06:20:46 - INFO - Récupération du package par ID: 69cea29efb98e15a3cf5355a
+2026-04-03 06:20:46 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf5355a
+2026-04-03 06:20:46 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 06:20:46 - INFO - ✅ SUCCÈS: Package trouvé: 69cea29efb98e15a3cf5355a
+2026-04-03 06:20:46 - INFO - Package: 69cea29efb98e15a3cf5355a, address field: 69cea29efb98e15a3cf53559
+2026-04-03 06:20:46 - INFO - Récupération adresse: 69cea29efb98e15a3cf53559
+2026-04-03 06:20:46 - INFO - Récupération de l'adresse par ID: 69cea29efb98e15a3cf53559
+2026-04-03 06:20:46 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf53559
+2026-04-03 06:20:47 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cea29efb98e15a3cf53559
+2026-04-03 06:20:47 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-03 06:20:47 - INFO - Trip créé: id=69cea29efb98e15a3cf5355a, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276926, lng=10.1950475
+2026-04-03 06:20:47 - INFO - ✅ SUCCÈS: 2 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 06:20:47 - INFO - ✅ SUCCÈS: 2 trip(s) exporté(s) vers data.json
+2026-04-03 06:20:47 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 06:20:47 - INFO - Recherche du driver par query: 000
+2026-04-03 06:20:47 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 06:20:47 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 06:24:56 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 06:24:56 - INFO - Récupération des trips pour le driver: 000
+2026-04-03 06:24:56 - INFO - Recherche du driver par query: 000
+2026-04-03 06:24:56 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 06:24:57 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 06:24:57 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 06:24:57 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-03 06:24:57 - INFO - Recherche du driver par query: 000
+2026-04-03 06:24:57 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 06:24:57 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 06:24:57 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-03 06:24:57 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-03 06:24:57 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-03 06:24:57 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-03 06:24:57 - INFO - Recherche des packages pour le schedule: 69cf4d8bfb98e15a3cf535a2
+2026-04-03 06:24:57 - INFO - Recherche par référence: field=schedule_id, value=69cf4d8bfb98e15a3cf535a2
+2026-04-03 06:24:57 - INFO - ✅ SUCCÈS: 2 package(s) trouvé(s) pour le schedule 69cf4d8bfb98e15a3cf535a2
+2026-04-03 06:24:57 - INFO - Récupération du package par ID: 69cf4d69fb98e15a3cf535a1
+2026-04-03 06:24:57 - INFO - Récupération de l'instance: 69cf4d69fb98e15a3cf535a1
+2026-04-03 06:24:57 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 06:24:57 - INFO - ✅ SUCCÈS: Package trouvé: 69cf4d69fb98e15a3cf535a1
+2026-04-03 06:24:57 - INFO - Package: 69cf4d69fb98e15a3cf535a1, address field: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:24:57 - INFO - Récupération adresse: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:24:57 - INFO - Récupération de l'adresse par ID: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:24:57 - INFO - Récupération de l'instance: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:24:57 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:24:57 - INFO - ✅ SUCCÈS: Adresse trouvée: Avenue Taib Sayala, Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-03 06:24:57 - INFO - Trip créé: id=69cf4d69fb98e15a3cf535a1, name=Avenue Taib Sayala, Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276115, lng=10.1967637
+2026-04-03 06:24:57 - INFO - Récupération du package par ID: 69cea29efb98e15a3cf5355a
+2026-04-03 06:24:57 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf5355a
+2026-04-03 06:24:57 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 06:24:57 - INFO - ✅ SUCCÈS: Package trouvé: 69cea29efb98e15a3cf5355a
+2026-04-03 06:24:57 - INFO - Package: 69cea29efb98e15a3cf5355a, address field: 69cea29efb98e15a3cf53559
+2026-04-03 06:24:57 - INFO - Récupération adresse: 69cea29efb98e15a3cf53559
+2026-04-03 06:24:57 - INFO - Récupération de l'adresse par ID: 69cea29efb98e15a3cf53559
+2026-04-03 06:24:57 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf53559
+2026-04-03 06:24:57 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cea29efb98e15a3cf53559
+2026-04-03 06:24:57 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-03 06:24:57 - INFO - Trip créé: id=69cea29efb98e15a3cf5355a, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276926, lng=10.1950475
+2026-04-03 06:24:57 - INFO - ✅ SUCCÈS: 2 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 06:24:57 - INFO - ✅ SUCCÈS: 2 trip(s) exporté(s) vers data.json
+2026-04-03 06:24:57 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 06:24:57 - INFO - Recherche du driver par query: 000
+2026-04-03 06:24:57 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 06:24:57 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 06:35:42 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 06:35:42 - INFO - Récupération des trips pour le driver: 000
+2026-04-03 06:35:42 - INFO - Recherche du driver par query: 000
+2026-04-03 06:35:42 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 06:35:43 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 06:35:43 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 06:35:43 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-03 06:35:43 - INFO - Recherche du driver par query: 000
+2026-04-03 06:35:43 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 06:35:43 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 06:35:43 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-03 06:35:43 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-03 06:35:43 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-03 06:35:43 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-03 06:35:43 - INFO - Recherche des packages pour le schedule: 69cf4d8bfb98e15a3cf535a2
+2026-04-03 06:35:43 - INFO - Recherche par référence: field=schedule_id, value=69cf4d8bfb98e15a3cf535a2
+2026-04-03 06:35:43 - INFO - ✅ SUCCÈS: 2 package(s) trouvé(s) pour le schedule 69cf4d8bfb98e15a3cf535a2
+2026-04-03 06:35:43 - INFO - Récupération du package par ID: 69cf4d69fb98e15a3cf535a1
+2026-04-03 06:35:43 - INFO - Récupération de l'instance: 69cf4d69fb98e15a3cf535a1
+2026-04-03 06:35:43 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 06:35:43 - INFO - ✅ SUCCÈS: Package trouvé: 69cf4d69fb98e15a3cf535a1
+2026-04-03 06:35:43 - INFO - Package: 69cf4d69fb98e15a3cf535a1, address field: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:35:43 - INFO - Récupération adresse: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:35:43 - INFO - Récupération de l'adresse par ID: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:35:43 - INFO - Récupération de l'instance: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:35:43 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:35:43 - INFO - ✅ SUCCÈS: Adresse trouvée: Avenue Taib Sayala, Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-03 06:35:43 - INFO - Trip créé: id=69cf4d69fb98e15a3cf535a1, name=Avenue Taib Sayala, Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276115, lng=10.1967637
+2026-04-03 06:35:43 - INFO - Récupération du package par ID: 69cea29efb98e15a3cf5355a
+2026-04-03 06:35:43 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf5355a
+2026-04-03 06:35:44 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 06:35:44 - INFO - ✅ SUCCÈS: Package trouvé: 69cea29efb98e15a3cf5355a
+2026-04-03 06:35:44 - INFO - Package: 69cea29efb98e15a3cf5355a, address field: 69cea29efb98e15a3cf53559
+2026-04-03 06:35:44 - INFO - Récupération adresse: 69cea29efb98e15a3cf53559
+2026-04-03 06:35:44 - INFO - Récupération de l'adresse par ID: 69cea29efb98e15a3cf53559
+2026-04-03 06:35:44 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf53559
+2026-04-03 06:35:44 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cea29efb98e15a3cf53559
+2026-04-03 06:35:44 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-03 06:35:44 - INFO - Trip créé: id=69cea29efb98e15a3cf5355a, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276926, lng=10.1950475
+2026-04-03 06:35:44 - INFO - ✅ SUCCÈS: 2 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 06:35:44 - INFO - ✅ SUCCÈS: 2 trip(s) exporté(s) vers data.json
+2026-04-03 06:35:44 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 06:35:44 - INFO - Recherche du driver par query: 000
+2026-04-03 06:35:44 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 06:35:44 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 06:38:09 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 06:38:09 - INFO - Récupération des trips pour le driver: 000
+2026-04-03 06:38:09 - INFO - Recherche du driver par query: 000
+2026-04-03 06:38:09 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 06:38:15 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 06:38:15 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 06:38:15 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-03 06:38:15 - INFO - Recherche du driver par query: 000
+2026-04-03 06:38:15 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 06:38:15 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 06:38:15 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-03 06:38:15 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-03 06:38:15 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-03 06:38:15 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-03 06:38:15 - INFO - Recherche des packages pour le schedule: 69cf4d8bfb98e15a3cf535a2
+2026-04-03 06:38:15 - INFO - Recherche par référence: field=schedule_id, value=69cf4d8bfb98e15a3cf535a2
+2026-04-03 06:38:15 - INFO - ✅ SUCCÈS: 2 package(s) trouvé(s) pour le schedule 69cf4d8bfb98e15a3cf535a2
+2026-04-03 06:38:15 - INFO - Récupération du package par ID: 69cf4d69fb98e15a3cf535a1
+2026-04-03 06:38:15 - INFO - Récupération de l'instance: 69cf4d69fb98e15a3cf535a1
+2026-04-03 06:38:15 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 06:38:15 - INFO - ✅ SUCCÈS: Package trouvé: 69cf4d69fb98e15a3cf535a1
+2026-04-03 06:38:15 - INFO - Package: 69cf4d69fb98e15a3cf535a1, address field: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:38:15 - INFO - Récupération adresse: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:38:15 - INFO - Récupération de l'adresse par ID: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:38:15 - INFO - Récupération de l'instance: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:38:15 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:38:15 - INFO - ✅ SUCCÈS: Adresse trouvée: Avenue Taib Sayala, Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-03 06:38:15 - INFO - Trip créé: id=69cf4d69fb98e15a3cf535a1, name=Avenue Taib Sayala, Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276115, lng=10.1967637
+2026-04-03 06:38:15 - INFO - Récupération du package par ID: 69cea29efb98e15a3cf5355a
+2026-04-03 06:38:15 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf5355a
+2026-04-03 06:38:15 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 06:38:15 - INFO - ✅ SUCCÈS: Package trouvé: 69cea29efb98e15a3cf5355a
+2026-04-03 06:38:15 - INFO - Package: 69cea29efb98e15a3cf5355a, address field: 69cea29efb98e15a3cf53559
+2026-04-03 06:38:15 - INFO - Récupération adresse: 69cea29efb98e15a3cf53559
+2026-04-03 06:38:15 - INFO - Récupération de l'adresse par ID: 69cea29efb98e15a3cf53559
+2026-04-03 06:38:15 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf53559
+2026-04-03 06:38:15 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cea29efb98e15a3cf53559
+2026-04-03 06:38:15 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-03 06:38:15 - INFO - Trip créé: id=69cea29efb98e15a3cf5355a, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276926, lng=10.1950475
+2026-04-03 06:38:15 - INFO - ✅ SUCCÈS: 2 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 06:38:15 - INFO - ✅ SUCCÈS: 2 trip(s) exporté(s) vers data.json
+2026-04-03 06:38:15 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 06:38:15 - INFO - Recherche du driver par query: 000
+2026-04-03 06:38:15 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 06:38:15 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 06:41:41 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 06:41:41 - INFO - Récupération des trips pour le driver: 000
+2026-04-03 06:41:41 - INFO - Recherche du driver par query: 000
+2026-04-03 06:41:41 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 06:41:42 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 06:41:42 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 06:41:42 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-03 06:41:42 - INFO - Recherche du driver par query: 000
+2026-04-03 06:41:42 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 06:41:42 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 06:41:42 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-03 06:41:42 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-03 06:41:42 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-03 06:41:42 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-03 06:41:42 - INFO - Recherche des packages pour le schedule: 69cf4d8bfb98e15a3cf535a2
+2026-04-03 06:41:42 - INFO - Recherche par référence: field=schedule_id, value=69cf4d8bfb98e15a3cf535a2
+2026-04-03 06:41:42 - INFO - ✅ SUCCÈS: 2 package(s) trouvé(s) pour le schedule 69cf4d8bfb98e15a3cf535a2
+2026-04-03 06:41:42 - INFO - Récupération du package par ID: 69cf4d69fb98e15a3cf535a1
+2026-04-03 06:41:42 - INFO - Récupération de l'instance: 69cf4d69fb98e15a3cf535a1
+2026-04-03 06:41:42 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 06:41:42 - INFO - ✅ SUCCÈS: Package trouvé: 69cf4d69fb98e15a3cf535a1
+2026-04-03 06:41:42 - INFO - Package: 69cf4d69fb98e15a3cf535a1, address field: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:41:42 - INFO - Récupération adresse: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:41:42 - INFO - Récupération de l'adresse par ID: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:41:42 - INFO - Récupération de l'instance: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:41:42 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:41:42 - INFO - ✅ SUCCÈS: Adresse trouvée: Avenue Taib Sayala, Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-03 06:41:42 - INFO - Trip créé: id=69cf4d69fb98e15a3cf535a1, name=Avenue Taib Sayala, Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276115, lng=10.1967637
+2026-04-03 06:41:42 - INFO - Récupération du package par ID: 69cea29efb98e15a3cf5355a
+2026-04-03 06:41:42 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf5355a
+2026-04-03 06:41:42 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 06:41:42 - INFO - ✅ SUCCÈS: Package trouvé: 69cea29efb98e15a3cf5355a
+2026-04-03 06:41:42 - INFO - Package: 69cea29efb98e15a3cf5355a, address field: 69cea29efb98e15a3cf53559
+2026-04-03 06:41:42 - INFO - Récupération adresse: 69cea29efb98e15a3cf53559
+2026-04-03 06:41:42 - INFO - Récupération de l'adresse par ID: 69cea29efb98e15a3cf53559
+2026-04-03 06:41:42 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf53559
+2026-04-03 06:41:42 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cea29efb98e15a3cf53559
+2026-04-03 06:41:42 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-03 06:41:42 - INFO - Trip créé: id=69cea29efb98e15a3cf5355a, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276926, lng=10.1950475
+2026-04-03 06:41:42 - INFO - ✅ SUCCÈS: 2 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 06:41:42 - INFO - ✅ SUCCÈS: 2 trip(s) exporté(s) vers data.json
+2026-04-03 06:41:42 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 06:41:42 - INFO - Recherche du driver par query: 000
+2026-04-03 06:41:42 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 06:41:42 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 06:43:49 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 06:43:49 - INFO - Récupération des trips pour le driver: 000
+2026-04-03 06:43:49 - INFO - Recherche du driver par query: 000
+2026-04-03 06:43:49 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 06:43:50 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 06:43:50 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 06:43:50 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-03 06:43:50 - INFO - Recherche du driver par query: 000
+2026-04-03 06:43:50 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 06:43:50 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 06:43:50 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-03 06:43:50 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-03 06:43:50 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-03 06:43:50 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-03 06:43:50 - INFO - Recherche des packages pour le schedule: 69cf4d8bfb98e15a3cf535a2
+2026-04-03 06:43:50 - INFO - Recherche par référence: field=schedule_id, value=69cf4d8bfb98e15a3cf535a2
+2026-04-03 06:43:50 - INFO - ✅ SUCCÈS: 2 package(s) trouvé(s) pour le schedule 69cf4d8bfb98e15a3cf535a2
+2026-04-03 06:43:50 - INFO - Récupération du package par ID: 69cf4d69fb98e15a3cf535a1
+2026-04-03 06:43:50 - INFO - Récupération de l'instance: 69cf4d69fb98e15a3cf535a1
+2026-04-03 06:43:50 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 06:43:50 - INFO - ✅ SUCCÈS: Package trouvé: 69cf4d69fb98e15a3cf535a1
+2026-04-03 06:43:50 - INFO - Package: 69cf4d69fb98e15a3cf535a1, address field: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:43:50 - INFO - Récupération adresse: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:43:50 - INFO - Récupération de l'adresse par ID: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:43:50 - INFO - Récupération de l'instance: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:43:50 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cf4d69fb98e15a3cf535a0
+2026-04-03 06:43:50 - INFO - ✅ SUCCÈS: Adresse trouvée: Avenue Taib Sayala, Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-03 06:43:50 - INFO - Trip créé: id=69cf4d69fb98e15a3cf535a1, name=Avenue Taib Sayala, Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276115, lng=10.1967637
+2026-04-03 06:43:50 - INFO - Récupération du package par ID: 69cea29efb98e15a3cf5355a
+2026-04-03 06:43:50 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf5355a
+2026-04-03 06:43:50 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 06:43:50 - INFO - ✅ SUCCÈS: Package trouvé: 69cea29efb98e15a3cf5355a
+2026-04-03 06:43:50 - INFO - Package: 69cea29efb98e15a3cf5355a, address field: 69cea29efb98e15a3cf53559
+2026-04-03 06:43:50 - INFO - Récupération adresse: 69cea29efb98e15a3cf53559
+2026-04-03 06:43:50 - INFO - Récupération de l'adresse par ID: 69cea29efb98e15a3cf53559
+2026-04-03 06:43:50 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf53559
+2026-04-03 06:43:50 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cea29efb98e15a3cf53559
+2026-04-03 06:43:50 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-03 06:43:50 - INFO - Trip créé: id=69cea29efb98e15a3cf5355a, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276926, lng=10.1950475
+2026-04-03 06:43:50 - INFO - ✅ SUCCÈS: 2 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 06:43:50 - INFO - ✅ SUCCÈS: 2 trip(s) exporté(s) vers data.json
+2026-04-03 06:43:50 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 06:43:50 - INFO - Recherche du driver par query: 000
+2026-04-03 06:43:50 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 06:43:50 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 07:22:56 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 07:22:56 - INFO - Récupération des trips pour le driver: 002
+2026-04-03 07:22:56 - INFO - Recherche du driver par query: 002
+2026-04-03 07:22:56 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 07:23:01 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 07:23:01 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 07:23:01 - INFO - Recherche des schedules par driver serial number: 002
+2026-04-03 07:23:01 - INFO - Recherche du driver par query: 002
+2026-04-03 07:23:01 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 07:23:01 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 07:23:01 - INFO - Recherche des entités par référence pour le driver ID: 69ce5c8bfb98e15a3cf53539
+2026-04-03 07:23:01 - INFO - Recherche par référence: field=driver_serial_number, value=69ce5c8bfb98e15a3cf53539
+2026-04-03 07:23:01 - INFO - 1 schedule(s) trouvé(s) sur 4 entité(s)
+2026-04-03 07:23:01 - INFO - ✅ SUCCÈS: 1 schedule(s) pour le driver 69ce5c8bfb98e15a3cf53539
+2026-04-03 07:23:01 - INFO - Recherche des packages pour le schedule: 69cf58d9fb98e15a3cf535a9
+2026-04-03 07:23:01 - INFO - Recherche par référence: field=schedule_id, value=69cf58d9fb98e15a3cf535a9
+2026-04-03 07:23:01 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69cf58d9fb98e15a3cf535a9
+2026-04-03 07:23:01 - INFO - Récupération du package par ID: 69ced3b7fb98e15a3cf5357f
+2026-04-03 07:23:01 - INFO - Récupération de l'instance: 69ced3b7fb98e15a3cf5357f
+2026-04-03 07:23:01 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:23:02 - INFO - ✅ SUCCÈS: Package trouvé: 69ced3b7fb98e15a3cf5357f
+2026-04-03 07:23:02 - INFO - Package: 69ced3b7fb98e15a3cf5357f, address field: 69ced3b7fb98e15a3cf5357e
+2026-04-03 07:23:02 - INFO - Récupération adresse: 69ced3b7fb98e15a3cf5357e
+2026-04-03 07:23:02 - INFO - Récupération de l'adresse par ID: 69ced3b7fb98e15a3cf5357e
+2026-04-03 07:23:02 - INFO - Récupération de l'instance: 69ced3b7fb98e15a3cf5357e
+2026-04-03 07:23:02 - INFO - ✅ SUCCÈS: Adresse trouvée: 69ced3b7fb98e15a3cf5357e
+2026-04-03 07:23:02 - INFO - ✅ SUCCÈS: Adresse trouvée: Aouina Tunis
+2026-04-03 07:23:02 - INFO - Trip créé: id=69ced3b7fb98e15a3cf5357f, name=Aouina Tunis, lat=36.85758551201123, lng=10.25351815296536
+2026-04-03 07:23:02 - INFO - Récupération du package par ID: 69ced439fb98e15a3cf53583
+2026-04-03 07:23:02 - INFO - Récupération de l'instance: 69ced439fb98e15a3cf53583
+2026-04-03 07:23:02 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:23:02 - INFO - ✅ SUCCÈS: Package trouvé: 69ced439fb98e15a3cf53583
+2026-04-03 07:23:02 - INFO - Package: 69ced439fb98e15a3cf53583, address field: 69ced439fb98e15a3cf53582
+2026-04-03 07:23:02 - INFO - Récupération adresse: 69ced439fb98e15a3cf53582
+2026-04-03 07:23:02 - INFO - Récupération de l'adresse par ID: 69ced439fb98e15a3cf53582
+2026-04-03 07:23:02 - INFO - Récupération de l'instance: 69ced439fb98e15a3cf53582
+2026-04-03 07:23:02 - INFO - ✅ SUCCÈS: Adresse trouvée: 69ced439fb98e15a3cf53582
+2026-04-03 07:23:02 - INFO - ✅ SUCCÈS: Adresse trouvée: Aouina Tunis
+2026-04-03 07:23:02 - INFO - Trip créé: id=69ced439fb98e15a3cf53583, name=Aouina Tunis, lat=36.85756745412908, lng=10.2505528144505
+2026-04-03 07:23:02 - INFO - Récupération du package par ID: 69ced37afb98e15a3cf5357d
+2026-04-03 07:23:02 - INFO - Récupération de l'instance: 69ced37afb98e15a3cf5357d
+2026-04-03 07:23:02 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:23:02 - INFO - ✅ SUCCÈS: Package trouvé: 69ced37afb98e15a3cf5357d
+2026-04-03 07:23:02 - INFO - Package: 69ced37afb98e15a3cf5357d, address field: 69ced379fb98e15a3cf5357c
+2026-04-03 07:23:02 - INFO - Récupération adresse: 69ced379fb98e15a3cf5357c
+2026-04-03 07:23:02 - INFO - Récupération de l'adresse par ID: 69ced379fb98e15a3cf5357c
+2026-04-03 07:23:02 - INFO - Récupération de l'instance: 69ced379fb98e15a3cf5357c
+2026-04-03 07:23:02 - INFO - ✅ SUCCÈS: Adresse trouvée: 69ced379fb98e15a3cf5357c
+2026-04-03 07:23:02 - INFO - ✅ SUCCÈS: Adresse trouvée: Aouina Tunis
+2026-04-03 07:23:02 - INFO - Trip créé: id=69ced37afb98e15a3cf5357d, name=Aouina Tunis, lat=36.85105525768403, lng=10.258339042318678
+2026-04-03 07:23:02 - INFO - Récupération du package par ID: 69cf5869fb98e15a3cf535a8
+2026-04-03 07:23:02 - INFO - Récupération de l'instance: 69cf5869fb98e15a3cf535a8
+2026-04-03 07:23:02 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:23:02 - INFO - ✅ SUCCÈS: Package trouvé: 69cf5869fb98e15a3cf535a8
+2026-04-03 07:23:02 - INFO - Package: 69cf5869fb98e15a3cf535a8, address field: 69cf5869fb98e15a3cf535a7
+2026-04-03 07:23:02 - INFO - Récupération adresse: 69cf5869fb98e15a3cf535a7
+2026-04-03 07:23:02 - INFO - Récupération de l'adresse par ID: 69cf5869fb98e15a3cf535a7
+2026-04-03 07:23:02 - INFO - Récupération de l'instance: 69cf5869fb98e15a3cf535a7
+2026-04-03 07:23:02 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cf5869fb98e15a3cf535a7
+2026-04-03 07:23:02 - INFO - ✅ SUCCÈS: Adresse trouvée: lac 1 tunis
+2026-04-03 07:23:02 - INFO - Trip créé: id=69cf5869fb98e15a3cf535a8, name=lac 1 tunis, lat=36.836577863850586, lng=10.23799184440209
+2026-04-03 07:23:02 - INFO - Récupération du package par ID: 69cf581dfb98e15a3cf535a6
+2026-04-03 07:23:02 - INFO - Récupération de l'instance: 69cf581dfb98e15a3cf535a6
+2026-04-03 07:23:02 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:23:02 - INFO - ✅ SUCCÈS: Package trouvé: 69cf581dfb98e15a3cf535a6
+2026-04-03 07:23:02 - INFO - Package: 69cf581dfb98e15a3cf535a6, address field: 69cf581dfb98e15a3cf535a5
+2026-04-03 07:23:02 - INFO - Récupération adresse: 69cf581dfb98e15a3cf535a5
+2026-04-03 07:23:02 - INFO - Récupération de l'adresse par ID: 69cf581dfb98e15a3cf535a5
+2026-04-03 07:23:02 - INFO - Récupération de l'instance: 69cf581dfb98e15a3cf535a5
+2026-04-03 07:23:02 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cf581dfb98e15a3cf535a5
+2026-04-03 07:23:02 - INFO - ✅ SUCCÈS: Adresse trouvée: lac 1 tunis
+2026-04-03 07:23:02 - INFO - Trip créé: id=69cf581dfb98e15a3cf535a6, name=lac 1 tunis, lat=36.83804655838208, lng=10.235404077136778
+2026-04-03 07:23:02 - INFO - ✅ SUCCÈS: 5 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 07:23:02 - INFO - ✅ SUCCÈS: 5 trip(s) exporté(s) vers data.json
+2026-04-03 07:23:02 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 07:23:02 - INFO - Recherche du driver par query: 002
+2026-04-03 07:23:02 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 07:23:03 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 07:25:09 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 07:25:09 - INFO - Mise à jour du package 69ced3b7fb98e15a3cf5357f vers: delivered_successfully
+2026-04-03 07:25:09 - INFO - Récupération du package par ID: 69ced3b7fb98e15a3cf5357f
+2026-04-03 07:25:09 - INFO - Récupération de l'instance: 69ced3b7fb98e15a3cf5357f
+2026-04-03 07:25:09 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:25:09 - INFO - ✅ SUCCÈS: Package trouvé: 69ced3b7fb98e15a3cf5357f
+2026-04-03 07:25:09 - INFO - Mise à jour de l'instance: 69ced3b7fb98e15a3cf5357f
+2026-04-03 07:25:09 - INFO - ✅ SUCCÈS: Instance 69ced3b7fb98e15a3cf5357f mise à jour
+2026-04-03 07:25:09 - INFO - ✅ SUCCÈS: Package 69ced3b7fb98e15a3cf5357f mis à jour: planned -> delivered_successfully
+2026-04-03 07:25:09 - INFO - ✅ SUCCÈS: Package 69ced3b7fb98e15a3cf5357f supprimé de data.json
+2026-04-03 07:26:55 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 07:26:55 - INFO - Mise à jour du package 69ced439fb98e15a3cf53583 vers: delivered_successfully
+2026-04-03 07:26:55 - INFO - Récupération du package par ID: 69ced439fb98e15a3cf53583
+2026-04-03 07:26:55 - INFO - Récupération de l'instance: 69ced439fb98e15a3cf53583
+2026-04-03 07:26:55 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:26:55 - INFO - ✅ SUCCÈS: Package trouvé: 69ced439fb98e15a3cf53583
+2026-04-03 07:26:55 - INFO - Mise à jour de l'instance: 69ced439fb98e15a3cf53583
+2026-04-03 07:26:55 - INFO - ✅ SUCCÈS: Instance 69ced439fb98e15a3cf53583 mise à jour
+2026-04-03 07:26:55 - INFO - ✅ SUCCÈS: Package 69ced439fb98e15a3cf53583 mis à jour: planned -> delivered_successfully
+2026-04-03 07:26:55 - INFO - ✅ SUCCÈS: Package 69ced439fb98e15a3cf53583 supprimé de data.json
+2026-04-03 07:31:24 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 07:31:24 - INFO - Mise à jour du package 69ced37afb98e15a3cf5357d vers: delivery_failure
+2026-04-03 07:31:24 - INFO - Récupération du package par ID: 69ced37afb98e15a3cf5357d
+2026-04-03 07:31:24 - INFO - Récupération de l'instance: 69ced37afb98e15a3cf5357d
+2026-04-03 07:31:24 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:31:25 - INFO - ✅ SUCCÈS: Package trouvé: 69ced37afb98e15a3cf5357d
+2026-04-03 07:31:25 - INFO - Mise à jour de l'instance: 69ced37afb98e15a3cf5357d
+2026-04-03 07:31:25 - INFO - ✅ SUCCÈS: Instance 69ced37afb98e15a3cf5357d mise à jour
+2026-04-03 07:31:25 - INFO - ✅ SUCCÈS: Package 69ced37afb98e15a3cf5357d mis à jour: planned -> delivery_failure
+2026-04-03 07:31:25 - INFO - ✅ SUCCÈS: Package 69ced37afb98e15a3cf5357d supprimé de data.json
+2026-04-03 07:31:25 - INFO - Ajout échec livraison pour 69ced37afb98e15a3cf5357d (cause: 1)
+2026-04-03 07:31:25 - INFO - Récupération du package par ID: 69ced37afb98e15a3cf5357d
+2026-04-03 07:31:25 - INFO - Récupération de l'instance: 69ced37afb98e15a3cf5357d
+2026-04-03 07:31:25 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:31:25 - INFO - ✅ SUCCÈS: Package trouvé: 69ced37afb98e15a3cf5357d
+2026-04-03 07:31:25 - INFO - Création d'un nouveau delivery failure
+2026-04-03 07:31:25 - INFO - Création d'une instance pour l'entité: 69bd7f7cfb98e15a3cf5337a
+2026-04-03 07:31:25 - INFO - ✅ SUCCÈS: Instance créée avec ID: 69cf5ebdfb98e15a3cf535b4
+2026-04-03 07:31:25 - INFO - ✅ SUCCÈS: Delivery failure créé avec ID: 69cf5ebdfb98e15a3cf535b4
+2026-04-03 07:31:25 - INFO - ✅ SUCCÈS: Échec de livraison ajouté pour le package 69ced37afb98e15a3cf5357d
+2026-04-03 07:31:25 - INFO - Mise à jour de l'instance: 69ced37afb98e15a3cf5357d
+2026-04-03 07:31:25 - INFO - ✅ SUCCÈS: Instance 69ced37afb98e15a3cf5357d mise à jour
+2026-04-03 07:37:06 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 07:37:06 - INFO - Mise à jour du package 69cf5869fb98e15a3cf535a8 vers: delivered_successfully
+2026-04-03 07:37:06 - INFO - Récupération du package par ID: 69cf5869fb98e15a3cf535a8
+2026-04-03 07:37:06 - INFO - Récupération de l'instance: 69cf5869fb98e15a3cf535a8
+2026-04-03 07:37:07 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:37:07 - INFO - ✅ SUCCÈS: Package trouvé: 69cf5869fb98e15a3cf535a8
+2026-04-03 07:37:07 - INFO - Mise à jour de l'instance: 69cf5869fb98e15a3cf535a8
+2026-04-03 07:37:07 - INFO - ✅ SUCCÈS: Instance 69cf5869fb98e15a3cf535a8 mise à jour
+2026-04-03 07:37:07 - INFO - ✅ SUCCÈS: Package 69cf5869fb98e15a3cf535a8 mis à jour: planned -> delivered_successfully
+2026-04-03 07:37:07 - INFO - ✅ SUCCÈS: Package 69cf5869fb98e15a3cf535a8 supprimé de data.json
+2026-04-03 07:38:58 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 07:38:58 - INFO - Mise à jour du package 69cf581dfb98e15a3cf535a6 vers: delivery_failure
+2026-04-03 07:38:58 - INFO - Récupération du package par ID: 69cf581dfb98e15a3cf535a6
+2026-04-03 07:38:58 - INFO - Récupération de l'instance: 69cf581dfb98e15a3cf535a6
+2026-04-03 07:38:59 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:38:59 - INFO - ✅ SUCCÈS: Package trouvé: 69cf581dfb98e15a3cf535a6
+2026-04-03 07:38:59 - INFO - Mise à jour de l'instance: 69cf581dfb98e15a3cf535a6
+2026-04-03 07:38:59 - INFO - ✅ SUCCÈS: Instance 69cf581dfb98e15a3cf535a6 mise à jour
+2026-04-03 07:38:59 - INFO - ✅ SUCCÈS: Package 69cf581dfb98e15a3cf535a6 mis à jour: planned -> delivery_failure
+2026-04-03 07:38:59 - INFO - ✅ SUCCÈS: Package 69cf581dfb98e15a3cf535a6 supprimé de data.json
+2026-04-03 07:38:59 - INFO - Ajout échec livraison pour 69cf581dfb98e15a3cf535a6 (cause: 1)
+2026-04-03 07:38:59 - INFO - Récupération du package par ID: 69cf581dfb98e15a3cf535a6
+2026-04-03 07:38:59 - INFO - Récupération de l'instance: 69cf581dfb98e15a3cf535a6
+2026-04-03 07:38:59 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:38:59 - INFO - ✅ SUCCÈS: Package trouvé: 69cf581dfb98e15a3cf535a6
+2026-04-03 07:38:59 - INFO - Création d'un nouveau delivery failure
+2026-04-03 07:38:59 - INFO - Création d'une instance pour l'entité: 69bd7f7cfb98e15a3cf5337a
+2026-04-03 07:38:59 - INFO - ✅ SUCCÈS: Instance créée avec ID: 69cf6083fb98e15a3cf535b5
+2026-04-03 07:38:59 - INFO - ✅ SUCCÈS: Delivery failure créé avec ID: 69cf6083fb98e15a3cf535b5
+2026-04-03 07:38:59 - INFO - ✅ SUCCÈS: Échec de livraison ajouté pour le package 69cf581dfb98e15a3cf535a6
+2026-04-03 07:38:59 - INFO - Mise à jour de l'instance: 69cf581dfb98e15a3cf535a6
+2026-04-03 07:38:59 - INFO - ✅ SUCCÈS: Instance 69cf581dfb98e15a3cf535a6 mise à jour
+2026-04-03 07:45:15 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 07:45:15 - INFO - Récupération des trips pour le driver: 002
+2026-04-03 07:45:15 - INFO - Recherche du driver par query: 002
+2026-04-03 07:45:15 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 07:45:16 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 07:45:16 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 07:45:16 - INFO - Recherche des schedules par driver serial number: 002
+2026-04-03 07:45:16 - INFO - Recherche du driver par query: 002
+2026-04-03 07:45:16 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 07:45:16 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 07:45:16 - INFO - Recherche des entités par référence pour le driver ID: 69ce5c8bfb98e15a3cf53539
+2026-04-03 07:45:16 - INFO - Recherche par référence: field=driver_serial_number, value=69ce5c8bfb98e15a3cf53539
+2026-04-03 07:45:16 - INFO - 1 schedule(s) trouvé(s) sur 4 entité(s)
+2026-04-03 07:45:16 - INFO - ✅ SUCCÈS: 1 schedule(s) pour le driver 69ce5c8bfb98e15a3cf53539
+2026-04-03 07:45:16 - INFO - Recherche des packages pour le schedule: 69cf58d9fb98e15a3cf535a9
+2026-04-03 07:45:16 - INFO - Recherche par référence: field=schedule_id, value=69cf58d9fb98e15a3cf535a9
+2026-04-03 07:45:16 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69cf58d9fb98e15a3cf535a9
+2026-04-03 07:45:16 - INFO - Récupération du package par ID: 69ced3b7fb98e15a3cf5357f
+2026-04-03 07:45:16 - INFO - Récupération de l'instance: 69ced3b7fb98e15a3cf5357f
+2026-04-03 07:45:16 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:45:16 - INFO - ✅ SUCCÈS: Package trouvé: 69ced3b7fb98e15a3cf5357f
+2026-04-03 07:45:16 - INFO - Récupération du package par ID: 69ced439fb98e15a3cf53583
+2026-04-03 07:45:16 - INFO - Récupération de l'instance: 69ced439fb98e15a3cf53583
+2026-04-03 07:45:16 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:45:16 - INFO - ✅ SUCCÈS: Package trouvé: 69ced439fb98e15a3cf53583
+2026-04-03 07:45:16 - INFO - Récupération du package par ID: 69ced37afb98e15a3cf5357d
+2026-04-03 07:45:16 - INFO - Récupération de l'instance: 69ced37afb98e15a3cf5357d
+2026-04-03 07:45:17 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:45:17 - INFO - ✅ SUCCÈS: Package trouvé: 69ced37afb98e15a3cf5357d
+2026-04-03 07:45:17 - INFO - Récupération du package par ID: 69cf5869fb98e15a3cf535a8
+2026-04-03 07:45:17 - INFO - Récupération de l'instance: 69cf5869fb98e15a3cf535a8
+2026-04-03 07:45:17 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:45:17 - INFO - ✅ SUCCÈS: Package trouvé: 69cf5869fb98e15a3cf535a8
+2026-04-03 07:45:17 - INFO - Récupération du package par ID: 69cf581dfb98e15a3cf535a6
+2026-04-03 07:45:17 - INFO - Récupération de l'instance: 69cf581dfb98e15a3cf535a6
+2026-04-03 07:45:17 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:45:17 - INFO - ✅ SUCCÈS: Package trouvé: 69cf581dfb98e15a3cf535a6
+2026-04-03 07:45:17 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 07:45:17 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 07:45:17 - INFO - Recherche du driver par query: 002
+2026-04-03 07:45:17 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 07:45:17 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 07:54:13 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 07:54:13 - INFO - Récupération des trips pour le driver: 002
+2026-04-03 07:54:13 - INFO - Recherche du driver par query: 002
+2026-04-03 07:54:13 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 07:54:18 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 07:54:18 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 07:54:18 - INFO - Recherche des schedules par driver serial number: 002
+2026-04-03 07:54:18 - INFO - Recherche du driver par query: 002
+2026-04-03 07:54:18 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 07:54:18 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 07:54:18 - INFO - Recherche des entités par référence pour le driver ID: 69ce5c8bfb98e15a3cf53539
+2026-04-03 07:54:18 - INFO - Recherche par référence: field=driver_serial_number, value=69ce5c8bfb98e15a3cf53539
+2026-04-03 07:54:18 - INFO - 1 schedule(s) trouvé(s) sur 4 entité(s)
+2026-04-03 07:54:18 - INFO - ✅ SUCCÈS: 1 schedule(s) pour le driver 69ce5c8bfb98e15a3cf53539
+2026-04-03 07:54:18 - INFO - Recherche des packages pour le schedule: 69cf63ecfb98e15a3cf535bc
+2026-04-03 07:54:18 - INFO - Recherche par référence: field=schedule_id, value=69cf63ecfb98e15a3cf535bc
+2026-04-03 07:54:18 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69cf63ecfb98e15a3cf535bc
+2026-04-03 07:54:18 - INFO - Récupération du package par ID: 69cf629efb98e15a3cf535b7
+2026-04-03 07:54:18 - INFO - Récupération de l'instance: 69cf629efb98e15a3cf535b7
+2026-04-03 07:54:18 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:54:18 - INFO - ✅ SUCCÈS: Package trouvé: 69cf629efb98e15a3cf535b7
+2026-04-03 07:54:18 - INFO - Package: 69cf629efb98e15a3cf535b7, address field: 69cf629efb98e15a3cf535b6
+2026-04-03 07:54:18 - INFO - Récupération adresse: 69cf629efb98e15a3cf535b6
+2026-04-03 07:54:18 - INFO - Récupération de l'adresse par ID: 69cf629efb98e15a3cf535b6
+2026-04-03 07:54:18 - INFO - Récupération de l'instance: 69cf629efb98e15a3cf535b6
+2026-04-03 07:54:18 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cf629efb98e15a3cf535b6
+2026-04-03 07:54:18 - INFO - ✅ SUCCÈS: Adresse trouvée: lac 1 tunis
+2026-04-03 07:54:18 - INFO - Trip créé: id=69cf629efb98e15a3cf535b7, name=lac 1 tunis, lat=36.8367980777849, lng=10.231524312342383
+2026-04-03 07:54:18 - INFO - Récupération du package par ID: 69cf62e0fb98e15a3cf535b9
+2026-04-03 07:54:18 - INFO - Récupération de l'instance: 69cf62e0fb98e15a3cf535b9
+2026-04-03 07:54:18 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:54:18 - INFO - ✅ SUCCÈS: Package trouvé: 69cf62e0fb98e15a3cf535b9
+2026-04-03 07:54:18 - INFO - Package: 69cf62e0fb98e15a3cf535b9, address field: 69cf62e0fb98e15a3cf535b8
+2026-04-03 07:54:18 - INFO - Récupération adresse: 69cf62e0fb98e15a3cf535b8
+2026-04-03 07:54:18 - INFO - Récupération de l'adresse par ID: 69cf62e0fb98e15a3cf535b8
+2026-04-03 07:54:18 - INFO - Récupération de l'instance: 69cf62e0fb98e15a3cf535b8
+2026-04-03 07:54:18 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cf62e0fb98e15a3cf535b8
+2026-04-03 07:54:18 - INFO - ✅ SUCCÈS: Adresse trouvée: lac 1 tunis
+2026-04-03 07:54:18 - INFO - Trip créé: id=69cf62e0fb98e15a3cf535b9, name=lac 1 tunis, lat=36.835500310394494, lng=10.231001370328011
+2026-04-03 07:54:18 - INFO - Récupération du package par ID: 69cf6361fb98e15a3cf535bb
+2026-04-03 07:54:18 - INFO - Récupération de l'instance: 69cf6361fb98e15a3cf535bb
+2026-04-03 07:54:18 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:54:18 - INFO - ✅ SUCCÈS: Package trouvé: 69cf6361fb98e15a3cf535bb
+2026-04-03 07:54:18 - INFO - Package: 69cf6361fb98e15a3cf535bb, address field: 69cf6360fb98e15a3cf535ba
+2026-04-03 07:54:18 - INFO - Récupération adresse: 69cf6360fb98e15a3cf535ba
+2026-04-03 07:54:18 - INFO - Récupération de l'adresse par ID: 69cf6360fb98e15a3cf535ba
+2026-04-03 07:54:18 - INFO - Récupération de l'instance: 69cf6360fb98e15a3cf535ba
+2026-04-03 07:54:19 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cf6360fb98e15a3cf535ba
+2026-04-03 07:54:19 - INFO - ✅ SUCCÈS: Adresse trouvée: lac 1 tunis
+2026-04-03 07:54:19 - INFO - Trip créé: id=69cf6361fb98e15a3cf535bb, name=lac 1 tunis, lat=36.835392714452496, lng=10.227344360002807
+2026-04-03 07:54:19 - INFO - Récupération du package par ID: 69cf5869fb98e15a3cf535a8
+2026-04-03 07:54:19 - INFO - Récupération de l'instance: 69cf5869fb98e15a3cf535a8
+2026-04-03 07:54:19 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:54:19 - INFO - ✅ SUCCÈS: Package trouvé: 69cf5869fb98e15a3cf535a8
+2026-04-03 07:54:19 - INFO - Package: 69cf5869fb98e15a3cf535a8, address field: 69cf5869fb98e15a3cf535a7
+2026-04-03 07:54:19 - INFO - Récupération adresse: 69cf5869fb98e15a3cf535a7
+2026-04-03 07:54:19 - INFO - Récupération de l'adresse par ID: 69cf5869fb98e15a3cf535a7
+2026-04-03 07:54:19 - INFO - Récupération de l'instance: 69cf5869fb98e15a3cf535a7
+2026-04-03 07:54:19 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cf5869fb98e15a3cf535a7
+2026-04-03 07:54:19 - INFO - ✅ SUCCÈS: Adresse trouvée: lac 1 tunis
+2026-04-03 07:54:19 - INFO - Trip créé: id=69cf5869fb98e15a3cf535a8, name=lac 1 tunis, lat=36.836577863850586, lng=10.23799184440209
+2026-04-03 07:54:19 - INFO - Récupération du package par ID: 69cf581dfb98e15a3cf535a6
+2026-04-03 07:54:19 - INFO - Récupération de l'instance: 69cf581dfb98e15a3cf535a6
+2026-04-03 07:54:19 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:54:19 - INFO - ✅ SUCCÈS: Package trouvé: 69cf581dfb98e15a3cf535a6
+2026-04-03 07:54:19 - INFO - Package: 69cf581dfb98e15a3cf535a6, address field: 69cf581dfb98e15a3cf535a5
+2026-04-03 07:54:19 - INFO - Récupération adresse: 69cf581dfb98e15a3cf535a5
+2026-04-03 07:54:19 - INFO - Récupération de l'adresse par ID: 69cf581dfb98e15a3cf535a5
+2026-04-03 07:54:19 - INFO - Récupération de l'instance: 69cf581dfb98e15a3cf535a5
+2026-04-03 07:54:19 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cf581dfb98e15a3cf535a5
+2026-04-03 07:54:19 - INFO - ✅ SUCCÈS: Adresse trouvée: lac 1 tunis
+2026-04-03 07:54:19 - INFO - Trip créé: id=69cf581dfb98e15a3cf535a6, name=lac 1 tunis, lat=36.83804655838208, lng=10.235404077136778
+2026-04-03 07:54:19 - INFO - ✅ SUCCÈS: 5 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 07:54:19 - INFO - ✅ SUCCÈS: 5 trip(s) exporté(s) vers data.json
+2026-04-03 07:54:19 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 07:54:19 - INFO - Recherche du driver par query: 002
+2026-04-03 07:54:19 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 07:54:24 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 07:56:12 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 07:56:12 - INFO - Mise à jour du package 69cf629efb98e15a3cf535b7 vers: delivered_successfully
+2026-04-03 07:56:12 - INFO - Récupération du package par ID: 69cf629efb98e15a3cf535b7
+2026-04-03 07:56:12 - INFO - Récupération de l'instance: 69cf629efb98e15a3cf535b7
+2026-04-03 07:56:13 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:56:13 - INFO - ✅ SUCCÈS: Package trouvé: 69cf629efb98e15a3cf535b7
+2026-04-03 07:56:13 - INFO - Mise à jour de l'instance: 69cf629efb98e15a3cf535b7
+2026-04-03 07:56:13 - INFO - ✅ SUCCÈS: Instance 69cf629efb98e15a3cf535b7 mise à jour
+2026-04-03 07:56:13 - INFO - ✅ SUCCÈS: Package 69cf629efb98e15a3cf535b7 mis à jour: planned -> delivered_successfully
+2026-04-03 07:56:13 - INFO - ✅ SUCCÈS: Package 69cf629efb98e15a3cf535b7 supprimé de data.json
+2026-04-03 07:58:16 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 07:58:16 - INFO - Mise à jour du package 69cf62e0fb98e15a3cf535b9 vers: delivery_failure
+2026-04-03 07:58:16 - INFO - Récupération du package par ID: 69cf62e0fb98e15a3cf535b9
+2026-04-03 07:58:16 - INFO - Récupération de l'instance: 69cf62e0fb98e15a3cf535b9
+2026-04-03 07:58:17 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:58:17 - INFO - ✅ SUCCÈS: Package trouvé: 69cf62e0fb98e15a3cf535b9
+2026-04-03 07:58:17 - INFO - Mise à jour de l'instance: 69cf62e0fb98e15a3cf535b9
+2026-04-03 07:58:17 - INFO - ✅ SUCCÈS: Instance 69cf62e0fb98e15a3cf535b9 mise à jour
+2026-04-03 07:58:17 - INFO - ✅ SUCCÈS: Package 69cf62e0fb98e15a3cf535b9 mis à jour: planned -> delivery_failure
+2026-04-03 07:58:17 - INFO - ✅ SUCCÈS: Package 69cf62e0fb98e15a3cf535b9 supprimé de data.json
+2026-04-03 07:58:17 - INFO - Ajout échec livraison pour 69cf62e0fb98e15a3cf535b9 (cause: 1)
+2026-04-03 07:58:17 - INFO - Récupération du package par ID: 69cf62e0fb98e15a3cf535b9
+2026-04-03 07:58:17 - INFO - Récupération de l'instance: 69cf62e0fb98e15a3cf535b9
+2026-04-03 07:58:17 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:58:17 - INFO - ✅ SUCCÈS: Package trouvé: 69cf62e0fb98e15a3cf535b9
+2026-04-03 07:58:17 - INFO - Création d'un nouveau delivery failure
+2026-04-03 07:58:17 - INFO - Création d'une instance pour l'entité: 69bd7f7cfb98e15a3cf5337a
+2026-04-03 07:58:17 - INFO - ✅ SUCCÈS: Instance créée avec ID: 69cf6509fb98e15a3cf535c7
+2026-04-03 07:58:17 - INFO - ✅ SUCCÈS: Delivery failure créé avec ID: 69cf6509fb98e15a3cf535c7
+2026-04-03 07:58:17 - INFO - ✅ SUCCÈS: Échec de livraison ajouté pour le package 69cf62e0fb98e15a3cf535b9
+2026-04-03 07:58:17 - INFO - Mise à jour de l'instance: 69cf62e0fb98e15a3cf535b9
+2026-04-03 07:58:17 - INFO - ✅ SUCCÈS: Instance 69cf62e0fb98e15a3cf535b9 mise à jour
+2026-04-03 07:59:24 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 07:59:24 - INFO - Mise à jour du package 69cf6361fb98e15a3cf535bb vers: delivered_successfully
+2026-04-03 07:59:24 - INFO - Récupération du package par ID: 69cf6361fb98e15a3cf535bb
+2026-04-03 07:59:24 - INFO - Récupération de l'instance: 69cf6361fb98e15a3cf535bb
+2026-04-03 07:59:25 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 07:59:25 - INFO - ✅ SUCCÈS: Package trouvé: 69cf6361fb98e15a3cf535bb
+2026-04-03 07:59:25 - INFO - Mise à jour de l'instance: 69cf6361fb98e15a3cf535bb
+2026-04-03 07:59:25 - INFO - ✅ SUCCÈS: Instance 69cf6361fb98e15a3cf535bb mise à jour
+2026-04-03 07:59:25 - INFO - ✅ SUCCÈS: Package 69cf6361fb98e15a3cf535bb mis à jour: planned -> delivered_successfully
+2026-04-03 07:59:25 - INFO - ✅ SUCCÈS: Package 69cf6361fb98e15a3cf535bb supprimé de data.json
+2026-04-03 08:03:01 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 08:03:01 - INFO - Mise à jour du package 69cf5869fb98e15a3cf535a8 vers: delivered_successfully
+2026-04-03 08:03:01 - INFO - Récupération du package par ID: 69cf5869fb98e15a3cf535a8
+2026-04-03 08:03:01 - INFO - Récupération de l'instance: 69cf5869fb98e15a3cf535a8
+2026-04-03 08:03:01 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 08:03:01 - INFO - ✅ SUCCÈS: Package trouvé: 69cf5869fb98e15a3cf535a8
+2026-04-03 08:03:01 - INFO - Mise à jour de l'instance: 69cf5869fb98e15a3cf535a8
+2026-04-03 08:03:01 - INFO - ✅ SUCCÈS: Instance 69cf5869fb98e15a3cf535a8 mise à jour
+2026-04-03 08:03:01 - INFO - ✅ SUCCÈS: Package 69cf5869fb98e15a3cf535a8 mis à jour: planned -> delivered_successfully
+2026-04-03 08:03:01 - INFO - ✅ SUCCÈS: Package 69cf5869fb98e15a3cf535a8 supprimé de data.json
+2026-04-03 08:06:48 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 08:06:48 - INFO - Mise à jour du package 69cf581dfb98e15a3cf535a6 vers: delivery_failure
+2026-04-03 08:06:48 - INFO - Récupération du package par ID: 69cf581dfb98e15a3cf535a6
+2026-04-03 08:06:48 - INFO - Récupération de l'instance: 69cf581dfb98e15a3cf535a6
+2026-04-03 08:06:49 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 08:06:49 - INFO - ✅ SUCCÈS: Package trouvé: 69cf581dfb98e15a3cf535a6
+2026-04-03 08:06:49 - INFO - Mise à jour de l'instance: 69cf581dfb98e15a3cf535a6
+2026-04-03 08:06:49 - INFO - ✅ SUCCÈS: Instance 69cf581dfb98e15a3cf535a6 mise à jour
+2026-04-03 08:06:49 - INFO - ✅ SUCCÈS: Package 69cf581dfb98e15a3cf535a6 mis à jour: planned -> delivery_failure
+2026-04-03 08:06:49 - INFO - ✅ SUCCÈS: Package 69cf581dfb98e15a3cf535a6 supprimé de data.json
+2026-04-03 08:06:49 - INFO - Ajout échec livraison pour 69cf581dfb98e15a3cf535a6 (cause: 1)
+2026-04-03 08:06:49 - INFO - Récupération du package par ID: 69cf581dfb98e15a3cf535a6
+2026-04-03 08:06:49 - INFO - Récupération de l'instance: 69cf581dfb98e15a3cf535a6
+2026-04-03 08:06:49 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 08:06:49 - INFO - ✅ SUCCÈS: Package trouvé: 69cf581dfb98e15a3cf535a6
+2026-04-03 08:06:49 - INFO - Création d'un nouveau delivery failure
+2026-04-03 08:06:49 - INFO - Création d'une instance pour l'entité: 69bd7f7cfb98e15a3cf5337a
+2026-04-03 08:06:49 - INFO - ✅ SUCCÈS: Instance créée avec ID: 69cf6709fb98e15a3cf535c8
+2026-04-03 08:06:49 - INFO - ✅ SUCCÈS: Delivery failure créé avec ID: 69cf6709fb98e15a3cf535c8
+2026-04-03 08:06:49 - INFO - ✅ SUCCÈS: Échec de livraison ajouté pour le package 69cf581dfb98e15a3cf535a6
+2026-04-03 08:06:49 - INFO - Mise à jour de l'instance: 69cf581dfb98e15a3cf535a6
+2026-04-03 08:06:49 - INFO - ✅ SUCCÈS: Instance 69cf581dfb98e15a3cf535a6 mise à jour
+2026-04-03 08:11:00 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 08:11:00 - INFO - Récupération des trips pour le driver: 002
+2026-04-03 08:11:00 - INFO - Recherche du driver par query: 002
+2026-04-03 08:11:00 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 08:11:06 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 08:11:06 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 08:11:06 - INFO - Recherche des schedules par driver serial number: 002
+2026-04-03 08:11:06 - INFO - Recherche du driver par query: 002
+2026-04-03 08:11:06 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 08:11:06 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 08:11:06 - INFO - Recherche des entités par référence pour le driver ID: 69ce5c8bfb98e15a3cf53539
+2026-04-03 08:11:06 - INFO - Recherche par référence: field=driver_serial_number, value=69ce5c8bfb98e15a3cf53539
+2026-04-03 08:11:06 - INFO - 1 schedule(s) trouvé(s) sur 4 entité(s)
+2026-04-03 08:11:06 - INFO - ✅ SUCCÈS: 1 schedule(s) pour le driver 69ce5c8bfb98e15a3cf53539
+2026-04-03 08:11:06 - INFO - Recherche des packages pour le schedule: 69cf67ccfb98e15a3cf535c9
+2026-04-03 08:11:06 - INFO - Recherche par référence: field=schedule_id, value=69cf67ccfb98e15a3cf535c9
+2026-04-03 08:11:06 - INFO - ✅ SUCCÈS: 4 package(s) trouvé(s) pour le schedule 69cf67ccfb98e15a3cf535c9
+2026-04-03 08:11:06 - INFO - Récupération du package par ID: 69cf5869fb98e15a3cf535a8
+2026-04-03 08:11:06 - INFO - Récupération de l'instance: 69cf5869fb98e15a3cf535a8
+2026-04-03 08:11:06 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 08:11:06 - INFO - ✅ SUCCÈS: Package trouvé: 69cf5869fb98e15a3cf535a8
+2026-04-03 08:11:06 - INFO - Package: 69cf5869fb98e15a3cf535a8, address field: 69cf5869fb98e15a3cf535a7
+2026-04-03 08:11:06 - INFO - Récupération adresse: 69cf5869fb98e15a3cf535a7
+2026-04-03 08:11:06 - INFO - Récupération de l'adresse par ID: 69cf5869fb98e15a3cf535a7
+2026-04-03 08:11:06 - INFO - Récupération de l'instance: 69cf5869fb98e15a3cf535a7
+2026-04-03 08:11:06 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cf5869fb98e15a3cf535a7
+2026-04-03 08:11:06 - INFO - ✅ SUCCÈS: Adresse trouvée: lac 1 tunis
+2026-04-03 08:11:06 - INFO - Trip créé: id=69cf5869fb98e15a3cf535a8, name=lac 1 tunis, lat=36.836577863850586, lng=10.23799184440209
+2026-04-03 08:11:06 - INFO - Récupération du package par ID: 69cf6361fb98e15a3cf535bb
+2026-04-03 08:11:06 - INFO - Récupération de l'instance: 69cf6361fb98e15a3cf535bb
+2026-04-03 08:11:07 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 08:11:07 - INFO - ✅ SUCCÈS: Package trouvé: 69cf6361fb98e15a3cf535bb
+2026-04-03 08:11:07 - INFO - Package: 69cf6361fb98e15a3cf535bb, address field: 69cf6360fb98e15a3cf535ba
+2026-04-03 08:11:07 - INFO - Récupération adresse: 69cf6360fb98e15a3cf535ba
+2026-04-03 08:11:07 - INFO - Récupération de l'adresse par ID: 69cf6360fb98e15a3cf535ba
+2026-04-03 08:11:07 - INFO - Récupération de l'instance: 69cf6360fb98e15a3cf535ba
+2026-04-03 08:11:07 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cf6360fb98e15a3cf535ba
+2026-04-03 08:11:07 - INFO - ✅ SUCCÈS: Adresse trouvée: lac 1 tunis
+2026-04-03 08:11:07 - INFO - Trip créé: id=69cf6361fb98e15a3cf535bb, name=lac 1 tunis, lat=36.835392714452496, lng=10.227344360002807
+2026-04-03 08:11:07 - INFO - Récupération du package par ID: 69cf62e0fb98e15a3cf535b9
+2026-04-03 08:11:07 - INFO - Récupération de l'instance: 69cf62e0fb98e15a3cf535b9
+2026-04-03 08:11:07 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 08:11:07 - INFO - ✅ SUCCÈS: Package trouvé: 69cf62e0fb98e15a3cf535b9
+2026-04-03 08:11:07 - INFO - Package: 69cf62e0fb98e15a3cf535b9, address field: 69cf62e0fb98e15a3cf535b8
+2026-04-03 08:11:07 - INFO - Récupération adresse: 69cf62e0fb98e15a3cf535b8
+2026-04-03 08:11:07 - INFO - Récupération de l'adresse par ID: 69cf62e0fb98e15a3cf535b8
+2026-04-03 08:11:07 - INFO - Récupération de l'instance: 69cf62e0fb98e15a3cf535b8
+2026-04-03 08:11:07 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cf62e0fb98e15a3cf535b8
+2026-04-03 08:11:07 - INFO - ✅ SUCCÈS: Adresse trouvée: lac 1 tunis
+2026-04-03 08:11:07 - INFO - Trip créé: id=69cf62e0fb98e15a3cf535b9, name=lac 1 tunis, lat=36.835500310394494, lng=10.231001370328011
+2026-04-03 08:11:07 - INFO - Récupération du package par ID: 69cf629efb98e15a3cf535b7
+2026-04-03 08:11:07 - INFO - Récupération de l'instance: 69cf629efb98e15a3cf535b7
+2026-04-03 08:11:07 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 08:11:07 - INFO - ✅ SUCCÈS: Package trouvé: 69cf629efb98e15a3cf535b7
+2026-04-03 08:11:07 - INFO - Package: 69cf629efb98e15a3cf535b7, address field: 69cf629efb98e15a3cf535b6
+2026-04-03 08:11:07 - INFO - Récupération adresse: 69cf629efb98e15a3cf535b6
+2026-04-03 08:11:07 - INFO - Récupération de l'adresse par ID: 69cf629efb98e15a3cf535b6
+2026-04-03 08:11:07 - INFO - Récupération de l'instance: 69cf629efb98e15a3cf535b6
+2026-04-03 08:11:07 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cf629efb98e15a3cf535b6
+2026-04-03 08:11:07 - INFO - ✅ SUCCÈS: Adresse trouvée: lac 1 tunis
+2026-04-03 08:11:07 - INFO - Trip créé: id=69cf629efb98e15a3cf535b7, name=lac 1 tunis, lat=36.8367980777849, lng=10.231524312342383
+2026-04-03 08:11:07 - INFO - ✅ SUCCÈS: 4 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 08:11:07 - INFO - ✅ SUCCÈS: 4 trip(s) exporté(s) vers data.json
+2026-04-03 08:11:07 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 08:11:07 - INFO - Recherche du driver par query: 002
+2026-04-03 08:11:07 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 08:11:07 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 08:13:58 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 08:13:58 - INFO - Mise à jour du package 69cf5869fb98e15a3cf535a8 vers: delivered_successfully
+2026-04-03 08:13:58 - INFO - Récupération du package par ID: 69cf5869fb98e15a3cf535a8
+2026-04-03 08:13:58 - INFO - Récupération de l'instance: 69cf5869fb98e15a3cf535a8
+2026-04-03 08:13:58 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 08:13:58 - INFO - ✅ SUCCÈS: Package trouvé: 69cf5869fb98e15a3cf535a8
+2026-04-03 08:13:58 - INFO - Mise à jour de l'instance: 69cf5869fb98e15a3cf535a8
+2026-04-03 08:13:58 - INFO - ✅ SUCCÈS: Instance 69cf5869fb98e15a3cf535a8 mise à jour
+2026-04-03 08:13:58 - INFO - ✅ SUCCÈS: Package 69cf5869fb98e15a3cf535a8 mis à jour: planned -> delivered_successfully
+2026-04-03 08:13:58 - INFO - ✅ SUCCÈS: Package 69cf5869fb98e15a3cf535a8 supprimé de data.json
+2026-04-03 08:16:17 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 08:16:17 - INFO - Mise à jour du package 69cf6361fb98e15a3cf535bb vers: delivered_successfully
+2026-04-03 08:16:17 - INFO - Récupération du package par ID: 69cf6361fb98e15a3cf535bb
+2026-04-03 08:16:17 - INFO - Récupération de l'instance: 69cf6361fb98e15a3cf535bb
+2026-04-03 08:16:22 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 08:16:22 - INFO - ✅ SUCCÈS: Package trouvé: 69cf6361fb98e15a3cf535bb
+2026-04-03 08:16:22 - INFO - Mise à jour de l'instance: 69cf6361fb98e15a3cf535bb
+2026-04-03 08:16:22 - INFO - ✅ SUCCÈS: Instance 69cf6361fb98e15a3cf535bb mise à jour
+2026-04-03 08:16:22 - INFO - ✅ SUCCÈS: Package 69cf6361fb98e15a3cf535bb mis à jour: planned -> delivered_successfully
+2026-04-03 08:16:22 - INFO - ✅ SUCCÈS: Package 69cf6361fb98e15a3cf535bb supprimé de data.json
+2026-04-03 08:17:29 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 08:17:29 - INFO - Mise à jour du package 69cf62e0fb98e15a3cf535b9 vers: delivery_failure
+2026-04-03 08:17:29 - INFO - Récupération du package par ID: 69cf62e0fb98e15a3cf535b9
+2026-04-03 08:17:29 - INFO - Récupération de l'instance: 69cf62e0fb98e15a3cf535b9
+2026-04-03 08:17:29 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 08:17:29 - INFO - ✅ SUCCÈS: Package trouvé: 69cf62e0fb98e15a3cf535b9
+2026-04-03 08:17:29 - INFO - Mise à jour de l'instance: 69cf62e0fb98e15a3cf535b9
+2026-04-03 08:17:29 - INFO - ✅ SUCCÈS: Instance 69cf62e0fb98e15a3cf535b9 mise à jour
+2026-04-03 08:17:29 - INFO - ✅ SUCCÈS: Package 69cf62e0fb98e15a3cf535b9 mis à jour: planned -> delivery_failure
+2026-04-03 08:17:29 - INFO - ✅ SUCCÈS: Package 69cf62e0fb98e15a3cf535b9 supprimé de data.json
+2026-04-03 08:17:29 - INFO - Ajout échec livraison pour 69cf62e0fb98e15a3cf535b9 (cause: 1)
+2026-04-03 08:17:29 - INFO - Récupération du package par ID: 69cf62e0fb98e15a3cf535b9
+2026-04-03 08:17:29 - INFO - Récupération de l'instance: 69cf62e0fb98e15a3cf535b9
+2026-04-03 08:17:29 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 08:17:30 - INFO - ✅ SUCCÈS: Package trouvé: 69cf62e0fb98e15a3cf535b9
+2026-04-03 08:17:30 - INFO - Création d'un nouveau delivery failure
+2026-04-03 08:17:30 - INFO - Création d'une instance pour l'entité: 69bd7f7cfb98e15a3cf5337a
+2026-04-03 08:17:30 - INFO - ✅ SUCCÈS: Instance créée avec ID: 69cf698afb98e15a3cf535ce
+2026-04-03 08:17:30 - INFO - ✅ SUCCÈS: Delivery failure créé avec ID: 69cf698afb98e15a3cf535ce
+2026-04-03 08:17:30 - INFO - ✅ SUCCÈS: Échec de livraison ajouté pour le package 69cf62e0fb98e15a3cf535b9
+2026-04-03 08:17:30 - INFO - Mise à jour de l'instance: 69cf62e0fb98e15a3cf535b9
+2026-04-03 08:17:30 - INFO - ✅ SUCCÈS: Instance 69cf62e0fb98e15a3cf535b9 mise à jour
+2026-04-03 08:21:26 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 08:21:26 - INFO - Mise à jour du package 69cf629efb98e15a3cf535b7 vers: delivered_successfully
+2026-04-03 08:21:26 - INFO - Récupération du package par ID: 69cf629efb98e15a3cf535b7
+2026-04-03 08:21:26 - INFO - Récupération de l'instance: 69cf629efb98e15a3cf535b7
+2026-04-03 08:21:27 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 08:21:27 - INFO - ✅ SUCCÈS: Package trouvé: 69cf629efb98e15a3cf535b7
+2026-04-03 08:21:27 - INFO - Mise à jour de l'instance: 69cf629efb98e15a3cf535b7
+2026-04-03 08:21:27 - INFO - ✅ SUCCÈS: Instance 69cf629efb98e15a3cf535b7 mise à jour
+2026-04-03 08:21:27 - INFO - ✅ SUCCÈS: Package 69cf629efb98e15a3cf535b7 mis à jour: planned -> delivered_successfully
+2026-04-03 08:21:27 - INFO - ✅ SUCCÈS: Package 69cf629efb98e15a3cf535b7 supprimé de data.json
+2026-04-03 10:07:22 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 10:07:22 - INFO - Récupération des trips pour le driver: 000
+2026-04-03 10:07:22 - INFO - Recherche du driver par query: 000
+2026-04-03 10:07:22 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 10:07:22 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 10:07:22 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 10:07:22 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-03 10:07:22 - INFO - Recherche du driver par query: 000
+2026-04-03 10:07:22 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 10:07:22 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 10:07:22 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-03 10:07:22 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-03 10:07:22 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-03 10:07:22 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-03 10:07:22 - INFO - Recherche des packages pour le schedule: 69cf82dbfb98e15a3cf535cf
+2026-04-03 10:07:22 - INFO - Recherche par référence: field=schedule_id, value=69cf82dbfb98e15a3cf535cf
+2026-04-03 10:07:22 - INFO - ✅ SUCCÈS: 4 package(s) trouvé(s) pour le schedule 69cf82dbfb98e15a3cf535cf
+2026-04-03 10:07:22 - INFO - Récupération du package par ID: 69cea258fb98e15a3cf53554
+2026-04-03 10:07:22 - INFO - Récupération de l'instance: 69cea258fb98e15a3cf53554
+2026-04-03 10:07:22 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 10:07:22 - INFO - ✅ SUCCÈS: Package trouvé: 69cea258fb98e15a3cf53554
+2026-04-03 10:07:22 - INFO - Package: 69cea258fb98e15a3cf53554, address field: 69cea258fb98e15a3cf53553
+2026-04-03 10:07:22 - INFO - Récupération adresse: 69cea258fb98e15a3cf53553
+2026-04-03 10:07:22 - INFO - Récupération de l'adresse par ID: 69cea258fb98e15a3cf53553
+2026-04-03 10:07:22 - INFO - Récupération de l'instance: 69cea258fb98e15a3cf53553
+2026-04-03 10:07:22 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cea258fb98e15a3cf53553
+2026-04-03 10:07:22 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-03 10:07:22 - INFO - Trip créé: id=69cea258fb98e15a3cf53554, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276926, lng=10.1950475
+2026-04-03 10:07:22 - INFO - Récupération du package par ID: 69cea26efb98e15a3cf53556
+2026-04-03 10:07:22 - INFO - Récupération de l'instance: 69cea26efb98e15a3cf53556
+2026-04-03 10:07:22 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 10:07:22 - INFO - ✅ SUCCÈS: Package trouvé: 69cea26efb98e15a3cf53556
+2026-04-03 10:07:22 - INFO - Package: 69cea26efb98e15a3cf53556, address field: 69cea26efb98e15a3cf53555
+2026-04-03 10:07:22 - INFO - Récupération adresse: 69cea26efb98e15a3cf53555
+2026-04-03 10:07:22 - INFO - Récupération de l'adresse par ID: 69cea26efb98e15a3cf53555
+2026-04-03 10:07:22 - INFO - Récupération de l'instance: 69cea26efb98e15a3cf53555
+2026-04-03 10:07:22 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cea26efb98e15a3cf53555
+2026-04-03 10:07:22 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-03 10:07:22 - INFO - Trip créé: id=69cea26efb98e15a3cf53556, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276926, lng=10.1950475
+2026-04-03 10:07:22 - INFO - Récupération du package par ID: 69cea28ffb98e15a3cf53558
+2026-04-03 10:07:22 - INFO - Récupération de l'instance: 69cea28ffb98e15a3cf53558
+2026-04-03 10:07:22 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 10:07:22 - INFO - ✅ SUCCÈS: Package trouvé: 69cea28ffb98e15a3cf53558
+2026-04-03 10:07:22 - INFO - Package: 69cea28ffb98e15a3cf53558, address field: 69cea28ffb98e15a3cf53557
+2026-04-03 10:07:22 - INFO - Récupération adresse: 69cea28ffb98e15a3cf53557
+2026-04-03 10:07:22 - INFO - Récupération de l'adresse par ID: 69cea28ffb98e15a3cf53557
+2026-04-03 10:07:22 - INFO - Récupération de l'instance: 69cea28ffb98e15a3cf53557
+2026-04-03 10:07:22 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cea28ffb98e15a3cf53557
+2026-04-03 10:07:22 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-03 10:07:22 - INFO - Trip créé: id=69cea28ffb98e15a3cf53558, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276926, lng=10.1950475
+2026-04-03 10:07:22 - INFO - Récupération du package par ID: 69cea29efb98e15a3cf5355a
+2026-04-03 10:07:22 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf5355a
+2026-04-03 10:07:22 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 10:07:23 - INFO - ✅ SUCCÈS: Package trouvé: 69cea29efb98e15a3cf5355a
+2026-04-03 10:07:23 - INFO - Package: 69cea29efb98e15a3cf5355a, address field: 69cea29efb98e15a3cf53559
+2026-04-03 10:07:23 - INFO - Récupération adresse: 69cea29efb98e15a3cf53559
+2026-04-03 10:07:23 - INFO - Récupération de l'adresse par ID: 69cea29efb98e15a3cf53559
+2026-04-03 10:07:23 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf53559
+2026-04-03 10:07:23 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cea29efb98e15a3cf53559
+2026-04-03 10:07:23 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-03 10:07:23 - INFO - Trip créé: id=69cea29efb98e15a3cf5355a, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8276926, lng=10.1950475
+2026-04-03 10:07:23 - INFO - ✅ SUCCÈS: 4 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 10:07:23 - INFO - ✅ SUCCÈS: 4 trip(s) exporté(s) vers data.json
+2026-04-03 10:07:23 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 10:07:23 - INFO - Recherche du driver par query: 000
+2026-04-03 10:07:23 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 10:07:23 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 10:08:08 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 10:08:08 - INFO - Mise à jour du package 69cea258fb98e15a3cf53554 vers: delivered_successfully
+2026-04-03 10:08:08 - INFO - Récupération du package par ID: 69cea258fb98e15a3cf53554
+2026-04-03 10:08:08 - INFO - Récupération de l'instance: 69cea258fb98e15a3cf53554
+2026-04-03 10:08:08 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 10:08:08 - INFO - ✅ SUCCÈS: Package trouvé: 69cea258fb98e15a3cf53554
+2026-04-03 10:08:08 - INFO - Mise à jour de l'instance: 69cea258fb98e15a3cf53554
+2026-04-03 10:08:09 - INFO - ✅ SUCCÈS: Instance 69cea258fb98e15a3cf53554 mise à jour
+2026-04-03 10:08:09 - INFO - ✅ SUCCÈS: Package 69cea258fb98e15a3cf53554 mis à jour: planned -> delivered_successfully
+2026-04-03 10:08:09 - INFO - ✅ SUCCÈS: Package 69cea258fb98e15a3cf53554 supprimé de data.json
+2026-04-03 10:08:27 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 10:08:27 - INFO - Mise à jour du package 69cea26efb98e15a3cf53556 vers: delivered_successfully
+2026-04-03 10:08:27 - INFO - Récupération du package par ID: 69cea26efb98e15a3cf53556
+2026-04-03 10:08:27 - INFO - Récupération de l'instance: 69cea26efb98e15a3cf53556
+2026-04-03 10:08:27 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 10:08:27 - INFO - ✅ SUCCÈS: Package trouvé: 69cea26efb98e15a3cf53556
+2026-04-03 10:08:27 - INFO - Mise à jour de l'instance: 69cea26efb98e15a3cf53556
+2026-04-03 10:08:27 - INFO - ✅ SUCCÈS: Instance 69cea26efb98e15a3cf53556 mise à jour
+2026-04-03 10:08:27 - INFO - ✅ SUCCÈS: Package 69cea26efb98e15a3cf53556 mis à jour: planned -> delivered_successfully
+2026-04-03 10:08:27 - INFO - ✅ SUCCÈS: Package 69cea26efb98e15a3cf53556 supprimé de data.json
+2026-04-03 10:08:41 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 10:08:41 - INFO - Mise à jour du package 69cea28ffb98e15a3cf53558 vers: delivered_successfully
+2026-04-03 10:08:41 - INFO - Récupération du package par ID: 69cea28ffb98e15a3cf53558
+2026-04-03 10:08:41 - INFO - Récupération de l'instance: 69cea28ffb98e15a3cf53558
+2026-04-03 10:08:41 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 10:08:41 - INFO - ✅ SUCCÈS: Package trouvé: 69cea28ffb98e15a3cf53558
+2026-04-03 10:08:41 - INFO - Mise à jour de l'instance: 69cea28ffb98e15a3cf53558
+2026-04-03 10:08:41 - INFO - ✅ SUCCÈS: Instance 69cea28ffb98e15a3cf53558 mise à jour
+2026-04-03 10:08:41 - INFO - ✅ SUCCÈS: Package 69cea28ffb98e15a3cf53558 mis à jour: planned -> delivered_successfully
+2026-04-03 10:08:41 - INFO - ✅ SUCCÈS: Package 69cea28ffb98e15a3cf53558 supprimé de data.json
+2026-04-03 10:08:53 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 10:08:53 - INFO - Mise à jour du package 69cea29efb98e15a3cf5355a vers: delivered_successfully
+2026-04-03 10:08:53 - INFO - Récupération du package par ID: 69cea29efb98e15a3cf5355a
+2026-04-03 10:08:53 - INFO - Récupération de l'instance: 69cea29efb98e15a3cf5355a
+2026-04-03 10:08:53 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 10:08:53 - INFO - ✅ SUCCÈS: Package trouvé: 69cea29efb98e15a3cf5355a
+2026-04-03 10:08:53 - INFO - Mise à jour de l'instance: 69cea29efb98e15a3cf5355a
+2026-04-03 10:08:53 - INFO - ✅ SUCCÈS: Instance 69cea29efb98e15a3cf5355a mise à jour
+2026-04-03 10:08:53 - INFO - ✅ SUCCÈS: Package 69cea29efb98e15a3cf5355a mis à jour: planned -> delivered_successfully
+2026-04-03 10:08:53 - INFO - ✅ SUCCÈS: Package 69cea29efb98e15a3cf5355a supprimé de data.json
