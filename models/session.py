@@ -32,6 +32,11 @@ class Session:
     audio_buffer: list = field(default_factory=list)
     # Petit historique des chunks avant speech_start pour ne pas couper le début des mots.
     pre_speech_buffer: deque = field(default_factory=deque)
+    # Buffers debug du flux WebRTC décodé avant resampling vers 16kHz.
+    decoded_audio_buffer: list = field(default_factory=list)
+    decoded_pre_speech_buffer: deque = field(default_factory=deque)
+    decoded_pre_speech_samples: int = 0
+    decoded_sample_rate: int = 0
     # Nombre de chunks de post-roll déjà accumulés après la détection de fin de parole.
     post_roll_chunks: int = 0
     # True si le VAD est actuellement en phase de parole
@@ -95,6 +100,12 @@ class Session:
                 self.tts_audio_queue.get_nowait()
             except asyncio.QueueEmpty:
                 break
+
+    def reset_decoded_audio_buffer(self):
+        self.decoded_audio_buffer.clear()
+        self.decoded_pre_speech_buffer.clear()
+        self.decoded_pre_speech_samples = 0
+        self.decoded_sample_rate = 0
 
     def reset_conversation(self):
         self.conversation_history.clear()

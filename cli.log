@@ -3815,3 +3815,400 @@
 2026-04-03 10:08:53 - INFO - ✅ SUCCÈS: Instance 69cea29efb98e15a3cf5355a mise à jour
 2026-04-03 10:08:53 - INFO - ✅ SUCCÈS: Package 69cea29efb98e15a3cf5355a mis à jour: planned -> delivered_successfully
 2026-04-03 10:08:53 - INFO - ✅ SUCCÈS: Package 69cea29efb98e15a3cf5355a supprimé de data.json
+2026-04-03 13:34:56 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 13:34:56 - INFO - Récupération des trips pour le driver: 002
+2026-04-03 13:34:56 - INFO - Recherche du driver par query: 002
+2026-04-03 13:34:56 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 13:34:56 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 13:34:56 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 13:34:56 - INFO - Recherche des schedules par driver serial number: 002
+2026-04-03 13:34:56 - INFO - Recherche du driver par query: 002
+2026-04-03 13:34:56 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 13:34:56 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 13:34:56 - INFO - Recherche des entités par référence pour le driver ID: 69ce5c8bfb98e15a3cf53539
+2026-04-03 13:34:56 - INFO - Recherche par référence: field=driver_serial_number, value=69ce5c8bfb98e15a3cf53539
+2026-04-03 13:34:56 - INFO - 1 schedule(s) trouvé(s) sur 4 entité(s)
+2026-04-03 13:34:56 - INFO - ✅ SUCCÈS: 1 schedule(s) pour le driver 69ce5c8bfb98e15a3cf53539
+2026-04-03 13:34:56 - INFO - Recherche des packages pour le schedule: 69cf67ccfb98e15a3cf535c9
+2026-04-03 13:34:56 - INFO - Recherche par référence: field=schedule_id, value=69cf67ccfb98e15a3cf535c9
+2026-04-03 13:34:56 - WARNING - Aucune entité trouvée pour le schedule 69cf67ccfb98e15a3cf535c9
+2026-04-03 13:34:56 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 13:34:56 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 13:34:56 - INFO - Recherche du driver par query: 002
+2026-04-03 13:34:56 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 13:34:57 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 13:53:42 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 13:53:42 - INFO - Récupération des trips pour le driver: 002
+2026-04-03 13:53:42 - INFO - Recherche du driver par query: 002
+2026-04-03 13:53:42 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 13:53:43 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 13:53:43 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 13:53:43 - INFO - Recherche des schedules par driver serial number: 002
+2026-04-03 13:53:43 - INFO - Recherche du driver par query: 002
+2026-04-03 13:53:43 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 13:53:43 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 13:53:43 - INFO - Recherche des entités par référence pour le driver ID: 69ce5c8bfb98e15a3cf53539
+2026-04-03 13:53:43 - INFO - Recherche par référence: field=driver_serial_number, value=69ce5c8bfb98e15a3cf53539
+2026-04-03 13:53:43 - INFO - 1 schedule(s) trouvé(s) sur 4 entité(s)
+2026-04-03 13:53:43 - INFO - ✅ SUCCÈS: 1 schedule(s) pour le driver 69ce5c8bfb98e15a3cf53539
+2026-04-03 13:53:43 - INFO - Recherche des packages pour le schedule: 69cf67ccfb98e15a3cf535c9
+2026-04-03 13:53:43 - INFO - Recherche par référence: field=schedule_id, value=69cf67ccfb98e15a3cf535c9
+2026-04-03 13:53:43 - WARNING - Aucune entité trouvée pour le schedule 69cf67ccfb98e15a3cf535c9
+2026-04-03 13:53:43 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 13:53:43 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 13:53:43 - INFO - Recherche du driver par query: 002
+2026-04-03 13:53:43 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 13:53:43 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 13:59:08 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 13:59:08 - INFO - Récupération des trips pour le driver: 002
+2026-04-03 13:59:08 - INFO - Recherche du driver par query: 002
+2026-04-03 13:59:08 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 13:59:08 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 13:59:08 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 13:59:08 - INFO - Recherche des schedules par driver serial number: 002
+2026-04-03 13:59:08 - INFO - Recherche du driver par query: 002
+2026-04-03 13:59:08 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 13:59:08 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 13:59:08 - INFO - Recherche des entités par référence pour le driver ID: 69ce5c8bfb98e15a3cf53539
+2026-04-03 13:59:08 - INFO - Recherche par référence: field=driver_serial_number, value=69ce5c8bfb98e15a3cf53539
+2026-04-03 13:59:08 - INFO - 1 schedule(s) trouvé(s) sur 4 entité(s)
+2026-04-03 13:59:08 - INFO - ✅ SUCCÈS: 1 schedule(s) pour le driver 69ce5c8bfb98e15a3cf53539
+2026-04-03 13:59:08 - INFO - Recherche des packages pour le schedule: 69cf67ccfb98e15a3cf535c9
+2026-04-03 13:59:08 - INFO - Recherche par référence: field=schedule_id, value=69cf67ccfb98e15a3cf535c9
+2026-04-03 13:59:08 - INFO - ✅ SUCCÈS: 1 package(s) trouvé(s) pour le schedule 69cf67ccfb98e15a3cf535c9
+2026-04-03 13:59:08 - INFO - Récupération du package par ID: 69cfb958fb98e15a3cf535d5
+2026-04-03 13:59:08 - INFO - Récupération de l'instance: 69cfb958fb98e15a3cf535d5
+2026-04-03 13:59:08 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 13:59:08 - INFO - ✅ SUCCÈS: Package trouvé: 69cfb958fb98e15a3cf535d5
+2026-04-03 13:59:08 - INFO - Package: 69cfb958fb98e15a3cf535d5, address field: 69cfb958fb98e15a3cf535d4
+2026-04-03 13:59:08 - INFO - Récupération adresse: 69cfb958fb98e15a3cf535d4
+2026-04-03 13:59:08 - INFO - Récupération de l'adresse par ID: 69cfb958fb98e15a3cf535d4
+2026-04-03 13:59:08 - INFO - Récupération de l'instance: 69cfb958fb98e15a3cf535d4
+2026-04-03 13:59:09 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cfb958fb98e15a3cf535d4
+2026-04-03 13:59:09 - INFO - ✅ SUCCÈS: Adresse trouvée: lac 1 tunis
+2026-04-03 13:59:09 - INFO - Trip créé: id=69cfb958fb98e15a3cf535d5, name=lac 1 tunis, lat=36.836772527851146, lng=10.231448181212583
+2026-04-03 13:59:09 - INFO - ✅ SUCCÈS: 1 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 13:59:09 - INFO - ✅ SUCCÈS: 1 trip(s) exporté(s) vers data.json
+2026-04-03 13:59:09 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 13:59:09 - INFO - Recherche du driver par query: 002
+2026-04-03 13:59:09 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 13:59:09 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 14:00:57 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 14:00:57 - INFO - Mise à jour du package 69cfb958fb98e15a3cf535d5 vers: delivered_successfully
+2026-04-03 14:00:57 - INFO - Récupération du package par ID: 69cfb958fb98e15a3cf535d5
+2026-04-03 14:00:57 - INFO - Récupération de l'instance: 69cfb958fb98e15a3cf535d5
+2026-04-03 14:00:57 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 14:00:57 - INFO - ✅ SUCCÈS: Package trouvé: 69cfb958fb98e15a3cf535d5
+2026-04-03 14:00:57 - INFO - Mise à jour de l'instance: 69cfb958fb98e15a3cf535d5
+2026-04-03 14:00:57 - INFO - ✅ SUCCÈS: Instance 69cfb958fb98e15a3cf535d5 mise à jour
+2026-04-03 14:00:57 - INFO - ✅ SUCCÈS: Package 69cfb958fb98e15a3cf535d5 mis à jour: planned -> delivered_successfully
+2026-04-03 14:00:57 - INFO - ✅ SUCCÈS: Package 69cfb958fb98e15a3cf535d5 supprimé de data.json
+2026-04-03 14:24:41 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 14:24:41 - INFO - Récupération des trips pour le driver: 002
+2026-04-03 14:24:41 - INFO - Recherche du driver par query: 002
+2026-04-03 14:24:41 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 14:24:42 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 14:24:42 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 14:24:42 - INFO - Recherche des schedules par driver serial number: 002
+2026-04-03 14:24:42 - INFO - Recherche du driver par query: 002
+2026-04-03 14:24:42 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 14:24:42 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 14:24:42 - INFO - Recherche des entités par référence pour le driver ID: 69ce5c8bfb98e15a3cf53539
+2026-04-03 14:24:42 - INFO - Recherche par référence: field=driver_serial_number, value=69ce5c8bfb98e15a3cf53539
+2026-04-03 14:24:42 - INFO - 1 schedule(s) trouvé(s) sur 4 entité(s)
+2026-04-03 14:24:42 - INFO - ✅ SUCCÈS: 1 schedule(s) pour le driver 69ce5c8bfb98e15a3cf53539
+2026-04-03 14:24:42 - INFO - Recherche des packages pour le schedule: 69cfbea0fb98e15a3cf535d9
+2026-04-03 14:24:42 - INFO - Recherche par référence: field=schedule_id, value=69cfbea0fb98e15a3cf535d9
+2026-04-03 14:24:42 - INFO - ✅ SUCCÈS: 2 package(s) trouvé(s) pour le schedule 69cfbea0fb98e15a3cf535d9
+2026-04-03 14:24:42 - INFO - Récupération du package par ID: 69cfbe59fb98e15a3cf535d8
+2026-04-03 14:24:42 - INFO - Récupération de l'instance: 69cfbe59fb98e15a3cf535d8
+2026-04-03 14:24:42 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 14:24:42 - INFO - ✅ SUCCÈS: Package trouvé: 69cfbe59fb98e15a3cf535d8
+2026-04-03 14:24:42 - INFO - Package: 69cfbe59fb98e15a3cf535d8, address field: 69cfbe59fb98e15a3cf535d7
+2026-04-03 14:24:42 - INFO - Récupération adresse: 69cfbe59fb98e15a3cf535d7
+2026-04-03 14:24:42 - INFO - Récupération de l'adresse par ID: 69cfbe59fb98e15a3cf535d7
+2026-04-03 14:24:42 - INFO - Récupération de l'instance: 69cfbe59fb98e15a3cf535d7
+2026-04-03 14:24:42 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cfbe59fb98e15a3cf535d7
+2026-04-03 14:24:42 - INFO - ✅ SUCCÈS: Adresse trouvée: lac 1 tunis
+2026-04-03 14:24:42 - INFO - Trip créé: id=69cfbe59fb98e15a3cf535d8, name=lac 1 tunis, lat=36.836246269170154, lng=10.230244052548125
+2026-04-03 14:24:42 - INFO - Récupération du package par ID: 69cfb958fb98e15a3cf535d5
+2026-04-03 14:24:42 - INFO - Récupération de l'instance: 69cfb958fb98e15a3cf535d5
+2026-04-03 14:24:42 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 14:24:42 - INFO - ✅ SUCCÈS: Package trouvé: 69cfb958fb98e15a3cf535d5
+2026-04-03 14:24:42 - INFO - Package: 69cfb958fb98e15a3cf535d5, address field: 69cfb958fb98e15a3cf535d4
+2026-04-03 14:24:42 - INFO - Récupération adresse: 69cfb958fb98e15a3cf535d4
+2026-04-03 14:24:42 - INFO - Récupération de l'adresse par ID: 69cfb958fb98e15a3cf535d4
+2026-04-03 14:24:42 - INFO - Récupération de l'instance: 69cfb958fb98e15a3cf535d4
+2026-04-03 14:24:42 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cfb958fb98e15a3cf535d4
+2026-04-03 14:24:42 - INFO - ✅ SUCCÈS: Adresse trouvée: lac 1 tunis
+2026-04-03 14:24:42 - INFO - Trip créé: id=69cfb958fb98e15a3cf535d5, name=lac 1 tunis, lat=36.836772527851146, lng=10.231448181212583
+2026-04-03 14:24:42 - INFO - ✅ SUCCÈS: 2 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 14:24:42 - INFO - ✅ SUCCÈS: 2 trip(s) exporté(s) vers data.json
+2026-04-03 14:24:42 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 14:24:42 - INFO - Recherche du driver par query: 002
+2026-04-03 14:24:42 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 14:24:42 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 14:32:41 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 14:32:41 - INFO - Récupération des trips pour le driver: 002
+2026-04-03 14:32:41 - INFO - Recherche du driver par query: 002
+2026-04-03 14:32:41 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 14:32:42 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 14:32:42 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 14:32:42 - INFO - Recherche des schedules par driver serial number: 002
+2026-04-03 14:32:42 - INFO - Recherche du driver par query: 002
+2026-04-03 14:32:42 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 14:32:42 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 14:32:42 - INFO - Recherche des entités par référence pour le driver ID: 69ce5c8bfb98e15a3cf53539
+2026-04-03 14:32:42 - INFO - Recherche par référence: field=driver_serial_number, value=69ce5c8bfb98e15a3cf53539
+2026-04-03 14:32:42 - INFO - 1 schedule(s) trouvé(s) sur 4 entité(s)
+2026-04-03 14:32:42 - INFO - ✅ SUCCÈS: 1 schedule(s) pour le driver 69ce5c8bfb98e15a3cf53539
+2026-04-03 14:32:42 - INFO - Recherche des packages pour le schedule: 69cfbea0fb98e15a3cf535d9
+2026-04-03 14:32:42 - INFO - Recherche par référence: field=schedule_id, value=69cfbea0fb98e15a3cf535d9
+2026-04-03 14:32:42 - INFO - ✅ SUCCÈS: 2 package(s) trouvé(s) pour le schedule 69cfbea0fb98e15a3cf535d9
+2026-04-03 14:32:42 - INFO - Récupération du package par ID: 69cfbe59fb98e15a3cf535d8
+2026-04-03 14:32:42 - INFO - Récupération de l'instance: 69cfbe59fb98e15a3cf535d8
+2026-04-03 14:32:42 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 14:32:42 - INFO - ✅ SUCCÈS: Package trouvé: 69cfbe59fb98e15a3cf535d8
+2026-04-03 14:32:42 - INFO - Package: 69cfbe59fb98e15a3cf535d8, address field: 69cfbe59fb98e15a3cf535d7
+2026-04-03 14:32:42 - INFO - Récupération adresse: 69cfbe59fb98e15a3cf535d7
+2026-04-03 14:32:42 - INFO - Récupération de l'adresse par ID: 69cfbe59fb98e15a3cf535d7
+2026-04-03 14:32:42 - INFO - Récupération de l'instance: 69cfbe59fb98e15a3cf535d7
+2026-04-03 14:32:42 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cfbe59fb98e15a3cf535d7
+2026-04-03 14:32:42 - INFO - ✅ SUCCÈS: Adresse trouvée: lac 1 tunis
+2026-04-03 14:32:42 - INFO - Trip créé: id=69cfbe59fb98e15a3cf535d8, name=lac 1 tunis, lat=36.836246269170154, lng=10.230244052548125
+2026-04-03 14:32:42 - INFO - Récupération du package par ID: 69cfb958fb98e15a3cf535d5
+2026-04-03 14:32:42 - INFO - Récupération de l'instance: 69cfb958fb98e15a3cf535d5
+2026-04-03 14:32:42 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 14:32:42 - INFO - ✅ SUCCÈS: Package trouvé: 69cfb958fb98e15a3cf535d5
+2026-04-03 14:32:42 - INFO - Package: 69cfb958fb98e15a3cf535d5, address field: 69cfb958fb98e15a3cf535d4
+2026-04-03 14:32:42 - INFO - Récupération adresse: 69cfb958fb98e15a3cf535d4
+2026-04-03 14:32:42 - INFO - Récupération de l'adresse par ID: 69cfb958fb98e15a3cf535d4
+2026-04-03 14:32:42 - INFO - Récupération de l'instance: 69cfb958fb98e15a3cf535d4
+2026-04-03 14:32:42 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cfb958fb98e15a3cf535d4
+2026-04-03 14:32:42 - INFO - ✅ SUCCÈS: Adresse trouvée: lac 1 tunis
+2026-04-03 14:32:42 - INFO - Trip créé: id=69cfb958fb98e15a3cf535d5, name=lac 1 tunis, lat=36.836772527851146, lng=10.231448181212583
+2026-04-03 14:32:42 - INFO - ✅ SUCCÈS: 2 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 14:32:42 - INFO - ✅ SUCCÈS: 2 trip(s) exporté(s) vers data.json
+2026-04-03 14:32:42 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 14:32:42 - INFO - Recherche du driver par query: 002
+2026-04-03 14:32:42 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 14:32:42 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 14:32:42 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 14:32:42 - INFO - Récupération des trips pour le driver: 002
+2026-04-03 14:32:42 - INFO - Recherche du driver par query: 002
+2026-04-03 14:32:42 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 14:32:43 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 14:32:43 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 14:32:43 - INFO - Recherche des schedules par driver serial number: 002
+2026-04-03 14:32:43 - INFO - Recherche du driver par query: 002
+2026-04-03 14:32:43 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 14:32:43 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 14:32:43 - INFO - Recherche des entités par référence pour le driver ID: 69ce5c8bfb98e15a3cf53539
+2026-04-03 14:32:43 - INFO - Recherche par référence: field=driver_serial_number, value=69ce5c8bfb98e15a3cf53539
+2026-04-03 14:32:43 - INFO - 1 schedule(s) trouvé(s) sur 4 entité(s)
+2026-04-03 14:32:43 - INFO - ✅ SUCCÈS: 1 schedule(s) pour le driver 69ce5c8bfb98e15a3cf53539
+2026-04-03 14:32:43 - INFO - Recherche des packages pour le schedule: 69cfbea0fb98e15a3cf535d9
+2026-04-03 14:32:43 - INFO - Recherche par référence: field=schedule_id, value=69cfbea0fb98e15a3cf535d9
+2026-04-03 14:32:43 - INFO - ✅ SUCCÈS: 2 package(s) trouvé(s) pour le schedule 69cfbea0fb98e15a3cf535d9
+2026-04-03 14:32:43 - INFO - Récupération du package par ID: 69cfbe59fb98e15a3cf535d8
+2026-04-03 14:32:43 - INFO - Récupération de l'instance: 69cfbe59fb98e15a3cf535d8
+2026-04-03 14:32:43 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 14:32:43 - INFO - ✅ SUCCÈS: Package trouvé: 69cfbe59fb98e15a3cf535d8
+2026-04-03 14:32:43 - INFO - Package: 69cfbe59fb98e15a3cf535d8, address field: 69cfbe59fb98e15a3cf535d7
+2026-04-03 14:32:43 - INFO - Récupération adresse: 69cfbe59fb98e15a3cf535d7
+2026-04-03 14:32:43 - INFO - Récupération de l'adresse par ID: 69cfbe59fb98e15a3cf535d7
+2026-04-03 14:32:43 - INFO - Récupération de l'instance: 69cfbe59fb98e15a3cf535d7
+2026-04-03 14:32:43 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cfbe59fb98e15a3cf535d7
+2026-04-03 14:32:43 - INFO - ✅ SUCCÈS: Adresse trouvée: lac 1 tunis
+2026-04-03 14:32:43 - INFO - Trip créé: id=69cfbe59fb98e15a3cf535d8, name=lac 1 tunis, lat=36.836246269170154, lng=10.230244052548125
+2026-04-03 14:32:43 - INFO - Récupération du package par ID: 69cfb958fb98e15a3cf535d5
+2026-04-03 14:32:43 - INFO - Récupération de l'instance: 69cfb958fb98e15a3cf535d5
+2026-04-03 14:32:43 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 14:32:43 - INFO - ✅ SUCCÈS: Package trouvé: 69cfb958fb98e15a3cf535d5
+2026-04-03 14:32:43 - INFO - Package: 69cfb958fb98e15a3cf535d5, address field: 69cfb958fb98e15a3cf535d4
+2026-04-03 14:32:43 - INFO - Récupération adresse: 69cfb958fb98e15a3cf535d4
+2026-04-03 14:32:43 - INFO - Récupération de l'adresse par ID: 69cfb958fb98e15a3cf535d4
+2026-04-03 14:32:43 - INFO - Récupération de l'instance: 69cfb958fb98e15a3cf535d4
+2026-04-03 14:32:43 - INFO - ✅ SUCCÈS: Adresse trouvée: 69cfb958fb98e15a3cf535d4
+2026-04-03 14:32:43 - INFO - ✅ SUCCÈS: Adresse trouvée: lac 1 tunis
+2026-04-03 14:32:43 - INFO - Trip créé: id=69cfb958fb98e15a3cf535d5, name=lac 1 tunis, lat=36.836772527851146, lng=10.231448181212583
+2026-04-03 14:32:43 - INFO - ✅ SUCCÈS: 2 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 14:32:43 - INFO - ✅ SUCCÈS: 2 trip(s) exporté(s) vers data.json
+2026-04-03 14:32:43 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 14:32:43 - INFO - Recherche du driver par query: 002
+2026-04-03 14:32:43 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 14:32:43 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 20:28:18 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 20:28:18 - INFO - Récupération des trips pour le driver: 002
+2026-04-03 20:28:18 - INFO - Recherche du driver par query: 002
+2026-04-03 20:28:18 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 20:28:19 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 20:28:19 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 20:28:19 - INFO - Recherche des schedules par driver serial number: 002
+2026-04-03 20:28:19 - INFO - Recherche du driver par query: 002
+2026-04-03 20:28:19 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 20:28:19 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 20:28:19 - INFO - Recherche des entités par référence pour le driver ID: 69ce5c8bfb98e15a3cf53539
+2026-04-03 20:28:19 - INFO - Recherche par référence: field=driver_serial_number, value=69ce5c8bfb98e15a3cf53539
+2026-04-03 20:28:19 - INFO - 1 schedule(s) trouvé(s) sur 4 entité(s)
+2026-04-03 20:28:19 - INFO - ✅ SUCCÈS: 1 schedule(s) pour le driver 69ce5c8bfb98e15a3cf53539
+2026-04-03 20:28:19 - INFO - Recherche des packages pour le schedule: 69cfbea0fb98e15a3cf535d9
+2026-04-03 20:28:19 - INFO - Recherche par référence: field=schedule_id, value=69cfbea0fb98e15a3cf535d9
+2026-04-03 20:28:19 - INFO - ✅ SUCCÈS: 3 package(s) trouvé(s) pour le schedule 69cfbea0fb98e15a3cf535d9
+2026-04-03 20:28:19 - INFO - Récupération du package par ID: 69d00eaffb98e15a3cf535e1
+2026-04-03 20:28:19 - INFO - Récupération de l'instance: 69d00eaffb98e15a3cf535e1
+2026-04-03 20:28:19 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 20:28:19 - INFO - ✅ SUCCÈS: Package trouvé: 69d00eaffb98e15a3cf535e1
+2026-04-03 20:28:19 - INFO - Package: 69d00eaffb98e15a3cf535e1, address field: 69d00eaffb98e15a3cf535e0
+2026-04-03 20:28:19 - INFO - Récupération adresse: 69d00eaffb98e15a3cf535e0
+2026-04-03 20:28:19 - INFO - Récupération de l'adresse par ID: 69d00eaffb98e15a3cf535e0
+2026-04-03 20:28:19 - INFO - Récupération de l'instance: 69d00eaffb98e15a3cf535e0
+2026-04-03 20:28:19 - INFO - ✅ SUCCÈS: Adresse trouvée: 69d00eaffb98e15a3cf535e0
+2026-04-03 20:28:19 - INFO - ✅ SUCCÈS: Adresse trouvée: aouina tunis
+2026-04-03 20:28:19 - INFO - Trip créé: id=69d00eaffb98e15a3cf535e1, name=aouina tunis, lat=36.860179340157444, lng=10.254438704572902
+2026-04-03 20:28:19 - INFO - Récupération du package par ID: 69d00e63fb98e15a3cf535df
+2026-04-03 20:28:19 - INFO - Récupération de l'instance: 69d00e63fb98e15a3cf535df
+2026-04-03 20:28:19 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 20:28:19 - INFO - ✅ SUCCÈS: Package trouvé: 69d00e63fb98e15a3cf535df
+2026-04-03 20:28:19 - INFO - Package: 69d00e63fb98e15a3cf535df, address field: 69d00e63fb98e15a3cf535de
+2026-04-03 20:28:19 - INFO - Récupération adresse: 69d00e63fb98e15a3cf535de
+2026-04-03 20:28:19 - INFO - Récupération de l'adresse par ID: 69d00e63fb98e15a3cf535de
+2026-04-03 20:28:19 - INFO - Récupération de l'instance: 69d00e63fb98e15a3cf535de
+2026-04-03 20:28:19 - INFO - ✅ SUCCÈS: Adresse trouvée: 69d00e63fb98e15a3cf535de
+2026-04-03 20:28:19 - INFO - ✅ SUCCÈS: Adresse trouvée: aouina tunis
+2026-04-03 20:28:19 - INFO - Trip créé: id=69d00e63fb98e15a3cf535df, name=aouina tunis, lat=36.85770876677427, lng=10.253936813752718
+2026-04-03 20:28:19 - INFO - Récupération du package par ID: 69d00e2efb98e15a3cf535dd
+2026-04-03 20:28:19 - INFO - Récupération de l'instance: 69d00e2efb98e15a3cf535dd
+2026-04-03 20:28:19 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 20:28:19 - INFO - ✅ SUCCÈS: Package trouvé: 69d00e2efb98e15a3cf535dd
+2026-04-03 20:28:19 - INFO - Package: 69d00e2efb98e15a3cf535dd, address field: 69d00e2efb98e15a3cf535dc
+2026-04-03 20:28:19 - INFO - Récupération adresse: 69d00e2efb98e15a3cf535dc
+2026-04-03 20:28:19 - INFO - Récupération de l'adresse par ID: 69d00e2efb98e15a3cf535dc
+2026-04-03 20:28:19 - INFO - Récupération de l'instance: 69d00e2efb98e15a3cf535dc
+2026-04-03 20:28:19 - INFO - ✅ SUCCÈS: Adresse trouvée: 69d00e2efb98e15a3cf535dc
+2026-04-03 20:28:19 - INFO - ✅ SUCCÈS: Adresse trouvée: aouina tunis
+2026-04-03 20:28:19 - INFO - Trip créé: id=69d00e2efb98e15a3cf535dd, name=aouina tunis, lat=36.85584336324234, lng=10.256731778679656
+2026-04-03 20:28:19 - INFO - ✅ SUCCÈS: 3 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 20:28:19 - INFO - ✅ SUCCÈS: 3 trip(s) exporté(s) vers data.json
+2026-04-03 20:28:19 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 20:28:19 - INFO - Recherche du driver par query: 002
+2026-04-03 20:28:19 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
+2026-04-03 20:28:20 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-04-03 20:31:34 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 20:31:34 - INFO - Mise à jour du package 69d00eaffb98e15a3cf535e1 vers: delivered_successfully
+2026-04-03 20:31:34 - INFO - Récupération du package par ID: 69d00eaffb98e15a3cf535e1
+2026-04-03 20:31:34 - INFO - Récupération de l'instance: 69d00eaffb98e15a3cf535e1
+2026-04-03 20:31:34 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 20:31:34 - INFO - ✅ SUCCÈS: Package trouvé: 69d00eaffb98e15a3cf535e1
+2026-04-03 20:31:34 - INFO - Mise à jour de l'instance: 69d00eaffb98e15a3cf535e1
+2026-04-03 20:31:34 - INFO - ✅ SUCCÈS: Instance 69d00eaffb98e15a3cf535e1 mise à jour
+2026-04-03 20:31:34 - INFO - ✅ SUCCÈS: Package 69d00eaffb98e15a3cf535e1 mis à jour: planned -> delivered_successfully
+2026-04-03 20:31:34 - INFO - ✅ SUCCÈS: Package 69d00eaffb98e15a3cf535e1 supprimé de data.json
+2026-04-03 20:36:21 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 20:36:21 - INFO - Mise à jour du package 69d00e63fb98e15a3cf535df vers: delivered_successfully
+2026-04-03 20:36:21 - INFO - Récupération du package par ID: 69d00e63fb98e15a3cf535df
+2026-04-03 20:36:21 - INFO - Récupération de l'instance: 69d00e63fb98e15a3cf535df
+2026-04-03 20:36:22 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 20:36:22 - INFO - ✅ SUCCÈS: Package trouvé: 69d00e63fb98e15a3cf535df
+2026-04-03 20:36:22 - INFO - Mise à jour de l'instance: 69d00e63fb98e15a3cf535df
+2026-04-03 20:36:22 - INFO - ✅ SUCCÈS: Instance 69d00e63fb98e15a3cf535df mise à jour
+2026-04-03 20:36:22 - INFO - ✅ SUCCÈS: Package 69d00e63fb98e15a3cf535df mis à jour: planned -> delivered_successfully
+2026-04-03 20:36:22 - INFO - ✅ SUCCÈS: Package 69d00e63fb98e15a3cf535df supprimé de data.json
+2026-04-03 20:38:21 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 20:38:21 - INFO - Mise à jour du package 69d00e2efb98e15a3cf535dd vers: delivered_successfully
+2026-04-03 20:38:21 - INFO - Récupération du package par ID: 69d00e2efb98e15a3cf535dd
+2026-04-03 20:38:21 - INFO - Récupération de l'instance: 69d00e2efb98e15a3cf535dd
+2026-04-03 20:38:22 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-03 20:38:22 - INFO - ✅ SUCCÈS: Package trouvé: 69d00e2efb98e15a3cf535dd
+2026-04-03 20:38:22 - INFO - Mise à jour de l'instance: 69d00e2efb98e15a3cf535dd
+2026-04-03 20:38:22 - INFO - ✅ SUCCÈS: Instance 69d00e2efb98e15a3cf535dd mise à jour
+2026-04-03 20:38:22 - INFO - ✅ SUCCÈS: Package 69d00e2efb98e15a3cf535dd mis à jour: planned -> delivered_successfully
+2026-04-03 20:38:22 - INFO - ✅ SUCCÈS: Package 69d00e2efb98e15a3cf535dd supprimé de data.json
+2026-04-03 22:39:12 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 22:39:12 - INFO - Récupération des trips pour le driver: 000
+2026-04-03 22:39:12 - INFO - Recherche du driver par query: 000
+2026-04-03 22:39:12 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 22:39:12 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 22:39:12 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 22:39:12 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-03 22:39:12 - INFO - Recherche du driver par query: 000
+2026-04-03 22:39:12 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 22:39:12 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 22:39:12 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-03 22:39:12 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-03 22:39:12 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-03 22:39:12 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-03 22:39:12 - INFO - Recherche des packages pour le schedule: 69cf82dbfb98e15a3cf535cf
+2026-04-03 22:39:12 - INFO - Recherche par référence: field=schedule_id, value=69cf82dbfb98e15a3cf535cf
+2026-04-03 22:39:12 - WARNING - Aucune entité trouvée pour le schedule 69cf82dbfb98e15a3cf535cf
+2026-04-03 22:39:12 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 22:39:12 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 22:39:12 - INFO - Recherche du driver par query: 000
+2026-04-03 22:39:12 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 22:39:12 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 22:57:01 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 22:57:01 - INFO - Récupération des trips pour le driver: 000
+2026-04-03 22:57:01 - INFO - Recherche du driver par query: 000
+2026-04-03 22:57:01 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 22:57:02 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 22:57:02 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 22:57:02 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-03 22:57:02 - INFO - Recherche du driver par query: 000
+2026-04-03 22:57:02 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 22:57:02 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 22:57:02 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-03 22:57:02 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-03 22:57:02 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-03 22:57:02 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-03 22:57:02 - INFO - Recherche des packages pour le schedule: 69cf82dbfb98e15a3cf535cf
+2026-04-03 22:57:02 - INFO - Recherche par référence: field=schedule_id, value=69cf82dbfb98e15a3cf535cf
+2026-04-03 22:57:02 - WARNING - Aucune entité trouvée pour le schedule 69cf82dbfb98e15a3cf535cf
+2026-04-03 22:57:02 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 22:57:02 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 22:57:02 - INFO - Recherche du driver par query: 000
+2026-04-03 22:57:02 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 22:57:02 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 22:59:34 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 22:59:34 - INFO - Récupération des trips pour le driver: 000
+2026-04-03 22:59:34 - INFO - Recherche du driver par query: 000
+2026-04-03 22:59:34 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 22:59:40 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 22:59:40 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 22:59:40 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-03 22:59:40 - INFO - Recherche du driver par query: 000
+2026-04-03 22:59:40 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 22:59:40 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 22:59:40 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-03 22:59:40 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-03 22:59:40 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-03 22:59:40 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-03 22:59:40 - INFO - Recherche des packages pour le schedule: 69cf82dbfb98e15a3cf535cf
+2026-04-03 22:59:40 - INFO - Recherche par référence: field=schedule_id, value=69cf82dbfb98e15a3cf535cf
+2026-04-03 22:59:40 - WARNING - Aucune entité trouvée pour le schedule 69cf82dbfb98e15a3cf535cf
+2026-04-03 22:59:40 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 22:59:40 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 22:59:40 - INFO - Recherche du driver par query: 000
+2026-04-03 22:59:40 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 22:59:40 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 23:04:17 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 23:04:17 - INFO - Récupération des trips pour le driver: 000
+2026-04-03 23:04:17 - INFO - Recherche du driver par query: 000
+2026-04-03 23:04:17 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 23:04:17 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 23:04:17 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 23:04:17 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-03 23:04:17 - INFO - Recherche du driver par query: 000
+2026-04-03 23:04:17 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 23:04:17 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-03 23:04:17 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-03 23:04:17 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-03 23:04:17 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-03 23:04:17 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-03 23:04:17 - INFO - Recherche des packages pour le schedule: 69cf82dbfb98e15a3cf535cf
+2026-04-03 23:04:17 - INFO - Recherche par référence: field=schedule_id, value=69cf82dbfb98e15a3cf535cf
+2026-04-03 23:04:17 - WARNING - Aucune entité trouvée pour le schedule 69cf82dbfb98e15a3cf535cf
+2026-04-03 23:04:17 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-03 23:04:17 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-03 23:04:17 - INFO - Recherche du driver par query: 000
+2026-04-03 23:04:17 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-03 23:04:17 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)

@@ -123,14 +123,15 @@ class AgentService:
         sample_rate: int,
         *,
         apply_denoise: bool = True,
+        utterance_id: str | None = None,
     ) -> None:
         """
         Entrée PCM/NumPy (recommandée pour WebRTC).
 
         Args:
-            apply_denoise: Si True, applique le denoise avant STT.
-                Mettre à False si le flux a déjà été débruité en amont
-                (ex: avant VAD dans WebRTCService).
+            apply_denoise: Autorise le denoise avant STT.
+                Le traitement ne sera réellement appliqué que si
+                config.DENOISE_FOR_STT est activé.
         """
         logger = logging.getLogger(__name__)
         if session.processing_lock.locked():
@@ -168,7 +169,7 @@ class AgentService:
 
             # Appliquer le denoise sur l'audio avant STT
             stt_samples = samples
-            if apply_denoise and self.denoise is not None:
+            if apply_denoise and getattr(config, "DENOISE_FOR_STT", False) and self.denoise is not None:
                 try:
                     denoised = await self.denoise.process_utterance(samples, sample_rate=int(sample_rate))
                     if getattr(denoised, "size", 0):
@@ -189,7 +190,13 @@ class AgentService:
                 except Exception:
                     logger.exception("STT utterance denoise failed client_id=%s", session.client_id)
 
-            self._save_debug_stt_audio(session, raw_stt_samples, stt_samples, int(sample_rate))
+            self._save_debug_stt_audio(
+                session,
+                raw_stt_samples,
+                stt_samples,
+                int(sample_rate),
+                utterance_id=utterance_id,
+            )
 
             # Normaliser (aide Whisper sur segments faibles)
             try:
@@ -1420,6 +1427,8 @@ class AgentService:
         raw_samples: np.ndarray,
         denoised_samples: np.ndarray,
         sample_rate: int,
+        *,
+        utterance_id: str | None = None,
     ) -> None:
         """
         Sauvegarde brute + débruitée de l'utterance réellement envoyée au pipeline STT
@@ -1431,7 +1440,7 @@ class AgentService:
             recordings_dir = Path("assets/recordings")
             recordings_dir.mkdir(parents=True, exist_ok=True)
 
-            utterance_id = uuid.uuid4().hex[:8]
+            utterance_id = str(utterance_id or uuid.uuid4().hex[:8])
             client_id = str(getattr(session, "client_id", "unknown")).replace("/", "_")
             prefix = f"webrtc_{client_id}_{utterance_id}"
 

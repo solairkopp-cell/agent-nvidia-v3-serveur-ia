@@ -23,7 +23,9 @@ from collections import deque
 import logging
 import math
 from fractions import Fraction
+from pathlib import Path
 from typing import TYPE_CHECKING
+import uuid
 
 import numpy as np
 
@@ -314,6 +316,7 @@ class WebRTCService:
             logger.exception("Error closing peer client_id=%s", session.client_id)
 
         session.reset_audio_buffer()
+        session.reset_decoded_audio_buffer()
         session.reset_tts_output_state()
         session.tts_playing = False
         logger.info("WebRTC cleaned up client_id=%s", session.client_id)
@@ -350,6 +353,7 @@ class WebRTCService:
         """
         chunk_samples = int(config.SAMPLE_RATE * (config.VAD_CHUNK_MS / 1000.0))
         pre_roll_chunks = max(0, int(math.ceil(max(0, config.VAD_PRE_ROLL_MS) / config.VAD_CHUNK_MS)))
+        native_debug_enabled = bool(getattr(config, "SAVE_WEBRTC_NATIVE_DEBUG", False))
         buffer: np.ndarray = np.array([], dtype=np.float32)
         frames_seen = 0
         chunks_seen = 0
@@ -359,8 +363,46 @@ class WebRTCService:
                 frame = await track.recv()
                 frames_seen += 1
 
-                # Conversion robuste via PyAV vers s16/mono/16k -> float32 [-1, 1].
-                samples = self.audio.av_frame_to_array(frame, target_rate=config.SAMPLE_RATE)
+                native_samples = np.array([], dtype=np.float32)
+                native_rate = int(getattr(frame, "sample_rate", 0) or 0)
+                if native_rate <= 0:
+                    native_rate = int(getattr(frame, "rate", 0) or config.AUDIO_OUTPUT_SAMPLE_RATE or 48000)
+                native_frame_recorded = False
+                frame_had_utterance_end = False
+                frame_had_ignored_short = False
+                utterance_id: str | None = None
+
+                try:
+                    # Décoder d'abord au sample rate natif du frame.
+                    # Le downsample vers 16k pour VAD/STT est fait ensuite
+                    # via AudioService.resample() pour garder la meilleure qualité.
+                    native_samples = self.audio.av_frame_to_array(frame, target_rate=native_rate)
+                except Exception:
+                    logger.exception("Native WebRTC decode failed client_id=%s", session.client_id)
+                    native_samples = np.array([], dtype=np.float32)
+                    native_rate = 0
+
+                if native_debug_enabled and session.is_speaking and native_samples.size:
+                    self._append_native_frame(session, native_samples, native_rate)
+                    native_frame_recorded = True
+
+                samples = native_samples
+                if native_samples.size and native_rate > 0 and native_rate != config.SAMPLE_RATE:
+                    try:
+                        samples = self.audio.resample(
+                            native_samples,
+                            source_rate=native_rate,
+                            target_rate=config.SAMPLE_RATE,
+                        )
+                    except Exception:
+                        logger.exception(
+                            "High-quality resample failed client_id=%s native_sr=%d target_sr=%d; falling back to PyAV",
+                            session.client_id,
+                            native_rate,
+                            config.SAMPLE_RATE,
+                        )
+                        samples = self.audio.av_frame_to_array(frame, target_rate=config.SAMPLE_RATE)
+
                 rate = config.SAMPLE_RATE
 
                 # Optionnel: débruitage en amont du VAD.
@@ -396,6 +438,17 @@ class WebRTCService:
                                 session.client_id,
                                 added,
                             )
+                        if native_debug_enabled and native_samples.size and not native_frame_recorded:
+                            native_added = self._prepend_native_pre_roll(session)
+                            self._append_native_frame(session, native_samples, native_rate)
+                            native_frame_recorded = True
+                            if native_added > 0:
+                                logger.info(
+                                    "WebRTC native pre_roll client_id=%s samples=%d sr=%d",
+                                    session.client_id,
+                                    native_added,
+                                    native_rate,
+                                )
                     elif not session.is_speaking:
                         self._remember_pre_roll(session, chunk, pre_roll_chunks)
 
@@ -416,6 +469,7 @@ class WebRTCService:
                         except Exception:
                             pass
                     if getattr(vad_result, "ignored_short", False):
+                        frame_had_ignored_short = True
                         logger.info(
                             "VAD short_utterance_ignored client_id=%s speech_chunks=%d",
                             session.client_id,
@@ -433,6 +487,8 @@ class WebRTCService:
                     if vad_result.audio is None or vad_result.audio.size == 0:
                         continue
                     logger.info("Utterance end client_id=%s samples=%d", session.client_id, vad_result.audio.size)
+                    frame_had_utterance_end = True
+                    utterance_id = uuid.uuid4().hex[:8]
                     try:
                         await session.websocket.send_json(
                             {"type": "vad", "event": "utterance_end", "samples": int(vad_result.audio.size)}
@@ -451,9 +507,23 @@ class WebRTCService:
                             session,
                             vad_result.audio,
                             config.SAMPLE_RATE,
-                            apply_denoise=True,
+                            apply_denoise=getattr(config, "DENOISE_FOR_STT", False),
+                            utterance_id=utterance_id,
                         )
                     )
+
+                if native_debug_enabled:
+                    if frame_had_utterance_end and utterance_id is not None:
+                        self._save_native_debug_utterance(session, utterance_id)
+                    elif frame_had_ignored_short:
+                        session.reset_decoded_audio_buffer()
+                    elif not session.is_speaking and not native_frame_recorded and native_samples.size:
+                        self._remember_native_pre_roll(
+                            session,
+                            native_samples,
+                            native_rate,
+                            max_ms=config.VAD_PRE_ROLL_MS,
+                        )
 
         except MediaStreamError:
             # Normal : la track se termine (peer fermé / renegociation / stop micro).
@@ -477,6 +547,93 @@ class WebRTCService:
         session.pre_speech_buffer.clear()
         session.audio_buffer = pre_roll + session.audio_buffer
         return int(sum(int(chunk.size) for chunk in pre_roll))
+
+    def _append_native_frame(self, session: Session, samples: np.ndarray, sample_rate: int) -> int:
+        if sample_rate <= 0:
+            return 0
+        if session.decoded_sample_rate and session.decoded_sample_rate != int(sample_rate):
+            logger.warning(
+                "Native debug sample rate changed client_id=%s old=%d new=%d; resetting buffer",
+                session.client_id,
+                session.decoded_sample_rate,
+                int(sample_rate),
+            )
+            session.reset_decoded_audio_buffer()
+        session.decoded_sample_rate = int(sample_rate)
+        frame = np.asarray(samples, dtype=np.float32).reshape(-1)
+        if frame.size == 0:
+            return 0
+        session.decoded_audio_buffer.append(frame.copy())
+        return int(frame.size)
+
+    def _remember_native_pre_roll(
+        self,
+        session: Session,
+        samples: np.ndarray,
+        sample_rate: int,
+        *,
+        max_ms: int,
+    ) -> None:
+        if sample_rate <= 0:
+            return
+        if max_ms <= 0:
+            session.decoded_pre_speech_buffer.clear()
+            session.decoded_pre_speech_samples = 0
+            return
+        if session.decoded_sample_rate and session.decoded_sample_rate != int(sample_rate):
+            logger.warning(
+                "Native debug sample rate changed client_id=%s old=%d new=%d; resetting pre-roll",
+                session.client_id,
+                session.decoded_sample_rate,
+                int(sample_rate),
+            )
+            session.reset_decoded_audio_buffer()
+        session.decoded_sample_rate = int(sample_rate)
+        frame = np.asarray(samples, dtype=np.float32).reshape(-1)
+        if frame.size == 0:
+            return
+        session.decoded_pre_speech_buffer.append(frame.copy())
+        session.decoded_pre_speech_samples += int(frame.size)
+        max_samples = max(1, int(math.ceil(int(sample_rate) * (max(0, int(max_ms)) / 1000.0))))
+        while session.decoded_pre_speech_samples > max_samples and session.decoded_pre_speech_buffer:
+            removed = session.decoded_pre_speech_buffer.popleft()
+            session.decoded_pre_speech_samples -= int(np.asarray(removed).size)
+        if session.decoded_pre_speech_samples < 0:
+            session.decoded_pre_speech_samples = 0
+
+    def _prepend_native_pre_roll(self, session: Session) -> int:
+        if not session.decoded_pre_speech_buffer:
+            return 0
+        pre_roll = list(session.decoded_pre_speech_buffer)
+        session.decoded_pre_speech_buffer.clear()
+        session.decoded_pre_speech_samples = 0
+        session.decoded_audio_buffer = pre_roll + session.decoded_audio_buffer
+        return int(sum(int(np.asarray(chunk).size) for chunk in pre_roll))
+
+    def _save_native_debug_utterance(self, session: Session, utterance_id: str) -> None:
+        try:
+            if not session.decoded_audio_buffer or session.decoded_sample_rate <= 0:
+                return
+            recordings_dir = Path("assets/recordings")
+            recordings_dir.mkdir(parents=True, exist_ok=True)
+            client_id = str(getattr(session, "client_id", "unknown")).replace("/", "_")
+            prefix = f"webrtc_{client_id}_{utterance_id}"
+            native_path = recordings_dir / f"{prefix}_decoded_native.wav"
+            samples = np.concatenate(session.decoded_audio_buffer).astype(np.float32, copy=False)
+            self.audio.save_wav(native_path, samples, sample_rate=session.decoded_sample_rate)
+            rms = float(np.sqrt(np.mean(samples * samples))) if samples.size else 0.0
+            logger.info(
+                "Saved WebRTC native debug client_id=%s native=%s rms=%.6f sr=%d n=%d",
+                session.client_id,
+                native_path.name,
+                rms,
+                session.decoded_sample_rate,
+                int(samples.size),
+            )
+        except Exception:
+            logger.exception("Failed to save WebRTC native debug audio client_id=%s", session.client_id)
+        finally:
+            session.reset_decoded_audio_buffer()
 
     async def on_state_change(self, session: Session) -> None:
         """

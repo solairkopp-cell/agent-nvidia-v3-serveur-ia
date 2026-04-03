@@ -133,6 +133,15 @@ DENOISE_BACKEND = os.getenv("DENOISE_BACKEND", "deepfilternet").strip().lower()
 #   avant STT / sauvegarde → latence plus faible
 # - True = denoise chunk par chunk avant VAD → plus propre mais plus lent
 DENOISE_BEFORE_VAD = os.getenv("DENOISE_BEFORE_VAD", "false").strip().lower() in ("1", "true", "yes", "on")
+# Contrôle séparément le débruitage juste avant STT.
+# False (défaut) garde un pipeline simple côté serveur :
+#   decode -> mono/16k/float32 -> VAD -> Whisper
+# True réactive le denoise utterance-level avant transcription.
+DENOISE_FOR_STT = os.getenv("DENOISE_FOR_STT", "false").strip().lower() in ("1", "true", "yes", "on")
+# Sauvegarde optionnelle d'un WAV debug du flux WebRTC décodé avant
+# le resampling serveur vers 16kHz. Utile pour diagnostiquer les
+# limitations de bande passante amont (Android/WebRTC/codec).
+SAVE_WEBRTC_NATIVE_DEBUG = os.getenv("SAVE_WEBRTC_NATIVE_DEBUG", "false").strip().lower() in ("1", "true", "yes", "on")
 
 # ── Audio / VAD ───────────────────────────────────────────────────────────────
 SAMPLE_RATE = 16000
