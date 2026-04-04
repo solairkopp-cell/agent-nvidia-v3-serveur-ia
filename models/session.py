@@ -32,6 +32,8 @@ class Session:
     audio_buffer: list = field(default_factory=list)
     # Petit historique des chunks avant speech_start pour ne pas couper le début des mots.
     pre_speech_buffer: deque = field(default_factory=deque)
+    # Chunks consécutifs > seuil en attente de confirmation avant speech_start.
+    speech_start_buffer: list = field(default_factory=list)
     # Buffers debug du flux WebRTC décodé avant resampling vers 16kHz.
     decoded_audio_buffer: list = field(default_factory=list)
     decoded_pre_speech_buffer: deque = field(default_factory=deque)
@@ -90,6 +92,7 @@ class Session:
     def reset_audio_buffer(self):
         self.audio_buffer.clear()
         self.pre_speech_buffer.clear()
+        self.speech_start_buffer.clear()
         self.post_roll_chunks = 0
         self.is_speaking = False
         self.silence_chunks = 0

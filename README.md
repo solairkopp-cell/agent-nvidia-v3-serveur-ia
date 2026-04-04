@@ -550,7 +550,7 @@ All configuration is centralized in `config.py` via environment variables.
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `OLLAMA_URL` | `http://localhost:11434` | Ollama server URL |
-| `OLLAMA_MODEL` | `qwen3:0.6b-q4_K_M` | Model name |
+| `OLLAMA_MODEL` | `smollm2:360m` | Model name |
 | `OLLAMA_CONTEXT_WINDOW` | `1024` | Context window size |
 | `OLLAMA_NUM_PREDICT` | `50` | Max tokens to generate |
 | `OLLAMA_TEMPERATURE` | `0.7` | Sampling temperature |

@@ -38,7 +38,7 @@ WHISPER_BACKEND = os.getenv("WHISPER_BACKEND", "faster-whisper")
 
 # ── LLM ──────────────────────────────────────────────────────────────────────
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
-OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "qwen3:0.6b-q4_K_M")
+OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "smollm2:360m")
 OLLAMA_CONTEXT_WINDOW = int(os.getenv("OLLAMA_CONTEXT_WINDOW", "1024"))
 OLLAMA_NUM_PREDICT = int(os.getenv("OLLAMA_NUM_PREDICT", "50"))
 OLLAMA_TEMPERATURE = float(os.getenv("OLLAMA_TEMPERATURE", "0.7"))
@@ -126,7 +126,7 @@ TTS_TRIM_TRAILING = os.getenv("TTS_TRIM_TRAILING", "false").strip().lower() in (
 # ── Denoising ────────────────────────────────────────────────────────────────
 # Denoise global sur l'audio entrant.
 # Mettre "false" pour désactiver le débruitage (audio brut)
-DENOISE_ENABLED = os.getenv("DENOISE_ENABLED", "yes").strip().lower() in ("1", "true", "yes", "on")
+DENOISE_ENABLED = os.getenv("DENOISE_ENABLED", "false").strip().lower() in ("1", "true", "yes", "on")
 DENOISE_BACKEND = os.getenv("DENOISE_BACKEND", "deepfilternet").strip().lower()
 # IMPORTANT:
 # - False (défaut) = VAD sur audio brut, denoise seulement sur l'utterance finale
@@ -148,7 +148,10 @@ SAMPLE_RATE = 16000
 # 48kHz = standard WebRTC/Opus (évite le resampling interne métallique)
 AUDIO_OUTPUT_SAMPLE_RATE = int(os.getenv("AUDIO_OUTPUT_SAMPLE_RATE", "48000"))  # 48kHz = Opus native
 VAD_CHUNK_MS = 32                   # ms par chunk Silero
-VAD_SILENCE_THRESHOLD = 0.8         # seuil probabilité vocale
+VAD_SILENCE_THRESHOLD = float(os.getenv("VAD_SILENCE_THRESHOLD", "0.85"))  # seuil probabilité vocale
+# Demander plusieurs chunks consécutifs avant speech_start réduit les faux positifs
+# sur bruit impulsif / souffle, sans ajouter beaucoup de latence.
+VAD_START_TRIGGER_CHUNKS = int(os.getenv("VAD_START_TRIGGER_CHUNKS", "2"))
 # Seuil de continuation (hysteresis) : avec RNNoise, garder un seuil plus bas
 # aide beaucoup à ne pas casser les phrases courtes après un speech_start.
 VAD_CONTINUE_THRESHOLD = float(os.getenv("VAD_CONTINUE_THRESHOLD", "0.5"))

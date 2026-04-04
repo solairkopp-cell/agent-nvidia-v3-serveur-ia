@@ -4212,3 +4212,117 @@
 2026-04-03 23:04:17 - INFO - Recherche du driver par query: 000
 2026-04-03 23:04:17 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
 2026-04-03 23:04:17 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-04 00:07:05 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-04 00:07:05 - INFO - Récupération des trips pour le driver: 000
+2026-04-04 00:07:05 - INFO - Recherche du driver par query: 000
+2026-04-04 00:07:05 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-04 00:07:05 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-04 00:07:05 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-04 00:07:05 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-04 00:07:05 - INFO - Recherche du driver par query: 000
+2026-04-04 00:07:05 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-04 00:07:05 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-04 00:07:05 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-04 00:07:05 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-04 00:07:05 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-04 00:07:05 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-04 00:07:05 - WARNING - Aucun schedule pour la date: 2026-04-04
+2026-04-04 00:07:05 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-04 00:07:05 - INFO - Recherche du driver par query: 000
+2026-04-04 00:07:05 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-04 00:07:05 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-04 00:12:34 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-04 00:12:34 - INFO - Récupération des trips pour le driver: 000
+2026-04-04 00:12:34 - INFO - Recherche du driver par query: 000
+2026-04-04 00:12:34 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-04 00:12:35 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-04 00:12:35 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-04 00:12:35 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-04 00:12:35 - INFO - Recherche du driver par query: 000
+2026-04-04 00:12:35 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-04 00:12:35 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-04 00:12:35 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-04 00:12:35 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-04 00:12:35 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-04 00:12:35 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-04 00:12:35 - WARNING - Aucun schedule pour la date: 2026-04-04
+2026-04-04 00:12:35 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-04 00:12:35 - INFO - Recherche du driver par query: 000
+2026-04-04 00:12:35 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-04 00:12:35 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-04 00:23:06 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-04 00:23:06 - INFO - Récupération des trips pour le driver: 000
+2026-04-04 00:23:06 - INFO - Recherche du driver par query: 000
+2026-04-04 00:23:06 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-04 00:23:07 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-04 00:23:07 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-04 00:23:07 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-04 00:23:07 - INFO - Recherche du driver par query: 000
+2026-04-04 00:23:07 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-04 00:23:07 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-04 00:23:07 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-04 00:23:07 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-04 00:23:07 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-04 00:23:07 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-04 00:23:07 - WARNING - Aucun schedule pour la date: 2026-04-04
+2026-04-04 00:23:07 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-04 00:23:07 - INFO - Recherche du driver par query: 000
+2026-04-04 00:23:07 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-04 00:23:07 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-04 00:30:45 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-04 00:30:45 - INFO - Récupération des trips pour le driver: 000
+2026-04-04 00:30:45 - INFO - Recherche du driver par query: 000
+2026-04-04 00:30:45 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-04 00:30:45 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-04 00:30:45 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-04 00:30:45 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-04 00:30:45 - INFO - Recherche du driver par query: 000
+2026-04-04 00:30:45 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-04 00:30:45 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-04 00:30:45 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-04 00:30:45 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-04 00:30:45 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-04 00:30:45 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-04 00:30:45 - WARNING - Aucun schedule pour la date: 2026-04-04
+2026-04-04 00:30:45 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-04 00:30:45 - INFO - Recherche du driver par query: 000
+2026-04-04 00:30:45 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-04 00:30:45 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-04 00:37:02 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-04 00:37:02 - INFO - Récupération des trips pour le driver: 000
+2026-04-04 00:37:02 - INFO - Recherche du driver par query: 000
+2026-04-04 00:37:02 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-04 00:37:02 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-04 00:37:02 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-04 00:37:02 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-04 00:37:02 - INFO - Recherche du driver par query: 000
+2026-04-04 00:37:02 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-04 00:37:02 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-04 00:37:02 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-04 00:37:02 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-04 00:37:02 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-04 00:37:02 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-04 00:37:02 - WARNING - Aucun schedule pour la date: 2026-04-04
+2026-04-04 00:37:02 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-04 00:37:02 - INFO - Recherche du driver par query: 000
+2026-04-04 00:37:02 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-04 00:37:02 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-04 00:50:13 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-04 00:50:13 - INFO - Récupération des trips pour le driver: 000
+2026-04-04 00:50:13 - INFO - Recherche du driver par query: 000
+2026-04-04 00:50:13 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-04 00:50:13 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-04 00:50:13 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-04 00:50:13 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-04 00:50:13 - INFO - Recherche du driver par query: 000
+2026-04-04 00:50:13 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-04 00:50:13 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-04 00:50:13 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-04 00:50:13 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-04 00:50:13 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-04 00:50:13 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-04 00:50:13 - WARNING - Aucun schedule pour la date: 2026-04-04
+2026-04-04 00:50:13 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-04 02:01:19
+2026-04-04 00:50:13 - INFO - Recherche du driver par query: 000
+2026-04-04 00:50:13 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-04 00:50:18 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)

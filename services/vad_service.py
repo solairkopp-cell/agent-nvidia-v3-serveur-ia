@@ -44,6 +44,7 @@ class VADService:
         self._chunk_samples: int = 0   # calculé depuis config.VAD_CHUNK_MS
         self._silence_threshold: int = 0  # nb chunks silence → utterance_end
         self._min_speech_chunks: int = 0  # nb chunks min pour valider utterance
+        self._start_trigger_chunks: int = 1  # nb chunks parole consécutifs avant speech_start
         self._pre_roll_chunks: int = 0    # nb chunks gardés avant speech_start
         self._post_roll_chunks: int = 0   # nb chunks gardés après fin détectée
         self._max_speech_chunks: int = 0  # garde-fou durée max utterance
@@ -67,6 +68,7 @@ class VADService:
         self._silence_threshold = int(math.ceil(config.VAD_SILENCE_DURATION_MS / config.VAD_CHUNK_MS))
         # 300ms / 32ms -> 10 chunks (ceil)
         self._min_speech_chunks = int(math.ceil(config.VAD_MIN_SPEECH_MS / config.VAD_CHUNK_MS))
+        self._start_trigger_chunks = max(1, int(getattr(config, "VAD_START_TRIGGER_CHUNKS", 1)))
         self._pre_roll_chunks = int(math.ceil(config.VAD_PRE_ROLL_MS / config.VAD_CHUNK_MS)) if config.VAD_PRE_ROLL_MS > 0 else 0
         self._post_roll_chunks = int(math.ceil(config.VAD_POST_ROLL_MS / config.VAD_CHUNK_MS)) if config.VAD_POST_ROLL_MS > 0 else 0
         # 6000ms / 32ms -> 188 chunks (ceil). 0 ou négatif -> désactivé.
@@ -145,14 +147,19 @@ class VADService:
 
         if is_speech:
             if not session.is_speaking:
+                session.speech_start_buffer.append(chunk.copy())
+                if len(session.speech_start_buffer) < self._start_trigger_chunks:
+                    return VADResult(type="silence", speech_prob=speech_prob)
+
                 session.is_speaking = True
                 if session.pre_speech_buffer:
                     session.audio_buffer.extend(session.pre_speech_buffer)
                     session.pre_speech_buffer.clear()
-                session.audio_buffer.append(chunk)
+                session.audio_buffer.extend(session.speech_start_buffer)
+                session.speech_start_buffer.clear()
                 session.silence_chunks = 0
                 session.post_roll_chunks = 0
-                session.speech_chunks = 1
+                session.speech_chunks = self._start_trigger_chunks
                 return VADResult(type="speech_start", speech_prob=speech_prob)
 
             session.audio_buffer.append(chunk)
@@ -170,6 +177,7 @@ class VADService:
 
         # Silence
         if not session.is_speaking:
+            self._flush_speech_start_buffer(session)
             self._remember_pre_roll(session, chunk)
             return VADResult(type="silence", speech_prob=speech_prob)
 
@@ -296,6 +304,18 @@ class VADService:
         session.pre_speech_buffer.append(chunk.copy())
         while len(session.pre_speech_buffer) > self._pre_roll_chunks:
             session.pre_speech_buffer.popleft()
+
+    def _flush_speech_start_buffer(self, session: Session) -> None:
+        """
+        Réinjecte un début de parole non confirmé dans le pré-roll.
+        Cela évite de couper le début d'un mot si un chunk intermédiaire
+        retombe brièvement sous le seuil.
+        """
+        if not session.speech_start_buffer:
+            return
+        for chunk in session.speech_start_buffer:
+            self._remember_pre_roll(session, chunk)
+        session.speech_start_buffer.clear()
 
 
 def _as_float(value: object) -> float:
