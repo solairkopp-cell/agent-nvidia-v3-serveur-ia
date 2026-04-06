@@ -12,6 +12,7 @@ Le system prompt définit la personnalité de l'agent.
 """
 from __future__ import annotations
 
+import json
 import logging
 from pathlib import Path
 from typing import AsyncIterator
@@ -133,6 +134,44 @@ class OllamaService:
                     yield content
         except Exception:
             logger.exception("Ollama generate_stream error")
+            yield ""
+
+    async def generate_answer_stream(
+        self,
+        data: list,
+        user_question: str,
+    ) -> AsyncIterator[str]:
+        """
+        One-shot generation from data + driver question.
+        Uses ollama.generate() — no history, no chat format.
+        """
+        logger = logging.getLogger(__name__)
+        if self._client is None:
+            yield ""
+            return
+
+        data_str = json.dumps(data, ensure_ascii=False, indent=2, default=str)
+        prompt = (
+            f"{self._system_prompt}\n\n"
+            "Answer only from the provided data.\n"
+            "If the answer is missing from the data, say that you do not have that information.\n\n"
+            f"Driver question: {user_question}\n"
+            f"Relevant JSON data:\n{data_str}\n\n"
+            "Generate a short and direct answer."
+        )
+        try:
+            stream = await self._client.generate(
+                model=self._model,
+                prompt=prompt,
+                stream=True,
+                think=self._think,
+                options=self._options,
+            )
+            async for chunk in stream:
+                if chunk.response:
+                    yield chunk.response
+        except Exception:
+            logger.exception("generate_answer_stream error")
             yield ""
 
     async def generate(

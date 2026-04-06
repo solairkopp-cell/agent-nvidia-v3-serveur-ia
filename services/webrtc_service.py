@@ -352,7 +352,6 @@ class WebRTCService:
         ou que la connexion soit coupée.
         """
         chunk_samples = int(config.SAMPLE_RATE * (config.VAD_CHUNK_MS / 1000.0))
-        pre_roll_chunks = max(0, int(math.ceil(max(0, config.VAD_PRE_ROLL_MS) / config.VAD_CHUNK_MS)))
         native_debug_enabled = bool(getattr(config, "SAVE_WEBRTC_NATIVE_DEBUG", False))
         buffer: np.ndarray = np.array([], dtype=np.float32)
         frames_seen = 0
@@ -429,15 +428,11 @@ class WebRTCService:
                     buffer = buffer[chunk_samples:]
                     chunks_seen += 1
 
+                    # Le pré-roll 16k est déjà géré dans VADService.
+                    # Le dupliquer ici raccourcit artificiellement la fenêtre utile
+                    # et peut remplacer les anciens chunks par des doublons récents.
                     vad_result = self.vad.process_chunk(session, chunk)
                     if vad_result.type == "speech_start":
-                        added = self._prepend_pre_roll(session)
-                        if added > 0:
-                            logger.info(
-                                "VAD pre_roll client_id=%s samples=%d",
-                                session.client_id,
-                                added,
-                            )
                         if native_debug_enabled and native_samples.size and not native_frame_recorded:
                             native_added = self._prepend_native_pre_roll(session)
                             self._append_native_frame(session, native_samples, native_rate)
@@ -449,9 +444,6 @@ class WebRTCService:
                                     native_added,
                                     native_rate,
                                 )
-                    elif not session.is_speaking:
-                        self._remember_pre_roll(session, chunk, pre_roll_chunks)
-
                     if vad_result.type == "speech_start":
                         logger.info(
                             "VAD speech_start client_id=%s p=%.3f",
@@ -532,21 +524,6 @@ class WebRTCService:
         except Exception:
             logger.exception("Audio track processing error client_id=%s", session.client_id)
             return
-
-    def _remember_pre_roll(self, session: Session, chunk: np.ndarray, max_chunks: int) -> None:
-        if max_chunks <= 0:
-            return
-        session.pre_speech_buffer.append(np.asarray(chunk, dtype=np.float32).copy())
-        while len(session.pre_speech_buffer) > max_chunks:
-            session.pre_speech_buffer.popleft()
-
-    def _prepend_pre_roll(self, session: Session) -> int:
-        if not session.pre_speech_buffer:
-            return 0
-        pre_roll = list(session.pre_speech_buffer)
-        session.pre_speech_buffer.clear()
-        session.audio_buffer = pre_roll + session.audio_buffer
-        return int(sum(int(chunk.size) for chunk in pre_roll))
 
     def _append_native_frame(self, session: Session, samples: np.ndarray, sample_rate: int) -> int:
         if sample_rate <= 0:

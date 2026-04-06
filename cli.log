@@ -4326,3 +4326,208 @@
 2026-04-04 00:50:13 - INFO - Recherche du driver par query: 000
 2026-04-04 00:50:13 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
 2026-04-04 00:50:18 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-05 12:18:16 - ERROR - Erreur lors de la lecture du cache: name 'log_warning' is not defined
+2026-04-05 12:18:16 - INFO - Token non valide ou absent, récupération d'un nouveau token...
+2026-04-05 12:18:16 - INFO - Tentative de connexion à l'API Fleet...
+2026-04-05 12:18:17 - INFO - ✅ SUCCÈS: Authentification réussie auprès de l'API Fleet
+2026-04-05 12:18:17 - INFO - ✅ SUCCÈS: Token sauvegardé (valide jusqu'au 2026-04-06 12:18:17)
+2026-04-05 12:18:17 - INFO - Récupération des trips pour le driver: 000
+2026-04-05 12:18:17 - INFO - Recherche du driver par query: 000
+2026-04-05 12:18:17 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-05 12:18:17 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-05 12:18:17 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-05 12:18:17 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-05 12:18:17 - INFO - Recherche du driver par query: 000
+2026-04-05 12:18:17 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-05 12:18:17 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-05 12:18:17 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-05 12:18:17 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-05 12:18:17 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-05 12:18:17 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-05 12:18:17 - WARNING - Aucun schedule pour la date: 2026-04-05
+2026-04-05 12:18:17 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-06 12:18:17
+2026-04-05 12:18:17 - INFO - Recherche du driver par query: 000
+2026-04-05 12:18:17 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-05 12:18:17 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-05 12:20:06 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-06 12:18:17
+2026-04-05 12:20:06 - INFO - Récupération des trips pour le driver: 000
+2026-04-05 12:20:06 - INFO - Recherche du driver par query: 000
+2026-04-05 12:20:06 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-05 12:20:07 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-05 12:20:07 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-05 12:20:07 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-05 12:20:07 - INFO - Recherche du driver par query: 000
+2026-04-05 12:20:07 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-05 12:20:07 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-05 12:20:07 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-05 12:20:07 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-05 12:20:07 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-05 12:20:07 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-05 12:20:07 - WARNING - Aucun schedule pour la date: 2026-04-05
+2026-04-05 12:20:07 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-06 12:18:17
+2026-04-05 12:20:07 - INFO - Recherche du driver par query: 000
+2026-04-05 12:20:07 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-05 12:20:07 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-05 12:20:07 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-06 12:18:17
+2026-04-05 12:20:07 - INFO - Récupération des trips pour le driver: 000
+2026-04-05 12:20:07 - INFO - Recherche du driver par query: 000
+2026-04-05 12:20:07 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-05 12:20:08 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-05 12:20:08 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-05 12:20:08 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-05 12:20:08 - INFO - Recherche du driver par query: 000
+2026-04-05 12:20:08 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-05 12:20:08 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-05 12:20:08 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-05 12:20:08 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-05 12:20:08 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-05 12:20:08 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-05 12:20:08 - WARNING - Aucun schedule pour la date: 2026-04-05
+2026-04-05 12:20:08 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-06 12:18:17
+2026-04-05 12:20:08 - INFO - Recherche du driver par query: 000
+2026-04-05 12:20:08 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-05 12:20:08 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-05 12:24:20 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-06 12:18:17
+2026-04-05 12:24:20 - INFO - Récupération des trips pour le driver: 000
+2026-04-05 12:24:20 - INFO - Recherche du driver par query: 000
+2026-04-05 12:24:20 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-05 12:24:20 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-05 12:24:20 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-05 12:24:20 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-05 12:24:20 - INFO - Recherche du driver par query: 000
+2026-04-05 12:24:20 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-05 12:24:20 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-05 12:24:20 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-05 12:24:20 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-05 12:24:20 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-05 12:24:20 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-05 12:24:20 - WARNING - Aucun schedule pour la date: 2026-04-05
+2026-04-05 12:24:20 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-06 12:18:17
+2026-04-05 12:24:20 - INFO - Recherche du driver par query: 000
+2026-04-05 12:24:20 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-05 12:24:21 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-05 17:56:36 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-06 12:18:17
+2026-04-05 17:56:36 - INFO - Récupération des trips pour le driver: 000
+2026-04-05 17:56:36 - INFO - Recherche du driver par query: 000
+2026-04-05 17:56:36 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-05 17:56:37 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-05 17:56:37 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-05 17:56:37 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-05 17:56:37 - INFO - Recherche du driver par query: 000
+2026-04-05 17:56:37 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-05 17:56:37 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-05 17:56:37 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-05 17:56:37 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-05 17:56:37 - INFO - 3 schedule(s) trouvé(s) sur 12 entité(s)
+2026-04-05 17:56:37 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-05 17:56:37 - WARNING - Aucun schedule pour la date: 2026-04-05
+2026-04-05 17:56:37 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-06 12:18:17
+2026-04-05 17:56:37 - INFO - Recherche du driver par query: 000
+2026-04-05 17:56:37 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-05 17:56:37 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-06 18:45:39 - ERROR - Erreur lors de la lecture du cache: name 'log_warning' is not defined
+2026-04-06 18:45:39 - INFO - Token non valide ou absent, récupération d'un nouveau token...
+2026-04-06 18:45:39 - INFO - Tentative de connexion à l'API Fleet...
+2026-04-06 18:45:40 - INFO - ✅ SUCCÈS: Authentification réussie auprès de l'API Fleet
+2026-04-06 18:45:40 - INFO - ✅ SUCCÈS: Token sauvegardé (valide jusqu'au 2026-04-07 18:45:40)
+2026-04-06 18:45:40 - INFO - Récupération des trips pour le driver: 000
+2026-04-06 18:45:40 - INFO - Recherche du driver par query: 000
+2026-04-06 18:45:40 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-06 18:45:40 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-06 18:45:40 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-06 18:45:40 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-06 18:45:40 - INFO - Recherche du driver par query: 000
+2026-04-06 18:45:40 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-06 18:45:40 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-06 18:45:40 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-06 18:45:40 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-06 18:45:40 - INFO - 4 schedule(s) trouvé(s) sur 14 entité(s)
+2026-04-06 18:45:40 - INFO - ✅ SUCCÈS: 4 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-06 18:45:40 - INFO - Recherche des packages pour le schedule: 69d3f111fb98e15a3cf535e8
+2026-04-06 18:45:40 - INFO - Recherche par référence: field=schedule_id, value=69d3f111fb98e15a3cf535e8
+2026-04-06 18:45:40 - INFO - ✅ SUCCÈS: 1 package(s) trouvé(s) pour le schedule 69d3f111fb98e15a3cf535e8
+2026-04-06 18:45:40 - INFO - Récupération du package par ID: 69d3f0c5fb98e15a3cf535e6
+2026-04-06 18:45:40 - INFO - Récupération de l'instance: 69d3f0c5fb98e15a3cf535e6
+2026-04-06 18:45:40 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-06 18:45:40 - INFO - ✅ SUCCÈS: Package trouvé: 69d3f0c5fb98e15a3cf535e6
+2026-04-06 18:45:40 - INFO - Package: 69d3f0c5fb98e15a3cf535e6, address field: 69d3f0c5fb98e15a3cf535e5
+2026-04-06 18:45:40 - INFO - Récupération adresse: 69d3f0c5fb98e15a3cf535e5
+2026-04-06 18:45:40 - INFO - Récupération de l'adresse par ID: 69d3f0c5fb98e15a3cf535e5
+2026-04-06 18:45:40 - INFO - Récupération de l'instance: 69d3f0c5fb98e15a3cf535e5
+2026-04-06 18:45:40 - INFO - ✅ SUCCÈS: Adresse trouvée: 69d3f0c5fb98e15a3cf535e5
+2026-04-06 18:45:40 - INFO - ✅ SUCCÈS: Adresse trouvée: Monoprix, Rue Saint-Sébastien, Quartier Saint-Ambroise, Paris 11e Arrondissement, Paris, Île-de-France, France métropolitaine, 75011, France
+2026-04-06 18:45:40 - INFO - Trip créé: id=69d3f0c5fb98e15a3cf535e6, name=Monoprix, Rue Saint-Sébastien, Quartier Saint-Ambroise, Paris 11e Arrondissement, Paris, Île-de-France, France métropolitaine, 75011, France, lat=48.861717, lng=2.3717045
+2026-04-06 18:45:40 - INFO - ✅ SUCCÈS: 1 trip(s) créé(s) et ordonné(s) par position
+2026-04-06 18:45:40 - INFO - ✅ SUCCÈS: 1 trip(s) exporté(s) vers data.json
+2026-04-06 18:45:40 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-07 18:45:40
+2026-04-06 18:45:40 - INFO - Recherche du driver par query: 000
+2026-04-06 18:45:40 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-06 18:45:40 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-06 19:02:32 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-07 18:45:40
+2026-04-06 19:02:32 - INFO - Récupération des trips pour le driver: 000
+2026-04-06 19:02:32 - INFO - Recherche du driver par query: 000
+2026-04-06 19:02:32 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-06 19:02:33 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-06 19:02:33 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-06 19:02:33 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-06 19:02:33 - INFO - Recherche du driver par query: 000
+2026-04-06 19:02:33 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-06 19:02:33 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-06 19:02:33 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-06 19:02:33 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-06 19:02:33 - INFO - 4 schedule(s) trouvé(s) sur 14 entité(s)
+2026-04-06 19:02:33 - INFO - ✅ SUCCÈS: 4 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-06 19:02:33 - INFO - Recherche des packages pour le schedule: 69d3f111fb98e15a3cf535e8
+2026-04-06 19:02:33 - INFO - Recherche par référence: field=schedule_id, value=69d3f111fb98e15a3cf535e8
+2026-04-06 19:02:33 - INFO - ✅ SUCCÈS: 1 package(s) trouvé(s) pour le schedule 69d3f111fb98e15a3cf535e8
+2026-04-06 19:02:33 - INFO - Récupération du package par ID: 69d3f0c5fb98e15a3cf535e6
+2026-04-06 19:02:33 - INFO - Récupération de l'instance: 69d3f0c5fb98e15a3cf535e6
+2026-04-06 19:02:33 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-06 19:02:33 - INFO - ✅ SUCCÈS: Package trouvé: 69d3f0c5fb98e15a3cf535e6
+2026-04-06 19:02:33 - INFO - Package: 69d3f0c5fb98e15a3cf535e6, address field: 69d3f0c5fb98e15a3cf535e5
+2026-04-06 19:02:33 - INFO - Récupération adresse: 69d3f0c5fb98e15a3cf535e5
+2026-04-06 19:02:33 - INFO - Récupération de l'adresse par ID: 69d3f0c5fb98e15a3cf535e5
+2026-04-06 19:02:33 - INFO - Récupération de l'instance: 69d3f0c5fb98e15a3cf535e5
+2026-04-06 19:02:33 - INFO - ✅ SUCCÈS: Adresse trouvée: 69d3f0c5fb98e15a3cf535e5
+2026-04-06 19:02:33 - INFO - ✅ SUCCÈS: Adresse trouvée: Monoprix, Rue Saint-Sébastien, Quartier Saint-Ambroise, Paris 11e Arrondissement, Paris, Île-de-France, France métropolitaine, 75011, France
+2026-04-06 19:02:33 - INFO - Trip créé: id=69d3f0c5fb98e15a3cf535e6, name=Monoprix, Rue Saint-Sébastien, Quartier Saint-Ambroise, Paris 11e Arrondissement, Paris, Île-de-France, France métropolitaine, 75011, France, lat=48.861717, lng=2.3717045
+2026-04-06 19:02:33 - INFO - ✅ SUCCÈS: 1 trip(s) créé(s) et ordonné(s) par position
+2026-04-06 19:02:33 - INFO - ✅ SUCCÈS: 1 trip(s) exporté(s) vers data.json
+2026-04-06 19:02:33 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-07 18:45:40
+2026-04-06 19:02:33 - INFO - Recherche du driver par query: 000
+2026-04-06 19:02:33 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-06 19:02:33 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-06 19:46:57 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-07 18:45:40
+2026-04-06 19:46:57 - INFO - Récupération des trips pour le driver: 000
+2026-04-06 19:46:57 - INFO - Recherche du driver par query: 000
+2026-04-06 19:46:57 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-06 19:46:57 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-06 19:46:57 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-06 19:46:57 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-06 19:46:57 - INFO - Recherche du driver par query: 000
+2026-04-06 19:46:57 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-06 19:46:57 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-06 19:46:57 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-06 19:46:57 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-06 19:46:57 - INFO - 4 schedule(s) trouvé(s) sur 14 entité(s)
+2026-04-06 19:46:57 - INFO - ✅ SUCCÈS: 4 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-06 19:46:57 - INFO - Recherche des packages pour le schedule: 69d3f111fb98e15a3cf535e8
+2026-04-06 19:46:57 - INFO - Recherche par référence: field=schedule_id, value=69d3f111fb98e15a3cf535e8
+2026-04-06 19:46:57 - INFO - ✅ SUCCÈS: 1 package(s) trouvé(s) pour le schedule 69d3f111fb98e15a3cf535e8
+2026-04-06 19:46:57 - INFO - Récupération du package par ID: 69d3f0c5fb98e15a3cf535e6
+2026-04-06 19:46:57 - INFO - Récupération de l'instance: 69d3f0c5fb98e15a3cf535e6
+2026-04-06 19:46:57 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-06 19:46:57 - INFO - ✅ SUCCÈS: Package trouvé: 69d3f0c5fb98e15a3cf535e6
+2026-04-06 19:46:57 - INFO - Package: 69d3f0c5fb98e15a3cf535e6, address field: 69d3f0c5fb98e15a3cf535e5
+2026-04-06 19:46:57 - INFO - Récupération adresse: 69d3f0c5fb98e15a3cf535e5
+2026-04-06 19:46:57 - INFO - Récupération de l'adresse par ID: 69d3f0c5fb98e15a3cf535e5
+2026-04-06 19:46:57 - INFO - Récupération de l'instance: 69d3f0c5fb98e15a3cf535e5
+2026-04-06 19:46:57 - INFO - ✅ SUCCÈS: Adresse trouvée: 69d3f0c5fb98e15a3cf535e5
+2026-04-06 19:46:57 - INFO - ✅ SUCCÈS: Adresse trouvée: Monoprix, Rue Saint-Sébastien, Quartier Saint-Ambroise, Paris 11e Arrondissement, Paris, Île-de-France, France métropolitaine, 75011, France
+2026-04-06 19:46:57 - INFO - Trip créé: id=69d3f0c5fb98e15a3cf535e6, name=Monoprix, Rue Saint-Sébastien, Quartier Saint-Ambroise, Paris 11e Arrondissement, Paris, Île-de-France, France métropolitaine, 75011, France, lat=48.861717, lng=2.3717045
+2026-04-06 19:46:57 - INFO - ✅ SUCCÈS: 1 trip(s) créé(s) et ordonné(s) par position
+2026-04-06 19:46:57 - INFO - ✅ SUCCÈS: 1 trip(s) exporté(s) vers data.json
+2026-04-06 19:46:57 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-07 18:45:40
+2026-04-06 19:46:57 - INFO - Recherche du driver par query: 000
+2026-04-06 19:46:57 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-06 19:46:57 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)

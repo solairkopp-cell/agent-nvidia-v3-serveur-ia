@@ -1,10 +1,12 @@
 import asyncio
 import numpy as np
 import pytest
-from unittest.mock import patch
+from unittest.mock import MagicMock
 
+from models.session import Session
 from services.audio_service import AudioService
-from services.webrtc_service import TTSAudioTrack
+from services.vad_service import VADService
+from services.webrtc_service import MediaStreamError, TTSAudioTrack, WebRTCService
 import config
 
 
@@ -55,3 +57,49 @@ async def test_tts_audio_track_clear_empties_queue():
 
     # La queue doit être vide
     assert track._queue.empty()
+
+
+class _FakeTrack:
+    kind = "audio"
+
+    def __init__(self, frames):
+        self._frames = iter(frames)
+
+    async def recv(self):
+        try:
+            return next(self._frames)
+        except StopIteration as exc:
+            raise MediaStreamError from exc
+
+
+@pytest.mark.asyncio
+async def test_process_audio_track_does_not_duplicate_vad_pre_roll():
+    """Le pré-roll 16k doit rester piloté par le VAD, sans doublons côté WebRTC."""
+    audio = AudioService()
+    vad = VADService()
+    vad._model = MagicMock(return_value=0.1)
+    vad._chunk_samples = 512
+    vad._silence_threshold = 15
+    vad._min_speech_chunks = 10
+    vad._start_trigger_chunks = 2
+    vad._pre_roll_chunks = 2
+    vad._post_roll_chunks = 2
+
+    agent = MagicMock()
+    agent.denoise = None
+
+    service = WebRTCService(vad=vad, agent=agent, audio=audio, ws=None)
+    session = Session(client_id="test-client", websocket=MagicMock())
+
+    chunk_a = np.ones(512, dtype=np.float32) * 0.25
+    chunk_b = np.ones(512, dtype=np.float32) * -0.5
+    frames = [
+        audio.array_to_av_frame(chunk_a, config.SAMPLE_RATE),
+        audio.array_to_av_frame(chunk_b, config.SAMPLE_RATE),
+    ]
+
+    await service._process_audio_track(session, _FakeTrack(frames))
+
+    assert len(session.pre_speech_buffer) == 2
+    np.testing.assert_allclose(session.pre_speech_buffer[0], chunk_a, atol=5e-5)
+    np.testing.assert_allclose(session.pre_speech_buffer[1], chunk_b, atol=5e-5)

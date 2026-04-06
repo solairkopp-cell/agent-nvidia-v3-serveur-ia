@@ -454,26 +454,34 @@ class AgentService:
             session.clear_active_user_turn()
             return
 
+        llm_user_text = effective_transcript
+        llm_data = None
+        if action_result is not None:
+            if action_result.text_to_llm:
+                llm_user_text = action_result.text_to_llm
+            llm_data = action_result.llm_data
+
         # Action non traitée → envoyer au LLM
         if session.active_user_message_index is None:
-            session.conversation_history.append({"role": "user", "content": effective_transcript})
+            session.conversation_history.append({"role": "user", "content": llm_user_text})
             session.mark_active_user_turn(
                 request_id=request_id,
                 index=len(session.conversation_history) - 1,
-                text=effective_transcript,
+                text=llm_user_text,
             )
         else:
             session.mark_active_user_turn(
                 request_id=request_id,
                 index=session.active_user_message_index,
-                text=effective_transcript,
+                text=llm_user_text,
             )
 
         # LLM -> TTS streaming
         full_reply = await self._stream_response(
             session=session,
-            user_text=effective_transcript,
+            user_text=llm_user_text,
             request_id=request_id,
+            data=llm_data,
         )
 
         if session.cancel_flag or session.current_request_id != request_id:
@@ -649,6 +657,7 @@ class AgentService:
         user_text: str,
         request_id: int,
         interruptible: bool = True,
+        data: list | None = None,
     ) -> str:
         """
         LLM streaming → TTS non-streaming → TTSAudioTrack via queue + scheduler.
@@ -662,16 +671,21 @@ class AgentService:
             user_text: Texte utilisateur
             request_id: ID de requête
             interruptible: Si True, l'utilisateur peut interrompre ce TTS
+            data: Données JSON optionnelles à injecter dans un prompt one-shot
         """
         logger = logging.getLogger(__name__)
         if session.tts_track is None:
             return ""
 
-        history = session.conversation_history
-
         # 1. Générer tout le texte du LLM
         full_reply = ""
-        async for token in self.llm.generate_stream(user_text, history):
+        if data:
+            token_stream = self.llm.generate_answer_stream(data, user_text)
+        else:
+            history = session.conversation_history
+            token_stream = self.llm.generate_stream(user_text, history)
+
+        async for token in token_stream:
             if session.cancel_flag or session.current_request_id != request_id:
                 return ""
             full_reply += token

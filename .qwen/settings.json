@@ -35,7 +35,9 @@
       "Bash(out.mux)",
       "Bash(eof)",
       "Bash(output_wav *)",
-      "Bash(\"assets/recordings/recording_1df5436c_raw.wav\")"
+      "Bash(\"assets/recordings/recording_1df5436c_raw.wav\")",
+      "WebSearch",
+      "WebFetch(github.com)"
     ]
   },
   "$version": 3

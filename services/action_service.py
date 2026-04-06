@@ -12,7 +12,8 @@ Responsabilité :
 Flux :
   transcription + intention → ActionService.execute()
     → Si INCONNU : retourne {"action": "forward_to_llm", "text": transcription}
-    → Si action connue : exécute l'action, retourne {"action": "handled", "intent": "...", "response": "..."}
+    → Si action connue : exécute l'action, retourne soit une réponse locale,
+      soit des données JSON à transmettre au LLM avec la question utilisateur
     → Envoie événement external_control au client via WebSocket
 """
 from __future__ import annotations
@@ -44,6 +45,12 @@ class ActionService:
         "get_package_info",
         "show_map",
     )
+
+    _LLM_DATA_FIELDS_BY_INTENT = {
+        "get_next_client_name": "clientName",
+        "get_next_delivery_address": "name",
+        "get_package_info": "packageInfo",
+    }
 
     def __init__(self):
         self._known_intents = self._load_known_intents()
@@ -148,13 +155,7 @@ class ActionService:
                 intent,
                 session.client_id,
             )
-            response = await self._handle_known_action(session, intent, transcription)
-            return ActionResult(
-                handled=True,
-                intent=intent,
-                text_to_llm=None,
-                response=response,
-            )
+            return await self._handle_known_action(session, intent, transcription)
 
         # Intent non listée mais pas INCONNU → envoyer au LLM par défaut
         self._logger.info(
@@ -169,9 +170,15 @@ class ActionService:
             response=None,
         )
 
-    async def _handle_known_action(self, session: Session, intent: str, transcription: str) -> str:
+    async def _handle_known_action(
+        self,
+        session: Session,
+        intent: str,
+        transcription: str,
+    ) -> ActionResult:
         """
-        Exécuter une action connue et retourner une réponse textuelle pour le TTS.
+        Exécuter une action connue et retourner soit une réponse locale,
+        soit un contexte JSON à transmettre au LLM.
 
         Args:
             session: Session courante
@@ -179,7 +186,7 @@ class ActionService:
             transcription: Texte original (peut servir pour le contexte)
 
         Returns:
-            Réponse textuelle à synthétiser par le TTS
+            ActionResult décrivant soit une réponse locale, soit un forward au LLM
         """
         # Log l'intention pour débogage / action externe
         self._logger.info("ACTION: %s", intent)
@@ -192,25 +199,28 @@ class ActionService:
             "show_map": "Centering the map.",
         }
 
-        # Gestion spécifique pour get_next_client_name
-        if intent == "get_next_client_name":
-            client_name = await self._get_next_client_name()
-            if client_name:
-                return f"Your next client is {client_name}."
-            return "No client found."
+        if intent in self._LLM_DATA_FIELDS_BY_INTENT:
+            llm_data = await self._get_llm_data_for_intent(intent)
+            if llm_data:
+                return ActionResult(
+                    handled=False,
+                    intent=intent,
+                    text_to_llm=transcription,
+                    response=None,
+                    llm_data=llm_data,
+                )
 
-        # Gestion spécifique pour get_next_delivery_address
-        if intent == "get_next_delivery_address":
-            address = await self._get_next_delivery_address()
-            if address:
-                return f"Your next delivery is at {address}."
-            return "No delivery address found."
-
-        if intent == "get_package_info":
-            package_info = await self._get_package_info()
-            if package_info:
-                return f"Package info: {package_info}."
-            return "No package info found."
+            fallback = {
+                "get_next_client_name": "No client found.",
+                "get_next_delivery_address": "No delivery address found.",
+                "get_package_info": "No package info found.",
+            }
+            return ActionResult(
+                handled=True,
+                intent=intent,
+                text_to_llm=None,
+                response=fallback[intent],
+            )
 
         response = responses.get(intent, f"Action {intent} exécutée.")
 
@@ -238,7 +248,12 @@ class ActionService:
         if intent == "show_map":
             await self._send_show_map_event(session)
 
-        return response
+        return ActionResult(
+            handled=True,
+            intent=intent,
+            text_to_llm=None,
+            response=response,
+        )
 
     async def _send_show_deliveries_event(self, session: Session) -> None:
         """
@@ -417,6 +432,40 @@ class ActionService:
             self._logger.error("Error reading data.json: %s", e)
             return None
 
+    async def _get_llm_data_for_intent(self, intent: str) -> list[dict] | None:
+        """
+        Extraire les données JSON pertinentes pour un intent
+        afin de les transmettre au LLM avec la question utilisateur.
+        """
+        field_name = self._LLM_DATA_FIELDS_BY_INTENT.get(intent)
+        if not field_name:
+            return None
+
+        try:
+            trip = self._get_first_planned_trip()
+            if not trip:
+                return None
+
+            value = trip.get(field_name)
+            if value is None:
+                return None
+            if isinstance(value, str) and not value.strip():
+                return None
+
+            return [
+                {
+                    "id": trip.get("id"),
+                    "deliveryStatus": trip.get("deliveryStatus"),
+                    field_name: value,
+                }
+            ]
+        except json.JSONDecodeError as e:
+            self._logger.error("Failed to parse data.json: %s", e)
+            return None
+        except Exception as e:
+            self._logger.error("Error extracting LLM data from data.json: %s", e)
+            return None
+
     async def health_check(self) -> bool:
         """
         Health check : True si le service est opérationnel.
@@ -447,14 +496,17 @@ class ActionResult:
         intent: str,
         text_to_llm: str | None,
         response: str | None,
+        llm_data: list[dict] | None = None,
     ):
         self.handled = handled  # True si l'action a été traitée localement
         self.intent = intent  # Nom de l'intention détectée
         self.text_to_llm = text_to_llm  # Texte à envoyer au LLM (si handled=False)
         self.response = response  # Réponse TTS (si handled=True)
+        self.llm_data = llm_data  # Données JSON à fournir au LLM pour répondre
 
     def __repr__(self) -> str:
         return (
             f"ActionResult(handled={self.handled}, intent={self.intent!r}, "
-            f"text_to_llm={self.text_to_llm!r}, response={self.response!r})"
+            f"text_to_llm={self.text_to_llm!r}, response={self.response!r}, "
+            f"llm_data={self.llm_data!r})"
         )

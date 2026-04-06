@@ -38,7 +38,7 @@ WHISPER_BACKEND = os.getenv("WHISPER_BACKEND", "faster-whisper")
 
 # ── LLM ──────────────────────────────────────────────────────────────────────
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
-OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "smollm2:360m")
+OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "Rytle:latest")
 OLLAMA_CONTEXT_WINDOW = int(os.getenv("OLLAMA_CONTEXT_WINDOW", "1024"))
 OLLAMA_NUM_PREDICT = int(os.getenv("OLLAMA_NUM_PREDICT", "50"))
 OLLAMA_TEMPERATURE = float(os.getenv("OLLAMA_TEMPERATURE", "0.7"))
@@ -51,13 +51,23 @@ SYSTEM_PROMPT_PATH = os.getenv("SYSTEM_PROMPT_PATH", "system_prompt.md")
 # Désactiver le mode "thinking" (si supporté par Ollama / modèle)
 OLLAMA_THINK = os.getenv("OLLAMA_THINK", "false")
 
-# ── Intent Detection (embeddings) ────────────────────────────────────────────
-# Intentions stockées dans un CSV (colonnes : intent, example)
-INTENT_CSV_PATH = os.getenv("INTENT_CSV_PATH", "intent_detection/intentions.csv")
-INTENT_EMBED_MODEL = os.getenv("INTENT_EMBED_MODEL", "paraphrase-multilingual-MiniLM-L12-v2")
+# ── Intent Detection (modèle finetuné local) ────────────────────────────────
+# Intentions disponibles (colonnes : intent, example). Utilisé aussi par
+# l'ActionService pour filtrer les intents locaux réellement connus.
+INTENT_CSV_PATH = os.getenv("INTENT_CSV_PATH", "intent_detection2/intentions.csv")
+# Embedder SentenceTransformer local finetuné.
+INTENT_MODEL_DIR = os.getenv(
+    "INTENT_MODEL_DIR",
+    os.getenv("INTENT_EMBED_LOCAL_DIR", "intent_detection2/intent_embedder"),
+)
+# Classifieur sklearn entraîné sur les embeddings du modèle ci-dessus.
+INTENT_CLASSIFIER_PATH = os.getenv("INTENT_CLASSIFIER_PATH", "intent_detection2/intent_clf.pkl")
 # Intent detection sur Orin : forcer CPU pour économiser la VRAM.
 INTENT_DEVICE = os.getenv("INTENT_DEVICE", "cpu")
+# Seuil de confiance/probabilité minimum du classifieur.
 INTENT_THRESHOLD = float(os.getenv("INTENT_THRESHOLD", "0.60"))
+# Réglages historiques conservés pour compatibilité avec l'environnement.
+INTENT_EMBED_MODEL = os.getenv("INTENT_EMBED_MODEL", "paraphrase-multilingual-MiniLM-L12-v2")
 INTENT_EMBED_LOCAL_DIR = os.getenv("INTENT_EMBED_LOCAL_DIR", "")
 INTENT_EMBED_CACHE_DIR = os.getenv("INTENT_EMBED_CACHE_DIR", "")
 INTENT_EMBED_DOWNLOAD_ON_STARTUP = os.getenv("INTENT_EMBED_DOWNLOAD_ON_STARTUP", "false").strip().lower() in ("1", "true", "yes", "on")
@@ -141,7 +151,7 @@ DENOISE_FOR_STT = os.getenv("DENOISE_FOR_STT", "false").strip().lower() in ("1",
 # Sauvegarde optionnelle d'un WAV debug du flux WebRTC décodé avant
 # le resampling serveur vers 16kHz. Utile pour diagnostiquer les
 # limitations de bande passante amont (Android/WebRTC/codec).
-SAVE_WEBRTC_NATIVE_DEBUG = os.getenv("SAVE_WEBRTC_NATIVE_DEBUG", "false").strip().lower() in ("1", "true", "yes", "on")
+SAVE_WEBRTC_NATIVE_DEBUG = os.getenv("SAVE_WEBRTC_NATIVE_DEBUG", "true").strip().lower() in ("1", "true", "yes", "on")
 
 # ── Audio / VAD ───────────────────────────────────────────────────────────────
 SAMPLE_RATE = 16000

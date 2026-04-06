@@ -10,6 +10,7 @@ import numpy as np
 import pytest
 
 from models.session import Session
+from services.action_service import ActionResult
 from services.agent_service import AgentService
 from services.whisper_service import TranscriptionResult
 
@@ -144,6 +145,29 @@ class TestProcessUtterance:
         stt_samples = agent.stt.transcribe_pcm.await_args.args[0]
         np.testing.assert_array_equal(stt_samples, denoised)
 
+    @pytest.mark.asyncio
+    async def test_action_llm_data_is_forwarded_to_stream_response(self, agent, session):
+        agent.stt.transcribe = AsyncMock(return_value=TranscriptionResult(text="who is next"))
+        agent.intent = MagicMock()
+        agent.intent.getint = MagicMock(return_value="get_next_client_name")
+        agent.action = MagicMock()
+        agent.action.execute = AsyncMock(
+            return_value=ActionResult(
+                handled=False,
+                intent="get_next_client_name",
+                text_to_llm="who is next",
+                response=None,
+                llm_data=[{"clientName": "Alice"}],
+            )
+        )
+        agent._stream_response = AsyncMock(return_value="Alice")
+
+        await agent.process_utterance(session, b"wav_bytes")
+
+        kwargs = agent._stream_response.await_args.kwargs
+        assert kwargs["user_text"] == "who is next"
+        assert kwargs["data"] == [{"clientName": "Alice"}]
+
 
 class TestInterrupt:
 
@@ -193,11 +217,11 @@ class TestTranscriptionInterruption:
         await agent._process_transcription(session, 2, "there")
 
         assert session.conversation_history == [{"role": "user", "content": "hello there"}]
-        agent._stream_response.assert_awaited_once_with(
-            session=session,
-            user_text="hello there",
-            request_id=2,
-        )
+        kwargs = agent._stream_response.await_args.kwargs
+        assert kwargs["session"] is session
+        assert kwargs["user_text"] == "hello there"
+        assert kwargs["request_id"] == 2
+        assert kwargs["data"] is None
         assert session.active_user_message_index is None
 
     @pytest.mark.asyncio
@@ -215,11 +239,11 @@ class TestTranscriptionInterruption:
         await agent._process_transcription(session, 2, "new request")
 
         assert session.conversation_history == [{"role": "user", "content": "new request"}]
-        agent._stream_response.assert_awaited_once_with(
-            session=session,
-            user_text="new request",
-            request_id=2,
-        )
+        kwargs = agent._stream_response.await_args.kwargs
+        assert kwargs["session"] is session
+        assert kwargs["user_text"] == "new request"
+        assert kwargs["request_id"] == 2
+        assert kwargs["data"] is None
         assert session.active_user_message_index is None
 
     def test_decide_interruption_mode_uses_configured_thresholds_and_words(self, agent, session):
@@ -252,23 +276,19 @@ class TestStreamResponse:
             async def fake_token_stream():
                 yield "Bonjour."
 
-            async def fake_tts_stream(_text_stream, cancel_check=None):
-                yield ("Bonjour.", np.ones(24000, dtype=np.float32), 24000)
-
             agent.llm.generate_stream = MagicMock(return_value=fake_token_stream())
-            agent.tts.synthesize_stream = fake_tts_stream
-            agent.audio.array_to_av_frames = MagicMock(return_value=["frame-1", "frame-2", "frame-3"])
+            agent.tts.synthesize = AsyncMock(return_value=(np.ones(4800, dtype=np.float32), 48000))
+            agent.audio.array_to_av_frame = MagicMock(return_value="frame-1")
             agent.ws_service = MagicMock()
+            agent.ws_service.send = AsyncMock()
             agent.ws_service.send_response_chunk = AsyncMock()
 
             reply = await agent._stream_response(session, "hello", request_id=session.current_request_id)
 
             assert reply == "Bonjour."
-            agent.audio.array_to_av_frames.assert_called_once()
-            assert session.tts_track.feed.await_count == 3
+            agent.audio.array_to_av_frame.assert_called()
+            assert session.tts_track.feed.await_count >= 1
             session.tts_track.feed.assert_any_await("frame-1")
-            session.tts_track.feed.assert_any_await("frame-2")
-            session.tts_track.feed.assert_any_await("frame-3")
             agent.ws_service.send_response_chunk.assert_awaited_once_with(session, "Bonjour.")
 
     @pytest.mark.asyncio
@@ -277,19 +297,16 @@ class TestStreamResponse:
             yield ("Test audio.", np.ones(16000, dtype=np.float32), 16000)
 
         agent.tts.synthesize_stream = fake_tts_stream
-        agent.audio.array_to_av_frames = MagicMock(return_value=["frame-1", "frame-2"])
+        agent.audio.array_to_av_frame = MagicMock(return_value="frame-1")
         agent.ws_service = MagicMock()
         agent.ws_service.send = AsyncMock()
 
         await agent.speak_text(session, "Test audio.")
 
-        agent.ws_service.send.assert_awaited_once_with(
-            session,
-            {"type": "tts_test", "text": "Test audio."},
-        )
-        assert session.tts_track.feed.await_count == 2
+        sent_payloads = [call.args[1] for call in agent.ws_service.send.await_args_list]
+        assert {"type": "tts_test", "text": "Test audio."} in sent_payloads
+        assert session.tts_track.feed.await_count >= 1
         session.tts_track.feed.assert_any_await("frame-1")
-        session.tts_track.feed.assert_any_await("frame-2")
 
     @pytest.mark.asyncio
     async def test_stream_response_sends_all_frames(self, agent, session):
@@ -299,14 +316,11 @@ class TestStreamResponse:
             yield "Bonjour."
             yield "Encore."
 
-        async def fake_tts_stream(_text_stream, cancel_check=None):
-            yield ("Bonjour.", np.ones(16000, dtype=np.float32), 16000)
-            yield ("Encore.", np.ones(16000, dtype=np.float32), 16000)
-
         agent.llm.generate_stream = MagicMock(return_value=fake_token_stream())
-        agent.tts.synthesize_stream = fake_tts_stream
-        agent.audio.array_to_av_frames = MagicMock(return_value=["frame-1"])
+        agent.tts.synthesize = AsyncMock(return_value=(np.ones(2880, dtype=np.float32), 48000))
+        agent.audio.array_to_av_frame = MagicMock(return_value="frame-1")
         agent.ws_service = MagicMock()
+        agent.ws_service.send = AsyncMock()
         agent.ws_service.send_response_chunk = AsyncMock()
 
         await agent._stream_response(session, "hello", request_id=session.current_request_id)

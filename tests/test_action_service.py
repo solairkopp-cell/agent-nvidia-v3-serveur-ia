@@ -63,8 +63,16 @@ class TestGetPackageInfo:
 
         result = await action_service.execute(session, "get_package_info", "what is in the package")
 
-        assert result.handled is True
-        assert result.response == "Package info: Fragile medical supplies."
+        assert result.handled is False
+        assert result.response is None
+        assert result.text_to_llm == "what is in the package"
+        assert result.llm_data == [
+            {
+                "id": "planned-1",
+                "deliveryStatus": "planned",
+                "packageInfo": "Fragile medical supplies",
+            }
+        ]
 
 
 class TestShowMap:
