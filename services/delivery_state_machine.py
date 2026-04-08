@@ -225,6 +225,7 @@ class DeliveryStateMachine:
         action: Optional[str]  # Action à exécuter (ex: "update_trip")
         action_params: dict = field(default_factory=dict)  # Paramètres de l'action
         interruptible: bool = True  # Si True, l'utilisateur peut interrompre ce TTS
+        emit_tts_boundary_emotions: bool = True  # "speaking"/"idle" automatiques
     
     async def process_input(
         self,
@@ -301,6 +302,11 @@ class DeliveryStateMachine:
 
             # Trouver le trip suivant et préparer l'annonce
             next_trip_info = await self._get_next_trip_info(session)
+            await self._send_outcome_emotions(
+                session,
+                success=True,
+                is_last=await self._should_send_end_emotion(session, next_trip_info),
+            )
             announcement = (
                 "The delivery has been marked as completed. "
                 "It was your last delivery. Good job."
@@ -346,6 +352,7 @@ class DeliveryStateMachine:
                 action="update_trip",
                 action_params={"status": self.config.success_status},
                 interruptible=False,  # Non interruptible - annonce importante
+                emit_tts_boundary_emotions=False,
             )
 
         # Vérifier NO
@@ -479,6 +486,11 @@ class DeliveryStateMachine:
                 # Autres raisons → directement failure + annonce suite
                 # Trouver le trip suivant et préparer l'annonce
                 next_trip_info = await self._get_next_trip_info(session)
+                await self._send_outcome_emotions(
+                    session,
+                    success=False,
+                    is_last=await self._should_send_end_emotion(session, next_trip_info),
+                )
                 announcement = "Delivery has been marked as failure."
 
                 # Envoyer l'événement MARK_FAILED à l'application Android
@@ -526,6 +538,7 @@ class DeliveryStateMachine:
                         "reason": reason,
                     },
                     interruptible=False,
+                    emit_tts_boundary_emotions=False,
                 )
             else:
                 # Numéro hors limite
@@ -697,6 +710,68 @@ class DeliveryStateMachine:
         except Exception as e:
             logger.error("Error sending emotion: %s", e)
 
+    async def _send_outcome_emotions(
+        self,
+        session: "Session",
+        *,
+        success: bool,
+        is_last: bool = False,
+    ) -> None:
+        """
+        Envoyer les émotions de résultat pour tous les chemins de fin de livraison.
+        """
+        if is_last:
+            await self._send_emotion(session, "end")
+            return
+
+        await self._send_emotion(session, "happy" if success else "sad")
+
+    async def _should_send_end_emotion(
+        self,
+        session: "Session",
+        next_trip_info: tuple | None,
+    ) -> bool:
+        """
+        Déterminer si l'émotion `end` doit être envoyée pour ce résultat.
+        """
+        if next_trip_info is not None:
+            return bool(next_trip_info[3])
+
+        import json
+        from pathlib import Path
+
+        data_file = Path("data.json")
+
+        try:
+            if not data_file.exists():
+                return False
+
+            with open(data_file, "r", encoding="utf-8") as f:
+                trips = json.load(f)
+
+            if not isinstance(trips, list) or len(trips) == 0:
+                return False
+
+            current_trip_id = session.current_trip_id
+            current_index = -1
+
+            for i, trip in enumerate(trips):
+                if trip.get("id") == current_trip_id:
+                    current_index = i
+                    break
+
+            if current_index < 0:
+                return False
+
+            for trip in trips[current_index + 1:]:
+                if trip.get("deliveryStatus", "") != "COMPLETED":
+                    return False
+
+            return True
+        except Exception as e:
+            logger.error("Error determining end emotion eligibility: %s", e)
+            return False
+
     async def _send_mark_delivered_event(self, session: "Session", trip_id: str) -> None:
         """
         Envoyer l'événement MARK_DELIVERED à l'application Android.
@@ -822,17 +897,14 @@ class DeliveryStateMachine:
         Annoncer la prochaine livraison et démarrer la navigation.
         """
         next_trip_info = await self._get_next_trip_info(session)
+        await self._send_outcome_emotions(
+            session,
+            success=success,
+            is_last=await self._should_send_end_emotion(session, next_trip_info),
+        )
 
         if next_trip_info:
             next_trip_id, next_address, next_client_name, is_last = next_trip_info
-
-            # Envoyer l'émotion avant l'annonce
-            emotion = "happy" if success else "sad"
-            await self._send_emotion(session, emotion)
-
-            # Si c'est la dernière livraison, envoyer l'émotion "end"
-            if is_last:
-                await self._send_emotion(session, "end")
 
             # Annoncer
             if success:
@@ -875,7 +947,12 @@ class DeliveryStateMachine:
             # Parler l'annonce via AgentService en mode non interruptible pour
             # préserver la cohérence du flow de fin de livraison.
             if self._agent_service:
-                await self._agent_service.speak_text(session, announcement, interruptible=False)
+                await self._agent_service.speak_text(
+                    session,
+                    announcement,
+                    interruptible=False,
+                    emit_boundary_emotions=False,
+                )
 
             # Démarrer navigation après le TTS (délai pour lecture annonce)
             asyncio.create_task(
@@ -893,12 +970,14 @@ class DeliveryStateMachine:
                         session,
                         "Delivery completed successfully. It was your last delivery. Good job.",
                         interruptible=False,
+                        emit_boundary_emotions=False,
                     )
                 else:
                     await self._agent_service.speak_text(
                         session,
                         "Delivery has been marked as failure.",
                         interruptible=False,
+                        emit_boundary_emotions=False,
                     )
 
     async def _get_next_trip_info(self, session: "Session") -> tuple | None:

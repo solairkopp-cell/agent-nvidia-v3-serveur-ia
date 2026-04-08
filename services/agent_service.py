@@ -284,6 +284,7 @@ class AgentService:
                             request_id,
                             state_result.tts_response,
                             interruptible=state_result.interruptible,
+                            emit_boundary_emotions=state_result.emit_tts_boundary_emotions,
                         )
 
                     if state_result.action == "update_trip":
@@ -565,6 +566,7 @@ class AgentService:
         session: "Session",
         text: str,
         interruptible: bool = True,
+        emit_boundary_emotions: bool = True,
     ) -> None:
         """
         Jouer un texte arbitraire via le pipeline TTS, sans passer par STT/LLM.
@@ -574,6 +576,8 @@ class AgentService:
             session: Session WebSocket
             text: Texte à synthétiser
             interruptible: Si True, l'utilisateur peut interrompre ce TTS
+            emit_boundary_emotions: Si True, envoie les émotions automatiques
+                de début/fin de parole ("speaking" / "idle").
         """
         logger = logging.getLogger(__name__)
         text = (text or "").strip()
@@ -588,13 +592,19 @@ class AgentService:
             await self.interrupt(session)
 
         async with session.processing_lock:
-            await self._speak_text_internal(session, text, interruptible)
+            await self._speak_text_internal(
+                session,
+                text,
+                interruptible,
+                emit_boundary_emotions=emit_boundary_emotions,
+            )
 
     async def _speak_text_internal(
         self,
         session: "Session",
         text: str,
         interruptible: bool = True,
+        emit_boundary_emotions: bool = True,
     ) -> None:
         """
         Implémentation interne de speak_text, sans acquisition du lock.
@@ -604,6 +614,8 @@ class AgentService:
             session: Session WebSocket
             text: Texte à synthétiser
             interruptible: Si True, l'utilisateur peut interrompre ce TTS
+            emit_boundary_emotions: Si True, envoie les émotions automatiques
+                de début/fin de parole ("speaking" / "idle").
         """
         logger = logging.getLogger(__name__)
         text = (text or "").strip()
@@ -633,6 +645,7 @@ class AgentService:
                 ),
                 client_event_type="tts_test",
                 full_text_parts=None,
+                emit_boundary_emotions=emit_boundary_emotions,
             )
         except Exception:
             logger.exception("TTS test playback error client_id=%s", session.client_id)
@@ -647,7 +660,8 @@ class AgentService:
                 session.vad_h = None
             if hasattr(session, "vad_c"):
                 session.vad_c = None
-            await self._send_emotion(session, "idle")
+            if emit_boundary_emotions:
+                await self._send_emotion(session, "idle")
 
     # ── Pipeline interne ─────────────────────────────────────────────────────
 
@@ -767,6 +781,7 @@ class AgentService:
         stream,
         client_event_type: str | None,
         full_text_parts: list[str] | None,
+        emit_boundary_emotions: bool = True,
     ) -> None:
         """
         Jouer le flux TTS avec scheduler temps réel et queue audio.
@@ -778,12 +793,13 @@ class AgentService:
         """
         logger = logging.getLogger(__name__)
 
-        # Envoyer l'émotion "speaking" au début de chaque prise de parole
-        try:
-            if self.ws_service is not None:
-                await self.ws_service.send(session, {"type": "emotion", "name": "speaking"})
-        except Exception:
-            pass  # Ignorer silencieusement pour ne pas bloquer le TTS
+        if emit_boundary_emotions:
+            # Envoyer l'émotion "speaking" au début de chaque prise de parole
+            try:
+                if self.ws_service is not None:
+                    await self.ws_service.send(session, {"type": "emotion", "name": "speaking"})
+            except Exception:
+                pass  # Ignorer silencieusement pour ne pas bloquer le TTS
 
         # Démarrer le scheduler en tâche de fond
         scheduler_task = asyncio.create_task(
@@ -1111,6 +1127,7 @@ class AgentService:
         request_id: int,
         text: str,
         interruptible: bool = True,
+        emit_boundary_emotions: bool = True,
     ) -> None:
         """
         Synthétiser et envoyer une réponse TTS pour la machine à états.
@@ -1120,6 +1137,8 @@ class AgentService:
             request_id: ID de requête
             text: Texte à synthétiser
             interruptible: Si True, l'utilisateur peut interrompre ce TTS
+            emit_boundary_emotions: Si True, envoie les émotions automatiques
+                de début/fin de parole ("speaking" / "idle").
         """
         logger = logging.getLogger(__name__)
         if not text or session.tts_track is None:
@@ -1130,12 +1149,13 @@ class AgentService:
         session.tts_started_at = time.monotonic()
         session.tts_interruptible = interruptible  # Définir si interruptible
 
-        # Envoyer l'émotion "speaking" avant la réponse
-        try:
-            if self.ws_service is not None:
-                await self.ws_service.send(session, {"type": "emotion", "name": "speaking"})
-        except Exception:
-            pass  # Ignorer silencieusement pour ne pas bloquer le TTS
+        if emit_boundary_emotions:
+            # Envoyer l'émotion "speaking" avant la réponse
+            try:
+                if self.ws_service is not None:
+                    await self.ws_service.send(session, {"type": "emotion", "name": "speaking"})
+            except Exception:
+                pass  # Ignorer silencieusement pour ne pas bloquer le TTS
 
         # Démarrer le scheduler
         scheduler_task = asyncio.create_task(
@@ -1183,7 +1203,8 @@ class AgentService:
                 session.vad_h = None
             if hasattr(session, "vad_c"):
                 session.vad_c = None
-            await self._send_emotion(session, "idle")
+            if emit_boundary_emotions:
+                await self._send_emotion(session, "idle")
 
     async def _handle_update_trip_action(
         self,
