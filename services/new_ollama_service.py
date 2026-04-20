@@ -1,8 +1,11 @@
 import asyncio
-import requests
-import logging
 import json
+import logging
 from pathlib import Path
+from typing import AsyncIterator
+
+import httpx
+import requests
 
 import config
 
@@ -31,6 +34,7 @@ class OllamaService:
         self.status = "good"
         self._ws_service = None
         self._session = None
+        self._async_client = None
 
     # --- Lifecycle ---
 
@@ -48,6 +52,10 @@ class OllamaService:
     async def shutdown(self) -> None:
         self._extra_system_messages = []
         self.history = [{"role": "system", "content": self._load_system_prompt()}]
+        if self._async_client is not None:
+            client = self._async_client
+            self._async_client = None
+            await client.aclose()
         logging.info("MascoteService arrêté")
 
     # --- Injection ---
@@ -359,12 +367,14 @@ class OllamaService:
 
         return messages
 
-    def _build_payload(self, messages, include_tools=True):
+    def _build_payload(self, messages, include_tools=True, stream=False):
         payload = {
             "model": config.OLLAMA_MODEL,
             "messages": messages,
             "temperature": config.OLLAMA_TEMPERATURE,
         }
+        if stream:
+            payload["stream"] = True
         if include_tools:
             payload["tools"] = self._get_tools_schema()
             payload["tool_choice"] = "auto"
@@ -375,46 +385,148 @@ class OllamaService:
         response.raise_for_status()
         return response.json()
 
+    async def _get_async_client(self) -> httpx.AsyncClient:
+        if self._async_client is None:
+            self._async_client = httpx.AsyncClient(
+                timeout=httpx.Timeout(connect=5.0, write=60.0, read=None, pool=60.0)
+            )
+        return self._async_client
+
+    async def _request_completion(self, payload):
+        return await asyncio.to_thread(self._post_chat_completion, payload)
+
+    async def _execute_tool_calls(self, tool_calls):
+        tool_messages = []
+
+        for tool_call in tool_calls:
+            func_name = tool_call["function"]["name"]
+            args = tool_call["function"].get("arguments", {})
+            if isinstance(args, str):
+                args = json.loads(args) if args.strip() else {}
+            if args is None:
+                args = {}
+
+            method = getattr(self, func_name, None)
+            if method:
+                result = await method(**args) if asyncio.iscoroutinefunction(method) else method(**args)
+            else:
+                result = {"error": f"Outil inconnu: {func_name}"}
+
+            tool_messages.append({
+                "role": "tool",
+                "name": func_name,
+                "content": json.dumps(result, ensure_ascii=False),
+                "tool_call_id": tool_call.get("id", "1"),
+            })
+
+        return tool_messages
+
+    async def _complete_tool_calls(self, messages, llm_message, include_tools=True, persist_history=False) -> str:
+        tool_messages = await self._execute_tool_calls(llm_message.get("tool_calls", []))
+        final_messages = messages + [llm_message] + tool_messages
+        final_res = await self._request_completion(
+            self._build_payload(final_messages, include_tools=include_tools)
+        )
+        final_message = final_res["choices"][0]["message"]
+        if persist_history:
+            self.history = final_messages + [final_message]
+        return final_message.get("content", "")
+
     async def _run_completion(self, messages, include_tools=True, persist_history=False):
-        data = self._post_chat_completion(self._build_payload(messages, include_tools=include_tools))
+        data = await self._request_completion(self._build_payload(messages, include_tools=include_tools))
         llm_message = data["choices"][0]["message"]
 
         if include_tools and llm_message.get("tool_calls"):
-            tool_messages = [llm_message]
-
-            for tool_call in llm_message["tool_calls"]:
-                func_name = tool_call["function"]["name"]
-                args = tool_call["function"].get("arguments", {})
-                if isinstance(args, str):
-                    args = json.loads(args)
-                if args is None:
-                    args = {}
-
-                method = getattr(self, func_name, None)
-                if method:
-                    result = await method(**args) if asyncio.iscoroutinefunction(method) else method(**args)
-                else:
-                    result = {"error": f"Outil inconnu: {func_name}"}
-
-                tool_messages.append({
-                    "role": "tool",
-                    "name": func_name,
-                    "content": json.dumps(result, ensure_ascii=False),
-                    "tool_call_id": tool_call.get("id", "1")
-                })
-
-            final_messages = messages + tool_messages
-            final_res = self._post_chat_completion(
-                self._build_payload(final_messages, include_tools=include_tools)
+            return await self._complete_tool_calls(
+                messages,
+                llm_message,
+                include_tools=include_tools,
+                persist_history=persist_history,
             )
-            final_message = final_res["choices"][0]["message"]
-            if persist_history:
-                self.history = final_messages + [final_message]
-            return final_message.get("content", "")
 
         if persist_history:
             self.history = messages + [llm_message]
         return llm_message.get("content", "")
+
+    async def _run_completion_stream(
+        self,
+        messages,
+        include_tools=True,
+        persist_history=False,
+    ) -> AsyncIterator[str]:
+        client = await self._get_async_client()
+        payload = self._build_payload(messages, include_tools=include_tools, stream=True)
+        assistant_parts = []
+        tool_calls_by_index = {}
+
+        async with client.stream("POST", self.url, json=payload) as response:
+            response.raise_for_status()
+
+            async for line in response.aiter_lines():
+                if not line or not line.startswith("data:"):
+                    continue
+
+                raw = line[5:].strip()
+                if not raw:
+                    continue
+                if raw == "[DONE]":
+                    break
+
+                data = json.loads(raw)
+                choices = data.get("choices") or []
+                if not choices:
+                    continue
+
+                choice = choices[0]
+                delta = choice.get("delta") or {}
+
+                content = delta.get("content")
+                if isinstance(content, str) and content:
+                    assistant_parts.append(content)
+                    yield content
+
+                for tool_delta in delta.get("tool_calls") or []:
+                    index = int(tool_delta.get("index", 0))
+                    entry = tool_calls_by_index.setdefault(
+                        index,
+                        {
+                            "id": tool_delta.get("id", str(index)),
+                            "type": tool_delta.get("type", "function"),
+                            "function": {"name": "", "arguments": ""},
+                        },
+                    )
+
+                    if tool_delta.get("id"):
+                        entry["id"] = tool_delta["id"]
+
+                    func_delta = tool_delta.get("function") or {}
+                    name_piece = func_delta.get("name")
+                    if isinstance(name_piece, str) and name_piece:
+                        entry["function"]["name"] += name_piece
+
+                    args_piece = func_delta.get("arguments")
+                    if isinstance(args_piece, str) and args_piece:
+                        entry["function"]["arguments"] += args_piece
+
+        if tool_calls_by_index:
+            llm_message = {
+                "role": "assistant",
+                "content": "".join(assistant_parts),
+                "tool_calls": [tool_calls_by_index[index] for index in sorted(tool_calls_by_index)],
+            }
+            final_content = await self._complete_tool_calls(
+                messages,
+                llm_message,
+                include_tools=include_tools,
+                persist_history=persist_history,
+            )
+            if final_content:
+                yield final_content
+            return
+
+        assistant_message = {"role": "assistant", "content": "".join(assistant_parts)}
+        if persist_history:
+            self.history = messages + [assistant_message]
 
     async def chat(self, user_message, history=None, session=None):
         try:
@@ -427,3 +539,21 @@ class OllamaService:
         except Exception as e:
             self.log(f"Erreur : {e}", level="error")
             return "Erreur de connexion."
+
+    async def stream_chat(self, user_message, history=None, session=None):
+        emitted = False
+        try:
+            if session is not None:
+                self.set_session(session)
+
+            messages = self.build_messages(user_message, history)
+            async for chunk in self._run_completion_stream(messages, persist_history=True):
+                if chunk:
+                    emitted = True
+                    yield chunk
+        except Exception as e:
+            self.log(f"Erreur streaming : {e}", level="error")
+            if not emitted:
+                fallback = await self.chat(user_message, history=history, session=session)
+                if fallback:
+                    yield fallback

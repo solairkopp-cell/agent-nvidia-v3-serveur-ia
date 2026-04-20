@@ -2,8 +2,6 @@
 tests/test_tts_utils.py
 Tests pour la segmentation de texte TTS.
 """
-import pytest
-
 from services.tts_utils import extract_tts_ready_segments
 
 
@@ -12,39 +10,44 @@ class TestExtractTtsReadySegments:
     def test_split_on_period(self):
         """Découpe sur le point."""
         segments, remaining = extract_tts_ready_segments("Bonjour. Comment ça va?")
-        assert segments == ["Bonjour."]
-        assert remaining == "Comment ça va?"
+        assert segments == ["Bonjour.", "Comment ça va?"]
+        assert remaining == ""
 
     def test_split_on_exclamation(self):
         """Découpe sur le point d'exclamation."""
         segments, remaining = extract_tts_ready_segments("Hello! How are you?")
-        assert segments == ["Hello!"]
-        assert remaining == "How are you?"
+        assert segments == ["Hello!", "How are you?"]
+        assert remaining == ""
 
     def test_split_on_question(self):
         """Découpe sur le point d'interrogation."""
         segments, remaining = extract_tts_ready_segments("Qui êtes-vous? Je suis là.")
-        assert segments == ["Qui êtes-vous?"]
-        assert remaining == "Je suis là."
+        assert segments == ["Qui êtes-vous?", "Je suis là."]
+        assert remaining == ""
 
     def test_split_on_colon(self):
         """Découpe sur les deux-points."""
         segments, remaining = extract_tts_ready_segments("Voici la liste: premier élément. Deuxième élément.")
-        # Le premier segment s'arrête au ':', le suivant au '.'
-        assert segments == ["Voici la liste:", "premier élément."]
-        assert remaining == "Deuxième élément."
+        assert segments == ["Voici la liste:", "premier élément.", "Deuxième élément."]
+        assert remaining == ""
+
+    def test_split_on_semicolon(self):
+        """Découpe sur le point-virgule."""
+        segments, remaining = extract_tts_ready_segments("Première partie; deuxième partie.")
+        assert segments == ["Première partie;", "deuxième partie."]
+        assert remaining == ""
 
     def test_split_on_ellipsis(self):
         """Découpe sur les points de suspension."""
         segments, remaining = extract_tts_ready_segments("Attendez... Je réfléchis. Oui.")
-        assert segments == ["Attendez...", "Je réfléchis."]
-        assert remaining == "Oui."
+        assert segments == ["Attendez...", "Je réfléchis.", "Oui."]
+        assert remaining == ""
 
     def test_multiple_delimiters(self):
         """Multiple délimiteurs dans le même texte."""
         segments, remaining = extract_tts_ready_segments("Bonjour! Comment allez-vous? Très bien, merci. Et vous?")
-        assert segments == ["Bonjour!", "Comment allez-vous?", "Très bien, merci."]
-        assert remaining == "Et vous?"
+        assert segments == ["Bonjour!", "Comment allez-vous?", "Très bien, merci.", "Et vous?"]
+        assert remaining == ""
 
     def test_final_mode_returns_all(self):
         """En mode final, retourne tout le texte restant."""
@@ -73,5 +76,10 @@ class TestExtractTtsReadySegments:
     def test_whitespace_handling(self):
         """Gestion des espaces."""
         segments, remaining = extract_tts_ready_segments("  Bonjour.   Comment ça va?  ")
+        assert segments == ["Bonjour.", "Comment ça va?"]
+        assert remaining == ""
+
+    def test_emit_first_complete_sentence_even_with_incomplete_tail(self):
+        segments, remaining = extract_tts_ready_segments("Bonjour. Comment")
         assert segments == ["Bonjour."]
-        assert remaining == "Comment ça va?"
+        assert remaining == "Comment"

@@ -41,6 +41,7 @@ PIPER_BIN_PATH = os.getenv("PIPER_BIN_PATH", "/home/server/piper/piper/piper")
 # ── LLM ──────────────────────────────────────────────────────────────────────
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:8080")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "Rytle:latest")
+OLLAMA_STREAM = os.getenv("OLLAMA_STREAM", "true").strip().lower() in ("1", "true", "yes", "on")
 OLLAMA_CONTEXT_WINDOW = int(os.getenv("OLLAMA_CONTEXT_WINDOW", "1024"))
 OLLAMA_NUM_PREDICT = int(os.getenv("OLLAMA_NUM_PREDICT", "50"))
 OLLAMA_TEMPERATURE = float(os.getenv("OLLAMA_TEMPERATURE", "0.7"))
@@ -70,8 +71,8 @@ PIPER_CONFIG_PATH = os.getenv("PIPER_CONFIG_PATH", "assets/models/en_US-hfc_fema
 
 # ── TTS Common Settings ──────────────────────────────────────────────────────
 # Streaming TTS : commencer à parler avant la fin de la phrase complète.
-# Augmenté à 8 mots pour des phrases plus naturelles et moins de coupures
-TTS_STREAM_WORD_CHUNK_SIZE = int(os.getenv("TTS_STREAM_WORD_CHUNK_SIZE", "8"))
+# 5 mots donne un meilleur compromis latence / naturel.
+TTS_STREAM_WORD_CHUNK_SIZE = int(os.getenv("TTS_STREAM_WORD_CHUNK_SIZE", "0"))
 # Fondu/crossfade entre segments pour éviter les coupures sèches (100ms)
 TTS_SEGMENT_OVERLAP_MS = float(os.getenv("TTS_SEGMENT_OVERLAP_MS", "100"))
 # Buffer segments TTS : 5 est un bon compromis vitesse/fluidité

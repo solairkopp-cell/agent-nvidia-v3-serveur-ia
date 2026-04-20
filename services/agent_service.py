@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import asyncio
 from contextlib import suppress
+import inspect
 import logging
 from pathlib import Path
 import time
@@ -537,10 +538,68 @@ class AgentService:
         interruptible: bool = True,
     ) -> str:
         """
-        LLM non-streaming → TTS non-streaming → socket audio via queue + scheduler.
+        LLM → TTS → socket audio via queue + scheduler.
         """
+        logger = logging.getLogger(__name__)
         if session.tts_track is None:
             return ""
+
+        stream_chat = getattr(self.llm, "stream_chat", None)
+        if config.OLLAMA_STREAM and inspect.isasyncgenfunction(stream_chat):
+            session.tts_playing = True
+            session.reset_tts_output_state()
+            session.tts_started_at = time.monotonic()
+            session.tts_interruptible = interruptible
+            llm_chunks: list[str] = []
+            first_chunk_started_at: float | None = None
+
+            async def _llm_stream():
+                nonlocal first_chunk_started_at
+                async for chunk in stream_chat(
+                    user_text,
+                    history=session.conversation_history,
+                    session=session,
+                ):
+                    if session.cancel_flag or session.current_request_id != request_id:
+                        break
+                    if not chunk:
+                        continue
+                    if first_chunk_started_at is None:
+                        first_chunk_started_at = time.monotonic()
+                        logger.info(
+                            "LLM first chunk client_id=%s latency_ms=%.1f",
+                            session.client_id,
+                            (first_chunk_started_at - session.processing_started_at) * 1000.0,
+                        )
+                    llm_chunks.append(chunk)
+                    yield chunk
+
+            try:
+                await self._play_tts_stream(
+                    session=session,
+                    request_id=request_id,
+                    stream=self.tts.synthesize_stream(
+                        _llm_stream(),
+                        cancel_check=lambda: session.cancel_flag or session.current_request_id != request_id,
+                    ),
+                    client_event_type="response",
+                    full_text_parts=None,
+                )
+            except Exception:
+                logger.exception("Streaming response error client_id=%s", session.client_id)
+            finally:
+                session.tts_playing = False
+                session.reset_tts_output_state()
+                session.tts_started_at = 0.0
+                session.tts_interruptible = True
+                session.reset_audio_buffer()
+                if hasattr(session, "vad_h"):
+                    session.vad_h = None
+                if hasattr(session, "vad_c"):
+                    session.vad_c = None
+                await self._send_emotion(session, "idle")
+
+            return "".join(llm_chunks).strip()
 
         full_reply = await self.llm.chat(
             user_text,
@@ -635,8 +694,6 @@ class AgentService:
         """
         logger = logging.getLogger(__name__)
         frame_duration_ms = 20
-        prebuffer_ms = max(0, int(getattr(config, "TTS_PLAYBACK_PREBUFFER_MS", 0)))
-        prebuffer_frames = max(1, prebuffer_ms // frame_duration_ms) if prebuffer_ms > 0 else 1
         scheduler_task = None
         emitted_audio = False
 
@@ -647,6 +704,14 @@ class AgentService:
                     await self.ws_service.send(session, {"type": "emotion", "name": "speaking"})
             except Exception:
                 pass  # Ignorer silencieusement pour ne pas bloquer le TTS
+
+        # Démarrer le scheduler immédiatement pour éviter un deadlock:
+        # si un segment est long, l'enqueue peut remplir la queue avant que
+        # le scheduler ne soit lancé (cas observé après tool-calls).
+        scheduler_task = asyncio.create_task(
+            self._tts_scheduler(session, request_id),
+            name=f"tts-scheduler-{session.client_id}",
+        )
 
         await self._enqueue_initial_tts_silence(session, request_id)
         
@@ -659,30 +724,19 @@ class AgentService:
                 if full_text_parts is not None and phrase_text:
                     full_text_parts.append(phrase_text)
                     
-                await self._emit_tts_audio(
+                queued_frames = await self._emit_tts_audio(
                     session=session,
                     phrase_text=phrase_text,
                     samples=samples,
                     rate=rate,
                     client_event_type=client_event_type,
                 )
-                emitted_audio = True
-
-                if scheduler_task is None and session.tts_audio_queue.qsize() >= prebuffer_frames:
-                    scheduler_task = asyncio.create_task(
-                        self._tts_scheduler(session, request_id),
-                        name=f"tts-scheduler-{session.client_id}"
-                    )
+                if queued_frames > 0:
+                    emitted_audio = True
                 
         except Exception:
             logger.exception("TTS stream playback error client_id=%s", session.client_id)
         finally:
-            if scheduler_task is None and emitted_audio and not session.cancel_flag and session.current_request_id == request_id:
-                scheduler_task = asyncio.create_task(
-                    self._tts_scheduler(session, request_id),
-                    name=f"tts-scheduler-{session.client_id}"
-                )
-
             # Si annulé, sortir immédiatement sans attendre
             if session.cancel_flag or session.current_request_id != request_id:
                 # Vider la queue
@@ -720,7 +774,7 @@ class AgentService:
         rate: int,
         *,
         client_event_type: str | None,
-    ) -> None:
+    ) -> int:
         """
         Émettre l'audio TTS via une queue avec scheduler temps réel stable.
         
@@ -740,7 +794,7 @@ class AgentService:
         # Préparation samples
         samples = self._prepare_tts_samples(session, samples, int(rate))
         if samples is None or len(samples) == 0:
-            return
+            return 0
 
         # S'assurer qu'on a du float32
         if samples.dtype != np.float32:
@@ -749,7 +803,7 @@ class AgentService:
         samples = samples.reshape(-1)
 
         if samples.size == 0:
-            return
+            return 0
 
         logger.info(
             "TTS audio client_id=%s phrase_len=%d rate=%d samples=%d dtype=%s",
@@ -784,6 +838,7 @@ class AgentService:
             session.client_id,
             frames_count,
         )
+        return frames_count
 
     def _prepare_tts_samples(self, session: "Session", samples, rate: int):
         """

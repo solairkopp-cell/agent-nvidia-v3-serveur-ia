@@ -247,6 +247,35 @@ class TestTranscriptionInterruption:
 class TestStreamResponse:
 
     @pytest.mark.asyncio
+    async def test_stream_response_uses_llm_streaming_when_available(self, agent, session, monkeypatch):
+        monkeypatch.setattr("config.OLLAMA_STREAM", True)
+
+        async def fake_stream_chat(user_message, history=None, session=None):
+            yield "Bonjour."
+            yield " Encore."
+
+        async def fake_tts_stream(text_stream, cancel_check=None):
+            async for chunk in text_stream:
+                phrase = chunk.strip()
+                if phrase:
+                    yield (phrase, np.ones(960, dtype=np.float32), 48000)
+
+        agent.llm.stream_chat = fake_stream_chat
+        agent.llm.chat = AsyncMock(return_value="fallback")
+        agent.tts.synthesize_stream = fake_tts_stream
+        agent.ws_service = MagicMock()
+        agent.ws_service.send = AsyncMock()
+        agent.ws_service.send_response_chunk = AsyncMock()
+
+        reply = await agent._stream_response(session, "hello", request_id=session.current_request_id)
+
+        assert reply == "Bonjour. Encore."
+        agent.llm.chat.assert_not_awaited()
+        assert session.tts_track.feed.await_count >= 1
+        sent_chunks = [call.args[1] for call in agent.ws_service.send_response_chunk.await_args_list]
+        assert sent_chunks == ["Bonjour.", "Encore."]
+
+    @pytest.mark.asyncio
     async def test_stream_response_sends_all_audio_frames(self, agent, session):
         """Le flux TTS est découpé en frames et poussé intégralement vers la track."""
         with patch("config.TTS_SEGMENT_OVERLAP_MS", 0):
