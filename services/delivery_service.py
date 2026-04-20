@@ -112,13 +112,13 @@ class DeliveryService:
                 # Envoyer les trips au client
                 await self._send_trips_to_client(session, trips)
 
-                # Stocker les infos pour le résumé vocal (à envoyer après connexion WebRTC)
+                # Stocker les infos pour le résumé vocal (à envoyer après ouverture du flux audio)
                 session._pending_voice_summary = {
                     "trips": trips,
                     "driver_name": driver_name,
                 }
 
-                # Si WebRTC est déjà prêt, envoyer le résumé vocal immédiatement
+                # Si le flux audio est déjà prêt, envoyer le résumé vocal immédiatement
                 if session.tts_track is not None:
                     await self._send_voice_summary(session, trips, driver_name)
             else:
@@ -309,8 +309,8 @@ class DeliveryService:
 
         # Utiliser speak_text de AgentService pour parler directement
         try:
-            if self.ws_service is not None and self.ws_service.webrtc is not None:
-                agent = self.ws_service.webrtc.agent
+            if self.ws_service is not None and self.ws_service.audio_stream is not None:
+                agent = self.ws_service.audio_stream.agent
                 await agent.speak_text(session, summary_text)
                 logger.info("🔊 Voice summary sent: %s", summary_text)
         except Exception as e:
@@ -334,7 +334,7 @@ class DeliveryService:
             },
         )
 
-        # Stocker le message vocal en attente (à envoyer après connexion WebRTC)
+        # Stocker le message vocal en attente (à envoyer après ouverture du flux audio)
         session._pending_voice_summary = {
             "trips": [],
             "driver_name": driver_name,
@@ -342,7 +342,7 @@ class DeliveryService:
             "voice_message": voice_message,
         }
 
-        # Si WebRTC est déjà prêt, envoyer le message vocal immédiatement
+        # Si le flux audio est déjà prêt, envoyer le message vocal immédiatement
         if session.tts_track is not None:
             # Envoyer l'émotion greeting avant le message vocal
             try:
@@ -353,8 +353,8 @@ class DeliveryService:
                 logger.error("Could not send emotion greeting: %s", e)
 
             try:
-                if self.ws_service is not None and self.ws_service.webrtc is not None:
-                    agent = self.ws_service.webrtc.agent
+                if self.ws_service is not None and self.ws_service.audio_stream is not None:
+                    agent = self.ws_service.audio_stream.agent
                     await agent.speak_text(session, voice_message)
                     logger.info("🔊 No trips voice message sent: %s", voice_message)
             except Exception as e:

@@ -1,337 +1,653 @@
-2026-04-20 18:47:56,203 - INFO - TTS frames queued client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b frames=60
-2026-04-20 18:47:57,336 - INFO - TTS scheduler stopped client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b
-2026-04-20 18:47:57,337 - INFO - 📤 WS MESSAGE SENT client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b type=emotion data={'type': 'emotion', 'name': 'idle'}
-2026-04-20 18:47:59,997 - INFO - WebRTC native pre_roll client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b samples=19200 sr=48000
-2026-04-20 18:48:00,001 - INFO - VAD speech_start client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b p=0.885
-2026-04-20 18:48:01,698 - INFO - Utterance end client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b samples=34816
-2026-04-20 18:48:01,725 - INFO - Saved WebRTC native debug client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b native=webrtc_207207ed-d5d6-487a-9558-eb83f78bbd7b_9e667f21_decoded_native.wav rms=0.131580 sr=48000 n=101760
-2026-04-20 18:48:01,728 - INFO - STT raw input client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b ms=2176 rms=0.1298 peak=0.7509 n=34816 sr=16000
-2026-04-20 18:48:01,741 - INFO - Saved WebRTC STT audio compare client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b raw=webrtc_207207ed-d5d6-487a-9558-eb83f78bbd7b_9e667f21_raw.wav denoised=webrtc_207207ed-d5d6-487a-9558-eb83f78bbd7b_9e667f21_denoised.wav raw_rms=0.129807 denoised_rms=0.129807 sr=16000
-2026-04-20 18:48:01,743 - INFO - Processing audio with duration 00:02.176
-2026-04-20 18:48:02,490 - INFO - STT transcript client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b text='Hello, can you hear me?'
-2026-04-20 18:48:02,491 - INFO - 📤 WS MESSAGE SENT client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b type=transcript data={'type': 'transcript', 'text': 'Hello, can you hear me?'}
-2026-04-20 18:48:02,492 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
-2026-04-20 18:48:04,924 - INFO - 📤 WS MESSAGE SENT client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-20 18:48:04,925 - INFO - 📤 WS MESSAGE SENT client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b type=response data={'type': 'response', 'text': 'Hello! Yes, I can hear you perfectly. How can I assist you today?'}
-2026-04-20 18:48:04,926 - INFO - TTS audio client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b phrase_len=65 rate=48000 samples=211030 dtype=float32
-2026-04-20 18:48:07,174 - INFO - TTS frames queued client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b frames=220
-2026-04-20 18:48:08,312 - INFO - TTS scheduler stopped client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b
-2026-04-20 18:48:08,312 - INFO - 📤 WS MESSAGE SENT client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b type=emotion data={'type': 'emotion', 'name': 'idle'}
-2026-04-20 18:48:11,587 - INFO - WebRTC native pre_roll client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b samples=19200 sr=48000
-2026-04-20 18:48:11,590 - INFO - VAD speech_start client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b p=0.909
-2026-04-20 18:48:14,079 - INFO - Utterance end client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b samples=47616
-2026-04-20 18:48:14,096 - INFO - Saved WebRTC native debug client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b native=webrtc_207207ed-d5d6-487a-9558-eb83f78bbd7b_fb021bae_decoded_native.wav rms=0.079574 sr=48000 n=139200
-2026-04-20 18:48:14,098 - INFO - STT raw input client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b ms=2976 rms=0.0785 peak=0.4786 n=47616 sr=16000
-2026-04-20 18:48:14,110 - INFO - Saved WebRTC STT audio compare client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b raw=webrtc_207207ed-d5d6-487a-9558-eb83f78bbd7b_fb021bae_raw.wav denoised=webrtc_207207ed-d5d6-487a-9558-eb83f78bbd7b_fb021bae_denoised.wav raw_rms=0.078511 denoised_rms=0.078511 sr=16000
-2026-04-20 18:48:14,111 - INFO - Processing audio with duration 00:02.976
-2026-04-20 18:48:14,830 - ERROR - Task was destroyed but it is pending!
-task: <Task pending name='Task-12395' coro=<AgentService.process_utterance_pcm() running at /home/server/agent-nvidia-v2/services/agent_service.py:135> wait_for=<Future pending cb=[Task.task_wakeup()]>>
-2026-04-20 18:48:14,831 - ERROR - Task was destroyed but it is pending!
-task: <Task pending name='Task-16884' coro=<AgentService.process_utterance_pcm() running at /home/server/agent-nvidia-v2/services/agent_service.py:135> wait_for=<Future pending cb=[Task.task_wakeup()]>>
-2026-04-20 18:48:14,832 - ERROR - Task was destroyed but it is pending!
-task: <Task pending name='Task-18018' coro=<AgentService.process_utterance_pcm() running at /home/server/agent-nvidia-v2/services/agent_service.py:135> wait_for=<Future pending cb=[Task.task_wakeup()]>>
-2026-04-20 18:48:14,832 - ERROR - Task was destroyed but it is pending!
-task: <Task pending name='Task-11792' coro=<AgentService.process_utterance_pcm() running at /home/server/agent-nvidia-v2/services/agent_service.py:207> wait_for=<Future pending cb=[Task.task_wakeup()]>>
-2026-04-20 18:48:14,833 - INFO - 📤 WS MESSAGE SENT client_id=d9bd80ff-457f-401f-997e-fdb5cb6b8542 type=emotion data={'type': 'emotion', 'name': 'idle'}
-2026-04-20 18:48:14,833 - INFO - STT transcript client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b text='Do I have any deliveries today?'
-2026-04-20 18:48:14,834 - INFO - 📤 WS MESSAGE SENT client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b type=transcript data={'type': 'transcript', 'text': 'Do I have any deliveries today?'}
-2026-04-20 18:48:14,834 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
-2026-04-20 18:48:16,217 - INFO - Action: SHOW_DELIVERIES_LIST
-2026-04-20 18:48:16,217 - INFO - 📤 WS MESSAGE SENT client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.SHOW_DELIVERIES_LIST', 'extras': {}}
-2026-04-20 18:48:23,726 - INFO - 📤 WS MESSAGE SENT client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-20 18:48:23,727 - INFO - 📤 WS MESSAGE SENT client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b type=response data={'type': 'response', 'text': 'You have a delivery scheduled today at Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie. The package is a burger and the status is planned. Would you like to know more about this delivery or start the navigation?'}
-2026-04-20 18:48:23,728 - INFO - TTS audio client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b phrase_len=261 rate=48000 samples=778340 dtype=float32
-2026-04-20 18:48:35,685 - INFO - TTS frames queued client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b frames=811
-2026-04-20 18:48:36,819 - INFO - TTS scheduler stopped client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b
-2026-04-20 18:48:36,820 - INFO - 📤 WS MESSAGE SENT client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b type=emotion data={'type': 'emotion', 'name': 'idle'}
-2026-04-20 18:48:42,464 - INFO - WebRTC native pre_roll client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b samples=19200 sr=48000
-2026-04-20 18:48:42,465 - INFO - VAD speech_start client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b p=0.982
-2026-04-20 18:48:44,924 - INFO - Utterance end client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b samples=46592
-2026-04-20 18:48:44,947 - INFO - Saved WebRTC native debug client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b native=webrtc_207207ed-d5d6-487a-9558-eb83f78bbd7b_4adcfaa7_decoded_native.wav rms=0.106255 sr=48000 n=137280
-2026-04-20 18:48:44,949 - INFO - STT raw input client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b ms=2912 rms=0.1052 peak=0.7545 n=46592 sr=16000
-2026-04-20 18:48:44,964 - INFO - Saved WebRTC STT audio compare client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b raw=webrtc_207207ed-d5d6-487a-9558-eb83f78bbd7b_4adcfaa7_raw.wav denoised=webrtc_207207ed-d5d6-487a-9558-eb83f78bbd7b_4adcfaa7_denoised.wav raw_rms=0.105236 denoised_rms=0.105236 sr=16000
-2026-04-20 18:48:44,966 - INFO - Processing audio with duration 00:02.912
-2026-04-20 18:48:45,816 - INFO - STT transcript client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b text='Yes, start the navigation.'
-2026-04-20 18:48:45,816 - INFO - 📤 WS MESSAGE SENT client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b type=transcript data={'type': 'transcript', 'text': 'Yes, start the navigation.'}
-2026-04-20 18:48:45,817 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
-2026-04-20 18:48:47,704 - INFO - Action: START_NAVIGATION trip_id=12345
-2026-04-20 18:48:47,704 - INFO - 📤 WS MESSAGE SENT client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.START_NAVIGATION', 'extras': {'id': '12345'}}
-2026-04-20 18:48:49,812 - ERROR - Exception in callback <bound method Transaction.__retry of <aioice.stun.Transaction object at 0xffff280dad40>>
-handle: <TimerHandle Transaction.__retry>
-Traceback (most recent call last):
-  File "uvloop/cbhandles.pyx", line 253, in uvloop.loop.TimerHandle._run
-  File "/home/server/.local/lib/python3.10/site-packages/aioice/stun.py", line 330, in __retry
-    self.__future.set_exception(TransactionTimeout())
-asyncio.exceptions.InvalidStateError: invalid state
-2026-04-20 18:48:51,616 - INFO - 📤 WS MESSAGE SENT client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-20 18:48:51,617 - INFO - 📤 WS MESSAGE SENT client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b type=response data={'type': 'response', 'text': 'The navigation has been started for trip 12345. You will be guided to the delivery location.'}
-2026-04-20 18:48:51,617 - INFO - TTS audio client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b phrase_len=92 rate=48000 samples=325146 dtype=float32
-2026-04-20 18:48:54,921 - INFO - TTS frames queued client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b frames=339
-2026-04-20 18:48:56,073 - INFO - TTS scheduler stopped client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b
-2026-04-20 18:48:56,074 - INFO - 📤 WS MESSAGE SENT client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b type=emotion data={'type': 'emotion', 'name': 'idle'}
-2026-04-20 18:49:19,577 - INFO - WebRTC native pre_roll client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b samples=19200 sr=48000
-2026-04-20 18:49:19,578 - INFO - VAD speech_start client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b p=0.920
-2026-04-20 18:49:20,373 - INFO - Utterance end client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b samples=20480
-2026-04-20 18:49:20,385 - INFO - Saved WebRTC native debug client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b native=webrtc_207207ed-d5d6-487a-9558-eb83f78bbd7b_d5523c1f_decoded_native.wav rms=0.084238 sr=48000 n=58560
-2026-04-20 18:49:20,388 - INFO - STT raw input client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b ms=1280 rms=0.0822 peak=0.7528 n=20480 sr=16000
-2026-04-20 18:49:20,400 - INFO - Saved WebRTC STT audio compare client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b raw=webrtc_207207ed-d5d6-487a-9558-eb83f78bbd7b_d5523c1f_raw.wav denoised=webrtc_207207ed-d5d6-487a-9558-eb83f78bbd7b_d5523c1f_denoised.wav raw_rms=0.082199 denoised_rms=0.082199 sr=16000
-2026-04-20 18:49:20,401 - INFO - Processing audio with duration 00:01.280
-2026-04-20 18:49:21,111 - INFO - STT transcript client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b text='No.'
-2026-04-20 18:49:21,111 - INFO - 📤 WS MESSAGE SENT client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b type=transcript data={'type': 'transcript', 'text': 'No.'}
-2026-04-20 18:49:21,112 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
-2026-04-20 18:49:24,143 - INFO - 📤 WS MESSAGE SENT client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-20 18:49:24,146 - INFO - 📤 WS MESSAGE SENT client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b type=response data={'type': 'response', 'text': 'Sure, I can help with that. Could you please provide me with the trip ID so I can stop the navigation?'}
-2026-04-20 18:49:24,146 - INFO - TTS audio client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b phrase_len=102 rate=48000 samples=268304 dtype=float32
-2026-04-20 18:49:27,323 - INFO - TTS frames queued client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b frames=280
-2026-04-20 18:49:28,454 - INFO - TTS scheduler stopped client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b
-2026-04-20 18:49:28,455 - INFO - 📤 WS MESSAGE SENT client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b type=emotion data={'type': 'emotion', 'name': 'idle'}
-2026-04-20 18:49:46,622 - INFO - WebRTC native pre_roll client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b samples=19200 sr=48000
-2026-04-20 18:49:46,623 - INFO - VAD speech_start client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b p=0.887
-2026-04-20 18:49:49,666 - INFO - Audio track ended client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b
-2026-04-20 18:49:49,671 - INFO - ICE state client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b state=closed
-2026-04-20 18:49:49,672 - INFO - WebRTC state client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b state=closed
-2026-04-20 18:49:49,674 - INFO - WebRTC cleaned up client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b
-2026-04-20 18:49:50,136 - INFO - WebRTC cleaned up client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b
-2026-04-20 18:49:50,138 - INFO - WS disconnected client_id=207207ed-d5d6-487a-9558-eb83f78bbd7b
-2026-04-20 18:49:50,139 - INFO - connection closed
-2026-04-20 18:51:58,730 - INFO - 127.0.0.1:39186 - "WebSocket /ws" [accepted]
-2026-04-20 18:51:58,732 - INFO - WS connected client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c
-2026-04-20 18:51:58,734 - INFO - connection open
-2026-04-20 18:52:18,804 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=start data={'type': 'start'}
-2026-04-20 18:52:18,805 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=start data={'type': 'start'}
-2026-04-20 18:52:18,824 - INFO - WebRTC peer created client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c
-2026-04-20 18:52:18,824 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=started data={'type': 'started'}
-2026-04-20 18:52:18,825 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=offer data={'type': 'offer', 'sdp': 'v=0\r\no=- 2798945374122887807 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 0 8 13 110 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:Gi/F\r\na=ice-pwd:gDTVCc+tDUOrMcl/woxhmsvK\r\na=ice-options:trickle\r\na=fingerprint:sha-256 EA:90:CF:F6:BD:70:76:A0:7F:E3:87:5B:7E:B6:74:49:23:42:C6:45:D9:32:FF:76:50:E5:5B:E1:CC:29:58:38\r\na=setup:actpass\r\na=mid:0\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=recvonly\r\na=rtcp-mux\r\na=rtcp-rsize\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1\r\na=rtpmap:63 red/48000/2\r\na=fmtp:63 111/111\r\na=rtpmap:9 G722/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:110 telephone-event/48000\r\na=rtpmap:126 telephone-event/8000\r\n'}
-2026-04-20 18:52:18,825 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=offer data={'type': 'offer', 'sdp': 'v=0\r\no=- 2798945374122887807 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 0 8 13 110 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:Gi/F\r\na=ice-pwd:gDTVCc+tDUOrMcl/woxhmsvK\r\na=ice-options:trickle\r\na=fingerprint:sha-256 EA:90:CF:F6:BD:70:76:A0:7F:E3:87:5B:7E:B6:74:49:23:42:C6:45:D9:32:FF:76:50:E5:5B:E1:CC:29:58:38\r\na=setup:actpass\r\na=mid:0\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=recvonly\r\na=rtcp-mux\r\na=rtcp-rsize\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1\r\na=rtpmap:63 red/48000/2\r\na=fmtp:63 111/111\r\na=rtpmap:9 G722/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:110 telephone-event/48000\r\na=rtpmap:126 telephone-event/8000\r\n'}
-2026-04-20 18:52:23,844 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=answer data={'type': 'answer', 'sdp': 'v=0\r\no=- 3985692738 3985692738 IN IP4 0.0.0.0\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=msid-semantic:WMS *\r\nm=audio 53905 UDP/TLS/RTP/SAVPF 111 9 0 8\r\nc=IN IP4 192.168.1.2\r\na=sendonly\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=mid:0\r\na=msid:c4ad55b3-dcb1-4fd9-ae3c-9e9179280b91 d2e7e534-5352-4ddb-a8ad-d014d83f79ca\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=rtcp-mux\r\na=ssrc:2776892507 cname:d451cf03-3ebf-4bee-a35b-25d17856cf5c\r\na=rtpmap:111 opus/48000/2\r\na=rtpmap:9 G722/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=candidate:e2aea8ef0c61df57b654b7125d14184e 1 udp 2130706431 192.168.1.2 53905 typ host\r\na=candidate:b651bd9b1bc9adcc78d97e3465fd5bf2 1 udp 2130706431 192.168.55.1 56538 typ host\r\na=candidate:d562b16207e26c2e9ce1214be2a781c0 1 udp 2130706431 100.106.184.117 56079 typ host\r\na=candidate:580b5f32035da7f14a30ea7a8d826c67 1 udp 2130706431 172.17.0.1 49880 typ host\r\na=candidate:0ad8db753210ce9554cf251a9e51e792 1 udp 1694498815 196.179.251.38 49880 typ srflx raddr 172.17.0.1 rport 49880\r\na=candidate:7b29ffc97bc5f5ca4db0cbe5623d884d 1 udp 1694498815 196.179.251.38 53905 typ srflx raddr 192.168.1.2 rport 53905\r\na=end-of-candidates\r\na=ice-ufrag:7RxK\r\na=ice-pwd:NCsULH5uR0y3j6wsmTsDpe\r\na=fingerprint:sha-256 FB:10:17:63:1A:02:C6:45:9B:AC:67:E6:D8:24:AA:D0:5C:06:D4:56:6F:03:1B:68:C2:CB:03:2B:60:12:FC:76\r\na=fingerprint:sha-384 20:EE:2F:E5:20:0C:86:C6:98:EB:CB:6F:2F:73:3E:E8:3E:5B:00:55:51:AD:7E:6F:E7:B5:C0:D8:1E:3C:F4:90:F8:AE:42:56:5B:81:58:81:F2:3F:CE:D4:AB:D6:79:23\r\na=fingerprint:sha-512 52:3D:EB:C1:50:A1:05:37:9E:33:4B:FC:E9:C4:34:B2:BA:CB:4E:33:5F:89:52:70:CC:90:06:C7:F0:D0:C7:20:B4:A2:84:7E:DB:AC:17:84:4E:0E:E0:48:12:F8:AF:76:E0:A6:7B:2B:84:8A:39:62:0D:12:15:F5:85:35:2B:FC\r\na=setup:active\r\n'}
-2026-04-20 18:52:23,848 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:1755007587 1 udp 2122194687 25.9.85.122 51855 typ host generation 0 ufrag Gi/F network-id 1', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 18:52:23,849 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:1755007587 1 udp 2122194687 25.9.85.122 51855 typ host generation 0 ufrag Gi/F network-id 1', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 18:52:23,850 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:44184593 1 udp 2122129151 192.168.55.100 51856 typ host generation 0 ufrag Gi/F network-id 4', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 18:52:23,850 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:44184593 1 udp 2122129151 192.168.55.100 51856 typ host generation 0 ufrag Gi/F network-id 4', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 18:52:23,851 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:584937401 1 udp 2122063615 169.254.137.191 51857 typ host generation 0 ufrag Gi/F network-id 5', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 18:52:23,851 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:584937401 1 udp 2122063615 169.254.137.191 51857 typ host generation 0 ufrag Gi/F network-id 5', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 18:52:23,851 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:3076742542 1 udp 2121998079 192.168.1.8 51858 typ host generation 0 ufrag Gi/F network-id 3 network-cost 10', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 18:52:23,852 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:3076742542 1 udp 2121998079 192.168.1.8 51858 typ host generation 0 ufrag Gi/F network-id 3 network-cost 10', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 18:52:23,852 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:3649118372 1 udp 2122262783 2620:9b::1909:557a 51859 typ host generation 0 ufrag Gi/F network-id 2', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 18:52:23,853 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:3649118372 1 udp 2122262783 2620:9b::1909:557a 51859 typ host generation 0 ufrag Gi/F network-id 2', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 18:52:23,853 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:4154011431 1 udp 1685790463 196.179.251.38 51858 typ srflx raddr 192.168.1.8 rport 51858 generation 0 ufrag Gi/F network-id 3 network-cost 10', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 18:52:23,854 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:4154011431 1 udp 1685790463 196.179.251.38 51858 typ srflx raddr 192.168.1.8 rport 51858 generation 0 ufrag Gi/F network-id 3 network-cost 10', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 18:52:23,854 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:2519834359 1 tcp 1518214911 25.9.85.122 9 typ host tcptype active generation 0 ufrag Gi/F network-id 1', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 18:52:23,855 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:2519834359 1 tcp 1518214911 25.9.85.122 9 typ host tcptype active generation 0 ufrag Gi/F network-id 1', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 18:52:23,855 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:4228440197 1 tcp 1518149375 192.168.55.100 9 typ host tcptype active generation 0 ufrag Gi/F network-id 4', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 18:52:23,855 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:4228440197 1 tcp 1518149375 192.168.55.100 9 typ host tcptype active generation 0 ufrag Gi/F network-id 4', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 18:52:23,856 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:3698834221 1 tcp 1518083839 169.254.137.191 9 typ host tcptype active generation 0 ufrag Gi/F network-id 5', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 18:52:23,856 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:3698834221 1 tcp 1518083839 169.254.137.191 9 typ host tcptype active generation 0 ufrag Gi/F network-id 5', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 18:52:23,857 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:1237944602 1 tcp 1518018303 192.168.1.8 9 typ host tcptype active generation 0 ufrag Gi/F network-id 3 network-cost 10', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 18:52:23,857 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:1237944602 1 tcp 1518018303 192.168.1.8 9 typ host tcptype active generation 0 ufrag Gi/F network-id 3 network-cost 10', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 18:52:23,858 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:657191984 1 tcp 1518283007 2620:9b::1909:557a 9 typ host tcptype active generation 0 ufrag Gi/F network-id 2', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 18:52:23,858 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:657191984 1 tcp 1518283007 2620:9b::1909:557a 9 typ host tcptype active generation 0 ufrag Gi/F network-id 2', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 18:52:23,860 - INFO - ICE state client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c state=checking
-2026-04-20 18:52:23,861 - INFO - Connection(2) Check CandidatePair(('192.168.1.2', 53905) -> ('25.9.85.122', 51855)) State.FROZEN -> State.WAITING
-2026-04-20 18:52:23,862 - INFO - Connection(2) Check CandidatePair(('192.168.55.1', 56538) -> ('25.9.85.122', 51855)) State.FROZEN -> State.WAITING
-2026-04-20 18:52:23,862 - INFO - Connection(2) Check CandidatePair(('100.106.184.117', 56079) -> ('25.9.85.122', 51855)) State.FROZEN -> State.WAITING
-2026-04-20 18:52:23,862 - INFO - Connection(2) Check CandidatePair(('172.17.0.1', 49880) -> ('25.9.85.122', 51855)) State.FROZEN -> State.WAITING
-2026-04-20 18:52:23,863 - INFO - Connection(2) Check CandidatePair(('192.168.1.2', 53905) -> ('192.168.55.100', 51856)) State.FROZEN -> State.WAITING
-2026-04-20 18:52:23,863 - INFO - WebRTC state client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c state=connecting
-2026-04-20 18:52:23,863 - INFO - Connection(2) Check CandidatePair(('192.168.1.2', 53905) -> ('25.9.85.122', 51855)) State.WAITING -> State.IN_PROGRESS
-2026-04-20 18:52:23,885 - INFO - Connection(2) Check CandidatePair(('192.168.55.1', 56538) -> ('25.9.85.122', 51855)) State.WAITING -> State.IN_PROGRESS
-2026-04-20 18:52:23,905 - INFO - Connection(2) Check CandidatePair(('100.106.184.117', 56079) -> ('25.9.85.122', 51855)) State.WAITING -> State.IN_PROGRESS
-2026-04-20 18:52:23,926 - INFO - Connection(2) Check CandidatePair(('172.17.0.1', 49880) -> ('25.9.85.122', 51855)) State.WAITING -> State.IN_PROGRESS
-2026-04-20 18:52:23,946 - INFO - Connection(2) Check CandidatePair(('192.168.1.2', 53905) -> ('192.168.55.100', 51856)) State.WAITING -> State.IN_PROGRESS
-2026-04-20 18:52:23,967 - INFO - Connection(2) Check CandidatePair(('192.168.55.1', 56538) -> ('192.168.55.100', 51856)) State.FROZEN -> State.IN_PROGRESS
-2026-04-20 18:52:23,968 - INFO - Connection(2) Check CandidatePair(('192.168.55.1', 56538) -> ('192.168.55.100', 51856)) State.IN_PROGRESS -> State.SUCCEEDED
-2026-04-20 18:52:23,969 - INFO - Connection(2) Check CandidatePair(('192.168.55.1', 56538) -> ('169.254.137.191', 51857)) State.FROZEN -> State.WAITING
-2026-04-20 18:52:23,969 - INFO - Connection(2) Check CandidatePair(('192.168.55.1', 56538) -> ('192.168.1.8', 51858)) State.FROZEN -> State.WAITING
-2026-04-20 18:52:23,969 - INFO - Connection(2) Check CandidatePair(('192.168.55.1', 56538) -> ('196.179.251.38', 51858)) State.FROZEN -> State.WAITING
-2026-04-20 18:52:23,987 - INFO - Connection(2) Check CandidatePair(('192.168.55.1', 56538) -> ('169.254.137.191', 51857)) State.WAITING -> State.IN_PROGRESS
-2026-04-20 18:52:24,006 - INFO - Connection(2) Check CandidatePair(('100.106.184.117', 56079) -> ('192.168.55.100', 51856)) State.FROZEN -> State.FAILED
-2026-04-20 18:52:24,006 - INFO - Connection(2) Check CandidatePair(('172.17.0.1', 49880) -> ('192.168.55.100', 51856)) State.FROZEN -> State.FAILED
-2026-04-20 18:52:24,006 - INFO - Connection(2) Check CandidatePair(('192.168.1.2', 53905) -> ('169.254.137.191', 51857)) State.FROZEN -> State.FAILED
-2026-04-20 18:52:24,007 - INFO - Connection(2) Check CandidatePair(('100.106.184.117', 56079) -> ('169.254.137.191', 51857)) State.FROZEN -> State.FAILED
-2026-04-20 18:52:24,007 - INFO - Connection(2) Check CandidatePair(('172.17.0.1', 49880) -> ('169.254.137.191', 51857)) State.FROZEN -> State.FAILED
-2026-04-20 18:52:24,007 - INFO - Connection(2) Check CandidatePair(('192.168.1.2', 53905) -> ('192.168.1.8', 51858)) State.FROZEN -> State.FAILED
-2026-04-20 18:52:24,007 - INFO - Connection(2) Check CandidatePair(('192.168.55.1', 56538) -> ('192.168.1.8', 51858)) State.WAITING -> State.FAILED
-2026-04-20 18:52:24,008 - INFO - Connection(2) Check CandidatePair(('100.106.184.117', 56079) -> ('192.168.1.8', 51858)) State.FROZEN -> State.FAILED
-2026-04-20 18:52:24,008 - INFO - Connection(2) Check CandidatePair(('172.17.0.1', 49880) -> ('192.168.1.8', 51858)) State.FROZEN -> State.FAILED
-2026-04-20 18:52:24,008 - INFO - Connection(2) Check CandidatePair(('192.168.1.2', 53905) -> ('196.179.251.38', 51858)) State.FROZEN -> State.FAILED
-2026-04-20 18:52:24,008 - INFO - Connection(2) Check CandidatePair(('192.168.55.1', 56538) -> ('196.179.251.38', 51858)) State.WAITING -> State.FAILED
-2026-04-20 18:52:24,009 - INFO - Connection(2) Check CandidatePair(('100.106.184.117', 56079) -> ('196.179.251.38', 51858)) State.FROZEN -> State.FAILED
-2026-04-20 18:52:24,009 - INFO - Connection(2) Check CandidatePair(('172.17.0.1', 49880) -> ('196.179.251.38', 51858)) State.FROZEN -> State.FAILED
-2026-04-20 18:52:24,009 - INFO - Connection(2) ICE completed
-2026-04-20 18:52:24,010 - INFO - ICE state client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c state=completed
-2026-04-20 18:52:24,048 - INFO - WebRTC state client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c state=connected
-2026-04-20 18:52:24,147 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=test_tts data={'type': 'test_tts', 'text': 'hello how are you ?'}
-2026-04-20 18:52:24,148 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=test_tts data={'type': 'test_tts', 'text': 'hello how are you ?'}
-2026-04-20 18:52:24,149 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-20 18:52:24,880 - INFO - Connection(2) Check CandidatePair(('192.168.1.2', 53905) -> ('192.168.1.8', 51858)) State.FAILED -> State.IN_PROGRESS
-2026-04-20 18:52:24,885 - INFO - Connection(2) Check CandidatePair(('192.168.1.2', 53905) -> ('192.168.1.8', 51858)) State.IN_PROGRESS -> State.SUCCEEDED
-2026-04-20 18:52:25,079 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=tts_test data={'type': 'tts_test', 'text': 'hello how are you ?'}
-2026-04-20 18:52:25,080 - INFO - TTS audio client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c phrase_len=19 rate=48000 samples=60870 dtype=float32
-2026-04-20 18:52:25,253 - INFO - TTS frames queued client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c frames=64
-2026-04-20 18:52:26,384 - INFO - TTS scheduler stopped client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c
-2026-04-20 18:52:26,386 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=emotion data={'type': 'emotion', 'name': 'idle'}
-2026-04-20 18:55:25,072 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=test_tts data={'type': 'test_tts', 'text': 'hello how are you ?'}
-2026-04-20 18:55:25,073 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=test_tts data={'type': 'test_tts', 'text': 'hello how are you ?'}
-2026-04-20 18:55:25,075 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-20 18:55:25,989 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=tts_test data={'type': 'tts_test', 'text': 'hello how are you ?'}
-2026-04-20 18:55:25,990 - INFO - TTS audio client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c phrase_len=19 rate=48000 samples=61984 dtype=float32
-2026-04-20 18:55:26,218 - INFO - TTS frames queued client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c frames=65
-2026-04-20 18:55:27,354 - INFO - TTS scheduler stopped client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c
-2026-04-20 18:55:27,355 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=emotion data={'type': 'emotion', 'name': 'idle'}
-2026-04-20 19:13:58,670 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=test_tts data={'type': 'test_tts', 'text': 'hello how are you ?'}
-2026-04-20 19:13:58,671 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=test_tts data={'type': 'test_tts', 'text': 'hello how are you ?'}
-2026-04-20 19:13:58,672 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-20 19:13:59,574 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=tts_test data={'type': 'tts_test', 'text': 'hello how are you ?'}
-2026-04-20 19:13:59,575 - INFO - TTS audio client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c phrase_len=19 rate=48000 samples=59198 dtype=float32
-2026-04-20 19:13:59,716 - INFO - TTS frames queued client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c frames=62
-2026-04-20 19:14:00,850 - INFO - TTS scheduler stopped client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c
-2026-04-20 19:14:00,852 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=emotion data={'type': 'emotion', 'name': 'idle'}
-2026-04-20 19:14:21,989 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=test_tts data={'type': 'test_tts', 'text': 'hey , you have 30 deliveries today good luck'}
-2026-04-20 19:14:21,990 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=test_tts data={'type': 'test_tts', 'text': 'hey , you have 30 deliveries today good luck'}
-2026-04-20 19:14:21,991 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-20 19:14:23,107 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=tts_test data={'type': 'tts_test', 'text': 'hey , you have 30 deliveries today good luck'}
-2026-04-20 19:14:23,109 - INFO - TTS audio client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c phrase_len=44 rate=48000 samples=136660 dtype=float32
-2026-04-20 19:14:24,854 - INFO - TTS frames queued client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c frames=143
-2026-04-20 19:14:25,987 - INFO - TTS scheduler stopped client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c
-2026-04-20 19:14:25,989 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=emotion data={'type': 'emotion', 'name': 'idle'}
-2026-04-20 19:14:38,095 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=test_tts data={'type': 'test_tts', 'text': 'hey , you have 30 deliveries today good luck !'}
-2026-04-20 19:14:38,096 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=test_tts data={'type': 'test_tts', 'text': 'hey , you have 30 deliveries today good luck !'}
-2026-04-20 19:14:38,097 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-20 19:14:39,214 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=tts_test data={'type': 'tts_test', 'text': 'hey , you have 30 deliveries today good luck !'}
-2026-04-20 19:14:39,216 - INFO - TTS audio client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c phrase_len=46 rate=48000 samples=138889 dtype=float32
-2026-04-20 19:14:41,000 - INFO - TTS frames queued client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c frames=145
-2026-04-20 19:14:42,135 - INFO - TTS scheduler stopped client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c
-2026-04-20 19:14:42,137 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=emotion data={'type': 'emotion', 'name': 'idle'}
-2026-04-20 19:14:47,484 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=stop data={'type': 'stop'}
-2026-04-20 19:14:47,485 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=stop data={'type': 'stop'}
-2026-04-20 19:14:47,491 - INFO - ICE state client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c state=closed
-2026-04-20 19:14:47,492 - INFO - WebRTC state client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c state=None
-2026-04-20 19:14:47,492 - INFO - WebRTC cleaned up client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c
-2026-04-20 19:14:47,493 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=stopped data={'type': 'stopped'}
-2026-04-20 19:14:49,195 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=start data={'type': 'start'}
-2026-04-20 19:14:49,197 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=start data={'type': 'start'}
-2026-04-20 19:14:49,204 - INFO - WebRTC peer created client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c
-2026-04-20 19:14:49,204 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=started data={'type': 'started'}
-2026-04-20 19:14:49,598 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=offer data={'type': 'offer', 'sdp': 'v=0\r\no=- 8034275925983490170 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS 790f741c-3332-42e2-bc06-1fc606754c12\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 0 8 13 110 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:qvBX\r\na=ice-pwd:PpLSh1WeVxjrTVVgaNkBKgjZ\r\na=ice-options:trickle\r\na=fingerprint:sha-256 19:ED:F4:FF:D9:B1:2A:57:A4:8A:9E:8D:83:A7:6E:9E:2D:D1:F4:6C:9A:76:BC:6A:1C:14:FA:94:FD:AC:7C:FD\r\na=setup:actpass\r\na=mid:0\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=sendrecv\r\na=msid:790f741c-3332-42e2-bc06-1fc606754c12 d8885961-0333-4ae1-902e-0354fa671e8c\r\na=rtcp-mux\r\na=rtcp-rsize\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1\r\na=rtpmap:63 red/48000/2\r\na=fmtp:63 111/111\r\na=rtpmap:9 G722/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:110 telephone-event/48000\r\na=rtpmap:126 telephone-event/8000\r\na=ssrc:3680779678 cname:wiVd92Ls6206YzFn\r\na=ssrc:3680779678 msid:790f741c-3332-42e2-bc06-1fc606754c12 d8885961-0333-4ae1-902e-0354fa671e8c\r\n'}
-2026-04-20 19:14:49,600 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=offer data={'type': 'offer', 'sdp': 'v=0\r\no=- 8034275925983490170 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS 790f741c-3332-42e2-bc06-1fc606754c12\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 0 8 13 110 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:qvBX\r\na=ice-pwd:PpLSh1WeVxjrTVVgaNkBKgjZ\r\na=ice-options:trickle\r\na=fingerprint:sha-256 19:ED:F4:FF:D9:B1:2A:57:A4:8A:9E:8D:83:A7:6E:9E:2D:D1:F4:6C:9A:76:BC:6A:1C:14:FA:94:FD:AC:7C:FD\r\na=setup:actpass\r\na=mid:0\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=sendrecv\r\na=msid:790f741c-3332-42e2-bc06-1fc606754c12 d8885961-0333-4ae1-902e-0354fa671e8c\r\na=rtcp-mux\r\na=rtcp-rsize\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1\r\na=rtpmap:63 red/48000/2\r\na=fmtp:63 111/111\r\na=rtpmap:9 G722/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:110 telephone-event/48000\r\na=rtpmap:126 telephone-event/8000\r\na=ssrc:3680779678 cname:wiVd92Ls6206YzFn\r\na=ssrc:3680779678 msid:790f741c-3332-42e2-bc06-1fc606754c12 d8885961-0333-4ae1-902e-0354fa671e8c\r\n'}
-2026-04-20 19:14:49,607 - INFO - Audio track received client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c
-2026-04-20 19:14:54,620 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=answer data={'type': 'answer', 'sdp': 'v=0\r\no=- 3985694089 3985694089 IN IP4 0.0.0.0\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=msid-semantic:WMS *\r\nm=audio 55166 UDP/TLS/RTP/SAVPF 111 9 0 8\r\nc=IN IP4 192.168.1.2\r\na=sendrecv\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=mid:0\r\na=msid:b4c6b084-ce14-4fa6-b717-a2b4566b596b e4a81646-9e80-4174-9250-e0ec3b67cc6d\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=rtcp-mux\r\na=ssrc:1540346473 cname:67f92d03-ae40-40b8-a63a-50e2788d5859\r\na=rtpmap:111 opus/48000/2\r\na=rtpmap:9 G722/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=candidate:e2aea8ef0c61df57b654b7125d14184e 1 udp 2130706431 192.168.1.2 55166 typ host\r\na=candidate:b651bd9b1bc9adcc78d97e3465fd5bf2 1 udp 2130706431 192.168.55.1 43518 typ host\r\na=candidate:d562b16207e26c2e9ce1214be2a781c0 1 udp 2130706431 100.106.184.117 50205 typ host\r\na=candidate:580b5f32035da7f14a30ea7a8d826c67 1 udp 2130706431 172.17.0.1 54066 typ host\r\na=candidate:0ad8db753210ce9554cf251a9e51e792 1 udp 1694498815 196.179.251.38 54066 typ srflx raddr 172.17.0.1 rport 54066\r\na=candidate:7b29ffc97bc5f5ca4db0cbe5623d884d 1 udp 1694498815 196.179.251.38 55166 typ srflx raddr 192.168.1.2 rport 55166\r\na=end-of-candidates\r\na=ice-ufrag:8fKS\r\na=ice-pwd:JIsElR4EEcRmsgTZER6sAW\r\na=fingerprint:sha-256 84:4B:39:DA:3D:AC:5F:58:41:EA:AB:E5:49:8A:AA:A7:11:C1:44:F0:DF:0D:39:D9:AF:3C:B7:A6:B7:4A:C2:88\r\na=fingerprint:sha-384 2C:40:AC:0B:B5:B3:DD:01:09:F7:B4:54:A6:1C:E3:26:C7:0A:58:95:E6:1B:51:B7:B5:2B:0D:F1:B9:C1:70:07:0B:EB:4C:10:CA:58:AF:11:85:52:86:76:3D:3C:5C:97\r\na=fingerprint:sha-512 6F:04:88:0D:86:59:6C:9D:A6:7C:00:7B:2E:A6:60:7F:55:FE:AC:02:34:45:61:A5:48:C2:E3:DB:C0:05:3B:94:7F:AF:95:FC:FD:3F:0F:3D:32:CE:2E:91:69:A1:D0:D4:E1:DF:D7:7B:7F:44:64:68:0E:5B:6A:3D:8A:04:61:40\r\na=setup:active\r\n'}
-2026-04-20 19:14:54,624 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:3014644086 1 udp 2122194687 25.9.85.122 61816 typ host generation 0 ufrag qvBX network-id 1', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 19:14:54,624 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:3014644086 1 udp 2122194687 25.9.85.122 61816 typ host generation 0 ufrag qvBX network-id 1', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 19:14:54,625 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:988893543 1 udp 2122129151 192.168.55.100 61817 typ host generation 0 ufrag qvBX network-id 4', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 19:14:54,625 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:988893543 1 udp 2122129151 192.168.55.100 61817 typ host generation 0 ufrag qvBX network-id 4', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 19:14:54,626 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:707742226 1 udp 2122063615 169.254.137.191 61818 typ host generation 0 ufrag qvBX network-id 5', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 19:14:54,626 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:707742226 1 udp 2122063615 169.254.137.191 61818 typ host generation 0 ufrag qvBX network-id 5', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 19:14:54,627 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:727187418 1 udp 2121998079 192.168.1.8 61819 typ host generation 0 ufrag qvBX network-id 3 network-cost 10', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 19:14:54,627 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:727187418 1 udp 2121998079 192.168.1.8 61819 typ host generation 0 ufrag qvBX network-id 3 network-cost 10', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 19:14:54,628 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:2720805453 1 udp 2122262783 2620:9b::1909:557a 61820 typ host generation 0 ufrag qvBX network-id 2', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 19:14:54,628 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:2720805453 1 udp 2122262783 2620:9b::1909:557a 61820 typ host generation 0 ufrag qvBX network-id 2', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 19:14:54,629 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:237908016 1 udp 1685790463 196.179.251.38 61819 typ srflx raddr 192.168.1.8 rport 61819 generation 0 ufrag qvBX network-id 3 network-cost 10', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 19:14:54,629 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:237908016 1 udp 1685790463 196.179.251.38 61819 typ srflx raddr 192.168.1.8 rport 61819 generation 0 ufrag qvBX network-id 3 network-cost 10', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 19:14:54,630 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:3445634030 1 tcp 1518214911 25.9.85.122 9 typ host tcptype active generation 0 ufrag qvBX network-id 1', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 19:14:54,630 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:3445634030 1 tcp 1518214911 25.9.85.122 9 typ host tcptype active generation 0 ufrag qvBX network-id 1', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 19:14:54,630 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:1144959999 1 tcp 1518149375 192.168.55.100 9 typ host tcptype active generation 0 ufrag qvBX network-id 4', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 19:14:54,631 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:1144959999 1 tcp 1518149375 192.168.55.100 9 typ host tcptype active generation 0 ufrag qvBX network-id 4', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 19:14:54,631 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:1424009354 1 tcp 1518083839 169.254.137.191 9 typ host tcptype active generation 0 ufrag qvBX network-id 5', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 19:14:54,631 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:1424009354 1 tcp 1518083839 169.254.137.191 9 typ host tcptype active generation 0 ufrag qvBX network-id 5', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 19:14:54,632 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:1436032322 1 tcp 1518018303 192.168.1.8 9 typ host tcptype active generation 0 ufrag qvBX network-id 3 network-cost 10', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 19:14:54,632 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:1436032322 1 tcp 1518018303 192.168.1.8 9 typ host tcptype active generation 0 ufrag qvBX network-id 3 network-cost 10', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 19:14:54,633 - INFO - 📨 WS MESSAGE RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:3705917653 1 tcp 1518283007 2620:9b::1909:557a 9 typ host tcptype active generation 0 ufrag qvBX network-id 2', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 19:14:54,633 - INFO - 📨 NOTIFICATION RECEIVED client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:3705917653 1 tcp 1518283007 2620:9b::1909:557a 9 typ host tcptype active generation 0 ufrag qvBX network-id 2', 'sdpMid': '0', 'sdpMLineIndex': 0}}
-2026-04-20 19:14:54,635 - INFO - ICE state client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c state=checking
-2026-04-20 19:14:54,637 - INFO - Connection(3) Check CandidatePair(('192.168.1.2', 55166) -> ('25.9.85.122', 61816)) State.FROZEN -> State.WAITING
-2026-04-20 19:14:54,637 - INFO - Connection(3) Check CandidatePair(('192.168.55.1', 43518) -> ('25.9.85.122', 61816)) State.FROZEN -> State.WAITING
-2026-04-20 19:14:54,637 - INFO - Connection(3) Check CandidatePair(('100.106.184.117', 50205) -> ('25.9.85.122', 61816)) State.FROZEN -> State.WAITING
-2026-04-20 19:14:54,637 - INFO - Connection(3) Check CandidatePair(('172.17.0.1', 54066) -> ('25.9.85.122', 61816)) State.FROZEN -> State.WAITING
-2026-04-20 19:14:54,638 - INFO - Connection(3) Check CandidatePair(('192.168.1.2', 55166) -> ('192.168.55.100', 61817)) State.FROZEN -> State.WAITING
-2026-04-20 19:14:54,638 - INFO - WebRTC state client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c state=connecting
-2026-04-20 19:14:54,638 - INFO - Connection(3) Check CandidatePair(('192.168.1.2', 55166) -> ('25.9.85.122', 61816)) State.WAITING -> State.IN_PROGRESS
-2026-04-20 19:14:54,659 - INFO - Connection(3) Check CandidatePair(('192.168.55.1', 43518) -> ('25.9.85.122', 61816)) State.WAITING -> State.IN_PROGRESS
-2026-04-20 19:14:54,679 - INFO - Connection(3) Check CandidatePair(('100.106.184.117', 50205) -> ('25.9.85.122', 61816)) State.WAITING -> State.IN_PROGRESS
-2026-04-20 19:14:54,699 - INFO - Connection(3) Check CandidatePair(('172.17.0.1', 54066) -> ('25.9.85.122', 61816)) State.WAITING -> State.IN_PROGRESS
-2026-04-20 19:14:54,719 - INFO - Connection(3) Check CandidatePair(('192.168.1.2', 55166) -> ('192.168.55.100', 61817)) State.WAITING -> State.IN_PROGRESS
-2026-04-20 19:14:54,740 - INFO - Connection(3) Check CandidatePair(('192.168.55.1', 43518) -> ('192.168.55.100', 61817)) State.FROZEN -> State.IN_PROGRESS
-2026-04-20 19:14:54,743 - INFO - Connection(3) Check CandidatePair(('192.168.55.1', 43518) -> ('192.168.55.100', 61817)) State.IN_PROGRESS -> State.SUCCEEDED
-2026-04-20 19:14:54,744 - INFO - Connection(3) Check CandidatePair(('192.168.55.1', 43518) -> ('169.254.137.191', 61818)) State.FROZEN -> State.WAITING
-2026-04-20 19:14:54,744 - INFO - Connection(3) Check CandidatePair(('192.168.55.1', 43518) -> ('192.168.1.8', 61819)) State.FROZEN -> State.WAITING
-2026-04-20 19:14:54,744 - INFO - Connection(3) Check CandidatePair(('192.168.55.1', 43518) -> ('196.179.251.38', 61819)) State.FROZEN -> State.WAITING
-2026-04-20 19:14:54,758 - INFO - Connection(3) Check CandidatePair(('100.106.184.117', 50205) -> ('192.168.55.100', 61817)) State.FROZEN -> State.FAILED
-2026-04-20 19:14:54,759 - INFO - Connection(3) Check CandidatePair(('172.17.0.1', 54066) -> ('192.168.55.100', 61817)) State.FROZEN -> State.FAILED
-2026-04-20 19:14:54,759 - INFO - Connection(3) Check CandidatePair(('192.168.1.2', 55166) -> ('169.254.137.191', 61818)) State.FROZEN -> State.FAILED
-2026-04-20 19:14:54,759 - INFO - Connection(3) Check CandidatePair(('192.168.55.1', 43518) -> ('169.254.137.191', 61818)) State.WAITING -> State.FAILED
-2026-04-20 19:14:54,759 - INFO - Connection(3) Check CandidatePair(('100.106.184.117', 50205) -> ('169.254.137.191', 61818)) State.FROZEN -> State.FAILED
-2026-04-20 19:14:54,760 - INFO - Connection(3) Check CandidatePair(('172.17.0.1', 54066) -> ('169.254.137.191', 61818)) State.FROZEN -> State.FAILED
-2026-04-20 19:14:54,760 - INFO - Connection(3) Check CandidatePair(('192.168.1.2', 55166) -> ('192.168.1.8', 61819)) State.FROZEN -> State.FAILED
-2026-04-20 19:14:54,760 - INFO - Connection(3) Check CandidatePair(('192.168.55.1', 43518) -> ('192.168.1.8', 61819)) State.WAITING -> State.FAILED
-2026-04-20 19:14:54,760 - INFO - Connection(3) Check CandidatePair(('100.106.184.117', 50205) -> ('192.168.1.8', 61819)) State.FROZEN -> State.FAILED
-2026-04-20 19:14:54,760 - INFO - Connection(3) Check CandidatePair(('172.17.0.1', 54066) -> ('192.168.1.8', 61819)) State.FROZEN -> State.FAILED
-2026-04-20 19:14:54,761 - INFO - Connection(3) Check CandidatePair(('192.168.1.2', 55166) -> ('196.179.251.38', 61819)) State.FROZEN -> State.FAILED
-2026-04-20 19:14:54,761 - INFO - Connection(3) Check CandidatePair(('192.168.55.1', 43518) -> ('196.179.251.38', 61819)) State.WAITING -> State.FAILED
-2026-04-20 19:14:54,761 - INFO - Connection(3) Check CandidatePair(('100.106.184.117', 50205) -> ('196.179.251.38', 61819)) State.FROZEN -> State.FAILED
-2026-04-20 19:14:54,761 - INFO - Connection(3) Check CandidatePair(('172.17.0.1', 54066) -> ('196.179.251.38', 61819)) State.FROZEN -> State.FAILED
-2026-04-20 19:14:54,761 - INFO - Connection(3) ICE completed
-2026-04-20 19:14:54,762 - INFO - ICE state client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c state=completed
-2026-04-20 19:14:54,780 - INFO - WebRTC state client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c state=connected
-2026-04-20 19:14:55,688 - INFO - Connection(3) Check CandidatePair(('192.168.1.2', 55166) -> ('192.168.1.8', 61819)) State.FAILED -> State.IN_PROGRESS
-2026-04-20 19:14:55,692 - INFO - Connection(3) Check CandidatePair(('192.168.1.2', 55166) -> ('192.168.1.8', 61819)) State.IN_PROGRESS -> State.SUCCEEDED
-2026-04-20 19:15:07,740 - INFO - WebRTC native pre_roll client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c samples=19200 sr=48000
-2026-04-20 19:15:07,743 - INFO - VAD speech_start client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c p=0.912
-2026-04-20 19:15:08,539 - INFO - Utterance end client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c samples=20480
-2026-04-20 19:15:08,557 - INFO - Saved WebRTC native debug client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c native=webrtc_ae9b7f9f-91b3-4588-9cca-40568962ea6c_c23d171e_decoded_native.wav rms=0.074270 sr=48000 n=58560
-2026-04-20 19:15:08,559 - INFO - STT raw input client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c ms=1280 rms=0.0725 peak=0.4485 n=20480 sr=16000
-2026-04-20 19:15:08,567 - INFO - Saved WebRTC STT audio compare client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c raw=webrtc_ae9b7f9f-91b3-4588-9cca-40568962ea6c_c23d171e_raw.wav denoised=webrtc_ae9b7f9f-91b3-4588-9cca-40568962ea6c_c23d171e_denoised.wav raw_rms=0.072476 denoised_rms=0.072476 sr=16000
-2026-04-20 19:15:08,569 - INFO - Processing audio with duration 00:01.280
-2026-04-20 19:15:09,194 - INFO - STT transcript client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c text='Hello?'
-2026-04-20 19:15:09,194 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=transcript data={'type': 'transcript', 'text': 'Hello?'}
-2026-04-20 19:15:09,195 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
-2026-04-20 19:15:10,964 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-20 19:15:10,965 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=response data={'type': 'response', 'text': 'Hello! How can I assist you today?'}
-2026-04-20 19:15:10,966 - INFO - TTS audio client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c phrase_len=34 rate=48000 samples=113937 dtype=float32
-2026-04-20 19:15:11,785 - INFO - TTS frames queued client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c frames=119
-2026-04-20 19:15:12,922 - INFO - TTS scheduler stopped client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c
-2026-04-20 19:15:12,923 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=emotion data={'type': 'emotion', 'name': 'idle'}
-2026-04-20 19:15:15,100 - INFO - WebRTC native pre_roll client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c samples=19200 sr=48000
-2026-04-20 19:15:15,103 - INFO - VAD speech_start client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c p=0.985
-2026-04-20 19:15:17,901 - INFO - Utterance end client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c samples=52736
-2026-04-20 19:15:17,926 - INFO - Saved WebRTC native debug client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c native=webrtc_ae9b7f9f-91b3-4588-9cca-40568962ea6c_aad5b272_decoded_native.wav rms=0.053140 sr=48000 n=154560
-2026-04-20 19:15:17,928 - INFO - STT raw input client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c ms=3296 rms=0.0525 peak=0.2862 n=52736 sr=16000
-2026-04-20 19:15:17,941 - INFO - Saved WebRTC STT audio compare client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c raw=webrtc_ae9b7f9f-91b3-4588-9cca-40568962ea6c_aad5b272_raw.wav denoised=webrtc_ae9b7f9f-91b3-4588-9cca-40568962ea6c_aad5b272_denoised.wav raw_rms=0.052484 denoised_rms=0.052484 sr=16000
-2026-04-20 19:15:17,943 - INFO - Processing audio with duration 00:03.296
-2026-04-20 19:15:18,757 - INFO - STT transcript client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c text='Do I have any deliveries today?'
-2026-04-20 19:15:18,757 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=transcript data={'type': 'transcript', 'text': 'Do I have any deliveries today?'}
-2026-04-20 19:15:18,758 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
-2026-04-20 19:15:20,115 - INFO - Action: SHOW_DELIVERIES_LIST
-2026-04-20 19:15:20,115 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.SHOW_DELIVERIES_LIST', 'extras': {}}
-2026-04-20 19:15:30,637 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-20 19:15:30,638 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=response data={'type': 'response', 'text': 'You have a delivery planned today. Here are the details:\n\n- **Location:** Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie\n- **Client Name:** Sandra\n- **Package Information:** Burger\n- **Delivery Status:** Planned\n\nWould you like to know more about this delivery or start navigation to the location?'}
-2026-04-20 19:15:30,638 - INFO - TTS audio client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c phrase_len=348 rate=48000 samples=1456192 dtype=float32
-2026-04-20 19:15:54,854 - INFO - TTS frames queued client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c frames=1517
-2026-04-20 19:15:55,986 - INFO - TTS scheduler stopped client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c
-2026-04-20 19:15:55,987 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=emotion data={'type': 'emotion', 'name': 'idle'}
-2026-04-20 19:15:56,440 - INFO - WebRTC native pre_roll client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c samples=19200 sr=48000
-2026-04-20 19:15:56,441 - INFO - VAD speech_start client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c p=0.935
-2026-04-20 19:15:57,620 - INFO - Utterance end client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c samples=26624
-2026-04-20 19:15:57,640 - INFO - Saved WebRTC native debug client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c native=webrtc_ae9b7f9f-91b3-4588-9cca-40568962ea6c_c4aab39d_decoded_native.wav rms=0.045021 sr=48000 n=76800
-2026-04-20 19:15:57,643 - INFO - STT raw input client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c ms=1664 rms=0.0441 peak=0.2376 n=26624 sr=16000
-2026-04-20 19:15:57,654 - INFO - Saved WebRTC STT audio compare client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c raw=webrtc_ae9b7f9f-91b3-4588-9cca-40568962ea6c_c4aab39d_raw.wav denoised=webrtc_ae9b7f9f-91b3-4588-9cca-40568962ea6c_c4aab39d_denoised.wav raw_rms=0.044121 denoised_rms=0.044121 sr=16000
-2026-04-20 19:15:57,655 - INFO - Processing audio with duration 00:01.664
-2026-04-20 19:15:57,785 - INFO - WebRTC native pre_roll client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c samples=5760 sr=48000
-2026-04-20 19:15:57,786 - INFO - VAD speech_start client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c p=0.948
-2026-04-20 19:15:57,786 - WARNING - INTERRUPT called! client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c tts_playing=False processing_lock=True cancel_flag=False
-2026-04-20 19:15:57,787 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=tts_stop_now data={'type': 'tts_stop_now'}
-2026-04-20 19:15:59,959 - INFO - Utterance end client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c samples=37376
-2026-04-20 19:15:59,974 - INFO - Saved WebRTC native debug client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c native=webrtc_ae9b7f9f-91b3-4588-9cca-40568962ea6c_1b5e0459_decoded_native.wav rms=0.056012 sr=48000 n=112320
-2026-04-20 19:15:59,976 - INFO - STT raw input client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c ms=2336 rms=0.0560 peak=0.3087 n=37376 sr=16000
-2026-04-20 19:15:59,988 - INFO - Saved WebRTC STT audio compare client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c raw=webrtc_ae9b7f9f-91b3-4588-9cca-40568962ea6c_1b5e0459_raw.wav denoised=webrtc_ae9b7f9f-91b3-4588-9cca-40568962ea6c_1b5e0459_denoised.wav raw_rms=0.056012 denoised_rms=0.056012 sr=16000
-2026-04-20 19:15:59,990 - INFO - Processing audio with duration 00:02.336
-2026-04-20 19:16:00,773 - INFO - STT transcript client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c text='I want you to tell me more about you.'
-2026-04-20 19:16:00,774 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=transcript data={'type': 'transcript', 'text': 'I want you to tell me more about you.'}
-2026-04-20 19:16:00,774 - INFO - Interruption decision client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c mode=continuation elapsed_ms=144 transcript='I want you to tell me more about you.'
-2026-04-20 19:16:00,774 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=interruption_decision data={'type': 'interruption_decision', 'decision': 'continuation', 'elapsed_ms': 143.7, 'text': 'I want you to tell me more about you.'}
-2026-04-20 19:16:00,775 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
-2026-04-20 19:16:08,171 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=emotion data={'type': 'emotion', 'name': 'speaking'}
-2026-04-20 19:16:08,180 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=response data={'type': 'response', 'text': "It seems there might be some confusion. I am actually an AI assistant named Rytle designed to assist with delivery-related tasks, such as checking delivery statuses and providing navigation. I don't have personal information about myself like a human would. I can help you with your delivery needs, so how can I assist you with your current delivery today?"}
-2026-04-20 19:16:08,181 - INFO - TTS audio client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c phrase_len=356 rate=48000 samples=917229 dtype=float32
-2026-04-20 19:16:22,971 - INFO - TTS frames queued client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c frames=956
-2026-04-20 19:16:24,106 - INFO - TTS scheduler stopped client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c
-2026-04-20 19:16:24,107 - INFO - 📤 WS MESSAGE SENT client_id=ae9b7f9f-91b3-4588-9cca-40568962ea6c type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-20 19:29:52,493 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
+2026-04-20 19:29:52,493 - INFO - Handler registered for message type: identify_driver
+2026-04-20 19:29:52,494 - INFO - Handler registered for message type: get_trips
+2026-04-20 19:29:52,562 - INFO - Started server process [256900]
+2026-04-20 19:29:52,563 - INFO - Waiting for application startup.
+2026-04-20 19:29:55,465 - INFO - HTTP Request: GET https://huggingface.co/api/models/Systran/faster-whisper-small/revision/main "HTTP/1.1 200 OK"
+2026-04-20 19:30:03,232 - INFO - MascoteService démarré
+2026-04-20 19:30:03,233 - INFO - NotificationService started
+2026-04-20 19:30:03,234 - INFO - DeliveryService started
+2026-04-20 19:30:03,234 - INFO - DeliveryStateMachine started
+2026-04-20 19:30:03,244 - INFO - Piper binary ready bin=/home/server/piper/piper/piper sample_rate=22050
+2026-04-20 19:30:03,244 - INFO - Denoise disabled
+2026-04-20 19:30:03,245 - INFO - Warmup started
+2026-04-20 19:30:03,252 - INFO - Warmup vad ok in 0.01s
+2026-04-20 19:30:03,253 - INFO - Processing audio with duration 00:01.000
+2026-04-20 19:30:07,420 - INFO - Warmup stt ok in 4.17s
+2026-04-20 19:30:07,421 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
+2026-04-20 19:30:08,674 - INFO - Warmup llm ok in 1.25s
+2026-04-20 19:30:10,474 - INFO - Warmup tts ok in 1.80s
+2026-04-20 19:30:10,475 - INFO - Warmup finished
+2026-04-20 19:30:10,475 - INFO - Application startup complete.
+2026-04-20 19:30:10,483 - INFO - Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-04-20 19:38:38,768 - INFO - 100.82.137.115:59430 - "WebSocket /ws" [accepted]
+2026-04-20 19:38:38,773 - INFO - WS connected client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b
+2026-04-20 19:38:38,775 - INFO - connection open
+2026-04-20 19:38:38,856 - INFO - 📨 WS MESSAGE RECEIVED client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-04-20 19:38:38,857 - INFO - 📨 NOTIFICATION RECEIVED client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-04-20 19:38:38,858 - INFO - 🚚 Identifying driver client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b serial=000
+2026-04-20 19:38:39,712 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-20 19:38:39,713 - INFO - Récupération des trips pour le driver: 000
+2026-04-20 19:38:39,713 - INFO - Recherche du driver par query: 000
+2026-04-20 19:38:39,714 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 19:38:40,527 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 19:38:40,529 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 19:38:40,529 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-20 19:38:40,529 - INFO - Recherche du driver par query: 000
+2026-04-20 19:38:40,529 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 19:38:40,577 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 19:38:40,577 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-20 19:38:40,577 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-20 19:38:40,709 - INFO - 3 schedule(s) trouvé(s) sur 36 entité(s)
+2026-04-20 19:38:40,710 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-20 19:38:40,710 - INFO - Recherche des packages pour le schedule: 69e64adb6e48095340640444
+2026-04-20 19:38:40,710 - INFO - Recherche par référence: field=schedule_id, value=69e64adb6e48095340640444
+2026-04-20 19:38:40,774 - INFO - ✅ SUCCÈS: 1 package(s) trouvé(s) pour le schedule 69e64adb6e48095340640444
+2026-04-20 19:38:40,775 - INFO - Récupération du package par ID: 69e64abf6e48095340640443
+2026-04-20 19:38:40,775 - INFO - Récupération de l'instance: 69e64abf6e48095340640443
+2026-04-20 19:38:40,882 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-20 19:38:41,389 - INFO - ✅ SUCCÈS: Package trouvé: 69e64abf6e48095340640443
+2026-04-20 19:38:41,391 - INFO - Package: 69e64abf6e48095340640443, address field: 69e64abf6e48095340640442
+2026-04-20 19:38:41,391 - INFO - Récupération adresse: 69e64abf6e48095340640442
+2026-04-20 19:38:41,392 - INFO - Récupération de l'adresse par ID: 69e64abf6e48095340640442
+2026-04-20 19:38:41,392 - INFO - Récupération de l'instance: 69e64abf6e48095340640442
+2026-04-20 19:38:41,447 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e64abf6e48095340640442
+2026-04-20 19:38:41,448 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-20 19:38:41,448 - INFO - Trip créé: id=69e64abf6e48095340640443, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.827657, lng=10.1949974
+2026-04-20 19:38:41,448 - INFO - ✅ SUCCÈS: 1 trip(s) créé(s) et ordonné(s) par position
+2026-04-20 19:38:41,449 - INFO - ✅ SUCCÈS: 1 trip(s) exporté(s) vers data.json
+2026-04-20 19:38:41,451 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-20 19:38:41,451 - INFO - Recherche du driver par query: 000
+2026-04-20 19:38:41,451 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 19:38:41,646 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 19:38:41,649 - INFO - ✅ Found 1 trips for driver vivien (000)
+2026-04-20 19:38:41,649 - INFO - 📤 NOTIFICATION SENT client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=trips_list data={'driver_serial': '000', 'trip_count': 1, 'trips': [{'id': '69e64abf6e48095340640443', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.827657, 'longitude': 10.1949974, 'clientName': 'sandra', 'packageInfo': 'burger', 'deliveryStatus': 'planned', 'isFragile': False}]}
+2026-04-20 19:38:41,650 - INFO - 📤 WS MESSAGE SENT client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=notification data={'type': 'notification', 'notification_type': 'trips_list', 'data': {'driver_serial': '000', 'trip_count': 1, 'trips': [{'id': '69e64abf6e48095340640443', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.827657, 'longitude': 10.1949974, 'clientName': 'sandra', 'packageInfo': 'burger', 'deliveryStatus': 'planned', 'isFragile': False}]}}
+2026-04-20 19:38:41,651 - INFO - 📤 WS MESSAGE SENT client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=error data={'type': 'error', 'message': 'unknown type'}
+2026-04-20 19:38:41,651 - INFO - 📨 WS MESSAGE RECEIVED client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=start data={'type': 'start'}
+2026-04-20 19:38:41,652 - INFO - 📨 NOTIFICATION RECEIVED client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=start data={'type': 'start'}
+2026-04-20 19:38:41,770 - INFO - WebRTC peer created client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b
+2026-04-20 19:38:41,772 - INFO - 📤 WS MESSAGE SENT client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=started data={'type': 'started'}
+2026-04-20 19:38:41,773 - INFO - 📨 WS MESSAGE RECEIVED client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=offer data={'type': 'offer', 'sdp': 'v=0\r\no=- 5021938799301198486 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 102 0 8 13 110 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:u29I\r\na=ice-pwd:MQyezdwjymZbc+1KcQlreUPZ\r\na=ice-options:trickle renomination\r\na=fingerprint:sha-256 25:B8:2C:13:0C:00:6A:32:2C:65:01:4B:78:EE:2C:95:EB:CE:40:F5:DC:2F:9A:1B:22:83:A6:74:5F:1E:24:31\r\na=setup:actpass\r\na=mid:0\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=sendrecv\r\na=msid:- audio_label\r\na=rtcp-mux\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1;stereo=0;sprop-stereo=0;maxaveragebitrate=64000;ptime=20\r\na=rtpmap:63 red/48000/2\r\na=fmtp:63 111/111\r\na=rtpmap:9 G722/8000\r\na=rtpmap:102 ILBC/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:110 telephone-event/48000\r\na=rtpmap:126 telephone-event/8000\r\na=ssrc:4176055898 cname:5PlgtJ7zKdmVvnSU\r\na=ssrc:4176055898 msid:- audio_label\r\n'}
+2026-04-20 19:38:41,773 - INFO - 📨 NOTIFICATION RECEIVED client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=offer data={'type': 'offer', 'sdp': 'v=0\r\no=- 5021938799301198486 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 102 0 8 13 110 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:u29I\r\na=ice-pwd:MQyezdwjymZbc+1KcQlreUPZ\r\na=ice-options:trickle renomination\r\na=fingerprint:sha-256 25:B8:2C:13:0C:00:6A:32:2C:65:01:4B:78:EE:2C:95:EB:CE:40:F5:DC:2F:9A:1B:22:83:A6:74:5F:1E:24:31\r\na=setup:actpass\r\na=mid:0\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=sendrecv\r\na=msid:- audio_label\r\na=rtcp-mux\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1;stereo=0;sprop-stereo=0;maxaveragebitrate=64000;ptime=20\r\na=rtpmap:63 red/48000/2\r\na=fmtp:63 111/111\r\na=rtpmap:9 G722/8000\r\na=rtpmap:102 ILBC/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:110 telephone-event/48000\r\na=rtpmap:126 telephone-event/8000\r\na=ssrc:4176055898 cname:5PlgtJ7zKdmVvnSU\r\na=ssrc:4176055898 msid:- audio_label\r\n'}
+2026-04-20 19:38:41,779 - INFO - Audio track received client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b
+2026-04-20 19:38:46,794 - INFO - 📤 WS MESSAGE SENT client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=answer data={'type': 'answer', 'sdp': 'v=0\r\no=- 3985695521 3985695521 IN IP4 0.0.0.0\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=msid-semantic:WMS *\r\nm=audio 47223 UDP/TLS/RTP/SAVPF 111 9 0 8\r\nc=IN IP4 192.168.1.2\r\na=sendrecv\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=mid:0\r\na=msid:a386b6f8-2aa0-4c66-b900-7b4d51feb59a 14ee9207-205a-4469-8a75-57b6667b34ed\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=rtcp-mux\r\na=ssrc:1080388065 cname:807e7389-b6ef-4c7a-aa7d-16ef9574461f\r\na=rtpmap:111 opus/48000/2\r\na=rtpmap:9 G722/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=candidate:e2aea8ef0c61df57b654b7125d14184e 1 udp 2130706431 192.168.1.2 47223 typ host\r\na=candidate:d562b16207e26c2e9ce1214be2a781c0 1 udp 2130706431 100.106.184.117 48790 typ host\r\na=candidate:7b29ffc97bc5f5ca4db0cbe5623d884d 1 udp 1694498815 196.179.251.38 47223 typ srflx raddr 192.168.1.2 rport 47223\r\na=end-of-candidates\r\na=ice-ufrag:jsuL\r\na=ice-pwd:b6P1cL5WTZsJivgUSsUcCW\r\na=fingerprint:sha-256 F8:85:EF:B5:BF:6C:9D:B5:DB:A8:C5:CE:24:8F:D1:FD:F1:1B:E8:6E:01:FF:DD:CC:90:71:1D:E2:8A:31:79:57\r\na=fingerprint:sha-384 55:3B:A2:80:4F:F2:FD:E3:52:99:5D:19:05:C7:DE:8C:E8:E4:75:1D:75:B8:45:26:AC:5A:34:3D:C1:39:B2:01:24:20:E1:41:19:53:1F:D8:5C:58:F3:66:F5:12:F6:E5\r\na=fingerprint:sha-512 D5:EB:CE:C6:41:61:A1:9A:7A:97:2A:0D:3F:E9:8C:7A:72:6F:6B:8E:DF:34:B6:41:3E:99:83:9A:EF:04:E2:3D:72:0B:3C:81:6C:FB:0C:49:87:86:37:E9:EB:95:89:32:20:82:06:66:0A:A6:C2:14:5C:46:33:BA:34:80:72:A9\r\na=setup:active\r\n'}
+2026-04-20 19:38:46,798 - INFO - 📨 WS MESSAGE RECEIVED client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:402133472 1 udp 2122129151 192.168.1.3 41761 typ host generation 0 ufrag u29I network-id 3 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 19:38:46,798 - INFO - 📨 NOTIFICATION RECEIVED client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:402133472 1 udp 2122129151 192.168.1.3 41761 typ host generation 0 ufrag u29I network-id 3 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 19:38:46,799 - INFO - 📨 WS MESSAGE RECEIVED client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:1437507750 1 udp 1685921535 196.179.251.38 41761 typ srflx raddr 192.168.1.3 rport 41761 generation 0 ufrag u29I network-id 3 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 19:38:46,800 - INFO - 📨 NOTIFICATION RECEIVED client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:1437507750 1 udp 1685921535 196.179.251.38 41761 typ srflx raddr 192.168.1.3 rport 41761 generation 0 ufrag u29I network-id 3 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 19:38:46,800 - INFO - 📨 WS MESSAGE RECEIVED client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:3914515828 1 tcp 1518280447 192.168.1.3 9 typ host tcptype active generation 0 ufrag u29I network-id 5 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 19:38:46,801 - INFO - 📨 NOTIFICATION RECEIVED client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:3914515828 1 tcp 1518280447 192.168.1.3 9 typ host tcptype active generation 0 ufrag u29I network-id 5 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 19:38:46,802 - INFO - ICE state client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b state=checking
+2026-04-20 19:38:46,803 - INFO - Connection(0) Check CandidatePair(('192.168.1.2', 47223) -> ('192.168.1.3', 41761)) State.FROZEN -> State.WAITING
+2026-04-20 19:38:46,804 - INFO - Connection(0) Check CandidatePair(('192.168.55.1', 34917) -> ('192.168.1.3', 41761)) State.FROZEN -> State.WAITING
+2026-04-20 19:38:46,804 - INFO - Connection(0) Check CandidatePair(('100.106.184.117', 48790) -> ('192.168.1.3', 41761)) State.FROZEN -> State.WAITING
+2026-04-20 19:38:46,804 - INFO - Connection(0) Check CandidatePair(('172.17.0.1', 50666) -> ('192.168.1.3', 41761)) State.FROZEN -> State.WAITING
+2026-04-20 19:38:46,805 - INFO - Connection(0) Check CandidatePair(('192.168.1.2', 47223) -> ('196.179.251.38', 41761)) State.FROZEN -> State.WAITING
+2026-04-20 19:38:46,805 - INFO - WebRTC state client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b state=connecting
+2026-04-20 19:38:46,805 - INFO - Connection(0) Check CandidatePair(('192.168.1.2', 47223) -> ('192.168.1.3', 41761)) State.WAITING -> State.IN_PROGRESS
+2026-04-20 19:38:46,825 - INFO - Connection(0) Check CandidatePair(('192.168.55.1', 34917) -> ('192.168.1.3', 41761)) State.WAITING -> State.IN_PROGRESS
+2026-04-20 19:38:46,845 - INFO - Connection(0) Check CandidatePair(('100.106.184.117', 48790) -> ('192.168.1.3', 41761)) State.WAITING -> State.IN_PROGRESS
+2026-04-20 19:38:46,851 - INFO - Connection(0) Check CandidatePair(('192.168.1.2', 47223) -> ('192.168.1.3', 41761)) State.IN_PROGRESS -> State.SUCCEEDED
+2026-04-20 19:38:46,853 - INFO - Connection(0) Check CandidatePair(('100.106.184.117', 48790) -> ('192.168.1.3', 41761)) failed : source address mismatch
+2026-04-20 19:38:46,853 - INFO - Connection(0) Check CandidatePair(('100.106.184.117', 48790) -> ('192.168.1.3', 41761)) State.IN_PROGRESS -> State.FAILED
+2026-04-20 19:38:46,854 - INFO - Connection(0) Check CandidatePair(('172.17.0.1', 50666) -> ('192.168.1.3', 41761)) State.WAITING -> State.FAILED
+2026-04-20 19:38:46,855 - INFO - Connection(0) Check CandidatePair(('192.168.1.2', 47223) -> ('196.179.251.38', 41761)) State.WAITING -> State.FAILED
+2026-04-20 19:38:46,855 - INFO - Connection(0) Check CandidatePair(('192.168.55.1', 34917) -> ('196.179.251.38', 41761)) State.FROZEN -> State.FAILED
+2026-04-20 19:38:46,855 - INFO - Connection(0) Check CandidatePair(('100.106.184.117', 48790) -> ('196.179.251.38', 41761)) State.FROZEN -> State.FAILED
+2026-04-20 19:38:46,855 - INFO - Connection(0) Check CandidatePair(('172.17.0.1', 50666) -> ('196.179.251.38', 41761)) State.FROZEN -> State.FAILED
+2026-04-20 19:38:46,855 - INFO - Connection(0) ICE completed
+2026-04-20 19:38:46,865 - INFO - ICE state client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b state=completed
+2026-04-20 19:38:46,971 - INFO - WebRTC state client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b state=connected
+2026-04-20 19:38:46,972 - INFO - 🔊 Sending pending voice summary client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b
+2026-04-20 19:38:46,972 - INFO - 📤 WS MESSAGE SENT client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=emotion data={'type': 'emotion', 'name': 'greeting'}
+2026-04-20 19:38:46,973 - INFO - 😊 Emotion greeting sent client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b
+2026-04-20 19:38:46,974 - INFO - 📤 WS MESSAGE SENT client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-20 19:38:48,525 - INFO - 📤 WS MESSAGE SENT client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=tts_test data={'type': 'tts_test', 'text': 'Hello vivien, you have 1 trips.'}
+2026-04-20 19:38:48,526 - INFO - TTS audio client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b phrase_len=31 rate=48000 samples=113254 dtype=float32
+2026-04-20 19:39:19,762 - INFO - WebRTC native pre_roll client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b samples=19200 sr=48000
+2026-04-20 19:39:19,765 - INFO - VAD speech_start client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b p=0.901
+2026-04-20 19:39:19,766 - WARNING - INTERRUPT called! client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b tts_playing=True processing_lock=True cancel_flag=False
+2026-04-20 19:39:19,767 - INFO - 📤 WS MESSAGE SENT client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=tts_stop_now data={'type': 'tts_stop_now'}
+2026-04-20 19:39:20,780 - INFO - Utterance end client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b samples=24064
+2026-04-20 19:39:20,834 - INFO - Saved WebRTC native debug client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b native=webrtc_1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b_82d7c2d4_decoded_native.wav rms=0.085204 sr=48000 n=69120
+2026-04-20 19:44:47,580 - INFO - WebRTC native pre_roll client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b samples=19200 sr=48000
+2026-04-20 19:44:47,609 - INFO - VAD speech_start client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b p=0.923
+2026-04-20 19:44:48,894 - INFO - Utterance end client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b samples=28672
+2026-04-20 19:44:48,980 - INFO - Saved WebRTC native debug client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b native=webrtc_1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b_786327ba_decoded_native.wav rms=0.010963 sr=48000 n=83520
+2026-04-20 19:44:48,984 - INFO - TTS frames queued client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b frames=118
+2026-04-20 19:44:48,985 - INFO - 📤 WS MESSAGE SENT client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-20 19:44:48,990 - INFO - STT raw input client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b ms=1504 rms=0.0833 peak=0.6271 n=24064 sr=16000
+2026-04-20 19:44:49,073 - INFO - Saved WebRTC STT audio compare client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b raw=webrtc_1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b_82d7c2d4_raw.wav denoised=webrtc_1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b_82d7c2d4_denoised.wav raw_rms=0.083318 denoised_rms=0.083318 sr=16000
+2026-04-20 19:44:49,079 - INFO - Processing audio with duration 00:01.504
+2026-04-20 19:44:52,466 - INFO - STT transcript client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b text='Hello?'
+2026-04-20 19:44:52,467 - INFO - 📤 WS MESSAGE SENT client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=transcript data={'type': 'transcript', 'text': 'Hello?'}
+2026-04-20 19:44:52,468 - INFO - Interruption decision client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b mode=interruption elapsed_ms=32792 transcript='Hello?'
+2026-04-20 19:44:52,468 - INFO - 📤 WS MESSAGE SENT client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=interruption_decision data={'type': 'interruption_decision', 'decision': 'interruption', 'elapsed_ms': 32792.1, 'text': 'Hello?'}
+2026-04-20 19:44:52,469 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
+2026-04-20 19:44:56,214 - INFO - 📤 WS MESSAGE SENT client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-20 19:44:56,215 - INFO - 📤 WS MESSAGE SENT client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=response data={'type': 'response', 'text': 'Hello! How can I assist you today?'}
+2026-04-20 19:44:56,215 - INFO - TTS audio client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b phrase_len=34 rate=48000 samples=112823 dtype=float32
+2026-04-20 19:44:56,237 - INFO - TTS frames queued client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b frames=118
+2026-04-20 19:44:56,628 - INFO - TTS scheduler stopped client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b
+2026-04-20 19:44:56,629 - INFO - 📤 WS MESSAGE SENT client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-20 19:44:56,642 - INFO - STT raw input client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b ms=1792 rms=0.0108 peak=0.0913 n=28672 sr=16000
+2026-04-20 19:44:56,669 - INFO - Saved WebRTC STT audio compare client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b raw=webrtc_1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b_786327ba_raw.wav denoised=webrtc_1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b_786327ba_denoised.wav raw_rms=0.010801 denoised_rms=0.010801 sr=16000
+2026-04-20 19:44:56,670 - INFO - Processing audio with duration 00:01.792
+2026-04-20 19:44:57,645 - INFO - STT transcript client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b text='BOOM!'
+2026-04-20 19:44:57,646 - INFO - 📤 WS MESSAGE SENT client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=transcript data={'type': 'transcript', 'text': 'BOOM!'}
+2026-04-20 19:44:57,647 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
+2026-04-20 19:45:02,953 - INFO - 📤 WS MESSAGE SENT client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-20 19:45:02,954 - INFO - 📤 WS MESSAGE SENT client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=response data={'type': 'response', 'text': 'Oh, I\'m sorry, could you please clarify what you meant by "BOOM"? Did you need help with a specific delivery or maybe a navigation request?'}
+2026-04-20 19:45:02,955 - INFO - TTS audio client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b phrase_len=139 rate=48000 samples=360255 dtype=float32
+2026-04-20 19:45:07,689 - INFO - TTS frames queued client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b frames=376
+2026-04-20 19:45:08,819 - INFO - TTS scheduler stopped client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b
+2026-04-20 19:45:08,821 - INFO - 📤 WS MESSAGE SENT client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-20 19:45:12,295 - INFO - WebRTC native pre_roll client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b samples=19200 sr=48000
+2026-04-20 19:45:12,296 - INFO - VAD speech_start client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b p=0.957
+2026-04-20 19:45:14,688 - INFO - Utterance end client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b samples=45568
+2026-04-20 19:45:14,712 - INFO - Saved WebRTC native debug client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b native=webrtc_1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b_3ffbdbec_decoded_native.wav rms=0.052579 sr=48000 n=134400
+2026-04-20 19:45:14,715 - INFO - STT raw input client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b ms=2848 rms=0.0521 peak=0.3552 n=45568 sr=16000
+2026-04-20 19:45:14,729 - INFO - Saved WebRTC STT audio compare client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b raw=webrtc_1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b_3ffbdbec_raw.wav denoised=webrtc_1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b_3ffbdbec_denoised.wav raw_rms=0.052105 denoised_rms=0.052105 sr=16000
+2026-04-20 19:45:14,732 - INFO - Processing audio with duration 00:02.848
+2026-04-20 19:45:15,913 - INFO - STT transcript client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b text='You can actually hear me.'
+2026-04-20 19:45:15,914 - INFO - 📤 WS MESSAGE SENT client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=transcript data={'type': 'transcript', 'text': 'You can actually hear me.'}
+2026-04-20 19:45:15,915 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
+2026-04-20 19:45:21,878 - INFO - 📤 WS MESSAGE SENT client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-20 19:45:21,879 - INFO - 📤 WS MESSAGE SENT client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=response data={'type': 'response', 'text': "It seems there might have been some technical issues, but I'm here to help! Could you please provide the order ID of the delivery you need assistance with, or do you need navigation assistance to a specific location?"}
+2026-04-20 19:45:21,879 - INFO - TTS audio client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b phrase_len=216 rate=48000 samples=510163 dtype=float32
+2026-04-20 19:45:28,506 - INFO - TTS frames queued client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b frames=532
+2026-04-20 19:45:29,641 - INFO - TTS scheduler stopped client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b
+2026-04-20 19:45:29,643 - INFO - 📤 WS MESSAGE SENT client_id=1c5e4a34-d3c3-42a0-b140-8bd56a0b6e8b type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-20 19:48:53,925 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
+2026-04-20 19:48:53,927 - INFO - Handler registered for message type: identify_driver
+2026-04-20 19:48:53,928 - INFO - Handler registered for message type: get_trips
+2026-04-20 19:48:56,410 - INFO - Started server process [3723]
+2026-04-20 19:48:56,413 - INFO - Waiting for application startup.
+2026-04-20 19:49:32,815 - INFO - HTTP Request: GET https://huggingface.co/api/models/Systran/faster-whisper-small/revision/main "HTTP/1.1 200 OK"
+2026-04-20 19:49:43,979 - INFO - MascoteService démarré
+2026-04-20 19:49:43,981 - INFO - NotificationService started
+2026-04-20 19:49:43,981 - INFO - DeliveryService started
+2026-04-20 19:49:43,982 - INFO - DeliveryStateMachine started
+2026-04-20 19:49:43,988 - INFO - Piper binary ready bin=/home/server/piper/piper/piper sample_rate=22050
+2026-04-20 19:49:43,988 - INFO - Denoise disabled
+2026-04-20 19:49:43,988 - INFO - Warmup started
+2026-04-20 19:49:44,244 - INFO - Warmup vad ok in 0.26s
+2026-04-20 19:49:44,246 - INFO - Processing audio with duration 00:01.000
+2026-04-20 19:49:49,660 - INFO - Warmup stt ok in 5.41s
+2026-04-20 19:49:49,665 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
+2026-04-20 19:49:52,103 - INFO - Warmup llm ok in 2.44s
+2026-04-20 19:49:53,878 - INFO - Warmup tts ok in 1.77s
+2026-04-20 19:49:53,879 - INFO - Warmup finished
+2026-04-20 19:49:53,883 - INFO - Application startup complete.
+2026-04-20 19:49:53,900 - INFO - Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-04-20 19:51:47,893 - INFO - 100.82.137.115:54350 - "WebSocket /ws" [accepted]
+2026-04-20 19:51:47,897 - INFO - WS connected client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d
+2026-04-20 19:51:47,900 - INFO - connection open
+2026-04-20 19:51:48,005 - INFO - 📨 WS MESSAGE RECEIVED client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-04-20 19:51:48,006 - INFO - 📨 NOTIFICATION RECEIVED client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-04-20 19:51:48,007 - INFO - 🚚 Identifying driver client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d serial=000
+2026-04-20 19:51:48,529 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-20 19:51:48,530 - INFO - Récupération des trips pour le driver: 000
+2026-04-20 19:51:48,530 - INFO - Recherche du driver par query: 000
+2026-04-20 19:51:48,531 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 19:51:49,045 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 19:51:49,047 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 19:51:49,047 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-20 19:51:49,047 - INFO - Recherche du driver par query: 000
+2026-04-20 19:51:49,047 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 19:51:49,143 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 19:51:49,144 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-20 19:51:49,144 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-20 19:51:49,284 - INFO - 3 schedule(s) trouvé(s) sur 36 entité(s)
+2026-04-20 19:51:49,286 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-20 19:51:49,286 - INFO - Recherche des packages pour le schedule: 69e64adb6e48095340640444
+2026-04-20 19:51:49,287 - INFO - Recherche par référence: field=schedule_id, value=69e64adb6e48095340640444
+2026-04-20 19:51:49,343 - INFO - ✅ SUCCÈS: 1 package(s) trouvé(s) pour le schedule 69e64adb6e48095340640444
+2026-04-20 19:51:49,343 - INFO - Récupération du package par ID: 69e64abf6e48095340640443
+2026-04-20 19:51:49,344 - INFO - Récupération de l'instance: 69e64abf6e48095340640443
+2026-04-20 19:51:49,388 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-20 19:51:49,474 - INFO - ✅ SUCCÈS: Package trouvé: 69e64abf6e48095340640443
+2026-04-20 19:51:49,475 - INFO - Package: 69e64abf6e48095340640443, address field: 69e64abf6e48095340640442
+2026-04-20 19:51:49,475 - INFO - Récupération adresse: 69e64abf6e48095340640442
+2026-04-20 19:51:49,475 - INFO - Récupération de l'adresse par ID: 69e64abf6e48095340640442
+2026-04-20 19:51:49,476 - INFO - Récupération de l'instance: 69e64abf6e48095340640442
+2026-04-20 19:51:49,520 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e64abf6e48095340640442
+2026-04-20 19:51:49,521 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-20 19:51:49,521 - INFO - Trip créé: id=69e64abf6e48095340640443, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.827657, lng=10.1949974
+2026-04-20 19:51:49,522 - INFO - ✅ SUCCÈS: 1 trip(s) créé(s) et ordonné(s) par position
+2026-04-20 19:51:49,527 - INFO - ✅ SUCCÈS: 1 trip(s) exporté(s) vers data.json
+2026-04-20 19:51:49,529 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-20 19:51:49,530 - INFO - Recherche du driver par query: 000
+2026-04-20 19:51:49,530 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 19:51:49,692 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 19:51:49,699 - INFO - ✅ Found 1 trips for driver vivien (000)
+2026-04-20 19:51:49,700 - INFO - 📤 NOTIFICATION SENT client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d type=trips_list data={'driver_serial': '000', 'trip_count': 1, 'trips': [{'id': '69e64abf6e48095340640443', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.827657, 'longitude': 10.1949974, 'clientName': 'sandra', 'packageInfo': 'burger', 'deliveryStatus': 'planned', 'isFragile': False}]}
+2026-04-20 19:51:49,700 - INFO - 📤 WS MESSAGE SENT client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d type=notification data={'type': 'notification', 'notification_type': 'trips_list', 'data': {'driver_serial': '000', 'trip_count': 1, 'trips': [{'id': '69e64abf6e48095340640443', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.827657, 'longitude': 10.1949974, 'clientName': 'sandra', 'packageInfo': 'burger', 'deliveryStatus': 'planned', 'isFragile': False}]}}
+2026-04-20 19:51:49,702 - INFO - 📤 WS MESSAGE SENT client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d type=error data={'type': 'error', 'message': 'unknown type'}
+2026-04-20 19:51:49,703 - INFO - 📨 WS MESSAGE RECEIVED client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d type=start data={'type': 'start'}
+2026-04-20 19:51:49,703 - INFO - 📨 NOTIFICATION RECEIVED client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d type=start data={'type': 'start'}
+2026-04-20 19:51:49,840 - INFO - WebRTC peer created client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d
+2026-04-20 19:51:49,842 - INFO - 📤 WS MESSAGE SENT client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d type=started data={'type': 'started'}
+2026-04-20 19:51:49,844 - INFO - 📨 WS MESSAGE RECEIVED client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d type=offer data={'type': 'offer', 'sdp': 'v=0\r\no=- 8622975897046462221 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 102 0 8 13 110 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:FdDV\r\na=ice-pwd:nIyy2ub3H2aTfo2A4bijzBlU\r\na=ice-options:trickle renomination\r\na=fingerprint:sha-256 0F:CB:AE:63:DB:13:EF:C0:C2:BD:92:CE:33:96:30:FC:9C:FA:C2:77:25:B0:EF:EE:E4:5C:35:7D:C0:8C:1D:7D\r\na=setup:actpass\r\na=mid:0\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=sendrecv\r\na=msid:- audio_label\r\na=rtcp-mux\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1;stereo=0;sprop-stereo=0;maxaveragebitrate=64000;ptime=20\r\na=rtpmap:63 red/48000/2\r\na=fmtp:63 111/111\r\na=rtpmap:9 G722/8000\r\na=rtpmap:102 ILBC/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:110 telephone-event/48000\r\na=rtpmap:126 telephone-event/8000\r\na=ssrc:78233681 cname:0djTxbmb/eRmpLfs\r\na=ssrc:78233681 msid:- audio_label\r\n'}
+2026-04-20 19:51:49,844 - INFO - 📨 NOTIFICATION RECEIVED client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d type=offer data={'type': 'offer', 'sdp': 'v=0\r\no=- 8622975897046462221 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 102 0 8 13 110 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:FdDV\r\na=ice-pwd:nIyy2ub3H2aTfo2A4bijzBlU\r\na=ice-options:trickle renomination\r\na=fingerprint:sha-256 0F:CB:AE:63:DB:13:EF:C0:C2:BD:92:CE:33:96:30:FC:9C:FA:C2:77:25:B0:EF:EE:E4:5C:35:7D:C0:8C:1D:7D\r\na=setup:actpass\r\na=mid:0\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=sendrecv\r\na=msid:- audio_label\r\na=rtcp-mux\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1;stereo=0;sprop-stereo=0;maxaveragebitrate=64000;ptime=20\r\na=rtpmap:63 red/48000/2\r\na=fmtp:63 111/111\r\na=rtpmap:9 G722/8000\r\na=rtpmap:102 ILBC/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:110 telephone-event/48000\r\na=rtpmap:126 telephone-event/8000\r\na=ssrc:78233681 cname:0djTxbmb/eRmpLfs\r\na=ssrc:78233681 msid:- audio_label\r\n'}
+2026-04-20 19:51:49,854 - INFO - Audio track received client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d
+2026-04-20 19:51:54,874 - INFO - 📤 WS MESSAGE SENT client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d type=answer data={'type': 'answer', 'sdp': 'v=0\r\no=- 3985696309 3985696309 IN IP4 0.0.0.0\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=msid-semantic:WMS *\r\nm=audio 50466 UDP/TLS/RTP/SAVPF 111 9 0 8\r\nc=IN IP4 192.168.1.2\r\na=sendrecv\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=mid:0\r\na=msid:47f63a6f-600f-4061-8280-729f72baa041 cf1493c4-a680-46e7-886d-ff13d355c4df\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=rtcp-mux\r\na=ssrc:3369204424 cname:0b90716f-04cd-442d-8b2f-94e0949f4b8f\r\na=rtpmap:111 opus/48000/2\r\na=rtpmap:9 G722/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=candidate:e2aea8ef0c61df57b654b7125d14184e 1 udp 2130706431 192.168.1.2 50466 typ host\r\na=candidate:d562b16207e26c2e9ce1214be2a781c0 1 udp 2130706431 100.106.184.117 42846 typ host\r\na=candidate:7b29ffc97bc5f5ca4db0cbe5623d884d 1 udp 1694498815 196.179.251.38 50466 typ srflx raddr 192.168.1.2 rport 50466\r\na=end-of-candidates\r\na=ice-ufrag:Hu2n\r\na=ice-pwd:yqdSW95uRooPqQokL6vjmz\r\na=fingerprint:sha-256 68:CC:2B:D6:CC:20:20:F2:AE:CD:6B:DA:CE:F8:7D:BE:63:6C:5A:65:0E:E6:85:24:F6:C9:C3:82:10:7D:8D:25\r\na=fingerprint:sha-384 FA:CD:75:14:97:6E:81:42:D1:B6:F8:70:D4:AF:A2:32:EE:24:A9:A2:F9:FF:EB:59:6F:99:CB:CD:00:C2:20:D4:81:56:62:91:48:F8:71:9A:C0:72:C5:A6:15:22:4E:5E\r\na=fingerprint:sha-512 A5:8B:99:A5:5E:CF:8F:F2:DA:F8:29:0E:8A:A5:F8:B5:D0:A8:A4:D6:70:5C:3A:4D:8B:A5:B2:EE:10:E4:99:FF:CA:17:2F:02:31:DE:8F:F9:45:98:64:FA:DE:63:6A:02:E0:2F:CB:5D:0E:49:8E:49:92:46:72:6A:44:91:7E:00\r\na=setup:active\r\n'}
+2026-04-20 19:51:54,878 - INFO - 📨 WS MESSAGE RECEIVED client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:1889883216 1 udp 2122129151 192.168.1.3 52168 typ host generation 0 ufrag FdDV network-id 3 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 19:51:54,878 - INFO - 📨 NOTIFICATION RECEIVED client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:1889883216 1 udp 2122129151 192.168.1.3 52168 typ host generation 0 ufrag FdDV network-id 3 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 19:51:54,880 - INFO - 📨 WS MESSAGE RECEIVED client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:241874632 1 tcp 1518280447 192.168.1.3 9 typ host tcptype active generation 0 ufrag FdDV network-id 5 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 19:51:54,880 - INFO - 📨 NOTIFICATION RECEIVED client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:241874632 1 tcp 1518280447 192.168.1.3 9 typ host tcptype active generation 0 ufrag FdDV network-id 5 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 19:51:54,881 - INFO - 📨 WS MESSAGE RECEIVED client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:2492235385 1 udp 1685921535 196.179.251.38 52168 typ srflx raddr 192.168.1.3 rport 52168 generation 0 ufrag FdDV network-id 3 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 19:51:54,881 - INFO - 📨 NOTIFICATION RECEIVED client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:2492235385 1 udp 1685921535 196.179.251.38 52168 typ srflx raddr 192.168.1.3 rport 52168 generation 0 ufrag FdDV network-id 3 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 19:51:54,883 - INFO - ICE state client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d state=checking
+2026-04-20 19:51:54,884 - INFO - Connection(0) Check CandidatePair(('192.168.1.2', 50466) -> ('192.168.1.3', 52168)) State.FROZEN -> State.WAITING
+2026-04-20 19:51:54,884 - INFO - Connection(0) Check CandidatePair(('192.168.55.1', 54798) -> ('192.168.1.3', 52168)) State.FROZEN -> State.WAITING
+2026-04-20 19:51:54,885 - INFO - Connection(0) Check CandidatePair(('100.106.184.117', 42846) -> ('192.168.1.3', 52168)) State.FROZEN -> State.WAITING
+2026-04-20 19:51:54,885 - INFO - Connection(0) Check CandidatePair(('172.17.0.1', 49948) -> ('192.168.1.3', 52168)) State.FROZEN -> State.WAITING
+2026-04-20 19:51:54,885 - INFO - Connection(0) Check CandidatePair(('192.168.1.2', 50466) -> ('196.179.251.38', 52168)) State.FROZEN -> State.WAITING
+2026-04-20 19:51:54,886 - INFO - WebRTC state client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d state=connecting
+2026-04-20 19:51:54,886 - INFO - Connection(0) Check CandidatePair(('192.168.1.2', 50466) -> ('192.168.1.3', 52168)) State.WAITING -> State.IN_PROGRESS
+2026-04-20 19:51:54,906 - INFO - Connection(0) Check CandidatePair(('192.168.55.1', 54798) -> ('192.168.1.3', 52168)) State.WAITING -> State.IN_PROGRESS
+2026-04-20 19:51:54,926 - INFO - Connection(0) Check CandidatePair(('100.106.184.117', 42846) -> ('192.168.1.3', 52168)) State.WAITING -> State.IN_PROGRESS
+2026-04-20 19:51:54,946 - INFO - Connection(0) Check CandidatePair(('172.17.0.1', 49948) -> ('192.168.1.3', 52168)) State.WAITING -> State.IN_PROGRESS
+2026-04-20 19:51:54,966 - INFO - Connection(0) Check CandidatePair(('192.168.1.2', 50466) -> ('196.179.251.38', 52168)) State.WAITING -> State.IN_PROGRESS
+2026-04-20 19:51:54,986 - INFO - Connection(0) Check CandidatePair(('192.168.55.1', 54798) -> ('196.179.251.38', 52168)) State.FROZEN -> State.IN_PROGRESS
+2026-04-20 19:51:55,002 - INFO - Connection(0) Check CandidatePair(('192.168.1.2', 50466) -> ('192.168.1.3', 52168)) State.IN_PROGRESS -> State.SUCCEEDED
+2026-04-20 19:51:55,003 - INFO - Connection(0) Check CandidatePair(('172.17.0.1', 49948) -> ('192.168.1.3', 52168)) State.IN_PROGRESS -> State.SUCCEEDED
+2026-04-20 19:51:55,003 - INFO - Connection(0) Check CandidatePair(('172.17.0.1', 49948) -> ('196.179.251.38', 52168)) State.FROZEN -> State.WAITING
+2026-04-20 19:51:55,004 - INFO - Connection(0) Check CandidatePair(('100.106.184.117', 42846) -> ('192.168.1.3', 52168)) failed : source address mismatch
+2026-04-20 19:51:55,004 - INFO - Connection(0) Check CandidatePair(('100.106.184.117', 42846) -> ('192.168.1.3', 52168)) State.IN_PROGRESS -> State.FAILED
+2026-04-20 19:51:55,006 - INFO - Connection(0) Check CandidatePair(('172.17.0.1', 49948) -> ('196.179.251.38', 52168)) State.WAITING -> State.IN_PROGRESS
+2026-04-20 19:51:55,009 - INFO - Connection(0) Discovered peer reflexive candidate Candidate(cl7ZLLA9Dx 1 udp 1853693695 100.82.137.115 52168 typ prflx)
+2026-04-20 19:51:55,009 - INFO - Connection(0) Check CandidatePair(('100.106.184.117', 42846) -> ('100.82.137.115', 52168)) State.WAITING -> State.IN_PROGRESS
+2026-04-20 19:51:55,017 - INFO - Connection(0) Check CandidatePair(('100.106.184.117', 42846) -> ('100.82.137.115', 52168)) State.IN_PROGRESS -> State.SUCCEEDED
+2026-04-20 19:51:55,018 - INFO - Connection(0) Check CandidatePair(('100.106.184.117', 42846) -> ('196.179.251.38', 52168)) State.FROZEN -> State.FAILED
+2026-04-20 19:51:55,018 - INFO - Connection(0) ICE completed
+2026-04-20 19:51:55,026 - INFO - ICE state client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d state=completed
+2026-04-20 19:51:55,136 - INFO - WebRTC state client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d state=connected
+2026-04-20 19:51:55,137 - INFO - 🔊 Sending pending voice summary client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d
+2026-04-20 19:51:55,137 - INFO - 📤 WS MESSAGE SENT client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d type=emotion data={'type': 'emotion', 'name': 'greeting'}
+2026-04-20 19:51:55,138 - INFO - 😊 Emotion greeting sent client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d
+2026-04-20 19:51:55,139 - INFO - 📤 WS MESSAGE SENT client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-20 19:51:57,494 - INFO - 📤 WS MESSAGE SENT client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d type=tts_test data={'type': 'tts_test', 'text': 'Hello vivien, you have 1 trips.'}
+2026-04-20 19:51:57,496 - INFO - TTS audio client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d phrase_len=31 rate=48000 samples=111582 dtype=float32
+2026-04-20 19:59:52,228 - INFO - Shutting down
+2026-04-20 19:59:52,245 - INFO - connection closed
+2026-04-20 19:59:52,246 - INFO - Audio track ended client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d
+2026-04-20 19:59:52,275 - INFO - ICE state client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d state=closed
+2026-04-20 19:59:52,277 - INFO - WebRTC state client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d state=None
+2026-04-20 19:59:52,279 - INFO - WebRTC cleaned up client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d
+2026-04-20 19:59:52,279 - INFO - WS disconnected client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d
+2026-04-20 19:59:52,330 - INFO - Waiting for application shutdown.
+2026-04-20 19:59:52,602 - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-41' coro=<WebRTCService.on_state_change() running at /home/server/agent-nvidia-v2/services/webrtc_service.py:750> wait_for=<Future cancelled>>
+2026-04-20 19:59:52,618 - INFO - 📤 WS MESSAGE SENT client_id=26b4879a-844a-4a66-b1d3-18a5ff42e69d type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-20 19:59:52,633 - INFO - DeliveryService shutdown
+2026-04-20 19:59:52,643 - INFO - DeliveryStateMachine shutdown
+2026-04-20 19:59:52,644 - INFO - NotificationService shutdown
+2026-04-20 19:59:52,644 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
+2026-04-20 19:59:52,644 - INFO - MascoteService arrêté
+2026-04-20 19:59:53,613 - INFO - Application shutdown complete.
+2026-04-20 19:59:53,616 - INFO - Finished server process [3723]
+2026-04-20 20:00:25,313 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
+2026-04-20 20:00:25,314 - INFO - Handler registered for message type: identify_driver
+2026-04-20 20:00:25,314 - INFO - Handler registered for message type: get_trips
+2026-04-20 20:00:25,386 - INFO - Started server process [147101]
+2026-04-20 20:00:25,387 - INFO - Waiting for application startup.
+2026-04-20 20:00:28,149 - INFO - HTTP Request: GET https://huggingface.co/api/models/Systran/faster-whisper-small/revision/main "HTTP/1.1 200 OK"
+2026-04-20 20:00:35,951 - INFO - MascoteService démarré
+2026-04-20 20:00:35,953 - INFO - NotificationService started
+2026-04-20 20:00:35,953 - INFO - DeliveryService started
+2026-04-20 20:00:35,953 - INFO - DeliveryStateMachine started
+2026-04-20 20:00:35,955 - INFO - Piper binary ready bin=/home/server/piper/piper/piper sample_rate=22050
+2026-04-20 20:00:35,956 - INFO - Denoise disabled
+2026-04-20 20:00:35,956 - INFO - Warmup started
+2026-04-20 20:00:36,021 - INFO - Warmup vad ok in 0.06s
+2026-04-20 20:00:36,023 - INFO - Processing audio with duration 00:01.000
+2026-04-20 20:00:39,503 - INFO - Warmup stt ok in 3.48s
+2026-04-20 20:00:39,505 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
+2026-04-20 20:00:40,928 - INFO - Warmup llm ok in 1.42s
+2026-04-20 20:00:42,763 - INFO - Warmup tts ok in 1.83s
+2026-04-20 20:00:42,765 - INFO - Warmup finished
+2026-04-20 20:00:42,770 - INFO - Application startup complete.
+2026-04-20 20:00:42,788 - INFO - Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-04-20 20:00:49,290 - INFO - 100.82.137.115:46474 - "WebSocket /ws" [accepted]
+2026-04-20 20:00:49,293 - INFO - WS connected client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276
+2026-04-20 20:00:49,313 - INFO - connection open
+2026-04-20 20:00:49,346 - INFO - 📨 WS MESSAGE RECEIVED client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-04-20 20:00:49,347 - INFO - 📨 NOTIFICATION RECEIVED client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-04-20 20:00:49,348 - INFO - 🚚 Identifying driver client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 serial=000
+2026-04-20 20:00:50,177 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-20 20:00:50,177 - INFO - Récupération des trips pour le driver: 000
+2026-04-20 20:00:50,178 - INFO - Recherche du driver par query: 000
+2026-04-20 20:00:50,178 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 20:00:50,488 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 20:00:50,490 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 20:00:50,490 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-20 20:00:50,490 - INFO - Recherche du driver par query: 000
+2026-04-20 20:00:50,491 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 20:00:50,565 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 20:00:50,566 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-20 20:00:50,566 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-20 20:00:50,713 - INFO - 3 schedule(s) trouvé(s) sur 36 entité(s)
+2026-04-20 20:00:50,714 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-20 20:00:50,715 - INFO - Recherche des packages pour le schedule: 69e64adb6e48095340640444
+2026-04-20 20:00:50,715 - INFO - Recherche par référence: field=schedule_id, value=69e64adb6e48095340640444
+2026-04-20 20:00:50,797 - INFO - ✅ SUCCÈS: 1 package(s) trouvé(s) pour le schedule 69e64adb6e48095340640444
+2026-04-20 20:00:50,798 - INFO - Récupération du package par ID: 69e64abf6e48095340640443
+2026-04-20 20:00:50,798 - INFO - Récupération de l'instance: 69e64abf6e48095340640443
+2026-04-20 20:00:50,849 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-20 20:00:50,997 - INFO - ✅ SUCCÈS: Package trouvé: 69e64abf6e48095340640443
+2026-04-20 20:00:50,998 - INFO - Package: 69e64abf6e48095340640443, address field: 69e64abf6e48095340640442
+2026-04-20 20:00:50,999 - INFO - Récupération adresse: 69e64abf6e48095340640442
+2026-04-20 20:00:50,999 - INFO - Récupération de l'adresse par ID: 69e64abf6e48095340640442
+2026-04-20 20:00:50,999 - INFO - Récupération de l'instance: 69e64abf6e48095340640442
+2026-04-20 20:00:51,052 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e64abf6e48095340640442
+2026-04-20 20:00:51,054 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-20 20:00:51,054 - INFO - Trip créé: id=69e64abf6e48095340640443, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.827657, lng=10.1949974
+2026-04-20 20:00:51,054 - INFO - ✅ SUCCÈS: 1 trip(s) créé(s) et ordonné(s) par position
+2026-04-20 20:00:51,059 - INFO - ✅ SUCCÈS: 1 trip(s) exporté(s) vers data.json
+2026-04-20 20:00:51,061 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-20 20:00:51,061 - INFO - Recherche du driver par query: 000
+2026-04-20 20:00:51,061 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 20:00:51,228 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 20:00:51,233 - INFO - ✅ Found 1 trips for driver vivien (000)
+2026-04-20 20:00:51,234 - INFO - 📤 NOTIFICATION SENT client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 type=trips_list data={'driver_serial': '000', 'trip_count': 1, 'trips': [{'id': '69e64abf6e48095340640443', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.827657, 'longitude': 10.1949974, 'clientName': 'sandra', 'packageInfo': 'burger', 'deliveryStatus': 'planned', 'isFragile': False}]}
+2026-04-20 20:00:51,234 - INFO - 📤 WS MESSAGE SENT client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 type=notification data={'type': 'notification', 'notification_type': 'trips_list', 'data': {'driver_serial': '000', 'trip_count': 1, 'trips': [{'id': '69e64abf6e48095340640443', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.827657, 'longitude': 10.1949974, 'clientName': 'sandra', 'packageInfo': 'burger', 'deliveryStatus': 'planned', 'isFragile': False}]}}
+2026-04-20 20:00:51,236 - INFO - 📤 WS MESSAGE SENT client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 type=error data={'type': 'error', 'message': 'unknown type'}
+2026-04-20 20:00:51,237 - INFO - 📨 WS MESSAGE RECEIVED client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 type=start data={'type': 'start'}
+2026-04-20 20:00:51,237 - INFO - 📨 NOTIFICATION RECEIVED client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 type=start data={'type': 'start'}
+2026-04-20 20:00:51,377 - INFO - WebRTC peer created client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276
+2026-04-20 20:00:51,379 - INFO - 📤 WS MESSAGE SENT client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 type=started data={'type': 'started'}
+2026-04-20 20:00:51,381 - INFO - 📨 WS MESSAGE RECEIVED client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 type=offer data={'type': 'offer', 'sdp': 'v=0\r\no=- 4604636623950292619 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 102 0 8 13 110 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:NegZ\r\na=ice-pwd:gnZYiHDlUhQEmxBMe52CZzWH\r\na=ice-options:trickle renomination\r\na=fingerprint:sha-256 BE:C1:39:9F:92:8F:FE:EB:51:04:B1:F5:10:7E:F2:53:7A:59:AE:2B:C8:B5:E7:AD:30:EE:AE:60:52:48:B4:C4\r\na=setup:actpass\r\na=mid:0\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=sendrecv\r\na=msid:- audio_label\r\na=rtcp-mux\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1;stereo=0;sprop-stereo=0;maxaveragebitrate=64000;ptime=20\r\na=rtpmap:63 red/48000/2\r\na=fmtp:63 111/111\r\na=rtpmap:9 G722/8000\r\na=rtpmap:102 ILBC/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:110 telephone-event/48000\r\na=rtpmap:126 telephone-event/8000\r\na=ssrc:2821494188 cname:/8/+hEKJBtvsbwFU\r\na=ssrc:2821494188 msid:- audio_label\r\n'}
+2026-04-20 20:00:51,381 - INFO - 📨 NOTIFICATION RECEIVED client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 type=offer data={'type': 'offer', 'sdp': 'v=0\r\no=- 4604636623950292619 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 102 0 8 13 110 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:NegZ\r\na=ice-pwd:gnZYiHDlUhQEmxBMe52CZzWH\r\na=ice-options:trickle renomination\r\na=fingerprint:sha-256 BE:C1:39:9F:92:8F:FE:EB:51:04:B1:F5:10:7E:F2:53:7A:59:AE:2B:C8:B5:E7:AD:30:EE:AE:60:52:48:B4:C4\r\na=setup:actpass\r\na=mid:0\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=sendrecv\r\na=msid:- audio_label\r\na=rtcp-mux\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1;stereo=0;sprop-stereo=0;maxaveragebitrate=64000;ptime=20\r\na=rtpmap:63 red/48000/2\r\na=fmtp:63 111/111\r\na=rtpmap:9 G722/8000\r\na=rtpmap:102 ILBC/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:110 telephone-event/48000\r\na=rtpmap:126 telephone-event/8000\r\na=ssrc:2821494188 cname:/8/+hEKJBtvsbwFU\r\na=ssrc:2821494188 msid:- audio_label\r\n'}
+2026-04-20 20:00:51,390 - INFO - Audio track received client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276
+2026-04-20 20:00:56,411 - INFO - 📤 WS MESSAGE SENT client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 type=answer data={'type': 'answer', 'sdp': 'v=0\r\no=- 3985696851 3985696851 IN IP4 0.0.0.0\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=msid-semantic:WMS *\r\nm=audio 43302 UDP/TLS/RTP/SAVPF 111 9 0 8\r\nc=IN IP4 192.168.1.2\r\na=sendrecv\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=mid:0\r\na=msid:8bb693a0-3191-46f9-8529-84f16bb1f9f0 2fb09250-8f71-4a75-96bd-2acc3972465f\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=rtcp-mux\r\na=ssrc:2127397208 cname:e9ee3b75-b5e7-4e55-b0d4-73ce38df840d\r\na=rtpmap:111 opus/48000/2\r\na=rtpmap:9 G722/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=candidate:e2aea8ef0c61df57b654b7125d14184e 1 udp 2130706431 192.168.1.2 43302 typ host\r\na=candidate:d562b16207e26c2e9ce1214be2a781c0 1 udp 2130706431 100.106.184.117 40517 typ host\r\na=candidate:7b29ffc97bc5f5ca4db0cbe5623d884d 1 udp 1694498815 196.179.251.38 43302 typ srflx raddr 192.168.1.2 rport 43302\r\na=end-of-candidates\r\na=ice-ufrag:v1dk\r\na=ice-pwd:x1DptHVUNgDwY5C6AhqBPc\r\na=fingerprint:sha-256 04:8C:A1:C3:B0:A6:6B:CF:35:E9:59:25:FC:7A:3D:F7:9D:A9:18:9F:13:D0:5D:23:E7:17:EC:50:A7:49:C7:8C\r\na=fingerprint:sha-384 22:77:35:FA:A5:75:31:91:28:96:8B:58:5F:C3:43:68:D3:BC:FE:AB:03:CE:D2:D8:DD:73:45:33:D9:D9:50:A2:C6:59:99:37:77:A1:D6:66:C5:B8:F2:C4:E2:A2:52:8A\r\na=fingerprint:sha-512 59:94:F4:C9:8F:CA:8A:5D:6C:45:44:9D:D9:19:80:CC:26:65:25:AF:41:98:CE:CA:DE:7F:E9:B7:B0:31:49:47:EB:3E:7B:4D:15:3E:35:77:A3:47:16:7B:23:2E:45:A0:C9:C3:50:DF:CB:7A:AD:D2:DF:61:15:B0:5E:64:32:75\r\na=setup:active\r\n'}
+2026-04-20 20:00:56,414 - INFO - 📨 WS MESSAGE RECEIVED client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:4144570922 1 udp 2122129151 192.168.1.3 54666 typ host generation 0 ufrag NegZ network-id 3 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:00:56,415 - INFO - 📨 NOTIFICATION RECEIVED client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:4144570922 1 udp 2122129151 192.168.1.3 54666 typ host generation 0 ufrag NegZ network-id 3 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:00:56,416 - INFO - 📨 WS MESSAGE RECEIVED client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:2311504050 1 tcp 1518280447 192.168.1.3 9 typ host tcptype active generation 0 ufrag NegZ network-id 5 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:00:56,416 - INFO - 📨 NOTIFICATION RECEIVED client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:2311504050 1 tcp 1518280447 192.168.1.3 9 typ host tcptype active generation 0 ufrag NegZ network-id 5 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:00:56,417 - INFO - 📨 WS MESSAGE RECEIVED client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:320866307 1 udp 1685921535 196.179.251.38 54666 typ srflx raddr 192.168.1.3 rport 54666 generation 0 ufrag NegZ network-id 3 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:00:56,417 - INFO - 📨 NOTIFICATION RECEIVED client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 type=ice data={'type': 'ice', 'candidate': {'candidate': '{"candidate":"candidate:320866307 1 udp 1685921535 196.179.251.38 54666 typ srflx raddr 192.168.1.3 rport 54666 generation 0 ufrag NegZ network-id 3 network-cost 10","sdpMid":"0","sdpMLineIndex":0}', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:00:56,419 - INFO - ICE state client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 state=checking
+2026-04-20 20:00:56,420 - INFO - Connection(0) Check CandidatePair(('192.168.1.2', 43302) -> ('192.168.1.3', 54666)) State.FROZEN -> State.WAITING
+2026-04-20 20:00:56,421 - INFO - Connection(0) Check CandidatePair(('192.168.55.1', 48553) -> ('192.168.1.3', 54666)) State.FROZEN -> State.WAITING
+2026-04-20 20:00:56,421 - INFO - Connection(0) Check CandidatePair(('100.106.184.117', 40517) -> ('192.168.1.3', 54666)) State.FROZEN -> State.WAITING
+2026-04-20 20:00:56,421 - INFO - Connection(0) Check CandidatePair(('172.17.0.1', 51921) -> ('192.168.1.3', 54666)) State.FROZEN -> State.WAITING
+2026-04-20 20:00:56,421 - INFO - Connection(0) Check CandidatePair(('192.168.1.2', 43302) -> ('196.179.251.38', 54666)) State.FROZEN -> State.WAITING
+2026-04-20 20:00:56,422 - INFO - WebRTC state client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 state=connecting
+2026-04-20 20:00:56,422 - INFO - Connection(0) Check CandidatePair(('192.168.1.2', 43302) -> ('192.168.1.3', 54666)) State.WAITING -> State.IN_PROGRESS
+2026-04-20 20:00:56,431 - INFO - Connection(0) Check CandidatePair(('192.168.1.2', 43302) -> ('192.168.1.3', 54666)) State.IN_PROGRESS -> State.SUCCEEDED
+2026-04-20 20:00:56,432 - INFO - Connection(0) Check CandidatePair(('192.168.55.1', 48553) -> ('192.168.1.3', 54666)) State.WAITING -> State.FAILED
+2026-04-20 20:00:56,432 - INFO - Connection(0) Check CandidatePair(('100.106.184.117', 40517) -> ('192.168.1.3', 54666)) State.WAITING -> State.FAILED
+2026-04-20 20:00:56,433 - INFO - Connection(0) Check CandidatePair(('172.17.0.1', 51921) -> ('192.168.1.3', 54666)) State.WAITING -> State.FAILED
+2026-04-20 20:00:56,433 - INFO - Connection(0) Check CandidatePair(('192.168.1.2', 43302) -> ('196.179.251.38', 54666)) State.WAITING -> State.FAILED
+2026-04-20 20:00:56,433 - INFO - Connection(0) Check CandidatePair(('192.168.55.1', 48553) -> ('196.179.251.38', 54666)) State.FROZEN -> State.FAILED
+2026-04-20 20:00:56,433 - INFO - Connection(0) Check CandidatePair(('100.106.184.117', 40517) -> ('196.179.251.38', 54666)) State.FROZEN -> State.FAILED
+2026-04-20 20:00:56,434 - INFO - Connection(0) Check CandidatePair(('172.17.0.1', 51921) -> ('196.179.251.38', 54666)) State.FROZEN -> State.FAILED
+2026-04-20 20:00:56,434 - INFO - Connection(0) ICE completed
+2026-04-20 20:00:56,441 - INFO - ICE state client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 state=completed
+2026-04-20 20:00:56,563 - INFO - WebRTC state client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 state=connected
+2026-04-20 20:00:56,565 - INFO - 🔊 Sending pending voice summary client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276
+2026-04-20 20:00:56,565 - INFO - 📤 WS MESSAGE SENT client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 type=emotion data={'type': 'emotion', 'name': 'greeting'}
+2026-04-20 20:00:56,566 - INFO - 😊 Emotion greeting sent client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276
+2026-04-20 20:00:56,567 - INFO - 📤 WS MESSAGE SENT client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-20 20:00:58,021 - INFO - 📤 WS MESSAGE SENT client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 type=tts_test data={'type': 'tts_test', 'text': 'Hello vivien, you have 1 trips.'}
+2026-04-20 20:00:58,024 - INFO - TTS audio client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 phrase_len=31 rate=48000 samples=104895 dtype=float32
+2026-04-20 20:02:22,289 - INFO - Audio track ended client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276
+2026-04-20 20:02:22,292 - INFO - ICE state client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 state=closed
+2026-04-20 20:02:22,292 - INFO - WebRTC state client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 state=closed
+2026-04-20 20:02:22,294 - INFO - WebRTC cleaned up client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276
+2026-04-20 20:02:22,313 - INFO - WebRTC cleaned up client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276
+2026-04-20 20:02:22,314 - INFO - WS disconnected client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276
+2026-04-20 20:02:22,314 - INFO - connection closed
+2026-04-20 20:02:22,315 - INFO - TTS frames queued client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 frames=110
+2026-04-20 20:02:22,316 - INFO - 📤 WS MESSAGE SENT client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 type=tts_test data={'type': 'tts_test', 'text': 'The first one is a burger for sandra.'}
+2026-04-20 20:02:22,317 - INFO - TTS audio client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 phrase_len=37 rate=48000 samples=117155 dtype=float32
+2026-04-20 20:02:23,959 - INFO - TTS frames queued client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 frames=123
+2026-04-20 20:02:23,961 - INFO - 📤 WS MESSAGE SENT client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 type=tts_test data={'type': 'tts_test', 'text': 'Have a great day.'}
+2026-04-20 20:02:23,962 - INFO - TTS audio client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 phrase_len=17 rate=48000 samples=63099 dtype=float32
+2026-04-20 20:02:25,279 - INFO - TTS frames queued client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 frames=66
+2026-04-20 20:02:26,411 - INFO - TTS scheduler stopped client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276
+2026-04-20 20:02:26,413 - INFO - 📤 WS MESSAGE SENT client_id=d20f0e1c-eca9-4585-8ffe-ce8a711df276 type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-20 20:02:28,109 - INFO - 127.0.0.1:41984 - "GET / HTTP/1.1" 200
+2026-04-20 20:02:31,257 - INFO - 127.0.0.1:42008 - "WebSocket /ws" [accepted]
+2026-04-20 20:02:31,260 - INFO - WS connected client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68
+2026-04-20 20:02:31,262 - INFO - connection open
+2026-04-20 20:02:32,192 - INFO - 📨 WS MESSAGE RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=start data={'type': 'start'}
+2026-04-20 20:02:32,193 - INFO - 📨 NOTIFICATION RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=start data={'type': 'start'}
+2026-04-20 20:02:32,201 - INFO - WebRTC peer created client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68
+2026-04-20 20:02:32,201 - INFO - 📤 WS MESSAGE SENT client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=started data={'type': 'started'}
+2026-04-20 20:02:32,819 - INFO - 📨 WS MESSAGE RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=offer data={'type': 'offer', 'sdp': 'v=0\r\no=- 6978531913611420533 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS cc4d4245-231d-42ff-ab06-5d5b8fb6447d\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 0 8 13 110 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:vm8X\r\na=ice-pwd:xcZZTog22rjAGPukCgjlV02y\r\na=ice-options:trickle\r\na=fingerprint:sha-256 7E:7E:37:7C:41:1F:BE:21:EE:6B:0D:AB:5C:8F:60:07:5C:2B:00:E3:BB:3C:5F:16:24:43:6D:78:EB:E3:67:9E\r\na=setup:actpass\r\na=mid:0\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=sendrecv\r\na=msid:cc4d4245-231d-42ff-ab06-5d5b8fb6447d f4ef87b9-5b23-44a8-a6b8-b47da20aa49c\r\na=rtcp-mux\r\na=rtcp-rsize\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1\r\na=rtpmap:63 red/48000/2\r\na=fmtp:63 111/111\r\na=rtpmap:9 G722/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:110 telephone-event/48000\r\na=rtpmap:126 telephone-event/8000\r\na=ssrc:2410410845 cname:yTM09NNGVDw4snpQ\r\na=ssrc:2410410845 msid:cc4d4245-231d-42ff-ab06-5d5b8fb6447d f4ef87b9-5b23-44a8-a6b8-b47da20aa49c\r\n'}
+2026-04-20 20:02:32,820 - INFO - 📨 NOTIFICATION RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=offer data={'type': 'offer', 'sdp': 'v=0\r\no=- 6978531913611420533 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS cc4d4245-231d-42ff-ab06-5d5b8fb6447d\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 0 8 13 110 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:vm8X\r\na=ice-pwd:xcZZTog22rjAGPukCgjlV02y\r\na=ice-options:trickle\r\na=fingerprint:sha-256 7E:7E:37:7C:41:1F:BE:21:EE:6B:0D:AB:5C:8F:60:07:5C:2B:00:E3:BB:3C:5F:16:24:43:6D:78:EB:E3:67:9E\r\na=setup:actpass\r\na=mid:0\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=sendrecv\r\na=msid:cc4d4245-231d-42ff-ab06-5d5b8fb6447d f4ef87b9-5b23-44a8-a6b8-b47da20aa49c\r\na=rtcp-mux\r\na=rtcp-rsize\r\na=rtpmap:111 opus/48000/2\r\na=rtcp-fb:111 transport-cc\r\na=fmtp:111 minptime=10;useinbandfec=1\r\na=rtpmap:63 red/48000/2\r\na=fmtp:63 111/111\r\na=rtpmap:9 G722/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:110 telephone-event/48000\r\na=rtpmap:126 telephone-event/8000\r\na=ssrc:2410410845 cname:yTM09NNGVDw4snpQ\r\na=ssrc:2410410845 msid:cc4d4245-231d-42ff-ab06-5d5b8fb6447d f4ef87b9-5b23-44a8-a6b8-b47da20aa49c\r\n'}
+2026-04-20 20:02:32,829 - INFO - Audio track received client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68
+2026-04-20 20:02:37,843 - INFO - 📤 WS MESSAGE SENT client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=answer data={'type': 'answer', 'sdp': 'v=0\r\no=- 3985696952 3985696952 IN IP4 0.0.0.0\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=msid-semantic:WMS *\r\nm=audio 49737 UDP/TLS/RTP/SAVPF 111 9 0 8\r\nc=IN IP4 192.168.1.2\r\na=sendrecv\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\na=mid:0\r\na=msid:c7fc22b3-8a14-47de-a905-9202913af5f1 9261ba2b-c353-4ac4-912f-ec08a0b1b915\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=rtcp-mux\r\na=ssrc:671965129 cname:49e36eb3-e260-43ae-9ceb-18bf4fc2c999\r\na=rtpmap:111 opus/48000/2\r\na=rtpmap:9 G722/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=candidate:e2aea8ef0c61df57b654b7125d14184e 1 udp 2130706431 192.168.1.2 49737 typ host\r\na=candidate:d562b16207e26c2e9ce1214be2a781c0 1 udp 2130706431 100.106.184.117 55278 typ host\r\na=candidate:7b29ffc97bc5f5ca4db0cbe5623d884d 1 udp 1694498815 196.179.251.38 49737 typ srflx raddr 192.168.1.2 rport 49737\r\na=end-of-candidates\r\na=ice-ufrag:X9Ue\r\na=ice-pwd:lw3TajgySYw326FHfLTY59\r\na=fingerprint:sha-256 64:9B:40:E9:EE:D7:3E:C1:80:51:70:30:DA:41:38:BC:93:C5:0D:0D:BD:5F:CA:06:01:A3:30:D9:EA:0C:BF:CF\r\na=fingerprint:sha-384 CB:F6:75:63:58:42:37:06:2C:77:AF:3D:68:31:0A:E7:15:24:4A:4B:9D:EE:9D:EB:89:EB:BA:90:A3:2C:F2:A5:FC:BF:A6:E3:CF:C5:B4:82:06:E7:7C:A5:D6:C7:B6:7F\r\na=fingerprint:sha-512 0C:63:4E:93:BE:34:80:A5:CC:B6:28:D2:60:94:FC:A9:53:5A:C1:89:E5:86:2C:4A:A3:7D:76:50:BD:B3:9E:5B:0A:E5:7B:C7:79:55:77:7E:B6:90:4B:69:90:23:58:94:ED:8D:1F:FD:0C:1E:1E:68:C3:C2:01:B3:8D:EC:6B:04\r\na=setup:active\r\n'}
+2026-04-20 20:02:37,847 - INFO - 📨 WS MESSAGE RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:1554087725 1 udp 2122194687 25.9.85.122 54170 typ host generation 0 ufrag vm8X network-id 1', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:02:37,847 - INFO - 📨 NOTIFICATION RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:1554087725 1 udp 2122194687 25.9.85.122 54170 typ host generation 0 ufrag vm8X network-id 1', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:02:37,849 - INFO - 📨 WS MESSAGE RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:3590324028 1 udp 2122129151 192.168.55.100 54171 typ host generation 0 ufrag vm8X network-id 4', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:02:37,849 - INFO - 📨 NOTIFICATION RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:3590324028 1 udp 2122129151 192.168.55.100 54171 typ host generation 0 ufrag vm8X network-id 4', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:02:37,849 - INFO - Ignoring remote ICE candidate client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 candidate=candidate:3590324028 1 udp 2122129151 192.168.55.100 54171 typ host generation 0 ufrag vm8X network-id 4
+2026-04-20 20:02:37,849 - INFO - 📨 WS MESSAGE RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:3307332681 1 udp 2122063615 169.254.137.191 54172 typ host generation 0 ufrag vm8X network-id 5', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:02:37,850 - INFO - 📨 NOTIFICATION RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:3307332681 1 udp 2122063615 169.254.137.191 54172 typ host generation 0 ufrag vm8X network-id 5', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:02:37,850 - INFO - Ignoring remote ICE candidate client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 candidate=candidate:3307332681 1 udp 2122063615 169.254.137.191 54172 typ host generation 0 ufrag vm8X network-id 5
+2026-04-20 20:02:37,850 - INFO - 📨 WS MESSAGE RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:3294187905 1 udp 2121998079 192.168.1.8 54173 typ host generation 0 ufrag vm8X network-id 3 network-cost 10', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:02:37,851 - INFO - 📨 NOTIFICATION RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:3294187905 1 udp 2121998079 192.168.1.8 54173 typ host generation 0 ufrag vm8X network-id 3 network-cost 10', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:02:37,851 - INFO - 📨 WS MESSAGE RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:1294113814 1 udp 2122262783 2620:9b::1909:557a 54174 typ host generation 0 ufrag vm8X network-id 2', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:02:37,852 - INFO - 📨 NOTIFICATION RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:1294113814 1 udp 2122262783 2620:9b::1909:557a 54174 typ host generation 0 ufrag vm8X network-id 2', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:02:37,852 - INFO - 📨 WS MESSAGE RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:3777011307 1 udp 1685790463 196.179.251.38 54173 typ srflx raddr 192.168.1.8 rport 54173 generation 0 ufrag vm8X network-id 3 network-cost 10', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:02:37,853 - INFO - 📨 NOTIFICATION RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:3777011307 1 udp 1685790463 196.179.251.38 54173 typ srflx raddr 192.168.1.8 rport 54173 generation 0 ufrag vm8X network-id 3 network-cost 10', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:02:37,853 - INFO - 📨 WS MESSAGE RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:577674677 1 tcp 1518214911 25.9.85.122 9 typ host tcptype active generation 0 ufrag vm8X network-id 1', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:02:37,854 - INFO - 📨 NOTIFICATION RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:577674677 1 tcp 1518214911 25.9.85.122 9 typ host tcptype active generation 0 ufrag vm8X network-id 1', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:02:37,854 - INFO - 📨 WS MESSAGE RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:2872057252 1 tcp 1518149375 192.168.55.100 9 typ host tcptype active generation 0 ufrag vm8X network-id 4', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:02:37,854 - INFO - 📨 NOTIFICATION RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:2872057252 1 tcp 1518149375 192.168.55.100 9 typ host tcptype active generation 0 ufrag vm8X network-id 4', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:02:37,855 - INFO - Ignoring remote ICE candidate client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 candidate=candidate:2872057252 1 tcp 1518149375 192.168.55.100 9 typ host tcptype active generation 0 ufrag vm8X network-id 4
+2026-04-20 20:02:37,855 - INFO - 📨 WS MESSAGE RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:3152938705 1 tcp 1518083839 169.254.137.191 9 typ host tcptype active generation 0 ufrag vm8X network-id 5', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:02:37,855 - INFO - 📨 NOTIFICATION RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:3152938705 1 tcp 1518083839 169.254.137.191 9 typ host tcptype active generation 0 ufrag vm8X network-id 5', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:02:37,855 - INFO - Ignoring remote ICE candidate client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 candidate=candidate:3152938705 1 tcp 1518083839 169.254.137.191 9 typ host tcptype active generation 0 ufrag vm8X network-id 5
+2026-04-20 20:02:37,856 - INFO - 📨 WS MESSAGE RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:3130438425 1 tcp 1518018303 192.168.1.8 9 typ host tcptype active generation 0 ufrag vm8X network-id 3 network-cost 10', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:02:37,856 - INFO - 📨 NOTIFICATION RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:3130438425 1 tcp 1518018303 192.168.1.8 9 typ host tcptype active generation 0 ufrag vm8X network-id 3 network-cost 10', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:02:37,856 - INFO - 📨 WS MESSAGE RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:871202446 1 tcp 1518283007 2620:9b::1909:557a 9 typ host tcptype active generation 0 ufrag vm8X network-id 2', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:02:37,857 - INFO - 📨 NOTIFICATION RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=ice data={'type': 'ice', 'candidate': {'candidate': 'candidate:871202446 1 tcp 1518283007 2620:9b::1909:557a 9 typ host tcptype active generation 0 ufrag vm8X network-id 2', 'sdpMid': '0', 'sdpMLineIndex': 0}}
+2026-04-20 20:02:37,858 - INFO - ICE state client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 state=checking
+2026-04-20 20:02:37,860 - INFO - Connection(1) Check CandidatePair(('192.168.1.2', 49737) -> ('25.9.85.122', 54170)) State.FROZEN -> State.WAITING
+2026-04-20 20:02:37,860 - INFO - Connection(1) Check CandidatePair(('192.168.55.1', 36038) -> ('25.9.85.122', 54170)) State.FROZEN -> State.WAITING
+2026-04-20 20:02:37,861 - INFO - Connection(1) Check CandidatePair(('100.106.184.117', 55278) -> ('25.9.85.122', 54170)) State.FROZEN -> State.WAITING
+2026-04-20 20:02:37,861 - INFO - Connection(1) Check CandidatePair(('172.17.0.1', 43962) -> ('25.9.85.122', 54170)) State.FROZEN -> State.WAITING
+2026-04-20 20:02:37,861 - INFO - Connection(1) Check CandidatePair(('192.168.1.2', 49737) -> ('192.168.1.8', 54173)) State.FROZEN -> State.WAITING
+2026-04-20 20:02:37,862 - INFO - WebRTC state client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 state=connecting
+2026-04-20 20:02:37,862 - INFO - Connection(1) Check CandidatePair(('192.168.1.2', 49737) -> ('25.9.85.122', 54170)) State.WAITING -> State.IN_PROGRESS
+2026-04-20 20:02:37,882 - INFO - Connection(1) Check CandidatePair(('192.168.55.1', 36038) -> ('25.9.85.122', 54170)) State.WAITING -> State.IN_PROGRESS
+2026-04-20 20:02:37,903 - INFO - Connection(1) Check CandidatePair(('100.106.184.117', 55278) -> ('25.9.85.122', 54170)) State.WAITING -> State.IN_PROGRESS
+2026-04-20 20:02:37,923 - INFO - Connection(1) Check CandidatePair(('172.17.0.1', 43962) -> ('25.9.85.122', 54170)) State.WAITING -> State.IN_PROGRESS
+2026-04-20 20:02:37,944 - INFO - Connection(1) Check CandidatePair(('192.168.1.2', 49737) -> ('192.168.1.8', 54173)) State.WAITING -> State.IN_PROGRESS
+2026-04-20 20:02:37,964 - INFO - Connection(1) Check CandidatePair(('192.168.55.1', 36038) -> ('192.168.1.8', 54173)) State.FROZEN -> State.IN_PROGRESS
+2026-04-20 20:02:37,984 - INFO - Connection(1) Check CandidatePair(('100.106.184.117', 55278) -> ('192.168.1.8', 54173)) State.FROZEN -> State.IN_PROGRESS
+2026-04-20 20:02:38,004 - INFO - Connection(1) Check CandidatePair(('172.17.0.1', 43962) -> ('192.168.1.8', 54173)) State.FROZEN -> State.IN_PROGRESS
+2026-04-20 20:02:38,025 - INFO - Connection(1) Check CandidatePair(('192.168.1.2', 49737) -> ('196.179.251.38', 54173)) State.FROZEN -> State.IN_PROGRESS
+2026-04-20 20:02:38,046 - INFO - Connection(1) Check CandidatePair(('192.168.55.1', 36038) -> ('196.179.251.38', 54173)) State.FROZEN -> State.IN_PROGRESS
+2026-04-20 20:02:38,067 - INFO - Connection(1) Check CandidatePair(('100.106.184.117', 55278) -> ('196.179.251.38', 54173)) State.FROZEN -> State.IN_PROGRESS
+2026-04-20 20:02:38,087 - INFO - Connection(1) Check CandidatePair(('172.17.0.1', 43962) -> ('196.179.251.38', 54173)) State.FROZEN -> State.IN_PROGRESS
+2026-04-20 20:02:38,191 - INFO - Connection(1) Discovered peer reflexive candidate Candidate(XjBTWTRwJJ 1 udp 1853693695 192.168.55.100 54171 typ prflx)
+2026-04-20 20:02:38,193 - INFO - Connection(1) Check CandidatePair(('192.168.1.2', 49737) -> ('192.168.55.100', 54171)) State.WAITING -> State.IN_PROGRESS
+2026-04-20 20:02:38,195 - INFO - Connection(1) Check CandidatePair(('192.168.1.2', 49737) -> ('192.168.55.100', 54171)) State.IN_PROGRESS -> State.SUCCEEDED
+2026-04-20 20:02:38,196 - INFO - Connection(1) ICE completed
+2026-04-20 20:02:38,215 - INFO - ICE state client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 state=completed
+2026-04-20 20:02:38,236 - INFO - WebRTC state client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 state=connected
+2026-04-20 20:02:44,912 - INFO - WebRTC native pre_roll client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 samples=19200 sr=48000
+2026-04-20 20:02:44,913 - INFO - VAD speech_start client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 p=0.926
+2026-04-20 20:02:47,572 - INFO - Utterance end client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 samples=50176
+2026-04-20 20:02:47,643 - INFO - Saved WebRTC native debug client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 native=webrtc_22531a15-1035-4ca7-8a4a-69d16dab5d68_4d2082b7_decoded_native.wav rms=0.036400 sr=48000 n=147840
+2026-04-20 20:02:47,647 - INFO - STT raw input client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 ms=3136 rms=0.0359 peak=0.2037 n=50176 sr=16000
+2026-04-20 20:02:47,667 - INFO - Saved WebRTC STT audio compare client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 raw=webrtc_22531a15-1035-4ca7-8a4a-69d16dab5d68_4d2082b7_raw.wav denoised=webrtc_22531a15-1035-4ca7-8a4a-69d16dab5d68_4d2082b7_denoised.wav raw_rms=0.035916 denoised_rms=0.035916 sr=16000
+2026-04-20 20:02:47,670 - INFO - Processing audio with duration 00:03.136
+2026-04-20 20:02:49,872 - INFO - STT transcript client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 text='Please introduce yourself.'
+2026-04-20 20:02:49,872 - INFO - 📤 WS MESSAGE SENT client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=transcript data={'type': 'transcript', 'text': 'Please introduce yourself.'}
+2026-04-20 20:02:49,873 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
+2026-04-20 20:02:55,254 - INFO - 📤 WS MESSAGE SENT client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-20 20:02:55,256 - INFO - 📤 WS MESSAGE SENT client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=response data={'type': 'response', 'text': "Sure, I'm Rytle. I'm a polite and efficient delivery assistant here to help you with your delivery needs. How can I assist you today?"}
+2026-04-20 20:02:55,256 - INFO - TTS audio client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 phrase_len=133 rate=48000 samples=368740 dtype=float32
+2026-04-20 20:02:59,314 - INFO - TTS frames queued client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 frames=385
+2026-04-20 20:03:00,443 - INFO - TTS scheduler stopped client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68
+2026-04-20 20:03:00,444 - INFO - 📤 WS MESSAGE SENT client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-20 20:03:05,952 - INFO - Audio track ended client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68
+2026-04-20 20:03:05,954 - INFO - 📨 WS MESSAGE RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=stop data={'type': 'stop'}
+2026-04-20 20:03:05,955 - INFO - 📨 NOTIFICATION RECEIVED client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=stop data={'type': 'stop'}
+2026-04-20 20:03:05,958 - INFO - ICE state client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 state=closed
+2026-04-20 20:03:05,959 - INFO - WebRTC state client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 state=None
+2026-04-20 20:03:05,960 - INFO - WebRTC cleaned up client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68
+2026-04-20 20:03:05,961 - INFO - 📤 WS MESSAGE SENT client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68 type=stopped data={'type': 'stopped'}
+2026-04-20 20:27:35,748 - INFO - Shutting down
+2026-04-20 20:27:35,768 - INFO - WebRTC cleaned up client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68
+2026-04-20 20:27:35,769 - INFO - WS disconnected client_id=22531a15-1035-4ca7-8a4a-69d16dab5d68
+2026-04-20 20:27:35,770 - INFO - connection closed
+2026-04-20 20:27:35,852 - INFO - Waiting for application shutdown.
+2026-04-20 20:27:36,361 - INFO - DeliveryService shutdown
+2026-04-20 20:27:36,363 - INFO - DeliveryStateMachine shutdown
+2026-04-20 20:27:36,363 - INFO - NotificationService shutdown
+2026-04-20 20:27:36,365 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
+2026-04-20 20:27:36,365 - INFO - MascoteService arrêté
+2026-04-20 20:27:37,789 - INFO - Application shutdown complete.
+2026-04-20 20:27:37,792 - INFO - Finished server process [147101]
+2026-04-20 20:33:44,470 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
+2026-04-20 20:33:44,470 - INFO - Handler registered for message type: identify_driver
+2026-04-20 20:33:44,471 - INFO - Handler registered for message type: get_trips
+2026-04-20 20:33:44,543 - INFO - Started server process [182730]
+2026-04-20 20:33:44,544 - INFO - Waiting for application startup.
+2026-04-20 20:33:47,466 - INFO - HTTP Request: GET https://huggingface.co/api/models/Systran/faster-whisper-small/revision/main "HTTP/1.1 200 OK"
+2026-04-20 20:33:55,056 - INFO - MascoteService démarré
+2026-04-20 20:33:55,057 - INFO - NotificationService started
+2026-04-20 20:33:55,057 - INFO - DeliveryService started
+2026-04-20 20:33:55,057 - INFO - DeliveryStateMachine started
+2026-04-20 20:33:55,059 - INFO - Piper binary ready bin=/home/server/piper/piper/piper sample_rate=22050
+2026-04-20 20:33:55,060 - INFO - Denoise disabled
+2026-04-20 20:33:55,060 - INFO - Warmup started
+2026-04-20 20:33:55,115 - INFO - Warmup vad ok in 0.06s
+2026-04-20 20:33:55,116 - INFO - Processing audio with duration 00:01.000
+2026-04-20 20:33:58,539 - INFO - Warmup stt ok in 3.42s
+2026-04-20 20:33:58,540 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
+2026-04-20 20:34:00,744 - INFO - Warmup llm ok in 2.20s
+2026-04-20 20:34:02,501 - INFO - Warmup tts ok in 1.76s
+2026-04-20 20:34:02,502 - INFO - Warmup finished
+2026-04-20 20:34:02,502 - INFO - Application startup complete.
+2026-04-20 20:34:02,520 - INFO - Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-04-20 20:34:06,740 - INFO - 127.0.0.1:53932 - "GET / HTTP/1.1" 200
+2026-04-20 20:34:10,597 - INFO - 127.0.0.1:53960 - "WebSocket /ws" [accepted]
+2026-04-20 20:34:10,600 - INFO - WS connected client_id=29758285-1b85-449c-9a98-7ad54c18be9e
+2026-04-20 20:34:10,616 - INFO - connection open
+2026-04-20 20:34:14,476 - INFO - 📨 WS MESSAGE RECEIVED client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=start data={'type': 'start', 'input_sample_rate': 48000}
+2026-04-20 20:34:14,477 - INFO - 📨 NOTIFICATION RECEIVED client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=start data={'type': 'start', 'input_sample_rate': 48000}
+2026-04-20 20:34:14,478 - INFO - Audio WS session started client_id=29758285-1b85-449c-9a98-7ad54c18be9e input_sr=48000 output_sr=48000
+2026-04-20 20:34:14,479 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=started data={'type': 'started', 'input_sample_rate': 48000, 'audio_output_sample_rate': 48000, 'encoding': 'pcm_s16le', 'channels': 1}
+2026-04-20 20:34:20,660 - INFO - VAD speech_start client_id=29758285-1b85-449c-9a98-7ad54c18be9e p=0.981
+2026-04-20 20:34:20,661 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=vad data={'type': 'vad', 'event': 'speech_start', 'p': 0.9807510375976562}
+2026-04-20 20:34:22,720 - INFO - Utterance end client_id=29758285-1b85-449c-9a98-7ad54c18be9e samples=40448
+2026-04-20 20:34:22,723 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=vad data={'type': 'vad', 'event': 'utterance_end', 'samples': 40448}
+2026-04-20 20:34:22,727 - INFO - STT raw input client_id=29758285-1b85-449c-9a98-7ad54c18be9e ms=2528 rms=0.0551 peak=0.3845 n=40448 sr=16000
+2026-04-20 20:34:22,779 - INFO - Saved STT audio compare client_id=29758285-1b85-449c-9a98-7ad54c18be9e raw=audio_29758285-1b85-449c-9a98-7ad54c18be9e_7365df6a_raw.wav denoised=audio_29758285-1b85-449c-9a98-7ad54c18be9e_7365df6a_denoised.wav raw_rms=0.055110 denoised_rms=0.055110 sr=16000
+2026-04-20 20:34:22,780 - INFO - Processing audio with duration 00:02.528
+2026-04-20 20:34:23,637 - INFO - STT transcript client_id=29758285-1b85-449c-9a98-7ad54c18be9e text='Hello, can you hear me?'
+2026-04-20 20:34:23,638 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=transcript data={'type': 'transcript', 'text': 'Hello, can you hear me?'}
+2026-04-20 20:34:23,639 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
+2026-04-20 20:34:27,663 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-20 20:34:27,677 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=response data={'type': 'response', 'text': "Hello! I can definitely hear you. Is there anything specific you'd like to know or do today?"}
+2026-04-20 20:34:27,678 - INFO - TTS audio client_id=29758285-1b85-449c-9a98-7ad54c18be9e phrase_len=92 rate=48000 samples=267873 dtype=float32
+2026-04-20 20:34:27,908 - INFO - 127.0.0.1:53940 - "GET /favicon.ico HTTP/1.1" 404
+2026-04-20 20:34:31,975 - INFO - TTS frames queued client_id=29758285-1b85-449c-9a98-7ad54c18be9e frames=280
+2026-04-20 20:34:33,107 - INFO - TTS scheduler stopped client_id=29758285-1b85-449c-9a98-7ad54c18be9e
+2026-04-20 20:34:33,109 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-20 20:34:49,640 - INFO - VAD speech_start client_id=29758285-1b85-449c-9a98-7ad54c18be9e p=0.884
+2026-04-20 20:34:49,642 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=vad data={'type': 'vad', 'event': 'speech_start', 'p': 0.8839882612228394}
+2026-04-20 20:34:50,489 - INFO - Utterance end client_id=29758285-1b85-449c-9a98-7ad54c18be9e samples=21504
+2026-04-20 20:34:50,492 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=vad data={'type': 'vad', 'event': 'utterance_end', 'samples': 21504}
+2026-04-20 20:34:50,496 - INFO - STT raw input client_id=29758285-1b85-449c-9a98-7ad54c18be9e ms=1344 rms=0.0144 peak=0.1023 n=21504 sr=16000
+2026-04-20 20:34:50,515 - INFO - Saved STT audio compare client_id=29758285-1b85-449c-9a98-7ad54c18be9e raw=audio_29758285-1b85-449c-9a98-7ad54c18be9e_b43dd04a_raw.wav denoised=audio_29758285-1b85-449c-9a98-7ad54c18be9e_b43dd04a_denoised.wav raw_rms=0.014401 denoised_rms=0.014401 sr=16000
+2026-04-20 20:34:50,517 - INFO - Processing audio with duration 00:01.344
+2026-04-20 20:34:51,246 - INFO - STT transcript client_id=29758285-1b85-449c-9a98-7ad54c18be9e text=''
+2026-04-20 20:34:51,247 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=stt_empty data={'type': 'stt_empty'}
+2026-04-20 20:35:19,501 - INFO - VAD speech_start client_id=29758285-1b85-449c-9a98-7ad54c18be9e p=0.875
+2026-04-20 20:35:19,506 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=vad data={'type': 'vad', 'event': 'speech_start', 'p': 0.874948263168335}
+2026-04-20 20:35:23,770 - INFO - Utterance end client_id=29758285-1b85-449c-9a98-7ad54c18be9e samples=75776
+2026-04-20 20:35:23,771 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=vad data={'type': 'vad', 'event': 'utterance_end', 'samples': 75776}
+2026-04-20 20:35:23,779 - INFO - STT raw input client_id=29758285-1b85-449c-9a98-7ad54c18be9e ms=4736 rms=0.0512 peak=0.3032 n=75776 sr=16000
+2026-04-20 20:35:23,809 - INFO - Saved STT audio compare client_id=29758285-1b85-449c-9a98-7ad54c18be9e raw=audio_29758285-1b85-449c-9a98-7ad54c18be9e_b71a6783_raw.wav denoised=audio_29758285-1b85-449c-9a98-7ad54c18be9e_b71a6783_denoised.wav raw_rms=0.051192 denoised_rms=0.051192 sr=16000
+2026-04-20 20:35:23,811 - INFO - Processing audio with duration 00:04.736
+2026-04-20 20:35:24,766 - INFO - STT transcript client_id=29758285-1b85-449c-9a98-7ad54c18be9e text='Yes, can you check if I have some deliveries today?'
+2026-04-20 20:35:24,767 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=transcript data={'type': 'transcript', 'text': 'Yes, can you check if I have some deliveries today?'}
+2026-04-20 20:35:24,768 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
+2026-04-20 20:35:27,017 - INFO - Action: SHOW_DELIVERIES_LIST
+2026-04-20 20:35:27,017 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.SHOW_DELIVERIES_LIST', 'extras': {}}
+2026-04-20 20:35:34,721 - INFO - VAD speech_start client_id=29758285-1b85-449c-9a98-7ad54c18be9e p=0.987
+2026-04-20 20:35:34,741 - WARNING - INTERRUPT called! client_id=29758285-1b85-449c-9a98-7ad54c18be9e tts_playing=True processing_lock=True cancel_flag=False
+2026-04-20 20:35:34,741 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=tts_stop_now data={'type': 'tts_stop_now'}
+2026-04-20 20:35:34,764 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=vad data={'type': 'vad', 'event': 'speech_start', 'p': 0.9873428344726562}
+2026-04-20 20:35:34,795 - INFO - TTS scheduler stopped client_id=29758285-1b85-449c-9a98-7ad54c18be9e
+2026-04-20 20:35:37,070 - INFO - Utterance end client_id=29758285-1b85-449c-9a98-7ad54c18be9e samples=45056
+2026-04-20 20:35:37,098 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=vad data={'type': 'vad', 'event': 'utterance_end', 'samples': 45056}
+2026-04-20 20:35:37,800 - INFO - VAD speech_start client_id=29758285-1b85-449c-9a98-7ad54c18be9e p=0.867
+2026-04-20 20:35:37,801 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=vad data={'type': 'vad', 'event': 'speech_start', 'p': 0.8665286898612976}
+2026-04-20 20:35:38,517 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-20 20:35:38,547 - INFO - STT raw input client_id=29758285-1b85-449c-9a98-7ad54c18be9e ms=2816 rms=0.0172 peak=0.2106 n=45056 sr=16000
+2026-04-20 20:35:38,599 - INFO - Saved STT audio compare client_id=29758285-1b85-449c-9a98-7ad54c18be9e raw=audio_29758285-1b85-449c-9a98-7ad54c18be9e_2d694fed_raw.wav denoised=audio_29758285-1b85-449c-9a98-7ad54c18be9e_2d694fed_denoised.wav raw_rms=0.017202 denoised_rms=0.017202 sr=16000
+2026-04-20 20:35:38,602 - INFO - Processing audio with duration 00:02.816
+2026-04-20 20:35:42,748 - INFO - STT transcript client_id=29758285-1b85-449c-9a98-7ad54c18be9e text="I'm sorry, she's just a piece of..."
+2026-04-20 20:35:42,748 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=transcript data={'type': 'transcript', 'text': "I'm sorry, she's just a piece of..."}
+2026-04-20 20:35:42,749 - INFO - Interruption decision client_id=29758285-1b85-449c-9a98-7ad54c18be9e mode=interruption elapsed_ms=3429 transcript="I'm sorry, she's just a piece of..."
+2026-04-20 20:35:42,750 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=interruption_decision data={'type': 'interruption_decision', 'decision': 'interruption', 'elapsed_ms': 3428.6, 'text': "I'm sorry, she's just a piece of..."}
+2026-04-20 20:35:42,751 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
+2026-04-20 20:35:45,737 - INFO - VAD speech_start client_id=29758285-1b85-449c-9a98-7ad54c18be9e p=0.871
+2026-04-20 20:35:45,739 - WARNING - INTERRUPT called! client_id=29758285-1b85-449c-9a98-7ad54c18be9e tts_playing=True processing_lock=True cancel_flag=False
+2026-04-20 20:35:45,739 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=tts_stop_now data={'type': 'tts_stop_now'}
+2026-04-20 20:35:45,740 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=vad data={'type': 'vad', 'event': 'speech_start', 'p': 0.8713631629943848}
+2026-04-20 20:35:45,745 - INFO - TTS scheduler stopped client_id=29758285-1b85-449c-9a98-7ad54c18be9e
+2026-04-20 20:35:49,745 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-20 20:35:50,058 - INFO - VAD speech_start client_id=29758285-1b85-449c-9a98-7ad54c18be9e p=0.962
+2026-04-20 20:35:50,059 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=vad data={'type': 'vad', 'event': 'speech_start', 'p': 0.9618258476257324}
+2026-04-20 20:35:51,208 - INFO - Utterance end client_id=29758285-1b85-449c-9a98-7ad54c18be9e samples=24064
+2026-04-20 20:35:51,209 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=vad data={'type': 'vad', 'event': 'utterance_end', 'samples': 24064}
+2026-04-20 20:35:51,211 - INFO - STT raw input client_id=29758285-1b85-449c-9a98-7ad54c18be9e ms=1504 rms=0.0250 peak=0.1461 n=24064 sr=16000
+2026-04-20 20:35:51,231 - INFO - Saved STT audio compare client_id=29758285-1b85-449c-9a98-7ad54c18be9e raw=audio_29758285-1b85-449c-9a98-7ad54c18be9e_deeafbc9_raw.wav denoised=audio_29758285-1b85-449c-9a98-7ad54c18be9e_deeafbc9_denoised.wav raw_rms=0.024990 denoised_rms=0.024990 sr=16000
+2026-04-20 20:35:51,233 - INFO - Processing audio with duration 00:01.504
+2026-04-20 20:35:56,357 - INFO - VAD speech_start client_id=29758285-1b85-449c-9a98-7ad54c18be9e p=0.989
+2026-04-20 20:35:56,362 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=vad data={'type': 'vad', 'event': 'speech_start', 'p': 0.9887981414794922}
+2026-04-20 20:35:58,066 - INFO - Utterance end client_id=29758285-1b85-449c-9a98-7ad54c18be9e samples=35328
+2026-04-20 20:35:58,067 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=vad data={'type': 'vad', 'event': 'utterance_end', 'samples': 35328}
+2026-04-20 20:35:58,067 - WARNING - INTERRUPT called! client_id=29758285-1b85-449c-9a98-7ad54c18be9e tts_playing=False processing_lock=True cancel_flag=False
+2026-04-20 20:35:58,067 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=interrupted data={'type': 'interrupted'}
+2026-04-20 20:35:59,437 - INFO - STT raw input client_id=29758285-1b85-449c-9a98-7ad54c18be9e ms=2208 rms=0.1617 peak=0.9954 n=35328 sr=16000
+2026-04-20 20:35:59,451 - INFO - Saved STT audio compare client_id=29758285-1b85-449c-9a98-7ad54c18be9e raw=audio_29758285-1b85-449c-9a98-7ad54c18be9e_d0d465e0_raw.wav denoised=audio_29758285-1b85-449c-9a98-7ad54c18be9e_d0d465e0_denoised.wav raw_rms=0.161675 denoised_rms=0.161675 sr=16000
+2026-04-20 20:35:59,453 - INFO - Processing audio with duration 00:02.208
+2026-04-20 20:36:00,087 - INFO - STT transcript client_id=29758285-1b85-449c-9a98-7ad54c18be9e text='Start with navigation.'
+2026-04-20 20:36:00,088 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=transcript data={'type': 'transcript', 'text': 'Start with navigation.'}
+2026-04-20 20:36:00,088 - INFO - Interruption decision client_id=29758285-1b85-449c-9a98-7ad54c18be9e mode=continuation elapsed_ms=77 transcript='Start with navigation.'
+2026-04-20 20:36:00,088 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=interruption_decision data={'type': 'interruption_decision', 'decision': 'continuation', 'elapsed_ms': 77.2, 'text': 'Start with navigation.'}
+2026-04-20 20:36:00,094 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
+2026-04-20 20:36:02,593 - INFO - Action: START_NAVIGATION trip_id=12345
+2026-04-20 20:36:02,593 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.START_NAVIGATION', 'extras': {'id': '12345'}}
+2026-04-20 20:36:09,157 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-20 20:36:09,171 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=response data={'type': 'response', 'text': "Your navigation has been started for trip 12345. You're on your way! If you need any assistance during the trip, feel free to ask."}
+2026-04-20 20:36:09,172 - INFO - TTS audio client_id=29758285-1b85-449c-9a98-7ad54c18be9e phrase_len=130 rate=48000 samples=432270 dtype=float32
+2026-04-20 20:36:16,493 - INFO - TTS frames queued client_id=29758285-1b85-449c-9a98-7ad54c18be9e frames=451
+2026-04-20 20:36:17,623 - INFO - TTS scheduler stopped client_id=29758285-1b85-449c-9a98-7ad54c18be9e
+2026-04-20 20:36:17,625 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-20 20:36:20,338 - INFO - VAD speech_start client_id=29758285-1b85-449c-9a98-7ad54c18be9e p=0.873
+2026-04-20 20:36:20,347 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=vad data={'type': 'vad', 'event': 'speech_start', 'p': 0.8726151585578918}
+2026-04-20 20:36:25,209 - INFO - Utterance end client_id=29758285-1b85-449c-9a98-7ad54c18be9e samples=85504
+2026-04-20 20:36:25,213 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=vad data={'type': 'vad', 'event': 'utterance_end', 'samples': 85504}
+2026-04-20 20:36:25,251 - INFO - STT raw input client_id=29758285-1b85-449c-9a98-7ad54c18be9e ms=5344 rms=0.1244 peak=0.7669 n=85504 sr=16000
+2026-04-20 20:36:25,305 - INFO - Saved STT audio compare client_id=29758285-1b85-449c-9a98-7ad54c18be9e raw=audio_29758285-1b85-449c-9a98-7ad54c18be9e_4d932bd6_raw.wav denoised=audio_29758285-1b85-449c-9a98-7ad54c18be9e_4d932bd6_denoised.wav raw_rms=0.124362 denoised_rms=0.124362 sr=16000
+2026-04-20 20:36:25,307 - INFO - Processing audio with duration 00:05.344
+2026-04-20 20:36:26,422 - INFO - STT transcript client_id=29758285-1b85-449c-9a98-7ad54c18be9e text='Yes, show tell me more about my deliveries.'
+2026-04-20 20:36:26,423 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=transcript data={'type': 'transcript', 'text': 'Yes, show tell me more about my deliveries.'}
+2026-04-20 20:36:26,424 - WARNING - system_prompt.txt est vide, fallback sur le prompt par défaut
+2026-04-20 20:36:28,040 - INFO - Action: SHOW_DELIVERIES_LIST
+2026-04-20 20:36:28,040 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.SHOW_DELIVERIES_LIST', 'extras': {}}
+2026-04-20 20:36:42,593 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-20 20:36:42,596 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=response data={'type': 'response', 'text': "Here are your current deliveries for today:\n\n1. **Package Information**: Burger\n2. **Delivery Location**: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie\n3. **Client's Name**: Sandra\n4. **Delivery Status**: Planned\n\nYou're all set for today's deliveries. If you need to start navigation to any of these locations, just let me know!"}
+2026-04-20 20:36:42,597 - INFO - TTS audio client_id=29758285-1b85-449c-9a98-7ad54c18be9e phrase_len=381 rate=48000 samples=1705800 dtype=float32
+2026-04-20 20:36:52,053 - INFO - 📨 WS MESSAGE RECEIVED client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=stop data={'type': 'stop'}
+2026-04-20 20:36:52,054 - INFO - 📨 NOTIFICATION RECEIVED client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=stop data={'type': 'stop'}
+2026-04-20 20:36:52,056 - INFO - Audio WS cleaned up client_id=29758285-1b85-449c-9a98-7ad54c18be9e
+2026-04-20 20:36:52,056 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=stopped data={'type': 'stopped'}
+2026-04-20 21:06:26,033 - INFO - TTS frames queued client_id=29758285-1b85-449c-9a98-7ad54c18be9e frames=1777
+2026-04-20 21:06:27,169 - INFO - TTS scheduler stopped client_id=29758285-1b85-449c-9a98-7ad54c18be9e
+2026-04-20 21:06:27,171 - INFO - 📤 WS MESSAGE SENT client_id=29758285-1b85-449c-9a98-7ad54c18be9e type=emotion data={'type': 'emotion', 'name': 'idle'}

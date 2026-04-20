@@ -99,25 +99,16 @@ class TestWavRoundtrip:
         np.testing.assert_allclose(recovered, original, atol=1e-4)
 
 
-class TestArrayToAvFrames:
+class TestPcm16Roundtrip:
 
-    def test_array_to_av_frames_resamples_and_chunks(self, audio):
-        """Le TTS est resamplé vers 16kHz et découpé en frames régulières."""
-        pytest.importorskip("av")
-
+    def test_array_to_pcm16_and_back(self, audio):
         original = np.linspace(-0.5, 0.5, 24000, dtype=np.float32)
-        frames = audio.array_to_av_frames(
-            original,
-            source_rate=24000,
-            target_rate=16000,
-            frame_ms=20,
-        )
+        payload = audio.array_to_pcm16_bytes(original)
+        recovered = audio.pcm_bytes_to_array(payload)
 
-        assert frames
-        assert all(frame.sample_rate == 16000 for frame in frames)
-        assert all(frame.format.name == "s16" for frame in frames)
-        assert all(frame.layout.name == "mono" for frame in frames)
-        assert sum(frame.samples for frame in frames) == 16000
+        assert isinstance(payload, bytes)
+        assert recovered.shape == original.shape
+        np.testing.assert_allclose(recovered, original, atol=1e-4)
 
 
 class TestTrimSilence:

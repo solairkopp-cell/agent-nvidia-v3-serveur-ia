@@ -1,19 +1,17 @@
 """
 models/session.py
 État complet d'une session client.
-Un objet Session par connexion WebSocket / WebRTC active.
+Un objet Session par connexion WebSocket active.
 """
 from __future__ import annotations
 
 import asyncio
 from collections import deque
 from dataclasses import dataclass, field
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING, Any, Optional
 
 if TYPE_CHECKING:
-    from aiortc import RTCPeerConnection
     from fastapi import WebSocket
-    from services.webrtc_service import TTSAudioTrack
 
 
 @dataclass
@@ -23,9 +21,12 @@ class Session:
 
     # ── Transport ────────────────────────────────────────────────────────────
     websocket: "WebSocket"
-    peer: Optional["RTCPeerConnection"] = None
-    tts_track: Optional["TTSAudioTrack"] = None
+    tts_track: Optional[Any] = None
     _ping_task: Optional[asyncio.Task] = None  # Tâche de keep-alive WebSocket
+    send_lock: asyncio.Lock = field(default_factory=asyncio.Lock)
+    audio_stream_started: bool = False
+    audio_input_sample_rate: int = 16000
+    audio_output_sample_rate: int = 48000
 
     # ── Pipeline audio ────────────────────────────────────────────────────────
     # Buffer PCM brut accumulé entre deux silences (VAD)
@@ -34,7 +35,7 @@ class Session:
     pre_speech_buffer: deque = field(default_factory=deque)
     # Chunks consécutifs > seuil en attente de confirmation avant speech_start.
     speech_start_buffer: list = field(default_factory=list)
-    # Buffers debug du flux WebRTC décodé avant resampling vers 16kHz.
+    # Buffers debug du flux audio décodé avant resampling vers 16kHz.
     decoded_audio_buffer: list = field(default_factory=list)
     decoded_pre_speech_buffer: deque = field(default_factory=deque)
     decoded_pre_speech_samples: int = 0

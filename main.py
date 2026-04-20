@@ -15,8 +15,8 @@ Ordre de démarrage (startup) :
   4. OllamaService       (crée client, vérifie modèle)
   5. PiperTTSService     (charge modèle ONNX)
   6. AgentService        (injection des 4 précédents)
-  7. WebRTCService       (injection VAD + Agent + Audio)
-  8. WebSocketService    (injection WebRTC)
+  7. WebSocketAudioService (transport audio WebSocket)
+  8. WebSocketService      (session + messages)
   9. AgentService.set_ws_service(ws_service)  (résout dépendance circulaire)
 
 Ordre d'arrêt (shutdown) : inverse du démarrage.
@@ -49,7 +49,7 @@ from services.piper_tts_service import PiperTTSService
 from services.agent_service import AgentService
 from services.denoise_service import DenoiseService
 from experimental.denoise_stream import create_denoise_stream_processor
-from services.webrtc_service import WebRTCService
+from services.ws_audio_service import WebSocketAudioService
 from services.websocket_service import WebSocketService
 from services.delivery_state_machine import DeliveryStateMachine
 
@@ -80,19 +80,19 @@ agent_service    = AgentService(
     state_machine=state_machine,
 )
 
-webrtc_service   = WebRTCService(
+audio_stream_service = WebSocketAudioService(
     vad=vad_service,
     agent=agent_service,
     audio=audio_service,
 )
 
 ws_service       = WebSocketService(
-    webrtc=webrtc_service,
+    audio_stream=audio_stream_service,
     notification=notification_service,
 )
 
-# Passer le ws_service au webrtc_service pour l'envoi des émotions
-webrtc_service._ws_service = ws_service
+# Passer le ws_service au service audio pour l'envoi des émotions
+audio_stream_service._ws_service = ws_service
 
 # Injection des dépendances dans la state machine
 state_machine._ws_service = ws_service
@@ -174,7 +174,7 @@ async def lifespan(app: FastAPI):
     await piper_service.startup()
     await denoise_service.startup()
     await prewarm_services()
-    # AudioService et WebRTCService/WebSocketService n'ont pas de startup async
+    # AudioService, WebSocketAudioService et WebSocketService n'ont pas de startup async
 
     yield  # L'application tourne ici
 
@@ -193,7 +193,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="Voice Agent Server",
-    description="WebRTC + WebSocket voice agent (STT → LLM → TTS)",
+    description="WebSocket voice agent (STT → LLM → TTS)",
     version="1.0.0",
     lifespan=lifespan,
 )
@@ -373,10 +373,10 @@ async def health():
     return {
         "status": "ok",
         "sessions": ws_service.active_sessions,
-        "webrtc_peers": ws_service.active_webrtc_peers,
+        "audio_streams": ws_service.active_audio_streams,
         "services": {
             "ws":      await ws_service.health_check(),
-            "webrtc":  await webrtc_service.health_check(),
+            "audio_stream": await audio_stream_service.health_check(),
             "whisper": await whisper_service.health_check(),
             "ollama":  await ollama_service.health_check(),
             "notification": await notification_service.health_check(),

@@ -10,16 +10,8 @@ from pathlib import Path
 import numpy as np
 import soundfile as sf
 
-from fractions import Fraction
-
-try:
-    import av  # type: ignore
-except Exception:  # pragma: no cover
-    av = None
-
-
 # ── Constantes ────────────────────────────────────────────────────────────────
-TARGET_SAMPLE_RATE = 48000   # WebRTC/Opus native sample rate
+TARGET_SAMPLE_RATE = 48000
 TARGET_CHANNELS = 1          # mono
 
 
@@ -34,7 +26,6 @@ class AudioService:
     def pcm_bytes_to_array(self, raw: bytes, dtype: str = "float32") -> np.ndarray:
         """
         Bytes PCM bruts → numpy array float32.
-        Utilisé pour les frames WebRTC (av.AudioFrame.to_ndarray).
         """
         if not raw:
             return np.array([], dtype=np.float32)
@@ -45,33 +36,20 @@ class AudioService:
             return samples
         return samples.astype(dtype)
 
-    def av_frame_to_array(self, frame, target_rate: int = TARGET_SAMPLE_RATE) -> np.ndarray:
+    def array_to_pcm16_bytes(self, samples: np.ndarray) -> bytes:
         """
-        Convertit un `av.AudioFrame` vers un PCM mono float32 dans [-1, 1].
-
-        On force explicitement `s16` + `mono` + `target_rate` via le resampler
-        PyAV pour éviter les ambiguïtés de format / layout observées avec
-        `frame.to_ndarray()` brut.
+        numpy float32 mono [-1, 1] → bytes PCM16 little-endian.
         """
-        if av is None:
-            raise RuntimeError("PyAV is not installed (package 'av').")
+        if not isinstance(samples, np.ndarray):
+            samples = np.asarray(samples, dtype=np.float32)
+        if samples.ndim > 1:
+            samples = self.to_mono(samples)
+        samples = samples.astype(np.float32, copy=False).reshape(-1)
+        if samples.size == 0:
+            return b""
 
-        resampler = av.AudioResampler(format="s16", layout="mono", rate=int(target_rate))
-        out_frames = resampler.resample(frame)
-        if not out_frames:
-            return np.array([], dtype=np.float32)
-
-        arrays: list[np.ndarray] = []
-        for out_frame in out_frames:
-            pcm = out_frame.to_ndarray()
-            if not isinstance(pcm, np.ndarray):
-                pcm = np.asarray(pcm, dtype=np.int16)
-            pcm = pcm.reshape(-1).astype(np.int16, copy=False)
-            arrays.append(pcm.astype(np.float32) / 32768.0)
-
-        if not arrays:
-            return np.array([], dtype=np.float32)
-        return np.concatenate(arrays).astype(np.float32, copy=False)
+        clipped = np.clip(samples, -1.0, 1.0)
+        return (clipped * 32767.0).astype(np.int16).tobytes()
 
     def array_to_wav_bytes(self, samples: np.ndarray, rate: int = TARGET_SAMPLE_RATE) -> bytes:
         """
@@ -115,110 +93,6 @@ class AudioService:
         output_path = Path(path)
         output_path.parent.mkdir(parents=True, exist_ok=True)
         sf.write(str(output_path), samples, int(sample_rate), format="WAV", subtype="PCM_16")
-
-    def array_to_av_frame(self, samples: np.ndarray, sample_rate: int):
-        """
-        numpy float32 → av.AudioFrame prêt pour aiortc.
-        Format : s16, layout mono, pts calculé.
-        """
-        if av is None:
-            raise RuntimeError("PyAV is not installed (package 'av').")
-
-        if not isinstance(samples, np.ndarray):
-            samples = np.asarray(samples, dtype=np.float32)
-        if samples.ndim > 1:
-            samples = self.to_mono(samples)
-        samples = samples.astype(np.float32, copy=False).reshape(-1)
-
-        # float32 [-1,1] -> int16
-        clipped = np.clip(samples, -1.0, 1.0)
-        pcm16 = (clipped * 32767.0).astype(np.int16)
-
-        frame = av.AudioFrame(format="s16", layout="mono", samples=len(pcm16))
-        frame.sample_rate = int(sample_rate)
-        frame.time_base = Fraction(1, int(sample_rate))
-        frame.planes[0].update(pcm16.tobytes())
-        return frame
-
-    def array_to_av_frames(
-        self,
-        samples: np.ndarray,
-        source_rate: int,
-        target_rate: int = TARGET_SAMPLE_RATE,
-        frame_ms: int = 20,
-    ) -> list:
-        """
-        numpy float32 → liste de `av.AudioFrame` mono/s16 à fréquence fixe.
-
-        Validation stricte : source_rate DOIT être 48000 Hz.
-        Aucun resampling automatique - les erreurs doivent être détectées.
-        """
-        if av is None:
-            raise RuntimeError("PyAV is not installed (package 'av').")
-
-        if not isinstance(samples, np.ndarray):
-            samples = np.asarray(samples, dtype=np.float32)
-        if samples.ndim > 1:
-            samples = self.to_mono(samples)
-        samples = samples.astype(np.float32, copy=False).reshape(-1)
-        if samples.size == 0:
-            return []
-
-        normalized_rate = int(target_rate) if int(target_rate) > 0 else TARGET_SAMPLE_RATE
-        
-        # Validation stricte : 48k requis, pas de resampling automatique
-        if int(source_rate) > 0 and int(source_rate) != 48000:
-            raise ValueError(f"Sample rate invalide: {source_rate}, attendu 48000")
-        if normalized_rate != 48000:
-            raise ValueError(f"Target rate invalide: {normalized_rate}, attendu 48000")
-
-        frame_samples = max(1, int(normalized_rate * (frame_ms / 1000.0)))
-        frames = []
-        for start in range(0, len(samples), frame_samples):
-            chunk = samples[start : start + frame_samples]
-            if chunk.size == 0:
-                continue
-            frames.append(self.array_to_av_frame(chunk, normalized_rate))
-        return frames
-
-    def array_to_av_frames_direct(
-        self,
-        samples: np.ndarray,
-        sample_rate: int,
-        frame_ms: int = 20,
-    ) -> list:
-        """
-        Conversion directe sans resampling pour qualité audio maximale.
-        Utilisé pour TTS où source_rate == target_rate (48kHz).
-        
-        Frame fixe : 20ms = 960 samples @ 48kHz (standard WebRTC/Opus)
-        """
-        if av is None:
-            raise RuntimeError("PyAV is not installed (package 'av').")
-
-        if not isinstance(samples, np.ndarray):
-            samples = np.asarray(samples, dtype=np.float32)
-        if samples.ndim > 1:
-            samples = self.to_mono(samples)
-        samples = samples.astype(np.float32, copy=False).reshape(-1)
-        if samples.size == 0:
-            return []
-
-        # Validation stricte : 48k requis
-        rate = int(sample_rate) if int(sample_rate) > 0 else 48000
-        if rate != 48000:
-            raise ValueError(f"Sample rate invalide: {rate}, attendu 48000")
-        
-        # 20ms = 960 samples @ 48kHz (WebRTC/Opus standard)
-        frame_samples = 960  # int(48000 * 20 / 1000) = 960
-        
-        frames = []
-        for start in range(0, len(samples), frame_samples):
-            chunk = samples[start : start + frame_samples]
-            if chunk.size == 0:
-                continue
-            frames.append(self.array_to_av_frame(chunk, rate))
-        return frames
 
     # ── Resampling ───────────────────────────────────────────────────────────
 

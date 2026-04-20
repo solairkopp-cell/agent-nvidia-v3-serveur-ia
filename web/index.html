@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AI Server – Test Micro/WebRTC</title>
+    <title>AI Server – Test Micro/WebSocket</title>
     <style>
       body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 24px; max-width: 900px; }
       .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
@@ -19,7 +19,7 @@
     </style>
   </head>
   <body>
-    <h2>AI Server – WebRTC + Micro</h2>
+    <h2>AI Server – Audio 100% WebSocket</h2>
     <div class="row">
       <div>
         <div class="label">WebSocket URL</div>
@@ -35,17 +35,27 @@
         <button id="startBtn" class="primary" disabled>Démarrer (micro)</button>
         <button id="stopBtn" disabled>Stop</button>
         <button id="testTtsBtn" disabled>Test TTS</button>
-        <span class="label">Audio sortie (TTS)</span>
-        <audio id="remoteAudio" autoplay playsinline controls></audio>
+        <span class="label">Lecture TTS</span>
+        <span id="audioState">idle</span>
+      </div>
+      <div class="row" style="margin-top: 10px;">
+        <span class="label">Entrée</span>
+        <span id="inputRate">-</span>
+        <span class="label">Sortie</span>
+        <span id="outputRate">-</span>
       </div>
     </div>
 
     <div class="card">
+      <div class="label">Test rapide</div>
+      <div class="mono">1. Connecter
+2. Test TTS pour valider la sortie audio WS
+3. Démarrer (micro) pour tester le flux entrant + STT</div>
+    </div>
+
+    <div class="card">
       <div class="label">Texte Test TTS</div>
-      <textarea id="ttsTestText">Bonjour. Ceci est un test du pipeline TTS sans passer par le micro.</textarea>
-      <div class="row" style="margin-top: 12px;">
-        <span class="label">Fonctionne même sans micro : le navigateur ouvre un WebRTC en réception audio.</span>
-      </div>
+      <textarea id="ttsTestText">Bonjour. Ceci est un test du pipeline TTS entier via WebSocket.</textarea>
     </div>
 
     <div class="card">
@@ -77,7 +87,7 @@
       const $ = (id) => document.getElementById(id);
       const log = (msg) => {
         const el = $("logs");
-        el.textContent += msg + "\\n";
+        el.textContent += msg + "\n";
         el.scrollTop = el.scrollHeight;
       };
 
@@ -89,11 +99,27 @@
       $("wsUrl").value = defaultWsUrl();
 
       let ws = null;
-      let pc = null;
-      let localStream = null;
+      let sessionStarted = false;
+      let micStream = null;
+      let captureContext = null;
+      let captureSource = null;
+      let captureProcessor = null;
+      let captureSink = null;
+      let playbackContext = null;
+      let playbackCursor = 0;
+      let outputSampleRate = 48000;
+      const playbackSources = new Set();
+      let pendingStartPromise = null;
+      let resolvePendingStart = null;
+      let rejectPendingStart = null;
 
       function setStatus(text) {
         $("status").textContent = text;
+      }
+
+      function setAudioRates({ input = "-", output = "-" } = {}) {
+        $("inputRate").textContent = input === "-" ? "-" : `${input} Hz`;
+        $("outputRate").textContent = output === "-" ? "-" : `${output} Hz`;
       }
 
       function setButtons({ connected, started }) {
@@ -105,10 +131,109 @@
       }
 
       setButtons({ connected: false, started: false });
+      setAudioRates();
+
+      function resetPendingStart(error = null) {
+        if (error && rejectPendingStart) {
+          rejectPendingStart(error);
+        }
+        pendingStartPromise = null;
+        resolvePendingStart = null;
+        rejectPendingStart = null;
+      }
+
+      async function ensurePlaybackContext() {
+        if (playbackContext && playbackContext.sampleRate !== outputSampleRate) {
+          try { await playbackContext.close(); } catch {}
+          playbackContext = null;
+          playbackCursor = 0;
+        }
+        if (!playbackContext) {
+          playbackContext = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: outputSampleRate });
+        }
+        if (playbackContext.state === "suspended") {
+          await playbackContext.resume();
+        }
+        if (playbackCursor < playbackContext.currentTime) {
+          playbackCursor = playbackContext.currentTime;
+        }
+      }
+
+      function clearPlayback() {
+        for (const source of Array.from(playbackSources)) {
+          try { source.stop(0); } catch {}
+        }
+        playbackSources.clear();
+        if (playbackContext) {
+          playbackCursor = playbackContext.currentTime;
+        } else {
+          playbackCursor = 0;
+        }
+        $("audioState").textContent = "idle";
+      }
+
+      function schedulePcmPlayback(arrayBuffer) {
+        if (!playbackContext || !(arrayBuffer instanceof ArrayBuffer)) return;
+
+        const pcm = new Int16Array(arrayBuffer);
+        if (!pcm.length) return;
+
+        const samples = new Float32Array(pcm.length);
+        for (let i = 0; i < pcm.length; i += 1) {
+          samples[i] = pcm[i] / 32768;
+        }
+
+        const audioBuffer = playbackContext.createBuffer(1, samples.length, outputSampleRate);
+        audioBuffer.copyToChannel(samples, 0);
+
+        const source = playbackContext.createBufferSource();
+        source.buffer = audioBuffer;
+        source.connect(playbackContext.destination);
+
+        const startAt = Math.max(playbackContext.currentTime + 0.03, playbackCursor);
+        source.start(startAt);
+        playbackCursor = startAt + audioBuffer.duration;
+        playbackSources.add(source);
+        $("audioState").textContent = "playing";
+
+        source.onended = () => {
+          playbackSources.delete(source);
+          if (!playbackSources.size) {
+            $("audioState").textContent = "idle";
+          }
+        };
+      }
+
+      function floatToPcm16Buffer(input) {
+        const pcm = new Int16Array(input.length);
+        for (let i = 0; i < input.length; i += 1) {
+          const value = Math.max(-1, Math.min(1, input[i]));
+          pcm[i] = value < 0 ? value * 32768 : value * 32767;
+        }
+        return pcm.buffer;
+      }
+
+      async function sendStart(inputSampleRate = null) {
+        if (!ws || ws.readyState !== WebSocket.OPEN) throw new Error("WS not connected");
+        if (sessionStarted) return;
+        if (pendingStartPromise) return pendingStartPromise;
+
+        const payload = { type: "start" };
+        if (Number.isFinite(inputSampleRate) && inputSampleRate > 0) {
+          payload.input_sample_rate = Math.round(inputSampleRate);
+        }
+        pendingStartPromise = new Promise((resolve, reject) => {
+          resolvePendingStart = resolve;
+          rejectPendingStart = reject;
+        });
+        ws.send(JSON.stringify(payload));
+        return pendingStartPromise;
+      }
 
       async function connect() {
         const url = $("wsUrl").value.trim();
         ws = new WebSocket(url);
+        ws.binaryType = "arraybuffer";
 
         ws.onopen = () => {
           setStatus("ws connected");
@@ -116,35 +241,57 @@
           log("WS open");
         };
 
-        ws.onclose = () => {
+        ws.onclose = async () => {
+          resetPendingStart(new Error("WS closed"));
+          sessionStarted = false;
+          await stopLocalMicrophone();
+          clearPlayback();
+          setAudioRates();
           setStatus("offline");
           setButtons({ connected: false, started: false });
           log("WS closed");
         };
 
-        ws.onerror = (e) => {
+        ws.onerror = () => {
           log("WS error");
         };
 
         ws.onmessage = async (ev) => {
+          if (typeof ev.data !== "string") {
+            schedulePcmPlayback(ev.data);
+            return;
+          }
+
           let msg = null;
           try { msg = JSON.parse(ev.data); } catch { return; }
           if (!msg || !msg.type) return;
 
-          if (msg.type === "answer") {
-            await pc.setRemoteDescription({ type: "answer", sdp: msg.sdp });
-            log("SDP answer set");
-            setStatus("webrtc negotiating");
+          if (msg.type === "started") {
+            sessionStarted = true;
+            outputSampleRate = msg.audio_output_sample_rate || 48000;
+            await ensurePlaybackContext();
+            setAudioRates({
+              input: msg.input_sample_rate || "-",
+              output: outputSampleRate,
+            });
+            setStatus("audio ready");
+            setButtons({ connected: true, started: true });
+            log(`audio started in=${msg.input_sample_rate || "n/a"} out=${outputSampleRate}`);
+            if (resolvePendingStart) {
+              resolvePendingStart(msg);
+              resetPendingStart();
+            }
             return;
           }
 
-          if (msg.type === "ice") {
-            if (!msg.candidate) return;
-            try {
-              await pc.addIceCandidate(msg.candidate);
-            } catch (e) {
-              log("addIceCandidate error: " + e);
-            }
+          if (msg.type === "stopped") {
+            sessionStarted = false;
+            clearPlayback();
+            resetPendingStart(new Error("Audio stopped"));
+            setAudioRates();
+            setStatus("ws connected");
+            setButtons({ connected: true, started: false });
+            log("audio stopped");
             return;
           }
 
@@ -156,14 +303,12 @@
           }
 
           if (msg.type === "response") {
-            $("remoteAudio").muted = false;
             $("response").textContent += (msg.text || "");
             return;
           }
 
           if (msg.type === "tts_test") {
-            $("remoteAudio").muted = false;
-            $("ttsTestLog").textContent += (msg.text || "") + "\\n";
+            $("ttsTestLog").textContent += (msg.text || "") + "\n";
             return;
           }
 
@@ -178,8 +323,8 @@
             return;
           }
 
-          if (msg.type === "tts_stop_now") {
-            $("remoteAudio").muted = true;
+          if (msg.type === "tts_stop_now" || msg.type === "interrupted") {
+            clearPlayback();
             log("TTS stop now");
             return;
           }
@@ -195,12 +340,71 @@
           }
 
           if (msg.type === "error") {
+            if (rejectPendingStart && String(msg.message || "").startsWith("start failed")) {
+              rejectPendingStart(new Error(msg.message));
+              resetPendingStart();
+            }
             log("Server error: " + msg.message);
             return;
           }
 
           log("Server msg: " + ev.data);
         };
+      }
+
+      async function stopLocalMicrophone() {
+        if (captureProcessor) {
+          captureProcessor.onaudioprocess = null;
+          try { captureProcessor.disconnect(); } catch {}
+          captureProcessor = null;
+        }
+        if (captureSource) {
+          try { captureSource.disconnect(); } catch {}
+          captureSource = null;
+        }
+        if (captureSink) {
+          try { captureSink.disconnect(); } catch {}
+          captureSink = null;
+        }
+        if (micStream) {
+          for (const track of micStream.getTracks()) track.stop();
+          micStream = null;
+        }
+        if (captureContext) {
+          try { await captureContext.close(); } catch {}
+          captureContext = null;
+        }
+      }
+
+      async function ensureMicrophoneStreaming() {
+        if (captureProcessor) return;
+        if (!ws || ws.readyState !== WebSocket.OPEN) throw new Error("WS not connected");
+
+        micStream = await navigator.mediaDevices.getUserMedia({
+          audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true },
+          video: false,
+        });
+
+        captureContext = new (window.AudioContext || window.webkitAudioContext)();
+        await captureContext.resume();
+        await sendStart(captureContext.sampleRate);
+
+        captureSource = captureContext.createMediaStreamSource(micStream);
+        captureProcessor = captureContext.createScriptProcessor(2048, 1, 1);
+        captureSink = captureContext.createGain();
+        captureSink.gain.value = 0;
+
+        captureProcessor.onaudioprocess = (event) => {
+          if (!ws || ws.readyState !== WebSocket.OPEN) return;
+          const input = event.inputBuffer.getChannelData(0);
+          ws.send(floatToPcm16Buffer(input));
+        };
+
+        captureSource.connect(captureProcessor);
+        captureProcessor.connect(captureSink);
+        captureSink.connect(captureContext.destination);
+
+        log(`mic streaming sr=${captureContext.sampleRate}`);
       }
 
       async function disconnect() {
@@ -211,119 +415,24 @@
         }
       }
 
-      function setupPeerEvents() {
-        pc.onicecandidate = (ev) => {
-          if (!ev.candidate) return;
-          ws.send(JSON.stringify({
-            type: "ice",
-            candidate: {
-              candidate: ev.candidate.candidate,
-              sdpMid: ev.candidate.sdpMid,
-              sdpMLineIndex: ev.candidate.sdpMLineIndex,
-            }
-          }));
-        };
-
-        pc.onconnectionstatechange = () => {
-          log("pc state: " + pc.connectionState);
-          if (pc.connectionState === "connected") setStatus("webrtc connected");
-          else if (pc.connectionState === "connecting") setStatus("webrtc negotiating");
-          else setStatus("webrtc " + pc.connectionState);
-        };
-
-        pc.oniceconnectionstatechange = () => {
-          log("ice state: " + pc.iceConnectionState);
-        };
-
-        pc.onsignalingstatechange = () => {
-          log("signaling state: " + pc.signalingState);
-        };
-
-        pc.ontrack = (ev) => {
-          log("remote track: " + ev.track.kind);
-          const stream = ev.streams[0];
-          if (stream) {
-            const audioEl = $("remoteAudio");
-            audioEl.srcObject = stream;
-            audioEl.muted = false;
-            const playPromise = audioEl.play();
-            if (playPromise && typeof playPromise.catch === "function") {
-              playPromise.catch((e) => log("remote audio play blocked: " + e));
-            }
-          }
-        };
-      }
-
-      async function ensurePeer(withMicrophone) {
-        if (pc) return;
-        if (!ws || ws.readyState !== 1) throw new Error("WS not connected");
-
-        ws.send(JSON.stringify({ type: "start" }));
-
-        pc = new RTCPeerConnection({
-          iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
-        });
-        setupPeerEvents();
-
-        if (withMicrophone) {
-          localStream = await navigator.mediaDevices.getUserMedia({
-            audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true },
-            video: false,
-          });
-
-          for (const track of localStream.getTracks()) {
-            pc.addTrack(track, localStream);
-          }
-        } else {
-          pc.addTransceiver("audio", { direction: "recvonly" });
-        }
-
-        const offer = await pc.createOffer();
-        await pc.setLocalDescription(offer);
-
-        ws.send(JSON.stringify({ type: "offer", sdp: pc.localDescription.sdp }));
-        log(withMicrophone ? "offer sent (micro)" : "offer sent (recvonly tts)");
-
-        setButtons({ connected: true, started: true });
-        setStatus("webrtc negotiating");
-      }
-
-      async function waitForPeerReady(timeoutMs = 6000) {
-        if (!pc) throw new Error("Peer non initialise");
-
-        const startedAt = Date.now();
-        while (Date.now() - startedAt < timeoutMs) {
-          const audioReady = !!$("remoteAudio").srcObject;
-          const state = pc.connectionState || "";
-          if (audioReady && (state === "connected" || state === "connecting")) {
-            return;
-          }
-          await new Promise((resolve) => setTimeout(resolve, 50));
-        }
-        throw new Error("WebRTC audio non pret pour le test TTS");
-      }
-
       async function start() {
         $("transcript").textContent = "";
         $("intent").textContent = "";
         $("response").textContent = "";
-
-        if (!ws || ws.readyState !== 1) throw new Error("WS not connected");
-        if (pc && !localStream) {
-          throw new Error("Un peer recvonly est déjà actif. Clique Stop puis redémarre le micro.");
-        }
-        await ensurePeer(true);
+        await ensurePlaybackContext();
+        await ensureMicrophoneStreaming();
+        setStatus("streaming mic");
       }
 
       async function testTts() {
-        if (!ws || ws.readyState !== 1) throw new Error("WS not connected");
+        if (!ws || ws.readyState !== WebSocket.OPEN) throw new Error("WS not connected");
         const text = $("ttsTestText").value.trim();
         if (!text) throw new Error("Texte de test vide");
 
-        if (!pc) {
-          await ensurePeer(false);
+        await ensurePlaybackContext();
+        if (!sessionStarted) {
+          await sendStart();
         }
-        await waitForPeerReady();
 
         $("ttsTestLog").textContent = "";
         log("TTS test sent");
@@ -331,28 +440,27 @@
       }
 
       async function stop() {
-        if (ws && ws.readyState === 1) {
+        await stopLocalMicrophone();
+        clearPlayback();
+        sessionStarted = false;
+        resetPendingStart(new Error("Audio stopped by client"));
+        setAudioRates();
+
+        if (ws && ws.readyState === WebSocket.OPEN) {
           try { ws.send(JSON.stringify({ type: "stop" })); } catch {}
+          setStatus("ws connected");
+          setButtons({ connected: true, started: false });
+        } else {
+          setStatus("offline");
+          setButtons({ connected: false, started: false });
         }
-
-        if (localStream) {
-          for (const t of localStream.getTracks()) t.stop();
-          localStream = null;
-        }
-        if (pc) {
-          try { pc.close(); } catch {}
-          pc = null;
-        }
-
-        if (ws && ws.readyState === 1) setStatus("ws connected");
-        setButtons({ connected: !!ws && ws.readyState === 1, started: false });
       }
 
-      $("connectBtn").onclick = () => connect().catch(e => log(String(e)));
-      $("disconnectBtn").onclick = () => disconnect().catch(e => log(String(e)));
-      $("startBtn").onclick = () => start().catch(e => log(String(e)));
-      $("stopBtn").onclick = () => stop().catch(e => log(String(e)));
-      $("testTtsBtn").onclick = () => testTts().catch(e => log(String(e)));
+      $("connectBtn").onclick = () => connect().catch((e) => log(String(e)));
+      $("disconnectBtn").onclick = () => disconnect().catch((e) => log(String(e)));
+      $("startBtn").onclick = () => start().catch((e) => log(String(e)));
+      $("stopBtn").onclick = () => stop().catch((e) => log(String(e)));
+      $("testTtsBtn").onclick = () => testTts().catch((e) => log(String(e)));
     </script>
   </body>
 </html>

@@ -3,9 +3,9 @@ services/agent_service.py
 Orchestration centrale du pipeline IA : STT → LLM → TTS.
 
 Responsabilité :
-  - Recevoir un utterance complet (WAV bytes) depuis WebRTCService
+  - Recevoir un utterance complet depuis le flux audio
   - Orchestrer STT → LLM → TTS
-  - Alimenter le TTSAudioTrack de la session en temps réel
+  - Alimenter la sortie audio WebSocket de la session en temps réel
   - Gérer l'annulation si une nouvelle utterance arrive pendant le traitement
   - Mettre à jour l'historique de conversation dans la Session
 
@@ -13,7 +13,7 @@ Flux principal :
   wav_bytes → WhisperService.transcribe()
             → OllamaService.chat()
             → PiperTTSService.synthesize()
-            → Queue audio → Scheduler (20ms) → TTSAudioTrack
+            → Queue audio → Scheduler (20ms) → socket audio
 
 Le lock session.processing_lock garantit qu'un seul pipeline
 s'exécute par session à la fois.
@@ -45,7 +45,7 @@ import config
 
 class AgentService:
     """
-    Singleton. Injecté dans WebRTCService.
+    Singleton. Injecté dans le service de flux audio.
     """
 
     def __init__(
@@ -71,7 +71,7 @@ class AgentService:
 
     async def process_utterance(self, session: "Session", wav_bytes: bytes) -> None:
         """
-        Point d'entrée principal. Appelé par WebRTCService après
+        Point d'entrée principal. Appelé par le flux audio après
         détection de fin d'utterance par le VAD.
 
         Étapes :
@@ -79,7 +79,7 @@ class AgentService:
           2. Incrémenter session.current_request_id
           3. STT : WhisperService.transcribe(wav_bytes)
           4. Si transcript vide → relâcher le lock et retourner
-          5. Notifier le client du transcript via WebSocketService (optionnel)
+          5. Notifier le client du transcript via WebSocket (optionnel)
           6. Ajouter {"role":"user","content":transcript} à session.conversation_history
           7. LLM → TTS (voir _stream_response)
           8. Ajouter {"role":"assistant","content":full_reply} à l'historique
@@ -120,7 +120,7 @@ class AgentService:
         utterance_id: str | None = None,
     ) -> None:
         """
-        Entrée PCM/NumPy (recommandée pour WebRTC).
+        Entrée PCM/NumPy.
 
         Args:
             apply_denoise: Autorise le denoise avant STT.
@@ -158,7 +158,7 @@ class AgentService:
                     int(sample_rate),
                 )
 
-            # Sauvegarde de référence du brut reçu côté WebRTC
+            # Sauvegarde de référence du brut reçu côté socket
             raw_stt_samples = samples.copy()
 
             # Appliquer le denoise sur l'audio avant STT
@@ -363,10 +363,10 @@ class AgentService:
 
         Actions :
           1. session.cancel_flag = True
-          2. Vider la queue du TTSAudioTrack si il existe
+          2. Vider la sortie audio si elle existe
           3. Notifier le client via WebSocket {"type": "interrupted"}
 
-        Appelé par WebRTCService quand une nouvelle utterance est détectée
+        Appelé quand une nouvelle utterance est détectée
         pendant qu'une réponse TTS est en cours de diffusion.
         """
         logger = logging.getLogger(__name__)
@@ -537,7 +537,7 @@ class AgentService:
         interruptible: bool = True,
     ) -> str:
         """
-        LLM non-streaming → TTS non-streaming → TTSAudioTrack via queue + scheduler.
+        LLM non-streaming → TTS non-streaming → socket audio via queue + scheduler.
         """
         if session.tts_track is None:
             return ""
@@ -634,6 +634,11 @@ class AgentService:
           - Flush : ajoute 100ms de silence à la fin
         """
         logger = logging.getLogger(__name__)
+        frame_duration_ms = 20
+        prebuffer_ms = max(0, int(getattr(config, "TTS_PLAYBACK_PREBUFFER_MS", 0)))
+        prebuffer_frames = max(1, prebuffer_ms // frame_duration_ms) if prebuffer_ms > 0 else 1
+        scheduler_task = None
+        emitted_audio = False
 
         if emit_boundary_emotions:
             # Envoyer l'émotion "speaking" au début de chaque prise de parole
@@ -643,11 +648,7 @@ class AgentService:
             except Exception:
                 pass  # Ignorer silencieusement pour ne pas bloquer le TTS
 
-        # Démarrer le scheduler en tâche de fond
-        scheduler_task = asyncio.create_task(
-            self._tts_scheduler(session, request_id),
-            name=f"tts-scheduler-{session.client_id}"
-        )
+        await self._enqueue_initial_tts_silence(session, request_id)
         
         try:
             # Traiter chaque segment du flux TTS
@@ -665,10 +666,23 @@ class AgentService:
                     rate=rate,
                     client_event_type=client_event_type,
                 )
+                emitted_audio = True
+
+                if scheduler_task is None and session.tts_audio_queue.qsize() >= prebuffer_frames:
+                    scheduler_task = asyncio.create_task(
+                        self._tts_scheduler(session, request_id),
+                        name=f"tts-scheduler-{session.client_id}"
+                    )
                 
         except Exception:
             logger.exception("TTS stream playback error client_id=%s", session.client_id)
         finally:
+            if scheduler_task is None and emitted_audio and not session.cancel_flag and session.current_request_id == request_id:
+                scheduler_task = asyncio.create_task(
+                    self._tts_scheduler(session, request_id),
+                    name=f"tts-scheduler-{session.client_id}"
+                )
+
             # Si annulé, sortir immédiatement sans attendre
             if session.cancel_flag or session.current_request_id != request_id:
                 # Vider la queue
@@ -678,9 +692,9 @@ class AgentService:
                     except asyncio.QueueEmpty:
                         break
                 # Annuler le scheduler
-                if scheduler_task and not scheduler_task.done():
+                if scheduler_task is not None and not scheduler_task.done():
                     scheduler_task.cancel()
-            else:
+            elif scheduler_task is not None:
                 # Attendre que la queue soit presque vide
                 await self._wait_queue_empty(session, request_id, timeout=2.0)
 
@@ -691,11 +705,12 @@ class AgentService:
                 await asyncio.sleep(0.15)
 
                 # Arrêter le scheduler
-                if scheduler_task and not scheduler_task.done():
+                if not scheduler_task.done():
                     scheduler_task.cancel()
             
-            with suppress(asyncio.CancelledError):
-                await scheduler_task
+            if scheduler_task is not None:
+                with suppress(asyncio.CancelledError):
+                    await scheduler_task
 
     async def _emit_tts_audio(
         self,
@@ -773,7 +788,7 @@ class AgentService:
     def _prepare_tts_samples(self, session: "Session", samples, rate: int):
         """
         Prépare les samples TTS : trim_silence optionnel.
-        Pas de resampling : TTS sort déjà en 48kHz et WebRTC attend 48kHz.
+        Pas de resampling : TTS et sortie client utilisent déjà 48kHz.
         """
         logger = logging.getLogger(__name__)
         import numpy as np
@@ -863,10 +878,9 @@ class AgentService:
                     # Timeout → frame silence pour éviter les trous
                     frame = silence_frame
 
-                # Envoyer la frame au track (array_to_av_frame convertit float32→int16)
+                # Envoyer directement la frame PCM via le transport audio WS.
                 if session.tts_track is not None:
-                    av_frame = self.audio.array_to_av_frame(frame, sample_rate=48000)
-                    await session.tts_track.feed(av_frame)
+                    await session.tts_track.feed(frame)
 
                 # Scheduler : attendre le bon moment
                 next_time += FRAME_DURATION
@@ -889,6 +903,21 @@ class AgentService:
         # Silence en float32 (coherent avec la queue)
         silence_frame = np.zeros(FRAME_SIZE, dtype=np.float32)
         
+        for _ in range(silence_frames):
+            if session.cancel_flag or session.current_request_id != request_id:
+                break
+            await session.tts_audio_queue.put(silence_frame.copy())
+
+    async def _enqueue_initial_tts_silence(self, session: "Session", request_id: int) -> None:
+        initial_silence_ms = max(0, int(getattr(config, "TTS_INITIAL_SILENCE_MS", 0)))
+        if initial_silence_ms <= 0:
+            return
+
+        frame_duration_ms = 20
+        frame_size = 960
+        silence_frames = max(1, initial_silence_ms // frame_duration_ms)
+        silence_frame = np.zeros(frame_size, dtype=np.float32)
+
         for _ in range(silence_frames):
             if session.cancel_flag or session.current_request_id != request_id:
                 break
@@ -1307,7 +1336,7 @@ class AgentService:
     ) -> None:
         """
         Sauvegarde brute + débruitée de l'utterance réellement envoyée au pipeline STT
-        dans le flux normal WebRTC, pour comparaison A/B.
+        dans le flux audio normal, pour comparaison A/B.
         """
         logger = logging.getLogger(__name__)
 
@@ -1317,7 +1346,7 @@ class AgentService:
 
             utterance_id = str(utterance_id or uuid.uuid4().hex[:8])
             client_id = str(getattr(session, "client_id", "unknown")).replace("/", "_")
-            prefix = f"webrtc_{client_id}_{utterance_id}"
+            prefix = f"audio_{client_id}_{utterance_id}"
 
             raw_path = recordings_dir / f"{prefix}_raw.wav"
             denoised_path = recordings_dir / f"{prefix}_denoised.wav"
@@ -1329,7 +1358,7 @@ class AgentService:
             denoised_rms = float(np.sqrt(np.mean(denoised_samples * denoised_samples))) if denoised_samples.size else 0.0
 
             logger.info(
-                "Saved WebRTC STT audio compare client_id=%s raw=%s denoised=%s raw_rms=%.6f denoised_rms=%.6f sr=%d",
+                "Saved STT audio compare client_id=%s raw=%s denoised=%s raw_rms=%.6f denoised_rms=%.6f sr=%d",
                 session.client_id,
                 raw_path.name,
                 denoised_path.name,
@@ -1338,7 +1367,7 @@ class AgentService:
                 sample_rate,
             )
         except Exception:
-            logger.exception("Failed to save WebRTC STT comparison audio client_id=%s", session.client_id)
+            logger.exception("Failed to save STT comparison audio client_id=%s", session.client_id)
 
     async def _send_emotion(self, session: "Session", name: str) -> None:
         if self.ws_service is None:

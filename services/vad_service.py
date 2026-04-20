@@ -36,7 +36,7 @@ class VADResult:
 
 class VADService:
     """
-    Singleton. Chargé une fois dans main.py et injecté dans WebRTCService.
+    Singleton. Chargé une fois dans main.py et injecté dans le service audio.
     """
 
     def __init__(self):

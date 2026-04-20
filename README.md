@@ -1,12 +1,12 @@
 # aiserver
 
-**aiserver** is a complete AI voice assistant server, designed to handle real-time conversations via WebRTC and WebSocket. It integrates a full pipeline from audio reception to speech synthesis with delivery management capabilities.
+**aiserver** is a complete AI voice assistant server, designed to handle real-time conversations via WebSocket. It integrates a full pipeline from audio reception to speech synthesis with delivery management capabilities.
 
 ---
 
 ## 🚀 Features
 
-1. **Real-time Audio**: Receives audio via **WebRTC** / **WebSocket**
+1. **Real-time Audio**: Receives and sends audio via **WebSocket**
 2. **Voice Activity Detection**: Detects speech using **Silero VAD**
 3. **Audio Denoising**: Cleans audio with **DeepFilterNet** (streaming or utterance-level)
 4. **Speech-to-Text**: Transcribes speech with **Whisper** (embedded or HTTP mode)
@@ -25,7 +25,7 @@
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                          Client (Browser)                           │
-│                     WebRTC Audio + WebSocket                        │
+│                       Audio WebSocket                               │
 └────────────────────────┬────────────────────────────────────────────┘
                          │
                          ▼
@@ -36,7 +36,7 @@
                          │
                          ▼
 ┌─────────────────────────────────────────────────────────────────────┐
-│                       WebRTC Service                                │
+│                    Audio Stream Service                             │
 │              Audio Track Handling + VAD Detection                   │
 └────────┬──────────────┬──────────────────────┬──────────────────────┘
          │              │                      │
@@ -79,7 +79,7 @@
                         ▼
               ┌──────────────────┐
               │ TTS Media Player │
-              │  (aiortc stream) │
+              │ (PCM stream)     │
               └────────┬─────────┘
                        │
                        ▼
@@ -109,7 +109,7 @@ aiserver/
 │
 ├── services/                # Main services
 │   ├── agent_service.py     # Main orchestrator (STT → LLM → TTS)
-│   ├── webrtc_service.py    # WebRTC peer management
+│   ├── ws_audio_service.py  # WebSocket audio streaming
 │   ├── websocket_service.py # WebSocket session management
 │   ├── vad_service.py       # Voice Activity Detection (Silero ONNX)
 │   ├── denoise_service.py   # Audio denoising (DeepFilterNet)
@@ -143,7 +143,7 @@ aiserver/
 │   ├── test_ollama_service.py
 │   ├── test_piper_service.py
 │   ├── test_vad_service.py
-│   └── test_webrtc_service.py
+│   └── test_ws_audio_service.py
 │
 ├── documentations/          # Additional documentation
 │   ├── state_machine.md     # Delivery state machine docs
@@ -163,7 +163,6 @@ aiserver/
 | [Piper TTS](https://github.com/rhasspy/piper) | High-quality Text-to-Speech |
 | [Silero VAD](https://github.com/snakers4/silero-vad) | Voice Activity Detection |
 | [DeepFilterNet](https://github.com/Rikorose/DeepFilterNet) | Audio denoising |
-| [aiortc](https://aiortc.readthedocs.io/) | WebRTC communication |
 | [websockets](https://websockets.readthedocs.io/) | WebSocket communication |
 | [FastAPI](https://fastapi.tiangolo.com/) | Web framework |
 | [Sentence Transformers](https://www.sbert.net/) | Intent detection embeddings |
@@ -219,7 +218,7 @@ pytest tests/
 
 #### `POST /ws` - Main Voice Session
 Primary WebSocket endpoint for voice conversations.
-- **Protocol**: WebRTC audio + WebSocket signaling
+- **Protocol**: PCM16 audio + JSON/binary WebSocket messages
 - **Messages**: STT transcripts, TTS audio chunks, intent events, interruptions
 
 #### `POST /ws-denoise` - Real-time Denoising
@@ -236,10 +235,10 @@ Returns status of all services:
 {
   "status": "ok",
   "sessions": 2,
-  "webrtc_peers": 1,
+  "audio_streams": 1,
   "services": {
     "ws": true,
-    "webrtc": true,
+    "audio_stream": true,
     "whisper": true,
     "ollama": true,
     "piper": true,
@@ -538,7 +537,7 @@ All configuration is centralized in `config.py` via environment variables.
 | `TTS_SEGMENT_QUEUE_MAXSIZE` | `5` | Segment buffer |
 | `TTS_PLAYBACK_PREBUFFER_MS` | `1500` | Buffer before playing |
 | `TTS_BUFFER_LOW_WATERMARK_MS` | `1200` | Trigger next synthesis |
-| `TTS_FRAME_INTERVAL_MS` | `10` | WebRTC frame interval |
+| `TTS_FRAME_INTERVAL_MS` | `10` | Audio frame interval |
 | `TTS_TRIM_SILENCE_THRESHOLD` | `0.0001` | Silence detection threshold |
 | `TTS_TRIM_SILENCE_PAD_MS` | `80` | Padding before silence |
 | `TTS_TRIM_MIN_SILENCE_MS` | `150` | Minimum silence gap |

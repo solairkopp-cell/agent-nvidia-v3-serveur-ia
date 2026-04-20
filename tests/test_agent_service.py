@@ -160,7 +160,7 @@ class TestInterrupt:
 
     @pytest.mark.asyncio
     async def test_interrupt_clears_tts_track(self, agent, session):
-        """interrupt() vide la queue du TTSAudioTrack."""
+        """interrupt() vide la sortie audio en cours."""
         await agent.interrupt(session)
         session.tts_track.clear.assert_called_once()
 
@@ -252,7 +252,6 @@ class TestStreamResponse:
         with patch("config.TTS_SEGMENT_OVERLAP_MS", 0):
             agent.llm.chat = AsyncMock(return_value="Bonjour.")
             agent.tts.synthesize = AsyncMock(return_value=(np.ones(4800, dtype=np.float32), 48000))
-            agent.audio.array_to_av_frame = MagicMock(return_value="frame-1")
             agent.ws_service = MagicMock()
             agent.ws_service.send = AsyncMock()
             agent.ws_service.send_response_chunk = AsyncMock()
@@ -260,9 +259,7 @@ class TestStreamResponse:
             reply = await agent._stream_response(session, "hello", request_id=session.current_request_id)
 
             assert reply == "Bonjour."
-            agent.audio.array_to_av_frame.assert_called()
             assert session.tts_track.feed.await_count >= 1
-            session.tts_track.feed.assert_any_await("frame-1")
             agent.ws_service.send_response_chunk.assert_awaited_once_with(session, "Bonjour.")
 
     @pytest.mark.asyncio
@@ -271,7 +268,6 @@ class TestStreamResponse:
             yield ("Test audio.", np.ones(16000, dtype=np.float32), 16000)
 
         agent.tts.synthesize_stream = fake_tts_stream
-        agent.audio.array_to_av_frame = MagicMock(return_value="frame-1")
         agent.ws_service = MagicMock()
         agent.ws_service.send = AsyncMock()
 
@@ -280,14 +276,12 @@ class TestStreamResponse:
         sent_payloads = [call.args[1] for call in agent.ws_service.send.await_args_list]
         assert {"type": "tts_test", "text": "Test audio."} in sent_payloads
         assert session.tts_track.feed.await_count >= 1
-        session.tts_track.feed.assert_any_await("frame-1")
 
     @pytest.mark.asyncio
     async def test_stream_response_sends_all_frames(self, agent, session):
         """Le stream response envoie tous les frames TTS."""
         agent.llm.chat = AsyncMock(return_value="Bonjour. Encore.")
         agent.tts.synthesize = AsyncMock(return_value=(np.ones(2880, dtype=np.float32), 48000))
-        agent.audio.array_to_av_frame = MagicMock(return_value="frame-1")
         agent.ws_service = MagicMock()
         agent.ws_service.send = AsyncMock()
         agent.ws_service.send_response_chunk = AsyncMock()

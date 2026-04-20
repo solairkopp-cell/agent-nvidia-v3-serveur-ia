@@ -8,7 +8,7 @@ Responsabilité :
   - Retourner un TranscriptionResult (text + detected_language + duration_ms)
 
 NB:
-  - Pour le pipeline WebRTC, l'entrée optimale est du PCM (NumPy).
+  - Pour le pipeline audio WebSocket, l'entrée optimale est du PCM (NumPy).
   - `transcribe(wav_bytes)` reste disponible pour compat / debug.
 """
 from __future__ import annotations
@@ -100,7 +100,7 @@ class WhisperService:
         - samples : np.ndarray float32 mono (ou multi-canal → moyenné)
         - sample_rate : fréquence d'échantillonnage (ex: 48000, 16000)
 
-        En mode embedded, c'est l'API recommandée pour WebRTC.
+        En mode embedded, c'est l'API recommandée pour le flux audio.
         """
         if self._mode != "embedded":
             # En mode HTTP, il faudrait ré-encapsuler en WAV côté client.

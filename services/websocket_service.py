@@ -1,23 +1,23 @@
 """
 services/websocket_service.py
-Gestion du signaling WebSocket.
+Gestion du transport WebSocket.
 
 Responsabilité :
   - Accepter les connexions WebSocket
   - Maintenir le registre des sessions actives
-  - Router les messages entrants vers WebRTCService
+  - Router les messages JSON et binaires vers le pipeline audio
   - Envoyer des événements au client (transcript, réponse LLM, erreurs)
 
-Protocole de signaling (client → serveur) :
-  {"type": "offer",  "sdp": "..."}          → WebRTCService.handle_offer()
-  {"type": "ice",    "candidate": {...}}     → WebRTCService.add_ice_candidate()
-  {"type": "start"}                          → WebRTCService.create_peer() si besoin
-  {"type": "stop"}                           → cleanup()
-  {"type": "test_tts", "text": "..."}        → lire un texte via le TTS sans micro
+Protocole JSON (client → serveur) :
+  {"type": "start", "input_sample_rate": 48000}  → initialiser la session audio
+  {"type": "stop"}                               → cleanup()
+  {"type": "test_tts", "text": "..."}            → lire un texte via le TTS sans micro
 
-Protocole de signaling (serveur → client) :
-  {"type": "answer",     "sdp": "..."}
-  {"type": "ice",        "candidate": {...}}
+Protocole binaire (client → serveur) :
+  bytes PCM16 mono                               → micro entrant
+
+Protocole JSON (serveur → client) :
+  {"type": "started", "audio_output_sample_rate": 48000, ...}
   {"type": "transcript", "text": "..."}      → texte STT reçu
   {"type": "response",   "text": "..."}      → fragment de réponse LLM
   {"type": "tts_test",   "text": "..."}      → fragment de texte joué par le test TTS
@@ -25,6 +25,9 @@ Protocole de signaling (serveur → client) :
   {"type": "interruption_decision", ...}     → décision continuation / interruption
   {"type": "interrupted"}                    → TTS interrompu
   {"type": "error",      "message": "..."}
+
+Protocole binaire (serveur → client) :
+  bytes PCM16 mono                               → chunks audio TTS
 """
 from __future__ import annotations
 
@@ -38,7 +41,7 @@ from fastapi import WebSocket, WebSocketDisconnect
 from models.session import Session
 
 if TYPE_CHECKING:
-    from services.webrtc_service import WebRTCService
+    from services.ws_audio_service import WebSocketAudioService
     from services.notification_service import NotificationService
 
 
@@ -52,10 +55,10 @@ class WebSocketService:
 
     def __init__(
         self,
-        webrtc: "WebRTCService",
+        audio_stream: "WebSocketAudioService",
         notification: "NotificationService | None" = None,
     ):
-        self.webrtc = webrtc
+        self.audio_stream = audio_stream
         self.notification = notification
         # Registre de toutes les sessions actives
         self._sessions: dict[str, Session] = {}
@@ -100,7 +103,7 @@ class WebSocketService:
         Actions :
           1. Annuler la tâche de ping
           2. Supprimer de self._sessions
-          3. webrtc.cleanup(session)
+          3. audio_stream.cleanup(session)
           4. Logger la déconnexion
         """
         # Annuler le ping keep-alive
@@ -113,9 +116,9 @@ class WebSocketService:
         
         self._sessions.pop(session.client_id, None)
         try:
-            await self.webrtc.cleanup(session)
+            await self.audio_stream.cleanup(session)
         except Exception:
-            logger.exception("Error during WebRTC cleanup client_id=%s", session.client_id)
+            logger.exception("Error during audio stream cleanup client_id=%s", session.client_id)
         logger.info("WS disconnected client_id=%s", session.client_id)
 
     # ── Boucle de messages ────────────────────────────────────────────────────
@@ -141,11 +144,14 @@ class WebSocketService:
                     logger.debug("Receive failed (client disconnected) client_id=%s: %s", session.client_id, e)
                     break
 
-                # Ignorer les messages binaires ou de contrôle
                 if message.get("type") not in ("websocket.receive", "websocket.connect"):
                     continue
 
-                # Parser le JSON manuellement
+                audio_bytes = message.get("bytes")
+                if audio_bytes:
+                    await self.audio_stream.handle_audio_bytes(session, audio_bytes)
+                    continue
+
                 text = message.get("text")
                 if not text:
                     continue
@@ -173,14 +179,9 @@ class WebSocketService:
         """
         Router un message entrant selon son type.
 
-        "offer"  → sdp = webrtc.handle_offer(session, message["sdp"])
-                    send(session, {"type": "answer", "sdp": sdp})
+        "start"  → initialiser la session audio WS
 
-        "ice"    → webrtc.add_ice_candidate(session, message["candidate"])
-
-        "start"  → logger + éventuellement créer le peer à l'avance
-
-        "stop"   → webrtc.cleanup(session)
+        "stop"   → audio_stream.cleanup(session)
 
         Types notification → notification.on_message(session, message)
 
@@ -199,49 +200,30 @@ class WebSocketService:
             if handled_by_notification:
                 return
 
-        if msg_type == "offer":
-            sdp = message.get("sdp")
-            if not isinstance(sdp, str) or not sdp.strip():
-                await self.send_error(session, "missing sdp")
-                return
-            try:
-                answer_sdp = await self.webrtc.handle_offer(session, sdp)
-            except Exception as exc:
-                logger.exception("handle_offer failed client_id=%s", session.client_id)
-                await self.send_error(session, f"offer failed: {exc}")
-                return
-            await self.send(session, {"type": "answer", "sdp": answer_sdp})
-            return
-
-        if msg_type == "ice":
-            candidate = message.get("candidate")
-            if candidate is None:
-                # end-of-candidates support
-                return
-            if not isinstance(candidate, dict):
-                await self.send_error(session, "invalid candidate")
-                return
-            try:
-                await self.webrtc.add_ice_candidate(session, candidate)
-            except Exception as exc:
-                logger.exception("add_ice_candidate failed client_id=%s", session.client_id)
-                await self.send_error(session, f"ice failed: {exc}")
-            return
-
         if msg_type == "start":
-            # Optionnel : pré-créer le peer côté serveur avant offer.
-            if session.peer is None:
-                try:
-                    await self.webrtc.create_peer(session)
-                except Exception as exc:
-                    logger.exception("create_peer failed client_id=%s", session.client_id)
-                    await self.send_error(session, f"start failed: {exc}")
-                    return
-            await self.send(session, {"type": "started"})
+            raw_rate = message.get("input_sample_rate")
+            input_sample_rate = int(raw_rate) if isinstance(raw_rate, (int, float)) and int(raw_rate) > 0 else None
+            try:
+                await self.audio_stream.start_session(session, input_sample_rate=input_sample_rate)
+            except Exception as exc:
+                logger.exception("start audio session failed client_id=%s", session.client_id)
+                await self.send_error(session, f"start failed: {exc}")
+                return
+            await self.send(
+                session,
+                {
+                    "type": "started",
+                    "input_sample_rate": session.audio_input_sample_rate,
+                    "audio_output_sample_rate": session.audio_output_sample_rate,
+                    "encoding": "pcm_s16le",
+                    "channels": 1,
+                },
+            )
+            asyncio.create_task(self.audio_stream.on_session_ready(session))
             return
 
         if msg_type == "stop":
-            await self.webrtc.cleanup(session)
+            await self.audio_stream.cleanup(session)
             await self.send(session, {"type": "stopped"})
             return
 
@@ -252,7 +234,7 @@ class WebSocketService:
                 await self.send_error(session, "missing arrived trip id")
                 return
             asyncio.create_task(
-                self.webrtc.agent.handle_external_control(
+                self.audio_stream.agent.handle_external_control(
                     session, "arrived", {"trip_id": trip_id}
                 )
             )
@@ -261,7 +243,7 @@ class WebSocketService:
         if msg_type == "photo_taken":
             # Réponse à ask_photo_event : photo prise avec succès
             asyncio.create_task(
-                self.webrtc.agent.handle_external_control(
+                self.audio_stream.agent.handle_external_control(
                     session, "photo_taken", message
                 )
             )
@@ -270,7 +252,7 @@ class WebSocketService:
         if msg_type == "photo_not_taken":
             # Réponse à ask_photo_event : photo non prise
             asyncio.create_task(
-                self.webrtc.agent.handle_external_control(
+                self.audio_stream.agent.handle_external_control(
                     session, "photo_not_taken", message
                 )
             )
@@ -282,9 +264,9 @@ class WebSocketService:
                 await self.send_error(session, "missing test tts text")
                 return
             if session.tts_track is None:
-                await self.send_error(session, "tts not ready: start webrtc first")
+                await self.send_error(session, "tts not ready: send start first")
                 return
-            asyncio.create_task(self.webrtc.agent.speak_text(session, text))
+            asyncio.create_task(self.audio_stream.agent.speak_text(session, text))
             return
 
         if msg_type == "external_control":
@@ -296,7 +278,7 @@ class WebSocketService:
                 await self.send_error(session, "missing external_control action")
                 return
             asyncio.create_task(
-                self.webrtc.agent.handle_external_control(session, action, extras)
+                self.audio_stream.agent.handle_external_control(session, action, extras)
             )
             return
 
@@ -313,7 +295,8 @@ class WebSocketService:
             # Log tous les envois (y compris émotions)
             logger.info("📤 WS MESSAGE SENT client_id=%s type=%s data=%r",
                         session.client_id, data.get("type"), data)
-            await session.websocket.send_json(data)
+            async with session.send_lock:
+                await session.websocket.send_json(data)
         except Exception:
             # La connexion peut être fermée / en erreur.
             return
@@ -340,11 +323,8 @@ class WebSocketService:
         return len(self._sessions)
 
     @property
-    def active_webrtc_peers(self) -> int:
-        """
-        Nombre de sessions ayant un RTCPeerConnection actif.
-        """
-        return sum(1 for s in self._sessions.values() if getattr(s, "peer", None) is not None)
+    def active_audio_streams(self) -> int:
+        return sum(1 for s in self._sessions.values() if getattr(s, "audio_stream_started", False))
 
     async def health_check(self) -> bool:
         """

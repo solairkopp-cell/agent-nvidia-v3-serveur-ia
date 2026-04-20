@@ -78,14 +78,16 @@ TTS_SEGMENT_OVERLAP_MS = float(os.getenv("TTS_SEGMENT_OVERLAP_MS", "100"))
 TTS_SEGMENT_QUEUE_MAXSIZE = int(os.getenv("TTS_SEGMENT_QUEUE_MAXSIZE", "5"))
 # Petit tampon de lecture avant de lancer le son.
 # 1500ms = buffer confortable pour Internet (fluide mais ~1.5s de latence)
-TTS_PLAYBACK_PREBUFFER_MS = int(os.getenv("TTS_PLAYBACK_PREBUFFER_MS", "1500"))
+TTS_PLAYBACK_PREBUFFER_MS = int(os.getenv("TTS_PLAYBACK_PREBUFFER_MS", "0"))
+# Petit silence initial pour laisser le lecteur audio client se stabiliser.
+TTS_INITIAL_SILENCE_MS = int(os.getenv("TTS_INITIAL_SILENCE_MS", "0"))
 # Déclencher la synthèse/livraison du segment suivant quand il reste peu d'audio
 # en file côté serveur.
-TTS_BUFFER_LOW_WATERMARK_MS = int(os.getenv("TTS_BUFFER_LOW_WATERMARK_MS", "1200"))
-# Intervalle entre les frames audio WebRTC (ms).
-# IMPORTANT : doit correspondre à la durée réelle des frames (voir webrtc_service.py)
+TTS_BUFFER_LOW_WATERMARK_MS = int(os.getenv("TTS_BUFFER_LOW_WATERMARK_MS", "0"))
+# Intervalle entre les frames audio (ms).
+# IMPORTANT : doit correspondre à la durée réelle des frames envoyées.
 # 10ms = latence minimale, 20ms = compromis, 40ms = ralenti
-TTS_FRAME_INTERVAL_MS = int(os.getenv("TTS_FRAME_INTERVAL_MS", "10"))
+TTS_FRAME_INTERVAL_MS = int(os.getenv("TTS_FRAME_INTERVAL_MS", "20"))
 # Trim silence : seuil très bas pour éviter de couper
 TTS_TRIM_SILENCE_THRESHOLD = float(os.getenv("TTS_TRIM_SILENCE_THRESHOLD", "0.0001"))
 TTS_TRIM_SILENCE_PAD_MS = int(os.getenv("TTS_TRIM_SILENCE_PAD_MS", "80"))
@@ -109,15 +111,9 @@ DENOISE_BEFORE_VAD = os.getenv("DENOISE_BEFORE_VAD", "false").strip().lower() in
 #   decode -> mono/16k/float32 -> VAD -> Whisper
 # True réactive le denoise utterance-level avant transcription.
 DENOISE_FOR_STT = os.getenv("DENOISE_FOR_STT", "false").strip().lower() in ("1", "true", "yes", "on")
-# Sauvegarde optionnelle d'un WAV debug du flux WebRTC décodé avant
-# le resampling serveur vers 16kHz. Utile pour diagnostiquer les
-# limitations de bande passante amont (Android/WebRTC/codec).
-SAVE_WEBRTC_NATIVE_DEBUG = os.getenv("SAVE_WEBRTC_NATIVE_DEBUG", "true").strip().lower() in ("1", "true", "yes", "on")
-
 # ── Audio / VAD ───────────────────────────────────────────────────────────────
 SAMPLE_RATE = 16000
-# 48kHz = standard WebRTC/Opus (évite le resampling interne métallique)
-AUDIO_OUTPUT_SAMPLE_RATE = int(os.getenv("AUDIO_OUTPUT_SAMPLE_RATE", "48000"))  # 48kHz = Opus native
+AUDIO_OUTPUT_SAMPLE_RATE = int(os.getenv("AUDIO_OUTPUT_SAMPLE_RATE", "48000"))
 VAD_CHUNK_MS = 32                   # ms par chunk Silero
 VAD_SILENCE_THRESHOLD = float(os.getenv("VAD_SILENCE_THRESHOLD", "0.85"))  # seuil probabilité vocale
 # Demander plusieurs chunks consécutifs avant speech_start réduit les faux positifs
@@ -140,12 +136,6 @@ SILERO_MODEL_PATH = os.getenv(
     "SILERO_MODEL_PATH",
     "assets/models/silero_vad.onnx",
 )
-
-# ── WebRTC / ICE ─────────────────────────────────────────────────────────────
-STUN_URL = os.getenv("STUN_URL", "stun:stun.l.google.com:19302")
-TURN_URL = os.getenv("TURN_URL", "")           # optionnel
-TURN_USERNAME = os.getenv("TURN_USERNAME", "")
-TURN_CREDENTIAL = os.getenv("TURN_CREDENTIAL", "")
 
 # ── Warmup / Préchauffage ────────────────────────────────────────────────────
 PREWARM_ON_STARTUP = os.getenv("PREWARM_ON_STARTUP", "true").strip().lower() in ("1", "true", "yes", "on")
