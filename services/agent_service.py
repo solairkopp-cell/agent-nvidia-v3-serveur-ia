@@ -4,15 +4,15 @@ Orchestration centrale du pipeline IA : STT → LLM → TTS.
 
 Responsabilité :
   - Recevoir un utterance complet (WAV bytes) depuis WebRTCService
-  - Orchestrer STT → LLM (streaming) → TTS (streaming)
+  - Orchestrer STT → LLM → TTS
   - Alimenter le TTSAudioTrack de la session en temps réel
   - Gérer l'annulation si une nouvelle utterance arrive pendant le traitement
   - Mettre à jour l'historique de conversation dans la Session
 
 Flux principal :
   wav_bytes → WhisperService.transcribe()
-            → OllamaService.generate_stream()
-            → PiperTTSService.synthesize_stream()
+            → OllamaService.chat()
+            → PiperTTSService.synthesize()
             → Queue audio → Scheduler (20ms) → TTSAudioTrack
 
 Le lock session.processing_lock garantit qu'un seul pipeline
@@ -37,8 +37,6 @@ if TYPE_CHECKING:
     from services.piper_tts_service import PiperTTSService
     from services.audio_service import AudioService
     from services.websocket_service import WebSocketService
-    from services.intent_service import IntentService
-    from services.action_service import ActionService
     from services.denoise_service import DenoiseService
     from services.delivery_state_machine import DeliveryStateMachine
 
@@ -56,8 +54,6 @@ class AgentService:
         llm: "OllamaService",
         tts: "PiperTTSService",
         audio: "AudioService",
-        intent: "IntentService | None" = None,
-        action: "ActionService | None" = None,
         denoise: "DenoiseService | None" = None,
         state_machine: "DeliveryStateMachine | None" = None,
     ):
@@ -65,8 +61,6 @@ class AgentService:
         self.llm = llm
         self.tts = tts
         self.audio = audio
-        self.intent = intent
-        self.action = action
         self.denoise = denoise
         self.state_machine = state_machine
         # Référence optionnelle au WebSocketService pour envoyer
@@ -87,7 +81,7 @@ class AgentService:
           4. Si transcript vide → relâcher le lock et retourner
           5. Notifier le client du transcript via WebSocketService (optionnel)
           6. Ajouter {"role":"user","content":transcript} à session.conversation_history
-          7. LLM streaming → TTS streaming (voir _stream_response)
+          7. LLM → TTS (voir _stream_response)
           8. Ajouter {"role":"assistant","content":full_reply} à l'historique
           9. session.trim_history(MAX_HISTORY, TRIM_TO)
 
@@ -332,137 +326,8 @@ class AgentService:
                 logger.exception("State machine error client_id=%s", session.client_id)
                 # En cas d'erreur, on continue avec le pipeline normal
 
-        # Intent detection (optionnel)
-        detected_intent = None
-        if self.intent is not None:
-            try:
-                detected_intent = await asyncio.to_thread(self.intent.getint, effective_transcript)
-            except Exception:
-                logger.exception("Intent detection error client_id=%s", session.client_id)
-                detected_intent = None
-
-            if self.ws_service is not None:
-                await self.ws_service.send(
-                    session,
-                    {"type": "intent", "intent": detected_intent or "INCONNU"},
-                )
-
-            if _parse_bool(config.INTENT_GATE_LLM) and detected_intent and detected_intent != "INCONNU":
-                session.clear_active_user_turn()
-                return
-
-        # Action service : exécuter les actions connues localement
-        action_result = None
-        if self.action is not None and detected_intent:
-            try:
-                action_result = await self.action.execute(
-                    session=session,
-                    intent=detected_intent,
-                    transcription=effective_transcript,
-                )
-                logger.info("Action result client_id=%s %s", session.client_id, action_result)
-            except Exception:
-                logger.exception("Action execution error client_id=%s", session.client_id)
-                action_result = None
-
-        # Si l'action a été traitée localement → TTS direct sans LLM
-        if action_result is not None and action_result.handled:
-            session.tts_interruptible = True
-            # Ajouter le message utilisateur à l'historique
-            if session.active_user_message_index is None:
-                session.conversation_history.append({"role": "user", "content": effective_transcript})
-                session.mark_active_user_turn(
-                    request_id=request_id,
-                    index=len(session.conversation_history) - 1,
-                    text=effective_transcript,
-                )
-            else:
-                session.mark_active_user_turn(
-                    request_id=request_id,
-                    index=session.active_user_message_index,
-                    text=effective_transcript,
-                )
-
-            # Synthétiser la réponse de l'action directement
-            if action_result.response:
-                session.tts_playing = True
-                session.reset_tts_output_state()
-                session.tts_started_at = time.monotonic()
-
-                # Envoyer l'émotion "speaking" avant la réponse
-                try:
-                    if self.ws_service is not None:
-                        await self.ws_service.send(session, {"type": "emotion", "name": "speaking"})
-                except Exception:
-                    pass  # Ignorer silencieusement pour ne pas bloquer le TTS
-
-                # Démarrer le scheduler
-                scheduler_task = asyncio.create_task(
-                    self._tts_scheduler(session, request_id),
-                    name=f"tts-scheduler-{session.client_id}"
-                )
-
-                try:
-                    samples, rate = await self.tts.synthesize(action_result.response)
-
-                    if not session.cancel_flag and session.current_request_id == request_id:
-                        # Envoyer via queue (avec prébuffer et découpage)
-                        await self._emit_tts_audio(
-                            session=session,
-                            phrase_text=action_result.response,
-                            samples=samples,
-                            rate=rate,
-                            client_event_type="response",
-                        )
-
-                        # Attendre que la queue soit presque vide
-                        await self._wait_queue_empty(session, request_id, timeout=2.0)
-
-                        # Si annulé, sortir vite sans flush
-                        if session.cancel_flag or session.current_request_id != request_id:
-                            return
-
-                        # Flush de fin : 100ms de silence
-                        await self._flush_tts_queue(session, request_id, silence_frames=5)
-
-                        # Attendre que le flush soit consommé
-                        await asyncio.sleep(0.15)
-                except Exception:
-                    logger.exception("TTS action response error client_id=%s", session.client_id)
-                finally:
-                    # Arrêter le scheduler
-                    if not scheduler_task.done():
-                        scheduler_task.cancel()
-                    with suppress(asyncio.CancelledError):
-                        # Attendre max 0.5s le scheduler pour éviter de bloquer trop longtemps
-                        try:
-                            await asyncio.wait_for(scheduler_task, timeout=0.5)
-                        except asyncio.TimeoutError:
-                            logger.warning("⚠️ Timeout waiting for scheduler task client_id=%s", session.client_id)
-
-                    session.tts_playing = False
-                    session.reset_tts_output_state()
-                    session.tts_started_at = 0.0
-                    # Réinitialiser l'état VAD pour que la prochaine parole soit détectée
-                    session.reset_audio_buffer()
-                    if hasattr(session, "vad_h"):
-                        session.vad_h = None
-                    if hasattr(session, "vad_c"):
-                        session.vad_c = None
-
-            session.conversation_history.append({"role": "assistant", "content": action_result.response or ""})
-            session.trim_history(config.MAX_HISTORY, config.TRIM_TO)
-            session.clear_active_user_turn()
-            return
-
+        # Pipeline normal → envoyer au LLM
         llm_user_text = effective_transcript
-        llm_data = None
-        if action_result is not None:
-            if action_result.text_to_llm:
-                llm_user_text = action_result.text_to_llm
-            llm_data = action_result.llm_data
-
-        # Action non traitée → envoyer au LLM
         if session.active_user_message_index is None:
             session.conversation_history.append({"role": "user", "content": llm_user_text})
             session.mark_active_user_turn(
@@ -477,12 +342,11 @@ class AgentService:
                 text=llm_user_text,
             )
 
-        # LLM -> TTS streaming
+        # LLM -> TTS
         full_reply = await self._stream_response(
             session=session,
             user_text=llm_user_text,
             request_id=request_id,
-            data=llm_data,
         )
 
         if session.cancel_flag or session.current_request_id != request_id:
@@ -671,49 +535,28 @@ class AgentService:
         user_text: str,
         request_id: int,
         interruptible: bool = True,
-        data: list | None = None,
     ) -> str:
         """
-        LLM streaming → TTS non-streaming → TTSAudioTrack via queue + scheduler.
-
-        Architecture :
-          - Scheduler : consomme tts_audio_queue → envoie frames à intervalle fixe (20ms)
-          - Flush : ajoute 100ms de silence à la fin
-          
-        Args:
-            session: Session WebSocket
-            user_text: Texte utilisateur
-            request_id: ID de requête
-            interruptible: Si True, l'utilisateur peut interrompre ce TTS
-            data: Données JSON optionnelles à injecter dans un prompt one-shot
+        LLM non-streaming → TTS non-streaming → TTSAudioTrack via queue + scheduler.
         """
-        logger = logging.getLogger(__name__)
         if session.tts_track is None:
             return ""
 
-        # 1. Générer tout le texte du LLM
-        full_reply = ""
-        if data:
-            token_stream = self.llm.generate_answer_stream(data, user_text)
-        else:
-            history = session.conversation_history
-            token_stream = self.llm.generate_stream(user_text, history)
-
-        async for token in token_stream:
-            if session.cancel_flag or session.current_request_id != request_id:
-                return ""
-            full_reply += token
-
+        full_reply = await self.llm.chat(
+            user_text,
+            history=session.conversation_history,
+            session=session,
+        )
+        if session.cancel_flag or session.current_request_id != request_id:
+            return ""
         if not full_reply.strip():
             return ""
 
-        # 2. Synthétiser TTS en un seul bloc
         session.tts_playing = True
         session.reset_tts_output_state()
         session.tts_started_at = time.monotonic()
-        session.tts_interruptible = interruptible  # Définir si interruptible
+        session.tts_interruptible = interruptible
 
-        # Démarrer le scheduler
         scheduler_task = asyncio.create_task(
             self._tts_scheduler(session, request_id),
             name=f"tts-scheduler-{session.client_id}"
@@ -732,7 +575,6 @@ class AgentService:
             except Exception:
                 pass  # Ignorer silencieusement pour ne pas bloquer le TTS
 
-            # 3. Envoyer via queue (avec prébuffer et découpage)
             await self._emit_tts_audio(
                 session=session,
                 phrase_text=full_reply,
@@ -1385,6 +1227,7 @@ class AgentService:
             # On utilise _speak_text_internal directement car c'est une action prioritaire
             logger.info("🗣️ Envoi question TTS: 'Is the delivery completed?' (NON-INTERRUPTIBLE)")
             await self._speak_text_internal(session, "Is the delivery completed?", interruptible=False)
+            self.llm.add_system_message( "The driver has arrived at the delivery location. Ask if the delivery is completed.")
         else:
             logger.warning("⚠️ State machine non disponible client_id=%s", session.client_id)
 
@@ -1417,9 +1260,6 @@ class AgentService:
             session.client_id,
             trip_id or "N/A",
         )
-
-        if self.action is not None and hasattr(self.action, "clear_start_navigation_in_progress"):
-            self.action.clear_start_navigation_in_progress(session)
 
     async def _handle_completed_delivery_action(
         self,

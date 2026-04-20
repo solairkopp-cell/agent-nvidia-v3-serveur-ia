@@ -27,7 +27,7 @@ WHISPER_TIMEOUT = int(os.getenv("WHISPER_TIMEOUT", "30"))                  # uti
 WHISPER_LANGUAGE = os.getenv("WHISPER_LANGUAGE", "en")  # ou "en", ou None (auto)
 
 # faster-whisper (embedded)
-WHISPER_MODEL = os.getenv("WHISPER_MODEL", "small.en")        # ex: tiny, base, small, medium, large-v3
+WHISPER_MODEL = os.getenv("WHISPER_MODEL", "small")        # ex: tiny, base, small, medium, large-v3
 WHISPER_DEVICE = os.getenv("WHISPER_DEVICE", "cuda")       # "cpu" pour maximiser la stabilité Jetson
 WHISPER_COMPUTE_TYPE = os.getenv("WHISPER_COMPUTE_TYPE", "int8")  # "int8" pour les modèles quantifiés (ex: small.en), "float16" pour les modèles non quantifiés (ex: medium)
 WHISPER_BEAM_SIZE = int(os.getenv("WHISPER_BEAM_SIZE", "1"))
@@ -36,8 +36,10 @@ WHISPER_BEAM_SIZE = int(os.getenv("WHISPER_BEAM_SIZE", "1"))
 # - "faster-whisper" : faster-whisper (CTranslate2, beaucoup plus léger sur Jetson)
 WHISPER_BACKEND = os.getenv("WHISPER_BACKEND", "faster-whisper")
 
+PIPER_BIN_PATH = os.getenv("PIPER_BIN_PATH", "/home/server/piper/piper/piper")
+
 # ── LLM ──────────────────────────────────────────────────────────────────────
-OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
+OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:8080")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "Rytle:latest")
 OLLAMA_CONTEXT_WINDOW = int(os.getenv("OLLAMA_CONTEXT_WINDOW", "1024"))
 OLLAMA_NUM_PREDICT = int(os.getenv("OLLAMA_NUM_PREDICT", "50"))
@@ -51,29 +53,6 @@ SYSTEM_PROMPT_PATH = os.getenv("SYSTEM_PROMPT_PATH", "system_prompt.md")
 # Désactiver le mode "thinking" (si supporté par Ollama / modèle)
 OLLAMA_THINK = os.getenv("OLLAMA_THINK", "false")
 
-# ── Intent Detection (modèle finetuné local) ────────────────────────────────
-# Intentions disponibles (colonnes : intent, example). Utilisé aussi par
-# l'ActionService pour filtrer les intents locaux réellement connus.
-INTENT_CSV_PATH = os.getenv("INTENT_CSV_PATH", "intent_detection2/intentions.csv")
-# Embedder SentenceTransformer local finetuné.
-INTENT_MODEL_DIR = os.getenv(
-    "INTENT_MODEL_DIR",
-    os.getenv("INTENT_EMBED_LOCAL_DIR", "intent_detection2/intent_embedder"),
-)
-# Classifieur sklearn entraîné sur les embeddings du modèle ci-dessus.
-INTENT_CLASSIFIER_PATH = os.getenv("INTENT_CLASSIFIER_PATH", "intent_detection2/intent_clf.pkl")
-# Intent detection sur Orin : forcer CPU pour économiser la VRAM.
-INTENT_DEVICE = os.getenv("INTENT_DEVICE", "cpu")
-# Seuil de confiance/probabilité minimum du classifieur.
-INTENT_THRESHOLD = float(os.getenv("INTENT_THRESHOLD", "0.60"))
-# Réglages historiques conservés pour compatibilité avec l'environnement.
-INTENT_EMBED_MODEL = os.getenv("INTENT_EMBED_MODEL", "paraphrase-multilingual-MiniLM-L12-v2")
-INTENT_EMBED_LOCAL_DIR = os.getenv("INTENT_EMBED_LOCAL_DIR", "")
-INTENT_EMBED_CACHE_DIR = os.getenv("INTENT_EMBED_CACHE_DIR", "")
-INTENT_EMBED_DOWNLOAD_ON_STARTUP = os.getenv("INTENT_EMBED_DOWNLOAD_ON_STARTUP", "false").strip().lower() in ("1", "true", "yes", "on")
-# Si true: si un intent connu est détecté, ne pas appeler le LLM (le client gère l'action)
-INTENT_GATE_LLM = os.getenv("INTENT_GATE_LLM", "false")
-
 # ── Interruptions / Barge-in ────────────────────────────────────────────────
 INTERRUPTION_SHORT_THRESHOLD_MS = float(os.getenv("INTERRUPTION_SHORT_THRESHOLD_MS", "1000"))
 INTERRUPTION_WORDS_EN = _parse_env_words(
@@ -85,27 +64,9 @@ CONTINUATION_WORDS_EN = _parse_env_words(
     "also,and,plus,additionally,actually,wait and",
 )
 
-# ── Action Service ───────────────────────────────────────────────────────────
-# Intentions connues qui sont exécutées localement sans passer par le LLM
-ACTION_KNOWN_INTENTS = _parse_env_words(
-    "ACTION_KNOWN_INTENTS",
-    "start_navigation,show_deliveries,get_next_client_name,get_next_delivery_address,get_possible_delivery_failure_reason,get_package_info,show_map",
-)
-# Si true : les intentions connues ne sont PAS envoyées au LLM (économie de ressources)
-ACTION_SKIP_LLM_FOR_KNOWN_INTENTS = os.getenv("ACTION_SKIP_LLM_FOR_KNOWN_INTENTS", "true").strip().lower() in ("1", "true", "yes", "on")
-
 # ── Piper TTS ──────────────────────────────────────────────────────────────────
 PIPER_MODEL_PATH = os.getenv("PIPER_MODEL_PATH", "assets/models/en_US-hfc_female-medium.onnx")
 PIPER_CONFIG_PATH = os.getenv("PIPER_CONFIG_PATH", "assets/models/en_US-hfc_female-medium.onnx.json")
-
-# ── Kokoro TTS ─────────────────────────────────────────────────────────────────
-# Kokoro-82M ONNX model (CPU optimized)
-KOKORO_MODEL_PATH = os.getenv("KOKORO_MODEL_PATH", "assets/models/kokoro-v1.0.int8.onnx")
-KOKORO_VOICES_PATH = os.getenv("KOKORO_VOICES_PATH", "assets/models/voices-v1.0.bin")
-# Voix disponibles : af_sarah (US female), af_bella (US female), am_adam (US male), etc.
-KOKORO_VOICE = os.getenv("KOKORO_VOICE", "af_sarah")
-KOKORO_LANGUAGE = os.getenv("KOKORO_LANGUAGE", "en-us")
-KOKORO_SPEED = float(os.getenv("KOKORO_SPEED", "1.0"))  # 1.0 = normal, >1 = faster
 
 # ── TTS Common Settings ──────────────────────────────────────────────────────
 # Streaming TTS : commencer à parler avant la fin de la phrase complète.
@@ -189,7 +150,6 @@ TURN_CREDENTIAL = os.getenv("TURN_CREDENTIAL", "")
 # ── Warmup / Préchauffage ────────────────────────────────────────────────────
 PREWARM_ON_STARTUP = os.getenv("PREWARM_ON_STARTUP", "true").strip().lower() in ("1", "true", "yes", "on")
 PREWARM_TIMEOUT_SEC = int(os.getenv("PREWARM_TIMEOUT_SEC", "20"))
-PREWARM_INTENT_TEXT = os.getenv("PREWARM_INTENT_TEXT", "bonjour")
 PREWARM_LLM_TEXT = os.getenv("PREWARM_LLM_TEXT", "hello what's your name?")
 PREWARM_TTS_TEXT = os.getenv("PREWARM_TTS_TEXT", "Warmup.")
 

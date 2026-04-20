@@ -108,7 +108,7 @@ aiserver/
 ├── logging_setup.py         # Logging configuration
 │
 ├── services/                # Main services
-│   ├── agent_service.py     # Main orchestrator (STT → Intent → LLM → TTS)
+│   ├── agent_service.py     # Main orchestrator (STT → LLM → TTS)
 │   ├── webrtc_service.py    # WebRTC peer management
 │   ├── websocket_service.py # WebSocket session management
 │   ├── vad_service.py       # Voice Activity Detection (Silero ONNX)
@@ -116,26 +116,16 @@ aiserver/
 │   ├── audio_service.py     # Audio utilities (resampling, format conversion)
 │   ├── whisper_service.py   # Speech-to-Text (faster-whisper or HTTP)
 │   ├── ollama_service.py    # LLM inference via Ollama
-│   ├── intent_service.py    # Intent detection via embeddings
-│   ├── action_service.py    # Execute known intents locally
 │   ├── piper_tts_service.py # Text-to-Speech (Piper)
-│   ├── kokoro_tts_service.py# Text-to-Speech (Kokoro-82M, lightweight)
-│   ├── tts_media_player.py  # Audio streaming via aiortc MediaPlayer
 │   ├── tts_utils.py         # TTS text segmentation utilities
 │   ├── notification_service.py  # Real-time push notifications
 │   ├── delivery_service.py  # Delivery/trip management
 │   └── delivery_state_machine.py  # Delivery completion workflow
 │
 ├── experimental/            # Experimental features
-│   ├── denoise_stream.py    # Real-time denoising via WebSocket
-│   └── denoise_processor.py # Streaming denoise processor
-│
-├── intent_detection/        # Intent detection module
-│   ├── intent_interview.py  # Classification logic
-│   └── intentions.csv       # Intent training data
+│   └── denoise_stream.py    # Real-time denoising via WebSocket
 │
 ├── models/                  # Data models
-│   ├── intent.py            # Intent model
 │   └── session.py           # Session model (state, interruption)
 │
 ├── web/                     # Web interface
@@ -150,7 +140,6 @@ aiserver/
 │   ├── test_agent_service.py
 │   ├── test_audio_service.py
 │   ├── test_denoise_service.py
-│   ├── test_intent_interview.py
 │   ├── test_ollama_service.py
 │   ├── test_piper_service.py
 │   ├── test_vad_service.py
@@ -158,9 +147,7 @@ aiserver/
 │
 ├── documentations/          # Additional documentation
 │   ├── state_machine.md     # Delivery state machine docs
-│   ├── kokoro_setup.md      # Kokoro TTS setup guide
-│   ├── AUDIO_CONTINUITY_FIX.md
-│   └── MEDIA_PLAYER_USAGE.md
+│   └── AUDIO_CONTINUITY_FIX.md
 │
 └── logs/                    # Log files
 ```
@@ -174,7 +161,6 @@ aiserver/
 | [Whisper / faster-whisper](https://github.com/openai/whisper) | Speech-to-Text (STT) |
 | [Ollama](https://ollama.com/) | Local LLM inference (Qwen3, Llama, etc.) |
 | [Piper TTS](https://github.com/rhasspy/piper) | High-quality Text-to-Speech |
-| [Kokoro-82M](https://github.com/hexgrad/kokoro) | Lightweight TTS (ONNX, CPU-optimized) |
 | [Silero VAD](https://github.com/snakers4/silero-vad) | Voice Activity Detection |
 | [DeepFilterNet](https://github.com/Rikorose/DeepFilterNet) | Audio denoising |
 | [aiortc](https://aiortc.readthedocs.io/) | WebRTC communication |
@@ -200,7 +186,7 @@ pip install -r requirements.txt
 ### Prerequisites
 
 - **Python 3.10+**
-- **Ollama** running locally (default: `http://localhost:11434`)
+- **Ollama** running locally (default: `http://localhost:8080`)
 - **ONNX Models**: VAD, TTS (see Models section)
 
 ---
@@ -347,7 +333,7 @@ If no  → STATE_2 (Ask reason) → STATE_6 (Ask photo) → STATE_4 → STATE_5
 
 ## 🔊 Text-to-Speech (TTS)
 
-The server supports **two TTS engines** that can be used interchangeably.
+The server uses **Piper TTS** for speech synthesis.
 
 ### Piper TTS (High Quality)
 
@@ -359,29 +345,7 @@ The server supports **two TTS engines** that can be used interchangeably.
 | **Quality** | Medium-High |
 | **Sample Rate** | 22050 Hz |
 
-### Kokoro TTS (Lightweight)
-
-| Parameter | Value |
-|-----------|-------|
-| **Model** | `kokoro-v1.0.int8.onnx` |
-| **Language** | English (US) 🇺🇸 |
-| **Voice** | af_sarah (default) |
-| **Quality** | Medium (CPU-optimized) |
-| **Sample Rate** | 24000 Hz |
-| **Speed** | 1.0 (configurable) |
-
-### Comparison
-
-| Feature | Piper | Kokoro |
-|---------|-------|--------|
-| **Quality** | High | Medium |
-| **Model Size** | ~60-120 MB | ~800 MB (int8) |
-| **CPU Usage** | Medium | Low (optimized) |
-| **Speed** | Fast | Very Fast |
-| **Voices** | Many available | 82M parameters |
-| **Best for** | Production quality | Edge devices, speed |
-
-### Switching TTS Engines
+### TTS Configuration
 
 In `config.py`, set:
 ```bash
@@ -389,13 +353,7 @@ In `config.py`, set:
 PIPER_MODEL_PATH="assets/models/en_US-hfc_female-medium.onnx"
 PIPER_CONFIG_PATH="assets/models/en_US-hfc_female-medium.onnx.json"
 
-# For Kokoro
-KOKORO_MODEL_PATH="assets/models/kokoro-v1.0.int8.onnx"
-KOKORO_VOICES_PATH="assets/models/voices-v1.0.bin"
-KOKORO_VOICE="af_sarah"  # Options: af_sarah, af_bella, am_adam, etc.
 ```
-
-**Setup guide**: See [documentations/kokoro_setup.md](documentations/kokoro_setup.md)
 
 ---
 
@@ -549,22 +507,12 @@ All configuration is centralized in `config.py` via environment variables.
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `OLLAMA_URL` | `http://localhost:11434` | Ollama server URL |
+| `OLLAMA_URL` | `http://localhost:8080` | Ollama server URL |
 | `OLLAMA_MODEL` | `smollm2:360m` | Model name |
 | `OLLAMA_CONTEXT_WINDOW` | `1024` | Context window size |
 | `OLLAMA_NUM_PREDICT` | `50` | Max tokens to generate |
 | `OLLAMA_TEMPERATURE` | `0.7` | Sampling temperature |
 | `OLLAMA_THINK` | `false` | Disable thinking mode |
-
-### Intent Detection
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `INTENT_CSV_PATH` | `intent_detection/intentions.csv` | Training data |
-| `INTENT_EMBED_MODEL` | `paraphrase-multilingual-MiniLM-L12-v2` | Embedding model |
-| `INTENT_DEVICE` | `cpu` | `cpu` or `cuda` |
-| `INTENT_THRESHOLD` | `0.60` | Similarity threshold |
-| `INTENT_GATE_LLM` | `false` | Skip LLM if intent known |
 
 ### Audio / VAD
 
@@ -595,20 +543,12 @@ All configuration is centralized in `config.py` via environment variables.
 | `TTS_TRIM_SILENCE_PAD_MS` | `80` | Padding before silence |
 | `TTS_TRIM_MIN_SILENCE_MS` | `150` | Minimum silence gap |
 
-### Actions
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `ACTION_KNOWN_INTENTS` | `start_navigation,show_deliveries,...` | Local intents |
-| `ACTION_SKIP_LLM_FOR_KNOWN_INTENTS` | `true` | Bypass LLM for known intents |
-
 ### Warmup
 
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `PREWARM_ON_STARTUP` | `true` | Enable warmup |
 | `PREWARM_TIMEOUT_SEC` | `20` | Warmup timeout |
-| `PREWARM_INTENT_TEXT` | `bonjour` | Warmup intent |
 | `PREWARM_LLM_TEXT` | `hello what's your name?` | Warmup LLM |
 | `PREWARM_TTS_TEXT` | `Warmup.` | Warmup TTS |
 
@@ -633,29 +573,9 @@ wget -O assets/models/en_US-hfc_female-medium.onnx \
 wget -O assets/models/en_US-hfc_female-medium.onnx.json \
   https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/hfc_female/medium/en_US-hfc_female-medium.onnx.json
 
-# Alternative English voice - Low Quality (faster)
-wget -O assets/models/en_US-danny-low.onnx \
-  https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/danny/low/en_US-danny-low.onnx
-
-wget -O assets/models/en_US-danny-low.onnx.json \
-  https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/danny/low/en_US-danny-low.onnx.json
 ```
 
-#### 2. Kokoro TTS
-
-```bash
-# Kokoro model (int8 optimized)
-# Download from: https://huggingface.co/hexgrad/Kokoro-82M
-wget -O assets/models/kokoro-v1.0.int8.onnx \
-  <kokoro_model_url>
-
-wget -O assets/models/voices-v1.0.bin \
-  <kokoro_voices_url>
-```
-
-See [documentations/kokoro_setup.md](documentations/kokoro_setup.md) for detailed instructions.
-
-#### 3. Silero VAD
+#### 2. Silero VAD
 
 ```bash
 # Download Silero VAD model
@@ -663,7 +583,7 @@ wget -O assets/models/silero_vad.onnx \
   https://github.com/snakers4/silero-vad/raw/master/files/silero_vad.onnx
 ```
 
-#### 4. Verify Models
+#### 3. Verify Models
 
 ```bash
 ls -lh assets/models/
@@ -751,9 +671,7 @@ The server uses **Rytle** as its AI persona for delivery assistance.
 | Document | Description |
 |----------|-------------|
 | [state_machine.md](documentations/state_machine.md) | Delivery state machine workflow |
-| [kokoro_setup.md](documentations/kokoro_setup.md) | Kokoro TTS setup guide |
 | [AUDIO_CONTINUITY_FIX.md](documentations/AUDIO_CONTINUITY_FIX.md) | Audio continuity improvements |
-| [MEDIA_PLAYER_USAGE.md](documentations/MEDIA_PLAYER_USAGE.md) | TTS media player usage |
 
 ---
 

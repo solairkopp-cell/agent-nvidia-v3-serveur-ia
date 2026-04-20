@@ -1,13 +1,5 @@
 """
 services/denoise_service.py
-Débruitage du flux audio entrant avant VAD.
-
-Backend principal :
-  - DeepFilterNet (plus performant que RNNoise)
-
-Comportement :
-  - Si le backend n'est pas disponible, le service devient un passthrough.
-  - DeepFilterNet tourne nativement à 48kHz, resampling automatique 16k↔48k.
 """
 from __future__ import annotations
 
@@ -17,7 +9,6 @@ import logging
 from typing import TYPE_CHECKING
 
 import numpy as np
-import torch
 
 import config
 
@@ -33,23 +24,17 @@ class DenoiseService:
         self.audio = audio
         self._enabled: bool = bool(getattr(config, "DENOISE_ENABLED", False))
         self._stream_sample_rate: int = int(config.SAMPLE_RATE)
-
         self._ready: bool = False
         self._model = None
-        self._df_state = None
 
     async def startup(self) -> None:
         if not self._enabled:
             logger.info("Denoise disabled")
             return
-
         try:
-            await asyncio.to_thread(self._init_deepfilternet)
+            await asyncio.to_thread(self._init_rnnoise)
             self._ready = True
-            logger.info(
-                "Denoise backend ready backend=deepfilternet stream_sr=%d",
-                self._stream_sample_rate,
-            )
+            logger.info("Denoise backend ready backend=rnnoise")
         except Exception:
             self._ready = False
             logger.exception("Denoise startup failed; passthrough mode enabled")
@@ -57,18 +42,18 @@ class DenoiseService:
     async def shutdown(self) -> None:
         self._ready = False
         self._model = None
-        self._df_state = None
-        await asyncio.to_thread(self._cleanup_resources)
+        gc.collect()
 
     def create_stream_state(self):
-        # DeepFilterNet n'a pas d'état par stream comme RNNoise
-        # On retourne un placeholder pour garder l'API compatible
-        if not self._ready:
+        if not self._ready or self._model is None:
             return None
-        return {}
+        try:
+            return self._model.create_state()
+        except Exception:
+            return None
 
     def release_stream_state(self, state) -> None:
-        pass  # No-op pour DeepFilterNet
+        pass
 
     async def process(self, samples: np.ndarray, *, sample_rate: int, state=None) -> np.ndarray:
         if not isinstance(samples, np.ndarray):
@@ -76,16 +61,10 @@ class DenoiseService:
         samples = samples.astype(np.float32, copy=False).reshape(-1)
         if samples.size == 0:
             return samples
-
         if not self._enabled or not self._ready:
             return samples
-
         try:
-            return await asyncio.to_thread(
-                self._process_deepfilternet,
-                samples,
-                int(sample_rate),
-            )
+            return await asyncio.to_thread(self._process_rnnoise, samples, state)
         except Exception:
             logger.exception("Denoise processing failed; passthrough current chunk")
             return samples
@@ -98,13 +77,8 @@ class DenoiseService:
             return samples
         if not self._enabled or not self._ready:
             return samples
-
         try:
-            return await asyncio.to_thread(
-                self._process_deepfilternet_utterance,
-                samples,
-                int(sample_rate),
-            )
+            return await asyncio.to_thread(self._process_rnnoise, samples, None)
         except Exception:
             logger.exception("Denoise utterance processing failed; passthrough utterance")
             return samples
@@ -114,71 +88,46 @@ class DenoiseService:
             return True
         return self._ready
 
-    def _init_deepfilternet(self) -> None:
-        """Initialise le modèle DeepFilterNet2 (optimisé pour embarqué/temps réel)."""
-        from df import init_df
-        # DeepFilterNet2 est optimisé pour les appareils embarqués avec ~20ms de latence
-        self._model, self._df_state, _ = init_df(default_model='DeepFilterNet2')
-        logger.info("DeepFilterNet2 model initialized (embedded/real-time optimized)")
+    def _init_rnnoise(self) -> None:
+        import rnnoise
+        self._model = rnnoise.RNNoise()
+        logger.info("RNNoise model initialized")
 
-    def _process_deepfilternet(self, samples: np.ndarray, sample_rate: int) -> np.ndarray:
+    def _process_rnnoise(self, samples: np.ndarray, state=None) -> np.ndarray:
         """
-        Débruite un chunk audio avec DeepFilterNet.
-        
-        DeepFilterNet attend du 48kHz, donc on resample 16k→48k→16k.
-        
-        Args:
-            samples: float32 numpy array [T] mono 16kHz
-            sample_rate: fréquence d'échantillonnage des samples
-        
-        Returns:
-            float32 numpy array [T] denoised
+        RNNoise attend du PCM int16 mono 48kHz, frames de 480 samples.
+        On resample 16k→48k, on traite par frames, on resample 48k→16k.
         """
-        from df import enhance
         from scipy.signal import resample_poly
-        
-        if sample_rate != self._stream_sample_rate:
-            logger.debug(
-                "Unexpected sample rate=%d expected=%d; passthrough current chunk",
-                sample_rate,
-                self._stream_sample_rate,
-            )
-            return samples
-        
-        if self._model is None or self._df_state is None:
-            return samples
-        
-        # Resample 16k→48k (DeepFilterNet native)
+
+        # 16k → 48k
         audio_48k = resample_poly(samples, 3, 1).astype(np.float32)
-        
-        # [1, T] tensor pour torch
-        tensor = torch.from_numpy(audio_48k).unsqueeze(0)
-        
-        # Denoise avec inference mode
-        with torch.inference_mode():
-            enhanced = enhance(self._model, self._df_state, tensor)
-        
-        # Resample 48k→16k
-        enhanced_np = enhanced.squeeze(0).numpy()
-        denoised_16k = resample_poly(enhanced_np, 1, 3).astype(np.float32)
-        
-        return np.clip(denoised_16k, -1.0, 1.0).astype(np.float32, copy=False)
 
-    def _process_deepfilternet_utterance(self, samples: np.ndarray, sample_rate: int) -> np.ndarray:
-        """
-        Débruite une utterance complète.
-        Même logique que process() mais pour un traitement one-shot.
-        """
-        return self._process_deepfilternet(samples, sample_rate)
+        # float32 → int16
+        pcm_int16 = (audio_48k * 32767).clip(-32768, 32767).astype(np.int16)
 
-    def _cleanup_resources(self) -> None:
-        """Nettoie les ressources torch."""
-        if self._model is not None:
-            del self._model
-            self._model = None
-        if self._df_state is not None:
-            del self._df_state
-            self._df_state = None
-        if torch.cuda.is_available():
-            torch.cuda.empty_cache()
-        gc.collect()
+        frame_size = 480
+        out_frames = []
+
+        for i in range(0, len(pcm_int16) - frame_size + 1, frame_size):
+            frame = pcm_int16[i:i + frame_size]
+            denoised = self._model.process_frame(frame, state)
+            out_frames.append(denoised)
+
+        if not out_frames:
+            return samples
+
+        out_int16 = np.concatenate(out_frames)
+        out_float = (out_int16.astype(np.float32) / 32767.0)
+
+        # 48k → 16k
+        out_16k = resample_poly(out_float, 1, 3).astype(np.float32)
+
+        # Ajuster la taille à l'original
+        target_len = len(samples)
+        if len(out_16k) >= target_len:
+            return np.clip(out_16k[:target_len], -1.0, 1.0)
+        else:
+            padded = np.zeros(target_len, dtype=np.float32)
+            padded[:len(out_16k)] = out_16k
+            return padded

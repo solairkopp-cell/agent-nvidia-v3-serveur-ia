@@ -241,11 +241,13 @@ class WhisperService:
                 
                 # Garbage collection CUDA pour éviter l'OOM
                 if str(self._device).startswith("cuda"):
-                    import torch
                     import gc
-                    if hasattr(torch.cuda, "empty_cache"):
-                        torch.cuda.empty_cache()
                     gc.collect()
+                    try:
+                        import ctranslate2
+                        # pas d'API cache à vider côté ctranslate2, gc suffit
+                    except ImportError:
+                        pass
             except Exception:
                 logger.exception("Whisper (faster) transcribe failed")
                 return TranscriptionResult(text="")
@@ -256,7 +258,7 @@ class WhisperService:
     # ── HTTP mode (legacy) ───────────────────────────────────────────────────
 
     async def _startup_http(self) -> None:
-        try:
+        try: 
             import httpx
         except Exception as exc:  # pragma: no cover
             raise RuntimeError(

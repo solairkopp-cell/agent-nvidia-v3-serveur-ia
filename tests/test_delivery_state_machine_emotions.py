@@ -107,7 +107,58 @@ class TestDeliveryStateMachineEmotions:
 
         state_machine._agent_service.speak_text.assert_awaited_once_with(
             session,
-            "Delivery completed successfully. It was your last delivery. Good job.",
+            "Delivery completed successfully. It was your last delivery. The route is now finished.",
             interruptible=False,
             emit_boundary_emotions=False,
         )
+
+    @pytest.mark.asyncio
+    async def test_state_1_uses_llm_confirmation_to_enter_reason_flow(self, state_machine, session):
+        _enter_mode_1(state_machine, session, State.STATE_1)
+        state_machine._agent_service = MagicMock()
+        state_machine._agent_service.llm = MagicMock()
+        state_machine._agent_service.llm.is_this_a_confirmation = AsyncMock(return_value=False)
+        state_machine._agent_service.llm.generate_system_reply = AsyncMock(
+            return_value="Please choose a reason from 1 to 6 or ask for the list."
+        )
+
+        result = await state_machine.process_input(session, "not completed")
+
+        assert result.next_state == State.STATE_2
+        assert result.tts_response == "Please choose a reason from 1 to 6 or ask for the list."
+        state_machine._agent_service.llm.is_this_a_confirmation.assert_awaited_once_with(
+            "not completed",
+            session=session,
+        )
+
+    @pytest.mark.asyncio
+    async def test_state_2_uses_llm_reason_list_reply(self, state_machine, session):
+        _enter_mode_1(state_machine, session, State.STATE_2)
+        state_machine._agent_service = MagicMock()
+        state_machine._agent_service.llm = MagicMock()
+        state_machine._agent_service.llm.get_delivery_failure_reason_response = AsyncMock(
+            return_value="1. Customer not available, 2. Wrong address"
+        )
+
+        result = await state_machine.process_input(session, "give me the list")
+
+        assert result.next_state == State.STATE_2
+        assert result.action is None
+        assert result.tts_response == "1. Customer not available, 2. Wrong address"
+
+    @pytest.mark.asyncio
+    async def test_state_2_uses_llm_reason_number_for_photo_request(self, state_machine, session):
+        _enter_mode_1(state_machine, session, State.STATE_2)
+        state_machine._send_ask_photo_event = AsyncMock()
+        state_machine._agent_service = MagicMock()
+        state_machine._agent_service.llm = MagicMock()
+        state_machine._agent_service.llm.get_delivery_failure_reason_response = AsyncMock(return_value="1")
+        state_machine._agent_service.llm.generate_system_reply = AsyncMock(
+            return_value="Please take a photo to validate the delivery."
+        )
+
+        result = await state_machine.process_input(session, "customer not available")
+
+        assert result.next_state == State.STATE_6
+        assert result.tts_response == "Please take a photo to validate the delivery."
+        state_machine._send_ask_photo_event.assert_awaited_once()

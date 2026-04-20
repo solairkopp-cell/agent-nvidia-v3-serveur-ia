@@ -10,7 +10,6 @@ import numpy as np
 import pytest
 
 from models.session import Session
-from services.action_service import ActionResult
 from services.agent_service import AgentService
 from services.whisper_service import TranscriptionResult
 
@@ -47,7 +46,7 @@ class TestProcessUtterance:
             return_value=TranscriptionResult(text="")
         )
         await agent.process_utterance(session, b"wav_bytes")
-        agent.llm.generate_stream.assert_not_called()
+        agent.llm.chat.assert_not_called()
 
     @pytest.mark.asyncio
     async def test_transcript_added_to_history(self, agent, session):
@@ -81,14 +80,11 @@ class TestProcessUtterance:
         )
 
     @pytest.mark.asyncio
-    async def test_intent_event_sent_to_client_even_when_unknown(self, agent, session):
-        """Le client reçoit toujours le résultat d'intent, y compris INCONNU."""
+    async def test_transcript_event_sent_to_client(self, agent, session):
         agent.stt.transcribe = AsyncMock(
             return_value=TranscriptionResult(text="hello")
         )
         agent._stream_response = AsyncMock(return_value="")
-        agent.intent = MagicMock()
-        agent.intent.getint = MagicMock(return_value="INCONNU")
         agent.ws_service = MagicMock()
         agent.ws_service.send = AsyncMock()
         agent.ws_service.send_transcript = AsyncMock()
@@ -96,10 +92,7 @@ class TestProcessUtterance:
         await agent.process_utterance(session, b"wav_bytes")
 
         agent.ws_service.send_transcript.assert_awaited_once_with(session, "hello")
-        agent.ws_service.send.assert_awaited_once_with(
-            session,
-            {"type": "intent", "intent": "INCONNU"},
-        )
+        agent.ws_service.send.assert_not_awaited()
 
     @pytest.mark.asyncio
     async def test_stale_cancel_flag_does_not_block_next_processing(self, agent, session):
@@ -146,27 +139,14 @@ class TestProcessUtterance:
         np.testing.assert_array_equal(stt_samples, denoised)
 
     @pytest.mark.asyncio
-    async def test_action_llm_data_is_forwarded_to_stream_response(self, agent, session):
+    async def test_effective_transcript_is_forwarded_to_stream_response(self, agent, session):
         agent.stt.transcribe = AsyncMock(return_value=TranscriptionResult(text="who is next"))
-        agent.intent = MagicMock()
-        agent.intent.getint = MagicMock(return_value="get_next_client_name")
-        agent.action = MagicMock()
-        agent.action.execute = AsyncMock(
-            return_value=ActionResult(
-                handled=False,
-                intent="get_next_client_name",
-                text_to_llm="who is next",
-                response=None,
-                llm_data=[{"clientName": "Alice"}],
-            )
-        )
         agent._stream_response = AsyncMock(return_value="Alice")
 
         await agent.process_utterance(session, b"wav_bytes")
 
         kwargs = agent._stream_response.await_args.kwargs
         assert kwargs["user_text"] == "who is next"
-        assert kwargs["data"] == [{"clientName": "Alice"}]
 
 
 class TestInterrupt:
@@ -221,7 +201,6 @@ class TestTranscriptionInterruption:
         assert kwargs["session"] is session
         assert kwargs["user_text"] == "hello there"
         assert kwargs["request_id"] == 2
-        assert kwargs["data"] is None
         assert session.active_user_message_index is None
 
     @pytest.mark.asyncio
@@ -243,7 +222,6 @@ class TestTranscriptionInterruption:
         assert kwargs["session"] is session
         assert kwargs["user_text"] == "new request"
         assert kwargs["request_id"] == 2
-        assert kwargs["data"] is None
         assert session.active_user_message_index is None
 
     def test_decide_interruption_mode_uses_configured_thresholds_and_words(self, agent, session):
@@ -272,11 +250,7 @@ class TestStreamResponse:
     async def test_stream_response_sends_all_audio_frames(self, agent, session):
         """Le flux TTS est découpé en frames et poussé intégralement vers la track."""
         with patch("config.TTS_SEGMENT_OVERLAP_MS", 0):
-
-            async def fake_token_stream():
-                yield "Bonjour."
-
-            agent.llm.generate_stream = MagicMock(return_value=fake_token_stream())
+            agent.llm.chat = AsyncMock(return_value="Bonjour.")
             agent.tts.synthesize = AsyncMock(return_value=(np.ones(4800, dtype=np.float32), 48000))
             agent.audio.array_to_av_frame = MagicMock(return_value="frame-1")
             agent.ws_service = MagicMock()
@@ -311,12 +285,7 @@ class TestStreamResponse:
     @pytest.mark.asyncio
     async def test_stream_response_sends_all_frames(self, agent, session):
         """Le stream response envoie tous les frames TTS."""
-
-        async def fake_token_stream():
-            yield "Bonjour."
-            yield "Encore."
-
-        agent.llm.generate_stream = MagicMock(return_value=fake_token_stream())
+        agent.llm.chat = AsyncMock(return_value="Bonjour. Encore.")
         agent.tts.synthesize = AsyncMock(return_value=(np.ones(2880, dtype=np.float32), 48000))
         agent.audio.array_to_av_frame = MagicMock(return_value="frame-1")
         agent.ws_service = MagicMock()

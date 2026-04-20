@@ -43,8 +43,6 @@ from services.audio_service import AudioService
 from services.vad_service import VADService
 from services.whisper_service import WhisperService
 from services.ollama_service import OllamaService
-from services.intent_service import IntentService
-from services.action_service import ActionService
 from services.notification_service import NotificationService
 from services.delivery_service import DeliveryService
 from services.piper_tts_service import PiperTTSService
@@ -67,21 +65,17 @@ audio_service    = AudioService()
 vad_service      = VADService()
 whisper_service  = WhisperService()
 ollama_service   = OllamaService()
-intent_service   = IntentService()
-action_service   = ActionService()
 notification_service = NotificationService()
 delivery_service = DeliveryService()
 piper_service    = PiperTTSService()
 denoise_service  = DenoiseService(audio=audio_service)
-state_machine    = DeliveryStateMachine(intent_detector=intent_service)
+state_machine    = DeliveryStateMachine()
 
 agent_service    = AgentService(
     stt=whisper_service,
     llm=ollama_service,
     tts=piper_service,
     audio=audio_service,
-    intent=intent_service,
-    action=action_service,
     denoise=denoise_service,
     state_machine=state_machine,
 )
@@ -106,12 +100,10 @@ state_machine._agent_service = agent_service
 
 # Résolution de la dépendance circulaire Agent ↔ WebSocket
 agent_service.set_ws_service(ws_service)
+ollama_service.set_ws_service(ws_service)
 
 # Résolution de la dépendance circulaire Notification ↔ WebSocket
 notification_service.set_ws_service(ws_service)
-
-# Injection du WebSocketService dans ActionService
-action_service.set_ws_service(ws_service)
 
 # Injection des services dans DeliveryService
 delivery_service.set_notification_service(notification_service)
@@ -151,11 +143,8 @@ async def prewarm_services() -> None:
     async def _warm_stt():
         await whisper_service.transcribe_pcm(stt_samples, config.SAMPLE_RATE)
 
-    async def _warm_intent():
-        await asyncio.to_thread(intent_service.getint, config.PREWARM_INTENT_TEXT)
-
     async def _warm_llm():
-        await ollama_service.generate(config.PREWARM_LLM_TEXT, [])
+        await ollama_service.chat(config.PREWARM_LLM_TEXT, history=[])
 
     async def _warm_tts():
         await piper_service.synthesize(config.PREWARM_TTS_TEXT)
@@ -163,7 +152,6 @@ async def prewarm_services() -> None:
     for name, op in (
         ("vad", _warm_vad),
         ("stt", _warm_stt),
-        ("intent", _warm_intent),
         ("llm", _warm_llm),
         ("tts", _warm_tts),
     ):
@@ -180,8 +168,6 @@ async def lifespan(app: FastAPI):
     await vad_service.startup()
     await whisper_service.startup()
     await ollama_service.startup()
-    await intent_service.startup()
-    await action_service.startup()
     await notification_service.startup()
     await delivery_service.startup()
     await state_machine.startup()
@@ -198,8 +184,6 @@ async def lifespan(app: FastAPI):
     await delivery_service.shutdown()
     await state_machine.shutdown()
     await notification_service.shutdown()
-    await action_service.shutdown()
-    await intent_service.shutdown()
     await ollama_service.shutdown()
     await whisper_service.shutdown()
     await vad_service.shutdown()
@@ -395,8 +379,6 @@ async def health():
             "webrtc":  await webrtc_service.health_check(),
             "whisper": await whisper_service.health_check(),
             "ollama":  await ollama_service.health_check(),
-            "intent":  await intent_service.health_check(),
-            "action":  await action_service.health_check(),
             "notification": await notification_service.health_check(),
             "delivery": await delivery_service.health_check(),
             "state_machine": True,  # Pas de health check nécessaire

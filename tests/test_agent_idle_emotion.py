@@ -53,10 +53,7 @@ class TestIdleEmotion:
 
     @pytest.mark.asyncio
     async def test_stream_response_sends_idle_when_finished(self, agent, session):
-        async def fake_token_stream():
-            yield "Bonjour."
-
-        agent.llm.generate_stream = MagicMock(return_value=fake_token_stream())
+        agent.llm.chat = AsyncMock(return_value="Bonjour.")
         agent.tts.synthesize = AsyncMock(return_value=(np.ones(960, dtype=np.float32), 48000))
         agent._emit_tts_audio = AsyncMock(return_value=None)
         agent._wait_queue_empty = AsyncMock(return_value=None)

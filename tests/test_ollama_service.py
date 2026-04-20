@@ -1,9 +1,7 @@
-"""
-tests/test_ollama_service.py
-Tests unitaires de l'OllamaService.
-"""
-import config
 import pytest
+from unittest.mock import AsyncMock, MagicMock
+
+import config
 from services.ollama_service import OllamaService
 
 
@@ -11,6 +9,7 @@ def test_build_messages_uses_external_system_prompt(tmp_path, monkeypatch):
     prompt_path = tmp_path / "system_prompt.md"
     prompt_path.write_text("You are Rytle.", encoding="utf-8")
     monkeypatch.setattr(config, "SYSTEM_PROMPT_PATH", str(prompt_path))
+    monkeypatch.setattr(config, "MAX_HISTORY", 3)
 
     service = OllamaService()
     messages = service.build_messages("Bonjour", [{"role": "assistant", "content": "Salut"}])
@@ -19,48 +18,74 @@ def test_build_messages_uses_external_system_prompt(tmp_path, monkeypatch):
     assert messages[-1] == {"role": "user", "content": "Bonjour"}
 
 
-def test_build_messages_falls_back_when_prompt_file_missing(tmp_path, monkeypatch):
-    missing_path = tmp_path / "missing_system_prompt.md"
-    monkeypatch.setattr(config, "SYSTEM_PROMPT_PATH", str(missing_path))
-
-    service = OllamaService()
-    messages = service.build_messages("Bonjour", [])
-
-    assert messages[0]["role"] == "system"
-    assert "helpful voice assistant" in messages[0]["content"]
-
-
-@pytest.mark.asyncio
-async def test_generate_answer_stream_serializes_json_data(tmp_path, monkeypatch):
+def test_build_messages_does_not_duplicate_last_user_message(tmp_path, monkeypatch):
     prompt_path = tmp_path / "system_prompt.md"
     prompt_path.write_text("You are Rytle.", encoding="utf-8")
     monkeypatch.setattr(config, "SYSTEM_PROMPT_PATH", str(prompt_path))
 
-    captured: dict = {}
+    service = OllamaService()
+    history = [{"role": "user", "content": "Bonjour"}]
 
-    class FakeChunk:
-        def __init__(self, response: str):
-            self.response = response
+    messages = service.build_messages("Bonjour", history)
 
-    async def fake_stream():
-        yield FakeChunk("Alice")
+    assert messages.count({"role": "user", "content": "Bonjour"}) == 1
 
-    class FakeClient:
-        async def generate(self, **kwargs):
-            captured.update(kwargs)
-            return fake_stream()
+
+@pytest.mark.asyncio
+async def test_chat_executes_tool_call_and_returns_final_content(tmp_path, monkeypatch):
+    prompt_path = tmp_path / "system_prompt.md"
+    prompt_path.write_text("You are Rytle.", encoding="utf-8")
+    monkeypatch.setattr(config, "SYSTEM_PROMPT_PATH", str(prompt_path))
 
     service = OllamaService()
-    service._client = FakeClient()
+    service.set_ws_service(MagicMock(send=AsyncMock()))
 
-    parts = []
-    async for token in service.generate_answer_stream(
-        [{"clientName": "Alice"}],
-        "who is my next client?",
-    ):
-        parts.append(token)
+    responses = [
+        {
+            "choices": [
+                {
+                    "message": {
+                        "role": "assistant",
+                        "content": "",
+                        "tool_calls": [
+                            {
+                                "id": "call-1",
+                                "function": {
+                                    "name": "show_map",
+                                    "arguments": "{}",
+                                },
+                            }
+                        ],
+                    }
+                }
+            ]
+        },
+        {
+            "choices": [
+                {
+                    "message": {
+                        "role": "assistant",
+                        "content": "Map centered.",
+                    }
+                }
+            ]
+        },
+    ]
 
-    assert "".join(parts) == "Alice"
-    assert '"clientName": "Alice"' in captured["prompt"]
-    assert "who is my next client?" in captured["prompt"]
-    assert captured["think"] is False
+    def fake_post(payload):
+        return responses.pop(0)
+
+    service._post_chat_completion = fake_post
+    session = MagicMock()
+
+    reply = await service.chat("show me the map", history=[], session=session)
+
+    assert reply == "Map centered."
+    service._ws_service.send.assert_awaited_once_with(
+        session,
+        {
+            "type": "external_control",
+            "action": "com.avvc.maps.action.RECENTER",
+            "extras": {},
+        },
+    )

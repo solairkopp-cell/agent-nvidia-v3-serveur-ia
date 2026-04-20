@@ -1,125 +1,87 @@
 """
 services/piper_tts_service.py
-Synthèse vocale via Piper ONNX (local, optimized for CPU).
+Synthèse vocale via Piper binaire compilé.
 """
 from __future__ import annotations
 
 import asyncio
-import logging
-import time
 import json
+import logging
+import subprocess
+import time
 from pathlib import Path
 from typing import AsyncIterator, Optional
-import soxr
 
 import numpy as np
+import soxr
+
 import config
 from services.tts_utils import extract_tts_ready_segments
 
+
 class PiperTTSService:
-    """
-    Singleton. Injecté dans AgentService.
-    """
 
     def __init__(self):
-        self._voice = None          # piper.PiperVoice loaded in startup()
-        self._lock = asyncio.Lock() # protects the model
+        self._lock = asyncio.Lock()
         self._model_path = config.PIPER_MODEL_PATH
         self._config_path = config.PIPER_CONFIG_PATH
-        self._sample_rate = 16000   # default, will be updated from config
+        self._piper_bin = config.PIPER_BIN_PATH  # ex: /home/server/piper/piper/piper
+        self._sample_rate = 22050
 
     async def startup(self):
-        """
-        Charger Piper depuis config.PIPER_MODEL_PATH.
-        """
         logger = logging.getLogger(__name__)
         model_path = Path(self._model_path)
         config_path = Path(self._config_path)
+        piper_bin = Path(self._piper_bin)
 
+        if not piper_bin.exists():
+            raise FileNotFoundError(f"Piper binary not found at '{piper_bin}'")
         if not model_path.exists():
             raise FileNotFoundError(f"Piper model not found at '{model_path}'")
         if not config_path.exists():
             raise FileNotFoundError(f"Piper config not found at '{config_path}'")
 
-        def _load():
-            from piper import PiperVoice
-            return PiperVoice.load(str(model_path), str(config_path))
-
-        start = time.perf_counter()
-        self._voice = await asyncio.to_thread(_load)
-        
-        # Load sample rate from config
         with open(config_path, 'r') as f:
             cfg = json.load(f)
             self._sample_rate = cfg.get("audio", {}).get("sample_rate", 22050)
 
-        logger.info("Piper loaded in %.2fs (sample_rate=%d)", time.perf_counter() - start, self._sample_rate)
+        logger.info("Piper binary ready bin=%s sample_rate=%d", self._piper_bin, self._sample_rate)
 
     async def shutdown(self):
-        self._voice = None
+        pass
 
     async def synthesize(self, text: str) -> tuple[np.ndarray, int]:
-        """
-        Synthétiser un texte complet avec upsampling à 48kHz pour WebRTC.
-        """
-        if self._voice is None:
-            raise RuntimeError("PiperTTSService not started")
-
-        target_rate = 48000 # Standard WebRTC/Opus
+        target_rate = 48000
         text = (text or "").strip()
         if not text:
             return np.array([], dtype=np.float32), target_rate
 
         async with self._lock:
             def _do():
-                # Piper outputs iterator of AudioChunk objects
-                chunks = list(self._voice.synthesize(text))
-                if not chunks:
-                    return np.array([], dtype=np.float32), target_rate
+                proc = subprocess.run(
+                    [
+                        self._piper_bin,
+                        "--model", self._model_path,
+                        "--config", self._config_path,
+                        "--output-raw",
+                    ],
+                    input=text.encode("utf-8"),
+                    capture_output=True,
+                )
+                if proc.returncode != 0:
+                    raise RuntimeError(f"Piper error: {proc.stderr.decode()}")
 
-                # 1. Récupération du raw int16
-                audio_bytes = b"".join(chunk.audio_int16_bytes for chunk in chunks)
-
-                # 2. Conversion en float32 (22050 Hz)
-                samples = np.frombuffer(audio_bytes, dtype=np.int16).astype(np.float32) / 32768.0
-
-                # 3. UPSAMPLING CRITIQUE : 22050 -> 48000 (WebRTC/Opus standard)
-                # Utilise soxr (haute qualité) avec fallbacks
-                try:
-                    import soxr
-                    samples_48k = soxr.resample(samples, self._sample_rate, target_rate)
-                except ImportError:
-                    # Fallback scipy
-                    try:
-                        from scipy import signal as scipy_signal
-                        num_samples = int(np.ceil(len(samples) * target_rate / self._sample_rate))
-                        samples_48k = scipy_signal.resample(samples, num_samples).astype(np.float32, copy=False)
-                    except ImportError:
-                        # Fallback librosa
-                        try:
-                            import librosa
-                            samples_48k = librosa.resample(samples, orig_sr=self._sample_rate, target_sr=target_rate)
-                        except ImportError:
-                            # Fallback numpy (moins bon)
-                            duration = len(samples) / float(self._sample_rate)
-                            target_len = int(round(duration * target_rate))
-                            x_old = np.linspace(0.0, 1.0, num=len(samples), endpoint=False)
-                            x_new = np.linspace(0.0, 1.0, num=target_len, endpoint=False)
-                            samples_48k = np.interp(x_new, x_old, samples).astype(np.float32, copy=False)
-
-                return samples_48k, target_rate
+                samples = np.frombuffer(proc.stdout, dtype=np.int16).astype(np.float32) / 32768.0
+                samples_48k = soxr.resample(samples, self._sample_rate, target_rate)
+                return samples_48k.astype(np.float32), target_rate
 
             return await asyncio.to_thread(_do)
-            
+
     async def synthesize_stream(
         self,
         text_stream: AsyncIterator[str],
         cancel_check: Optional[callable] = None,
     ) -> AsyncIterator[tuple[str, np.ndarray, int]]:
-        """
-        Mode streaming : consomme les tokens LLM au fur et à mesure.
-        Segmentation sur frontières naturelles.
-        """
         buffer = ""
         queue: asyncio.Queue[Optional[tuple[str, np.ndarray, int]]] = asyncio.Queue(maxsize=3)
 
@@ -153,7 +115,6 @@ class PiperTTSService:
                     if fade_text:
                         samples, rate = await self.synthesize_fade_out(fade_text)
                         await queue.put((fade_text, samples, rate))
-                
                 await queue.put(None)
 
         synth_task = asyncio.create_task(_synthesizer())

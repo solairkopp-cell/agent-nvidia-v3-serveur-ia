@@ -3,7 +3,7 @@ services/delivery_state_machine.py
 Machine à états pour la complétion de livraison.
 
 Modes:
-  - MODE_0: Normal (STT → IntentDetector → KNOWN/UNKNOWN → TTS/LLM)
+  - MODE_0: Normal (STT → LLM → TTS)
   - MODE_1: Delivery completion flow (STT → Normalize → pattern matching → action)
 
 États MODE_1:
@@ -155,7 +155,6 @@ class DeliveryStateMachine:
     def __init__(
         self,
         config: Optional[StateMachineConfig] = None,
-        intent_detector=None,
         ws_service=None,
         agent_service=None,
     ):
@@ -163,7 +162,6 @@ class DeliveryStateMachine:
         self._contexts: dict[str, StateContext] = {}  # client_id -> StateContext
         self._planning_service = None
         self._lock = asyncio.Lock()
-        self._intent_detector = intent_detector
         self._ws_service = ws_service
         self._agent_service = agent_service
     
@@ -269,6 +267,70 @@ class DeliveryStateMachine:
         # État inconnu → reset
         logger.warning("Unknown state %s for client_id=%s", ctx.state, session.client_id)
         return await self._trigger_fallback(session, ctx)
+
+    def _get_llm_service(self):
+        if self._agent_service is None:
+            return None
+        return getattr(self._agent_service, "llm", None)
+
+    async def _generate_driver_message(
+        self,
+        session: "Session",
+        instruction: str,
+        fallback: str,
+    ) -> str:
+        llm = self._get_llm_service()
+        if llm is None:
+            return fallback
+
+        try:
+            reply = await llm.generate_system_reply(instruction, session=session)
+            reply = (reply or "").strip()
+            return reply or fallback
+        except Exception:
+            logger.exception("Failed to generate driver message client_id=%s", session.client_id)
+            return fallback
+
+    def _extract_reason_number_from_reply(self, reply: str) -> Optional[int]:
+        text = (reply or "").strip()
+        match = re.fullmatch(r"(\d+)", text)
+        if not match:
+            return None
+
+        value = int(match.group(1))
+        if 1 <= value <= len(self.config.reason_list):
+            return value
+        return None
+
+    async def _build_outcome_announcement(
+        self,
+        session: "Session",
+        *,
+        success: bool,
+        next_trip_info: tuple | None,
+        fallback: str,
+        validated_by_photo: bool = False,
+    ) -> str:
+        if success:
+            if validated_by_photo:
+                instruction = "The requested photo was taken, so the delivery is validated."
+            else:
+                instruction = "The driver confirmed the delivery, so it is completed."
+        else:
+            instruction = "The delivery is marked as failed."
+
+        if next_trip_info:
+            next_trip_id, next_address, next_client_name, is_last = next_trip_info
+            instruction += (
+                f" Announce the next delivery with next_trip_id={next_trip_id}, "
+                f"address={next_address}, client={next_client_name}."
+            )
+            if is_last:
+                instruction += " Tell the driver this next delivery is the last one of the route."
+        else:
+            instruction += " There is no next delivery. Announce that the route is finished."
+
+        return await self._generate_driver_message(session, instruction, fallback)
     
     # ── State Handlers ───────────────────────────────────────────────────────
     
@@ -288,9 +350,22 @@ class DeliveryStateMachine:
         fallback → reset STATE_1
         """
         text_lower = transcript.lower().strip()
+        llm = self._get_llm_service()
+        confirmed = None
 
-        # Vérifier YES
-        if any(pattern in text_lower for pattern in self.config.yes_patterns):
+        if llm is not None:
+            try:
+                confirmed = await llm.is_this_a_confirmation(transcript, session=session)
+            except Exception:
+                logger.exception("STATE_1: confirmation check failed client_id=%s", session.client_id)
+
+        if confirmed is None:
+            if any(pattern in text_lower for pattern in self.config.yes_patterns):
+                confirmed = True
+            elif any(pattern in text_lower for pattern in self.config.no_patterns):
+                confirmed = False
+
+        if confirmed is True:
             logger.info(
                 "STATE_1: YES detected client_id=%s",
                 session.client_id,
@@ -309,7 +384,7 @@ class DeliveryStateMachine:
             )
             announcement = (
                 "The delivery has been marked as completed. "
-                "It was your last delivery. Good job."
+                "It was your last delivery. The route is now finished."
             )
 
             if next_trip_info:
@@ -345,6 +420,13 @@ class DeliveryStateMachine:
                     self._trigger_start_navigation_delayed(session, next_trip_id, delay=3.0)
                 )
 
+            announcement = await self._build_outcome_announcement(
+                session,
+                success=True,
+                next_trip_info=next_trip_info,
+                fallback=announcement,
+            )
+
             return self.ProcessResult(
                 should_handle=True,
                 tts_response=announcement,
@@ -355,15 +437,24 @@ class DeliveryStateMachine:
                 emit_tts_boundary_emotions=False,
             )
 
-        # Vérifier NO
-        if any(pattern in text_lower for pattern in self.config.no_patterns):
+        if confirmed is False:
             logger.info(
                 "STATE_1: NO detected client_id=%s → STATE_2",
                 session.client_id,
             )
+            ask_reason_tts = await self._generate_driver_message(
+                session,
+                (
+                    "The driver said the delivery is not completed. "
+                    "Ask for the reason. "
+                    "Tell the driver to answer with a number from 1 to 6, "
+                    "or ask for the list of reasons."
+                ),
+                self.config.ask_reason_tts,
+            )
             return self.ProcessResult(
                 should_handle=True,
-                tts_response=self.config.ask_reason_tts,
+                tts_response=ask_reason_tts,
                 next_state=State.STATE_2,
                 action=None,
                 interruptible=False,  # Non interruptible - question importante
@@ -394,44 +485,43 @@ class DeliveryStateMachine:
         STATE_2: ASK_REASON
         "Can you tell me why?"
 
-        Intent "get_possible_delivery_failure_reason" → read reasons aloud → stay STATE_2
+        "list" → read reasons aloud → stay STATE_2
         anything else → NumberExtractor →
             NUMBER found → STATE_4 (FAILURE)
             NO NUMBER   → retry (max 2)
         fallback → reset STATE_1
         """
         text_lower = transcript.lower().strip()
+        llm = self._get_llm_service()
+        llm_reason_reply = None
 
-        # Vérifier l'intent "get_possible_delivery_failure_reason" via intent detection
-        if self._intent_detector is not None:
+        if llm is not None:
             try:
-                detected_intent = self._intent_detector.getint(transcript)
-                if detected_intent == "get_possible_delivery_failure_reason":
-                    logger.info(
-                        "STATE_2: failure reason list requested via intent client_id=%s",
-                        session.client_id,
-                    )
-                    # Formater la liste des raisons
-                    list_text = "Failure reasons: " + ", ".join(
-                        f"{i+1}. {reason}"
-                        for i, reason in enumerate(self.config.reason_list)
-                    )
-                    return self.ProcessResult(
-                        should_handle=True,
-                        tts_response=list_text,
-                        next_state=State.STATE_2,
-                        action=None,
-                    )
+                llm_reason_reply = await llm.get_delivery_failure_reason_response(
+                    transcript,
+                    self.config.reason_list,
+                    session=session,
+                )
             except Exception:
-                logger.exception("Intent detection error in state machine client_id=%s", session.client_id)
+                logger.exception("STATE_2: reason classification failed client_id=%s", session.client_id)
 
-        # Fallback: vérifier l'ancien mot-clé "list"
-        if self.config.list_trigger in text_lower:
+        number = None
+        if llm_reason_reply is not None:
+            llm_reason_reply = llm_reason_reply.strip()
+            number = self._extract_reason_number_from_reply(llm_reason_reply)
+            if number is None:
+                return self.ProcessResult(
+                    should_handle=True,
+                    tts_response=llm_reason_reply or self.config.ask_reason_tts,
+                    next_state=State.STATE_2,
+                    action=None,
+                    interruptible=False,
+                )
+        elif self.config.list_trigger in text_lower:
             logger.info(
                 "STATE_2: list requested (fallback) client_id=%s",
                 session.client_id,
             )
-            # Formater la liste des raisons
             list_text = "Failure reasons: " + ", ".join(
                 f"{i+1}. {reason}"
                 for i, reason in enumerate(self.config.reason_list)
@@ -442,9 +532,9 @@ class DeliveryStateMachine:
                 next_state=State.STATE_2,
                 action=None,
             )
+        else:
+            number = NumberExtractor.extract(text_lower)
 
-        # Extraire un nombre
-        number = NumberExtractor.extract(text_lower)
         if number is not None:
             # Valider l'index
             if 1 <= number <= len(self.config.reason_list):
@@ -475,10 +565,19 @@ class DeliveryStateMachine:
                     
                     # Envoyer immédiatement l'événement ask_photo_event
                     await self._send_ask_photo_event(session, ctx)
+
+                    ask_photo_tts = await self._generate_driver_message(
+                        session,
+                        (
+                            "The driver selected reason 1. "
+                            "Ask the driver to take a photo to validate the delivery."
+                        ),
+                        "Can you please take a photo of the package?",
+                    )
                     
                     return self.ProcessResult(
                         should_handle=True,
-                        tts_response="Can you please take a photo of the package?",
+                        tts_response=ask_photo_tts,
                         next_state=State.STATE_6,  # Attendre photo_taken ou photo_not_taken
                         action=None,  # Pas encore de update_trip
                     )
@@ -491,7 +590,7 @@ class DeliveryStateMachine:
                     success=False,
                     is_last=await self._should_send_end_emotion(session, next_trip_info),
                 )
-                announcement = "Delivery has been marked as failure."
+                announcement = "Delivery has been marked as failure. The route is now finished."
 
                 # Envoyer l'événement MARK_FAILED à l'application Android
                 if ctx.current_trip_id:
@@ -527,6 +626,13 @@ class DeliveryStateMachine:
                     asyncio.create_task(
                         self._trigger_start_navigation_delayed(session, next_trip_id, delay=3.0)
                     )
+
+                announcement = await self._build_outcome_announcement(
+                    session,
+                    success=False,
+                    next_trip_info=next_trip_info,
+                    fallback=announcement,
+                )
 
                 return self.ProcessResult(
                     should_handle=True,
@@ -864,7 +970,11 @@ class DeliveryStateMachine:
                 await self._send_mark_delivered_event(session, trip_id)
 
             # Annoncer la suite et démarrer navigation
-            await self._announce_next_trip_and_start_navigation(session, success=True)
+            await self._announce_next_trip_and_start_navigation(
+                session,
+                success=True,
+                validated_by_photo=True,
+            )
         else:
             # Photo non prise → échec + annonce suite
             trip_id = ctx.photo_trip_id or ctx.current_trip_id
@@ -892,6 +1002,7 @@ class DeliveryStateMachine:
         self,
         session: "Session",
         success: bool,
+        validated_by_photo: bool = False,
     ) -> None:
         """
         Annoncer la prochaine livraison et démarrer la navigation.
@@ -907,7 +1018,21 @@ class DeliveryStateMachine:
             next_trip_id, next_address, next_client_name, is_last = next_trip_info
 
             # Annoncer
-            if success:
+            if success and validated_by_photo:
+                if is_last:
+                    announcement = (
+                        f"Delivery validated. "
+                        f"You are now heading to {next_address}. "
+                        f"The client is {next_client_name}. "
+                        f"This is your last delivery."
+                    )
+                else:
+                    announcement = (
+                        f"Delivery validated. "
+                        f"You are now heading to {next_address}. "
+                        f"The client is {next_client_name}."
+                    )
+            elif success:
                 if is_last:
                     announcement = (
                         f"Delivery completed successfully. "
@@ -935,6 +1060,14 @@ class DeliveryStateMachine:
                         f"You are now heading to {next_address}. "
                         f"The client is {next_client_name}."
                     )
+
+            announcement = await self._build_outcome_announcement(
+                session,
+                success=success,
+                next_trip_info=next_trip_info,
+                fallback=announcement,
+                validated_by_photo=validated_by_photo,
+            )
 
             logger.info(
                 "📢 Next trip announced client_id=%s address=%s client=%s is_last=%s",
@@ -965,20 +1098,27 @@ class DeliveryStateMachine:
                 session.client_id,
             )
             if self._agent_service:
-                if success:
-                    await self._agent_service.speak_text(
-                        session,
-                        "Delivery completed successfully. It was your last delivery. Good job.",
-                        interruptible=False,
-                        emit_boundary_emotions=False,
-                    )
+                if success and validated_by_photo:
+                    announcement = "Delivery validated. The route is now finished."
+                elif success:
+                    announcement = "Delivery completed successfully. It was your last delivery. The route is now finished."
                 else:
-                    await self._agent_service.speak_text(
-                        session,
-                        "Delivery has been marked as failure.",
-                        interruptible=False,
-                        emit_boundary_emotions=False,
-                    )
+                    announcement = "Delivery has been marked as failure. The route is now finished."
+
+                announcement = await self._build_outcome_announcement(
+                    session,
+                    success=success,
+                    next_trip_info=None,
+                    fallback=announcement,
+                    validated_by_photo=validated_by_photo,
+                )
+
+                await self._agent_service.speak_text(
+                    session,
+                    announcement,
+                    interruptible=False,
+                    emit_boundary_emotions=False,
+                )
 
     async def _get_next_trip_info(self, session: "Session") -> tuple | None:
         """
