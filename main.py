@@ -45,13 +45,14 @@ from services.whisper_service import WhisperService
 from services.ollama_service import OllamaService
 from services.notification_service import NotificationService
 from services.delivery_service import DeliveryService
-from services.piper_tts_service import PiperTTSService
+from services.piper_client_service import PiperClientService
 from services.agent_service import AgentService
 from services.denoise_service import DenoiseService
 from experimental.denoise_stream import create_denoise_stream_processor
 from services.ws_audio_service import WebSocketAudioService
 from services.websocket_service import WebSocketService
 from services.delivery_state_machine import DeliveryStateMachine
+from routers.test_audio_router import router as test_audio_router
 
 
 # ── Logging ───────────────────────────────────────────────────────────────────
@@ -67,7 +68,7 @@ whisper_service  = WhisperService()
 ollama_service   = OllamaService()
 notification_service = NotificationService()
 delivery_service = DeliveryService()
-piper_service    = PiperTTSService()
+piper_service    = PiperClientService()
 denoise_service  = DenoiseService(audio=audio_service)
 state_machine    = DeliveryStateMachine()
 
@@ -147,7 +148,8 @@ async def prewarm_services() -> None:
         await ollama_service.chat(config.PREWARM_LLM_TEXT, history=[])
 
     async def _warm_tts():
-        await piper_service.synthesize(config.PREWARM_TTS_TEXT)
+        async for _ in piper_service.synthesize_stream(config.PREWARM_TTS_TEXT):
+            pass
 
     for name, op in (
         ("vad", _warm_vad),
@@ -200,6 +202,9 @@ app = FastAPI(
 
 # Mount static files for assets
 app.mount("/assets", StaticFiles(directory="assets"), name="assets")
+
+# ── Test audio router (collecte données débruitage) ───────────────────────────
+app.include_router(test_audio_router)
 
 @app.get("/", include_in_schema=False)
 async def index():

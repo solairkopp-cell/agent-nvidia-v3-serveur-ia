@@ -12,6 +12,7 @@ Protocole JSON (client → serveur) :
   {"type": "start", "input_sample_rate": 48000}  → initialiser la session audio
   {"type": "stop"}                               → cleanup()
   {"type": "test_tts", "text": "..."}            → lire un texte via le TTS sans micro
+  (Les messages {"type": "read_next_instruction", ...} sont ignorés sans réponse ni log.)
 
 Protocole binaire (client → serveur) :
   bytes PCM16 mono                               → micro entrant
@@ -188,7 +189,11 @@ class WebSocketService:
         Inconnu → send(session, {"type": "error", "message": "unknown type"})
         """
         msg_type = message.get("type")
-        
+
+        # Indications tour-à-tour navigation envoyées par l'app client : le serveur ne les utilise pas.
+        if msg_type == "read_next_instruction":
+            return
+
         # Log tous les messages reçus
         logger.info("📨 WS MESSAGE RECEIVED client_id=%s type=%s data=%r", 
                     session.client_id, msg_type, message)

@@ -58,21 +58,14 @@ class Session:
     tts_playing: bool = False
     processing_started_at: float = 0.0
     tts_started_at: float = 0.0
-    # Fin du segment TTS précédent, gardée pour lisser le début du suivant.
-    tts_overlap_tail: object | None = None
-    tts_overlap_rate: int = 0
     active_user_message_index: Optional[int] = None
     active_user_request_id: int = 0
     active_user_text: str = ""
-    interruption_pending: bool = False
-    interruption_elapsed_ms: float = 0.0
     # Permet d'annuler la génération en cours
     current_request_id: int = 0
     cancel_flag: bool = False
-    # Queue audio pour le scheduler TTS (frames int16 de 960 samples)
-    tts_audio_queue: asyncio.Queue = field(default_factory=lambda: asyncio.Queue(maxsize=50))
-    # True si le TTS en cours peut être interrompu par l'utilisateur
-    tts_interruptible: bool = True
+    # Tâche asyncio du TTS courant — annulée lors d'une interruption
+    tts_task: Optional[asyncio.Task] = None
 
     # ── Delivery State Machine ───────────────────────────────────────────────
     # Serial du driver (pour delivery completion flow)
@@ -98,12 +91,6 @@ class Session:
         self.is_speaking = False
         self.silence_chunks = 0
         self.speech_chunks = 0
-        # Vider la queue audio TTS
-        while not self.tts_audio_queue.empty():
-            try:
-                self.tts_audio_queue.get_nowait()
-            except asyncio.QueueEmpty:
-                break
 
     def reset_decoded_audio_buffer(self):
         self.decoded_audio_buffer.clear()
@@ -115,8 +102,13 @@ class Session:
         self.conversation_history.clear()
 
     def reset_tts_output_state(self):
-        self.tts_overlap_tail = None
-        self.tts_overlap_rate = 0
+        """Réinitialise l'état TTS : annule la tâche en cours si besoin."""
+        self.tts_playing = False
+        self.tts_started_at = 0.0
+        self.cancel_flag = False
+        if self.tts_task is not None and not self.tts_task.done():
+            self.tts_task.cancel()
+        self.tts_task = None
 
     def mark_active_user_turn(self, *, request_id: int, index: int, text: str) -> None:
         self.active_user_request_id = int(request_id)
@@ -128,10 +120,6 @@ class Session:
         self.active_user_message_index = None
         self.active_user_text = ""
         self.processing_started_at = 0.0
-
-    def reset_interruption_state(self) -> None:
-        self.interruption_pending = False
-        self.interruption_elapsed_ms = 0.0
 
     def trim_history(self, max_size: int, trim_to: int):
         if len(self.conversation_history) > max_size:

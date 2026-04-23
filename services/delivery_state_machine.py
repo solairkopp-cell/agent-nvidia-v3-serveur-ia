@@ -840,43 +840,12 @@ class DeliveryStateMachine:
         """
         Déterminer si l'émotion `end` doit être envoyée pour ce résultat.
         """
+        # S'il y a un trip suivant, la route n'est pas terminée.
         if next_trip_info is not None:
-            return bool(next_trip_info[3])
-
-        import json
-        from pathlib import Path
-
-        data_file = Path("data.json")
-
-        try:
-            if not data_file.exists():
-                return False
-
-            with open(data_file, "r", encoding="utf-8") as f:
-                trips = json.load(f)
-
-            if not isinstance(trips, list) or len(trips) == 0:
-                return False
-
-            current_trip_id = session.current_trip_id
-            current_index = -1
-
-            for i, trip in enumerate(trips):
-                if trip.get("id") == current_trip_id:
-                    current_index = i
-                    break
-
-            if current_index < 0:
-                return False
-
-            for trip in trips[current_index + 1:]:
-                if trip.get("deliveryStatus", "") != "COMPLETED":
-                    return False
-
-            return True
-        except Exception as e:
-            logger.error("Error determining end emotion eligibility: %s", e)
             return False
+
+        # S'il n'y a plus de trip, c'est la fin de la route !
+        return True
 
     async def _send_mark_delivered_event(self, session: "Session", trip_id: str) -> None:
         """
@@ -975,6 +944,12 @@ class DeliveryStateMachine:
                 success=True,
                 validated_by_photo=True,
             )
+
+            # Informer le LLM
+            session.conversation_history.append({
+                "role": "system",
+                "content": "[SYSTEM MESSAGE] The delivery photo was taken. The delivery process is finished and marked as COMPLETED."
+            })
         else:
             # Photo non prise → échec + annonce suite
             trip_id = ctx.photo_trip_id or ctx.current_trip_id
@@ -994,6 +969,12 @@ class DeliveryStateMachine:
 
             # Annoncer la suite et démarrer navigation
             await self._announce_next_trip_and_start_navigation(session, success=False)
+
+            # Informer le LLM
+            session.conversation_history.append({
+                "role": "system",
+                "content": "[SYSTEM MESSAGE] The delivery photo was NOT taken. The delivery process is finished and marked as FAILED."
+            })
 
         # Reset et retour à MODE_0
         ctx.reset()
@@ -1083,8 +1064,6 @@ class DeliveryStateMachine:
                 await self._agent_service.speak_text(
                     session,
                     announcement,
-                    interruptible=False,
-                    emit_boundary_emotions=False,
                 )
 
             # Démarrer navigation après le TTS (délai pour lecture annonce)
@@ -1116,8 +1095,6 @@ class DeliveryStateMachine:
                 await self._agent_service.speak_text(
                     session,
                     announcement,
-                    interruptible=False,
-                    emit_boundary_emotions=False,
                 )
 
     async def _get_next_trip_info(self, session: "Session") -> tuple | None:

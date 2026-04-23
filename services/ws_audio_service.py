@@ -38,15 +38,20 @@ class AudioSocketOutput:
         payload = self._audio.array_to_pcm16_bytes(samples)
         if not payload:
             return
-        try:
-            async with self._session.send_lock:
-                await self._session.websocket.send_bytes(payload)
-        except Exception:
-            logger.debug(
-                "Audio chunk send failed client_id=%s",
-                self._session.client_id,
-                exc_info=True,
-            )
+        for attempt in range(2):
+            try:
+                async with self._session.send_lock:
+                    await self._session.websocket.send_bytes(payload)
+                return
+            except Exception:
+                if attempt == 0:
+                    await asyncio.sleep(0.015)
+                    continue
+                logger.warning(
+                    "Audio chunk send failed (giving up) client_id=%s",
+                    self._session.client_id,
+                    exc_info=True,
+                )
 
     async def clear(self) -> None:
         return

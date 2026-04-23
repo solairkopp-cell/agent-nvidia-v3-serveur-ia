@@ -172,3 +172,1752 @@
 2026-04-20 20:00:51 - INFO - Recherche du driver par query: 000
 2026-04-20 20:00:51 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
 2026-04-20 20:00:51 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 22:59:11 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-20 22:59:11 - INFO - Récupération des trips pour le driver: 000
+2026-04-20 22:59:11 - INFO - Recherche du driver par query: 000
+2026-04-20 22:59:11 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 22:59:12 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 22:59:12 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 22:59:12 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-20 22:59:12 - INFO - Recherche du driver par query: 000
+2026-04-20 22:59:12 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 22:59:12 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 22:59:12 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-20 22:59:12 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-20 22:59:12 - INFO - 3 schedule(s) trouvé(s) sur 36 entité(s)
+2026-04-20 22:59:12 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-20 22:59:12 - INFO - Recherche des packages pour le schedule: 69e64adb6e48095340640444
+2026-04-20 22:59:12 - INFO - Recherche par référence: field=schedule_id, value=69e64adb6e48095340640444
+2026-04-20 22:59:12 - INFO - ✅ SUCCÈS: 1 package(s) trouvé(s) pour le schedule 69e64adb6e48095340640444
+2026-04-20 22:59:12 - INFO - Récupération du package par ID: 69e64abf6e48095340640443
+2026-04-20 22:59:12 - INFO - Récupération de l'instance: 69e64abf6e48095340640443
+2026-04-20 22:59:12 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-20 22:59:12 - INFO - ✅ SUCCÈS: Package trouvé: 69e64abf6e48095340640443
+2026-04-20 22:59:12 - INFO - Package: 69e64abf6e48095340640443, address field: 69e64abf6e48095340640442
+2026-04-20 22:59:12 - INFO - Récupération adresse: 69e64abf6e48095340640442
+2026-04-20 22:59:12 - INFO - Récupération de l'adresse par ID: 69e64abf6e48095340640442
+2026-04-20 22:59:12 - INFO - Récupération de l'instance: 69e64abf6e48095340640442
+2026-04-20 22:59:12 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e64abf6e48095340640442
+2026-04-20 22:59:12 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-20 22:59:12 - INFO - Trip créé: id=69e64abf6e48095340640443, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.827657, lng=10.1949974
+2026-04-20 22:59:12 - INFO - ✅ SUCCÈS: 1 trip(s) créé(s) et ordonné(s) par position
+2026-04-20 22:59:12 - INFO - ✅ SUCCÈS: 1 trip(s) exporté(s) vers data.json
+2026-04-20 22:59:12 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-20 22:59:12 - INFO - Recherche du driver par query: 000
+2026-04-20 22:59:12 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 22:59:12 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:02:26 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-20 23:02:26 - INFO - Récupération des trips pour le driver: 000
+2026-04-20 23:02:26 - INFO - Recherche du driver par query: 000
+2026-04-20 23:02:26 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 23:02:26 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:02:26 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:02:26 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-20 23:02:26 - INFO - Recherche du driver par query: 000
+2026-04-20 23:02:26 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 23:02:26 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:02:26 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-20 23:02:26 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-20 23:02:26 - INFO - 3 schedule(s) trouvé(s) sur 36 entité(s)
+2026-04-20 23:02:26 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-20 23:02:26 - INFO - Recherche des packages pour le schedule: 69e64adb6e48095340640444
+2026-04-20 23:02:26 - INFO - Recherche par référence: field=schedule_id, value=69e64adb6e48095340640444
+2026-04-20 23:02:26 - INFO - ✅ SUCCÈS: 1 package(s) trouvé(s) pour le schedule 69e64adb6e48095340640444
+2026-04-20 23:02:26 - INFO - Récupération du package par ID: 69e64abf6e48095340640443
+2026-04-20 23:02:26 - INFO - Récupération de l'instance: 69e64abf6e48095340640443
+2026-04-20 23:02:26 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-20 23:02:26 - INFO - ✅ SUCCÈS: Package trouvé: 69e64abf6e48095340640443
+2026-04-20 23:02:26 - INFO - Package: 69e64abf6e48095340640443, address field: 69e64abf6e48095340640442
+2026-04-20 23:02:26 - INFO - Récupération adresse: 69e64abf6e48095340640442
+2026-04-20 23:02:26 - INFO - Récupération de l'adresse par ID: 69e64abf6e48095340640442
+2026-04-20 23:02:26 - INFO - Récupération de l'instance: 69e64abf6e48095340640442
+2026-04-20 23:02:26 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e64abf6e48095340640442
+2026-04-20 23:02:26 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-20 23:02:26 - INFO - Trip créé: id=69e64abf6e48095340640443, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.827657, lng=10.1949974
+2026-04-20 23:02:26 - INFO - ✅ SUCCÈS: 1 trip(s) créé(s) et ordonné(s) par position
+2026-04-20 23:02:26 - INFO - ✅ SUCCÈS: 1 trip(s) exporté(s) vers data.json
+2026-04-20 23:02:27 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-20 23:02:27 - INFO - Recherche du driver par query: 000
+2026-04-20 23:02:27 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 23:02:27 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:04:46 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-20 23:04:46 - INFO - Récupération des trips pour le driver: 000
+2026-04-20 23:04:46 - INFO - Recherche du driver par query: 000
+2026-04-20 23:04:46 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 23:04:47 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:04:47 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:04:47 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-20 23:04:47 - INFO - Recherche du driver par query: 000
+2026-04-20 23:04:47 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 23:04:47 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:04:47 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-20 23:04:47 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-20 23:04:47 - INFO - 3 schedule(s) trouvé(s) sur 36 entité(s)
+2026-04-20 23:04:47 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-20 23:04:47 - INFO - Recherche des packages pour le schedule: 69e64adb6e48095340640444
+2026-04-20 23:04:47 - INFO - Recherche par référence: field=schedule_id, value=69e64adb6e48095340640444
+2026-04-20 23:04:47 - INFO - ✅ SUCCÈS: 1 package(s) trouvé(s) pour le schedule 69e64adb6e48095340640444
+2026-04-20 23:04:47 - INFO - Récupération du package par ID: 69e64abf6e48095340640443
+2026-04-20 23:04:47 - INFO - Récupération de l'instance: 69e64abf6e48095340640443
+2026-04-20 23:04:47 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-20 23:04:47 - INFO - ✅ SUCCÈS: Package trouvé: 69e64abf6e48095340640443
+2026-04-20 23:04:47 - INFO - Package: 69e64abf6e48095340640443, address field: 69e64abf6e48095340640442
+2026-04-20 23:04:47 - INFO - Récupération adresse: 69e64abf6e48095340640442
+2026-04-20 23:04:47 - INFO - Récupération de l'adresse par ID: 69e64abf6e48095340640442
+2026-04-20 23:04:47 - INFO - Récupération de l'instance: 69e64abf6e48095340640442
+2026-04-20 23:04:47 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e64abf6e48095340640442
+2026-04-20 23:04:47 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-20 23:04:47 - INFO - Trip créé: id=69e64abf6e48095340640443, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.827657, lng=10.1949974
+2026-04-20 23:04:47 - INFO - ✅ SUCCÈS: 1 trip(s) créé(s) et ordonné(s) par position
+2026-04-20 23:04:47 - INFO - ✅ SUCCÈS: 1 trip(s) exporté(s) vers data.json
+2026-04-20 23:04:47 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-20 23:04:47 - INFO - Recherche du driver par query: 000
+2026-04-20 23:04:47 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 23:04:47 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:17:54 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-20 23:17:54 - INFO - Récupération des trips pour le driver: 000
+2026-04-20 23:17:54 - INFO - Recherche du driver par query: 000
+2026-04-20 23:17:54 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 23:17:54 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:17:54 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:17:54 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-20 23:17:54 - INFO - Recherche du driver par query: 000
+2026-04-20 23:17:54 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 23:17:54 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:17:54 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-20 23:17:54 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-20 23:17:55 - INFO - 3 schedule(s) trouvé(s) sur 36 entité(s)
+2026-04-20 23:17:55 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-20 23:17:55 - INFO - Recherche des packages pour le schedule: 69e64adb6e48095340640444
+2026-04-20 23:17:55 - INFO - Recherche par référence: field=schedule_id, value=69e64adb6e48095340640444
+2026-04-20 23:17:55 - INFO - ✅ SUCCÈS: 1 package(s) trouvé(s) pour le schedule 69e64adb6e48095340640444
+2026-04-20 23:17:55 - INFO - Récupération du package par ID: 69e64abf6e48095340640443
+2026-04-20 23:17:55 - INFO - Récupération de l'instance: 69e64abf6e48095340640443
+2026-04-20 23:17:55 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-20 23:17:55 - INFO - ✅ SUCCÈS: Package trouvé: 69e64abf6e48095340640443
+2026-04-20 23:17:55 - INFO - Package: 69e64abf6e48095340640443, address field: 69e64abf6e48095340640442
+2026-04-20 23:17:55 - INFO - Récupération adresse: 69e64abf6e48095340640442
+2026-04-20 23:17:55 - INFO - Récupération de l'adresse par ID: 69e64abf6e48095340640442
+2026-04-20 23:17:55 - INFO - Récupération de l'instance: 69e64abf6e48095340640442
+2026-04-20 23:17:55 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e64abf6e48095340640442
+2026-04-20 23:17:55 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-20 23:17:55 - INFO - Trip créé: id=69e64abf6e48095340640443, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.827657, lng=10.1949974
+2026-04-20 23:17:55 - INFO - ✅ SUCCÈS: 1 trip(s) créé(s) et ordonné(s) par position
+2026-04-20 23:17:55 - INFO - ✅ SUCCÈS: 1 trip(s) exporté(s) vers data.json
+2026-04-20 23:17:55 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-20 23:17:55 - INFO - Recherche du driver par query: 000
+2026-04-20 23:17:55 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 23:17:55 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:21:29 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-20 23:21:29 - INFO - Récupération des trips pour le driver: 000
+2026-04-20 23:21:29 - INFO - Recherche du driver par query: 000
+2026-04-20 23:21:29 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 23:21:29 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:21:29 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:21:29 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-20 23:21:29 - INFO - Recherche du driver par query: 000
+2026-04-20 23:21:29 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 23:21:29 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:21:29 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-20 23:21:29 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-20 23:21:29 - INFO - 3 schedule(s) trouvé(s) sur 36 entité(s)
+2026-04-20 23:21:29 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-20 23:21:29 - INFO - Recherche des packages pour le schedule: 69e64adb6e48095340640444
+2026-04-20 23:21:29 - INFO - Recherche par référence: field=schedule_id, value=69e64adb6e48095340640444
+2026-04-20 23:21:29 - INFO - ✅ SUCCÈS: 1 package(s) trouvé(s) pour le schedule 69e64adb6e48095340640444
+2026-04-20 23:21:29 - INFO - Récupération du package par ID: 69e64abf6e48095340640443
+2026-04-20 23:21:29 - INFO - Récupération de l'instance: 69e64abf6e48095340640443
+2026-04-20 23:21:29 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-20 23:21:29 - INFO - ✅ SUCCÈS: Package trouvé: 69e64abf6e48095340640443
+2026-04-20 23:21:29 - INFO - Package: 69e64abf6e48095340640443, address field: 69e64abf6e48095340640442
+2026-04-20 23:21:29 - INFO - Récupération adresse: 69e64abf6e48095340640442
+2026-04-20 23:21:29 - INFO - Récupération de l'adresse par ID: 69e64abf6e48095340640442
+2026-04-20 23:21:29 - INFO - Récupération de l'instance: 69e64abf6e48095340640442
+2026-04-20 23:21:29 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e64abf6e48095340640442
+2026-04-20 23:21:29 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-20 23:21:29 - INFO - Trip créé: id=69e64abf6e48095340640443, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.827657, lng=10.1949974
+2026-04-20 23:21:29 - INFO - ✅ SUCCÈS: 1 trip(s) créé(s) et ordonné(s) par position
+2026-04-20 23:21:29 - INFO - ✅ SUCCÈS: 1 trip(s) exporté(s) vers data.json
+2026-04-20 23:21:29 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-20 23:21:29 - INFO - Recherche du driver par query: 000
+2026-04-20 23:21:29 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 23:21:30 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:28:39 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-20 23:28:39 - INFO - Récupération des trips pour le driver: 000
+2026-04-20 23:28:39 - INFO - Recherche du driver par query: 000
+2026-04-20 23:28:39 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 23:28:40 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:28:40 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:28:40 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-20 23:28:40 - INFO - Recherche du driver par query: 000
+2026-04-20 23:28:40 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 23:28:40 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:28:40 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-20 23:28:40 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-20 23:28:40 - INFO - 3 schedule(s) trouvé(s) sur 36 entité(s)
+2026-04-20 23:28:40 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-20 23:28:40 - INFO - Recherche des packages pour le schedule: 69e64adb6e48095340640444
+2026-04-20 23:28:40 - INFO - Recherche par référence: field=schedule_id, value=69e64adb6e48095340640444
+2026-04-20 23:28:40 - INFO - ✅ SUCCÈS: 1 package(s) trouvé(s) pour le schedule 69e64adb6e48095340640444
+2026-04-20 23:28:40 - INFO - Récupération du package par ID: 69e64abf6e48095340640443
+2026-04-20 23:28:40 - INFO - Récupération de l'instance: 69e64abf6e48095340640443
+2026-04-20 23:28:40 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-20 23:28:40 - INFO - ✅ SUCCÈS: Package trouvé: 69e64abf6e48095340640443
+2026-04-20 23:28:40 - INFO - Package: 69e64abf6e48095340640443, address field: 69e64abf6e48095340640442
+2026-04-20 23:28:40 - INFO - Récupération adresse: 69e64abf6e48095340640442
+2026-04-20 23:28:40 - INFO - Récupération de l'adresse par ID: 69e64abf6e48095340640442
+2026-04-20 23:28:40 - INFO - Récupération de l'instance: 69e64abf6e48095340640442
+2026-04-20 23:28:40 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e64abf6e48095340640442
+2026-04-20 23:28:40 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-20 23:28:40 - INFO - Trip créé: id=69e64abf6e48095340640443, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.827657, lng=10.1949974
+2026-04-20 23:28:40 - INFO - ✅ SUCCÈS: 1 trip(s) créé(s) et ordonné(s) par position
+2026-04-20 23:28:40 - INFO - ✅ SUCCÈS: 1 trip(s) exporté(s) vers data.json
+2026-04-20 23:28:40 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-20 23:28:40 - INFO - Recherche du driver par query: 000
+2026-04-20 23:28:40 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 23:28:40 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:32:25 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-20 23:32:25 - INFO - Récupération des trips pour le driver: 000
+2026-04-20 23:32:25 - INFO - Recherche du driver par query: 000
+2026-04-20 23:32:25 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 23:32:25 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:32:25 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:32:25 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-20 23:32:25 - INFO - Recherche du driver par query: 000
+2026-04-20 23:32:25 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 23:32:25 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:32:25 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-20 23:32:25 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-20 23:32:25 - INFO - 3 schedule(s) trouvé(s) sur 36 entité(s)
+2026-04-20 23:32:25 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-20 23:32:25 - INFO - Recherche des packages pour le schedule: 69e64adb6e48095340640444
+2026-04-20 23:32:25 - INFO - Recherche par référence: field=schedule_id, value=69e64adb6e48095340640444
+2026-04-20 23:32:26 - INFO - ✅ SUCCÈS: 1 package(s) trouvé(s) pour le schedule 69e64adb6e48095340640444
+2026-04-20 23:32:26 - INFO - Récupération du package par ID: 69e64abf6e48095340640443
+2026-04-20 23:32:26 - INFO - Récupération de l'instance: 69e64abf6e48095340640443
+2026-04-20 23:32:26 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-20 23:32:26 - INFO - ✅ SUCCÈS: Package trouvé: 69e64abf6e48095340640443
+2026-04-20 23:32:26 - INFO - Package: 69e64abf6e48095340640443, address field: 69e64abf6e48095340640442
+2026-04-20 23:32:26 - INFO - Récupération adresse: 69e64abf6e48095340640442
+2026-04-20 23:32:26 - INFO - Récupération de l'adresse par ID: 69e64abf6e48095340640442
+2026-04-20 23:32:26 - INFO - Récupération de l'instance: 69e64abf6e48095340640442
+2026-04-20 23:32:26 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e64abf6e48095340640442
+2026-04-20 23:32:26 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-20 23:32:26 - INFO - Trip créé: id=69e64abf6e48095340640443, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.827657, lng=10.1949974
+2026-04-20 23:32:26 - INFO - ✅ SUCCÈS: 1 trip(s) créé(s) et ordonné(s) par position
+2026-04-20 23:32:26 - INFO - ✅ SUCCÈS: 1 trip(s) exporté(s) vers data.json
+2026-04-20 23:32:26 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-20 23:32:26 - INFO - Recherche du driver par query: 000
+2026-04-20 23:32:26 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 23:32:26 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:49:31 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-20 23:49:31 - INFO - Récupération des trips pour le driver: 000
+2026-04-20 23:49:31 - INFO - Recherche du driver par query: 000
+2026-04-20 23:49:31 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 23:49:31 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:49:31 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:49:31 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-20 23:49:31 - INFO - Recherche du driver par query: 000
+2026-04-20 23:49:31 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 23:49:31 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:49:31 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-20 23:49:31 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-20 23:49:31 - INFO - 3 schedule(s) trouvé(s) sur 36 entité(s)
+2026-04-20 23:49:31 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-20 23:49:31 - INFO - Recherche des packages pour le schedule: 69e64adb6e48095340640444
+2026-04-20 23:49:31 - INFO - Recherche par référence: field=schedule_id, value=69e64adb6e48095340640444
+2026-04-20 23:49:31 - INFO - ✅ SUCCÈS: 1 package(s) trouvé(s) pour le schedule 69e64adb6e48095340640444
+2026-04-20 23:49:31 - INFO - Récupération du package par ID: 69e64abf6e48095340640443
+2026-04-20 23:49:31 - INFO - Récupération de l'instance: 69e64abf6e48095340640443
+2026-04-20 23:49:31 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-20 23:49:31 - INFO - ✅ SUCCÈS: Package trouvé: 69e64abf6e48095340640443
+2026-04-20 23:49:31 - INFO - Package: 69e64abf6e48095340640443, address field: 69e64abf6e48095340640442
+2026-04-20 23:49:31 - INFO - Récupération adresse: 69e64abf6e48095340640442
+2026-04-20 23:49:31 - INFO - Récupération de l'adresse par ID: 69e64abf6e48095340640442
+2026-04-20 23:49:31 - INFO - Récupération de l'instance: 69e64abf6e48095340640442
+2026-04-20 23:49:31 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e64abf6e48095340640442
+2026-04-20 23:49:31 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-20 23:49:31 - INFO - Trip créé: id=69e64abf6e48095340640443, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.827657, lng=10.1949974
+2026-04-20 23:49:31 - INFO - ✅ SUCCÈS: 1 trip(s) créé(s) et ordonné(s) par position
+2026-04-20 23:49:31 - INFO - ✅ SUCCÈS: 1 trip(s) exporté(s) vers data.json
+2026-04-20 23:49:31 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-20 23:49:31 - INFO - Recherche du driver par query: 000
+2026-04-20 23:49:31 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 23:49:32 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:56:04 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-20 23:56:04 - INFO - Récupération des trips pour le driver: 000
+2026-04-20 23:56:04 - INFO - Recherche du driver par query: 000
+2026-04-20 23:56:04 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 23:56:05 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:56:05 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:56:05 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-20 23:56:05 - INFO - Recherche du driver par query: 000
+2026-04-20 23:56:05 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 23:56:05 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-20 23:56:05 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-20 23:56:05 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-20 23:56:05 - INFO - 3 schedule(s) trouvé(s) sur 36 entité(s)
+2026-04-20 23:56:05 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-20 23:56:05 - INFO - Recherche des packages pour le schedule: 69e64adb6e48095340640444
+2026-04-20 23:56:05 - INFO - Recherche par référence: field=schedule_id, value=69e64adb6e48095340640444
+2026-04-20 23:56:05 - INFO - ✅ SUCCÈS: 1 package(s) trouvé(s) pour le schedule 69e64adb6e48095340640444
+2026-04-20 23:56:05 - INFO - Récupération du package par ID: 69e64abf6e48095340640443
+2026-04-20 23:56:05 - INFO - Récupération de l'instance: 69e64abf6e48095340640443
+2026-04-20 23:56:05 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-20 23:56:05 - INFO - ✅ SUCCÈS: Package trouvé: 69e64abf6e48095340640443
+2026-04-20 23:56:05 - INFO - Package: 69e64abf6e48095340640443, address field: 69e64abf6e48095340640442
+2026-04-20 23:56:05 - INFO - Récupération adresse: 69e64abf6e48095340640442
+2026-04-20 23:56:05 - INFO - Récupération de l'adresse par ID: 69e64abf6e48095340640442
+2026-04-20 23:56:05 - INFO - Récupération de l'instance: 69e64abf6e48095340640442
+2026-04-20 23:56:05 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e64abf6e48095340640442
+2026-04-20 23:56:05 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-20 23:56:05 - INFO - Trip créé: id=69e64abf6e48095340640443, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.827657, lng=10.1949974
+2026-04-20 23:56:05 - INFO - ✅ SUCCÈS: 1 trip(s) créé(s) et ordonné(s) par position
+2026-04-20 23:56:05 - INFO - ✅ SUCCÈS: 1 trip(s) exporté(s) vers data.json
+2026-04-20 23:56:05 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-20 23:56:05 - INFO - Recherche du driver par query: 000
+2026-04-20 23:56:05 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-20 23:56:05 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:00:19 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 00:00:19 - INFO - Récupération des trips pour le driver: 000
+2026-04-21 00:00:19 - INFO - Recherche du driver par query: 000
+2026-04-21 00:00:19 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 00:00:19 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:00:19 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:00:19 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-21 00:00:19 - INFO - Recherche du driver par query: 000
+2026-04-21 00:00:19 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 00:00:19 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:00:19 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-21 00:00:19 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-21 00:00:19 - INFO - 3 schedule(s) trouvé(s) sur 36 entité(s)
+2026-04-21 00:00:19 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-21 00:00:19 - WARNING - Aucun schedule pour la date: 2026-04-21
+2026-04-21 00:00:19 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 00:00:19 - INFO - Recherche du driver par query: 000
+2026-04-21 00:00:19 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 00:00:20 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:10:22 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 00:10:22 - INFO - Récupération des trips pour le driver: 000
+2026-04-21 00:10:22 - INFO - Recherche du driver par query: 000
+2026-04-21 00:10:22 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 00:10:23 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:10:23 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:10:23 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-21 00:10:23 - INFO - Recherche du driver par query: 000
+2026-04-21 00:10:23 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 00:10:23 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:10:23 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-21 00:10:23 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-21 00:10:23 - INFO - 3 schedule(s) trouvé(s) sur 36 entité(s)
+2026-04-21 00:10:23 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-21 00:10:23 - WARNING - Aucun schedule pour la date: 2026-04-21
+2026-04-21 00:10:23 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 00:10:23 - INFO - Recherche du driver par query: 000
+2026-04-21 00:10:23 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 00:10:23 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:14:40 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 00:14:40 - INFO - Récupération des trips pour le driver: 000
+2026-04-21 00:14:40 - INFO - Recherche du driver par query: 000
+2026-04-21 00:14:40 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 00:14:40 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:14:40 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:14:40 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-21 00:14:40 - INFO - Recherche du driver par query: 000
+2026-04-21 00:14:40 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 00:14:40 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:14:40 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-21 00:14:40 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-21 00:14:40 - INFO - 3 schedule(s) trouvé(s) sur 36 entité(s)
+2026-04-21 00:14:40 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-21 00:14:40 - INFO - Recherche des packages pour le schedule: 69e6a5196e48095340640446
+2026-04-21 00:14:40 - INFO - Recherche par référence: field=schedule_id, value=69e6a5196e48095340640446
+2026-04-21 00:14:40 - INFO - ✅ SUCCÈS: 1 package(s) trouvé(s) pour le schedule 69e6a5196e48095340640446
+2026-04-21 00:14:40 - INFO - Récupération du package par ID: 69e64abf6e48095340640443
+2026-04-21 00:14:40 - INFO - Récupération de l'instance: 69e64abf6e48095340640443
+2026-04-21 00:14:40 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 00:14:41 - INFO - ✅ SUCCÈS: Package trouvé: 69e64abf6e48095340640443
+2026-04-21 00:14:41 - INFO - Package: 69e64abf6e48095340640443, address field: 69e64abf6e48095340640442
+2026-04-21 00:14:41 - INFO - Récupération adresse: 69e64abf6e48095340640442
+2026-04-21 00:14:41 - INFO - Récupération de l'adresse par ID: 69e64abf6e48095340640442
+2026-04-21 00:14:41 - INFO - Récupération de l'instance: 69e64abf6e48095340640442
+2026-04-21 00:14:41 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e64abf6e48095340640442
+2026-04-21 00:14:41 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-21 00:14:41 - INFO - Trip créé: id=69e64abf6e48095340640443, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.827657, lng=10.1949974
+2026-04-21 00:14:41 - INFO - ✅ SUCCÈS: 1 trip(s) créé(s) et ordonné(s) par position
+2026-04-21 00:14:41 - INFO - ✅ SUCCÈS: 1 trip(s) exporté(s) vers data.json
+2026-04-21 00:14:41 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 00:14:41 - INFO - Recherche du driver par query: 000
+2026-04-21 00:14:41 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 00:14:41 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:15:47 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 00:15:47 - INFO - Récupération des trips pour le driver: 000
+2026-04-21 00:15:47 - INFO - Recherche du driver par query: 000
+2026-04-21 00:15:47 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 00:15:47 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:15:47 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:15:47 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-21 00:15:47 - INFO - Recherche du driver par query: 000
+2026-04-21 00:15:47 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 00:15:47 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:15:47 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-21 00:15:47 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-21 00:15:47 - INFO - 3 schedule(s) trouvé(s) sur 36 entité(s)
+2026-04-21 00:15:47 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-21 00:15:47 - INFO - Recherche des packages pour le schedule: 69e6a5196e48095340640446
+2026-04-21 00:15:47 - INFO - Recherche par référence: field=schedule_id, value=69e6a5196e48095340640446
+2026-04-21 00:15:48 - INFO - ✅ SUCCÈS: 1 package(s) trouvé(s) pour le schedule 69e6a5196e48095340640446
+2026-04-21 00:15:48 - INFO - Récupération du package par ID: 69e64abf6e48095340640443
+2026-04-21 00:15:48 - INFO - Récupération de l'instance: 69e64abf6e48095340640443
+2026-04-21 00:15:48 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 00:15:48 - INFO - ✅ SUCCÈS: Package trouvé: 69e64abf6e48095340640443
+2026-04-21 00:15:48 - INFO - Package: 69e64abf6e48095340640443, address field: 69e64abf6e48095340640442
+2026-04-21 00:15:48 - INFO - Récupération adresse: 69e64abf6e48095340640442
+2026-04-21 00:15:48 - INFO - Récupération de l'adresse par ID: 69e64abf6e48095340640442
+2026-04-21 00:15:48 - INFO - Récupération de l'instance: 69e64abf6e48095340640442
+2026-04-21 00:15:48 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e64abf6e48095340640442
+2026-04-21 00:15:48 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-21 00:15:48 - INFO - Trip créé: id=69e64abf6e48095340640443, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.827657, lng=10.1949974
+2026-04-21 00:15:48 - INFO - ✅ SUCCÈS: 1 trip(s) créé(s) et ordonné(s) par position
+2026-04-21 00:15:48 - INFO - ✅ SUCCÈS: 1 trip(s) exporté(s) vers data.json
+2026-04-21 00:15:48 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 00:15:48 - INFO - Recherche du driver par query: 000
+2026-04-21 00:15:48 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 00:15:48 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:26:23 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 00:26:23 - INFO - Récupération des trips pour le driver: 000
+2026-04-21 00:26:23 - INFO - Recherche du driver par query: 000
+2026-04-21 00:26:23 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 00:26:24 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:26:24 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:26:24 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-21 00:26:24 - INFO - Recherche du driver par query: 000
+2026-04-21 00:26:24 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 00:26:24 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:26:24 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-21 00:26:24 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-21 00:26:24 - INFO - 3 schedule(s) trouvé(s) sur 36 entité(s)
+2026-04-21 00:26:24 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-21 00:26:24 - INFO - Recherche des packages pour le schedule: 69e6a5196e48095340640446
+2026-04-21 00:26:24 - INFO - Recherche par référence: field=schedule_id, value=69e6a5196e48095340640446
+2026-04-21 00:26:24 - INFO - ✅ SUCCÈS: 1 package(s) trouvé(s) pour le schedule 69e6a5196e48095340640446
+2026-04-21 00:26:24 - INFO - Récupération du package par ID: 69e64abf6e48095340640443
+2026-04-21 00:26:24 - INFO - Récupération de l'instance: 69e64abf6e48095340640443
+2026-04-21 00:26:24 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 00:26:24 - INFO - ✅ SUCCÈS: Package trouvé: 69e64abf6e48095340640443
+2026-04-21 00:26:24 - INFO - Package: 69e64abf6e48095340640443, address field: 69e64abf6e48095340640442
+2026-04-21 00:26:24 - INFO - Récupération adresse: 69e64abf6e48095340640442
+2026-04-21 00:26:24 - INFO - Récupération de l'adresse par ID: 69e64abf6e48095340640442
+2026-04-21 00:26:24 - INFO - Récupération de l'instance: 69e64abf6e48095340640442
+2026-04-21 00:26:24 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e64abf6e48095340640442
+2026-04-21 00:26:24 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-21 00:26:24 - INFO - Trip créé: id=69e64abf6e48095340640443, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.827657, lng=10.1949974
+2026-04-21 00:26:24 - INFO - ✅ SUCCÈS: 1 trip(s) créé(s) et ordonné(s) par position
+2026-04-21 00:26:24 - INFO - ✅ SUCCÈS: 1 trip(s) exporté(s) vers data.json
+2026-04-21 00:26:24 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 00:26:24 - INFO - Recherche du driver par query: 000
+2026-04-21 00:26:24 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 00:26:24 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:38:13 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 00:38:13 - INFO - Récupération des trips pour le driver: 000
+2026-04-21 00:38:13 - INFO - Recherche du driver par query: 000
+2026-04-21 00:38:13 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 00:38:14 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:38:14 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:38:14 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-21 00:38:14 - INFO - Recherche du driver par query: 000
+2026-04-21 00:38:14 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 00:38:14 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:38:14 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-21 00:38:14 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-21 00:38:14 - INFO - 3 schedule(s) trouvé(s) sur 36 entité(s)
+2026-04-21 00:38:14 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-21 00:38:14 - INFO - Recherche des packages pour le schedule: 69e6a5196e48095340640446
+2026-04-21 00:38:14 - INFO - Recherche par référence: field=schedule_id, value=69e6a5196e48095340640446
+2026-04-21 00:38:14 - INFO - ✅ SUCCÈS: 1 package(s) trouvé(s) pour le schedule 69e6a5196e48095340640446
+2026-04-21 00:38:14 - INFO - Récupération du package par ID: 69e64abf6e48095340640443
+2026-04-21 00:38:14 - INFO - Récupération de l'instance: 69e64abf6e48095340640443
+2026-04-21 00:38:14 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 00:38:14 - INFO - ✅ SUCCÈS: Package trouvé: 69e64abf6e48095340640443
+2026-04-21 00:38:14 - INFO - Package: 69e64abf6e48095340640443, address field: 69e64abf6e48095340640442
+2026-04-21 00:38:14 - INFO - Récupération adresse: 69e64abf6e48095340640442
+2026-04-21 00:38:14 - INFO - Récupération de l'adresse par ID: 69e64abf6e48095340640442
+2026-04-21 00:38:14 - INFO - Récupération de l'instance: 69e64abf6e48095340640442
+2026-04-21 00:38:14 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e64abf6e48095340640442
+2026-04-21 00:38:14 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-21 00:38:14 - INFO - Trip créé: id=69e64abf6e48095340640443, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.827657, lng=10.1949974
+2026-04-21 00:38:14 - INFO - ✅ SUCCÈS: 1 trip(s) créé(s) et ordonné(s) par position
+2026-04-21 00:38:14 - INFO - ✅ SUCCÈS: 1 trip(s) exporté(s) vers data.json
+2026-04-21 00:38:14 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 00:38:14 - INFO - Recherche du driver par query: 000
+2026-04-21 00:38:14 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 00:38:14 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:39:22 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 00:39:22 - INFO - Récupération des trips pour le driver: 000
+2026-04-21 00:39:22 - INFO - Recherche du driver par query: 000
+2026-04-21 00:39:22 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 00:39:23 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:39:23 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:39:23 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-21 00:39:23 - INFO - Recherche du driver par query: 000
+2026-04-21 00:39:23 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 00:39:23 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 00:39:23 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-21 00:39:23 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-21 00:39:23 - INFO - 3 schedule(s) trouvé(s) sur 36 entité(s)
+2026-04-21 00:39:23 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-21 00:39:23 - INFO - Recherche des packages pour le schedule: 69e6a5196e48095340640446
+2026-04-21 00:39:23 - INFO - Recherche par référence: field=schedule_id, value=69e6a5196e48095340640446
+2026-04-21 00:39:23 - INFO - ✅ SUCCÈS: 1 package(s) trouvé(s) pour le schedule 69e6a5196e48095340640446
+2026-04-21 00:39:23 - INFO - Récupération du package par ID: 69e64abf6e48095340640443
+2026-04-21 00:39:23 - INFO - Récupération de l'instance: 69e64abf6e48095340640443
+2026-04-21 00:39:23 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 00:39:23 - INFO - ✅ SUCCÈS: Package trouvé: 69e64abf6e48095340640443
+2026-04-21 00:39:23 - INFO - Package: 69e64abf6e48095340640443, address field: 69e64abf6e48095340640442
+2026-04-21 00:39:23 - INFO - Récupération adresse: 69e64abf6e48095340640442
+2026-04-21 00:39:23 - INFO - Récupération de l'adresse par ID: 69e64abf6e48095340640442
+2026-04-21 00:39:23 - INFO - Récupération de l'instance: 69e64abf6e48095340640442
+2026-04-21 00:39:23 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e64abf6e48095340640442
+2026-04-21 00:39:23 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-21 00:39:23 - INFO - Trip créé: id=69e64abf6e48095340640443, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.827657, lng=10.1949974
+2026-04-21 00:39:23 - INFO - ✅ SUCCÈS: 1 trip(s) créé(s) et ordonné(s) par position
+2026-04-21 00:39:23 - INFO - ✅ SUCCÈS: 1 trip(s) exporté(s) vers data.json
+2026-04-21 00:39:23 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 00:39:23 - INFO - Recherche du driver par query: 000
+2026-04-21 00:39:23 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 00:39:24 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 01:08:58 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 01:08:58 - INFO - Récupération des trips pour le driver: 000
+2026-04-21 01:08:58 - INFO - Recherche du driver par query: 000
+2026-04-21 01:08:58 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 01:08:59 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 01:08:59 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 01:08:59 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-21 01:08:59 - INFO - Recherche du driver par query: 000
+2026-04-21 01:08:59 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 01:08:59 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 01:08:59 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-21 01:08:59 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-21 01:08:59 - INFO - 3 schedule(s) trouvé(s) sur 36 entité(s)
+2026-04-21 01:08:59 - INFO - ✅ SUCCÈS: 3 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-21 01:08:59 - INFO - Recherche des packages pour le schedule: 69e6a5196e48095340640446
+2026-04-21 01:08:59 - INFO - Recherche par référence: field=schedule_id, value=69e6a5196e48095340640446
+2026-04-21 01:08:59 - INFO - ✅ SUCCÈS: 1 package(s) trouvé(s) pour le schedule 69e6a5196e48095340640446
+2026-04-21 01:08:59 - INFO - Récupération du package par ID: 69e64abf6e48095340640443
+2026-04-21 01:08:59 - INFO - Récupération de l'instance: 69e64abf6e48095340640443
+2026-04-21 01:08:59 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 01:08:59 - INFO - ✅ SUCCÈS: Package trouvé: 69e64abf6e48095340640443
+2026-04-21 01:08:59 - INFO - Package: 69e64abf6e48095340640443, address field: 69e64abf6e48095340640442
+2026-04-21 01:08:59 - INFO - Récupération adresse: 69e64abf6e48095340640442
+2026-04-21 01:08:59 - INFO - Récupération de l'adresse par ID: 69e64abf6e48095340640442
+2026-04-21 01:08:59 - INFO - Récupération de l'instance: 69e64abf6e48095340640442
+2026-04-21 01:08:59 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e64abf6e48095340640442
+2026-04-21 01:08:59 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-21 01:08:59 - INFO - Trip créé: id=69e64abf6e48095340640443, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.827657, lng=10.1949974
+2026-04-21 01:08:59 - INFO - ✅ SUCCÈS: 1 trip(s) créé(s) et ordonné(s) par position
+2026-04-21 01:08:59 - INFO - ✅ SUCCÈS: 1 trip(s) exporté(s) vers data.json
+2026-04-21 01:08:59 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 01:08:59 - INFO - Recherche du driver par query: 000
+2026-04-21 01:08:59 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 01:08:59 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 01:10:53 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 01:10:53 - INFO - Mise à jour du package 69e64abf6e48095340640443 vers: delivered_successfully
+2026-04-21 01:10:53 - INFO - Récupération du package par ID: 69e64abf6e48095340640443
+2026-04-21 01:10:53 - INFO - Récupération de l'instance: 69e64abf6e48095340640443
+2026-04-21 01:10:53 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 01:10:54 - INFO - ✅ SUCCÈS: Package trouvé: 69e64abf6e48095340640443
+2026-04-21 01:10:54 - INFO - Mise à jour de l'instance: 69e64abf6e48095340640443
+2026-04-21 01:10:54 - INFO - ✅ SUCCÈS: Instance 69e64abf6e48095340640443 mise à jour
+2026-04-21 01:10:54 - INFO - ✅ SUCCÈS: Package 69e64abf6e48095340640443 mis à jour: planned -> delivered_successfully
+2026-04-21 01:10:54 - INFO - ✅ SUCCÈS: Package 69e64abf6e48095340640443 supprimé de data.json
+2026-04-21 02:05:03 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 02:05:03 - INFO - Récupération des trips pour le driver: 000
+2026-04-21 02:05:03 - INFO - Recherche du driver par query: 000
+2026-04-21 02:05:03 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 02:05:04 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 02:05:04 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 02:05:04 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-21 02:05:04 - INFO - Recherche du driver par query: 000
+2026-04-21 02:05:04 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 02:05:04 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 02:05:04 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-21 02:05:04 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-21 02:05:04 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-21 02:05:04 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-21 02:05:04 - INFO - Recherche des packages pour le schedule: 69e6bf006e48095340640452
+2026-04-21 02:05:04 - INFO - Recherche par référence: field=schedule_id, value=69e6bf006e48095340640452
+2026-04-21 02:05:04 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69e6bf006e48095340640452
+2026-04-21 02:05:04 - INFO - Récupération du package par ID: 69e6bdaa6e48095340640449
+2026-04-21 02:05:04 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640449
+2026-04-21 02:05:04 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 02:05:04 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdaa6e48095340640449
+2026-04-21 02:05:04 - INFO - Package: 69e6bdaa6e48095340640449, address field: 69e6bdaa6e48095340640448
+2026-04-21 02:05:04 - INFO - Récupération adresse: 69e6bdaa6e48095340640448
+2026-04-21 02:05:04 - INFO - Récupération de l'adresse par ID: 69e6bdaa6e48095340640448
+2026-04-21 02:05:04 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640448
+2026-04-21 02:05:04 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6bdaa6e48095340640448
+2026-04-21 02:05:04 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-21 02:05:04 - INFO - Trip créé: id=69e6bdaa6e48095340640449, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-21 02:05:04 - INFO - Récupération du package par ID: 69e6bdc16e4809534064044b
+2026-04-21 02:05:04 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044b
+2026-04-21 02:05:04 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 02:05:04 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdc16e4809534064044b
+2026-04-21 02:05:04 - INFO - Package: 69e6bdc16e4809534064044b, address field: 69e6bdc16e4809534064044a
+2026-04-21 02:05:04 - INFO - Récupération adresse: 69e6bdc16e4809534064044a
+2026-04-21 02:05:04 - INFO - Récupération de l'adresse par ID: 69e6bdc16e4809534064044a
+2026-04-21 02:05:04 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044a
+2026-04-21 02:05:04 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6bdc16e4809534064044a
+2026-04-21 02:05:04 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-21 02:05:04 - INFO - Trip créé: id=69e6bdc16e4809534064044b, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-21 02:05:04 - INFO - Récupération du package par ID: 69e6be526e4809534064044d
+2026-04-21 02:05:04 - INFO - Récupération de l'instance: 69e6be526e4809534064044d
+2026-04-21 02:05:05 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 02:05:05 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be526e4809534064044d
+2026-04-21 02:05:05 - INFO - Package: 69e6be526e4809534064044d, address field: 69e6be526e4809534064044c
+2026-04-21 02:05:05 - INFO - Récupération adresse: 69e6be526e4809534064044c
+2026-04-21 02:05:05 - INFO - Récupération de l'adresse par ID: 69e6be526e4809534064044c
+2026-04-21 02:05:05 - INFO - Récupération de l'instance: 69e6be526e4809534064044c
+2026-04-21 02:05:05 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be526e4809534064044c
+2026-04-21 02:05:05 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-21 02:05:05 - INFO - Trip créé: id=69e6be526e4809534064044d, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-21 02:05:05 - INFO - Récupération du package par ID: 69e6be636e4809534064044f
+2026-04-21 02:05:05 - INFO - Récupération de l'instance: 69e6be636e4809534064044f
+2026-04-21 02:05:05 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 02:05:05 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be636e4809534064044f
+2026-04-21 02:05:05 - INFO - Package: 69e6be636e4809534064044f, address field: 69e6be636e4809534064044e
+2026-04-21 02:05:05 - INFO - Récupération adresse: 69e6be636e4809534064044e
+2026-04-21 02:05:05 - INFO - Récupération de l'adresse par ID: 69e6be636e4809534064044e
+2026-04-21 02:05:05 - INFO - Récupération de l'instance: 69e6be636e4809534064044e
+2026-04-21 02:05:05 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be636e4809534064044e
+2026-04-21 02:05:05 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-21 02:05:05 - INFO - Trip créé: id=69e6be636e4809534064044f, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-21 02:05:05 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-21 02:05:05 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-21 02:05:05 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 02:05:05 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-21 02:05:05 - INFO - Package: 69e6be736e48095340640451, address field: 69e6be736e48095340640450
+2026-04-21 02:05:05 - INFO - Récupération adresse: 69e6be736e48095340640450
+2026-04-21 02:05:05 - INFO - Récupération de l'adresse par ID: 69e6be736e48095340640450
+2026-04-21 02:05:05 - INFO - Récupération de l'instance: 69e6be736e48095340640450
+2026-04-21 02:05:05 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be736e48095340640450
+2026-04-21 02:05:05 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-21 02:05:05 - INFO - Trip créé: id=69e6be736e48095340640451, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-21 02:05:05 - INFO - ✅ SUCCÈS: 5 trip(s) créé(s) et ordonné(s) par position
+2026-04-21 02:05:05 - INFO - ✅ SUCCÈS: 5 trip(s) exporté(s) vers data.json
+2026-04-21 02:05:05 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 02:05:05 - INFO - Recherche du driver par query: 000
+2026-04-21 02:05:05 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 02:05:05 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 02:07:15 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 02:07:15 - INFO - Mise à jour du package 69e6be736e48095340640451 vers: delivered_successfully
+2026-04-21 02:07:15 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-21 02:07:15 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-21 02:07:15 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 02:07:15 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-21 02:07:15 - INFO - Mise à jour de l'instance: 69e6be736e48095340640451
+2026-04-21 02:07:15 - INFO - ✅ SUCCÈS: Instance 69e6be736e48095340640451 mise à jour
+2026-04-21 02:07:15 - INFO - ✅ SUCCÈS: Package 69e6be736e48095340640451 mis à jour: planned -> delivered_successfully
+2026-04-21 02:07:15 - INFO - ✅ SUCCÈS: Package 69e6be736e48095340640451 supprimé de data.json
+2026-04-21 14:48:38 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 14:48:38 - INFO - Récupération des trips pour le driver: 000
+2026-04-21 14:48:38 - INFO - Recherche du driver par query: 000
+2026-04-21 14:48:38 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 14:48:38 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 14:48:38 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 14:48:38 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-21 14:48:38 - INFO - Recherche du driver par query: 000
+2026-04-21 14:48:38 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 14:48:38 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 14:48:38 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-21 14:48:38 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-21 14:48:39 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-21 14:48:39 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-21 14:48:39 - INFO - Recherche des packages pour le schedule: 69e6bf006e48095340640452
+2026-04-21 14:48:39 - INFO - Recherche par référence: field=schedule_id, value=69e6bf006e48095340640452
+2026-04-21 14:48:39 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69e6bf006e48095340640452
+2026-04-21 14:48:39 - INFO - Récupération du package par ID: 69e6bdaa6e48095340640449
+2026-04-21 14:48:39 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640449
+2026-04-21 14:48:39 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 14:48:39 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdaa6e48095340640449
+2026-04-21 14:48:39 - INFO - Package: 69e6bdaa6e48095340640449, address field: 69e6bdaa6e48095340640448
+2026-04-21 14:48:39 - INFO - Récupération adresse: 69e6bdaa6e48095340640448
+2026-04-21 14:48:39 - INFO - Récupération de l'adresse par ID: 69e6bdaa6e48095340640448
+2026-04-21 14:48:39 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640448
+2026-04-21 14:48:39 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6bdaa6e48095340640448
+2026-04-21 14:48:39 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-21 14:48:39 - INFO - Trip créé: id=69e6bdaa6e48095340640449, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-21 14:48:39 - INFO - Récupération du package par ID: 69e6bdc16e4809534064044b
+2026-04-21 14:48:39 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044b
+2026-04-21 14:48:39 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 14:48:39 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdc16e4809534064044b
+2026-04-21 14:48:39 - INFO - Package: 69e6bdc16e4809534064044b, address field: 69e6bdc16e4809534064044a
+2026-04-21 14:48:39 - INFO - Récupération adresse: 69e6bdc16e4809534064044a
+2026-04-21 14:48:39 - INFO - Récupération de l'adresse par ID: 69e6bdc16e4809534064044a
+2026-04-21 14:48:39 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044a
+2026-04-21 14:48:39 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6bdc16e4809534064044a
+2026-04-21 14:48:39 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-21 14:48:39 - INFO - Trip créé: id=69e6bdc16e4809534064044b, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-21 14:48:39 - INFO - Récupération du package par ID: 69e6be526e4809534064044d
+2026-04-21 14:48:39 - INFO - Récupération de l'instance: 69e6be526e4809534064044d
+2026-04-21 14:48:39 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 14:48:39 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be526e4809534064044d
+2026-04-21 14:48:39 - INFO - Package: 69e6be526e4809534064044d, address field: 69e6be526e4809534064044c
+2026-04-21 14:48:39 - INFO - Récupération adresse: 69e6be526e4809534064044c
+2026-04-21 14:48:39 - INFO - Récupération de l'adresse par ID: 69e6be526e4809534064044c
+2026-04-21 14:48:39 - INFO - Récupération de l'instance: 69e6be526e4809534064044c
+2026-04-21 14:48:39 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be526e4809534064044c
+2026-04-21 14:48:39 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-21 14:48:39 - INFO - Trip créé: id=69e6be526e4809534064044d, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-21 14:48:39 - INFO - Récupération du package par ID: 69e6be636e4809534064044f
+2026-04-21 14:48:39 - INFO - Récupération de l'instance: 69e6be636e4809534064044f
+2026-04-21 14:48:39 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 14:48:39 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be636e4809534064044f
+2026-04-21 14:48:39 - INFO - Package: 69e6be636e4809534064044f, address field: 69e6be636e4809534064044e
+2026-04-21 14:48:39 - INFO - Récupération adresse: 69e6be636e4809534064044e
+2026-04-21 14:48:39 - INFO - Récupération de l'adresse par ID: 69e6be636e4809534064044e
+2026-04-21 14:48:39 - INFO - Récupération de l'instance: 69e6be636e4809534064044e
+2026-04-21 14:48:39 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be636e4809534064044e
+2026-04-21 14:48:39 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-21 14:48:39 - INFO - Trip créé: id=69e6be636e4809534064044f, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-21 14:48:39 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-21 14:48:39 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-21 14:48:39 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 14:48:39 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-21 14:48:39 - INFO - ✅ SUCCÈS: 4 trip(s) créé(s) et ordonné(s) par position
+2026-04-21 14:48:39 - INFO - ✅ SUCCÈS: 4 trip(s) exporté(s) vers data.json
+2026-04-21 14:48:39 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 14:48:39 - INFO - Recherche du driver par query: 000
+2026-04-21 14:48:39 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 14:48:40 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 14:49:34 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 14:49:34 - INFO - Mise à jour du package 69e6be636e4809534064044f vers: delivered_successfully
+2026-04-21 14:49:34 - INFO - Récupération du package par ID: 69e6be636e4809534064044f
+2026-04-21 14:49:34 - INFO - Récupération de l'instance: 69e6be636e4809534064044f
+2026-04-21 14:49:34 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 14:49:34 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be636e4809534064044f
+2026-04-21 14:49:34 - INFO - Mise à jour de l'instance: 69e6be636e4809534064044f
+2026-04-21 14:49:35 - INFO - ✅ SUCCÈS: Instance 69e6be636e4809534064044f mise à jour
+2026-04-21 14:49:35 - INFO - ✅ SUCCÈS: Package 69e6be636e4809534064044f mis à jour: planned -> delivered_successfully
+2026-04-21 14:49:35 - INFO - ✅ SUCCÈS: Package 69e6be636e4809534064044f supprimé de data.json
+2026-04-21 15:21:06 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 15:21:06 - INFO - Récupération des trips pour le driver: 000
+2026-04-21 15:21:06 - INFO - Recherche du driver par query: 000
+2026-04-21 15:21:06 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 15:21:06 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 15:21:06 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 15:21:06 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-21 15:21:06 - INFO - Recherche du driver par query: 000
+2026-04-21 15:21:06 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 15:21:06 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 15:21:06 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-21 15:21:06 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-21 15:21:06 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-21 15:21:06 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-21 15:21:06 - INFO - Recherche des packages pour le schedule: 69e6bf006e48095340640452
+2026-04-21 15:21:06 - INFO - Recherche par référence: field=schedule_id, value=69e6bf006e48095340640452
+2026-04-21 15:21:06 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69e6bf006e48095340640452
+2026-04-21 15:21:06 - INFO - Récupération du package par ID: 69e6bdaa6e48095340640449
+2026-04-21 15:21:06 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640449
+2026-04-21 15:21:06 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 15:21:06 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdaa6e48095340640449
+2026-04-21 15:21:06 - INFO - Package: 69e6bdaa6e48095340640449, address field: 69e6bdaa6e48095340640448
+2026-04-21 15:21:06 - INFO - Récupération adresse: 69e6bdaa6e48095340640448
+2026-04-21 15:21:06 - INFO - Récupération de l'adresse par ID: 69e6bdaa6e48095340640448
+2026-04-21 15:21:06 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640448
+2026-04-21 15:21:06 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6bdaa6e48095340640448
+2026-04-21 15:21:06 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-21 15:21:06 - INFO - Trip créé: id=69e6bdaa6e48095340640449, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-21 15:21:06 - INFO - Récupération du package par ID: 69e6bdc16e4809534064044b
+2026-04-21 15:21:06 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044b
+2026-04-21 15:21:06 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 15:21:07 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdc16e4809534064044b
+2026-04-21 15:21:07 - INFO - Package: 69e6bdc16e4809534064044b, address field: 69e6bdc16e4809534064044a
+2026-04-21 15:21:07 - INFO - Récupération adresse: 69e6bdc16e4809534064044a
+2026-04-21 15:21:07 - INFO - Récupération de l'adresse par ID: 69e6bdc16e4809534064044a
+2026-04-21 15:21:07 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044a
+2026-04-21 15:21:07 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6bdc16e4809534064044a
+2026-04-21 15:21:07 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-21 15:21:07 - INFO - Trip créé: id=69e6bdc16e4809534064044b, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-21 15:21:07 - INFO - Récupération du package par ID: 69e6be526e4809534064044d
+2026-04-21 15:21:07 - INFO - Récupération de l'instance: 69e6be526e4809534064044d
+2026-04-21 15:21:07 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 15:21:07 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be526e4809534064044d
+2026-04-21 15:21:07 - INFO - Package: 69e6be526e4809534064044d, address field: 69e6be526e4809534064044c
+2026-04-21 15:21:07 - INFO - Récupération adresse: 69e6be526e4809534064044c
+2026-04-21 15:21:07 - INFO - Récupération de l'adresse par ID: 69e6be526e4809534064044c
+2026-04-21 15:21:07 - INFO - Récupération de l'instance: 69e6be526e4809534064044c
+2026-04-21 15:21:07 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be526e4809534064044c
+2026-04-21 15:21:07 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-21 15:21:07 - INFO - Trip créé: id=69e6be526e4809534064044d, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-21 15:21:07 - INFO - Récupération du package par ID: 69e6be636e4809534064044f
+2026-04-21 15:21:07 - INFO - Récupération de l'instance: 69e6be636e4809534064044f
+2026-04-21 15:21:07 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 15:21:07 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be636e4809534064044f
+2026-04-21 15:21:07 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-21 15:21:07 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-21 15:21:07 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 15:21:07 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-21 15:21:07 - INFO - ✅ SUCCÈS: 3 trip(s) créé(s) et ordonné(s) par position
+2026-04-21 15:21:07 - INFO - ✅ SUCCÈS: 3 trip(s) exporté(s) vers data.json
+2026-04-21 15:21:07 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 15:21:07 - INFO - Recherche du driver par query: 000
+2026-04-21 15:21:07 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 15:21:07 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 15:21:49 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 15:21:49 - INFO - Mise à jour du package 69e6be526e4809534064044d vers: delivered_successfully
+2026-04-21 15:21:49 - INFO - Récupération du package par ID: 69e6be526e4809534064044d
+2026-04-21 15:21:49 - INFO - Récupération de l'instance: 69e6be526e4809534064044d
+2026-04-21 15:21:49 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 15:21:49 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be526e4809534064044d
+2026-04-21 15:21:49 - INFO - Mise à jour de l'instance: 69e6be526e4809534064044d
+2026-04-21 15:21:49 - INFO - ✅ SUCCÈS: Instance 69e6be526e4809534064044d mise à jour
+2026-04-21 15:21:49 - INFO - ✅ SUCCÈS: Package 69e6be526e4809534064044d mis à jour: planned -> delivered_successfully
+2026-04-21 15:21:49 - INFO - ✅ SUCCÈS: Package 69e6be526e4809534064044d supprimé de data.json
+2026-04-21 16:05:54 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 16:05:54 - INFO - Récupération des trips pour le driver: 000
+2026-04-21 16:05:54 - INFO - Recherche du driver par query: 000
+2026-04-21 16:05:54 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 16:05:54 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 16:05:54 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 16:05:54 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-21 16:05:54 - INFO - Recherche du driver par query: 000
+2026-04-21 16:05:54 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 16:05:54 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 16:05:54 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-21 16:05:54 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-21 16:05:54 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-21 16:05:54 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-21 16:05:54 - INFO - Recherche des packages pour le schedule: 69e6bf006e48095340640452
+2026-04-21 16:05:54 - INFO - Recherche par référence: field=schedule_id, value=69e6bf006e48095340640452
+2026-04-21 16:05:54 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69e6bf006e48095340640452
+2026-04-21 16:05:54 - INFO - Récupération du package par ID: 69e6bdaa6e48095340640449
+2026-04-21 16:05:54 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640449
+2026-04-21 16:05:55 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 16:05:55 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdaa6e48095340640449
+2026-04-21 16:05:55 - INFO - Package: 69e6bdaa6e48095340640449, address field: 69e6bdaa6e48095340640448
+2026-04-21 16:05:55 - INFO - Récupération adresse: 69e6bdaa6e48095340640448
+2026-04-21 16:05:55 - INFO - Récupération de l'adresse par ID: 69e6bdaa6e48095340640448
+2026-04-21 16:05:55 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640448
+2026-04-21 16:05:55 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6bdaa6e48095340640448
+2026-04-21 16:05:55 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-21 16:05:55 - INFO - Trip créé: id=69e6bdaa6e48095340640449, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-21 16:05:55 - INFO - Récupération du package par ID: 69e6bdc16e4809534064044b
+2026-04-21 16:05:55 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044b
+2026-04-21 16:05:55 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 16:05:55 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdc16e4809534064044b
+2026-04-21 16:05:55 - INFO - Package: 69e6bdc16e4809534064044b, address field: 69e6bdc16e4809534064044a
+2026-04-21 16:05:55 - INFO - Récupération adresse: 69e6bdc16e4809534064044a
+2026-04-21 16:05:55 - INFO - Récupération de l'adresse par ID: 69e6bdc16e4809534064044a
+2026-04-21 16:05:55 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044a
+2026-04-21 16:05:55 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6bdc16e4809534064044a
+2026-04-21 16:05:55 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-21 16:05:55 - INFO - Trip créé: id=69e6bdc16e4809534064044b, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-21 16:05:55 - INFO - Récupération du package par ID: 69e6be526e4809534064044d
+2026-04-21 16:05:55 - INFO - Récupération de l'instance: 69e6be526e4809534064044d
+2026-04-21 16:05:55 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 16:05:56 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be526e4809534064044d
+2026-04-21 16:05:56 - INFO - Récupération du package par ID: 69e6be636e4809534064044f
+2026-04-21 16:05:56 - INFO - Récupération de l'instance: 69e6be636e4809534064044f
+2026-04-21 16:05:56 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 16:05:56 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be636e4809534064044f
+2026-04-21 16:05:56 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-21 16:05:56 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-21 16:05:56 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 16:05:56 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-21 16:05:56 - INFO - ✅ SUCCÈS: 2 trip(s) créé(s) et ordonné(s) par position
+2026-04-21 16:05:56 - INFO - ✅ SUCCÈS: 2 trip(s) exporté(s) vers data.json
+2026-04-21 16:05:56 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 16:05:56 - INFO - Recherche du driver par query: 000
+2026-04-21 16:05:56 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 16:05:56 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 16:06:27 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 16:06:27 - INFO - Mise à jour du package 69e6bdaa6e48095340640449 vers: delivered_successfully
+2026-04-21 16:06:27 - INFO - Récupération du package par ID: 69e6bdaa6e48095340640449
+2026-04-21 16:06:27 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640449
+2026-04-21 16:06:27 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 16:06:27 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdaa6e48095340640449
+2026-04-21 16:06:27 - INFO - Mise à jour de l'instance: 69e6bdaa6e48095340640449
+2026-04-21 16:06:27 - INFO - ✅ SUCCÈS: Instance 69e6bdaa6e48095340640449 mise à jour
+2026-04-21 16:06:27 - INFO - ✅ SUCCÈS: Package 69e6bdaa6e48095340640449 mis à jour: planned -> delivered_successfully
+2026-04-21 16:06:27 - INFO - ✅ SUCCÈS: Package 69e6bdaa6e48095340640449 supprimé de data.json
+2026-04-21 16:07:53 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-21 18:42:21
+2026-04-21 16:07:53 - INFO - Mise à jour du package 69e6bdc16e4809534064044b vers: delivered_successfully
+2026-04-21 16:07:53 - INFO - Récupération du package par ID: 69e6bdc16e4809534064044b
+2026-04-21 16:07:53 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044b
+2026-04-21 16:07:54 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 16:07:54 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdc16e4809534064044b
+2026-04-21 16:07:54 - INFO - Mise à jour de l'instance: 69e6bdc16e4809534064044b
+2026-04-21 16:07:54 - INFO - ✅ SUCCÈS: Instance 69e6bdc16e4809534064044b mise à jour
+2026-04-21 16:07:54 - INFO - ✅ SUCCÈS: Package 69e6bdc16e4809534064044b mis à jour: planned -> delivered_successfully
+2026-04-21 16:07:54 - INFO - ✅ SUCCÈS: Package 69e6bdc16e4809534064044b supprimé de data.json
+2026-04-21 19:53:14 - ERROR - Erreur lors de la lecture du cache: name 'log_warning' is not defined
+2026-04-21 19:53:14 - INFO - Token non valide ou absent, récupération d'un nouveau token...
+2026-04-21 19:53:14 - INFO - Tentative de connexion à l'API Fleet...
+2026-04-21 19:53:15 - INFO - ✅ SUCCÈS: Authentification réussie auprès de l'API Fleet
+2026-04-21 19:53:15 - INFO - ✅ SUCCÈS: Token sauvegardé (valide jusqu'au 2026-04-22 19:53:15)
+2026-04-21 19:53:15 - INFO - Récupération des trips pour le driver: 000
+2026-04-21 19:53:15 - INFO - Recherche du driver par query: 000
+2026-04-21 19:53:15 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 19:53:15 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 19:53:15 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 19:53:15 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-21 19:53:15 - INFO - Recherche du driver par query: 000
+2026-04-21 19:53:15 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 19:53:15 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 19:53:15 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-21 19:53:15 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-21 19:53:15 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-21 19:53:15 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-21 19:53:15 - INFO - Recherche des packages pour le schedule: 69e6bf006e48095340640452
+2026-04-21 19:53:15 - INFO - Recherche par référence: field=schedule_id, value=69e6bf006e48095340640452
+2026-04-21 19:53:15 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69e6bf006e48095340640452
+2026-04-21 19:53:15 - INFO - Récupération du package par ID: 69e6bdaa6e48095340640449
+2026-04-21 19:53:15 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640449
+2026-04-21 19:53:15 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 19:53:15 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdaa6e48095340640449
+2026-04-21 19:53:15 - INFO - Récupération du package par ID: 69e6bdc16e4809534064044b
+2026-04-21 19:53:15 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044b
+2026-04-21 19:53:15 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 19:53:15 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdc16e4809534064044b
+2026-04-21 19:53:15 - INFO - Récupération du package par ID: 69e6be526e4809534064044d
+2026-04-21 19:53:15 - INFO - Récupération de l'instance: 69e6be526e4809534064044d
+2026-04-21 19:53:15 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 19:53:15 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be526e4809534064044d
+2026-04-21 19:53:15 - INFO - Récupération du package par ID: 69e6be636e4809534064044f
+2026-04-21 19:53:15 - INFO - Récupération de l'instance: 69e6be636e4809534064044f
+2026-04-21 19:53:16 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 19:53:16 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be636e4809534064044f
+2026-04-21 19:53:16 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-21 19:53:16 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-21 19:53:16 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 19:53:16 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-21 19:53:16 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-21 19:53:16 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-21 19:53:16 - INFO - Recherche du driver par query: 000
+2026-04-21 19:53:16 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 19:53:16 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 20:09:46 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-21 20:09:46 - INFO - Récupération des trips pour le driver: 000
+2026-04-21 20:09:46 - INFO - Recherche du driver par query: 000
+2026-04-21 20:09:46 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 20:09:46 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 20:09:46 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 20:09:46 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-21 20:09:46 - INFO - Recherche du driver par query: 000
+2026-04-21 20:09:46 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 20:09:46 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 20:09:46 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-21 20:09:46 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-21 20:09:47 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-21 20:09:47 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-21 20:09:47 - INFO - Recherche des packages pour le schedule: 69e6bf006e48095340640452
+2026-04-21 20:09:47 - INFO - Recherche par référence: field=schedule_id, value=69e6bf006e48095340640452
+2026-04-21 20:09:47 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69e6bf006e48095340640452
+2026-04-21 20:09:47 - INFO - Récupération du package par ID: 69e6bdaa6e48095340640449
+2026-04-21 20:09:47 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640449
+2026-04-21 20:09:47 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 20:09:47 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdaa6e48095340640449
+2026-04-21 20:09:47 - INFO - Récupération du package par ID: 69e6bdc16e4809534064044b
+2026-04-21 20:09:47 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044b
+2026-04-21 20:09:47 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 20:09:47 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdc16e4809534064044b
+2026-04-21 20:09:47 - INFO - Récupération du package par ID: 69e6be526e4809534064044d
+2026-04-21 20:09:47 - INFO - Récupération de l'instance: 69e6be526e4809534064044d
+2026-04-21 20:09:47 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 20:09:47 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be526e4809534064044d
+2026-04-21 20:09:47 - INFO - Récupération du package par ID: 69e6be636e4809534064044f
+2026-04-21 20:09:47 - INFO - Récupération de l'instance: 69e6be636e4809534064044f
+2026-04-21 20:09:47 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 20:09:47 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be636e4809534064044f
+2026-04-21 20:09:47 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-21 20:09:47 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-21 20:09:47 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 20:09:47 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-21 20:09:47 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-21 20:09:47 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-21 20:09:47 - INFO - Recherche du driver par query: 000
+2026-04-21 20:09:47 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 20:09:47 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 20:16:48 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-21 20:16:48 - INFO - Récupération des trips pour le driver: 000
+2026-04-21 20:16:48 - INFO - Recherche du driver par query: 000
+2026-04-21 20:16:48 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 20:16:48 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 20:16:48 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 20:16:48 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-21 20:16:48 - INFO - Recherche du driver par query: 000
+2026-04-21 20:16:48 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 20:16:49 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 20:16:49 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-21 20:16:49 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-21 20:16:49 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-21 20:16:49 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-21 20:16:49 - INFO - Recherche des packages pour le schedule: 69e6bf006e48095340640452
+2026-04-21 20:16:49 - INFO - Recherche par référence: field=schedule_id, value=69e6bf006e48095340640452
+2026-04-21 20:16:49 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69e6bf006e48095340640452
+2026-04-21 20:16:49 - INFO - Récupération du package par ID: 69e6bdaa6e48095340640449
+2026-04-21 20:16:49 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640449
+2026-04-21 20:16:49 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 20:16:49 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdaa6e48095340640449
+2026-04-21 20:16:49 - INFO - Récupération du package par ID: 69e6bdc16e4809534064044b
+2026-04-21 20:16:49 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044b
+2026-04-21 20:16:49 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 20:16:49 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdc16e4809534064044b
+2026-04-21 20:16:49 - INFO - Récupération du package par ID: 69e6be526e4809534064044d
+2026-04-21 20:16:49 - INFO - Récupération de l'instance: 69e6be526e4809534064044d
+2026-04-21 20:16:49 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 20:16:49 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be526e4809534064044d
+2026-04-21 20:16:49 - INFO - Récupération du package par ID: 69e6be636e4809534064044f
+2026-04-21 20:16:49 - INFO - Récupération de l'instance: 69e6be636e4809534064044f
+2026-04-21 20:16:49 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 20:16:49 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be636e4809534064044f
+2026-04-21 20:16:49 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-21 20:16:49 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-21 20:16:49 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 20:16:49 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-21 20:16:49 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-21 20:16:49 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-21 20:16:49 - INFO - Recherche du driver par query: 000
+2026-04-21 20:16:49 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 20:16:50 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 21:45:18 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-21 21:45:18 - INFO - Récupération des trips pour le driver: 000
+2026-04-21 21:45:18 - INFO - Recherche du driver par query: 000
+2026-04-21 21:45:18 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 21:45:18 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 21:45:18 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 21:45:18 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-21 21:45:18 - INFO - Recherche du driver par query: 000
+2026-04-21 21:45:18 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 21:45:18 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 21:45:18 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-21 21:45:18 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-21 21:45:19 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-21 21:45:19 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-21 21:45:19 - INFO - Recherche des packages pour le schedule: 69e6bf006e48095340640452
+2026-04-21 21:45:19 - INFO - Recherche par référence: field=schedule_id, value=69e6bf006e48095340640452
+2026-04-21 21:45:19 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69e6bf006e48095340640452
+2026-04-21 21:45:19 - INFO - Récupération du package par ID: 69e6bdaa6e48095340640449
+2026-04-21 21:45:19 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640449
+2026-04-21 21:45:19 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 21:45:20 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdaa6e48095340640449
+2026-04-21 21:45:20 - INFO - Récupération du package par ID: 69e6bdc16e4809534064044b
+2026-04-21 21:45:20 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044b
+2026-04-21 21:45:20 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 21:45:20 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdc16e4809534064044b
+2026-04-21 21:45:20 - INFO - Récupération du package par ID: 69e6be526e4809534064044d
+2026-04-21 21:45:20 - INFO - Récupération de l'instance: 69e6be526e4809534064044d
+2026-04-21 21:45:20 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 21:45:21 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be526e4809534064044d
+2026-04-21 21:45:21 - INFO - Récupération du package par ID: 69e6be636e4809534064044f
+2026-04-21 21:45:21 - INFO - Récupération de l'instance: 69e6be636e4809534064044f
+2026-04-21 21:45:21 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 21:45:21 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be636e4809534064044f
+2026-04-21 21:45:21 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-21 21:45:21 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-21 21:45:21 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 21:45:21 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-21 21:45:21 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-21 21:45:21 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-21 21:45:21 - INFO - Recherche du driver par query: 000
+2026-04-21 21:45:21 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 21:45:22 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 21:45:49 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-21 21:45:49 - INFO - Récupération des trips pour le driver: 000
+2026-04-21 21:45:49 - INFO - Recherche du driver par query: 000
+2026-04-21 21:45:49 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 21:45:49 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 21:45:49 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 21:45:49 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-21 21:45:49 - INFO - Recherche du driver par query: 000
+2026-04-21 21:45:49 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 21:45:49 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 21:45:49 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-21 21:45:49 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-21 21:45:50 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-21 21:45:50 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-21 21:45:50 - INFO - Recherche des packages pour le schedule: 69e6bf006e48095340640452
+2026-04-21 21:45:50 - INFO - Recherche par référence: field=schedule_id, value=69e6bf006e48095340640452
+2026-04-21 21:45:50 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69e6bf006e48095340640452
+2026-04-21 21:45:50 - INFO - Récupération du package par ID: 69e6bdaa6e48095340640449
+2026-04-21 21:45:50 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640449
+2026-04-21 21:45:50 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 21:45:50 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdaa6e48095340640449
+2026-04-21 21:45:50 - INFO - Récupération du package par ID: 69e6bdc16e4809534064044b
+2026-04-21 21:45:50 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044b
+2026-04-21 21:45:50 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 21:45:51 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdc16e4809534064044b
+2026-04-21 21:45:51 - INFO - Récupération du package par ID: 69e6be526e4809534064044d
+2026-04-21 21:45:51 - INFO - Récupération de l'instance: 69e6be526e4809534064044d
+2026-04-21 21:45:51 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 21:45:52 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be526e4809534064044d
+2026-04-21 21:45:52 - INFO - Récupération du package par ID: 69e6be636e4809534064044f
+2026-04-21 21:45:52 - INFO - Récupération de l'instance: 69e6be636e4809534064044f
+2026-04-21 21:45:52 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 21:45:52 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be636e4809534064044f
+2026-04-21 21:45:52 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-21 21:45:52 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-21 21:45:52 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 21:45:53 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-21 21:45:53 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-21 21:45:53 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-21 21:45:53 - INFO - Recherche du driver par query: 000
+2026-04-21 21:45:53 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 21:45:53 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 21:49:37 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-21 21:49:37 - INFO - Récupération des trips pour le driver: 000
+2026-04-21 21:49:37 - INFO - Recherche du driver par query: 000
+2026-04-21 21:49:37 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 21:49:37 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 21:49:37 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 21:49:37 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-21 21:49:37 - INFO - Recherche du driver par query: 000
+2026-04-21 21:49:37 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 21:49:38 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 21:49:38 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-21 21:49:38 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-21 21:49:38 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-21 21:49:38 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-21 21:49:38 - INFO - Recherche des packages pour le schedule: 69e6bf006e48095340640452
+2026-04-21 21:49:38 - INFO - Recherche par référence: field=schedule_id, value=69e6bf006e48095340640452
+2026-04-21 21:49:38 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69e6bf006e48095340640452
+2026-04-21 21:49:38 - INFO - Récupération du package par ID: 69e6bdaa6e48095340640449
+2026-04-21 21:49:38 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640449
+2026-04-21 21:49:38 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 21:49:38 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdaa6e48095340640449
+2026-04-21 21:49:38 - INFO - Récupération du package par ID: 69e6bdc16e4809534064044b
+2026-04-21 21:49:38 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044b
+2026-04-21 21:49:38 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 21:49:38 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdc16e4809534064044b
+2026-04-21 21:49:38 - INFO - Récupération du package par ID: 69e6be526e4809534064044d
+2026-04-21 21:49:38 - INFO - Récupération de l'instance: 69e6be526e4809534064044d
+2026-04-21 21:49:38 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 21:49:38 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be526e4809534064044d
+2026-04-21 21:49:38 - INFO - Récupération du package par ID: 69e6be636e4809534064044f
+2026-04-21 21:49:38 - INFO - Récupération de l'instance: 69e6be636e4809534064044f
+2026-04-21 21:49:38 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 21:49:38 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be636e4809534064044f
+2026-04-21 21:49:38 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-21 21:49:38 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-21 21:49:38 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 21:49:38 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-21 21:49:38 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-21 21:49:38 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-21 21:49:38 - INFO - Recherche du driver par query: 000
+2026-04-21 21:49:38 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 21:49:39 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 21:56:40 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-21 21:56:40 - INFO - Récupération des trips pour le driver: 000
+2026-04-21 21:56:40 - INFO - Recherche du driver par query: 000
+2026-04-21 21:56:40 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 21:56:40 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 21:56:40 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 21:56:40 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-21 21:56:40 - INFO - Recherche du driver par query: 000
+2026-04-21 21:56:40 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 21:56:41 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 21:56:41 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-21 21:56:41 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-21 21:56:41 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-21 21:56:41 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-21 21:56:41 - INFO - Recherche des packages pour le schedule: 69e6bf006e48095340640452
+2026-04-21 21:56:41 - INFO - Recherche par référence: field=schedule_id, value=69e6bf006e48095340640452
+2026-04-21 21:56:42 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69e6bf006e48095340640452
+2026-04-21 21:56:42 - INFO - Récupération du package par ID: 69e6bdaa6e48095340640449
+2026-04-21 21:56:42 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640449
+2026-04-21 21:56:42 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 21:56:42 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdaa6e48095340640449
+2026-04-21 21:56:42 - INFO - Récupération du package par ID: 69e6bdc16e4809534064044b
+2026-04-21 21:56:42 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044b
+2026-04-21 21:56:42 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 21:56:42 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdc16e4809534064044b
+2026-04-21 21:56:42 - INFO - Récupération du package par ID: 69e6be526e4809534064044d
+2026-04-21 21:56:42 - INFO - Récupération de l'instance: 69e6be526e4809534064044d
+2026-04-21 21:56:42 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 21:56:42 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be526e4809534064044d
+2026-04-21 21:56:42 - INFO - Récupération du package par ID: 69e6be636e4809534064044f
+2026-04-21 21:56:42 - INFO - Récupération de l'instance: 69e6be636e4809534064044f
+2026-04-21 21:56:42 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 21:56:43 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be636e4809534064044f
+2026-04-21 21:56:43 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-21 21:56:43 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-21 21:56:43 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 21:56:43 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-21 21:56:43 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-21 21:56:43 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-21 21:56:43 - INFO - Recherche du driver par query: 000
+2026-04-21 21:56:43 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 21:56:43 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 22:13:30 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-21 22:13:30 - INFO - Récupération des trips pour le driver: 000
+2026-04-21 22:13:30 - INFO - Recherche du driver par query: 000
+2026-04-21 22:13:30 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 22:13:35 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 22:13:35 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 22:13:35 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-21 22:13:35 - INFO - Recherche du driver par query: 000
+2026-04-21 22:13:35 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 22:13:35 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 22:13:35 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-21 22:13:35 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-21 22:13:36 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-21 22:13:36 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-21 22:13:36 - INFO - Recherche des packages pour le schedule: 69e6bf006e48095340640452
+2026-04-21 22:13:36 - INFO - Recherche par référence: field=schedule_id, value=69e6bf006e48095340640452
+2026-04-21 22:13:36 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69e6bf006e48095340640452
+2026-04-21 22:13:36 - INFO - Récupération du package par ID: 69e6bdaa6e48095340640449
+2026-04-21 22:13:36 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640449
+2026-04-21 22:13:36 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 22:13:36 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdaa6e48095340640449
+2026-04-21 22:13:36 - INFO - Récupération du package par ID: 69e6bdc16e4809534064044b
+2026-04-21 22:13:36 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044b
+2026-04-21 22:13:36 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 22:13:36 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdc16e4809534064044b
+2026-04-21 22:13:36 - INFO - Récupération du package par ID: 69e6be526e4809534064044d
+2026-04-21 22:13:36 - INFO - Récupération de l'instance: 69e6be526e4809534064044d
+2026-04-21 22:13:36 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 22:13:36 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be526e4809534064044d
+2026-04-21 22:13:36 - INFO - Récupération du package par ID: 69e6be636e4809534064044f
+2026-04-21 22:13:36 - INFO - Récupération de l'instance: 69e6be636e4809534064044f
+2026-04-21 22:13:36 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 22:13:36 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be636e4809534064044f
+2026-04-21 22:13:36 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-21 22:13:36 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-21 22:13:36 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 22:13:36 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-21 22:13:36 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-21 22:13:36 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-21 22:13:36 - INFO - Recherche du driver par query: 000
+2026-04-21 22:13:36 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 22:13:37 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 22:18:48 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-21 22:18:48 - INFO - Récupération des trips pour le driver: 000
+2026-04-21 22:18:48 - INFO - Recherche du driver par query: 000
+2026-04-21 22:18:48 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 22:18:49 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 22:18:49 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 22:18:49 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-21 22:18:49 - INFO - Recherche du driver par query: 000
+2026-04-21 22:18:49 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 22:18:49 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-21 22:18:49 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-21 22:18:49 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-21 22:18:49 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-21 22:18:49 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-21 22:18:49 - INFO - Recherche des packages pour le schedule: 69e6bf006e48095340640452
+2026-04-21 22:18:49 - INFO - Recherche par référence: field=schedule_id, value=69e6bf006e48095340640452
+2026-04-21 22:18:49 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69e6bf006e48095340640452
+2026-04-21 22:18:49 - INFO - Récupération du package par ID: 69e6bdaa6e48095340640449
+2026-04-21 22:18:49 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640449
+2026-04-21 22:18:49 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 22:18:49 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdaa6e48095340640449
+2026-04-21 22:18:49 - INFO - Récupération du package par ID: 69e6bdc16e4809534064044b
+2026-04-21 22:18:49 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044b
+2026-04-21 22:18:49 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 22:18:49 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdc16e4809534064044b
+2026-04-21 22:18:49 - INFO - Récupération du package par ID: 69e6be526e4809534064044d
+2026-04-21 22:18:49 - INFO - Récupération de l'instance: 69e6be526e4809534064044d
+2026-04-21 22:18:49 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 22:18:49 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be526e4809534064044d
+2026-04-21 22:18:49 - INFO - Récupération du package par ID: 69e6be636e4809534064044f
+2026-04-21 22:18:49 - INFO - Récupération de l'instance: 69e6be636e4809534064044f
+2026-04-21 22:18:49 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 22:18:50 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be636e4809534064044f
+2026-04-21 22:18:50 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-21 22:18:50 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-21 22:18:50 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-21 22:18:50 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-21 22:18:50 - INFO - ✅ SUCCÈS: 0 trip(s) créé(s) et ordonné(s) par position
+2026-04-21 22:18:50 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-21 22:18:50 - INFO - Recherche du driver par query: 000
+2026-04-21 22:18:50 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-21 22:18:50 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-22 13:15:20 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-22 13:15:20 - INFO - Récupération des trips pour le driver: 000
+2026-04-22 13:15:20 - INFO - Recherche du driver par query: 000
+2026-04-22 13:15:20 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-22 13:15:20 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-22 13:15:20 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-22 13:15:20 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-22 13:15:20 - INFO - Recherche du driver par query: 000
+2026-04-22 13:15:20 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-22 13:15:20 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-22 13:15:20 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-22 13:15:20 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-22 13:15:20 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-22 13:15:20 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-22 13:15:20 - INFO - Recherche des packages pour le schedule: 69e899726e48095340640458
+2026-04-22 13:15:20 - INFO - Recherche par référence: field=schedule_id, value=69e899726e48095340640458
+2026-04-22 13:15:20 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69e899726e48095340640458
+2026-04-22 13:15:20 - INFO - Récupération du package par ID: 69e6bdaa6e48095340640449
+2026-04-22 13:15:20 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640449
+2026-04-22 13:15:20 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-22 13:15:21 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdaa6e48095340640449
+2026-04-22 13:15:21 - INFO - Package: 69e6bdaa6e48095340640449, address field: 69e6bdaa6e48095340640448
+2026-04-22 13:15:21 - INFO - Récupération adresse: 69e6bdaa6e48095340640448
+2026-04-22 13:15:21 - INFO - Récupération de l'adresse par ID: 69e6bdaa6e48095340640448
+2026-04-22 13:15:21 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640448
+2026-04-22 13:15:21 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6bdaa6e48095340640448
+2026-04-22 13:15:21 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-22 13:15:21 - INFO - Trip créé: id=69e6bdaa6e48095340640449, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-22 13:15:21 - INFO - Récupération du package par ID: 69e6bdc16e4809534064044b
+2026-04-22 13:15:21 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044b
+2026-04-22 13:15:21 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-22 13:15:21 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdc16e4809534064044b
+2026-04-22 13:15:21 - INFO - Package: 69e6bdc16e4809534064044b, address field: 69e6bdc16e4809534064044a
+2026-04-22 13:15:21 - INFO - Récupération adresse: 69e6bdc16e4809534064044a
+2026-04-22 13:15:21 - INFO - Récupération de l'adresse par ID: 69e6bdc16e4809534064044a
+2026-04-22 13:15:21 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044a
+2026-04-22 13:15:21 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6bdc16e4809534064044a
+2026-04-22 13:15:21 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-22 13:15:21 - INFO - Trip créé: id=69e6bdc16e4809534064044b, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-22 13:15:21 - INFO - Récupération du package par ID: 69e6be526e4809534064044d
+2026-04-22 13:15:21 - INFO - Récupération de l'instance: 69e6be526e4809534064044d
+2026-04-22 13:15:21 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-22 13:15:21 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be526e4809534064044d
+2026-04-22 13:15:21 - INFO - Package: 69e6be526e4809534064044d, address field: 69e6be526e4809534064044c
+2026-04-22 13:15:21 - INFO - Récupération adresse: 69e6be526e4809534064044c
+2026-04-22 13:15:21 - INFO - Récupération de l'adresse par ID: 69e6be526e4809534064044c
+2026-04-22 13:15:21 - INFO - Récupération de l'instance: 69e6be526e4809534064044c
+2026-04-22 13:15:21 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be526e4809534064044c
+2026-04-22 13:15:21 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-22 13:15:21 - INFO - Trip créé: id=69e6be526e4809534064044d, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-22 13:15:21 - INFO - Récupération du package par ID: 69e6be636e4809534064044f
+2026-04-22 13:15:21 - INFO - Récupération de l'instance: 69e6be636e4809534064044f
+2026-04-22 13:15:21 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-22 13:15:21 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be636e4809534064044f
+2026-04-22 13:15:21 - INFO - Package: 69e6be636e4809534064044f, address field: 69e6be636e4809534064044e
+2026-04-22 13:15:21 - INFO - Récupération adresse: 69e6be636e4809534064044e
+2026-04-22 13:15:21 - INFO - Récupération de l'adresse par ID: 69e6be636e4809534064044e
+2026-04-22 13:15:21 - INFO - Récupération de l'instance: 69e6be636e4809534064044e
+2026-04-22 13:15:21 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be636e4809534064044e
+2026-04-22 13:15:21 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-22 13:15:21 - INFO - Trip créé: id=69e6be636e4809534064044f, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-22 13:15:21 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-22 13:15:21 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-22 13:15:21 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-22 13:15:21 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-22 13:15:21 - INFO - Package: 69e6be736e48095340640451, address field: 69e6be736e48095340640450
+2026-04-22 13:15:21 - INFO - Récupération adresse: 69e6be736e48095340640450
+2026-04-22 13:15:21 - INFO - Récupération de l'adresse par ID: 69e6be736e48095340640450
+2026-04-22 13:15:21 - INFO - Récupération de l'instance: 69e6be736e48095340640450
+2026-04-22 13:15:21 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be736e48095340640450
+2026-04-22 13:15:21 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-22 13:15:21 - INFO - Trip créé: id=69e6be736e48095340640451, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-22 13:15:21 - INFO - ✅ SUCCÈS: 5 trip(s) créé(s) et ordonné(s) par position
+2026-04-22 13:15:21 - INFO - ✅ SUCCÈS: 5 trip(s) exporté(s) vers data.json
+2026-04-22 13:15:21 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-22 13:15:21 - INFO - Recherche du driver par query: 000
+2026-04-22 13:15:21 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-22 13:15:21 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-22 14:29:17 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-22 14:29:17 - INFO - Récupération des trips pour le driver: 000
+2026-04-22 14:29:17 - INFO - Recherche du driver par query: 000
+2026-04-22 14:29:17 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-22 14:29:17 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-22 14:29:17 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-22 14:29:17 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-22 14:29:17 - INFO - Recherche du driver par query: 000
+2026-04-22 14:29:17 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-22 14:29:17 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-22 14:29:17 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-22 14:29:17 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-22 14:29:17 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-22 14:29:17 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-22 14:29:17 - INFO - Recherche des packages pour le schedule: 69e899726e48095340640458
+2026-04-22 14:29:17 - INFO - Recherche par référence: field=schedule_id, value=69e899726e48095340640458
+2026-04-22 14:29:17 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69e899726e48095340640458
+2026-04-22 14:29:17 - INFO - Récupération du package par ID: 69e6bdaa6e48095340640449
+2026-04-22 14:29:17 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640449
+2026-04-22 14:29:17 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-22 14:29:18 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdaa6e48095340640449
+2026-04-22 14:29:18 - INFO - Package: 69e6bdaa6e48095340640449, address field: 69e6bdaa6e48095340640448
+2026-04-22 14:29:18 - INFO - Récupération adresse: 69e6bdaa6e48095340640448
+2026-04-22 14:29:18 - INFO - Récupération de l'adresse par ID: 69e6bdaa6e48095340640448
+2026-04-22 14:29:18 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640448
+2026-04-22 14:29:18 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6bdaa6e48095340640448
+2026-04-22 14:29:18 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-22 14:29:18 - INFO - Trip créé: id=69e6bdaa6e48095340640449, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-22 14:29:18 - INFO - Récupération du package par ID: 69e6bdc16e4809534064044b
+2026-04-22 14:29:18 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044b
+2026-04-22 14:29:18 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-22 14:29:18 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdc16e4809534064044b
+2026-04-22 14:29:18 - INFO - Package: 69e6bdc16e4809534064044b, address field: 69e6bdc16e4809534064044a
+2026-04-22 14:29:18 - INFO - Récupération adresse: 69e6bdc16e4809534064044a
+2026-04-22 14:29:18 - INFO - Récupération de l'adresse par ID: 69e6bdc16e4809534064044a
+2026-04-22 14:29:18 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044a
+2026-04-22 14:29:18 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6bdc16e4809534064044a
+2026-04-22 14:29:18 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-22 14:29:18 - INFO - Trip créé: id=69e6bdc16e4809534064044b, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-22 14:29:18 - INFO - Récupération du package par ID: 69e6be526e4809534064044d
+2026-04-22 14:29:18 - INFO - Récupération de l'instance: 69e6be526e4809534064044d
+2026-04-22 14:29:18 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-22 14:29:18 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be526e4809534064044d
+2026-04-22 14:29:18 - INFO - Package: 69e6be526e4809534064044d, address field: 69e6be526e4809534064044c
+2026-04-22 14:29:18 - INFO - Récupération adresse: 69e6be526e4809534064044c
+2026-04-22 14:29:18 - INFO - Récupération de l'adresse par ID: 69e6be526e4809534064044c
+2026-04-22 14:29:18 - INFO - Récupération de l'instance: 69e6be526e4809534064044c
+2026-04-22 14:29:18 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be526e4809534064044c
+2026-04-22 14:29:18 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-22 14:29:18 - INFO - Trip créé: id=69e6be526e4809534064044d, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-22 14:29:18 - INFO - Récupération du package par ID: 69e6be636e4809534064044f
+2026-04-22 14:29:18 - INFO - Récupération de l'instance: 69e6be636e4809534064044f
+2026-04-22 14:29:18 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-22 14:29:18 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be636e4809534064044f
+2026-04-22 14:29:18 - INFO - Package: 69e6be636e4809534064044f, address field: 69e6be636e4809534064044e
+2026-04-22 14:29:18 - INFO - Récupération adresse: 69e6be636e4809534064044e
+2026-04-22 14:29:18 - INFO - Récupération de l'adresse par ID: 69e6be636e4809534064044e
+2026-04-22 14:29:18 - INFO - Récupération de l'instance: 69e6be636e4809534064044e
+2026-04-22 14:29:18 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be636e4809534064044e
+2026-04-22 14:29:18 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-22 14:29:18 - INFO - Trip créé: id=69e6be636e4809534064044f, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-22 14:29:18 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-22 14:29:18 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-22 14:29:18 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-22 14:29:18 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-22 14:29:18 - INFO - Package: 69e6be736e48095340640451, address field: 69e6be736e48095340640450
+2026-04-22 14:29:18 - INFO - Récupération adresse: 69e6be736e48095340640450
+2026-04-22 14:29:18 - INFO - Récupération de l'adresse par ID: 69e6be736e48095340640450
+2026-04-22 14:29:18 - INFO - Récupération de l'instance: 69e6be736e48095340640450
+2026-04-22 14:29:18 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be736e48095340640450
+2026-04-22 14:29:18 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-22 14:29:18 - INFO - Trip créé: id=69e6be736e48095340640451, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-22 14:29:18 - INFO - ✅ SUCCÈS: 5 trip(s) créé(s) et ordonné(s) par position
+2026-04-22 14:29:18 - INFO - ✅ SUCCÈS: 5 trip(s) exporté(s) vers data.json
+2026-04-22 14:29:18 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-22 14:29:18 - INFO - Recherche du driver par query: 000
+2026-04-22 14:29:18 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-22 14:29:19 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-22 14:53:03 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-22 14:53:03 - INFO - Récupération des trips pour le driver: 000
+2026-04-22 14:53:03 - INFO - Recherche du driver par query: 000
+2026-04-22 14:53:03 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-22 14:53:03 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-22 14:53:03 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-22 14:53:03 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-22 14:53:03 - INFO - Recherche du driver par query: 000
+2026-04-22 14:53:03 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-22 14:53:03 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-22 14:53:03 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-22 14:53:03 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-22 14:53:03 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-22 14:53:03 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-22 14:53:03 - INFO - Recherche des packages pour le schedule: 69e899726e48095340640458
+2026-04-22 14:53:03 - INFO - Recherche par référence: field=schedule_id, value=69e899726e48095340640458
+2026-04-22 14:53:03 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69e899726e48095340640458
+2026-04-22 14:53:03 - INFO - Récupération du package par ID: 69e6bdaa6e48095340640449
+2026-04-22 14:53:03 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640449
+2026-04-22 14:53:03 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-22 14:53:04 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdaa6e48095340640449
+2026-04-22 14:53:04 - INFO - Package: 69e6bdaa6e48095340640449, address field: 69e6bdaa6e48095340640448
+2026-04-22 14:53:04 - INFO - Récupération adresse: 69e6bdaa6e48095340640448
+2026-04-22 14:53:04 - INFO - Récupération de l'adresse par ID: 69e6bdaa6e48095340640448
+2026-04-22 14:53:04 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640448
+2026-04-22 14:53:04 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6bdaa6e48095340640448
+2026-04-22 14:53:04 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-22 14:53:04 - INFO - Trip créé: id=69e6bdaa6e48095340640449, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-22 14:53:04 - INFO - Récupération du package par ID: 69e6bdc16e4809534064044b
+2026-04-22 14:53:04 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044b
+2026-04-22 14:53:04 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-22 14:53:04 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdc16e4809534064044b
+2026-04-22 14:53:04 - INFO - Package: 69e6bdc16e4809534064044b, address field: 69e6bdc16e4809534064044a
+2026-04-22 14:53:04 - INFO - Récupération adresse: 69e6bdc16e4809534064044a
+2026-04-22 14:53:04 - INFO - Récupération de l'adresse par ID: 69e6bdc16e4809534064044a
+2026-04-22 14:53:04 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044a
+2026-04-22 14:53:04 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6bdc16e4809534064044a
+2026-04-22 14:53:04 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-22 14:53:04 - INFO - Trip créé: id=69e6bdc16e4809534064044b, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-22 14:53:04 - INFO - Récupération du package par ID: 69e6be526e4809534064044d
+2026-04-22 14:53:04 - INFO - Récupération de l'instance: 69e6be526e4809534064044d
+2026-04-22 14:53:04 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-22 14:53:04 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be526e4809534064044d
+2026-04-22 14:53:04 - INFO - Package: 69e6be526e4809534064044d, address field: 69e6be526e4809534064044c
+2026-04-22 14:53:04 - INFO - Récupération adresse: 69e6be526e4809534064044c
+2026-04-22 14:53:04 - INFO - Récupération de l'adresse par ID: 69e6be526e4809534064044c
+2026-04-22 14:53:04 - INFO - Récupération de l'instance: 69e6be526e4809534064044c
+2026-04-22 14:53:04 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be526e4809534064044c
+2026-04-22 14:53:04 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-22 14:53:04 - INFO - Trip créé: id=69e6be526e4809534064044d, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-22 14:53:04 - INFO - Récupération du package par ID: 69e6be636e4809534064044f
+2026-04-22 14:53:04 - INFO - Récupération de l'instance: 69e6be636e4809534064044f
+2026-04-22 14:53:04 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-22 14:53:04 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be636e4809534064044f
+2026-04-22 14:53:04 - INFO - Package: 69e6be636e4809534064044f, address field: 69e6be636e4809534064044e
+2026-04-22 14:53:04 - INFO - Récupération adresse: 69e6be636e4809534064044e
+2026-04-22 14:53:04 - INFO - Récupération de l'adresse par ID: 69e6be636e4809534064044e
+2026-04-22 14:53:04 - INFO - Récupération de l'instance: 69e6be636e4809534064044e
+2026-04-22 14:53:04 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be636e4809534064044e
+2026-04-22 14:53:04 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-22 14:53:04 - INFO - Trip créé: id=69e6be636e4809534064044f, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-22 14:53:04 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-22 14:53:04 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-22 14:53:04 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-22 14:53:04 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-22 14:53:04 - INFO - Package: 69e6be736e48095340640451, address field: 69e6be736e48095340640450
+2026-04-22 14:53:04 - INFO - Récupération adresse: 69e6be736e48095340640450
+2026-04-22 14:53:04 - INFO - Récupération de l'adresse par ID: 69e6be736e48095340640450
+2026-04-22 14:53:04 - INFO - Récupération de l'instance: 69e6be736e48095340640450
+2026-04-22 14:53:04 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be736e48095340640450
+2026-04-22 14:53:04 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-22 14:53:04 - INFO - Trip créé: id=69e6be736e48095340640451, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-22 14:53:04 - INFO - ✅ SUCCÈS: 5 trip(s) créé(s) et ordonné(s) par position
+2026-04-22 14:53:04 - INFO - ✅ SUCCÈS: 5 trip(s) exporté(s) vers data.json
+2026-04-22 14:53:04 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-22 14:53:04 - INFO - Recherche du driver par query: 000
+2026-04-22 14:53:04 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-22 14:53:04 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-22 15:33:41 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-22 15:33:41 - INFO - Récupération des trips pour le driver: 000
+2026-04-22 15:33:41 - INFO - Recherche du driver par query: 000
+2026-04-22 15:33:41 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-22 15:33:42 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-22 15:33:42 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-22 15:33:42 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-22 15:33:42 - INFO - Recherche du driver par query: 000
+2026-04-22 15:33:42 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-22 15:33:42 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-22 15:33:42 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-22 15:33:42 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-22 15:33:42 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-22 15:33:42 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-22 15:33:42 - INFO - Recherche des packages pour le schedule: 69e899726e48095340640458
+2026-04-22 15:33:42 - INFO - Recherche par référence: field=schedule_id, value=69e899726e48095340640458
+2026-04-22 15:33:42 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69e899726e48095340640458
+2026-04-22 15:33:42 - INFO - Récupération du package par ID: 69e6bdaa6e48095340640449
+2026-04-22 15:33:42 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640449
+2026-04-22 15:33:42 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-22 15:33:43 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdaa6e48095340640449
+2026-04-22 15:33:43 - INFO - Package: 69e6bdaa6e48095340640449, address field: 69e6bdaa6e48095340640448
+2026-04-22 15:33:43 - INFO - Récupération adresse: 69e6bdaa6e48095340640448
+2026-04-22 15:33:43 - INFO - Récupération de l'adresse par ID: 69e6bdaa6e48095340640448
+2026-04-22 15:33:43 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640448
+2026-04-22 15:33:43 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6bdaa6e48095340640448
+2026-04-22 15:33:43 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-22 15:33:43 - INFO - Trip créé: id=69e6bdaa6e48095340640449, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-22 15:33:43 - INFO - Récupération du package par ID: 69e6bdc16e4809534064044b
+2026-04-22 15:33:43 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044b
+2026-04-22 15:33:43 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-22 15:33:43 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdc16e4809534064044b
+2026-04-22 15:33:43 - INFO - Package: 69e6bdc16e4809534064044b, address field: 69e6bdc16e4809534064044a
+2026-04-22 15:33:43 - INFO - Récupération adresse: 69e6bdc16e4809534064044a
+2026-04-22 15:33:43 - INFO - Récupération de l'adresse par ID: 69e6bdc16e4809534064044a
+2026-04-22 15:33:43 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044a
+2026-04-22 15:33:43 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6bdc16e4809534064044a
+2026-04-22 15:33:43 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-22 15:33:43 - INFO - Trip créé: id=69e6bdc16e4809534064044b, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-22 15:33:43 - INFO - Récupération du package par ID: 69e6be526e4809534064044d
+2026-04-22 15:33:43 - INFO - Récupération de l'instance: 69e6be526e4809534064044d
+2026-04-22 15:33:43 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-22 15:33:43 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be526e4809534064044d
+2026-04-22 15:33:43 - INFO - Package: 69e6be526e4809534064044d, address field: 69e6be526e4809534064044c
+2026-04-22 15:33:43 - INFO - Récupération adresse: 69e6be526e4809534064044c
+2026-04-22 15:33:43 - INFO - Récupération de l'adresse par ID: 69e6be526e4809534064044c
+2026-04-22 15:33:43 - INFO - Récupération de l'instance: 69e6be526e4809534064044c
+2026-04-22 15:33:43 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be526e4809534064044c
+2026-04-22 15:33:43 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-22 15:33:43 - INFO - Trip créé: id=69e6be526e4809534064044d, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-22 15:33:43 - INFO - Récupération du package par ID: 69e6be636e4809534064044f
+2026-04-22 15:33:43 - INFO - Récupération de l'instance: 69e6be636e4809534064044f
+2026-04-22 15:33:43 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-22 15:33:43 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be636e4809534064044f
+2026-04-22 15:33:43 - INFO - Package: 69e6be636e4809534064044f, address field: 69e6be636e4809534064044e
+2026-04-22 15:33:43 - INFO - Récupération adresse: 69e6be636e4809534064044e
+2026-04-22 15:33:43 - INFO - Récupération de l'adresse par ID: 69e6be636e4809534064044e
+2026-04-22 15:33:43 - INFO - Récupération de l'instance: 69e6be636e4809534064044e
+2026-04-22 15:33:43 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be636e4809534064044e
+2026-04-22 15:33:43 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-22 15:33:43 - INFO - Trip créé: id=69e6be636e4809534064044f, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-22 15:33:43 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-22 15:33:43 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-22 15:33:43 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-22 15:33:43 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-22 15:33:43 - INFO - Package: 69e6be736e48095340640451, address field: 69e6be736e48095340640450
+2026-04-22 15:33:43 - INFO - Récupération adresse: 69e6be736e48095340640450
+2026-04-22 15:33:43 - INFO - Récupération de l'adresse par ID: 69e6be736e48095340640450
+2026-04-22 15:33:43 - INFO - Récupération de l'instance: 69e6be736e48095340640450
+2026-04-22 15:33:43 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be736e48095340640450
+2026-04-22 15:33:43 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-22 15:33:43 - INFO - Trip créé: id=69e6be736e48095340640451, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-22 15:33:43 - INFO - ✅ SUCCÈS: 5 trip(s) créé(s) et ordonné(s) par position
+2026-04-22 15:33:43 - INFO - ✅ SUCCÈS: 5 trip(s) exporté(s) vers data.json
+2026-04-22 15:33:43 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-22 15:33:43 - INFO - Recherche du driver par query: 000
+2026-04-22 15:33:43 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-22 15:33:48 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-22 15:50:06 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-22 15:50:06 - INFO - Récupération des trips pour le driver: 000
+2026-04-22 15:50:06 - INFO - Recherche du driver par query: 000
+2026-04-22 15:50:06 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-22 15:50:11 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-22 15:50:11 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-22 15:50:11 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-22 15:50:11 - INFO - Recherche du driver par query: 000
+2026-04-22 15:50:11 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-22 15:50:11 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-22 15:50:11 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-22 15:50:11 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-22 15:50:11 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-22 15:50:11 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-22 15:50:11 - INFO - Recherche des packages pour le schedule: 69e899726e48095340640458
+2026-04-22 15:50:11 - INFO - Recherche par référence: field=schedule_id, value=69e899726e48095340640458
+2026-04-22 15:50:11 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69e899726e48095340640458
+2026-04-22 15:50:11 - INFO - Récupération du package par ID: 69e6bdaa6e48095340640449
+2026-04-22 15:50:11 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640449
+2026-04-22 15:50:11 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-22 15:50:11 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdaa6e48095340640449
+2026-04-22 15:50:11 - INFO - Package: 69e6bdaa6e48095340640449, address field: 69e6bdaa6e48095340640448
+2026-04-22 15:50:11 - INFO - Récupération adresse: 69e6bdaa6e48095340640448
+2026-04-22 15:50:11 - INFO - Récupération de l'adresse par ID: 69e6bdaa6e48095340640448
+2026-04-22 15:50:11 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640448
+2026-04-22 15:50:11 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6bdaa6e48095340640448
+2026-04-22 15:50:11 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-22 15:50:11 - INFO - Trip créé: id=69e6bdaa6e48095340640449, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-22 15:50:11 - INFO - Récupération du package par ID: 69e6bdc16e4809534064044b
+2026-04-22 15:50:11 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044b
+2026-04-22 15:50:11 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-22 15:50:12 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdc16e4809534064044b
+2026-04-22 15:50:12 - INFO - Package: 69e6bdc16e4809534064044b, address field: 69e6bdc16e4809534064044a
+2026-04-22 15:50:12 - INFO - Récupération adresse: 69e6bdc16e4809534064044a
+2026-04-22 15:50:12 - INFO - Récupération de l'adresse par ID: 69e6bdc16e4809534064044a
+2026-04-22 15:50:12 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044a
+2026-04-22 15:50:12 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6bdc16e4809534064044a
+2026-04-22 15:50:12 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-22 15:50:12 - INFO - Trip créé: id=69e6bdc16e4809534064044b, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-22 15:50:12 - INFO - Récupération du package par ID: 69e6be526e4809534064044d
+2026-04-22 15:50:12 - INFO - Récupération de l'instance: 69e6be526e4809534064044d
+2026-04-22 15:50:12 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-22 15:50:12 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be526e4809534064044d
+2026-04-22 15:50:12 - INFO - Package: 69e6be526e4809534064044d, address field: 69e6be526e4809534064044c
+2026-04-22 15:50:12 - INFO - Récupération adresse: 69e6be526e4809534064044c
+2026-04-22 15:50:12 - INFO - Récupération de l'adresse par ID: 69e6be526e4809534064044c
+2026-04-22 15:50:12 - INFO - Récupération de l'instance: 69e6be526e4809534064044c
+2026-04-22 15:50:12 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be526e4809534064044c
+2026-04-22 15:50:12 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-22 15:50:12 - INFO - Trip créé: id=69e6be526e4809534064044d, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-22 15:50:12 - INFO - Récupération du package par ID: 69e6be636e4809534064044f
+2026-04-22 15:50:12 - INFO - Récupération de l'instance: 69e6be636e4809534064044f
+2026-04-22 15:50:12 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-22 15:50:12 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be636e4809534064044f
+2026-04-22 15:50:12 - INFO - Package: 69e6be636e4809534064044f, address field: 69e6be636e4809534064044e
+2026-04-22 15:50:12 - INFO - Récupération adresse: 69e6be636e4809534064044e
+2026-04-22 15:50:12 - INFO - Récupération de l'adresse par ID: 69e6be636e4809534064044e
+2026-04-22 15:50:12 - INFO - Récupération de l'instance: 69e6be636e4809534064044e
+2026-04-22 15:50:12 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be636e4809534064044e
+2026-04-22 15:50:12 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-22 15:50:12 - INFO - Trip créé: id=69e6be636e4809534064044f, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-22 15:50:12 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-22 15:50:12 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-22 15:50:12 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-22 15:50:12 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-22 15:50:12 - INFO - Package: 69e6be736e48095340640451, address field: 69e6be736e48095340640450
+2026-04-22 15:50:12 - INFO - Récupération adresse: 69e6be736e48095340640450
+2026-04-22 15:50:12 - INFO - Récupération de l'adresse par ID: 69e6be736e48095340640450
+2026-04-22 15:50:12 - INFO - Récupération de l'instance: 69e6be736e48095340640450
+2026-04-22 15:50:12 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be736e48095340640450
+2026-04-22 15:50:12 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-22 15:50:12 - INFO - Trip créé: id=69e6be736e48095340640451, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-22 15:50:12 - INFO - ✅ SUCCÈS: 5 trip(s) créé(s) et ordonné(s) par position
+2026-04-22 15:50:12 - INFO - ✅ SUCCÈS: 5 trip(s) exporté(s) vers data.json
+2026-04-22 15:50:12 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-22 19:53:15
+2026-04-22 15:50:12 - INFO - Recherche du driver par query: 000
+2026-04-22 15:50:12 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-22 15:50:13 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 01:58:56 - ERROR - Erreur lors de la lecture du cache: name 'log_warning' is not defined
+2026-04-23 01:58:56 - INFO - Token non valide ou absent, récupération d'un nouveau token...
+2026-04-23 01:58:56 - INFO - Tentative de connexion à l'API Fleet...
+2026-04-23 01:58:57 - INFO - ✅ SUCCÈS: Authentification réussie auprès de l'API Fleet
+2026-04-23 01:58:57 - INFO - ✅ SUCCÈS: Token sauvegardé (valide jusqu'au 2026-04-24 01:58:57)
+2026-04-23 01:58:57 - INFO - Récupération des trips pour le driver: 000
+2026-04-23 01:58:57 - INFO - Recherche du driver par query: 000
+2026-04-23 01:58:57 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 01:58:57 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 01:58:57 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 01:58:57 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-23 01:58:57 - INFO - Recherche du driver par query: 000
+2026-04-23 01:58:57 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 01:58:57 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 01:58:57 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-23 01:58:57 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-23 01:58:57 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-23 01:58:57 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-23 01:58:57 - WARNING - Aucun schedule pour la date: 2026-04-23
+2026-04-23 01:58:57 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-24 01:58:57
+2026-04-23 01:58:57 - INFO - Recherche du driver par query: 000
+2026-04-23 01:58:57 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 01:58:57 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 02:05:15 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-24 01:58:57
+2026-04-23 02:05:15 - INFO - Récupération des trips pour le driver: 000
+2026-04-23 02:05:15 - INFO - Recherche du driver par query: 000
+2026-04-23 02:05:15 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 02:05:15 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 02:05:15 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 02:05:15 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-23 02:05:15 - INFO - Recherche du driver par query: 000
+2026-04-23 02:05:15 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 02:05:15 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 02:05:15 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-23 02:05:15 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-23 02:05:15 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-23 02:05:15 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-23 02:05:15 - WARNING - Aucun schedule pour la date: 2026-04-23
+2026-04-23 02:05:15 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-24 01:58:57
+2026-04-23 02:05:15 - INFO - Recherche du driver par query: 000
+2026-04-23 02:05:15 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 02:05:15 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 02:08:20 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-24 01:58:57
+2026-04-23 02:08:20 - INFO - Récupération des trips pour le driver: 000
+2026-04-23 02:08:20 - INFO - Recherche du driver par query: 000
+2026-04-23 02:08:20 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 02:08:21 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 02:08:21 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 02:08:21 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-23 02:08:21 - INFO - Recherche du driver par query: 000
+2026-04-23 02:08:21 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 02:08:21 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 02:08:21 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-23 02:08:21 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-23 02:08:21 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-23 02:08:21 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-23 02:08:21 - WARNING - Aucun schedule pour la date: 2026-04-23
+2026-04-23 02:08:21 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-24 01:58:57
+2026-04-23 02:08:21 - INFO - Recherche du driver par query: 000
+2026-04-23 02:08:21 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 02:08:21 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 02:14:00 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-24 01:58:57
+2026-04-23 02:14:00 - INFO - Récupération des trips pour le driver: 000
+2026-04-23 02:14:00 - INFO - Recherche du driver par query: 000
+2026-04-23 02:14:00 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 02:14:01 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 02:14:01 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 02:14:01 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-23 02:14:01 - INFO - Recherche du driver par query: 000
+2026-04-23 02:14:01 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 02:14:01 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 02:14:01 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-23 02:14:01 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-23 02:14:01 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-23 02:14:01 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-23 02:14:01 - WARNING - Aucun schedule pour la date: 2026-04-23
+2026-04-23 02:14:01 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-24 01:58:57
+2026-04-23 02:14:01 - INFO - Recherche du driver par query: 000
+2026-04-23 02:14:01 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 02:14:01 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 02:26:15 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-24 01:58:57
+2026-04-23 02:26:15 - INFO - Récupération des trips pour le driver: 000
+2026-04-23 02:26:15 - INFO - Recherche du driver par query: 000
+2026-04-23 02:26:15 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 02:26:15 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 02:26:15 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 02:26:15 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-23 02:26:15 - INFO - Recherche du driver par query: 000
+2026-04-23 02:26:15 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 02:26:15 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 02:26:15 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-23 02:26:15 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-23 02:26:15 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-23 02:26:15 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-23 02:26:15 - WARNING - Aucun schedule pour la date: 2026-04-23
+2026-04-23 02:26:15 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-24 01:58:57
+2026-04-23 02:26:15 - INFO - Recherche du driver par query: 000
+2026-04-23 02:26:15 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 02:26:15 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)

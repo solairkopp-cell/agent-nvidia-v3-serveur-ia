@@ -227,6 +227,66 @@ WebSocket for streaming audio denoising.
 - **Output**: `{"status": "ok", "audio": "<base64 denoised>"}`
 - **Use case**: Live denoising during recording
 
+### How `web/index.html` Connects and Communicates
+
+The page in `web/index.html` uses a single WebSocket (`/ws`) for both control messages (JSON) and audio streaming (binary).
+
+#### 1) Connection and session startup
+
+1. The browser computes the URL automatically:
+   - `ws://<host>/ws` on HTTP
+   - `wss://<host>/ws` on HTTPS
+2. It opens `new WebSocket(url)` and sets `binaryType = "arraybuffer"`.
+3. To initialize the audio session, the client sends:
+   - `{"type":"start","input_sample_rate":<mic_rate>}` (or just `{"type":"start"}`)
+4. The server answers with:
+   - `{"type":"started","input_sample_rate":...,"audio_output_sample_rate":48000,"encoding":"pcm_s16le","channels":1}`
+5. The page configures playback using the announced output rate.
+
+#### 2) Audio upload (browser → server)
+
+- The microphone is captured with `getUserMedia`.
+- Audio frames are pulled in `ScriptProcessorNode`.
+- Each frame is converted from float32 `[-1,1]` to PCM16 little-endian.
+- The frame is sent as a **binary WebSocket message** (`ws.send(ArrayBuffer)`).
+
+#### 3) Audio playback (server → browser)
+
+- TTS audio is received as **binary PCM16** messages.
+- The client converts PCM16 to float32.
+- It creates `AudioBuffer` chunks and schedules them in `AudioContext`.
+- On interruption (`tts_stop_now` or `interrupted`), the page stops all active playback sources immediately.
+
+#### 4) JSON protocol used by the page
+
+- **Client → Server**
+  - `{"type":"start","input_sample_rate":...}`: initialize audio session
+  - `{"type":"stop"}`: stop audio session and cleanup
+  - `{"type":"test_tts","text":"..."}`: ask server to speak arbitrary text
+- **Server → Client**
+  - `started` / `stopped`: audio session lifecycle
+  - `transcript`: STT result
+  - `response`: streamed LLM text chunks
+  - `tts_test`: streamed text chunks for test-tts mode
+  - `vad`: voice activity events (`speech_start`, `utterance_end`, etc.)
+  - `tts_stop_now`, `interrupted`, `interruption_decision`: barge-in/interruption events
+  - `error`: server-side validation/runtime errors
+
+#### 5) Typical runtime sequence
+
+1. User clicks **Connect** → WebSocket open.
+2. User clicks **Start**:
+   - client sends `start`
+   - server returns `started`
+   - client starts mic streaming (binary PCM16 upstream)
+3. Server processes STT → LLM → TTS:
+   - text events come as JSON (`transcript`, `response`)
+   - synthesized audio comes as binary PCM16 chunks
+4. User clicks **Stop**:
+   - client stops local mic/playback
+   - client sends `stop`
+   - server returns `stopped`
+
 ### HTTP API
 
 #### `GET /health` - Health Check

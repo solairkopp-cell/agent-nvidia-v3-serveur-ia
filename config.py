@@ -42,60 +42,14 @@ PIPER_BIN_PATH = os.getenv("PIPER_BIN_PATH", "/home/server/piper/piper/piper")
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:8080")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "Rytle:latest")
 OLLAMA_STREAM = os.getenv("OLLAMA_STREAM", "true").strip().lower() in ("1", "true", "yes", "on")
-OLLAMA_CONTEXT_WINDOW = int(os.getenv("OLLAMA_CONTEXT_WINDOW", "1024"))
-OLLAMA_NUM_PREDICT = int(os.getenv("OLLAMA_NUM_PREDICT", "50"))
 OLLAMA_TEMPERATURE = float(os.getenv("OLLAMA_TEMPERATURE", "0.7"))
-OLLAMA_REPEAT_PENALTY = float(os.getenv("OLLAMA_REPEAT_PENALTY", "1.4"))
-OLLAMA_STOP = _parse_env_words("OLLAMA_STOP", "<|im_start|>,<|im_end|>")
-OLLAMA_PRESENCE_PENALTY = float(os.getenv("OLLAMA_PRESENCE_PENALTY", "0.0"))
-OLLAMA_TOP_K = int(os.getenv("OLLAMA_TOP_K", "20"))
-OLLAMA_TOP_P = float(os.getenv("OLLAMA_TOP_P", "0.95"))
 SYSTEM_PROMPT_PATH = os.getenv("SYSTEM_PROMPT_PATH", "system_prompt.md")
-# Désactiver le mode "thinking" (si supporté par Ollama / modèle)
-OLLAMA_THINK = os.getenv("OLLAMA_THINK", "false")
-
-# ── Interruptions / Barge-in ────────────────────────────────────────────────
-INTERRUPTION_SHORT_THRESHOLD_MS = float(os.getenv("INTERRUPTION_SHORT_THRESHOLD_MS", "1000"))
-INTERRUPTION_WORDS_EN = _parse_env_words(
-    "INTERRUPTION_WORDS_EN",
-    "no,stop,wait,cancel,forget,never mind",
-)
-CONTINUATION_WORDS_EN = _parse_env_words(
-    "CONTINUATION_WORDS_EN",
-    "also,and,plus,additionally,actually,wait and",
-)
 
 # ── Piper TTS ──────────────────────────────────────────────────────────────────
-PIPER_MODEL_PATH = os.getenv("PIPER_MODEL_PATH", "assets/models/en_US-hfc_female-medium.onnx")
-PIPER_CONFIG_PATH = os.getenv("PIPER_CONFIG_PATH", "assets/models/en_US-hfc_female-medium.onnx.json")
-
-# ── TTS Common Settings ──────────────────────────────────────────────────────
-# Streaming TTS : commencer à parler avant la fin de la phrase complète.
-# 5 mots donne un meilleur compromis latence / naturel.
-TTS_STREAM_WORD_CHUNK_SIZE = int(os.getenv("TTS_STREAM_WORD_CHUNK_SIZE", "0"))
-# Fondu/crossfade entre segments pour éviter les coupures sèches (100ms)
-TTS_SEGMENT_OVERLAP_MS = float(os.getenv("TTS_SEGMENT_OVERLAP_MS", "100"))
-# Buffer segments TTS : 5 est un bon compromis vitesse/fluidité
-TTS_SEGMENT_QUEUE_MAXSIZE = int(os.getenv("TTS_SEGMENT_QUEUE_MAXSIZE", "5"))
-# Petit tampon de lecture avant de lancer le son.
-# 1500ms = buffer confortable pour Internet (fluide mais ~1.5s de latence)
-TTS_PLAYBACK_PREBUFFER_MS = int(os.getenv("TTS_PLAYBACK_PREBUFFER_MS", "0"))
-# Petit silence initial pour laisser le lecteur audio client se stabiliser.
-TTS_INITIAL_SILENCE_MS = int(os.getenv("TTS_INITIAL_SILENCE_MS", "0"))
-# Déclencher la synthèse/livraison du segment suivant quand il reste peu d'audio
-# en file côté serveur.
-TTS_BUFFER_LOW_WATERMARK_MS = int(os.getenv("TTS_BUFFER_LOW_WATERMARK_MS", "0"))
-# Intervalle entre les frames audio (ms).
-# IMPORTANT : doit correspondre à la durée réelle des frames envoyées.
-# 10ms = latence minimale, 20ms = compromis, 40ms = ralenti
-TTS_FRAME_INTERVAL_MS = int(os.getenv("TTS_FRAME_INTERVAL_MS", "20"))
-# Trim silence : seuil très bas pour éviter de couper
-TTS_TRIM_SILENCE_THRESHOLD = float(os.getenv("TTS_TRIM_SILENCE_THRESHOLD", "0.0001"))
-TTS_TRIM_SILENCE_PAD_MS = int(os.getenv("TTS_TRIM_SILENCE_PAD_MS", "80"))
-TTS_TRIM_MIN_SILENCE_MS = int(os.getenv("TTS_TRIM_MIN_SILENCE_MS", "150"))
-TTS_TRIM_LEADING = os.getenv("TTS_TRIM_LEADING", "false").strip().lower() in ("1", "true", "yes", "on")
-# Désactivé pour éviter de couper les fins de phrases
-TTS_TRIM_TRAILING = os.getenv("TTS_TRIM_TRAILING", "false").strip().lower() in ("1", "true", "yes", "on")
+PIPER_MODEL_PATH = os.getenv("PIPER_MODEL_PATH", "assets/models/en_US-lessac-high.onnx")
+PIPER_CONFIG_PATH = os.getenv("PIPER_CONFIG_PATH", "assets/models/en_US-lessac-high.onnx.json")
+# Durée du fade-out en ms quand un TTS est interrompu par un nouveau TTS
+TTS_FADE_OUT_MS = int(os.getenv("TTS_FADE_OUT_MS", "150"))
 
 # ── Denoising ────────────────────────────────────────────────────────────────
 # Denoise global sur l'audio entrant.
@@ -147,3 +101,11 @@ PREWARM_TTS_TEXT = os.getenv("PREWARM_TTS_TEXT", "Warmup.")
 # ── Conversation ─────────────────────────────────────────────────────────────
 MAX_HISTORY = int(os.getenv("MAX_HISTORY", "3"))
 TRIM_TO = int(os.getenv("TRIM_TO", "30"))
+KOKORO_MODEL_PATH = "/home/server/agent-nvidia-v2/kokoro-v0_19.onnx"
+KOKORO_VOICES_PATH = "/home/server/agent-nvidia-v2/voices.json"
+
+PIPER_NOISE_SCALE = float(os.getenv("PIPER_NOISE_SCALE", "1.0"))
+PIPER_LENGTH_SCALE = float(os.getenv("PIPER_LENGTH_SCALE", "0.9"))
+PIPER_NOISE_W = float(os.getenv("PIPER_NOISE_W", "1.0"))
+PIPER_SENTENCE_SILENCE = float(os.getenv("PIPER_SENTENCE_SILENCE", "0.8"))
+PIPER_ESPEAK_DATA = os.getenv("PIPER_ESPEAK_DATA", "/usr/lib/aarch64-linux-gnu/espeak-ng-data")

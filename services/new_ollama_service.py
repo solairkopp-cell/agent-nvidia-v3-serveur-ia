@@ -107,7 +107,8 @@ class OllamaService:
             self.log(f"Erreur generate_system_reply : {e}", level="error")
             return "I could not process that."
 
-    async def is_this_a_confirmation(self, message: str, session=None) -> bool:
+    async def is_this_a_confirmation(self, message: str, session=None) -> bool | None:
+        """Retourne True=oui, False=non, None=ambigu (fallback vers keyword patterns)."""
         try:
             if session is not None:
                 self.set_session(session)
@@ -119,19 +120,25 @@ class OllamaService:
                         "You classify a delivery driver's answer to the question "
                         "'Is the delivery completed?'. "
                         "Reply only with true or false. "
-                        "Reply true only if the driver clearly confirms completion. "
-                        "Reply false for no, doubt, refusal, requests for help, "
-                        "or any unclear answer."
+                        "Reply true if the driver says yes, confirms, or expresses agreement — "
+                        "even with hesitation like 'yes?', 'yeah', 'yep', 'sure', 'done', 'completed', 'it is'. "
+                        "Reply false only if the driver clearly says no, denies, or describes a problem. "
+                        "Reply true if unsure between yes and ambiguous."
                     ),
                 },
                 {"role": "user", "content": message},
             ]
 
             reply = await self._run_completion(messages, include_tools=False)
-            return reply.strip().lower().startswith("true")
+            text = reply.strip().lower()
+            if text.startswith("true"):
+                return True
+            if text.startswith("false"):
+                return False
+            return None  # ambiguous → laisser le fallback keyword décider
         except Exception as e:
             self.log(f"Erreur is_this_a_confirmation : {e}", level="error")
-            return False
+            return None  # ne pas bloquer, laisser le fallback décider
 
     async def get_delivery_failure_reason_response(
         self,
@@ -205,15 +212,53 @@ class OllamaService:
         }
         return db.get(order_id, {"error": "Colis introuvable"})
 
-    async def start_navigation(self, trip_id: str):
-        self.log(f"Action: START_NAVIGATION trip_id={trip_id}")
+    def _load_deliveries_list(self) -> list:
+        """Liste brute depuis data.json (même source que get_deliveries)."""
+        try:
+            with open("data.json", "r", encoding="utf-8") as f:
+                data = json.load(f)
+            return data if isinstance(data, list) else []
+        except (FileNotFoundError, json.JSONDecodeError):
+            return []
+
+    @staticmethod
+    def _first_planned_trip_id(items: list) -> str | None:
+        """Premier élément de la liste dont le statut est planned (ordre fichier)."""
+        for d in items:
+            if not isinstance(d, dict):
+                continue
+            status = d.get("deliveryStatus") or d.get("status") or d.get("delivery_status")
+            if status is None:
+                continue
+            if str(status).strip().lower() != "planned":
+                continue
+            tid = d.get("id")
+            if tid:
+                return str(tid)
+        return None
+
+    async def start_navigation(self, trip_id: str | None = None):
+        """
+        Toujours relire la liste des livraisons et démarrer la navigation vers
+        le **premier** trip à l'état ``planned``. Le ``trip_id`` éventuel du LLM est ignoré.
+        """
+        items = self._load_deliveries_list()
+        resolved = self._first_planned_trip_id(items)
+        if not resolved:
+            self.log("Action: START_NAVIGATION aborted — no planned delivery in data.json", level="warning")
+            return {
+                "error": "no_planned_delivery",
+                "message": "No delivery with status planned in today's list.",
+            }
+
+        self.log(f"Action: START_NAVIGATION trip_id={resolved} (first planned in list, {len(items)} rows)")
         if self._ws_service and self._session:
             await self._ws_service.send(self._session, {
                 "type": "external_control",
                 "action": "com.avvc.maps.action.START_NAVIGATION",
-                "extras": {"id": trip_id},
+                "extras": {"id": resolved},
             })
-        return {"message": f"Navigation démarrée (trip {trip_id})."}
+        return {"message": f"Navigation started (trip {resolved}).", "trip_id": resolved}
 
     async def stop_navigation(self):
         self.log("Action: STOP_NAVIGATION")
@@ -233,16 +278,11 @@ class OllamaService:
                 "action": "com.avvc.maps.action.RECENTER",
                 "extras": {},
             })
-        return {"message": "Carte recentrée."}
+        return {"message": "Map recentered and shown to the driver."}
 
     async def get_deliveries(self):
-        self.log("Action: SHOW_DELIVERIES_LIST")
-        if self._ws_service and self._session:
-            await self._ws_service.send(self._session, {
-                "type": "external_control",
-                "action": "com.avvc.maps.action.SHOW_DELIVERIES_LIST",
-                "extras": {},
-            })
+        """Données livraisons uniquement (data.json) — n’ouvre pas l’UI carte."""
+        self.log("Action: GET_DELIVERIES")
         try:
             with open('data.json', 'r', encoding='utf-8') as f:
                 deliveries = json.load(f)
@@ -251,6 +291,17 @@ class OllamaService:
             return {"deliveries": []}
         except json.JSONDecodeError:
             return {"deliveries": []}
+
+    async def show_deliveries(self):
+        """Affiche la liste des livraisons dans l’app carte (seul cet outil envoie SHOW_DELIVERIES_LIST)."""
+        self.log("Action: SHOW_DELIVERIES_LIST")
+        if self._ws_service and self._session:
+            await self._ws_service.send(self._session, {
+                "type": "external_control",
+                "action": "com.avvc.maps.action.SHOW_DELIVERIES_LIST",
+                "extras": {},
+            })
+        return {"message": "Delivery list displayed on the map."}
 
     async def ask_photo(self):
         self.log("Action: ask_photo")
@@ -261,21 +312,20 @@ class OllamaService:
     def update_status(self, new_status):
         self.log(f"Action: Mise à jour du statut à {new_status}")
         self.status = new_status
-        return {"message": f"Statut mis à jour à {new_status}."}
+        return {"message": f"Status updated to {new_status}."}
 
     # --- Schema ---
-
     def _get_tools_schema(self):
         return [
             {
                 "type": "function",
                 "function": {
                     "name": "get_delivery_info",
-                    "description": "Récupère les infos d'un colis spécifique (statut, secteur, client).",
+                    "description": "Retrieves information about a specific package (status, sector, client).",
                     "parameters": {
                         "type": "object",
                         "properties": {
-                            "order_id": {"type": "string", "description": "L'identifiant du colis (ex: ABC-123)"}
+                            "order_id": {"type": "string", "description": "The package identifier (e.g.: ABC-123)"}
                         },
                         "required": ["order_id"]
                     }
@@ -285,21 +335,18 @@ class OllamaService:
                 "type": "function",
                 "function": {
                     "name": "start_navigation",
-                    "description": "Lance le GPS vers une destination via son ID de planning.",
-                    "parameters": {
-                        "type": "object",
-                        "properties": {
-                            "trip_id": {"type": "string", "description": "L'identifiant du trip de livraison"}
-                        },
-                        "required": ["trip_id"]
-                    }
+                    "description": (
+                        "Starts GPS navigation. The server always reloads the delivery list "
+                        "and uses the ID of the **first** trip with ``planned`` status — do not rely on a provided trip_id."
+                    ),
+                    "parameters": {"type": "object", "properties": {}},
                 }
             },
             {
                 "type": "function",
                 "function": {
                     "name": "stop_navigation",
-                    "description": "Arrête le guidage GPS en cours.",
+                    "description": "Stops the current GPS guidance.",
                     "parameters": {"type": "object", "properties": {}}
                 }
             },
@@ -307,7 +354,7 @@ class OllamaService:
                 "type": "function",
                 "function": {
                     "name": "show_map",
-                    "description": "Recentre la carte sur la position actuelle.",
+                    "description": "Recenters the map on the current position.",
                     "parameters": {"type": "object", "properties": {}}
                 }
             },
@@ -315,7 +362,21 @@ class OllamaService:
                 "type": "function",
                 "function": {
                     "name": "get_deliveries",
-                    "description": "Liste toutes les livraisons prévues pour aujourd'hui.",
+                    "description": (
+                        "Retrieves today's deliveries from local data (without opening the list screen on the map). "
+                        "Use to read trip_ids, statuses, addresses, etc."
+                    ),
+                    "parameters": {"type": "object", "properties": {}}
+                }
+            },
+            {
+                "type": "function",
+                "function": {
+                    "name": "show_deliveries",
+                    "description": (
+                        "Opens the delivery screen / list in the driver map application. "
+                        "Use only when the driver explicitly asks to see the list on screen."
+                    ),
                     "parameters": {"type": "object", "properties": {}}
                 }
             },
@@ -323,7 +384,7 @@ class OllamaService:
                 "type": "function",
                 "function": {
                     "name": "ask_photo",
-                    "description": "Demande au livreur de prendre une photo de preuve de livraison.",
+                    "description": "Asks the delivery driver to take a proof of delivery photo.",
                     "parameters": {"type": "object", "properties": {}}
                 }
             },
@@ -331,18 +392,17 @@ class OllamaService:
                 "type": "function",
                 "function": {
                     "name": "update_status",
-                    "description": "Change le statut de la livraison actuelle.",
+                    "description": "Changes the status of the current delivery.",
                     "parameters": {
                         "type": "object",
                         "properties": {
-                            "new_status": {"type": "string", "description": "Le nouveau statut (ex: Livré, Absent, Problème)"}
+                            "new_status": {"type": "string", "description": "The new status (e.g.: Delivered, Absent, Issue)"}
                         },
                         "required": ["new_status"]
                     }
                 }
             }
         ]
-
     # --- Cœur du service ---
 
     def build_messages(self, user_message, history=None):
@@ -372,9 +432,8 @@ class OllamaService:
             "model": config.OLLAMA_MODEL,
             "messages": messages,
             "temperature": config.OLLAMA_TEMPERATURE,
+            "stream": stream,
         }
-        if stream:
-            payload["stream"] = True
         if include_tools:
             payload["tools"] = self._get_tools_schema()
             payload["tool_choice"] = "auto"
@@ -422,15 +481,32 @@ class OllamaService:
         return tool_messages
 
     async def _complete_tool_calls(self, messages, llm_message, include_tools=True, persist_history=False) -> str:
-        tool_messages = await self._execute_tool_calls(llm_message.get("tool_calls", []))
-        final_messages = messages + [llm_message] + tool_messages
-        final_res = await self._request_completion(
-            self._build_payload(final_messages, include_tools=include_tools)
+        conversation = list(messages)
+        current_message = llm_message
+        max_rounds = max(1, int(getattr(config, "MAX_TOOL_CALL_ROUNDS", 32)))
+
+        for round_index in range(max_rounds):
+            tool_calls = current_message.get("tool_calls") or []
+            if not (include_tools and tool_calls):
+                if persist_history:
+                    self.history = conversation + [current_message]
+                return current_message.get("content", "")
+
+            tool_messages = await self._execute_tool_calls(tool_calls)
+            conversation.extend([current_message] + tool_messages)
+
+            next_res = await self._request_completion(
+                self._build_payload(conversation, include_tools=include_tools)
+            )
+            current_message = next_res["choices"][0]["message"]
+
+        self.log(
+            f"MAX_TOOL_CALL_ROUNDS reached ({max_rounds}) while resolving tool calls",
+            level="warning",
         )
-        final_message = final_res["choices"][0]["message"]
         if persist_history:
-            self.history = final_messages + [final_message]
-        return final_message.get("content", "")
+            self.history = conversation + [current_message]
+        return current_message.get("content", "")
 
     async def _run_completion(self, messages, include_tools=True, persist_history=False):
         data = await self._request_completion(self._build_payload(messages, include_tools=include_tools))
@@ -453,6 +529,7 @@ class OllamaService:
         messages,
         include_tools=True,
         persist_history=False,
+        depth=0,
     ) -> AsyncIterator[str]:
         client = await self._get_async_client()
         payload = self._build_payload(messages, include_tools=include_tools, stream=True)
@@ -514,14 +591,24 @@ class OllamaService:
                 "content": "".join(assistant_parts),
                 "tool_calls": [tool_calls_by_index[index] for index in sorted(tool_calls_by_index)],
             }
-            final_content = await self._complete_tool_calls(
-                messages,
-                llm_message,
+            max_rounds = max(1, int(getattr(config, "MAX_TOOL_CALL_ROUNDS", 32)))
+            if depth >= max_rounds:
+                self.log(f"MAX_TOOL_CALL_ROUNDS reached ({max_rounds}) in stream", level="warning")
+                if persist_history:
+                    self.history = messages + [llm_message]
+                return
+
+            tool_messages = await self._execute_tool_calls(llm_message["tool_calls"])
+            new_messages = list(messages)
+            new_messages.extend([llm_message] + tool_messages)
+
+            async for chunk in self._run_completion_stream(
+                new_messages,
                 include_tools=include_tools,
                 persist_history=persist_history,
-            )
-            if final_content:
-                yield final_content
+                depth=depth + 1,
+            ):
+                yield chunk
             return
 
         assistant_message = {"role": "assistant", "content": "".join(assistant_parts)}
