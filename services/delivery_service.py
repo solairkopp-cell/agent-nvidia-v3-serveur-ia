@@ -311,7 +311,17 @@ class DeliveryService:
         try:
             if self.ws_service is not None and self.ws_service.audio_stream is not None:
                 agent = self.ws_service.audio_stream.agent
-                await agent.speak_text(session, summary_text)
+                await agent.speak_instruction(
+                    session,
+                    instruction=(
+                        "You are a delivery assistant greeting the driver. "
+                        f"Driver name: {driver_name}. Number of trips: {trip_count}. "
+                        f"First trip client: {client_name or 'unknown'}. "
+                        f"First trip package info: {package_info or 'not specified'}. "
+                        "Produce one friendly welcome sentence."
+                    ),
+                    fallback=summary_text,
+                )
                 logger.info("🔊 Voice summary sent: %s", summary_text)
         except Exception as e:
             logger.debug("Could not send voice summary: %s", e)
@@ -355,7 +365,16 @@ class DeliveryService:
             try:
                 if self.ws_service is not None and self.ws_service.audio_stream is not None:
                     agent = self.ws_service.audio_stream.agent
-                    await agent.speak_text(session, voice_message)
+                    await agent.speak_instruction(
+                        session,
+                        instruction=(
+                            "You are a delivery assistant greeting the driver. "
+                            f"Driver name: {driver_name}. "
+                            "There are no trips scheduled today. "
+                            "Produce one short friendly spoken message."
+                        ),
+                        fallback=voice_message,
+                    )
                     logger.info("🔊 No trips voice message sent: %s", voice_message)
             except Exception as e:
                 logger.error("Could not send no trips voice message: %s", e)
@@ -417,7 +436,7 @@ class DeliveryService:
         
         # Si trip_id non spécifié, récupérer le premier trip non complété
         if not trip_id:
-            trips = await self._get_trips(driver_serial)
+            trips, _driver_name = await self._get_trips(driver_serial)
             for trip in trips:
                 status = getattr(trip, 'status', None)
                 if status != "COMPLETED":
@@ -436,15 +455,38 @@ class DeliveryService:
         
         # Entrer dans MODE_1 → STATE_1
         await state_machine.enter_mode_1(session, trip_id)
-        
-        # Envoyer la première question TTS
+
+        # Jouer la première question via le pipeline TTS serveur (Piper -> ws audio).
+        tts_text = "Is the delivery completed?"
+        played = False
+        try:
+            if self.ws_service is not None and self.ws_service.audio_stream is not None:
+                agent = self.ws_service.audio_stream.agent
+                await agent.speak_instruction(
+                    session,
+                    instruction=(
+                        "Ask the driver a short yes/no question to confirm "
+                        "whether the current delivery is completed."
+                    ),
+                    fallback=tts_text,
+                )
+                played = True
+        except Exception:
+            logger.exception(
+                "Could not play delivery start TTS client_id=%s trip_id=%s",
+                session.client_id,
+                trip_id,
+            )
+
+        # Conserver la notification pour le front (telemetrie/UI), meme si l'audio a deja ete joue.
         if self.notification_service is not None:
             await self.notification_service.send(
                 session=session,
                 notification_type="state_machine_start",
                 data={
                     "type": "tts_speak",
-                    "text": "Is the delivery completed?",
+                    "text": tts_text,
+                    "played_server_side": played,
                 },
             )
         

@@ -271,7 +271,13 @@ class WebSocketService:
             if session.tts_track is None:
                 await self.send_error(session, "tts not ready: send start first")
                 return
-            asyncio.create_task(self.audio_stream.agent.speak_text(session, text))
+            asyncio.create_task(
+                self.audio_stream.agent.speak_text(
+                    session,
+                    text,
+                    event_type="tts_test",
+                )
+            )
             return
 
         if msg_type == "external_control":

@@ -241,7 +241,16 @@ class WebSocketAudioService:
             if no_trips and voice_message:
                 if self._ws_service is not None:
                     await self._ws_service.send(session, {"type": "emotion", "name": "greeting"})
-                await self.agent.speak_text(session, voice_message)
+                await self.agent.speak_instruction(
+                    session,
+                    instruction=(
+                        "You are a delivery assistant greeting the driver. "
+                        f"Driver name: {driver_name}. "
+                        "There are no trips scheduled today. "
+                        "Produce one short friendly spoken message."
+                    ),
+                    fallback=voice_message,
+                )
                 return
 
             if not trips:
@@ -268,7 +277,17 @@ class WebSocketAudioService:
 
             if self._ws_service is not None:
                 await self._ws_service.send(session, {"type": "emotion", "name": "greeting"})
-            await self.agent.speak_text(session, summary_text)
+            await self.agent.speak_instruction(
+                session,
+                instruction=(
+                    "You are a delivery assistant greeting the driver. "
+                    f"Driver name: {driver_name}. Number of trips: {len(trips)}. "
+                    f"First trip client: {client_name or 'unknown'}. "
+                    f"First trip package info: {package_info or 'not specified'}. "
+                    "Produce one friendly welcome sentence."
+                ),
+                fallback=summary_text,
+            )
         except Exception:
             logger.exception("Error sending pending voice summary client_id=%s", session.client_id)
         finally:

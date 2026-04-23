@@ -37,6 +37,8 @@ if TYPE_CHECKING:
 
 import config
 
+logger = logging.getLogger(__name__)
+
 
 class AgentService:
     """
@@ -69,6 +71,15 @@ class AgentService:
         
         for session in list(self.ws_service._sessions.values()):
             if getattr(session, "tts_playing", False) and getattr(session, "tts_track", None) is not None:
+                chunk_count = int(getattr(session, "_tts_debug_chunks", 0)) + 1
+                session._tts_debug_chunks = chunk_count
+                if chunk_count == 1 or chunk_count % 50 == 0:
+                    logger.info(
+                        "TTS audio chunk client_id=%s chunks=%d samples=%d",
+                        session.client_id,
+                        chunk_count,
+                        int(samples.size),
+                    )
                 session.last_tts_audio_time = time.monotonic()
                 await session.tts_track.feed(samples)
 
@@ -207,8 +218,13 @@ class AgentService:
 
                 if state_result.should_handle:
                     if state_result.tts_response:
+                        state_tts = await self._rewrite_spoken_text(
+                            session=session,
+                            text=state_result.tts_response,
+                            context_hint="delivery_state_machine",
+                        )
                         await self._play_tts_simple(
-                            session, request_id, state_result.tts_response,
+                            session, request_id, state_tts,
                             event_type="response",
                         )
 
@@ -273,7 +289,12 @@ class AgentService:
 
     # ── TTS simple ────────────────────────────────────────────────────────────
 
-    async def _stop_current_tts_with_fade(self, session: "Session") -> None:
+    async def _stop_current_tts_with_fade(
+        self,
+        session: "Session",
+        *,
+        notify_client_stop: bool = True,
+    ) -> None:
         """
         Interrompt proprement le TTS en cours :
           1. Annule la tâche TTS (qui peut appeler tts.synthesize en cours)
@@ -289,7 +310,7 @@ class AgentService:
             with suppress(asyncio.CancelledError):
                 await session.tts_task
 
-        if self.ws_service is not None:
+        if notify_client_stop and self.ws_service is not None:
             await self.ws_service.send(session, {"type": "tts_stop_now"})
             
         # Interrompre également le flux sur le serveur externe Piper
@@ -336,6 +357,15 @@ class AgentService:
         session.tts_feeding_done = False
         session.last_tts_audio_time = time.monotonic()
         session.tts_started_at = time.monotonic()
+        session._tts_debug_chunks = 0
+        session._tts_debug_started_at = time.monotonic()
+        logger.info(
+            "TTS start client_id=%s request_id=%s event_type=%s text_len=%d",
+            session.client_id,
+            request_id,
+            event_type,
+            len(text),
+        )
 
         async def _do_play():
             try:
@@ -357,6 +387,18 @@ class AgentService:
             await tts_task
         except asyncio.CancelledError:
             pass
+        finally:
+            started_at = float(getattr(session, "_tts_debug_started_at", time.monotonic()))
+            elapsed_ms = (time.monotonic() - started_at) * 1000.0
+            logger.info(
+                "TTS end client_id=%s request_id=%s chunks=%d elapsed_ms=%.1f feeding_done=%s cancel_flag=%s",
+                session.client_id,
+                request_id,
+                int(getattr(session, "_tts_debug_chunks", 0)),
+                elapsed_ms,
+                bool(getattr(session, "tts_feeding_done", False)),
+                bool(getattr(session, "cancel_flag", False)),
+            )
 
     # ── Pipeline LLM → TTS ────────────────────────────────────────────────────
 
@@ -510,9 +552,11 @@ class AgentService:
         self,
         session: "Session",
         text: str,
+        *,
+        event_type: str = "response",
     ) -> None:
         """
-        Jouer un texte arbitraire via le pipeline TTS (bouton test dans la page).
+        Jouer un texte arbitraire via l'orchestration TTS standard.
         """
         logger = logging.getLogger(__name__)
         text = (text or "").strip()
@@ -528,7 +572,61 @@ class AgentService:
         async with session.processing_lock:
             request_id = session.next_request_id()
             session.cancel_flag = False
-            await self._play_tts_simple(session, request_id, text, event_type="tts_test")
+            await self._play_tts_simple(session, request_id, text, event_type=event_type)
+
+    async def _generate_spoken_text(
+        self,
+        session: "Session",
+        *,
+        instruction: str,
+        fallback: str,
+    ) -> str:
+        llm = getattr(self, "llm", None)
+        if llm is None:
+            return fallback
+        try:
+            reply = await llm.generate_system_reply(instruction, session=session)
+            reply = (reply or "").strip()
+            return reply or fallback
+        except Exception:
+            logger.exception("Spoken text generation failed client_id=%s", session.client_id)
+            return fallback
+
+    async def _rewrite_spoken_text(
+        self,
+        session: "Session",
+        *,
+        text: str,
+        context_hint: str = "general",
+    ) -> str:
+        text = (text or "").strip()
+        if not text:
+            return text
+        instruction = (
+            "Rewrite the following message for a delivery driver using natural, concise spoken English. "
+            "Keep the exact intent and factual meaning. Do not add new facts. "
+            f"Context={context_hint}. Message: {text}"
+        )
+        return await self._generate_spoken_text(
+            session,
+            instruction=instruction,
+            fallback=text,
+        )
+
+    async def speak_instruction(
+        self,
+        session: "Session",
+        *,
+        instruction: str,
+        fallback: str,
+        event_type: str = "response",
+    ) -> None:
+        text = await self._generate_spoken_text(
+            session,
+            instruction=instruction,
+            fallback=fallback,
+        )
+        await self.speak_text(session, text, event_type=event_type)
 
     # ── Utilitaires ──────────────────────────────────────────────────────────
 
@@ -597,7 +695,10 @@ class AgentService:
 
         # Interrompre le TTS en cours si besoin
         if session.tts_playing:
-            await self._stop_current_tts_with_fade(session)
+            # arrived peut suivre immediatement une reponse LLM.
+            # Eviter d'envoyer tts_stop_now au client ici limite le risque
+            # de couper la nouvelle phrase STATE_1 si le stop arrive en retard.
+            await self._stop_current_tts_with_fade(session, notify_client_stop=False)
 
         session.tts_playing = False
         session.cancel_flag = False
@@ -615,8 +716,16 @@ class AgentService:
                 ),
             })
             logger.info("🗣️ Envoi question TTS: 'Is the delivery completed?'")
-            request_id = session.next_request_id()
-            await self._play_tts_simple(session, request_id, "Is the delivery completed?")
+            # Important: utiliser speak_text (avec processing_lock) pour eviter
+            # une course avec le stream LLM juste avant le switch MODE_1.
+            await self.speak_instruction(
+                session,
+                instruction=(
+                    "The driver has arrived at the destination. Ask a short yes/no question "
+                    "to confirm whether the delivery is completed."
+                ),
+                fallback="Is the delivery completed?",
+            )
         else:
             logger.warning("⚠️ State machine non disponible client_id=%s", session.client_id)
 

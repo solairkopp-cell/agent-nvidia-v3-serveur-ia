@@ -1061,9 +1061,13 @@ class DeliveryStateMachine:
             # Parler l'annonce via AgentService en mode non interruptible pour
             # préserver la cohérence du flow de fin de livraison.
             if self._agent_service:
-                await self._agent_service.speak_text(
+                await self._agent_service.speak_instruction(
                     session,
-                    announcement,
+                    instruction=(
+                        "Announce the delivery outcome and next-step navigation to the driver. "
+                        "Keep it concise and clear."
+                    ),
+                    fallback=announcement,
                 )
 
             # Démarrer navigation après le TTS (délai pour lecture annonce)
@@ -1092,9 +1096,13 @@ class DeliveryStateMachine:
                     validated_by_photo=validated_by_photo,
                 )
 
-                await self._agent_service.speak_text(
+                await self._agent_service.speak_instruction(
                     session,
-                    announcement,
+                    instruction=(
+                        "Announce the final delivery outcome to the driver and mention that the route is finished. "
+                        "Keep it concise and clear."
+                    ),
+                    fallback=announcement,
                 )
 
     async def _get_next_trip_info(self, session: "Session") -> tuple | None:

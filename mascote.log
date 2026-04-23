@@ -1134,3 +1134,1005 @@ AttributeError: 'PiperClientService' object has no attribute 'synthesize_stream'
 2026-04-23 02:28:31,293 - INFO - Audio WS cleaned up client_id=c59578a6-6d60-4768-85b1-bd131b377140
 2026-04-23 02:28:31,295 - INFO - WS disconnected client_id=c59578a6-6d60-4768-85b1-bd131b377140
 2026-04-23 02:28:31,296 - INFO - connection closed
+2026-04-23 17:13:49,908 - INFO - Handler registered for message type: identify_driver
+2026-04-23 17:13:49,909 - INFO - Handler registered for message type: get_trips
+2026-04-23 17:13:49,928 - INFO - Started server process [3003]
+2026-04-23 17:13:49,928 - INFO - Waiting for application startup.
+2026-04-23 17:13:54,510 - INFO - HTTP Request: GET https://huggingface.co/api/models/Systran/faster-whisper-small/revision/main "HTTP/1.1 200 OK"
+2026-04-23 17:14:02,521 - INFO - MascoteService démarré
+2026-04-23 17:14:02,523 - INFO - NotificationService started
+2026-04-23 17:14:02,524 - INFO - DeliveryService started
+2026-04-23 17:14:02,524 - INFO - DeliveryStateMachine started
+2026-04-23 17:14:02,524 - INFO - Connexion au Piper Streaming Server externe sur ws://localhost:9000/
+2026-04-23 17:14:02,645 - INFO - WebSocket Piper connecté.
+2026-04-23 17:14:02,646 - INFO - Denoise disabled
+2026-04-23 17:14:02,646 - INFO - Warmup started
+2026-04-23 17:14:02,835 - INFO - Warmup vad ok in 0.19s
+2026-04-23 17:14:02,836 - INFO - Processing audio with duration 00:01.000
+2026-04-23 17:14:07,753 - INFO - Warmup stt ok in 4.92s
+2026-04-23 17:14:10,734 - INFO - Warmup llm ok in 2.98s
+2026-04-23 17:14:10,735 - ERROR - Warmup tts failed
+Traceback (most recent call last):
+  File "/home/server/agent-nvidia-v2/main.py", line 121, in _run_warmup_step
+    await asyncio.wait_for(op(), timeout=config.PREWARM_TIMEOUT_SEC)
+  File "/usr/lib/python3.10/asyncio/tasks.py", line 445, in wait_for
+    return fut.result()
+  File "/home/server/agent-nvidia-v2/main.py", line 151, in _warm_tts
+    async for _ in piper_service.synthesize_stream(config.PREWARM_TTS_TEXT):
+AttributeError: 'PiperClientService' object has no attribute 'synthesize_stream'
+2026-04-23 17:14:10,749 - INFO - Warmup finished
+2026-04-23 17:14:10,749 - INFO - Application startup complete.
+2026-04-23 17:14:10,750 - INFO - Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-04-23 19:44:11,230 - INFO - Handler registered for message type: identify_driver
+2026-04-23 19:44:11,231 - INFO - Handler registered for message type: get_trips
+2026-04-23 19:44:11,249 - INFO - Started server process [6308]
+2026-04-23 19:44:11,250 - INFO - Waiting for application startup.
+2026-04-23 19:44:15,481 - INFO - HTTP Request: GET https://huggingface.co/api/models/Systran/faster-whisper-small/revision/main "HTTP/1.1 200 OK"
+2026-04-23 19:44:23,264 - INFO - MascoteService démarré
+2026-04-23 19:44:23,265 - INFO - NotificationService started
+2026-04-23 19:44:23,265 - INFO - DeliveryService started
+2026-04-23 19:44:23,266 - INFO - DeliveryStateMachine started
+2026-04-23 19:44:23,266 - INFO - Connexion au Piper Streaming Server externe sur ws://localhost:9000/
+2026-04-23 19:44:23,383 - INFO - WebSocket Piper connecté.
+2026-04-23 19:44:23,384 - INFO - Denoise disabled
+2026-04-23 19:44:23,385 - INFO - Warmup started
+2026-04-23 19:44:23,562 - INFO - Warmup vad ok in 0.18s
+2026-04-23 19:44:23,563 - INFO - Processing audio with duration 00:01.000
+2026-04-23 19:44:27,858 - INFO - Warmup stt ok in 4.30s
+2026-04-23 19:44:30,818 - INFO - Warmup llm ok in 2.96s
+2026-04-23 19:44:30,819 - ERROR - Warmup tts failed
+Traceback (most recent call last):
+  File "/home/server/agent-nvidia-v2/main.py", line 121, in _run_warmup_step
+    await asyncio.wait_for(op(), timeout=config.PREWARM_TIMEOUT_SEC)
+  File "/usr/lib/python3.10/asyncio/tasks.py", line 445, in wait_for
+    return fut.result()
+  File "/home/server/agent-nvidia-v2/main.py", line 151, in _warm_tts
+    async for _ in piper_service.synthesize_stream(config.PREWARM_TTS_TEXT):
+AttributeError: 'PiperClientService' object has no attribute 'synthesize_stream'
+2026-04-23 19:44:30,827 - INFO - Warmup finished
+2026-04-23 19:44:30,828 - INFO - Application startup complete.
+2026-04-23 19:44:30,829 - INFO - Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-04-23 19:45:13,079 - INFO - 102.107.198.127:0 - "WebSocket /ws" [accepted]
+2026-04-23 19:45:13,082 - INFO - WS connected client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69
+2026-04-23 19:45:13,084 - INFO - connection open
+2026-04-23 19:45:13,186 - INFO - 📨 WS MESSAGE RECEIVED client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-04-23 19:45:13,187 - INFO - 📨 NOTIFICATION RECEIVED client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-04-23 19:45:13,188 - INFO - 🚚 Identifying driver client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 serial=000
+2026-04-23 19:45:13,558 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-24 01:58:57
+2026-04-23 19:45:13,559 - INFO - Récupération des trips pour le driver: 000
+2026-04-23 19:45:13,559 - INFO - Recherche du driver par query: 000
+2026-04-23 19:45:13,559 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 19:45:13,904 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 19:45:13,905 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 19:45:13,906 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-23 19:45:13,906 - INFO - Recherche du driver par query: 000
+2026-04-23 19:45:13,906 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 19:45:13,953 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 19:45:13,954 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-23 19:45:13,954 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-23 19:45:14,084 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-23 19:45:14,085 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-23 19:45:14,085 - INFO - Recherche des packages pour le schedule: 69e9e95f6e4809534064045e
+2026-04-23 19:45:14,086 - INFO - Recherche par référence: field=schedule_id, value=69e9e95f6e4809534064045e
+2026-04-23 19:45:14,148 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69e9e95f6e4809534064045e
+2026-04-23 19:45:14,150 - INFO - Récupération du package par ID: 69e6bdaa6e48095340640449
+2026-04-23 19:45:14,150 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640449
+2026-04-23 19:45:14,200 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 19:45:14,292 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdaa6e48095340640449
+2026-04-23 19:45:14,293 - INFO - Récupération du package par ID: 69e6bdc16e4809534064044b
+2026-04-23 19:45:14,293 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044b
+2026-04-23 19:45:14,341 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 19:45:14,433 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdc16e4809534064044b
+2026-04-23 19:45:14,433 - INFO - Récupération du package par ID: 69e6be526e4809534064044d
+2026-04-23 19:45:14,434 - INFO - Récupération de l'instance: 69e6be526e4809534064044d
+2026-04-23 19:45:14,479 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 19:45:14,535 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be526e4809534064044d
+2026-04-23 19:45:14,535 - INFO - Package: 69e6be526e4809534064044d, address field: 69e6be526e4809534064044c
+2026-04-23 19:45:14,536 - INFO - Récupération adresse: 69e6be526e4809534064044c
+2026-04-23 19:45:14,536 - INFO - Récupération de l'adresse par ID: 69e6be526e4809534064044c
+2026-04-23 19:45:14,536 - INFO - Récupération de l'instance: 69e6be526e4809534064044c
+2026-04-23 19:45:14,582 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be526e4809534064044c
+2026-04-23 19:45:14,583 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-23 19:45:14,583 - INFO - Trip créé: id=69e6be526e4809534064044d, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-23 19:45:14,583 - INFO - Récupération du package par ID: 69e6be636e4809534064044f
+2026-04-23 19:45:14,584 - INFO - Récupération de l'instance: 69e6be636e4809534064044f
+2026-04-23 19:45:14,633 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 19:45:14,697 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be636e4809534064044f
+2026-04-23 19:45:14,697 - INFO - Package: 69e6be636e4809534064044f, address field: 69e6be636e4809534064044e
+2026-04-23 19:45:14,697 - INFO - Récupération adresse: 69e6be636e4809534064044e
+2026-04-23 19:45:14,698 - INFO - Récupération de l'adresse par ID: 69e6be636e4809534064044e
+2026-04-23 19:45:14,698 - INFO - Récupération de l'instance: 69e6be636e4809534064044e
+2026-04-23 19:45:14,743 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be636e4809534064044e
+2026-04-23 19:45:14,744 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-23 19:45:14,744 - INFO - Trip créé: id=69e6be636e4809534064044f, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-23 19:45:14,745 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-23 19:45:14,745 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-23 19:45:14,792 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 19:45:14,847 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-23 19:45:14,848 - INFO - Package: 69e6be736e48095340640451, address field: 69e6be736e48095340640450
+2026-04-23 19:45:14,848 - INFO - Récupération adresse: 69e6be736e48095340640450
+2026-04-23 19:45:14,848 - INFO - Récupération de l'adresse par ID: 69e6be736e48095340640450
+2026-04-23 19:45:14,848 - INFO - Récupération de l'instance: 69e6be736e48095340640450
+2026-04-23 19:45:14,895 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be736e48095340640450
+2026-04-23 19:45:14,896 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-23 19:45:14,896 - INFO - Trip créé: id=69e6be736e48095340640451, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-23 19:45:14,896 - INFO - ✅ SUCCÈS: 3 trip(s) créé(s) et ordonné(s) par position
+2026-04-23 19:45:14,902 - INFO - ✅ SUCCÈS: 3 trip(s) exporté(s) vers data.json
+2026-04-23 19:45:14,904 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-24 01:58:57
+2026-04-23 19:45:14,904 - INFO - Recherche du driver par query: 000
+2026-04-23 19:45:14,904 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 19:45:15,064 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 19:45:15,069 - INFO - ✅ Found 3 trips for driver vivien (000)
+2026-04-23 19:45:15,070 - INFO - 📤 NOTIFICATION SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=trips_list data={'driver_serial': '000', 'trip_count': 3, 'trips': [{'id': '69e6be526e4809534064044d', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 3', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69e6be636e4809534064044f', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 4', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69e6be736e48095340640451', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 5', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}]}
+2026-04-23 19:45:15,070 - INFO - 📤 WS MESSAGE SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=notification data={'type': 'notification', 'notification_type': 'trips_list', 'data': {'driver_serial': '000', 'trip_count': 3, 'trips': [{'id': '69e6be526e4809534064044d', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 3', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69e6be636e4809534064044f', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 4', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69e6be736e48095340640451', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 5', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}]}}
+2026-04-23 19:45:15,072 - INFO - 📤 WS MESSAGE SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=error data={'type': 'error', 'message': 'unknown type'}
+2026-04-23 19:45:15,073 - INFO - 📨 WS MESSAGE RECEIVED client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=start data={'type': 'start', 'input_sample_rate': 48000}
+2026-04-23 19:45:15,073 - INFO - 📨 NOTIFICATION RECEIVED client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=start data={'type': 'start', 'input_sample_rate': 48000}
+2026-04-23 19:45:15,074 - INFO - Audio WS session started client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 input_sr=48000 output_sr=48000
+2026-04-23 19:45:15,074 - INFO - 📤 WS MESSAGE SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=started data={'type': 'started', 'input_sample_rate': 48000, 'audio_output_sample_rate': 48000, 'encoding': 'pcm_s16le', 'channels': 1}
+2026-04-23 19:45:15,075 - INFO - Sending pending voice summary client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69
+2026-04-23 19:45:15,076 - INFO - 📤 WS MESSAGE SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=emotion data={'type': 'emotion', 'name': 'greeting'}
+2026-04-23 19:45:15,077 - INFO - 📤 WS MESSAGE SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-23 19:45:15,078 - INFO - 📤 WS MESSAGE SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=tts_test data={'type': 'tts_test', 'text': 'Hello vivien, you have 3 trips. The first one is for test 3. Have a great day.'}
+2026-04-23 19:45:21,020 - INFO - 📤 WS MESSAGE SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-23 19:45:24,728 - INFO - VAD speech_start client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 p=0.874
+2026-04-23 19:45:24,732 - INFO - 📤 WS MESSAGE SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=vad data={'type': 'vad', 'event': 'speech_start', 'p': 0.8742034435272217}
+2026-04-23 19:45:27,084 - INFO - Utterance end client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 samples=45568
+2026-04-23 19:45:27,085 - INFO - 📤 WS MESSAGE SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=vad data={'type': 'vad', 'event': 'utterance_end', 'samples': 45568}
+2026-04-23 19:45:27,089 - INFO - STT raw input client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 ms=2848 rms=0.0632 peak=0.5494 n=45568 sr=16000
+2026-04-23 19:45:27,138 - INFO - Saved STT audio compare client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 raw=audio_0e042d36-5ea5-48b9-a678-7173fb1b3e69_392473e7_raw.wav denoised=audio_0e042d36-5ea5-48b9-a678-7173fb1b3e69_392473e7_denoised.wav raw_rms=0.063219 denoised_rms=0.063219 sr=16000
+2026-04-23 19:45:27,140 - INFO - Processing audio with duration 00:02.848
+2026-04-23 19:45:27,875 - INFO - STT transcript client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 text='Hello, start the navigation.'
+2026-04-23 19:45:27,875 - INFO - 📤 WS MESSAGE SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=transcript data={'type': 'transcript', 'text': 'Hello, start the navigation.'}
+2026-04-23 19:45:27,876 - INFO - 📤 WS MESSAGE SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-23 19:45:28,128 - INFO - HTTP Request: POST http://localhost:8080/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-23 19:45:29,293 - INFO - Action: START_NAVIGATION trip_id=69e6be526e4809534064044d (first planned in list, 3 rows)
+2026-04-23 19:45:29,294 - INFO - 📤 WS MESSAGE SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.START_NAVIGATION', 'extras': {'id': '69e6be526e4809534064044d'}}
+2026-04-23 19:45:29,479 - INFO - HTTP Request: POST http://localhost:8080/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-23 19:45:29,481 - INFO - LLM first chunk client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 latency_ms=2392.9
+2026-04-23 19:45:29,481 - INFO - 📤 WS MESSAGE SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=response data={'type': 'response', 'text': 'Navigation'}
+2026-04-23 19:45:29,541 - INFO - 📤 WS MESSAGE SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=response data={'type': 'response', 'text': ' started'}
+2026-04-23 19:45:29,602 - INFO - 📤 WS MESSAGE SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=response data={'type': 'response', 'text': '.'}
+2026-04-23 19:45:29,617 - INFO - 📨 WS MESSAGE RECEIVED client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=arrived data={'type': 'arrived', 'id': '69e6be526e4809534064044d'}
+2026-04-23 19:45:29,618 - INFO - 📨 NOTIFICATION RECEIVED client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=arrived data={'type': 'arrived', 'id': '69e6be526e4809534064044d'}
+2026-04-23 19:45:29,621 - INFO - 📮 EXTERNAL CONTROL REÇU client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 action=arrived extras={'trip_id': '69e6be526e4809534064044d'}
+2026-04-23 19:45:29,621 - INFO - ✅ Traitement action arrived pour client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69
+2026-04-23 19:45:29,621 - INFO - 🚚 DRIVER ARRIVÉ client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 trip_id=69e6be526e4809534064044d
+2026-04-23 19:45:29,621 - INFO - TTS fade-out + stop client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69
+2026-04-23 19:45:29,625 - INFO - 📤 WS MESSAGE SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=tts_stop_now data={'type': 'tts_stop_now'}
+2026-04-23 19:45:29,775 - INFO - 🚀 Démarrage de la state machine pour client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69
+2026-04-23 19:45:29,776 - INFO - State machine: entered MODE_1 → STATE_1 client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 trip_id=69e6be526e4809534064044d
+2026-04-23 19:45:29,776 - INFO - 🗣️ Envoi question TTS: 'Is the delivery completed?'
+2026-04-23 19:45:29,776 - INFO - 📤 WS MESSAGE SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-23 19:45:29,777 - INFO - 📤 WS MESSAGE SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=response data={'type': 'response', 'text': 'Is the delivery completed?'}
+2026-04-23 19:45:34,197 - INFO - 📤 WS MESSAGE SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-23 19:45:42,710 - INFO - VAD speech_start client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 p=0.945
+2026-04-23 19:45:42,711 - INFO - 📤 WS MESSAGE SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=vad data={'type': 'vad', 'event': 'speech_start', 'p': 0.944902777671814}
+2026-04-23 19:45:43,381 - INFO - Utterance end client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 samples=18432
+2026-04-23 19:45:43,383 - INFO - 📤 WS MESSAGE SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=vad data={'type': 'vad', 'event': 'utterance_end', 'samples': 18432}
+2026-04-23 19:45:43,386 - INFO - STT raw input client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 ms=1152 rms=0.0909 peak=0.7285 n=18432 sr=16000
+2026-04-23 19:45:43,406 - INFO - Saved STT audio compare client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 raw=audio_0e042d36-5ea5-48b9-a678-7173fb1b3e69_290e7f4a_raw.wav denoised=audio_0e042d36-5ea5-48b9-a678-7173fb1b3e69_290e7f4a_denoised.wav raw_rms=0.090937 denoised_rms=0.090937 sr=16000
+2026-04-23 19:45:43,408 - INFO - Processing audio with duration 00:01.152
+2026-04-23 19:45:44,097 - INFO - STT transcript client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 text='No'
+2026-04-23 19:45:44,097 - INFO - 📤 WS MESSAGE SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=transcript data={'type': 'transcript', 'text': 'No'}
+2026-04-23 19:45:44,412 - INFO - STATE_1: NO detected client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 → STATE_2
+2026-04-23 19:45:45,854 - INFO - 📤 WS MESSAGE SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-23 19:45:45,854 - INFO - 📤 WS MESSAGE SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=response data={'type': 'response', 'text': "Sure, give me a moment to check. Let's start with a number from 1 to 6."}
+2026-04-23 19:45:45,855 - INFO - State machine: transitioned to state_2 client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69
+2026-04-23 19:45:50,793 - INFO - 📤 WS MESSAGE SENT client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69 type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-23 19:46:41,705 - INFO - Audio WS cleaned up client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69
+2026-04-23 19:46:41,707 - INFO - WS disconnected client_id=0e042d36-5ea5-48b9-a678-7173fb1b3e69
+2026-04-23 19:46:41,708 - INFO - connection closed
+2026-04-23 19:58:09,276 - INFO - Shutting down
+2026-04-23 19:58:09,379 - INFO - Waiting for application shutdown.
+2026-04-23 19:58:09,382 - INFO - Fermeture du PiperClientService
+2026-04-23 19:58:09,591 - INFO - DeliveryService shutdown
+2026-04-23 19:58:09,592 - INFO - DeliveryStateMachine shutdown
+2026-04-23 19:58:09,592 - INFO - NotificationService shutdown
+2026-04-23 19:58:09,594 - INFO - MascoteService arrêté
+2026-04-23 19:58:09,907 - INFO - Application shutdown complete.
+2026-04-23 19:58:09,909 - INFO - Finished server process [6308]
+2026-04-23 19:58:15,080 - INFO - Handler registered for message type: identify_driver
+2026-04-23 19:58:15,080 - INFO - Handler registered for message type: get_trips
+2026-04-23 19:58:15,099 - INFO - Started server process [9684]
+2026-04-23 19:58:15,100 - INFO - Waiting for application startup.
+2026-04-23 19:58:17,259 - INFO - HTTP Request: GET https://huggingface.co/api/models/Systran/faster-whisper-small/revision/main "HTTP/1.1 200 OK"
+2026-04-23 19:58:24,618 - INFO - MascoteService démarré
+2026-04-23 19:58:24,619 - INFO - NotificationService started
+2026-04-23 19:58:24,619 - INFO - DeliveryService started
+2026-04-23 19:58:24,619 - INFO - DeliveryStateMachine started
+2026-04-23 19:58:24,619 - INFO - Connexion au Piper Streaming Server externe sur ws://localhost:9000/
+2026-04-23 19:58:24,641 - INFO - WebSocket Piper connecté.
+2026-04-23 19:58:24,642 - INFO - Denoise disabled
+2026-04-23 19:58:24,642 - INFO - Warmup started
+2026-04-23 19:58:24,646 - INFO - Warmup vad ok in 0.00s
+2026-04-23 19:58:24,647 - INFO - Processing audio with duration 00:01.000
+2026-04-23 19:58:26,164 - INFO - Warmup stt ok in 1.52s
+2026-04-23 19:58:27,227 - INFO - Warmup llm ok in 1.06s
+2026-04-23 19:58:27,228 - ERROR - Warmup tts failed
+Traceback (most recent call last):
+  File "/home/server/agent-nvidia-v2/main.py", line 121, in _run_warmup_step
+    await asyncio.wait_for(op(), timeout=config.PREWARM_TIMEOUT_SEC)
+  File "/usr/lib/python3.10/asyncio/tasks.py", line 445, in wait_for
+    return fut.result()
+  File "/home/server/agent-nvidia-v2/main.py", line 151, in _warm_tts
+    async for _ in piper_service.synthesize_stream(config.PREWARM_TTS_TEXT):
+AttributeError: 'PiperClientService' object has no attribute 'synthesize_stream'
+2026-04-23 19:58:27,235 - INFO - Warmup finished
+2026-04-23 19:58:27,235 - INFO - Application startup complete.
+2026-04-23 19:58:27,236 - INFO - Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-04-23 19:58:43,253 - INFO - 102.107.198.127:0 - "WebSocket /ws" [accepted]
+2026-04-23 19:58:43,256 - INFO - WS connected client_id=c32eb30d-e082-46de-b92f-f443c0c27ca8
+2026-04-23 19:58:43,258 - INFO - connection open
+2026-04-23 19:58:43,376 - INFO - 📨 WS MESSAGE RECEIVED client_id=c32eb30d-e082-46de-b92f-f443c0c27ca8 type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-04-23 19:58:43,377 - INFO - 📨 NOTIFICATION RECEIVED client_id=c32eb30d-e082-46de-b92f-f443c0c27ca8 type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-04-23 19:58:43,377 - INFO - 🚚 Identifying driver client_id=c32eb30d-e082-46de-b92f-f443c0c27ca8 serial=000
+2026-04-23 19:58:43,669 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-24 01:58:57
+2026-04-23 19:58:43,670 - INFO - Récupération des trips pour le driver: 000
+2026-04-23 19:58:43,670 - INFO - Recherche du driver par query: 000
+2026-04-23 19:58:43,670 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 19:58:44,214 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 19:58:44,215 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 19:58:44,215 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-23 19:58:44,216 - INFO - Recherche du driver par query: 000
+2026-04-23 19:58:44,216 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 19:58:44,304 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 19:58:44,304 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-23 19:58:44,305 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-23 19:58:44,721 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-23 19:58:44,723 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-23 19:58:44,723 - INFO - Recherche des packages pour le schedule: 69e9e95f6e4809534064045e
+2026-04-23 19:58:44,724 - INFO - Recherche par référence: field=schedule_id, value=69e9e95f6e4809534064045e
+2026-04-23 19:58:44,793 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69e9e95f6e4809534064045e
+2026-04-23 19:58:44,793 - INFO - Récupération du package par ID: 69e6bdaa6e48095340640449
+2026-04-23 19:58:44,794 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640449
+2026-04-23 19:58:44,845 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 19:58:45,002 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdaa6e48095340640449
+2026-04-23 19:58:45,003 - INFO - Récupération du package par ID: 69e6bdc16e4809534064044b
+2026-04-23 19:58:45,003 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044b
+2026-04-23 19:58:45,364 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 19:58:45,429 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdc16e4809534064044b
+2026-04-23 19:58:45,430 - INFO - Récupération du package par ID: 69e6be526e4809534064044d
+2026-04-23 19:58:45,430 - INFO - Récupération de l'instance: 69e6be526e4809534064044d
+2026-04-23 19:58:45,504 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 19:58:45,624 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be526e4809534064044d
+2026-04-23 19:58:45,625 - INFO - Package: 69e6be526e4809534064044d, address field: 69e6be526e4809534064044c
+2026-04-23 19:58:45,625 - INFO - Récupération adresse: 69e6be526e4809534064044c
+2026-04-23 19:58:45,625 - INFO - Récupération de l'adresse par ID: 69e6be526e4809534064044c
+2026-04-23 19:58:45,626 - INFO - Récupération de l'instance: 69e6be526e4809534064044c
+2026-04-23 19:58:45,673 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be526e4809534064044c
+2026-04-23 19:58:45,674 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-23 19:58:45,674 - INFO - Trip créé: id=69e6be526e4809534064044d, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-23 19:58:45,675 - INFO - Récupération du package par ID: 69e6be636e4809534064044f
+2026-04-23 19:58:45,675 - INFO - Récupération de l'instance: 69e6be636e4809534064044f
+2026-04-23 19:58:45,724 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 19:58:46,144 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be636e4809534064044f
+2026-04-23 19:58:46,145 - INFO - Package: 69e6be636e4809534064044f, address field: 69e6be636e4809534064044e
+2026-04-23 19:58:46,146 - INFO - Récupération adresse: 69e6be636e4809534064044e
+2026-04-23 19:58:46,146 - INFO - Récupération de l'adresse par ID: 69e6be636e4809534064044e
+2026-04-23 19:58:46,146 - INFO - Récupération de l'instance: 69e6be636e4809534064044e
+2026-04-23 19:58:46,296 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be636e4809534064044e
+2026-04-23 19:58:46,297 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-23 19:58:46,298 - INFO - Trip créé: id=69e6be636e4809534064044f, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-23 19:58:46,298 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-23 19:58:46,298 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-23 19:58:46,346 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 19:58:46,402 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-23 19:58:46,403 - INFO - Package: 69e6be736e48095340640451, address field: 69e6be736e48095340640450
+2026-04-23 19:58:46,403 - INFO - Récupération adresse: 69e6be736e48095340640450
+2026-04-23 19:58:46,403 - INFO - Récupération de l'adresse par ID: 69e6be736e48095340640450
+2026-04-23 19:58:46,403 - INFO - Récupération de l'instance: 69e6be736e48095340640450
+2026-04-23 19:58:46,449 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be736e48095340640450
+2026-04-23 19:58:46,450 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-23 19:58:46,450 - INFO - Trip créé: id=69e6be736e48095340640451, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-23 19:58:46,451 - INFO - ✅ SUCCÈS: 3 trip(s) créé(s) et ordonné(s) par position
+2026-04-23 19:58:46,453 - INFO - ✅ SUCCÈS: 3 trip(s) exporté(s) vers data.json
+2026-04-23 19:58:46,455 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-24 01:58:57
+2026-04-23 19:58:46,455 - INFO - Recherche du driver par query: 000
+2026-04-23 19:58:46,456 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 19:58:46,640 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 19:58:46,645 - INFO - ✅ Found 3 trips for driver vivien (000)
+2026-04-23 19:58:46,646 - INFO - 📤 NOTIFICATION SENT client_id=c32eb30d-e082-46de-b92f-f443c0c27ca8 type=trips_list data={'driver_serial': '000', 'trip_count': 3, 'trips': [{'id': '69e6be526e4809534064044d', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 3', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69e6be636e4809534064044f', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 4', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69e6be736e48095340640451', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 5', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}]}
+2026-04-23 19:58:46,646 - INFO - 📤 WS MESSAGE SENT client_id=c32eb30d-e082-46de-b92f-f443c0c27ca8 type=notification data={'type': 'notification', 'notification_type': 'trips_list', 'data': {'driver_serial': '000', 'trip_count': 3, 'trips': [{'id': '69e6be526e4809534064044d', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 3', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69e6be636e4809534064044f', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 4', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69e6be736e48095340640451', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 5', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}]}}
+2026-04-23 19:58:46,648 - INFO - 📤 WS MESSAGE SENT client_id=c32eb30d-e082-46de-b92f-f443c0c27ca8 type=error data={'type': 'error', 'message': 'unknown type'}
+2026-04-23 19:58:46,649 - INFO - 📨 WS MESSAGE RECEIVED client_id=c32eb30d-e082-46de-b92f-f443c0c27ca8 type=start data={'type': 'start', 'input_sample_rate': 48000}
+2026-04-23 19:58:46,649 - INFO - 📨 NOTIFICATION RECEIVED client_id=c32eb30d-e082-46de-b92f-f443c0c27ca8 type=start data={'type': 'start', 'input_sample_rate': 48000}
+2026-04-23 19:58:46,650 - INFO - Audio WS session started client_id=c32eb30d-e082-46de-b92f-f443c0c27ca8 input_sr=48000 output_sr=48000
+2026-04-23 19:58:46,650 - INFO - 📤 WS MESSAGE SENT client_id=c32eb30d-e082-46de-b92f-f443c0c27ca8 type=started data={'type': 'started', 'input_sample_rate': 48000, 'audio_output_sample_rate': 48000, 'encoding': 'pcm_s16le', 'channels': 1}
+2026-04-23 19:58:46,721 - INFO - Sending pending voice summary client_id=c32eb30d-e082-46de-b92f-f443c0c27ca8
+2026-04-23 19:58:46,722 - INFO - 📤 WS MESSAGE SENT client_id=c32eb30d-e082-46de-b92f-f443c0c27ca8 type=emotion data={'type': 'emotion', 'name': 'greeting'}
+2026-04-23 19:58:46,723 - INFO - 📤 WS MESSAGE SENT client_id=c32eb30d-e082-46de-b92f-f443c0c27ca8 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-23 19:58:46,723 - INFO - 📤 WS MESSAGE SENT client_id=c32eb30d-e082-46de-b92f-f443c0c27ca8 type=response data={'type': 'response', 'text': 'Hello vivien, you have 3 trips. The first one is for test 3. Have a great day.'}
+2026-04-23 19:58:46,723 - INFO - TTS start client_id=c32eb30d-e082-46de-b92f-f443c0c27ca8 request_id=1 event_type=response text_len=78
+2026-04-23 19:58:46,725 - INFO - TTS end client_id=c32eb30d-e082-46de-b92f-f443c0c27ca8 request_id=1 chunks=0 elapsed_ms=1.4 feeding_done=True cancel_flag=False
+2026-04-23 19:58:47,253 - ERROR - Erreur dans le listen_loop du Piper: name 'logger' is not defined
+2026-04-23 19:58:49,270 - INFO - WebSocket Piper connecté.
+2026-04-23 19:58:50,732 - INFO - 📤 WS MESSAGE SENT client_id=c32eb30d-e082-46de-b92f-f443c0c27ca8 type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-23 19:59:02,249 - WARNING - Connexion Piper fermée. Tentative de reconnexion...
+2026-04-23 19:59:03,256 - ERROR - Erreur de connexion au serveur Piper: [Errno 111] Connection refused
+2026-04-23 19:59:04,265 - ERROR - Erreur de connexion au serveur Piper: [Errno 111] Connection refused
+2026-04-23 19:59:05,272 - ERROR - Erreur de connexion au serveur Piper: [Errno 111] Connection refused
+2026-04-23 19:59:06,282 - ERROR - Erreur de connexion au serveur Piper: [Errno 111] Connection refused
+2026-04-23 19:59:07,289 - ERROR - Erreur de connexion au serveur Piper: [Errno 111] Connection refused
+2026-04-23 19:59:08,300 - ERROR - Erreur de connexion au serveur Piper: [Errno 111] Connection refused
+2026-04-23 19:59:09,305 - ERROR - Erreur de connexion au serveur Piper: [Errno 111] Connection refused
+2026-04-23 19:59:10,334 - ERROR - Erreur de connexion au serveur Piper: [Errno 111] Connection refused
+2026-04-23 19:59:11,342 - ERROR - Erreur de connexion au serveur Piper: [Errno 111] Connection refused
+2026-04-23 19:59:12,354 - ERROR - Erreur de connexion au serveur Piper: [Errno 111] Connection refused
+2026-04-23 19:59:13,360 - ERROR - Erreur de connexion au serveur Piper: [Errno 111] Connection refused
+2026-04-23 19:59:14,367 - ERROR - Erreur de connexion au serveur Piper: [Errno 111] Connection refused
+2026-04-23 19:59:15,373 - ERROR - Erreur de connexion au serveur Piper: [Errno 111] Connection refused
+2026-04-23 19:59:16,381 - ERROR - Erreur de connexion au serveur Piper: [Errno 111] Connection refused
+2026-04-23 19:59:17,395 - ERROR - Erreur de connexion au serveur Piper: [Errno 111] Connection refused
+2026-04-23 19:59:18,403 - ERROR - Erreur de connexion au serveur Piper: [Errno 111] Connection refused
+2026-04-23 19:59:19,413 - ERROR - Erreur de connexion au serveur Piper: [Errno 111] Connection refused
+2026-04-23 19:59:20,420 - ERROR - Erreur de connexion au serveur Piper: [Errno 111] Connection refused
+2026-04-23 19:59:21,430 - ERROR - Erreur de connexion au serveur Piper: [Errno 111] Connection refused
+2026-04-23 19:59:22,447 - INFO - WebSocket Piper connecté.
+2026-04-23 19:59:27,828 - INFO - Audio WS cleaned up client_id=c32eb30d-e082-46de-b92f-f443c0c27ca8
+2026-04-23 19:59:27,829 - INFO - WS disconnected client_id=c32eb30d-e082-46de-b92f-f443c0c27ca8
+2026-04-23 19:59:27,830 - INFO - connection closed
+2026-04-23 19:59:32,163 - INFO - 102.107.198.127:0 - "WebSocket /ws" [accepted]
+2026-04-23 19:59:32,165 - INFO - WS connected client_id=2061d253-704e-4a11-83ab-3b9cd1907f99
+2026-04-23 19:59:32,168 - INFO - connection open
+2026-04-23 19:59:32,266 - INFO - 📨 WS MESSAGE RECEIVED client_id=2061d253-704e-4a11-83ab-3b9cd1907f99 type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-04-23 19:59:32,267 - INFO - 📨 NOTIFICATION RECEIVED client_id=2061d253-704e-4a11-83ab-3b9cd1907f99 type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-04-23 19:59:32,267 - INFO - 🚚 Identifying driver client_id=2061d253-704e-4a11-83ab-3b9cd1907f99 serial=000
+2026-04-23 19:59:32,270 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-24 01:58:57
+2026-04-23 19:59:32,270 - INFO - Récupération des trips pour le driver: 000
+2026-04-23 19:59:32,271 - INFO - Recherche du driver par query: 000
+2026-04-23 19:59:32,271 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 19:59:32,445 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 19:59:32,446 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 19:59:32,447 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-23 19:59:32,447 - INFO - Recherche du driver par query: 000
+2026-04-23 19:59:32,447 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 19:59:32,495 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 19:59:32,496 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-23 19:59:32,496 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-23 19:59:32,598 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-23 19:59:32,598 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-23 19:59:32,599 - INFO - Recherche des packages pour le schedule: 69e9e95f6e4809534064045e
+2026-04-23 19:59:32,599 - INFO - Recherche par référence: field=schedule_id, value=69e9e95f6e4809534064045e
+2026-04-23 19:59:32,659 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69e9e95f6e4809534064045e
+2026-04-23 19:59:32,660 - INFO - Récupération du package par ID: 69e6bdaa6e48095340640449
+2026-04-23 19:59:32,660 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640449
+2026-04-23 19:59:32,707 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 19:59:32,800 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdaa6e48095340640449
+2026-04-23 19:59:32,801 - INFO - Récupération du package par ID: 69e6bdc16e4809534064044b
+2026-04-23 19:59:32,801 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044b
+2026-04-23 19:59:32,849 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 19:59:32,942 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdc16e4809534064044b
+2026-04-23 19:59:32,943 - INFO - Récupération du package par ID: 69e6be526e4809534064044d
+2026-04-23 19:59:32,944 - INFO - Récupération de l'instance: 69e6be526e4809534064044d
+2026-04-23 19:59:32,992 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 19:59:33,044 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be526e4809534064044d
+2026-04-23 19:59:33,045 - INFO - Package: 69e6be526e4809534064044d, address field: 69e6be526e4809534064044c
+2026-04-23 19:59:33,046 - INFO - Récupération adresse: 69e6be526e4809534064044c
+2026-04-23 19:59:33,046 - INFO - Récupération de l'adresse par ID: 69e6be526e4809534064044c
+2026-04-23 19:59:33,046 - INFO - Récupération de l'instance: 69e6be526e4809534064044c
+2026-04-23 19:59:33,094 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be526e4809534064044c
+2026-04-23 19:59:33,095 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-23 19:59:33,095 - INFO - Trip créé: id=69e6be526e4809534064044d, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-23 19:59:33,096 - INFO - Récupération du package par ID: 69e6be636e4809534064044f
+2026-04-23 19:59:33,096 - INFO - Récupération de l'instance: 69e6be636e4809534064044f
+2026-04-23 19:59:33,144 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 19:59:33,196 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be636e4809534064044f
+2026-04-23 19:59:33,197 - INFO - Package: 69e6be636e4809534064044f, address field: 69e6be636e4809534064044e
+2026-04-23 19:59:33,197 - INFO - Récupération adresse: 69e6be636e4809534064044e
+2026-04-23 19:59:33,198 - INFO - Récupération de l'adresse par ID: 69e6be636e4809534064044e
+2026-04-23 19:59:33,198 - INFO - Récupération de l'instance: 69e6be636e4809534064044e
+2026-04-23 19:59:33,250 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be636e4809534064044e
+2026-04-23 19:59:33,250 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-23 19:59:33,251 - INFO - Trip créé: id=69e6be636e4809534064044f, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-23 19:59:33,251 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-23 19:59:33,251 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-23 19:59:33,301 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 19:59:33,353 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-23 19:59:33,354 - INFO - Package: 69e6be736e48095340640451, address field: 69e6be736e48095340640450
+2026-04-23 19:59:33,354 - INFO - Récupération adresse: 69e6be736e48095340640450
+2026-04-23 19:59:33,354 - INFO - Récupération de l'adresse par ID: 69e6be736e48095340640450
+2026-04-23 19:59:33,354 - INFO - Récupération de l'instance: 69e6be736e48095340640450
+2026-04-23 19:59:33,404 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be736e48095340640450
+2026-04-23 19:59:33,405 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-23 19:59:33,405 - INFO - Trip créé: id=69e6be736e48095340640451, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-23 19:59:33,405 - INFO - ✅ SUCCÈS: 3 trip(s) créé(s) et ordonné(s) par position
+2026-04-23 19:59:33,408 - INFO - ✅ SUCCÈS: 3 trip(s) exporté(s) vers data.json
+2026-04-23 19:59:33,410 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-24 01:58:57
+2026-04-23 19:59:33,410 - INFO - Recherche du driver par query: 000
+2026-04-23 19:59:33,410 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 19:59:33,592 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 19:59:33,596 - INFO - ✅ Found 3 trips for driver vivien (000)
+2026-04-23 19:59:33,597 - INFO - 📤 NOTIFICATION SENT client_id=2061d253-704e-4a11-83ab-3b9cd1907f99 type=trips_list data={'driver_serial': '000', 'trip_count': 3, 'trips': [{'id': '69e6be526e4809534064044d', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 3', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69e6be636e4809534064044f', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 4', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69e6be736e48095340640451', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 5', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}]}
+2026-04-23 19:59:33,598 - INFO - 📤 WS MESSAGE SENT client_id=2061d253-704e-4a11-83ab-3b9cd1907f99 type=notification data={'type': 'notification', 'notification_type': 'trips_list', 'data': {'driver_serial': '000', 'trip_count': 3, 'trips': [{'id': '69e6be526e4809534064044d', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 3', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69e6be636e4809534064044f', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 4', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69e6be736e48095340640451', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 5', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}]}}
+2026-04-23 19:59:33,600 - INFO - 📤 WS MESSAGE SENT client_id=2061d253-704e-4a11-83ab-3b9cd1907f99 type=error data={'type': 'error', 'message': 'unknown type'}
+2026-04-23 19:59:33,600 - INFO - 📨 WS MESSAGE RECEIVED client_id=2061d253-704e-4a11-83ab-3b9cd1907f99 type=start data={'type': 'start', 'input_sample_rate': 48000}
+2026-04-23 19:59:33,601 - INFO - 📨 NOTIFICATION RECEIVED client_id=2061d253-704e-4a11-83ab-3b9cd1907f99 type=start data={'type': 'start', 'input_sample_rate': 48000}
+2026-04-23 19:59:33,601 - INFO - Audio WS session started client_id=2061d253-704e-4a11-83ab-3b9cd1907f99 input_sr=48000 output_sr=48000
+2026-04-23 19:59:33,601 - INFO - 📤 WS MESSAGE SENT client_id=2061d253-704e-4a11-83ab-3b9cd1907f99 type=started data={'type': 'started', 'input_sample_rate': 48000, 'audio_output_sample_rate': 48000, 'encoding': 'pcm_s16le', 'channels': 1}
+2026-04-23 19:59:33,602 - INFO - Sending pending voice summary client_id=2061d253-704e-4a11-83ab-3b9cd1907f99
+2026-04-23 19:59:33,603 - INFO - 📤 WS MESSAGE SENT client_id=2061d253-704e-4a11-83ab-3b9cd1907f99 type=emotion data={'type': 'emotion', 'name': 'greeting'}
+2026-04-23 19:59:33,603 - INFO - 📤 WS MESSAGE SENT client_id=2061d253-704e-4a11-83ab-3b9cd1907f99 type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-23 19:59:33,604 - INFO - 📤 WS MESSAGE SENT client_id=2061d253-704e-4a11-83ab-3b9cd1907f99 type=response data={'type': 'response', 'text': 'Hello vivien, you have 3 trips. The first one is for test 3. Have a great day.'}
+2026-04-23 19:59:33,604 - INFO - TTS start client_id=2061d253-704e-4a11-83ab-3b9cd1907f99 request_id=1 event_type=response text_len=78
+2026-04-23 19:59:33,606 - INFO - TTS end client_id=2061d253-704e-4a11-83ab-3b9cd1907f99 request_id=1 chunks=0 elapsed_ms=1.5 feeding_done=True cancel_flag=False
+2026-04-23 19:59:33,997 - ERROR - Erreur dans le listen_loop du Piper: name 'logger' is not defined
+2026-04-23 19:59:36,013 - INFO - WebSocket Piper connecté.
+2026-04-23 19:59:37,628 - INFO - 📤 WS MESSAGE SENT client_id=2061d253-704e-4a11-83ab-3b9cd1907f99 type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-23 20:04:40,897 - INFO - Shutting down
+2026-04-23 20:04:40,902 - INFO - Audio WS cleaned up client_id=2061d253-704e-4a11-83ab-3b9cd1907f99
+2026-04-23 20:04:40,902 - INFO - WS disconnected client_id=2061d253-704e-4a11-83ab-3b9cd1907f99
+2026-04-23 20:04:40,903 - INFO - connection closed
+2026-04-23 20:04:41,002 - INFO - Waiting for application shutdown.
+2026-04-23 20:04:41,004 - INFO - Fermeture du PiperClientService
+2026-04-23 20:04:41,215 - INFO - DeliveryService shutdown
+2026-04-23 20:04:41,216 - INFO - DeliveryStateMachine shutdown
+2026-04-23 20:04:41,216 - INFO - NotificationService shutdown
+2026-04-23 20:04:41,217 - INFO - MascoteService arrêté
+2026-04-23 20:04:41,503 - INFO - Application shutdown complete.
+2026-04-23 20:04:41,504 - INFO - Finished server process [9684]
+2026-04-23 20:04:53,501 - INFO - Handler registered for message type: identify_driver
+2026-04-23 20:04:53,502 - INFO - Handler registered for message type: get_trips
+2026-04-23 20:04:53,521 - INFO - Started server process [11523]
+2026-04-23 20:04:53,521 - INFO - Waiting for application startup.
+2026-04-23 20:04:55,429 - INFO - HTTP Request: GET https://huggingface.co/api/models/Systran/faster-whisper-small/revision/main "HTTP/1.1 200 OK"
+2026-04-23 20:04:59,749 - INFO - MascoteService démarré
+2026-04-23 20:04:59,749 - INFO - NotificationService started
+2026-04-23 20:04:59,750 - INFO - DeliveryService started
+2026-04-23 20:04:59,750 - INFO - DeliveryStateMachine started
+2026-04-23 20:04:59,750 - INFO - Connexion au Piper Streaming Server externe sur ws://localhost:9000/
+2026-04-23 20:04:59,767 - INFO - WebSocket Piper connecté.
+2026-04-23 20:04:59,768 - INFO - Denoise disabled
+2026-04-23 20:04:59,768 - INFO - Warmup started
+2026-04-23 20:04:59,772 - INFO - Warmup vad ok in 0.00s
+2026-04-23 20:04:59,774 - INFO - Processing audio with duration 00:01.000
+2026-04-23 20:05:01,136 - INFO - Warmup stt ok in 1.36s
+2026-04-23 20:05:02,672 - INFO - Warmup llm ok in 1.53s
+2026-04-23 20:05:02,672 - ERROR - Warmup tts failed
+Traceback (most recent call last):
+  File "/home/server/agent-nvidia-v2/main.py", line 121, in _run_warmup_step
+    await asyncio.wait_for(op(), timeout=config.PREWARM_TIMEOUT_SEC)
+  File "/usr/lib/python3.10/asyncio/tasks.py", line 445, in wait_for
+    return fut.result()
+  File "/home/server/agent-nvidia-v2/main.py", line 151, in _warm_tts
+    async for _ in piper_service.synthesize_stream(config.PREWARM_TTS_TEXT):
+AttributeError: 'PiperClientService' object has no attribute 'synthesize_stream'
+2026-04-23 20:05:02,677 - INFO - Warmup finished
+2026-04-23 20:05:02,677 - INFO - Application startup complete.
+2026-04-23 20:05:02,678 - INFO - Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-04-23 20:05:34,872 - INFO - 102.107.198.127:0 - "WebSocket /ws" [accepted]
+2026-04-23 20:05:34,875 - INFO - WS connected client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f
+2026-04-23 20:05:34,877 - INFO - connection open
+2026-04-23 20:05:35,172 - INFO - 📨 WS MESSAGE RECEIVED client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-04-23 20:05:35,174 - INFO - 📨 NOTIFICATION RECEIVED client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-04-23 20:05:35,174 - INFO - 🚚 Identifying driver client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f serial=000
+2026-04-23 20:05:35,425 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-24 01:58:57
+2026-04-23 20:05:35,426 - INFO - Récupération des trips pour le driver: 000
+2026-04-23 20:05:35,426 - INFO - Recherche du driver par query: 000
+2026-04-23 20:05:35,426 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 20:05:35,740 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 20:05:35,742 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 20:05:35,742 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-23 20:05:35,742 - INFO - Recherche du driver par query: 000
+2026-04-23 20:05:35,742 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 20:05:35,790 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 20:05:35,791 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-23 20:05:35,792 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-23 20:05:35,897 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-23 20:05:35,898 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-23 20:05:35,898 - INFO - Recherche des packages pour le schedule: 69e9e95f6e4809534064045e
+2026-04-23 20:05:35,898 - INFO - Recherche par référence: field=schedule_id, value=69e9e95f6e4809534064045e
+2026-04-23 20:05:35,961 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69e9e95f6e4809534064045e
+2026-04-23 20:05:35,962 - INFO - Récupération du package par ID: 69e6bdaa6e48095340640449
+2026-04-23 20:05:35,962 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640449
+2026-04-23 20:05:36,011 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 20:05:36,106 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdaa6e48095340640449
+2026-04-23 20:05:36,107 - INFO - Récupération du package par ID: 69e6bdc16e4809534064044b
+2026-04-23 20:05:36,107 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044b
+2026-04-23 20:05:36,158 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 20:05:36,251 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdc16e4809534064044b
+2026-04-23 20:05:36,252 - INFO - Récupération du package par ID: 69e6be526e4809534064044d
+2026-04-23 20:05:36,253 - INFO - Récupération de l'instance: 69e6be526e4809534064044d
+2026-04-23 20:05:36,300 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 20:05:36,359 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be526e4809534064044d
+2026-04-23 20:05:36,359 - INFO - Package: 69e6be526e4809534064044d, address field: 69e6be526e4809534064044c
+2026-04-23 20:05:36,360 - INFO - Récupération adresse: 69e6be526e4809534064044c
+2026-04-23 20:05:36,360 - INFO - Récupération de l'adresse par ID: 69e6be526e4809534064044c
+2026-04-23 20:05:36,360 - INFO - Récupération de l'instance: 69e6be526e4809534064044c
+2026-04-23 20:05:36,408 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be526e4809534064044c
+2026-04-23 20:05:36,408 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-23 20:05:36,409 - INFO - Trip créé: id=69e6be526e4809534064044d, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-23 20:05:36,409 - INFO - Récupération du package par ID: 69e6be636e4809534064044f
+2026-04-23 20:05:36,409 - INFO - Récupération de l'instance: 69e6be636e4809534064044f
+2026-04-23 20:05:36,458 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 20:05:36,514 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be636e4809534064044f
+2026-04-23 20:05:36,515 - INFO - Package: 69e6be636e4809534064044f, address field: 69e6be636e4809534064044e
+2026-04-23 20:05:36,515 - INFO - Récupération adresse: 69e6be636e4809534064044e
+2026-04-23 20:05:36,515 - INFO - Récupération de l'adresse par ID: 69e6be636e4809534064044e
+2026-04-23 20:05:36,516 - INFO - Récupération de l'instance: 69e6be636e4809534064044e
+2026-04-23 20:05:36,561 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be636e4809534064044e
+2026-04-23 20:05:36,561 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-23 20:05:36,561 - INFO - Trip créé: id=69e6be636e4809534064044f, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-23 20:05:36,562 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-23 20:05:36,562 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-23 20:05:36,610 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 20:05:36,667 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-23 20:05:36,667 - INFO - Package: 69e6be736e48095340640451, address field: 69e6be736e48095340640450
+2026-04-23 20:05:36,668 - INFO - Récupération adresse: 69e6be736e48095340640450
+2026-04-23 20:05:36,668 - INFO - Récupération de l'adresse par ID: 69e6be736e48095340640450
+2026-04-23 20:05:36,668 - INFO - Récupération de l'instance: 69e6be736e48095340640450
+2026-04-23 20:05:36,716 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be736e48095340640450
+2026-04-23 20:05:36,716 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-23 20:05:36,717 - INFO - Trip créé: id=69e6be736e48095340640451, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-23 20:05:36,717 - INFO - ✅ SUCCÈS: 3 trip(s) créé(s) et ordonné(s) par position
+2026-04-23 20:05:36,719 - INFO - ✅ SUCCÈS: 3 trip(s) exporté(s) vers data.json
+2026-04-23 20:05:36,721 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-24 01:58:57
+2026-04-23 20:05:36,721 - INFO - Recherche du driver par query: 000
+2026-04-23 20:05:36,722 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 20:05:36,891 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 20:05:36,896 - INFO - ✅ Found 3 trips for driver vivien (000)
+2026-04-23 20:05:36,896 - INFO - 📤 NOTIFICATION SENT client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f type=trips_list data={'driver_serial': '000', 'trip_count': 3, 'trips': [{'id': '69e6be526e4809534064044d', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 3', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69e6be636e4809534064044f', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 4', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69e6be736e48095340640451', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 5', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}]}
+2026-04-23 20:05:36,897 - INFO - 📤 WS MESSAGE SENT client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f type=notification data={'type': 'notification', 'notification_type': 'trips_list', 'data': {'driver_serial': '000', 'trip_count': 3, 'trips': [{'id': '69e6be526e4809534064044d', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 3', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69e6be636e4809534064044f', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 4', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69e6be736e48095340640451', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 5', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}]}}
+2026-04-23 20:05:36,899 - INFO - 📤 WS MESSAGE SENT client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f type=error data={'type': 'error', 'message': 'unknown type'}
+2026-04-23 20:05:36,899 - INFO - 📨 WS MESSAGE RECEIVED client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f type=start data={'type': 'start', 'input_sample_rate': 48000}
+2026-04-23 20:05:36,900 - INFO - 📨 NOTIFICATION RECEIVED client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f type=start data={'type': 'start', 'input_sample_rate': 48000}
+2026-04-23 20:05:36,900 - INFO - Audio WS session started client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f input_sr=48000 output_sr=48000
+2026-04-23 20:05:36,901 - INFO - 📤 WS MESSAGE SENT client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f type=started data={'type': 'started', 'input_sample_rate': 48000, 'audio_output_sample_rate': 48000, 'encoding': 'pcm_s16le', 'channels': 1}
+2026-04-23 20:05:36,902 - INFO - Sending pending voice summary client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f
+2026-04-23 20:05:36,903 - INFO - 📤 WS MESSAGE SENT client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f type=emotion data={'type': 'emotion', 'name': 'greeting'}
+2026-04-23 20:05:38,471 - INFO - 📤 WS MESSAGE SENT client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-23 20:05:38,472 - INFO - 📤 WS MESSAGE SENT client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f type=response data={'type': 'response', 'text': 'Good to see you, Vivien! Trip 1 is heading to test 3.'}
+2026-04-23 20:05:38,472 - INFO - TTS start client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f request_id=1 event_type=response text_len=53
+2026-04-23 20:05:38,473 - INFO - TTS end client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f request_id=1 chunks=0 elapsed_ms=0.7 feeding_done=True cancel_flag=False
+2026-04-23 20:05:38,688 - INFO - TTS audio chunk client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f chunks=1 samples=8916
+2026-04-23 20:05:43,397 - INFO - 📤 WS MESSAGE SENT client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-23 20:05:47,184 - INFO - VAD speech_start client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f p=0.978
+2026-04-23 20:05:47,186 - INFO - 📤 WS MESSAGE SENT client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f type=vad data={'type': 'vad', 'event': 'speech_start', 'p': 0.9778658747673035}
+2026-04-23 20:05:50,132 - INFO - Utterance end client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f samples=54272
+2026-04-23 20:05:50,134 - INFO - 📤 WS MESSAGE SENT client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f type=vad data={'type': 'vad', 'event': 'utterance_end', 'samples': 54272}
+2026-04-23 20:05:50,153 - INFO - STT raw input client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f ms=3392 rms=0.0689 peak=0.6187 n=54272 sr=16000
+2026-04-23 20:05:50,208 - INFO - Saved STT audio compare client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f raw=audio_2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f_8442c0a7_raw.wav denoised=audio_2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f_8442c0a7_denoised.wav raw_rms=0.068870 denoised_rms=0.068870 sr=16000
+2026-04-23 20:05:50,209 - INFO - Processing audio with duration 00:03.392
+2026-04-23 20:05:51,065 - INFO - STT transcript client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f text='Thank you, can you start the navigation?'
+2026-04-23 20:05:51,065 - INFO - 📤 WS MESSAGE SENT client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f type=transcript data={'type': 'transcript', 'text': 'Thank you, can you start the navigation?'}
+2026-04-23 20:05:51,066 - INFO - 📤 WS MESSAGE SENT client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-23 20:05:51,321 - INFO - HTTP Request: POST http://localhost:8080/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-23 20:05:52,454 - INFO - Action: START_NAVIGATION trip_id=69e6be526e4809534064044d (first planned in list, 3 rows)
+2026-04-23 20:05:52,454 - INFO - 📤 WS MESSAGE SENT client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.START_NAVIGATION', 'extras': {'id': '69e6be526e4809534064044d'}}
+2026-04-23 20:05:52,647 - INFO - HTTP Request: POST http://localhost:8080/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-23 20:05:52,649 - INFO - LLM first chunk client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f latency_ms=2512.7
+2026-04-23 20:05:52,649 - INFO - 📤 WS MESSAGE SENT client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f type=response data={'type': 'response', 'text': 'Navigation'}
+2026-04-23 20:05:52,654 - INFO - 📨 WS MESSAGE RECEIVED client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f type=arrived data={'type': 'arrived', 'id': '69e6be526e4809534064044d'}
+2026-04-23 20:05:52,655 - INFO - 📨 NOTIFICATION RECEIVED client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f type=arrived data={'type': 'arrived', 'id': '69e6be526e4809534064044d'}
+2026-04-23 20:05:52,655 - INFO - 📮 EXTERNAL CONTROL REÇU client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f action=arrived extras={'trip_id': '69e6be526e4809534064044d'}
+2026-04-23 20:05:52,655 - INFO - ✅ Traitement action arrived pour client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f
+2026-04-23 20:05:52,655 - INFO - 🚚 DRIVER ARRIVÉ client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f trip_id=69e6be526e4809534064044d
+2026-04-23 20:05:52,656 - INFO - TTS fade-out + stop client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f
+2026-04-23 20:05:52,658 - INFO - 📤 WS MESSAGE SENT client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f type=tts_stop_now data={'type': 'tts_stop_now'}
+2026-04-23 20:05:52,811 - INFO - 🚀 Démarrage de la state machine pour client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f
+2026-04-23 20:05:52,811 - INFO - State machine: entered MODE_1 → STATE_1 client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f trip_id=69e6be526e4809534064044d
+2026-04-23 20:05:52,812 - INFO - 🗣️ Envoi question TTS: 'Is the delivery completed?'
+2026-04-23 20:05:53,626 - INFO - 📤 WS MESSAGE SENT client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-23 20:05:53,627 - INFO - 📤 WS MESSAGE SENT client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f type=response data={'type': 'response', 'text': 'Is the package delivered where it needs to be?'}
+2026-04-23 20:05:53,628 - INFO - TTS start client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f request_id=3 event_type=response text_len=46
+2026-04-23 20:05:53,629 - INFO - TTS end client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f request_id=3 chunks=0 elapsed_ms=1.2 feeding_done=True cancel_flag=False
+2026-04-23 20:05:54,106 - INFO - TTS audio chunk client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f chunks=1 samples=8916
+2026-04-23 20:05:58,210 - INFO - 📤 WS MESSAGE SENT client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-23 20:08:34,631 - INFO - Audio WS cleaned up client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f
+2026-04-23 20:08:34,632 - INFO - WS disconnected client_id=2cbecc9c-0f07-4e7b-a97f-4c70e1a9555f
+2026-04-23 20:08:34,633 - INFO - connection closed
+2026-04-23 20:10:22,247 - INFO - Shutting down
+2026-04-23 20:10:22,350 - INFO - Waiting for application shutdown.
+2026-04-23 20:10:22,352 - INFO - Fermeture du PiperClientService
+2026-04-23 20:10:22,555 - INFO - DeliveryService shutdown
+2026-04-23 20:10:22,556 - INFO - DeliveryStateMachine shutdown
+2026-04-23 20:10:22,557 - INFO - NotificationService shutdown
+2026-04-23 20:10:22,558 - INFO - MascoteService arrêté
+2026-04-23 20:10:22,859 - INFO - Application shutdown complete.
+2026-04-23 20:10:22,862 - INFO - Finished server process [11523]
+2026-04-23 20:10:27,337 - INFO - Handler registered for message type: identify_driver
+2026-04-23 20:10:27,338 - INFO - Handler registered for message type: get_trips
+2026-04-23 20:10:27,357 - INFO - Started server process [12952]
+2026-04-23 20:10:27,357 - INFO - Waiting for application startup.
+2026-04-23 20:10:29,214 - INFO - HTTP Request: GET https://huggingface.co/api/models/Systran/faster-whisper-small/revision/main "HTTP/1.1 200 OK"
+2026-04-23 20:10:31,813 - INFO - MascoteService démarré
+2026-04-23 20:10:31,814 - INFO - NotificationService started
+2026-04-23 20:10:31,814 - INFO - DeliveryService started
+2026-04-23 20:10:31,814 - INFO - DeliveryStateMachine started
+2026-04-23 20:10:31,815 - INFO - Connexion au Piper Streaming Server externe sur ws://localhost:9000/
+2026-04-23 20:10:31,832 - INFO - WebSocket Piper connecté.
+2026-04-23 20:10:31,833 - INFO - Denoise disabled
+2026-04-23 20:10:31,833 - INFO - Warmup started
+2026-04-23 20:10:31,838 - INFO - Warmup vad ok in 0.00s
+2026-04-23 20:10:31,839 - INFO - Processing audio with duration 00:01.000
+2026-04-23 20:10:33,114 - INFO - Warmup stt ok in 1.28s
+2026-04-23 20:10:35,633 - INFO - Warmup llm ok in 2.52s
+2026-04-23 20:10:35,633 - ERROR - Warmup tts failed
+Traceback (most recent call last):
+  File "/home/server/agent-nvidia-v2/main.py", line 121, in _run_warmup_step
+    await asyncio.wait_for(op(), timeout=config.PREWARM_TIMEOUT_SEC)
+  File "/usr/lib/python3.10/asyncio/tasks.py", line 445, in wait_for
+    return fut.result()
+  File "/home/server/agent-nvidia-v2/main.py", line 151, in _warm_tts
+    async for _ in piper_service.synthesize_stream(config.PREWARM_TTS_TEXT):
+AttributeError: 'PiperClientService' object has no attribute 'synthesize_stream'
+2026-04-23 20:10:35,643 - INFO - Warmup finished
+2026-04-23 20:10:35,643 - INFO - Application startup complete.
+2026-04-23 20:10:35,644 - INFO - Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-04-23 20:10:46,270 - INFO - 102.107.198.127:0 - "WebSocket /ws" [accepted]
+2026-04-23 20:10:46,272 - INFO - WS connected client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa
+2026-04-23 20:10:46,274 - INFO - connection open
+2026-04-23 20:10:46,368 - INFO - 📨 WS MESSAGE RECEIVED client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-04-23 20:10:46,369 - INFO - 📨 NOTIFICATION RECEIVED client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}
+2026-04-23 20:10:46,370 - INFO - 🚚 Identifying driver client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa serial=000
+2026-04-23 20:10:46,645 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-24 01:58:57
+2026-04-23 20:10:46,646 - INFO - Récupération des trips pour le driver: 000
+2026-04-23 20:10:46,646 - INFO - Recherche du driver par query: 000
+2026-04-23 20:10:46,646 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 20:10:46,966 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 20:10:46,967 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 20:10:46,967 - INFO - Recherche des schedules par driver serial number: 000
+2026-04-23 20:10:46,968 - INFO - Recherche du driver par query: 000
+2026-04-23 20:10:46,968 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 20:10:47,020 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 20:10:47,022 - INFO - Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb
+2026-04-23 20:10:47,022 - INFO - Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb
+2026-04-23 20:10:47,134 - INFO - 2 schedule(s) trouvé(s) sur 35 entité(s)
+2026-04-23 20:10:47,135 - INFO - ✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb
+2026-04-23 20:10:47,135 - INFO - Recherche des packages pour le schedule: 69e9e95f6e4809534064045e
+2026-04-23 20:10:47,136 - INFO - Recherche par référence: field=schedule_id, value=69e9e95f6e4809534064045e
+2026-04-23 20:10:47,196 - INFO - ✅ SUCCÈS: 5 package(s) trouvé(s) pour le schedule 69e9e95f6e4809534064045e
+2026-04-23 20:10:47,197 - INFO - Récupération du package par ID: 69e6bdaa6e48095340640449
+2026-04-23 20:10:47,197 - INFO - Récupération de l'instance: 69e6bdaa6e48095340640449
+2026-04-23 20:10:47,246 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 20:10:47,338 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdaa6e48095340640449
+2026-04-23 20:10:47,339 - INFO - Récupération du package par ID: 69e6bdc16e4809534064044b
+2026-04-23 20:10:47,339 - INFO - Récupération de l'instance: 69e6bdc16e4809534064044b
+2026-04-23 20:10:47,388 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 20:10:47,493 - INFO - ✅ SUCCÈS: Package trouvé: 69e6bdc16e4809534064044b
+2026-04-23 20:10:47,494 - INFO - Récupération du package par ID: 69e6be526e4809534064044d
+2026-04-23 20:10:47,495 - INFO - Récupération de l'instance: 69e6be526e4809534064044d
+2026-04-23 20:10:47,547 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 20:10:47,605 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be526e4809534064044d
+2026-04-23 20:10:47,605 - INFO - Package: 69e6be526e4809534064044d, address field: 69e6be526e4809534064044c
+2026-04-23 20:10:47,606 - INFO - Récupération adresse: 69e6be526e4809534064044c
+2026-04-23 20:10:47,606 - INFO - Récupération de l'adresse par ID: 69e6be526e4809534064044c
+2026-04-23 20:10:47,606 - INFO - Récupération de l'instance: 69e6be526e4809534064044c
+2026-04-23 20:10:47,660 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be526e4809534064044c
+2026-04-23 20:10:47,661 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-23 20:10:47,662 - INFO - Trip créé: id=69e6be526e4809534064044d, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-23 20:10:47,662 - INFO - Récupération du package par ID: 69e6be636e4809534064044f
+2026-04-23 20:10:47,662 - INFO - Récupération de l'instance: 69e6be636e4809534064044f
+2026-04-23 20:10:47,708 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 20:10:47,763 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be636e4809534064044f
+2026-04-23 20:10:47,764 - INFO - Package: 69e6be636e4809534064044f, address field: 69e6be636e4809534064044e
+2026-04-23 20:10:47,764 - INFO - Récupération adresse: 69e6be636e4809534064044e
+2026-04-23 20:10:47,764 - INFO - Récupération de l'adresse par ID: 69e6be636e4809534064044e
+2026-04-23 20:10:47,765 - INFO - Récupération de l'instance: 69e6be636e4809534064044e
+2026-04-23 20:10:47,817 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be636e4809534064044e
+2026-04-23 20:10:47,817 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-23 20:10:47,818 - INFO - Trip créé: id=69e6be636e4809534064044f, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-23 20:10:47,818 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-23 20:10:47,818 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-23 20:10:47,870 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 20:10:47,928 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-23 20:10:47,928 - INFO - Package: 69e6be736e48095340640451, address field: 69e6be736e48095340640450
+2026-04-23 20:10:47,929 - INFO - Récupération adresse: 69e6be736e48095340640450
+2026-04-23 20:10:47,929 - INFO - Récupération de l'adresse par ID: 69e6be736e48095340640450
+2026-04-23 20:10:47,929 - INFO - Récupération de l'instance: 69e6be736e48095340640450
+2026-04-23 20:10:47,979 - INFO - ✅ SUCCÈS: Adresse trouvée: 69e6be736e48095340640450
+2026-04-23 20:10:47,979 - INFO - ✅ SUCCÈS: Adresse trouvée: Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie
+2026-04-23 20:10:47,980 - INFO - Trip créé: id=69e6be736e48095340640451, name=Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie, lat=36.8274771, lng=10.1948312
+2026-04-23 20:10:47,980 - INFO - ✅ SUCCÈS: 3 trip(s) créé(s) et ordonné(s) par position
+2026-04-23 20:10:47,982 - INFO - ✅ SUCCÈS: 3 trip(s) exporté(s) vers data.json
+2026-04-23 20:10:47,984 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-24 01:58:57
+2026-04-23 20:10:47,985 - INFO - Recherche du driver par query: 000
+2026-04-23 20:10:47,985 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-04-23 20:10:48,160 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)
+2026-04-23 20:10:48,165 - INFO - ✅ Found 3 trips for driver vivien (000)
+2026-04-23 20:10:48,165 - INFO - 📤 NOTIFICATION SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=trips_list data={'driver_serial': '000', 'trip_count': 3, 'trips': [{'id': '69e6be526e4809534064044d', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 3', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69e6be636e4809534064044f', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 4', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69e6be736e48095340640451', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 5', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}]}
+2026-04-23 20:10:48,166 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=notification data={'type': 'notification', 'notification_type': 'trips_list', 'data': {'driver_serial': '000', 'trip_count': 3, 'trips': [{'id': '69e6be526e4809534064044d', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 3', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69e6be636e4809534064044f', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 4', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}, {'id': '69e6be736e48095340640451', 'name': 'Cité El Khadra, Farhat Hached, Délégation Cité El Khadra, Tunis, Gouvernorat Tunis, 1003, Tunisie', 'latitude': 36.8274771, 'longitude': 10.1948312, 'clientName': 'test 5', 'packageInfo': '', 'deliveryStatus': 'planned', 'isFragile': False}]}}
+2026-04-23 20:10:48,168 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=error data={'type': 'error', 'message': 'unknown type'}
+2026-04-23 20:10:48,169 - INFO - 📨 WS MESSAGE RECEIVED client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=start data={'type': 'start', 'input_sample_rate': 48000}
+2026-04-23 20:10:48,169 - INFO - 📨 NOTIFICATION RECEIVED client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=start data={'type': 'start', 'input_sample_rate': 48000}
+2026-04-23 20:10:48,170 - INFO - Audio WS session started client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa input_sr=48000 output_sr=48000
+2026-04-23 20:10:48,170 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=started data={'type': 'started', 'input_sample_rate': 48000, 'audio_output_sample_rate': 48000, 'encoding': 'pcm_s16le', 'channels': 1}
+2026-04-23 20:10:48,171 - INFO - Sending pending voice summary client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa
+2026-04-23 20:10:48,172 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'greeting'}
+2026-04-23 20:10:49,300 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-23 20:10:49,301 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': 'Welcome, Vivien! Trip 1 is for test 3.'}
+2026-04-23 20:10:49,301 - INFO - TTS start client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa request_id=1 event_type=response text_len=38
+2026-04-23 20:10:49,302 - INFO - TTS end client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa request_id=1 chunks=0 elapsed_ms=1.0 feeding_done=True cancel_flag=False
+2026-04-23 20:10:49,593 - INFO - TTS audio chunk client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa chunks=1 samples=8916
+2026-04-23 20:10:54,023 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-23 20:10:56,061 - INFO - VAD speech_start client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa p=0.995
+2026-04-23 20:10:56,062 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=vad data={'type': 'vad', 'event': 'speech_start', 'p': 0.9950765371322632}
+2026-04-23 20:10:58,513 - INFO - Utterance end client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa samples=44032
+2026-04-23 20:10:58,515 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=vad data={'type': 'vad', 'event': 'utterance_end', 'samples': 44032}
+2026-04-23 20:10:58,527 - INFO - STT raw input client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa ms=2752 rms=0.0577 peak=0.6977 n=44032 sr=16000
+2026-04-23 20:10:58,555 - INFO - Saved STT audio compare client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa raw=audio_b942c4c7-0394-4eca-9c3d-e9362c82efaa_fe0fc0ba_raw.wav denoised=audio_b942c4c7-0394-4eca-9c3d-e9362c82efaa_fe0fc0ba_denoised.wav raw_rms=0.057696 denoised_rms=0.057696 sr=16000
+2026-04-23 20:10:58,557 - INFO - Processing audio with duration 00:02.752
+2026-04-23 20:10:59,277 - INFO - STT transcript client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa text='Thank you, start over in navigation.'
+2026-04-23 20:10:59,278 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=transcript data={'type': 'transcript', 'text': 'Thank you, start over in navigation.'}
+2026-04-23 20:10:59,278 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-23 20:10:59,523 - INFO - HTTP Request: POST http://localhost:8080/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-23 20:11:00,667 - INFO - Action: START_NAVIGATION trip_id=69e6be526e4809534064044d (first planned in list, 3 rows)
+2026-04-23 20:11:00,667 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.START_NAVIGATION', 'extras': {'id': '69e6be526e4809534064044d'}}
+2026-04-23 20:11:00,821 - INFO - 📨 WS MESSAGE RECEIVED client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=arrived data={'type': 'arrived', 'id': '69e6be526e4809534064044d'}
+2026-04-23 20:11:00,821 - INFO - 📨 NOTIFICATION RECEIVED client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=arrived data={'type': 'arrived', 'id': '69e6be526e4809534064044d'}
+2026-04-23 20:11:00,822 - INFO - 📮 EXTERNAL CONTROL REÇU client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa action=arrived extras={'trip_id': '69e6be526e4809534064044d'}
+2026-04-23 20:11:00,822 - INFO - ✅ Traitement action arrived pour client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa
+2026-04-23 20:11:00,822 - INFO - 🚚 DRIVER ARRIVÉ client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa trip_id=69e6be526e4809534064044d
+2026-04-23 20:11:00,822 - INFO - TTS fade-out + stop client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa
+2026-04-23 20:11:00,976 - INFO - 🚀 Démarrage de la state machine pour client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa
+2026-04-23 20:11:00,977 - INFO - State machine: entered MODE_1 → STATE_1 client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa trip_id=69e6be526e4809534064044d
+2026-04-23 20:11:00,977 - INFO - 🗣️ Envoi question TTS: 'Is the delivery completed?'
+2026-04-23 20:11:01,673 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-23 20:11:01,674 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': 'Is this the last stop for today?'}
+2026-04-23 20:11:01,674 - INFO - TTS start client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa request_id=3 event_type=response text_len=32
+2026-04-23 20:11:01,675 - INFO - TTS end client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa request_id=3 chunks=0 elapsed_ms=0.8 feeding_done=True cancel_flag=False
+2026-04-23 20:11:02,027 - INFO - TTS audio chunk client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa chunks=1 samples=8916
+2026-04-23 20:11:06,129 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-23 20:11:12,979 - INFO - VAD speech_start client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa p=0.977
+2026-04-23 20:11:12,980 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=vad data={'type': 'vad', 'event': 'speech_start', 'p': 0.9771011471748352}
+2026-04-23 20:11:14,040 - INFO - Utterance end client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa samples=25088
+2026-04-23 20:11:14,041 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=vad data={'type': 'vad', 'event': 'utterance_end', 'samples': 25088}
+2026-04-23 20:11:14,043 - INFO - STT raw input client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa ms=1568 rms=0.0942 peak=0.7383 n=25088 sr=16000
+2026-04-23 20:11:14,057 - INFO - Saved STT audio compare client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa raw=audio_b942c4c7-0394-4eca-9c3d-e9362c82efaa_44b273bc_raw.wav denoised=audio_b942c4c7-0394-4eca-9c3d-e9362c82efaa_44b273bc_denoised.wav raw_rms=0.094173 denoised_rms=0.094173 sr=16000
+2026-04-23 20:11:14,060 - INFO - Processing audio with duration 00:01.568
+2026-04-23 20:11:14,749 - INFO - STT transcript client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa text='Yes'
+2026-04-23 20:11:14,750 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=transcript data={'type': 'transcript', 'text': 'Yes'}
+2026-04-23 20:11:15,135 - INFO - STATE_1: YES detected client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa
+2026-04-23 20:11:15,135 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.MARK_DELIVERED', 'extras': {'com.avvc.maps.extra.DESTINATION_ID': '69e6be526e4809534064044d'}}
+2026-04-23 20:11:15,136 - INFO - 📍 MARK_DELIVERED sent client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa trip_id=69e6be526e4809534064044d
+2026-04-23 20:11:15,136 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'happy'}
+2026-04-23 20:11:15,136 - INFO - 😊 Emotion sent client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa name=happy
+2026-04-23 20:11:15,137 - INFO - STATE_1: next trip announced client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa trip_id=69e6be636e4809534064044f address=Cité El Khadra, client=test 4 is_last=False
+2026-04-23 20:11:17,575 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-23 20:11:17,576 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': 'Got it. Next stop is Cité El Khadra, address test 4.'}
+2026-04-23 20:11:17,577 - INFO - TTS start client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa request_id=4 event_type=response text_len=52
+2026-04-23 20:11:17,592 - INFO - TTS end client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa request_id=4 chunks=0 elapsed_ms=15.3 feeding_done=True cancel_flag=False
+2026-04-23 20:11:17,593 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-24 01:58:57
+2026-04-23 20:11:17,594 - INFO - Mise à jour du package 69e6be526e4809534064044d vers: delivered_successfully
+2026-04-23 20:11:17,594 - INFO - Récupération du package par ID: 69e6be526e4809534064044d
+2026-04-23 20:11:17,595 - INFO - Récupération de l'instance: 69e6be526e4809534064044d
+2026-04-23 20:11:17,694 - INFO - TTS audio chunk client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa chunks=1 samples=8916
+2026-04-23 20:11:17,757 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 20:11:17,860 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be526e4809534064044d
+2026-04-23 20:11:17,860 - INFO - Mise à jour de l'instance: 69e6be526e4809534064044d
+2026-04-23 20:11:17,938 - INFO - ✅ SUCCÈS: Instance 69e6be526e4809534064044d mise à jour
+2026-04-23 20:11:17,939 - INFO - ✅ SUCCÈS: Package 69e6be526e4809534064044d mis à jour: planned -> delivered_successfully
+2026-04-23 20:11:17,940 - INFO - ✅ SUCCÈS: Package 69e6be526e4809534064044d supprimé de data.json
+2026-04-23 20:11:17,940 - INFO - Package 69e6be526e4809534064044d updated: status=COMPLETED, reason=N/A
+2026-04-23 20:11:17,941 - INFO - ✅ Trip updated client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa trip_id=69e6be526e4809534064044d status=COMPLETED
+2026-04-23 20:11:17,941 - INFO - State machine: transitioned to state_5 client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa
+2026-04-23 20:11:17,941 - INFO - State machine: auto-reset to MODE_0 after terminal transition client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa
+2026-04-23 20:11:18,147 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.START_NAVIGATION', 'extras': {'id': '69e6be636e4809534064044f'}}
+2026-04-23 20:11:18,148 - INFO - 🗺️ Auto start_navigation sent client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa trip_id=69e6be636e4809534064044f
+2026-04-23 20:11:18,393 - INFO - 📨 WS MESSAGE RECEIVED client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=arrived data={'type': 'arrived', 'id': '69e6be636e4809534064044f'}
+2026-04-23 20:11:18,393 - INFO - 📨 NOTIFICATION RECEIVED client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=arrived data={'type': 'arrived', 'id': '69e6be636e4809534064044f'}
+2026-04-23 20:11:18,394 - INFO - 📮 EXTERNAL CONTROL REÇU client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa action=arrived extras={'trip_id': '69e6be636e4809534064044f'}
+2026-04-23 20:11:18,394 - INFO - ✅ Traitement action arrived pour client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa
+2026-04-23 20:11:18,394 - INFO - 🚚 DRIVER ARRIVÉ client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa trip_id=69e6be636e4809534064044f
+2026-04-23 20:11:18,394 - INFO - TTS fade-out + stop client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa
+2026-04-23 20:11:18,547 - INFO - 🚀 Démarrage de la state machine pour client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa
+2026-04-23 20:11:18,547 - INFO - State machine: entered MODE_1 → STATE_1 client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa trip_id=69e6be636e4809534064044f
+2026-04-23 20:11:18,548 - INFO - 🗣️ Envoi question TTS: 'Is the delivery completed?'
+2026-04-23 20:11:19,080 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-23 20:11:19,081 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': 'Did you receive all the items?'}
+2026-04-23 20:11:19,081 - INFO - TTS start client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa request_id=5 event_type=response text_len=30
+2026-04-23 20:11:19,082 - INFO - TTS end client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa request_id=5 chunks=0 elapsed_ms=0.6 feeding_done=True cancel_flag=False
+2026-04-23 20:11:19,309 - INFO - TTS audio chunk client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa chunks=1 samples=8916
+2026-04-23 20:11:23,355 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-23 20:11:26,178 - INFO - VAD speech_start client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa p=0.921
+2026-04-23 20:11:26,181 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=vad data={'type': 'vad', 'event': 'speech_start', 'p': 0.9213317036628723}
+2026-04-23 20:11:26,872 - INFO - Utterance end client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa samples=18432
+2026-04-23 20:11:26,875 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=vad data={'type': 'vad', 'event': 'utterance_end', 'samples': 18432}
+2026-04-23 20:11:26,879 - INFO - STT raw input client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa ms=1152 rms=0.0921 peak=0.7661 n=18432 sr=16000
+2026-04-23 20:11:26,900 - INFO - Saved STT audio compare client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa raw=audio_b942c4c7-0394-4eca-9c3d-e9362c82efaa_980c62fd_raw.wav denoised=audio_b942c4c7-0394-4eca-9c3d-e9362c82efaa_980c62fd_denoised.wav raw_rms=0.092141 denoised_rms=0.092141 sr=16000
+2026-04-23 20:11:26,902 - INFO - Processing audio with duration 00:01.152
+2026-04-23 20:11:27,594 - INFO - STT transcript client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa text='No.'
+2026-04-23 20:11:27,594 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=transcript data={'type': 'transcript', 'text': 'No.'}
+2026-04-23 20:11:27,985 - INFO - STATE_1: NO detected client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa → STATE_2
+2026-04-23 20:11:29,552 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-23 20:11:29,553 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': 'Got it, just give me that number or list.'}
+2026-04-23 20:11:29,554 - INFO - TTS start client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa request_id=6 event_type=response text_len=41
+2026-04-23 20:11:29,554 - INFO - TTS end client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa request_id=6 chunks=0 elapsed_ms=0.7 feeding_done=True cancel_flag=False
+2026-04-23 20:11:29,554 - INFO - State machine: transitioned to state_2 client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa
+2026-04-23 20:11:29,939 - INFO - TTS audio chunk client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa chunks=1 samples=8916
+2026-04-23 20:11:34,038 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-23 20:11:35,333 - INFO - VAD speech_start client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa p=0.876
+2026-04-23 20:11:35,334 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=vad data={'type': 'vad', 'event': 'speech_start', 'p': 0.8757864236831665}
+2026-04-23 20:11:36,351 - INFO - Utterance end client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa samples=26624
+2026-04-23 20:11:36,354 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=vad data={'type': 'vad', 'event': 'utterance_end', 'samples': 26624}
+2026-04-23 20:11:36,358 - INFO - STT raw input client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa ms=1664 rms=0.1046 peak=0.8135 n=26624 sr=16000
+2026-04-23 20:11:36,379 - INFO - Saved STT audio compare client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa raw=audio_b942c4c7-0394-4eca-9c3d-e9362c82efaa_91413689_raw.wav denoised=audio_b942c4c7-0394-4eca-9c3d-e9362c82efaa_91413689_denoised.wav raw_rms=0.104551 denoised_rms=0.104551 sr=16000
+2026-04-23 20:11:36,381 - INFO - Processing audio with duration 00:01.664
+2026-04-23 20:11:37,028 - INFO - STT transcript client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa text='Number one'
+2026-04-23 20:11:37,028 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=transcript data={'type': 'transcript', 'text': 'Number one'}
+2026-04-23 20:11:37,423 - INFO - STATE_2: reason selected #1: Customer not available client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa
+2026-04-23 20:11:37,423 - INFO - STATE_2: reason 1 selected → requesting photo client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa
+2026-04-23 20:11:37,424 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=ask_photo_event data={'type': 'ask_photo_event', 'trip_id': '69e6be636e4809534064044f', 'delivery_id': '69e6be636e4809534064044f', 'address': 'the delivery location', 'timestamp': '2026-04-23T18:11:37.424019'}
+2026-04-23 20:11:37,424 - INFO - 📸 ask_photo_event sent client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa trip_id=69e6be636e4809534064044f
+2026-04-23 20:11:39,019 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-23 20:11:39,020 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': 'Got it. Snap a pic and send it for confirmation.'}
+2026-04-23 20:11:39,020 - INFO - TTS start client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa request_id=7 event_type=response text_len=48
+2026-04-23 20:11:39,021 - INFO - TTS end client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa request_id=7 chunks=0 elapsed_ms=0.6 feeding_done=True cancel_flag=False
+2026-04-23 20:11:39,021 - INFO - State machine: transitioned to state_6 client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa
+2026-04-23 20:11:39,168 - INFO - TTS audio chunk client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa chunks=1 samples=8916
+2026-04-23 20:11:43,668 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-23 20:11:45,195 - INFO - 📨 WS MESSAGE RECEIVED client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=photo_taken data={'type': 'photo_taken', 'trip_id': '69e6be636e4809534064044f', 'delivery_id': '69e6be636e4809534064044f'}
+2026-04-23 20:11:45,196 - INFO - 📨 NOTIFICATION RECEIVED client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=photo_taken data={'type': 'photo_taken', 'trip_id': '69e6be636e4809534064044f', 'delivery_id': '69e6be636e4809534064044f'}
+2026-04-23 20:11:45,200 - INFO - 📮 EXTERNAL CONTROL REÇU client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa action=photo_taken extras={'type': 'photo_taken', 'trip_id': '69e6be636e4809534064044f', 'delivery_id': '69e6be636e4809534064044f'}
+2026-04-23 20:11:45,200 - INFO - ✅ Traitement action photo_taken pour client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa
+2026-04-23 20:11:45,200 - INFO - 📸 Photo response received client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa photo_taken=True
+2026-04-23 20:11:45,202 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-24 01:58:57
+2026-04-23 20:11:45,203 - INFO - Mise à jour du package 69e6be636e4809534064044f vers: delivered_successfully
+2026-04-23 20:11:45,203 - INFO - Récupération du package par ID: 69e6be636e4809534064044f
+2026-04-23 20:11:45,203 - INFO - Récupération de l'instance: 69e6be636e4809534064044f
+2026-04-23 20:11:45,391 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 20:11:45,615 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be636e4809534064044f
+2026-04-23 20:11:45,615 - INFO - Mise à jour de l'instance: 69e6be636e4809534064044f
+2026-04-23 20:11:45,683 - INFO - ✅ SUCCÈS: Instance 69e6be636e4809534064044f mise à jour
+2026-04-23 20:11:45,684 - INFO - ✅ SUCCÈS: Package 69e6be636e4809534064044f mis à jour: planned -> delivered_successfully
+2026-04-23 20:11:45,686 - INFO - ✅ SUCCÈS: Package 69e6be636e4809534064044f supprimé de data.json
+2026-04-23 20:11:45,686 - INFO - Package 69e6be636e4809534064044f updated: status=COMPLETED, reason=N/A
+2026-04-23 20:11:45,688 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.MARK_DELIVERED', 'extras': {'com.avvc.maps.extra.DESTINATION_ID': '69e6be636e4809534064044f'}}
+2026-04-23 20:11:45,688 - INFO - 📍 MARK_DELIVERED sent client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa trip_id=69e6be636e4809534064044f
+2026-04-23 20:11:45,689 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'happy'}
+2026-04-23 20:11:45,689 - INFO - 😊 Emotion sent client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa name=happy
+2026-04-23 20:11:46,984 - INFO - 📢 Next trip announced client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa address=Cité El Khadra, client=test 5 is_last=True
+2026-04-23 20:11:47,898 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-23 20:11:47,899 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': 'Confirm the delivery is done. Head to the next address or park safely.'}
+2026-04-23 20:11:47,899 - INFO - TTS start client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa request_id=8 event_type=response text_len=70
+2026-04-23 20:11:47,900 - INFO - TTS end client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa request_id=8 chunks=0 elapsed_ms=0.8 feeding_done=True cancel_flag=False
+2026-04-23 20:11:48,217 - INFO - TTS audio chunk client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa chunks=1 samples=8916
+2026-04-23 20:11:50,902 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.START_NAVIGATION', 'extras': {'id': '69e6be736e48095340640451'}}
+2026-04-23 20:11:50,903 - INFO - 🗺️ Auto start_navigation sent client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa trip_id=69e6be736e48095340640451
+2026-04-23 20:11:51,082 - INFO - 📨 WS MESSAGE RECEIVED client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=arrived data={'type': 'arrived', 'id': '69e6be736e48095340640451'}
+2026-04-23 20:11:51,083 - INFO - 📨 NOTIFICATION RECEIVED client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=arrived data={'type': 'arrived', 'id': '69e6be736e48095340640451'}
+2026-04-23 20:11:51,085 - INFO - 📮 EXTERNAL CONTROL REÇU client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa action=arrived extras={'trip_id': '69e6be736e48095340640451'}
+2026-04-23 20:11:51,085 - INFO - ✅ Traitement action arrived pour client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa
+2026-04-23 20:11:51,085 - INFO - 🚚 DRIVER ARRIVÉ client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa trip_id=69e6be736e48095340640451
+2026-04-23 20:11:51,085 - INFO - TTS fade-out + stop client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa
+2026-04-23 20:11:51,236 - INFO - 🚀 Démarrage de la state machine pour client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa
+2026-04-23 20:11:51,237 - INFO - State machine: entered MODE_1 → STATE_1 client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa trip_id=69e6be736e48095340640451
+2026-04-23 20:11:51,237 - INFO - 🗣️ Envoi question TTS: 'Is the delivery completed?'
+2026-04-23 20:11:51,834 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-23 20:11:51,835 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': 'Is the package signed for?'}
+2026-04-23 20:11:51,835 - INFO - TTS start client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa request_id=9 event_type=response text_len=26
+2026-04-23 20:11:51,838 - INFO - TTS end client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa request_id=9 chunks=0 elapsed_ms=2.7 feeding_done=True cancel_flag=False
+2026-04-23 20:11:52,177 - INFO - TTS audio chunk client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa chunks=1 samples=8916
+2026-04-23 20:11:56,259 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-23 20:11:57,515 - INFO - VAD speech_start client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa p=0.919
+2026-04-23 20:11:57,517 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=vad data={'type': 'vad', 'event': 'speech_start', 'p': 0.9189150929450989}
+2026-04-23 20:11:58,256 - INFO - Utterance end client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa samples=19456
+2026-04-23 20:11:58,260 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=vad data={'type': 'vad', 'event': 'utterance_end', 'samples': 19456}
+2026-04-23 20:11:58,264 - INFO - STT raw input client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa ms=1216 rms=0.1178 peak=1.0277 n=19456 sr=16000
+2026-04-23 20:11:58,282 - INFO - Saved STT audio compare client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa raw=audio_b942c4c7-0394-4eca-9c3d-e9362c82efaa_4f7e3502_raw.wav denoised=audio_b942c4c7-0394-4eca-9c3d-e9362c82efaa_4f7e3502_denoised.wav raw_rms=0.117789 denoised_rms=0.117789 sr=16000
+2026-04-23 20:11:58,284 - INFO - Processing audio with duration 00:01.216
+2026-04-23 20:11:58,918 - INFO - STT transcript client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa text='No'
+2026-04-23 20:11:58,918 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=transcript data={'type': 'transcript', 'text': 'No'}
+2026-04-23 20:11:59,313 - INFO - STATE_1: NO detected client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa → STATE_2
+2026-04-23 20:12:00,891 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-23 20:12:00,891 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': "Got you, let's start with reason number."}
+2026-04-23 20:12:00,892 - INFO - TTS start client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa request_id=10 event_type=response text_len=40
+2026-04-23 20:12:00,893 - INFO - TTS end client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa request_id=10 chunks=0 elapsed_ms=0.8 feeding_done=True cancel_flag=False
+2026-04-23 20:12:00,893 - INFO - State machine: transitioned to state_2 client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa
+2026-04-23 20:12:01,361 - INFO - TTS audio chunk client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa chunks=1 samples=8916
+2026-04-23 20:12:05,434 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-23 20:12:06,040 - INFO - VAD speech_start client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa p=0.896
+2026-04-23 20:12:06,041 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=vad data={'type': 'vad', 'event': 'speech_start', 'p': 0.8960378170013428}
+2026-04-23 20:12:07,252 - INFO - Utterance end client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa samples=27136
+2026-04-23 20:12:07,254 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=vad data={'type': 'vad', 'event': 'utterance_end', 'samples': 27136}
+2026-04-23 20:12:07,258 - INFO - STT raw input client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa ms=1696 rms=0.0414 peak=0.2157 n=27136 sr=16000
+2026-04-23 20:12:07,284 - INFO - Saved STT audio compare client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa raw=audio_b942c4c7-0394-4eca-9c3d-e9362c82efaa_961b93bf_raw.wav denoised=audio_b942c4c7-0394-4eca-9c3d-e9362c82efaa_961b93bf_denoised.wav raw_rms=0.041397 denoised_rms=0.041397 sr=16000
+2026-04-23 20:12:07,285 - INFO - Processing audio with duration 00:01.696
+2026-04-23 20:12:07,916 - INFO - STT transcript client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa text='number three'
+2026-04-23 20:12:07,917 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=transcript data={'type': 'transcript', 'text': 'number three'}
+2026-04-23 20:12:08,121 - INFO - STATE_2: reason selected #3: Package damaged client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa
+2026-04-23 20:12:08,122 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'end'}
+2026-04-23 20:12:08,123 - INFO - 😊 Emotion sent client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa name=end
+2026-04-23 20:12:08,123 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.MARK_FAILED', 'extras': {'com.avvc.maps.extra.DESTINATION_ID': '69e6be736e48095340640451'}}
+2026-04-23 20:12:08,123 - INFO - ❌ MARK_FAILED sent client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa trip_id=69e6be736e48095340640451
+2026-04-23 20:12:09,701 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-23 20:12:09,702 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': 'Route complete. Let me know if you need help.'}
+2026-04-23 20:12:09,702 - INFO - TTS start client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa request_id=11 event_type=response text_len=45
+2026-04-23 20:12:09,703 - INFO - TTS end client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa request_id=11 chunks=0 elapsed_ms=0.6 feeding_done=True cancel_flag=False
+2026-04-23 20:12:09,710 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-04-24 01:58:57
+2026-04-23 20:12:09,711 - INFO - Mise à jour du package 69e6be736e48095340640451 vers: delivery_failure
+2026-04-23 20:12:09,712 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-23 20:12:09,713 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-23 20:12:09,873 - INFO - TTS audio chunk client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa chunks=1 samples=8916
+2026-04-23 20:12:10,101 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 20:12:10,257 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-23 20:12:10,258 - INFO - Mise à jour de l'instance: 69e6be736e48095340640451
+2026-04-23 20:12:10,324 - INFO - ✅ SUCCÈS: Instance 69e6be736e48095340640451 mise à jour
+2026-04-23 20:12:10,324 - INFO - ✅ SUCCÈS: Package 69e6be736e48095340640451 mis à jour: planned -> delivery_failure
+2026-04-23 20:12:10,325 - INFO - ✅ SUCCÈS: Package 69e6be736e48095340640451 supprimé de data.json
+2026-04-23 20:12:10,326 - INFO - Ajout échec livraison pour 69e6be736e48095340640451 (cause: 1)
+2026-04-23 20:12:10,326 - INFO - Récupération du package par ID: 69e6be736e48095340640451
+2026-04-23 20:12:10,326 - INFO - Récupération de l'instance: 69e6be736e48095340640451
+2026-04-23 20:12:10,381 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-04-23 20:12:10,539 - INFO - ✅ SUCCÈS: Package trouvé: 69e6be736e48095340640451
+2026-04-23 20:12:10,539 - INFO - Création d'un nouveau delivery failure
+2026-04-23 20:12:10,540 - INFO - Création d'une instance pour l'entité: 69bd7f7cfb98e15a3cf5337a
+2026-04-23 20:12:10,604 - INFO - ✅ SUCCÈS: Instance créée avec ID: 69ea60fa6e48095340640464
+2026-04-23 20:12:10,604 - INFO - ✅ SUCCÈS: Delivery failure créé avec ID: 69ea60fa6e48095340640464
+2026-04-23 20:12:10,604 - INFO - ✅ SUCCÈS: Échec de livraison ajouté pour le package 69e6be736e48095340640451
+2026-04-23 20:12:10,605 - INFO - Mise à jour de l'instance: 69e6be736e48095340640451
+2026-04-23 20:12:10,681 - INFO - ✅ SUCCÈS: Instance 69e6be736e48095340640451 mise à jour
+2026-04-23 20:12:10,682 - INFO - Package 69e6be736e48095340640451 updated: status=FAILED, reason=Package damaged
+2026-04-23 20:12:10,683 - INFO - ✅ Trip updated client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa trip_id=69e6be736e48095340640451 status=FAILED
+2026-04-23 20:12:10,683 - INFO - State machine: transitioned to state_5 client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa
+2026-04-23 20:12:10,683 - INFO - State machine: auto-reset to MODE_0 after terminal transition client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa
+2026-04-23 20:12:14,234 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-23 20:12:14,941 - INFO - VAD speech_start client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa p=0.869
+2026-04-23 20:12:14,945 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=vad data={'type': 'vad', 'event': 'speech_start', 'p': 0.8685179948806763}
+2026-04-23 20:12:16,307 - INFO - Utterance end client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa samples=28160
+2026-04-23 20:12:16,308 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=vad data={'type': 'vad', 'event': 'utterance_end', 'samples': 28160}
+2026-04-23 20:12:16,314 - INFO - STT raw input client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa ms=1760 rms=0.0243 peak=0.1843 n=28160 sr=16000
+2026-04-23 20:12:16,338 - INFO - Saved STT audio compare client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa raw=audio_b942c4c7-0394-4eca-9c3d-e9362c82efaa_4acab75f_raw.wav denoised=audio_b942c4c7-0394-4eca-9c3d-e9362c82efaa_4acab75f_denoised.wav raw_rms=0.024265 denoised_rms=0.024265 sr=16000
+2026-04-23 20:12:16,341 - INFO - Processing audio with duration 00:01.760
+2026-04-23 20:12:17,540 - INFO - STT transcript client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa text='He he he!'
+2026-04-23 20:12:17,541 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=transcript data={'type': 'transcript', 'text': 'He he he!'}
+2026-04-23 20:12:17,541 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-23 20:12:17,773 - INFO - HTTP Request: POST http://localhost:8080/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-23 20:12:17,775 - INFO - LLM first chunk client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa latency_ms=1461.3
+2026-04-23 20:12:17,775 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': 'He'}
+2026-04-23 20:12:17,851 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' he'}
+2026-04-23 20:12:17,930 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' he'}
+2026-04-23 20:12:17,998 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ','}
+2026-04-23 20:12:18,067 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' looks'}
+2026-04-23 20:12:18,136 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' like'}
+2026-04-23 20:12:18,204 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' the'}
+2026-04-23 20:12:18,274 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' delivery'}
+2026-04-23 20:12:18,340 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' went'}
+2026-04-23 20:12:18,396 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' smoothly'}
+2026-04-23 20:12:18,451 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': '!'}
+2026-04-23 20:12:18,507 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' Would'}
+2026-04-23 20:12:18,564 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' you'}
+2026-04-23 20:12:18,622 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' like'}
+2026-04-23 20:12:18,679 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' to'}
+2026-04-23 20:12:18,736 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' take'}
+2026-04-23 20:12:18,793 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' a'}
+2026-04-23 20:12:18,848 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' photo'}
+2026-04-23 20:12:18,905 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' to'}
+2026-04-23 20:12:18,958 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' confirm'}
+2026-04-23 20:12:19,012 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': '?'}
+2026-04-23 20:12:23,568 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-23 20:12:25,078 - INFO - VAD speech_start client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa p=0.861
+2026-04-23 20:12:25,082 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=vad data={'type': 'vad', 'event': 'speech_start', 'p': 0.8607277870178223}
+2026-04-23 20:12:26,413 - INFO - Utterance end client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa samples=29696
+2026-04-23 20:12:26,414 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=vad data={'type': 'vad', 'event': 'utterance_end', 'samples': 29696}
+2026-04-23 20:12:26,416 - INFO - STT raw input client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa ms=1856 rms=0.0379 peak=0.2744 n=29696 sr=16000
+2026-04-23 20:12:26,434 - INFO - Saved STT audio compare client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa raw=audio_b942c4c7-0394-4eca-9c3d-e9362c82efaa_894a8426_raw.wav denoised=audio_b942c4c7-0394-4eca-9c3d-e9362c82efaa_894a8426_denoised.wav raw_rms=0.037933 denoised_rms=0.037933 sr=16000
+2026-04-23 20:12:26,436 - INFO - Processing audio with duration 00:01.856
+2026-04-23 20:12:27,127 - INFO - STT transcript client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa text="No, no, no, that's all."
+2026-04-23 20:12:27,127 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=transcript data={'type': 'transcript', 'text': "No, no, no, that's all."}
+2026-04-23 20:12:27,128 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'speaking'}
+2026-04-23 20:12:27,305 - INFO - HTTP Request: POST http://localhost:8080/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-23 20:12:27,307 - INFO - LLM first chunk client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa latency_ms=891.0
+2026-04-23 20:12:27,307 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': 'Got'}
+2026-04-23 20:12:27,380 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' it'}
+2026-04-23 20:12:27,455 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': '!'}
+2026-04-23 20:12:27,524 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' If'}
+2026-04-23 20:12:27,594 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' you'}
+2026-04-23 20:12:27,630 - INFO - TTS audio chunk client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa chunks=50 samples=8916
+2026-04-23 20:12:27,662 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' need'}
+2026-04-23 20:12:27,730 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' anything'}
+2026-04-23 20:12:27,798 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ','}
+2026-04-23 20:12:27,867 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' just'}
+2026-04-23 20:12:27,926 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' let'}
+2026-04-23 20:12:27,982 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' me'}
+2026-04-23 20:12:28,037 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' know'}
+2026-04-23 20:12:28,093 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': '.'}
+2026-04-23 20:12:28,148 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' Safe'}
+2026-04-23 20:12:28,203 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': ' travels'}
+2026-04-23 20:12:28,259 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=response data={'type': 'response', 'text': '!'}
+2026-04-23 20:12:32,747 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=emotion data={'type': 'emotion', 'name': 'idle'}
+2026-04-23 20:12:35,819 - INFO - VAD speech_start client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa p=0.896
+2026-04-23 20:12:35,820 - INFO - 📤 WS MESSAGE SENT client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa type=vad data={'type': 'vad', 'event': 'speech_start', 'p': 0.8963853120803833}
+2026-04-23 20:12:39,099 - INFO - Audio WS cleaned up client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa
+2026-04-23 20:12:39,104 - INFO - WS disconnected client_id=b942c4c7-0394-4eca-9c3d-e9362c82efaa
+2026-04-23 20:12:39,106 - INFO - connection closed
