@@ -302,6 +302,18 @@ class DeliveryStateMachine:
             return value
         return None
 
+    def _contains_any_word(self, text: str, patterns: tuple) -> bool:
+        normalized = (text or "").strip().lower()
+        if not normalized:
+            return False
+        for pattern in patterns:
+            token = (pattern or "").strip().lower()
+            if not token:
+                continue
+            if re.search(rf"\b{re.escape(token)}\b", normalized):
+                return True
+        return False
+
     async def _build_outcome_announcement(
         self,
         session: "Session",
@@ -360,9 +372,9 @@ class DeliveryStateMachine:
                 logger.exception("STATE_1: confirmation check failed client_id=%s", session.client_id)
 
         if confirmed is None:
-            if any(pattern in text_lower for pattern in self.config.yes_patterns):
+            if self._contains_any_word(text_lower, self.config.yes_patterns):
                 confirmed = True
-            elif any(pattern in text_lower for pattern in self.config.no_patterns):
+            elif self._contains_any_word(text_lower, self.config.no_patterns):
                 confirmed = False
 
         if confirmed is True:
@@ -467,9 +479,17 @@ class DeliveryStateMachine:
             ctx.retry_count,
             session.client_id,
         )
+        retry_tts = await self._generate_driver_message(
+            session,
+            (
+                "The driver's answer is not clearly yes or no. "
+                "Ask them to answer only with yes or no, in one short sentence."
+            ),
+            "I didn't catch that clearly. Please answer with yes or no.",
+        )
         return self.ProcessResult(
             should_handle=True,
-            tts_response=self.config.retry_tts,
+            tts_response=retry_tts,
             next_state=State.STATE_1,
             action=None,
             interruptible=False,  # Non interruptible - demande de répétition

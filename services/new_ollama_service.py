@@ -119,11 +119,10 @@ class OllamaService:
                     "content": (
                         "You classify a delivery driver's answer to the question "
                         "'Is the delivery completed?'. "
-                        "Reply only with true or false. "
-                        "Reply true if the driver says yes, confirms, or expresses agreement — "
-                        "even with hesitation like 'yes?', 'yeah', 'yep', 'sure', 'done', 'completed', 'it is'. "
-                        "Reply false only if the driver clearly says no, denies, or describes a problem. "
-                        "Reply true if unsure between yes and ambiguous."
+                        "Reply ONLY with one token: YES, NO, or UNKNOWN. "
+                        "Use YES only if the driver clearly confirms completion. "
+                        "Use NO only if the driver clearly denies completion. "
+                        "Use UNKNOWN for any other content (questions, unrelated text, thanks, greetings, uncertainty)."
                     ),
                 },
                 {"role": "user", "content": message},
@@ -131,9 +130,9 @@ class OllamaService:
 
             reply = await self._run_completion(messages, include_tools=False)
             text = reply.strip().lower()
-            if text.startswith("true"):
+            if text.startswith("yes"):
                 return True
-            if text.startswith("false"):
+            if text.startswith("no"):
                 return False
             return None  # ambiguous → laisser le fallback keyword décider
         except Exception as e:
