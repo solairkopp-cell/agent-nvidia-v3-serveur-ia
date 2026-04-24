@@ -27,7 +27,7 @@ WHISPER_TIMEOUT = int(os.getenv("WHISPER_TIMEOUT", "30"))                  # uti
 WHISPER_LANGUAGE = os.getenv("WHISPER_LANGUAGE", "en")  # ou "en", ou None (auto)
 
 # faster-whisper (embedded)
-WHISPER_MODEL = os.getenv("WHISPER_MODEL", "small")        # ex: tiny, base, small, medium, large-v3
+WHISPER_MODEL = os.getenv("WHISPER_MODEL", "small.en")        # ex: tiny, base, small, medium, large-v3
 WHISPER_DEVICE = os.getenv("WHISPER_DEVICE", "cuda")       # "cpu" pour maximiser la stabilité Jetson
 WHISPER_COMPUTE_TYPE = os.getenv("WHISPER_COMPUTE_TYPE", "int8")  # "int8" pour les modèles quantifiés (ex: small.en), "float16" pour les modèles non quantifiés (ex: medium)
 WHISPER_BEAM_SIZE = int(os.getenv("WHISPER_BEAM_SIZE", "1"))
@@ -101,11 +101,12 @@ PREWARM_TTS_TEXT = os.getenv("PREWARM_TTS_TEXT", "Warmup.")
 # ── Conversation ─────────────────────────────────────────────────────────────
 MAX_HISTORY = int(os.getenv("MAX_HISTORY", "3"))
 TRIM_TO = int(os.getenv("TRIM_TO", "30"))
-KOKORO_MODEL_PATH = "/home/server/agent-nvidia-v2/kokoro-v0_19.onnx"
-KOKORO_VOICES_PATH = "/home/server/agent-nvidia-v2/voices.json"
+
 
 PIPER_NOISE_SCALE = float(os.getenv("PIPER_NOISE_SCALE", "1.0"))
 PIPER_LENGTH_SCALE = float(os.getenv("PIPER_LENGTH_SCALE", "0.9"))
 PIPER_NOISE_W = float(os.getenv("PIPER_NOISE_W", "1.0"))
 PIPER_SENTENCE_SILENCE = float(os.getenv("PIPER_SENTENCE_SILENCE", "0.8"))
 PIPER_ESPEAK_DATA = os.getenv("PIPER_ESPEAK_DATA", "/usr/lib/aarch64-linux-gnu/espeak-ng-data")
+
+WHISPER_PROMPT = os.getenv("WHISPER_PROMPT", "delivery navigation map show the map start navigation show map delivery yes no ")  # pas de prompt initial pour éviter les biais (ex: "the following is a conversation in English...")

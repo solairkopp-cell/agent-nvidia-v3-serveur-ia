@@ -383,11 +383,9 @@ async def health():
             "ws":      await ws_service.health_check(),
             "audio_stream": await audio_stream_service.health_check(),
             "whisper": await whisper_service.health_check(),
-            "ollama":  await ollama_service.health_check(),
             "notification": await notification_service.health_check(),
             "delivery": await delivery_service.health_check(),
             "state_machine": True,  # Pas de health check nécessaire
-            "piper":   await piper_service.health_check(),
             "denoise": await denoise_service.health_check(),
         }
     }

@@ -231,6 +231,9 @@ class WhisperService:
                     samples,
                     language=language,
                     beam_size=self._beam_size,
+                    vad_filter=False,  # VAD intégré (optionnel, peut être désactivé pour un contrôle VAD externe)
+                    initial_prompt=config.WHISPER_PROMPT,  # pas de prompt initial pour éviter les biais (ex: "the following is a conversation in English...")
+                    condition_on_previous_text=False,  # éviter les biais de contexte sur les segments courts
                 )
                 text = "".join(getattr(seg, "text", "") for seg in segments).strip()
                 detected_language = getattr(info, "language", None)
