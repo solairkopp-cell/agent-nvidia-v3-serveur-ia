@@ -1,4 +1,7 @@
-from unittest.mock import AsyncMock, MagicMock, call, patch
+import sys
+import types
+from enum import Enum
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
@@ -60,9 +63,66 @@ class TestDeliveryStateMachineEmotions:
         assert result.action == "update_trip"
         assert result.action_params == {
             "status": "FAILED",
+            "cause": 2,
             "reason": "Wrong address",
         }
         assert result.emit_tts_boundary_emotions is False
+
+    @pytest.mark.asyncio
+    async def test_update_trip_status_uses_reason_code_for_delivery_failure(self, state_machine):
+        class FakeTokenManager:
+            def __init__(self, cache_file=None):
+                self.cache_file = cache_file
+
+        class FakePlanningService:
+            instance = None
+
+            def __init__(self, token_manager):
+                self.token_manager = token_manager
+                self.update_package_status = AsyncMock(return_value=True)
+                self.add_delivery_failure = AsyncMock(return_value=True)
+                self.close = AsyncMock()
+                FakePlanningService.instance = self
+
+        class FakePackageStatus(Enum):
+            DELIVERED_SUCCESSFULLY = "delivered_successfully"
+            DELIVERY_FAILURE = "delivery_failure"
+            PLANNED = "planned"
+
+        service_module = types.ModuleType("service")
+        service_module.TokenManager = FakeTokenManager
+
+        planning_module = types.ModuleType("service.planning_service")
+        planning_module.PlanningService = FakePlanningService
+
+        entities_module = types.ModuleType("entities")
+        entities_enum_module = types.ModuleType("entities.enum")
+        package_status_module = types.ModuleType("entities.enum.package_status")
+        package_status_module.PackageStatus = FakePackageStatus
+
+        with patch.dict(
+            sys.modules,
+            {
+                "service": service_module,
+                "service.planning_service": planning_module,
+                "entities": entities_module,
+                "entities.enum": entities_enum_module,
+                "entities.enum.package_status": package_status_module,
+            },
+        ):
+            success = await state_machine.update_trip_status(
+                driver_serial="driver-1",
+                trip_id="trip-1",
+                status="FAILED",
+                reason="Wrong address",
+            )
+
+        assert success is True
+        FakePlanningService.instance.add_delivery_failure.assert_awaited_once_with(
+            package_id="trip-1",
+            cause=2,
+            comment="Wrong address",
+        )
 
     @pytest.mark.asyncio
     async def test_success_path_keeps_end_for_last_upcoming_trip(self, state_machine, session):

@@ -661,6 +661,7 @@ class DeliveryStateMachine:
                     action="update_trip",
                     action_params={
                         "status": self.config.failure_status,
+                        "cause": number,
                         "reason": reason,
                     },
                     interruptible=False,
@@ -981,6 +982,7 @@ class DeliveryStateMachine:
                     driver_serial=session.driver_serial,
                     trip_id=trip_id,
                     status="FAILED",
+                    cause=(ctx.failure_reason_index + 1) if ctx.failure_reason_index is not None else None,
                     reason=reason,
                 )
                 
@@ -1272,6 +1274,7 @@ class DeliveryStateMachine:
         driver_serial: str,
         trip_id: str,
         status: str,
+        cause: Optional[int] = None,
         reason: Optional[str] = None,
     ) -> bool:
         """
@@ -1281,7 +1284,8 @@ class DeliveryStateMachine:
             driver_serial: Numéro de série du driver
             trip_id: ID du trip à mettre à jour
             status: "COMPLETED" ou "FAILED"
-            reason: Raison de l'échec (si status="FAILED")
+            cause: Code de la raison de l'échec (1 à 6)
+            reason: Libellé/commentaire de la raison de l'échec (si status="FAILED")
         
         Returns:
             True si la mise à jour a réussi
@@ -1317,9 +1321,10 @@ class DeliveryStateMachine:
                 
                 # Si échec, ajouter la raison
                 if status == "FAILED" and reason and result:
+                    failure_cause = cause or self._resolve_failure_cause(reason)
                     await planning_service.add_delivery_failure(
                         package_id=trip_id,
-                        cause=1,  # Cause générique
+                        cause=failure_cause,
                         comment=reason,
                     )
                 
@@ -1336,6 +1341,19 @@ class DeliveryStateMachine:
         except Exception as e:
             logger.exception("Failed to update trip status: %s", e)
             return False
+
+    def _resolve_failure_cause(self, reason: str) -> int:
+        """Résout un code de cause 1..6 à partir du libellé ou d'un nombre."""
+        number = NumberExtractor.extract(reason)
+        if number is not None and 1 <= number <= len(self.config.reason_list):
+            return number
+
+        normalized_reason = reason.strip().lower()
+        for index, label in enumerate(self.config.reason_list, start=1):
+            if normalized_reason == label.lower():
+                return index
+
+        return len(self.config.reason_list)
     
     # ── Session Management ───────────────────────────────────────────────────
     

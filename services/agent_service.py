@@ -244,7 +244,7 @@ class AgentService:
                                 "State machine: auto-reset to MODE_0 after terminal transition client_id=%s",
                                 session.client_id,
                             )
-                            await self._consume_pending_arrived(session)
+                            await self._drain_pending_arrived(session)
 
                     if state_result.action == "exit_to_mode_0":
                         ctx = self.state_machine._get_context(session)
@@ -667,7 +667,7 @@ class AgentService:
             logger.warning("⚠️ State machine non disponible client_id=%s", session.client_id)
             return
         await self.state_machine.handle_photo_response(session, photo_taken)
-        await self._consume_pending_arrived(session)
+        await self._drain_pending_arrived(session)
 
     async def _handle_arrived_action(self, session: "Session", extras: dict) -> None:
         """
@@ -740,6 +740,24 @@ class AgentService:
         )
         await self._handle_arrived_action(session, {"trip_id": pending_trip_id})
 
+    async def _drain_pending_arrived(self, session: "Session") -> None:
+        if not getattr(session, "pending_arrived_trip_id", None):
+            return
+
+        if session.processing_lock.locked():
+            asyncio.create_task(
+                self._consume_pending_arrived_when_unlocked(session),
+                name=f"pending-arrived-{session.client_id}",
+            )
+            return
+
+        await self._consume_pending_arrived(session)
+
+    async def _consume_pending_arrived_when_unlocked(self, session: "Session") -> None:
+        while session.processing_lock.locked():
+            await asyncio.sleep(0.01)
+        await self._consume_pending_arrived(session)
+
     async def _handle_started_navigation_action(self, session: "Session", extras: dict) -> None:
         logger = logging.getLogger(__name__)
         trip_id = extras.get("trip_id")
@@ -752,6 +770,7 @@ class AgentService:
         logger = logging.getLogger(__name__)
         trip_id = extras.get("trip_id")
         status = extras.get("status", "COMPLETED")
+        cause = extras.get("cause")
         reason = extras.get("reason")
 
         if not trip_id:
@@ -768,6 +787,7 @@ class AgentService:
                 driver_serial=session.driver_serial,
                 trip_id=trip_id,
                 status=status,
+                cause=cause,
                 reason=reason,
             )
             if success:
@@ -793,12 +813,14 @@ class AgentService:
             return
 
         status = params.get("status", "COMPLETED")
+        cause = params.get("cause")
         reason = params.get("reason")
 
         success = await self.state_machine.update_trip_status(
             driver_serial=driver_serial,
             trip_id=trip_id,
             status=status,
+            cause=cause,
             reason=reason,
         )
         if success:

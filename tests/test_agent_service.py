@@ -4,6 +4,7 @@ Tests unitaires de l'AgentService.
 STT, LLM et TTS sont mockés.
 """
 import asyncio
+from types import SimpleNamespace
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import numpy as np
@@ -181,6 +182,44 @@ class TestInterrupt:
 
 
 class TestTranscriptionInterruption:
+
+    @pytest.mark.asyncio
+    async def test_state_5_defers_pending_arrived_until_lock_is_released(self, agent, session):
+        agent.ws_service = MagicMock()
+        agent.ws_service.send = AsyncMock()
+        agent.ws_service.send_transcript = AsyncMock()
+
+        ctx = MagicMock()
+        state_machine = MagicMock()
+        state_machine.is_in_mode_1.return_value = True
+        state_machine.process_input = AsyncMock(
+            return_value=SimpleNamespace(
+                should_handle=True,
+                tts_response=None,
+                next_state=SimpleNamespace(value="state_5"),
+                action=None,
+            )
+        )
+        state_machine._get_context.return_value = ctx
+        agent.state_machine = state_machine
+
+        session.current_request_id = 7
+        session.pending_arrived_trip_id = "trip-2"
+
+        drained = asyncio.Event()
+
+        async def _fake_consume(_session):
+            assert _session.processing_lock.locked() is False
+            drained.set()
+
+        agent._consume_pending_arrived = AsyncMock(side_effect=_fake_consume)
+
+        async with session.processing_lock:
+            await agent._process_transcription(session, 7, "No")
+            agent._consume_pending_arrived.assert_not_awaited()
+
+        await asyncio.wait_for(drained.wait(), timeout=1.0)
+        agent._consume_pending_arrived.assert_awaited_once_with(session)
 
     @pytest.mark.asyncio
     async def test_process_transcription_continuation_merges_active_user_turn(self, agent, session):
