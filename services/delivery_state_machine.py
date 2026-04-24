@@ -458,9 +458,12 @@ class DeliveryStateMachine:
                 session,
                 (
                     "The driver said the delivery is not completed. "
-                    "Ask for the reason. "
-                    "Tell the driver to answer with a number from 1 to 6, "
-                    "or ask for the list of reasons."
+                    "Ask for the reason using a short and clear sentence. "
+                    "The sentence must ask the driver to choose a reason, "
+                    "specify a number between 1 and 6, "
+                    "and mention the option to ask for the list of reasons. "
+                    "Keep a professional and directive tone. "
+                    "Do not add explanations or extra sentences."
                 ),
                 self.config.ask_reason_tts,
             )
@@ -483,7 +486,10 @@ class DeliveryStateMachine:
             session,
             (
                 "The driver's answer is not clearly yes or no. "
-                "Ask them to answer only with yes or no, in one short sentence."
+                "Ask for confirmation using a short and clear sentence. "
+                "The sentence must instruct the driver to answer only with yes or no. "
+                "Keep a professional and directive tone. "
+                "Do not add explanations or extra sentences."
             ),
             "I didn't catch that clearly. Please answer with yes or no.",
         )
