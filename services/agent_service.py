@@ -709,7 +709,7 @@ class AgentService:
             await self.state_machine.enter_mode_1(session, trip_id)
 
             session.conversation_history.append({
-                "role": "system",
+                "role": "user",
                 "content": (
                     "The driver has arrived at the delivery location. "
                     "Ask if the delivery is completed."
@@ -793,7 +793,7 @@ class AgentService:
             if success:
                 logger.info("✅ Trip status updated client_id=%s trip_id=%s", session.client_id, trip_id)
                 session.conversation_history.append({
-                    "role": "system",
+                    "role": "user",
                     "content": f"[SYSTEM MESSAGE] The delivery process is finished. The delivery has been marked as {status}."
                 })
 
@@ -826,7 +826,7 @@ class AgentService:
         if success:
             logger.info("✅ Trip updated client_id=%s trip_id=%s status=%s", session.client_id, trip_id, status)
             session.conversation_history.append({
-                "role": "system",
+                "role": "user",
                 "content": f"[SYSTEM MESSAGE] The delivery process is finished. The delivery has been marked as {status}."
             })
         else:

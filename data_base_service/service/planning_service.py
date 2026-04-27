@@ -156,6 +156,9 @@ class PlanningService:
             
             import json
             trips_data = [trip.to_dict() for trip in trips]
+            for trip in trips_data:
+                if 'name' in trip:
+                    trip['address'] = trip.pop('name')
             with open(output_file, 'w', encoding='utf-8') as f:
                 json.dump(trips_data, f, indent=2, ensure_ascii=False)
             

@@ -15,11 +15,7 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
-DEFAULT_SYSTEM_PROMPT = (
-    "Tu es Rytle, un assistant de livraison poli et efficace. "
-    "**regles**: 1) verifie toujours que les info necessaires à l'appel d'un outil "
-    "ne sont pas deja dans l'historique de la conversation avant de demander à l'utilisateur."
-)
+DEFAULT_SYSTEM_PROMPT = ()
 
 
 class OllamaService:
@@ -71,7 +67,7 @@ class OllamaService:
             if session is not None:
                 self.set_session(session)
 
-            system_message = {"role": "system", "content": message}
+            system_message = {"role": "user", "content": message}
             self._extra_system_messages.append(system_message)
             messages = list(self.history)
             messages.append(system_message)
@@ -82,30 +78,22 @@ class OllamaService:
             self.log(f"Erreur add_system_message : {e}", level="error")
             return "Erreur de connexion."
 
-    async def generate_system_reply(self, system_message: str, user_message: str | None = None, session=None) -> str:
+    async def generate_system_reply(self, system_message: str, user_message: str | None = None, session=None) -> AsyncIterator[str]:
         try:
             if session is not None:
                 self.set_session(session)
 
-            messages = [
-                {
-                    "role": "system",
-                    "content": (
-                        "You speak directly to a delivery driver. "
-                        "Reply in short, natural English. "
-                        "Use at most two short sentences."
-                    ),
-                },
-                {"role": "system", "content": system_message},
-            ]
+            messages = list(self.history)
+            messages.append({"role": "user", "content": system_message})
 
             if user_message is not None:
                 messages.append({"role": "user", "content": user_message})
 
-            return await self._run_completion(messages, include_tools=False)
+            async for chunk in self._run_completion_stream(messages, include_tools=False):
+                yield chunk
         except Exception as e:
             self.log(f"Erreur generate_system_reply : {e}", level="error")
-            return "I could not process that."
+            yield "I could not process that."
 
     async def is_this_a_confirmation(self, message: str, session=None) -> bool | None:
         """Retourne True=oui, False=non, None=ambigu (fallback vers keyword patterns)."""
@@ -115,7 +103,7 @@ class OllamaService:
 
             messages = [
                 {
-                    "role": "system",
+                    "role": "user",
                     "content": (
                         "You classify a delivery driver's answer to the question "
                         "'Is the delivery completed?'. "
@@ -157,7 +145,7 @@ class OllamaService:
 
             messages = [
                 {
-                    "role": "system",
+                    "role": "user",
                     "content": (
                         "You analyze a delivery driver's answer after they were asked "
                         "to choose a failure reason.\n"
@@ -202,14 +190,6 @@ class OllamaService:
         return DEFAULT_SYSTEM_PROMPT
 
     # --- Les Outils ---
-
-    def get_delivery_info(self, order_id):
-        self.log(f"Action: Récupération des données pour le colis {order_id}")
-        db = {
-            "ABC-123": {"status": "En livraison", "secteur": "Ariana", "client": "Ahmed"},
-            "XYZ-789": {"status": "Livré", "secteur": "La Marsa", "client": "Sonia"}
-        }
-        return db.get(order_id, {"error": "Colis introuvable"})
 
     def _load_deliveries_list(self) -> list:
         """Liste brute depuis data.json (même source que get_deliveries)."""
@@ -267,7 +247,7 @@ class OllamaService:
                 "action": "com.avvc.maps.action.STOP_NAVIGATION",
                 "extras": {},
             })
-        return {"message": "Navigation arrêtée."}
+        return {"message": "the navigation has been stoped"}
 
     async def show_map(self):
         self.log("Action: RECENTER")
@@ -319,24 +299,9 @@ class OllamaService:
             {
                 "type": "function",
                 "function": {
-                    "name": "get_delivery_info",
-                    "description": "Retrieves information about a specific package (status, sector, client).",
-                    "parameters": {
-                        "type": "object",
-                        "properties": {
-                            "order_id": {"type": "string", "description": "The package identifier (e.g.: ABC-123)"}
-                        },
-                        "required": ["order_id"]
-                    }
-                }
-            },
-            {
-                "type": "function",
-                "function": {
                     "name": "start_navigation",
                     "description": (
-                        "Starts GPS navigation. The server always reloads the delivery list "
-                        "and uses the ID of the **first** trip with ``planned`` status — do not rely on a provided trip_id."
+                        "this tools start the gps guidance to the current delivery  (the first one when reading the list, ignoring any trip_id from the LLM). "
                     ),
                     "parameters": {"type": "object", "properties": {}},
                 }
@@ -353,7 +318,7 @@ class OllamaService:
                 "type": "function",
                 "function": {
                     "name": "show_map",
-                    "description": "Recenters the map on the current position.",
+                    "description": "this tools shows the map to the driver and recenter it on his position. Use it when you want the driver to see the map (for example to check the route or the traffic) without necessarily starting navigation.",
                     "parameters": {"type": "object", "properties": {}}
                 }
             },
@@ -362,8 +327,7 @@ class OllamaService:
                 "function": {
                     "name": "get_deliveries",
                     "description": (
-                        "Retrieves today's deliveries from local data (without opening the list screen on the map). "
-                        "Use to read trip_ids, statuses, addresses, etc."
+                        "this tool returns the list of deliveries for today with their details (id, clientname , name = address, packageinfo , longitude, latitude) as read from data.json. "
                     ),
                     "parameters": {"type": "object", "properties": {}}
                 }
@@ -373,8 +337,7 @@ class OllamaService:
                 "function": {
                     "name": "show_deliveries",
                     "description": (
-                        "Opens the delivery screen / list in the driver map application. "
-                        "Use only when the driver explicitly asks to see the list on screen."
+                        "this tool show the delivery list on the system ui , use it only when you want the driver to see the list of deliveries on the app (it will not only send the data but also trigger the display in the app). "
                     ),
                     "parameters": {"type": "object", "properties": {}}
                 }
@@ -383,22 +346,8 @@ class OllamaService:
                 "type": "function",
                 "function": {
                     "name": "ask_photo",
-                    "description": "Asks the delivery driver to take a proof of delivery photo.",
+                    "description": "this tool triggers the ask_photo_event that will make the app ask the driver to take a photo and send back either photo_taken or photo_failed. Use it when you want to ask the driver for a proof of delivery or a picture of an issue.",
                     "parameters": {"type": "object", "properties": {}}
-                }
-            },
-            {
-                "type": "function",
-                "function": {
-                    "name": "update_status",
-                    "description": "Changes the status of the current delivery.",
-                    "parameters": {
-                        "type": "object",
-                        "properties": {
-                            "new_status": {"type": "string", "description": "The new status (e.g.: Delivered, Absent, Issue)"}
-                        },
-                        "required": ["new_status"]
-                    }
                 }
             }
         ]
@@ -430,8 +379,8 @@ class OllamaService:
         payload = {
             "model": config.OLLAMA_MODEL,
             "messages": messages,
-            "temperature": config.OLLAMA_TEMPERATURE,
             "stream": stream,
+            "think": False,
         }
         if include_tools:
             payload["tools"] = self._get_tools_schema()
@@ -559,7 +508,8 @@ class OllamaService:
                 content = delta.get("content")
                 if isinstance(content, str) and content:
                     assistant_parts.append(content)
-                    yield content
+                    if not tool_calls_by_index:
+                        yield content
 
                 for tool_delta in delta.get("tool_calls") or []:
                     index = int(tool_delta.get("index", 0))
@@ -613,7 +563,6 @@ class OllamaService:
         assistant_message = {"role": "assistant", "content": "".join(assistant_parts)}
         if persist_history:
             self.history = messages + [assistant_message]
-
     async def chat(self, user_message, history=None, session=None):
         try:
             if session is not None:

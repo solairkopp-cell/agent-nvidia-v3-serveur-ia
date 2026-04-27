@@ -457,13 +457,7 @@ class DeliveryStateMachine:
             ask_reason_tts = await self._generate_driver_message(
                 session,
                 (
-                    "The driver said the delivery is not completed. "
-                    "Ask for the reason using a short and clear sentence. "
-                    "The sentence must ask the driver to choose a reason, "
-                    "specify a number between 1 and 6, "
-                    "and mention the option to ask for the list of reasons. "
-                    "Keep a professional and directive tone. "
-                    "Do not add explanations or extra sentences."
+                    "The driver said the delivery is not completed.  ask him to give a reason by picking a number between 1 and 6 or to ask the list "
                 ),
                 self.config.ask_reason_tts,
             )
@@ -974,8 +968,8 @@ class DeliveryStateMachine:
 
             # Informer le LLM
             session.conversation_history.append({
-                "role": "system",
-                "content": "[SYSTEM MESSAGE] The delivery photo was taken. The delivery process is finished and marked as COMPLETED."
+                "role": "user",
+                "content": "The delivery photo was taken. The delivery process is finished and marked as COMPLETED."
             })
         else:
             # Photo non prise → échec + annonce suite
@@ -1000,8 +994,8 @@ class DeliveryStateMachine:
 
             # Informer le LLM
             session.conversation_history.append({
-                "role": "system",
-                "content": "[SYSTEM MESSAGE] The delivery photo was NOT taken. The delivery process is finished and marked as FAILED."
+                "role": "user",
+                "content": "The delivery photo was NOT taken. The delivery process is finished and marked as FAILED."
             })
 
         # Reset et retour à MODE_0
