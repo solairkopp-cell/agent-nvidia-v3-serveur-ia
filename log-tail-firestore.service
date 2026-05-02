@@ -1,0 +1,14 @@
+[Unit]
+Description=Log Tail to Firestore
+After=network.target
+
+[Service]
+Type=simple
+User=server
+WorkingDirectory=/home/server/server
+ExecStart=/usr/bin/python3 /home/server/server/log_tail_to_firestore.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

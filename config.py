@@ -11,7 +11,7 @@ def _parse_env_words(name: str, default: str) -> tuple[str, ...]:
 
 # ── Logging ──────────────────────────────────────────────────────────────────
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
-LOG_FILE_PATH = os.getenv("LOG_FILE_PATH", "logs/server.log")
+LOG_FILE_PATH = os.getenv("LOG_FILE_PATH", "logs/server-logs.jsonl")
 
 # ── Serveur ──────────────────────────────────────────────────────────────────
 HOST = os.getenv("HOST", "0.0.0.0")

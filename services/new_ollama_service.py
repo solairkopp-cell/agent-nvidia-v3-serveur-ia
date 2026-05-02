@@ -9,12 +9,7 @@ import requests
 
 import config
 
-logging.basicConfig(
-    filename='mascote.log',
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
-
+logger = logging.getLogger(__name__)
 DEFAULT_SYSTEM_PROMPT = ()
 
 
@@ -39,7 +34,7 @@ class OllamaService:
             for endpoint in ("/v1/models", "/api/tags"):
                 response = requests.get(f"{self._base_url}{endpoint}", timeout=5)
                 if response.status_code == 200:
-                    logging.info("MascoteService démarré")
+                    logger.info("MascoteService démarré")
                     return
             raise RuntimeError("Ollama non joignable (healthcheck KO sur /v1/models et /api/tags)")
         except requests.exceptions.ConnectionError:
@@ -52,7 +47,7 @@ class OllamaService:
             client = self._async_client
             self._async_client = None
             await client.aclose()
-        logging.info("MascoteService arrêté")
+        logger.info("MascoteService arrêté")
 
     # --- Injection ---
 
@@ -96,37 +91,17 @@ class OllamaService:
             yield "I could not process that."
 
     async def is_this_a_confirmation(self, message: str, session=None) -> bool | None:
-        """Retourne True=oui, False=non, None=ambigu (fallback vers keyword patterns)."""
-        try:
-            if session is not None:
-                self.set_session(session)
-
-            messages = [
-                {
-                    "role": "user",
-                    "content": (
-                        "You classify a delivery driver's answer to the question "
-                        "'Is the delivery completed?'. "
-                        "Reply ONLY with one token: YES, NO, or UNKNOWN. "
-                        "Use YES only if the driver clearly confirms completion. "
-                        "Use NO only if the driver clearly denies completion. "
-                        "Use UNKNOWN for any other content (questions, unrelated text, thanks, greetings, uncertainty)."
-                    ),
-                },
-                {"role": "user", "content": message},
-            ]
-
-            reply = await self._run_completion(messages, include_tools=False)
-            text = reply.strip().lower()
-            if text.startswith("yes"):
+        text = (message or "").strip().lower()
+        yes_words = ("yes", "yep", "yeah", "yup", "done", "completed", "delivered", "sure", "correct", "affirmative")
+        no_words = ("no", "nope", "not", "negative", "failed", "couldn't", "cannot", "didn't")
+        for w in yes_words:
+            if w in text:
                 return True
-            if text.startswith("no"):
+        for w in no_words:
+            if w in text:
                 return False
-            return None  # ambiguous → laisser le fallback keyword décider
-        except Exception as e:
-            self.log(f"Erreur is_this_a_confirmation : {e}", level="error")
-            return None  # ne pas bloquer, laisser le fallback décider
-
+        return None
+    
     async def get_delivery_failure_reason_response(
         self,
         message: str,
@@ -169,24 +144,24 @@ class OllamaService:
 
     def log(self, message, level="info"):
         if level == "error":
-            logging.error(message)
+            logger.error(message)
             self.status = "bad"
         elif level == "warning":
-            logging.warning(message)
+            logger.warning(message)
             self.status = "medium"
         else:
-            logging.info(message)
+            logger.info(message)
 
     def _load_system_prompt(self) -> str:
         try:
             prompt = self._system_prompt_path.read_text(encoding="utf-8").strip()
             if prompt:
                 return prompt
-            logging.warning("system_prompt.txt est vide, fallback sur le prompt par défaut")
+            logger.warning("system_prompt.txt est vide, fallback sur le prompt par défaut")
         except FileNotFoundError:
-            logging.warning("system_prompt.txt introuvable, fallback sur le prompt par défaut")
+            logger.warning("system_prompt.txt introuvable, fallback sur le prompt par défaut")
         except Exception as e:
-            logging.warning(f"Erreur lecture system_prompt.txt : {e}")
+            logger.warning(f"Erreur lecture system_prompt.txt : {e}")
         return DEFAULT_SYSTEM_PROMPT
 
     # --- Les Outils ---
@@ -199,6 +174,20 @@ class OllamaService:
             return data if isinstance(data, list) else []
         except (FileNotFoundError, json.JSONDecodeError):
             return []
+
+    def get_current_delivery(self, delivery_id: str) -> dict:
+        with open("data.json", "r") as f:
+            deliveries = json.load(f)
+        
+        for delivery in deliveries:
+            if delivery["id"] == delivery_id:
+                return {
+                    "clientName": delivery["clientName"],
+                    "packageInfo": delivery["packageInfo"],
+                    "deliveryStatus": delivery["deliveryStatus"]
+                }
+        
+        return {"error": f"Delivery {delivery_id} not found"}
 
     @staticmethod
     def _first_planned_trip_id(items: list) -> str | None:
@@ -259,13 +248,23 @@ class OllamaService:
             })
         return {"message": "Map recentered and shown to the driver."}
 
+
     async def get_deliveries(self):
-        """Données livraisons uniquement (data.json) — n’ouvre pas l’UI carte."""
+        """Données livraisons uniquement (data.json) — n'ouvre pas l'UI carte."""
         self.log("Action: GET_DELIVERIES")
         try:
             with open('data.json', 'r', encoding='utf-8') as f:
                 deliveries = json.load(f)
-            return {"deliveries": deliveries}
+            return {
+                "deliveries": [
+                    {
+                        "clientName": d["clientName"],
+                        "address": d["address"],
+                        "packageInfo": d["packageInfo"]
+                    }
+                    for d in deliveries
+                ]
+            }
         except FileNotFoundError:
             return {"deliveries": []}
         except json.JSONDecodeError:
@@ -327,7 +326,7 @@ class OllamaService:
                 "function": {
                     "name": "get_deliveries",
                     "description": (
-                        "this tool returns the list of deliveries for today with their details (id, clientname , name = address, packageinfo , longitude, latitude) as read from data.json. "
+                        "this tool returns the list of deliveries for today with their details ( clientname , packageinfo ,address) as read from data.json. "
                     ),
                     "parameters": {"type": "object", "properties": {}}
                 }

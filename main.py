@@ -145,14 +145,10 @@ async def prewarm_services() -> None:
         await whisper_service.transcribe_pcm(stt_samples, config.SAMPLE_RATE)
 
 
-    async def _warm_tts():
-        async for _ in piper_service.synthesize_stream(config.PREWARM_TTS_TEXT):
-            pass
 
     for name, op in (
         ("vad", _warm_vad),
         ("stt", _warm_stt),
-        ("tts", _warm_tts),
     ):
         await _run_warmup_step(name, op)
 

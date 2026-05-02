@@ -37,8 +37,8 @@ if TYPE_CHECKING:
 
 import config
 
-logger = logging.getLogger(__name__)
 
+logger = logging.getLogger(__name__)
 
 class AgentService:
     """
@@ -61,14 +61,14 @@ class AgentService:
         self.denoise = denoise
         self.state_machine = state_machine
         self.ws_service: "WebSocketService | None" = None
-        
+
         self.tts.set_audio_callback(self._on_tts_audio_chunk)
         self._watchdog_task = asyncio.create_task(self._tts_watchdog())
 
     async def _on_tts_audio_chunk(self, samples: np.ndarray) -> None:
         if self.ws_service is None:
             return
-        
+
         for session in list(self.ws_service._sessions.values()):
             if getattr(session, "tts_playing", False) and getattr(session, "tts_track", None) is not None:
                 chunk_count = int(getattr(session, "_tts_debug_chunks", 0)) + 1
@@ -95,17 +95,11 @@ class AgentService:
                     last_audio = getattr(session, "last_tts_audio_time", 0)
                     if now - last_audio > 4.0:
                         session.tts_playing = False
-                        # On lance en tâche de fond pour éviter de bloquer la boucle
                         asyncio.create_task(self._send_emotion(session, "idle"))
 
     # ── Pipeline principal ────────────────────────────────────────────────────
 
     async def process_utterance(self, session: "Session", wav_bytes: bytes) -> None:
-        """
-        Point d'entrée principal. Appelé par le flux audio après
-        détection de fin d'utterance par le VAD.
-        """
-        logger = logging.getLogger(__name__)
 
         if session.processing_lock.locked():
             await self.interrupt(session)
@@ -133,7 +127,6 @@ class AgentService:
         utterance_id: str | None = None,
     ) -> None:
         """Entrée PCM/NumPy."""
-        logger = logging.getLogger(__name__)
         if session.processing_lock.locked():
             await self.interrupt(session)
 
@@ -186,7 +179,6 @@ class AgentService:
             await self._process_transcription(session, request_id, stt_result.text)
 
     async def _process_transcription(self, session: "Session", request_id: int, text: str | None) -> None:
-        logger = logging.getLogger(__name__)
         if session.cancel_flag or session.current_request_id != request_id:
             return
 
@@ -218,15 +210,7 @@ class AgentService:
 
                 if state_result.should_handle:
                     if state_result.tts_response:
-                        state_tts = await self._rewrite_spoken_text(
-                            session=session,
-                            text=state_result.tts_response,
-                            context_hint="delivery_state_machine",
-                        )
-                        await self._play_tts_simple(
-                            session, request_id, state_tts,
-                            event_type="response",
-                        )
+                        await self._stream_llm_to_tts(session, request_id, state_result.tts_response)
 
                     if state_result.action == "update_trip":
                         await self._handle_update_trip_action(session, state_result.action_params)
@@ -295,13 +279,6 @@ class AgentService:
         *,
         notify_client_stop: bool = True,
     ) -> None:
-        """
-        Interrompt proprement le TTS en cours :
-          1. Annule la tâche TTS (qui peut appeler tts.synthesize en cours)
-          2. Notifie le client (tts_stop_now)
-          3. Attend 150ms pour que le fade côté client soit perçu
-        """
-        logger = logging.getLogger(__name__)
         logger.info("TTS fade-out + stop client_id=%s", session.client_id)
         session.cancel_flag = True
 
@@ -312,8 +289,7 @@ class AgentService:
 
         if notify_client_stop and self.ws_service is not None:
             await self.ws_service.send(session, {"type": "tts_stop_now"})
-            
-        # Interrompre également le flux sur le serveur externe Piper
+
         await self.tts.interrupt()
 
         fade_ms = int(getattr(config, "TTS_FADE_OUT_MS", 150))
@@ -328,11 +304,7 @@ class AgentService:
         text: str,
         event_type: str = "response",
     ) -> None:
-        """
-        Synthétise `text` et envoie les samples directement au tts_track.
-        Si un TTS est déjà en cours, fait un fade-out + stop avant de jouer.
-        """
-        logger = logging.getLogger(__name__)
+        
         text = (text or "").strip()
         if not text or session.tts_track is None:
             return
@@ -343,10 +315,8 @@ class AgentService:
         if session.cancel_flag or session.current_request_id != request_id:
             return
 
-        # Envoyer l'émotion "speaking"
         await self._send_emotion(session, "speaking")
 
-        # Envoyer le texte au client
         if self.ws_service is not None:
             if event_type == "response":
                 await self.ws_service.send_response_chunk(session, text)
@@ -361,10 +331,7 @@ class AgentService:
         session._tts_debug_started_at = time.monotonic()
         logger.info(
             "TTS start client_id=%s request_id=%s event_type=%s text_len=%d",
-            session.client_id,
-            request_id,
-            event_type,
-            len(text),
+            session.client_id, request_id, event_type, len(text),
         )
 
         async def _do_play():
@@ -392,15 +359,78 @@ class AgentService:
             elapsed_ms = (time.monotonic() - started_at) * 1000.0
             logger.info(
                 "TTS end client_id=%s request_id=%s chunks=%d elapsed_ms=%.1f feeding_done=%s cancel_flag=%s",
-                session.client_id,
-                request_id,
+                session.client_id, request_id,
                 int(getattr(session, "_tts_debug_chunks", 0)),
                 elapsed_ms,
                 bool(getattr(session, "tts_feeding_done", False)),
                 bool(getattr(session, "cancel_flag", False)),
             )
 
-    # ── Pipeline LLM → TTS ────────────────────────────────────────────────────
+    # ── Pipeline LLM → TTS (stream) ───────────────────────────────────────────
+
+    async def _stream_llm_to_tts(
+        self,
+        session: "Session",
+        request_id: int,
+        instruction: str,
+    ) -> str:
+        """
+        Chemin générique stream : generate_system_reply → tts.stream_text → flush.
+        Retourne le texte complet généré.
+        """
+        session.tts_playing = True
+        session.tts_feeding_done = False
+        session.last_tts_audio_time = time.monotonic()
+        await self._send_emotion(session, "speaking")
+
+        llm_chunks: list[str] = []
+
+        async def _do_stream():
+            try:
+                async for chunk in self.llm.generate_system_reply(instruction, session=session):
+                    if session.cancel_flag or session.current_request_id != request_id:
+                        break
+                    if chunk:
+                        llm_chunks.append(chunk)
+                        await self.tts.stream_text(chunk)
+                        session.last_tts_audio_time = time.monotonic()
+                if not session.cancel_flag and session.current_request_id == request_id:
+                    await self.tts.flush()
+            except asyncio.CancelledError:
+                raise
+            except Exception:
+                logger.exception("TTS stream error client_id=%s", session.client_id)
+            finally:
+                session.tts_feeding_done = True
+
+        tts_task = asyncio.create_task(_do_stream(), name=f"tts-{session.client_id}")
+        session.tts_task = tts_task
+        try:
+            await tts_task
+        except asyncio.CancelledError:
+            pass
+
+        return "".join(llm_chunks).strip()
+
+    async def _rewrite_and_stream(
+        self,
+        session: "Session",
+        *,
+        text: str,
+        context_hint: str = "general",
+        request_id: int,
+    ) -> str:
+        """Réécrit `text` en anglais naturel et le streame directement vers Piper."""
+        text = (text or "").strip()
+        if not text:
+            return text
+        instruction = (
+            "Answer the delivery driver using natural, concise spoken English. "
+            "Keep the exact intent and factual meaning. Do not add new facts. "
+            f"Context={context_hint}. Message: {text}"
+        )
+        reply = await self._stream_llm_to_tts(session, request_id, instruction)
+        return reply or text
 
     async def _stream_response(
         self,
@@ -408,13 +438,9 @@ class AgentService:
         user_text: str,
         request_id: int,
     ) -> str:
-        """
-        LLM → TTS → socket audio.
-
-        En mode streaming (OLLAMA_STREAM=true) : passe le générateur au piper streaming TTS.
-        """
+        """LLM → TTS → socket audio (pipeline normal MODE_0)."""
         import inspect
-        logger = logging.getLogger(__name__)
+        
 
         if session.tts_track is None:
             return ""
@@ -457,16 +483,12 @@ class AgentService:
                 try:
                     if session.cancel_flag or session.current_request_id != request_id:
                         return
-                        
                     async for chunk in _llm_gen():
                         if session.cancel_flag or session.current_request_id != request_id:
                             break
-                        # Envoi direct du token au serveur Piper qui gère son propre buffer
                         await self.tts.stream_text(chunk)
                         session.last_tts_audio_time = time.monotonic()
-                            
                     if not session.cancel_flag and session.current_request_id == request_id:
-                        # Flush pour forcer la lecture des derniers mots
                         await self.tts.flush()
                         session.last_tts_audio_time = time.monotonic()
                 except asyncio.CancelledError:
@@ -508,11 +530,7 @@ class AgentService:
     # ── Interruption ──────────────────────────────────────────────────────────
 
     async def interrupt(self, session: "Session", *, event_type: str = "interrupted") -> None:
-        """
-        Annuler le traitement en cours pour cette session.
-        Si un TTS tourne : fade-out + stop.
-        """
-        logger = logging.getLogger(__name__)
+        
         logger.warning(
             "INTERRUPT called! client_id=%s tts_playing=%s",
             session.client_id, session.tts_playing,
@@ -530,23 +548,18 @@ class AgentService:
             await self.ws_service.send(session, {"type": event_type})
 
     async def on_user_speech_start(self, session: "Session") -> None:
-        """Appelé quand le VAD détecte une prise de parole de l'utilisateur."""
-        logger = logging.getLogger(__name__)
+        
         if not (session.tts_playing or session.processing_lock.locked()):
             return
 
-        # En MODE_1 (delivery state machine), on n'interrompt pas
         if self.state_machine is not None and self.state_machine.is_in_mode_1(session):
-            logger.info(
-                "🔇 Interruption blocked (MODE_1 active) client_id=%s",
-                session.client_id,
-            )
+            logger.info("🔇 Interruption blocked (MODE_1 active) client_id=%s", session.client_id)
             return
 
         logger.info("User speech detected during TTS → interrupting client_id=%s", session.client_id)
         await self.interrupt(session, event_type="tts_stop_now")
 
-    # ── speak_text (test TTS depuis le front) ────────────────────────────────
+    # ── speak_text ────────────────────────────────────────────────────────────
 
     async def speak_text(
         self,
@@ -555,10 +568,7 @@ class AgentService:
         *,
         event_type: str = "response",
     ) -> None:
-        """
-        Jouer un texte arbitraire via l'orchestration TTS standard.
-        """
-        logger = logging.getLogger(__name__)
+        
         text = (text or "").strip()
         if not text:
             return
@@ -574,45 +584,7 @@ class AgentService:
             session.cancel_flag = False
             await self._play_tts_simple(session, request_id, text, event_type=event_type)
 
-    async def _generate_spoken_text(
-        self,
-        session: "Session",
-        *,
-        instruction: str,
-        fallback: str,
-    ) -> str:
-        llm = getattr(self, "llm", None)
-        if llm is None:
-            return fallback
-        try:
-            reply = await llm.generate_system_reply(instruction, session=session)
-            reply = (reply or "").strip()
-            return reply or fallback
-        except Exception:
-            logger.exception("Spoken text generation failed client_id=%s", session.client_id)
-            return fallback
-
-    async def _rewrite_spoken_text(
-        self,
-        session: "Session",
-        *,
-        text: str,
-        context_hint: str = "general",
-    ) -> str:
-        text = (text or "").strip()
-        if not text:
-            return text
-        instruction = (
-            "Rewrite the following message for a delivery driver using natural, concise spoken English. "
-            "Keep the exact intent and factual meaning. Do not add new facts. "
-            f"Context={context_hint}. Message: {text}"
-        )
-        return await self._generate_spoken_text(
-            session,
-            instruction=instruction,
-            fallback=text,
-        )
-
+    # ── Utilitaires ──────────────────────────────────────────────────────────
     async def speak_instruction(
         self,
         session: "Session",
@@ -621,23 +593,21 @@ class AgentService:
         fallback: str,
         event_type: str = "response",
     ) -> None:
-        text = await self._generate_spoken_text(
-            session,
-            instruction=instruction,
-            fallback=fallback,
-        )
-        await self.speak_text(session, text, event_type=event_type)
-
-    # ── Utilitaires ──────────────────────────────────────────────────────────
-
+        if session.tts_track is None:
+            return
+        request_id = session.next_request_id()
+        session.cancel_flag = False
+        reply = await self._stream_llm_to_tts(session, request_id, instruction)
+        if not reply:
+            await self._play_tts_simple(session, request_id, fallback, event_type=event_type)
+            
     async def handle_external_control(
         self,
         session: "Session",
         action: str,
         extras: dict,
     ) -> None:
-        """Gérer les événements external_control reçus du client."""
-        logger = logging.getLogger(__name__)
+        
         logger.info(
             "📮 EXTERNAL CONTROL REÇU client_id=%s action=%s extras=%r",
             session.client_id, action, extras,
@@ -662,7 +632,7 @@ class AgentService:
             logger.warning("❌ Action external_control inconnue: %s", action)
 
     async def _handle_photo_taken_action(self, session: "Session", photo_taken: bool) -> None:
-        logger = logging.getLogger(__name__)
+        
         if self.state_machine is None:
             logger.warning("⚠️ State machine non disponible client_id=%s", session.client_id)
             return
@@ -670,11 +640,7 @@ class AgentService:
         await self._drain_pending_arrived(session)
 
     async def _handle_arrived_action(self, session: "Session", extras: dict) -> None:
-        """
-        Gérer l'action "arrived" : le driver est arrivé sur place.
-        Démarre automatiquement le flux de complétion (MODE_1).
-        """
-        logger = logging.getLogger(__name__)
+        
         trip_id = extras.get("trip_id")
 
         if not trip_id:
@@ -693,11 +659,7 @@ class AgentService:
                 )
                 return
 
-        # Interrompre le TTS en cours si besoin
         if session.tts_playing:
-            # arrived peut suivre immediatement une reponse LLM.
-            # Eviter d'envoyer tts_stop_now au client ici limite le risque
-            # de couper la nouvelle phrase STATE_1 si le stop arrive en retard.
             await self._stop_current_tts_with_fade(session, notify_client_stop=False)
 
         session.tts_playing = False
@@ -708,33 +670,25 @@ class AgentService:
             logger.info("🚀 Démarrage de la state machine pour client_id=%s", session.client_id)
             await self.state_machine.enter_mode_1(session, trip_id)
 
-            session.conversation_history.append({
-                "role": "user",
-                "content": (
-                    "The driver has arrived at the delivery location. "
-                    "Ask if the delivery is completed."
-                ),
-            })
-            logger.info("🗣️ Envoi question TTS: 'Is the delivery completed?'")
-            # Important: utiliser speak_text (avec processing_lock) pour eviter
-            # une course avec le stream LLM juste avant le switch MODE_1.
-            await self.speak_instruction(
-                session,
-                instruction=(
-                    "The driver has arrived at the destination. Ask a short yes/no question "
-                    "to confirm whether the delivery is completed."
-                ),
-                fallback="Is the delivery completed?",
-            )
+            delivery_info = self.llm.get_current_delivery(trip_id)
+            client_name = delivery_info.get('clientName', '')
+            package_info = delivery_info.get('packageInfo', '')
+            text = f"You've arrived at the delivery location. Package: {package_info} for {client_name}. Is the delivery completed?"
+
+            session.conversation_history.append({"role": "assistant", "content": text})
+            logger.info("🗣️ TTS question de livraison client_id=%s", session.client_id)
+
+            request_id = session.next_request_id()
+            session.cancel_flag = False
+            await self._play_tts_simple(session, request_id, text)
         else:
             logger.warning("⚠️ State machine non disponible client_id=%s", session.client_id)
-
     async def _consume_pending_arrived(self, session: "Session") -> None:
         pending_trip_id = getattr(session, "pending_arrived_trip_id", None)
         if not pending_trip_id:
             return
         session.pending_arrived_trip_id = None
-        logging.getLogger(__name__).info(
+        logger.info(
             "▶️ consuming deferred arrived client_id=%s trip_id=%s",
             session.client_id, pending_trip_id,
         )
@@ -759,7 +713,7 @@ class AgentService:
         await self._consume_pending_arrived(session)
 
     async def _handle_started_navigation_action(self, session: "Session", extras: dict) -> None:
-        logger = logging.getLogger(__name__)
+        
         trip_id = extras.get("trip_id")
         logger.info(
             "🗺️ Navigation started client_id=%s trip_id=%s",
@@ -767,7 +721,7 @@ class AgentService:
         )
 
     async def _handle_completed_delivery_action(self, session: "Session", extras: dict) -> None:
-        logger = logging.getLogger(__name__)
+        
         trip_id = extras.get("trip_id")
         status = extras.get("status", "COMPLETED")
         cause = extras.get("cause")
@@ -798,7 +752,7 @@ class AgentService:
                 })
 
     async def _handle_update_trip_action(self, session: "Session", params: dict) -> None:
-        logger = logging.getLogger(__name__)
+        
         if self.state_machine is None:
             return
 
@@ -841,7 +795,7 @@ class AgentService:
         *,
         utterance_id: str | None = None,
     ) -> None:
-        logger = logging.getLogger(__name__)
+        
         try:
             recordings_dir = Path("assets/recordings")
             recordings_dir.mkdir(parents=True, exist_ok=True)

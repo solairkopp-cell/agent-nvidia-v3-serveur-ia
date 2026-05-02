@@ -1,0 +1,464 @@
+{"ts": "2026-05-02T09:16:25.926054+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "Handler registered for message type: identify_driver"}
+{"ts": "2026-05-02T09:16:25.927000+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "Handler registered for message type: get_trips"}
+{"ts": "2026-05-02T09:16:25.946970+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "Started server process [4654]"}
+{"ts": "2026-05-02T09:16:25.947972+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "Waiting for application startup."}
+{"ts": "2026-05-02T09:16:31.175865+00:00", "level": "INFO", "logger": "httpx", "msg": "HTTP Request: GET https://huggingface.co/api/models/Systran/faster-whisper-small.en/revision/main \"HTTP/1.1 200 OK\""}
+{"ts": "2026-05-02T09:16:43.937203+00:00", "level": "INFO", "logger": "root", "msg": "MascoteService démarré"}
+{"ts": "2026-05-02T09:16:43.939642+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "NotificationService started"}
+{"ts": "2026-05-02T09:16:43.940057+00:00", "level": "INFO", "logger": "services.delivery_service", "msg": "DeliveryService started"}
+{"ts": "2026-05-02T09:16:43.940367+00:00", "level": "INFO", "logger": "services.delivery_state_machine", "msg": "DeliveryStateMachine started"}
+{"ts": "2026-05-02T09:16:43.940655+00:00", "level": "INFO", "logger": "services.piper_client_service", "msg": "Connexion au Piper Streaming Server externe sur ws://localhost:9000/"}
+{"ts": "2026-05-02T09:16:43.960593+00:00", "level": "INFO", "logger": "services.piper_client_service", "msg": "WebSocket Piper connecté."}
+{"ts": "2026-05-02T09:16:43.961047+00:00", "level": "INFO", "logger": "services.denoise_service", "msg": "Denoise disabled"}
+{"ts": "2026-05-02T09:16:43.961258+00:00", "level": "INFO", "logger": "main", "msg": "Warmup started"}
+{"ts": "2026-05-02T09:16:43.966890+00:00", "level": "INFO", "logger": "main", "msg": "Warmup vad ok in 0.01s"}
+{"ts": "2026-05-02T09:16:43.968061+00:00", "level": "INFO", "logger": "faster_whisper", "msg": "Processing audio with duration 00:01.000"}
+{"ts": "2026-05-02T09:16:45.275178+00:00", "level": "INFO", "logger": "main", "msg": "Warmup stt ok in 1.31s"}
+{"ts": "2026-05-02T09:16:45.275907+00:00", "level": "INFO", "logger": "main", "msg": "Warmup finished"}
+{"ts": "2026-05-02T09:16:45.276302+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "Application startup complete."}
+{"ts": "2026-05-02T09:16:45.277124+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)"}
+{"ts": "2026-05-02T09:17:55.192543+00:00", "level": "INFO", "logger": "uvicorn.access", "msg": "197.17.89.127:0 - \"GET / HTTP/1.1\" 200"}
+{"ts": "2026-05-02T09:17:55.503374+00:00", "level": "INFO", "logger": "uvicorn.access", "msg": "197.17.89.127:0 - \"GET /favicon.ico HTTP/1.1\" 404"}
+{"ts": "2026-05-02T09:17:56.983248+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "197.17.89.127:0 - \"WebSocket /ws\" [accepted]"}
+{"ts": "2026-05-02T09:17:56.986046+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "WS connected client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b"}
+{"ts": "2026-05-02T09:17:56.988162+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "connection open"}
+{"ts": "2026-05-02T09:18:02.737845+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📨 WS MESSAGE RECEIVED client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b type=start data={'type': 'start', 'input_sample_rate': 48000}"}
+{"ts": "2026-05-02T09:18:02.739548+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📨 NOTIFICATION RECEIVED client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b type=start data={'type': 'start', 'input_sample_rate': 48000}"}
+{"ts": "2026-05-02T09:18:02.740309+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Audio WS session started client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b input_sr=48000 output_sr=48000"}
+{"ts": "2026-05-02T09:18:02.740690+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b type=started data={'type': 'started', 'input_sample_rate': 48000, 'audio_output_sample_rate': 48000, 'encoding': 'pcm_s16le', 'channels': 1}"}
+{"ts": "2026-05-02T09:18:07.320058+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "VAD speech_start client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b p=0.987"}
+{"ts": "2026-05-02T09:18:07.324423+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b type=vad data={'type': 'vad', 'event': 'speech_start', 'p': 0.9870032072067261}"}
+{"ts": "2026-05-02T09:18:10.658014+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Utterance end client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b samples=61440"}
+{"ts": "2026-05-02T09:18:10.659718+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b type=vad data={'type': 'vad', 'event': 'utterance_end', 'samples': 61440}"}
+{"ts": "2026-05-02T09:18:10.674803+00:00", "level": "INFO", "logger": "services.agent_service", "msg": "STT raw input client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b ms=3840 rms=0.0527 peak=0.3071 n=61440 sr=16000"}
+{"ts": "2026-05-02T09:18:10.726198+00:00", "level": "INFO", "logger": "services.agent_service", "msg": "Saved STT audio compare client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b raw=audio_6ef985c8-de7f-4d3f-b5b4-8b2da178018b_0b634e5f_raw.wav denoised=audio_6ef985c8-de7f-4d3f-b5b4-8b2da178018b_0b634e5f_denoised.wav raw_rms=0.052702 denoised_rms=0.052702 sr=16000"}
+{"ts": "2026-05-02T09:18:10.728662+00:00", "level": "INFO", "logger": "faster_whisper", "msg": "Processing audio with duration 00:03.840"}
+{"ts": "2026-05-02T09:18:11.570131+00:00", "level": "INFO", "logger": "services.agent_service", "msg": "STT transcript client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b text='this is the test can you hear me'"}
+{"ts": "2026-05-02T09:18:11.570681+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b type=transcript data={'type': 'transcript', 'text': 'this is the test can you hear me'}"}
+{"ts": "2026-05-02T09:18:11.571388+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b type=emotion data={'type': 'emotion', 'name': 'speaking'}"}
+{"ts": "2026-05-02T09:18:16.878012+00:00", "level": "INFO", "logger": "httpx", "msg": "HTTP Request: POST http://localhost:8080/v1/chat/completions \"HTTP/1.1 200 OK\""}
+{"ts": "2026-05-02T09:18:18.302853+00:00", "level": "INFO", "logger": "root", "msg": "Action: GET_DELIVERIES"}
+{"ts": "2026-05-02T09:18:18.734637+00:00", "level": "INFO", "logger": "httpx", "msg": "HTTP Request: POST http://localhost:8080/v1/chat/completions \"HTTP/1.1 200 OK\""}
+{"ts": "2026-05-02T09:18:18.736032+00:00", "level": "INFO", "logger": "services.agent_service", "msg": "LLM first chunk client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b latency_ms=8074.3"}
+{"ts": "2026-05-02T09:18:18.736353+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b type=response data={'type': 'response', 'text': 'No'}"}
+{"ts": "2026-05-02T09:18:18.828354+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b type=response data={'type': 'response', 'text': ' deliveries'}"}
+{"ts": "2026-05-02T09:18:18.918591+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b type=response data={'type': 'response', 'text': ' are'}"}
+{"ts": "2026-05-02T09:18:19.001450+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b type=response data={'type': 'response', 'text': ' scheduled'}"}
+{"ts": "2026-05-02T09:18:19.118835+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b type=response data={'type': 'response', 'text': ' for'}"}
+{"ts": "2026-05-02T09:18:19.201755+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b type=response data={'type': 'response', 'text': ' today'}"}
+{"ts": "2026-05-02T09:18:19.284752+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b type=response data={'type': 'response', 'text': '.'}"}
+{"ts": "2026-05-02T09:18:19.872425+00:00", "level": "INFO", "logger": "services.agent_service", "msg": "TTS audio chunk client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b chunks=1 samples=8916"}
+{"ts": "2026-05-02T09:18:20.126129+00:00", "level": "INFO", "logger": "uvicorn.access", "msg": "197.17.89.127:0 - \"GET /favicon.ico HTTP/1.1\" 404"}
+{"ts": "2026-05-02T09:18:23.934061+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b type=emotion data={'type': 'emotion', 'name': 'idle'}"}
+{"ts": "2026-05-02T09:18:51.125512+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📨 WS MESSAGE RECEIVED client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b type=stop data={'type': 'stop'}"}
+{"ts": "2026-05-02T09:18:51.127293+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📨 NOTIFICATION RECEIVED client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b type=stop data={'type': 'stop'}"}
+{"ts": "2026-05-02T09:18:51.128036+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Audio WS cleaned up client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b"}
+{"ts": "2026-05-02T09:18:51.128423+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b type=stopped data={'type': 'stopped'}"}
+{"ts": "2026-05-02T09:18:52.281529+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📨 WS MESSAGE RECEIVED client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b type=stop data={'type': 'stop'}"}
+{"ts": "2026-05-02T09:18:52.283420+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📨 NOTIFICATION RECEIVED client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b type=stop data={'type': 'stop'}"}
+{"ts": "2026-05-02T09:18:52.284067+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Audio WS cleaned up client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b"}
+{"ts": "2026-05-02T09:18:52.284477+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b type=stopped data={'type': 'stopped'}"}
+{"ts": "2026-05-02T09:18:52.286730+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "connection closed"}
+{"ts": "2026-05-02T09:18:52.287797+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Audio WS cleaned up client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b"}
+{"ts": "2026-05-02T09:18:52.288230+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "WS disconnected client_id=6ef985c8-de7f-4d3f-b5b4-8b2da178018b"}
+{"ts": "2026-05-02T09:19:37.987908+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "197.17.89.127:0 - \"WebSocket /ws\" [accepted]"}
+{"ts": "2026-05-02T09:19:37.990154+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "WS connected client_id=da02e388-742f-4f53-9b9b-c1ef07b834a4"}
+{"ts": "2026-05-02T09:19:37.992460+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "connection open"}
+{"ts": "2026-05-02T09:19:37.994126+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "197.17.89.127:0 - \"WebSocket /ws\" [accepted]"}
+{"ts": "2026-05-02T09:19:37.994766+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "WS connected client_id=7cd438e3-4f60-4155-97ae-ed96795a6b69"}
+{"ts": "2026-05-02T09:19:37.996437+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "connection open"}
+{"ts": "2026-05-02T09:19:38.115378+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "connection closed"}
+{"ts": "2026-05-02T09:19:38.117037+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Audio WS cleaned up client_id=7cd438e3-4f60-4155-97ae-ed96795a6b69"}
+{"ts": "2026-05-02T09:19:38.117458+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "WS disconnected client_id=7cd438e3-4f60-4155-97ae-ed96795a6b69"}
+{"ts": "2026-05-02T09:19:38.190067+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📨 WS MESSAGE RECEIVED client_id=da02e388-742f-4f53-9b9b-c1ef07b834a4 type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}"}
+{"ts": "2026-05-02T09:19:38.191010+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📨 NOTIFICATION RECEIVED client_id=da02e388-742f-4f53-9b9b-c1ef07b834a4 type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}"}
+{"ts": "2026-05-02T09:19:38.191435+00:00", "level": "INFO", "logger": "services.delivery_service", "msg": "🚚 Identifying driver client_id=da02e388-742f-4f53-9b9b-c1ef07b834a4 serial=000"}
+{"ts": "2026-05-02T09:19:38.603973+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Token valide jusqu'au 2026-05-02 12:29:08"}
+{"ts": "2026-05-02T09:19:38.605431+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Récupération des trips pour le driver: 000"}
+{"ts": "2026-05-02T09:19:38.605680+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche du driver par query: 000"}
+{"ts": "2026-05-02T09:19:38.605894+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000"}
+{"ts": "2026-05-02T09:19:39.184272+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T09:19:39.186026+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T09:19:39.186528+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche des schedules par driver serial number: 000"}
+{"ts": "2026-05-02T09:19:39.187235+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche du driver par query: 000"}
+{"ts": "2026-05-02T09:19:39.187673+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000"}
+{"ts": "2026-05-02T09:19:39.237940+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T09:19:39.238977+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb"}
+{"ts": "2026-05-02T09:19:39.239387+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb"}
+{"ts": "2026-05-02T09:19:39.348539+00:00", "level": "INFO", "logger": "cli_logger", "msg": "2 schedule(s) trouvé(s) sur 35 entité(s)"}
+{"ts": "2026-05-02T09:19:39.350805+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb"}
+{"ts": "2026-05-02T09:19:39.351839+00:00", "level": "WARNING", "logger": "cli_logger", "msg": "Aucun schedule pour la date: 2026-05-02"}
+{"ts": "2026-05-02T09:19:39.353923+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Token valide jusqu'au 2026-05-02 12:29:08"}
+{"ts": "2026-05-02T09:19:39.354624+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche du driver par query: 000"}
+{"ts": "2026-05-02T09:19:39.355238+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000"}
+{"ts": "2026-05-02T09:19:39.798653+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T09:19:39.803527+00:00", "level": "INFO", "logger": "services.delivery_service", "msg": "ℹ️ No trips found for driver 000"}
+{"ts": "2026-05-02T09:19:39.805196+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📤 NOTIFICATION SENT client_id=da02e388-742f-4f53-9b9b-c1ef07b834a4 type=no_trips data={'message': \"Aucune livraison prévue pour aujourd'hui\", 'voice_message': 'Hello vivien, you have no trips scheduled for today. Have a great day.'}"}
+{"ts": "2026-05-02T09:19:39.805649+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=da02e388-742f-4f53-9b9b-c1ef07b834a4 type=notification data={'type': 'notification', 'notification_type': 'no_trips', 'data': {'message': \"Aucune livraison prévue pour aujourd'hui\", 'voice_message': 'Hello vivien, you have no trips scheduled for today. Have a great day.'}}"}
+{"ts": "2026-05-02T09:19:39.807254+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=da02e388-742f-4f53-9b9b-c1ef07b834a4 type=error data={'type': 'error', 'message': 'unknown type'}"}
+{"ts": "2026-05-02T09:19:39.808013+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📨 WS MESSAGE RECEIVED client_id=da02e388-742f-4f53-9b9b-c1ef07b834a4 type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}"}
+{"ts": "2026-05-02T09:19:39.808377+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📨 NOTIFICATION RECEIVED client_id=da02e388-742f-4f53-9b9b-c1ef07b834a4 type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}"}
+{"ts": "2026-05-02T09:19:39.808720+00:00", "level": "INFO", "logger": "services.delivery_service", "msg": "🚚 Identifying driver client_id=da02e388-742f-4f53-9b9b-c1ef07b834a4 serial=000"}
+{"ts": "2026-05-02T09:19:39.810540+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Token valide jusqu'au 2026-05-02 12:29:08"}
+{"ts": "2026-05-02T09:19:39.810980+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Récupération des trips pour le driver: 000"}
+{"ts": "2026-05-02T09:19:39.811337+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche du driver par query: 000"}
+{"ts": "2026-05-02T09:19:39.811670+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000"}
+{"ts": "2026-05-02T09:19:39.974791+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T09:19:39.976333+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T09:19:39.976781+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche des schedules par driver serial number: 000"}
+{"ts": "2026-05-02T09:19:39.977148+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche du driver par query: 000"}
+{"ts": "2026-05-02T09:19:39.977502+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000"}
+{"ts": "2026-05-02T09:19:40.036317+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T09:19:40.037481+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb"}
+{"ts": "2026-05-02T09:19:40.037888+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb"}
+{"ts": "2026-05-02T09:19:40.153079+00:00", "level": "INFO", "logger": "cli_logger", "msg": "2 schedule(s) trouvé(s) sur 35 entité(s)"}
+{"ts": "2026-05-02T09:19:40.154707+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb"}
+{"ts": "2026-05-02T09:19:40.155488+00:00", "level": "WARNING", "logger": "cli_logger", "msg": "Aucun schedule pour la date: 2026-05-02"}
+{"ts": "2026-05-02T09:19:40.157415+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Token valide jusqu'au 2026-05-02 12:29:08"}
+{"ts": "2026-05-02T09:19:40.157862+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche du driver par query: 000"}
+{"ts": "2026-05-02T09:19:40.158216+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000"}
+{"ts": "2026-05-02T09:19:40.641836+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T09:19:40.646513+00:00", "level": "INFO", "logger": "services.delivery_service", "msg": "ℹ️ No trips found for driver 000"}
+{"ts": "2026-05-02T09:19:40.647185+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📤 NOTIFICATION SENT client_id=da02e388-742f-4f53-9b9b-c1ef07b834a4 type=no_trips data={'message': \"Aucune livraison prévue pour aujourd'hui\", 'voice_message': 'Hello vivien, you have no trips scheduled for today. Have a great day.'}"}
+{"ts": "2026-05-02T09:19:40.647613+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=da02e388-742f-4f53-9b9b-c1ef07b834a4 type=notification data={'type': 'notification', 'notification_type': 'no_trips', 'data': {'message': \"Aucune livraison prévue pour aujourd'hui\", 'voice_message': 'Hello vivien, you have no trips scheduled for today. Have a great day.'}}"}
+{"ts": "2026-05-02T09:19:40.649032+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=da02e388-742f-4f53-9b9b-c1ef07b834a4 type=error data={'type': 'error', 'message': 'unknown type'}"}
+{"ts": "2026-05-02T09:19:40.649781+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📨 WS MESSAGE RECEIVED client_id=da02e388-742f-4f53-9b9b-c1ef07b834a4 type=start data={'type': 'start', 'input_sample_rate': 48000}"}
+{"ts": "2026-05-02T09:19:40.650142+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📨 NOTIFICATION RECEIVED client_id=da02e388-742f-4f53-9b9b-c1ef07b834a4 type=start data={'type': 'start', 'input_sample_rate': 48000}"}
+{"ts": "2026-05-02T09:19:40.650805+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Audio WS session started client_id=da02e388-742f-4f53-9b9b-c1ef07b834a4 input_sr=48000 output_sr=48000"}
+{"ts": "2026-05-02T09:19:40.651109+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=da02e388-742f-4f53-9b9b-c1ef07b834a4 type=started data={'type': 'started', 'input_sample_rate': 48000, 'audio_output_sample_rate': 48000, 'encoding': 'pcm_s16le', 'channels': 1}"}
+{"ts": "2026-05-02T09:19:40.667083+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Sending pending voice summary client_id=da02e388-742f-4f53-9b9b-c1ef07b834a4"}
+{"ts": "2026-05-02T09:19:40.668320+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=da02e388-742f-4f53-9b9b-c1ef07b834a4 type=emotion data={'type': 'emotion', 'name': 'greeting'}"}
+{"ts": "2026-05-02T09:19:40.669521+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=da02e388-742f-4f53-9b9b-c1ef07b834a4 type=emotion data={'type': 'emotion', 'name': 'speaking'}"}
+{"ts": "2026-05-02T09:19:42.825913+00:00", "level": "INFO", "logger": "httpx", "msg": "HTTP Request: POST http://localhost:8080/v1/chat/completions \"HTTP/1.1 200 OK\""}
+{"ts": "2026-05-02T09:19:43.384094+00:00", "level": "INFO", "logger": "services.agent_service", "msg": "TTS audio chunk client_id=da02e388-742f-4f53-9b9b-c1ef07b834a4 chunks=1 samples=8916"}
+{"ts": "2026-05-02T09:19:48.496158+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=da02e388-742f-4f53-9b9b-c1ef07b834a4 type=emotion data={'type': 'emotion', 'name': 'idle'}"}
+{"ts": "2026-05-02T09:20:38.186832+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Audio WS cleaned up client_id=da02e388-742f-4f53-9b9b-c1ef07b834a4"}
+{"ts": "2026-05-02T09:20:38.188538+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "WS disconnected client_id=da02e388-742f-4f53-9b9b-c1ef07b834a4"}
+{"ts": "2026-05-02T09:20:38.189286+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "connection closed"}
+{"ts": "2026-05-02T09:42:27.629916+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "Shutting down"}
+{"ts": "2026-05-02T09:42:27.731789+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "Waiting for application shutdown."}
+{"ts": "2026-05-02T09:42:27.733892+00:00", "level": "INFO", "logger": "services.piper_client_service", "msg": "Fermeture du PiperClientService"}
+{"ts": "2026-05-02T09:42:27.938198+00:00", "level": "INFO", "logger": "services.delivery_service", "msg": "DeliveryService shutdown"}
+{"ts": "2026-05-02T09:42:27.939071+00:00", "level": "INFO", "logger": "services.delivery_state_machine", "msg": "DeliveryStateMachine shutdown"}
+{"ts": "2026-05-02T09:42:27.939376+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "NotificationService shutdown"}
+{"ts": "2026-05-02T09:42:27.940924+00:00", "level": "INFO", "logger": "root", "msg": "MascoteService arrêté"}
+{"ts": "2026-05-02T09:42:28.279342+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "Application shutdown complete."}
+{"ts": "2026-05-02T09:42:28.282267+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "Finished server process [4654]"}
+{"ts": "2026-05-02T09:42:31.516657+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "Handler registered for message type: identify_driver"}
+{"ts": "2026-05-02T09:42:31.517426+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "Handler registered for message type: get_trips"}
+{"ts": "2026-05-02T09:42:31.535637+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "Started server process [5494]"}
+{"ts": "2026-05-02T09:42:31.536282+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "Waiting for application startup."}
+{"ts": "2026-05-02T09:42:37.178143+00:00", "level": "INFO", "logger": "httpx", "msg": "HTTP Request: GET https://huggingface.co/api/models/Systran/faster-whisper-small.en/revision/main \"HTTP/1.1 200 OK\""}
+{"ts": "2026-05-02T09:42:49.637739+00:00", "level": "INFO", "logger": "services.new_ollama_service", "msg": "MascoteService démarré"}
+{"ts": "2026-05-02T09:42:49.638425+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "NotificationService started"}
+{"ts": "2026-05-02T09:42:49.638658+00:00", "level": "INFO", "logger": "services.delivery_service", "msg": "DeliveryService started"}
+{"ts": "2026-05-02T09:42:49.638862+00:00", "level": "INFO", "logger": "services.delivery_state_machine", "msg": "DeliveryStateMachine started"}
+{"ts": "2026-05-02T09:42:49.639049+00:00", "level": "INFO", "logger": "services.piper_client_service", "msg": "Connexion au Piper Streaming Server externe sur ws://localhost:9000/"}
+{"ts": "2026-05-02T09:42:49.682883+00:00", "level": "INFO", "logger": "services.piper_client_service", "msg": "WebSocket Piper connecté."}
+{"ts": "2026-05-02T09:42:49.683497+00:00", "level": "INFO", "logger": "services.denoise_service", "msg": "Denoise disabled"}
+{"ts": "2026-05-02T09:42:49.683725+00:00", "level": "INFO", "logger": "main", "msg": "Warmup started"}
+{"ts": "2026-05-02T09:42:49.690928+00:00", "level": "INFO", "logger": "main", "msg": "Warmup vad ok in 0.01s"}
+{"ts": "2026-05-02T09:42:49.691432+00:00", "level": "INFO", "logger": "faster_whisper", "msg": "Processing audio with duration 00:01.000"}
+{"ts": "2026-05-02T09:42:51.257525+00:00", "level": "INFO", "logger": "main", "msg": "Warmup stt ok in 1.57s"}
+{"ts": "2026-05-02T09:42:51.265665+00:00", "level": "INFO", "logger": "main", "msg": "Warmup finished"}
+{"ts": "2026-05-02T09:42:51.266265+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "Application startup complete."}
+{"ts": "2026-05-02T09:42:51.267622+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)"}
+{"ts": "2026-05-02T10:07:46.004454+00:00", "level": "INFO", "logger": "uvicorn.access", "msg": "205.210.31.10:0 - \"GET / HTTP/1.1\" 200"}
+{"ts": "2026-05-02T10:23:28.364036+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "197.17.89.127:0 - \"WebSocket /ws\" [accepted]"}
+{"ts": "2026-05-02T10:23:28.367948+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "WS connected client_id=65d5a8bb-a935-4e43-816c-35c8181e04b0"}
+{"ts": "2026-05-02T10:23:28.370317+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "connection open"}
+{"ts": "2026-05-02T10:23:28.737858+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📨 WS MESSAGE RECEIVED client_id=65d5a8bb-a935-4e43-816c-35c8181e04b0 type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}"}
+{"ts": "2026-05-02T10:23:28.738518+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📨 NOTIFICATION RECEIVED client_id=65d5a8bb-a935-4e43-816c-35c8181e04b0 type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}"}
+{"ts": "2026-05-02T10:23:28.738891+00:00", "level": "INFO", "logger": "services.delivery_service", "msg": "🚚 Identifying driver client_id=65d5a8bb-a935-4e43-816c-35c8181e04b0 serial=000"}
+{"ts": "2026-05-02T10:23:29.901310+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Token valide jusqu'au 2026-05-02 12:29:08"}
+{"ts": "2026-05-02T10:23:29.902634+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Récupération des trips pour le driver: 000"}
+{"ts": "2026-05-02T10:23:29.902864+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche du driver par query: 000"}
+{"ts": "2026-05-02T10:23:29.903064+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000"}
+{"ts": "2026-05-02T10:23:31.648823+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T10:23:31.650370+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T10:23:31.650704+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche des schedules par driver serial number: 000"}
+{"ts": "2026-05-02T10:23:31.650970+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche du driver par query: 000"}
+{"ts": "2026-05-02T10:23:31.651227+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000"}
+{"ts": "2026-05-02T10:23:31.705937+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T10:23:31.706410+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb"}
+{"ts": "2026-05-02T10:23:31.706719+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb"}
+{"ts": "2026-05-02T10:23:31.818071+00:00", "level": "INFO", "logger": "cli_logger", "msg": "2 schedule(s) trouvé(s) sur 35 entité(s)"}
+{"ts": "2026-05-02T10:23:31.819168+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb"}
+{"ts": "2026-05-02T10:23:31.819756+00:00", "level": "WARNING", "logger": "cli_logger", "msg": "Aucun schedule pour la date: 2026-05-02"}
+{"ts": "2026-05-02T10:23:31.821511+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Token valide jusqu'au 2026-05-02 12:29:08"}
+{"ts": "2026-05-02T10:23:31.825488+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche du driver par query: 000"}
+{"ts": "2026-05-02T10:23:31.825792+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000"}
+{"ts": "2026-05-02T10:23:32.006125+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T10:23:32.011187+00:00", "level": "INFO", "logger": "services.delivery_service", "msg": "ℹ️ No trips found for driver 000"}
+{"ts": "2026-05-02T10:23:32.012639+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📤 NOTIFICATION SENT client_id=65d5a8bb-a935-4e43-816c-35c8181e04b0 type=no_trips data={'message': \"Aucune livraison prévue pour aujourd'hui\", 'voice_message': 'Hello vivien, you have no trips scheduled for today. Have a great day.'}"}
+{"ts": "2026-05-02T10:23:32.013338+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=65d5a8bb-a935-4e43-816c-35c8181e04b0 type=notification data={'type': 'notification', 'notification_type': 'no_trips', 'data': {'message': \"Aucune livraison prévue pour aujourd'hui\", 'voice_message': 'Hello vivien, you have no trips scheduled for today. Have a great day.'}}"}
+{"ts": "2026-05-02T10:23:32.014857+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=65d5a8bb-a935-4e43-816c-35c8181e04b0 type=error data={'type': 'error', 'message': 'unknown type'}"}
+{"ts": "2026-05-02T10:23:32.015512+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📨 WS MESSAGE RECEIVED client_id=65d5a8bb-a935-4e43-816c-35c8181e04b0 type=start data={'type': 'start', 'input_sample_rate': 48000}"}
+{"ts": "2026-05-02T10:23:32.015768+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📨 NOTIFICATION RECEIVED client_id=65d5a8bb-a935-4e43-816c-35c8181e04b0 type=start data={'type': 'start', 'input_sample_rate': 48000}"}
+{"ts": "2026-05-02T10:23:32.016615+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Audio WS session started client_id=65d5a8bb-a935-4e43-816c-35c8181e04b0 input_sr=48000 output_sr=48000"}
+{"ts": "2026-05-02T10:23:32.016870+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=65d5a8bb-a935-4e43-816c-35c8181e04b0 type=started data={'type': 'started', 'input_sample_rate': 48000, 'audio_output_sample_rate': 48000, 'encoding': 'pcm_s16le', 'channels': 1}"}
+{"ts": "2026-05-02T10:23:32.357125+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Sending pending voice summary client_id=65d5a8bb-a935-4e43-816c-35c8181e04b0"}
+{"ts": "2026-05-02T10:23:32.358332+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=65d5a8bb-a935-4e43-816c-35c8181e04b0 type=emotion data={'type': 'emotion', 'name': 'greeting'}"}
+{"ts": "2026-05-02T10:23:32.359600+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=65d5a8bb-a935-4e43-816c-35c8181e04b0 type=emotion data={'type': 'emotion', 'name': 'speaking'}"}
+{"ts": "2026-05-02T10:23:36.359924+00:00", "level": "INFO", "logger": "httpx", "msg": "HTTP Request: POST http://localhost:8080/v1/chat/completions \"HTTP/1.1 200 OK\""}
+{"ts": "2026-05-02T10:23:37.097143+00:00", "level": "INFO", "logger": "services.agent_service", "msg": "TTS audio chunk client_id=65d5a8bb-a935-4e43-816c-35c8181e04b0 chunks=1 samples=8916"}
+{"ts": "2026-05-02T10:23:42.160779+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=65d5a8bb-a935-4e43-816c-35c8181e04b0 type=emotion data={'type': 'emotion', 'name': 'idle'}"}
+{"ts": "2026-05-02T10:23:45.464060+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Audio WS cleaned up client_id=65d5a8bb-a935-4e43-816c-35c8181e04b0"}
+{"ts": "2026-05-02T10:23:45.465474+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "WS disconnected client_id=65d5a8bb-a935-4e43-816c-35c8181e04b0"}
+{"ts": "2026-05-02T10:23:45.466276+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "connection closed"}
+{"ts": "2026-05-02T10:24:43.431401+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "197.17.89.127:0 - \"WebSocket /ws\" [accepted]"}
+{"ts": "2026-05-02T10:24:43.433881+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "WS connected client_id=d05b9bfb-6702-4002-b187-f2bc2ae1662f"}
+{"ts": "2026-05-02T10:24:43.435291+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "connection open"}
+{"ts": "2026-05-02T10:24:43.940358+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📨 WS MESSAGE RECEIVED client_id=d05b9bfb-6702-4002-b187-f2bc2ae1662f type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}"}
+{"ts": "2026-05-02T10:24:43.941094+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📨 NOTIFICATION RECEIVED client_id=d05b9bfb-6702-4002-b187-f2bc2ae1662f type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}"}
+{"ts": "2026-05-02T10:24:43.941260+00:00", "level": "INFO", "logger": "services.delivery_service", "msg": "🚚 Identifying driver client_id=d05b9bfb-6702-4002-b187-f2bc2ae1662f serial=000"}
+{"ts": "2026-05-02T10:24:43.942240+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Token valide jusqu'au 2026-05-02 12:29:08"}
+{"ts": "2026-05-02T10:24:43.942556+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Récupération des trips pour le driver: 000"}
+{"ts": "2026-05-02T10:24:43.942730+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche du driver par query: 000"}
+{"ts": "2026-05-02T10:24:43.942892+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000"}
+{"ts": "2026-05-02T10:24:44.292840+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T10:24:44.294408+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T10:24:44.294757+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche des schedules par driver serial number: 000"}
+{"ts": "2026-05-02T10:24:44.295031+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche du driver par query: 000"}
+{"ts": "2026-05-02T10:24:44.295307+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000"}
+{"ts": "2026-05-02T10:24:44.344792+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T10:24:44.345205+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb"}
+{"ts": "2026-05-02T10:24:44.345501+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb"}
+{"ts": "2026-05-02T10:24:44.447514+00:00", "level": "INFO", "logger": "cli_logger", "msg": "2 schedule(s) trouvé(s) sur 35 entité(s)"}
+{"ts": "2026-05-02T10:24:44.448146+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb"}
+{"ts": "2026-05-02T10:24:44.448627+00:00", "level": "WARNING", "logger": "cli_logger", "msg": "Aucun schedule pour la date: 2026-05-02"}
+{"ts": "2026-05-02T10:24:44.450383+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Token valide jusqu'au 2026-05-02 12:29:08"}
+{"ts": "2026-05-02T10:24:44.450729+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche du driver par query: 000"}
+{"ts": "2026-05-02T10:24:44.450992+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000"}
+{"ts": "2026-05-02T10:24:44.611786+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T10:24:44.614876+00:00", "level": "INFO", "logger": "services.delivery_service", "msg": "ℹ️ No trips found for driver 000"}
+{"ts": "2026-05-02T10:24:44.615287+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📤 NOTIFICATION SENT client_id=d05b9bfb-6702-4002-b187-f2bc2ae1662f type=no_trips data={'message': \"Aucune livraison prévue pour aujourd'hui\", 'voice_message': 'Hello vivien, you have no trips scheduled for today. Have a great day.'}"}
+{"ts": "2026-05-02T10:24:44.615675+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=d05b9bfb-6702-4002-b187-f2bc2ae1662f type=notification data={'type': 'notification', 'notification_type': 'no_trips', 'data': {'message': \"Aucune livraison prévue pour aujourd'hui\", 'voice_message': 'Hello vivien, you have no trips scheduled for today. Have a great day.'}}"}
+{"ts": "2026-05-02T10:24:44.617042+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=d05b9bfb-6702-4002-b187-f2bc2ae1662f type=error data={'type': 'error', 'message': 'unknown type'}"}
+{"ts": "2026-05-02T10:24:44.617677+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📨 WS MESSAGE RECEIVED client_id=d05b9bfb-6702-4002-b187-f2bc2ae1662f type=start data={'type': 'start', 'input_sample_rate': 48000}"}
+{"ts": "2026-05-02T10:24:44.617927+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📨 NOTIFICATION RECEIVED client_id=d05b9bfb-6702-4002-b187-f2bc2ae1662f type=start data={'type': 'start', 'input_sample_rate': 48000}"}
+{"ts": "2026-05-02T10:24:44.618402+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Audio WS session started client_id=d05b9bfb-6702-4002-b187-f2bc2ae1662f input_sr=48000 output_sr=48000"}
+{"ts": "2026-05-02T10:24:44.618607+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=d05b9bfb-6702-4002-b187-f2bc2ae1662f type=started data={'type': 'started', 'input_sample_rate': 48000, 'audio_output_sample_rate': 48000, 'encoding': 'pcm_s16le', 'channels': 1}"}
+{"ts": "2026-05-02T10:24:44.619537+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Sending pending voice summary client_id=d05b9bfb-6702-4002-b187-f2bc2ae1662f"}
+{"ts": "2026-05-02T10:24:44.619766+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=d05b9bfb-6702-4002-b187-f2bc2ae1662f type=emotion data={'type': 'emotion', 'name': 'greeting'}"}
+{"ts": "2026-05-02T10:24:44.620211+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=d05b9bfb-6702-4002-b187-f2bc2ae1662f type=emotion data={'type': 'emotion', 'name': 'speaking'}"}
+{"ts": "2026-05-02T10:24:44.978578+00:00", "level": "INFO", "logger": "httpx", "msg": "HTTP Request: POST http://localhost:8080/v1/chat/completions \"HTTP/1.1 200 OK\""}
+{"ts": "2026-05-02T10:24:45.548709+00:00", "level": "INFO", "logger": "services.agent_service", "msg": "TTS audio chunk client_id=d05b9bfb-6702-4002-b187-f2bc2ae1662f chunks=1 samples=8916"}
+{"ts": "2026-05-02T10:24:50.564691+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=d05b9bfb-6702-4002-b187-f2bc2ae1662f type=emotion data={'type': 'emotion', 'name': 'idle'}"}
+{"ts": "2026-05-02T10:25:29.447196+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Audio WS cleaned up client_id=d05b9bfb-6702-4002-b187-f2bc2ae1662f"}
+{"ts": "2026-05-02T10:25:29.448576+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "WS disconnected client_id=d05b9bfb-6702-4002-b187-f2bc2ae1662f"}
+{"ts": "2026-05-02T10:25:29.449222+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "connection closed"}
+{"ts": "2026-05-02T10:25:31.687082+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "197.17.89.127:0 - \"WebSocket /ws\" [accepted]"}
+{"ts": "2026-05-02T10:25:31.689206+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "WS connected client_id=04d43b58-b632-4310-bafe-5d6c5525c53b"}
+{"ts": "2026-05-02T10:25:31.690694+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "connection open"}
+{"ts": "2026-05-02T10:25:31.844338+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📨 WS MESSAGE RECEIVED client_id=04d43b58-b632-4310-bafe-5d6c5525c53b type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}"}
+{"ts": "2026-05-02T10:25:31.845369+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📨 NOTIFICATION RECEIVED client_id=04d43b58-b632-4310-bafe-5d6c5525c53b type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}"}
+{"ts": "2026-05-02T10:25:31.845662+00:00", "level": "INFO", "logger": "services.delivery_service", "msg": "🚚 Identifying driver client_id=04d43b58-b632-4310-bafe-5d6c5525c53b serial=000"}
+{"ts": "2026-05-02T10:25:31.847676+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Token valide jusqu'au 2026-05-02 12:29:08"}
+{"ts": "2026-05-02T10:25:31.848238+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Récupération des trips pour le driver: 000"}
+{"ts": "2026-05-02T10:25:31.848525+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche du driver par query: 000"}
+{"ts": "2026-05-02T10:25:31.848831+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000"}
+{"ts": "2026-05-02T10:25:32.017272+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T10:25:32.018556+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T10:25:32.018900+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche des schedules par driver serial number: 000"}
+{"ts": "2026-05-02T10:25:32.019370+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche du driver par query: 000"}
+{"ts": "2026-05-02T10:25:32.019659+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000"}
+{"ts": "2026-05-02T10:25:32.068149+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T10:25:32.068530+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb"}
+{"ts": "2026-05-02T10:25:32.068872+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb"}
+{"ts": "2026-05-02T10:25:32.175148+00:00", "level": "INFO", "logger": "cli_logger", "msg": "2 schedule(s) trouvé(s) sur 35 entité(s)"}
+{"ts": "2026-05-02T10:25:32.175980+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb"}
+{"ts": "2026-05-02T10:25:32.176510+00:00", "level": "WARNING", "logger": "cli_logger", "msg": "Aucun schedule pour la date: 2026-05-02"}
+{"ts": "2026-05-02T10:25:32.178234+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Token valide jusqu'au 2026-05-02 12:29:08"}
+{"ts": "2026-05-02T10:25:32.178578+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche du driver par query: 000"}
+{"ts": "2026-05-02T10:25:32.178841+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000"}
+{"ts": "2026-05-02T10:25:32.340521+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T10:25:32.344594+00:00", "level": "INFO", "logger": "services.delivery_service", "msg": "ℹ️ No trips found for driver 000"}
+{"ts": "2026-05-02T10:25:32.345115+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📤 NOTIFICATION SENT client_id=04d43b58-b632-4310-bafe-5d6c5525c53b type=no_trips data={'message': \"Aucune livraison prévue pour aujourd'hui\", 'voice_message': 'Hello vivien, you have no trips scheduled for today. Have a great day.'}"}
+{"ts": "2026-05-02T10:25:32.345519+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=04d43b58-b632-4310-bafe-5d6c5525c53b type=notification data={'type': 'notification', 'notification_type': 'no_trips', 'data': {'message': \"Aucune livraison prévue pour aujourd'hui\", 'voice_message': 'Hello vivien, you have no trips scheduled for today. Have a great day.'}}"}
+{"ts": "2026-05-02T10:25:32.346788+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=04d43b58-b632-4310-bafe-5d6c5525c53b type=error data={'type': 'error', 'message': 'unknown type'}"}
+{"ts": "2026-05-02T10:25:32.347422+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📨 WS MESSAGE RECEIVED client_id=04d43b58-b632-4310-bafe-5d6c5525c53b type=start data={'type': 'start', 'input_sample_rate': 48000}"}
+{"ts": "2026-05-02T10:25:32.347664+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📨 NOTIFICATION RECEIVED client_id=04d43b58-b632-4310-bafe-5d6c5525c53b type=start data={'type': 'start', 'input_sample_rate': 48000}"}
+{"ts": "2026-05-02T10:25:32.348137+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Audio WS session started client_id=04d43b58-b632-4310-bafe-5d6c5525c53b input_sr=48000 output_sr=48000"}
+{"ts": "2026-05-02T10:25:32.348344+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=04d43b58-b632-4310-bafe-5d6c5525c53b type=started data={'type': 'started', 'input_sample_rate': 48000, 'audio_output_sample_rate': 48000, 'encoding': 'pcm_s16le', 'channels': 1}"}
+{"ts": "2026-05-02T10:25:32.349336+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Sending pending voice summary client_id=04d43b58-b632-4310-bafe-5d6c5525c53b"}
+{"ts": "2026-05-02T10:25:32.349573+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=04d43b58-b632-4310-bafe-5d6c5525c53b type=emotion data={'type': 'emotion', 'name': 'greeting'}"}
+{"ts": "2026-05-02T10:25:32.350017+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=04d43b58-b632-4310-bafe-5d6c5525c53b type=emotion data={'type': 'emotion', 'name': 'speaking'}"}
+{"ts": "2026-05-02T10:25:32.699538+00:00", "level": "INFO", "logger": "httpx", "msg": "HTTP Request: POST http://localhost:8080/v1/chat/completions \"HTTP/1.1 200 OK\""}
+{"ts": "2026-05-02T10:25:33.337436+00:00", "level": "INFO", "logger": "services.agent_service", "msg": "TTS audio chunk client_id=04d43b58-b632-4310-bafe-5d6c5525c53b chunks=1 samples=8916"}
+{"ts": "2026-05-02T10:25:38.333570+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=04d43b58-b632-4310-bafe-5d6c5525c53b type=emotion data={'type': 'emotion', 'name': 'idle'}"}
+{"ts": "2026-05-02T10:26:23.507190+00:00", "level": "INFO", "logger": "uvicorn.access", "msg": "198.235.24.171:0 - \"GET / HTTP/1.1\" 200"}
+{"ts": "2026-05-02T10:27:40.025979+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Audio WS cleaned up client_id=04d43b58-b632-4310-bafe-5d6c5525c53b"}
+{"ts": "2026-05-02T10:27:40.028116+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "WS disconnected client_id=04d43b58-b632-4310-bafe-5d6c5525c53b"}
+{"ts": "2026-05-02T10:27:40.029394+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "connection closed"}
+{"ts": "2026-05-02T10:27:42.805372+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "197.17.89.127:0 - \"WebSocket /ws\" [accepted]"}
+{"ts": "2026-05-02T10:27:42.807443+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "WS connected client_id=d5ec42fe-78d0-44fe-924f-5a7e3863aa5d"}
+{"ts": "2026-05-02T10:27:42.808940+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "connection open"}
+{"ts": "2026-05-02T10:27:42.893128+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📨 WS MESSAGE RECEIVED client_id=d5ec42fe-78d0-44fe-924f-5a7e3863aa5d type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}"}
+{"ts": "2026-05-02T10:27:42.893588+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📨 NOTIFICATION RECEIVED client_id=d5ec42fe-78d0-44fe-924f-5a7e3863aa5d type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}"}
+{"ts": "2026-05-02T10:27:42.893797+00:00", "level": "INFO", "logger": "services.delivery_service", "msg": "🚚 Identifying driver client_id=d5ec42fe-78d0-44fe-924f-5a7e3863aa5d serial=000"}
+{"ts": "2026-05-02T10:27:42.894706+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Token valide jusqu'au 2026-05-02 12:29:08"}
+{"ts": "2026-05-02T10:27:42.895075+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Récupération des trips pour le driver: 000"}
+{"ts": "2026-05-02T10:27:42.895281+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche du driver par query: 000"}
+{"ts": "2026-05-02T10:27:42.895467+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000"}
+{"ts": "2026-05-02T10:27:43.251244+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T10:27:43.252806+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T10:27:43.253206+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche des schedules par driver serial number: 000"}
+{"ts": "2026-05-02T10:27:43.253495+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche du driver par query: 000"}
+{"ts": "2026-05-02T10:27:43.253812+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000"}
+{"ts": "2026-05-02T10:27:43.303658+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T10:27:43.304777+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb"}
+{"ts": "2026-05-02T10:27:43.305179+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb"}
+{"ts": "2026-05-02T10:27:43.412387+00:00", "level": "INFO", "logger": "cli_logger", "msg": "2 schedule(s) trouvé(s) sur 35 entité(s)"}
+{"ts": "2026-05-02T10:27:43.414325+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb"}
+{"ts": "2026-05-02T10:27:43.414881+00:00", "level": "WARNING", "logger": "cli_logger", "msg": "Aucun schedule pour la date: 2026-05-02"}
+{"ts": "2026-05-02T10:27:43.416776+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Token valide jusqu'au 2026-05-02 12:29:08"}
+{"ts": "2026-05-02T10:27:43.417147+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche du driver par query: 000"}
+{"ts": "2026-05-02T10:27:43.417435+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000"}
+{"ts": "2026-05-02T10:27:43.576672+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T10:27:43.580975+00:00", "level": "INFO", "logger": "services.delivery_service", "msg": "ℹ️ No trips found for driver 000"}
+{"ts": "2026-05-02T10:27:43.581534+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📤 NOTIFICATION SENT client_id=d5ec42fe-78d0-44fe-924f-5a7e3863aa5d type=no_trips data={'message': \"Aucune livraison prévue pour aujourd'hui\", 'voice_message': 'Hello vivien, you have no trips scheduled for today. Have a great day.'}"}
+{"ts": "2026-05-02T10:27:43.581915+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=d5ec42fe-78d0-44fe-924f-5a7e3863aa5d type=notification data={'type': 'notification', 'notification_type': 'no_trips', 'data': {'message': \"Aucune livraison prévue pour aujourd'hui\", 'voice_message': 'Hello vivien, you have no trips scheduled for today. Have a great day.'}}"}
+{"ts": "2026-05-02T10:27:43.583239+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=d5ec42fe-78d0-44fe-924f-5a7e3863aa5d type=error data={'type': 'error', 'message': 'unknown type'}"}
+{"ts": "2026-05-02T10:27:43.583862+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📨 WS MESSAGE RECEIVED client_id=d5ec42fe-78d0-44fe-924f-5a7e3863aa5d type=start data={'type': 'start', 'input_sample_rate': 48000}"}
+{"ts": "2026-05-02T10:27:43.584103+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📨 NOTIFICATION RECEIVED client_id=d5ec42fe-78d0-44fe-924f-5a7e3863aa5d type=start data={'type': 'start', 'input_sample_rate': 48000}"}
+{"ts": "2026-05-02T10:27:43.584538+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Audio WS session started client_id=d5ec42fe-78d0-44fe-924f-5a7e3863aa5d input_sr=48000 output_sr=48000"}
+{"ts": "2026-05-02T10:27:43.584765+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=d5ec42fe-78d0-44fe-924f-5a7e3863aa5d type=started data={'type': 'started', 'input_sample_rate': 48000, 'audio_output_sample_rate': 48000, 'encoding': 'pcm_s16le', 'channels': 1}"}
+{"ts": "2026-05-02T10:27:43.585719+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Sending pending voice summary client_id=d5ec42fe-78d0-44fe-924f-5a7e3863aa5d"}
+{"ts": "2026-05-02T10:27:43.585963+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=d5ec42fe-78d0-44fe-924f-5a7e3863aa5d type=emotion data={'type': 'emotion', 'name': 'greeting'}"}
+{"ts": "2026-05-02T10:27:43.586423+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=d5ec42fe-78d0-44fe-924f-5a7e3863aa5d type=emotion data={'type': 'emotion', 'name': 'speaking'}"}
+{"ts": "2026-05-02T10:27:43.938266+00:00", "level": "INFO", "logger": "httpx", "msg": "HTTP Request: POST http://localhost:8080/v1/chat/completions \"HTTP/1.1 200 OK\""}
+{"ts": "2026-05-02T10:27:44.520756+00:00", "level": "INFO", "logger": "services.agent_service", "msg": "TTS audio chunk client_id=d5ec42fe-78d0-44fe-924f-5a7e3863aa5d chunks=1 samples=8916"}
+{"ts": "2026-05-02T10:27:49.523219+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=d5ec42fe-78d0-44fe-924f-5a7e3863aa5d type=emotion data={'type': 'emotion', 'name': 'idle'}"}
+{"ts": "2026-05-02T10:27:52.247514+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "connection closed"}
+{"ts": "2026-05-02T10:27:52.249678+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Audio WS cleaned up client_id=d5ec42fe-78d0-44fe-924f-5a7e3863aa5d"}
+{"ts": "2026-05-02T10:27:52.250067+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "WS disconnected client_id=d5ec42fe-78d0-44fe-924f-5a7e3863aa5d"}
+{"ts": "2026-05-02T10:32:37.161645+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "197.17.89.127:0 - \"WebSocket /ws\" [accepted]"}
+{"ts": "2026-05-02T10:32:37.163678+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "WS connected client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2"}
+{"ts": "2026-05-02T10:32:37.165224+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "connection open"}
+{"ts": "2026-05-02T10:32:37.439247+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📨 WS MESSAGE RECEIVED client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}"}
+{"ts": "2026-05-02T10:32:37.439874+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📨 NOTIFICATION RECEIVED client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}"}
+{"ts": "2026-05-02T10:32:37.440032+00:00", "level": "INFO", "logger": "services.delivery_service", "msg": "🚚 Identifying driver client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 serial=000"}
+{"ts": "2026-05-02T10:32:37.440975+00:00", "level": "ERROR", "logger": "cli_logger", "msg": "Erreur lors de la lecture du cache: name 'log_warning' is not defined"}
+{"ts": "2026-05-02T10:32:37.441272+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Token non valide ou absent, récupération d'un nouveau token..."}
+{"ts": "2026-05-02T10:32:37.441435+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Tentative de connexion à l'API Fleet..."}
+{"ts": "2026-05-02T10:32:37.914170+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Authentification réussie auprès de l'API Fleet"}
+{"ts": "2026-05-02T10:32:37.921449+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Token sauvegardé (valide jusqu'au 2026-05-03 12:32:37)"}
+{"ts": "2026-05-02T10:32:37.923602+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Récupération des trips pour le driver: 000"}
+{"ts": "2026-05-02T10:32:37.924070+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche du driver par query: 000"}
+{"ts": "2026-05-02T10:32:37.924383+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000"}
+{"ts": "2026-05-02T10:32:38.081787+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T10:32:38.083120+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T10:32:38.083454+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche des schedules par driver serial number: 000"}
+{"ts": "2026-05-02T10:32:38.083724+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche du driver par query: 000"}
+{"ts": "2026-05-02T10:32:38.084004+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000"}
+{"ts": "2026-05-02T10:32:38.134407+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T10:32:38.134892+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb"}
+{"ts": "2026-05-02T10:32:38.135355+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb"}
+{"ts": "2026-05-02T10:32:38.240390+00:00", "level": "INFO", "logger": "cli_logger", "msg": "2 schedule(s) trouvé(s) sur 35 entité(s)"}
+{"ts": "2026-05-02T10:32:38.241320+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb"}
+{"ts": "2026-05-02T10:32:38.241869+00:00", "level": "WARNING", "logger": "cli_logger", "msg": "Aucun schedule pour la date: 2026-05-02"}
+{"ts": "2026-05-02T10:32:38.243643+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Token valide jusqu'au 2026-05-03 12:32:37"}
+{"ts": "2026-05-02T10:32:38.243990+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche du driver par query: 000"}
+{"ts": "2026-05-02T10:32:38.244259+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000"}
+{"ts": "2026-05-02T10:32:38.408915+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T10:32:38.412911+00:00", "level": "INFO", "logger": "services.delivery_service", "msg": "ℹ️ No trips found for driver 000"}
+{"ts": "2026-05-02T10:32:38.413357+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📤 NOTIFICATION SENT client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=no_trips data={'message': \"Aucune livraison prévue pour aujourd'hui\", 'voice_message': 'Hello vivien, you have no trips scheduled for today. Have a great day.'}"}
+{"ts": "2026-05-02T10:32:38.413742+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=notification data={'type': 'notification', 'notification_type': 'no_trips', 'data': {'message': \"Aucune livraison prévue pour aujourd'hui\", 'voice_message': 'Hello vivien, you have no trips scheduled for today. Have a great day.'}}"}
+{"ts": "2026-05-02T10:32:38.415094+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=error data={'type': 'error', 'message': 'unknown type'}"}
+{"ts": "2026-05-02T10:32:38.415696+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📨 WS MESSAGE RECEIVED client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=start data={'type': 'start', 'input_sample_rate': 48000}"}
+{"ts": "2026-05-02T10:32:38.415935+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📨 NOTIFICATION RECEIVED client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=start data={'type': 'start', 'input_sample_rate': 48000}"}
+{"ts": "2026-05-02T10:32:38.416408+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Audio WS session started client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 input_sr=48000 output_sr=48000"}
+{"ts": "2026-05-02T10:32:38.416610+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=started data={'type': 'started', 'input_sample_rate': 48000, 'audio_output_sample_rate': 48000, 'encoding': 'pcm_s16le', 'channels': 1}"}
+{"ts": "2026-05-02T10:32:38.417578+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Sending pending voice summary client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2"}
+{"ts": "2026-05-02T10:32:38.417815+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=emotion data={'type': 'emotion', 'name': 'greeting'}"}
+{"ts": "2026-05-02T10:32:38.418267+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=emotion data={'type': 'emotion', 'name': 'speaking'}"}
+{"ts": "2026-05-02T10:32:38.757512+00:00", "level": "INFO", "logger": "httpx", "msg": "HTTP Request: POST http://localhost:8080/v1/chat/completions \"HTTP/1.1 200 OK\""}
+{"ts": "2026-05-02T10:32:39.380113+00:00", "level": "INFO", "logger": "services.agent_service", "msg": "TTS audio chunk client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 chunks=1 samples=8916"}
+{"ts": "2026-05-02T10:32:44.371500+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=emotion data={'type': 'emotion', 'name': 'idle'}"}
+{"ts": "2026-05-02T10:32:44.594316+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "VAD speech_start client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 p=0.989"}
+{"ts": "2026-05-02T10:32:44.595585+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=vad data={'type': 'vad', 'event': 'speech_start', 'p': 0.9886709451675415}"}
+{"ts": "2026-05-02T10:32:47.999875+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Utterance end client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 samples=62464"}
+{"ts": "2026-05-02T10:32:48.002962+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=vad data={'type': 'vad', 'event': 'utterance_end', 'samples': 62464}"}
+{"ts": "2026-05-02T10:32:48.013014+00:00", "level": "INFO", "logger": "services.agent_service", "msg": "STT raw input client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 ms=3904 rms=0.0557 peak=0.3491 n=62464 sr=16000"}
+{"ts": "2026-05-02T10:32:48.081815+00:00", "level": "INFO", "logger": "services.agent_service", "msg": "Saved STT audio compare client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 raw=audio_ecfca0d0-678d-4ec0-8837-9691b5040dc2_a6a8b2ea_raw.wav denoised=audio_ecfca0d0-678d-4ec0-8837-9691b5040dc2_a6a8b2ea_denoised.wav raw_rms=0.055702 denoised_rms=0.055702 sr=16000"}
+{"ts": "2026-05-02T10:32:48.084485+00:00", "level": "INFO", "logger": "faster_whisper", "msg": "Processing audio with duration 00:03.904"}
+{"ts": "2026-05-02T10:32:50.016764+00:00", "level": "INFO", "logger": "services.agent_service", "msg": "STT transcript client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 text='okay thank you can you show me the mapper'"}
+{"ts": "2026-05-02T10:32:50.017386+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=transcript data={'type': 'transcript', 'text': 'okay thank you can you show me the mapper'}"}
+{"ts": "2026-05-02T10:32:50.017975+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=emotion data={'type': 'emotion', 'name': 'speaking'}"}
+{"ts": "2026-05-02T10:32:53.826117+00:00", "level": "INFO", "logger": "httpx", "msg": "HTTP Request: POST http://localhost:8080/v1/chat/completions \"HTTP/1.1 200 OK\""}
+{"ts": "2026-05-02T10:32:55.006355+00:00", "level": "INFO", "logger": "services.new_ollama_service", "msg": "Action: RECENTER"}
+{"ts": "2026-05-02T10:32:55.006658+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=external_control data={'type': 'external_control', 'action': 'com.avvc.maps.action.RECENTER', 'extras': {}}"}
+{"ts": "2026-05-02T10:32:55.359088+00:00", "level": "INFO", "logger": "httpx", "msg": "HTTP Request: POST http://localhost:8080/v1/chat/completions \"HTTP/1.1 200 OK\""}
+{"ts": "2026-05-02T10:32:55.360338+00:00", "level": "INFO", "logger": "services.agent_service", "msg": "LLM first chunk client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 latency_ms=7354.7"}
+{"ts": "2026-05-02T10:32:55.360607+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=response data={'type': 'response', 'text': 'Map'}"}
+{"ts": "2026-05-02T10:32:55.451894+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=response data={'type': 'response', 'text': ' is'}"}
+{"ts": "2026-05-02T10:32:55.542231+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=response data={'type': 'response', 'text': ' now'}"}
+{"ts": "2026-05-02T10:32:55.625591+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=response data={'type': 'response', 'text': ' displayed'}"}
+{"ts": "2026-05-02T10:32:55.708710+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=response data={'type': 'response', 'text': ' and'}"}
+{"ts": "2026-05-02T10:32:55.791833+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=response data={'type': 'response', 'text': ' centered'}"}
+{"ts": "2026-05-02T10:32:55.878302+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=response data={'type': 'response', 'text': ' on'}"}
+{"ts": "2026-05-02T10:32:55.961244+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=response data={'type': 'response', 'text': ' your'}"}
+{"ts": "2026-05-02T10:32:56.044642+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=response data={'type': 'response', 'text': ' position'}"}
+{"ts": "2026-05-02T10:32:56.128272+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=response data={'type': 'response', 'text': '.'}"}
+{"ts": "2026-05-02T10:33:00.773223+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2 type=emotion data={'type': 'emotion', 'name': 'idle'}"}
+{"ts": "2026-05-02T10:33:01.489857+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Audio WS cleaned up client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2"}
+{"ts": "2026-05-02T10:33:01.491186+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "WS disconnected client_id=ecfca0d0-678d-4ec0-8837-9691b5040dc2"}
+{"ts": "2026-05-02T10:33:01.492124+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "connection closed"}
+{"ts": "2026-05-02T11:38:21.431415+00:00", "level": "INFO", "logger": "uvicorn.access", "msg": "198.235.24.20:0 - \"GET / HTTP/1.1\" 200"}
+{"ts": "2026-05-02T12:12:44.207552+00:00", "level": "INFO", "logger": "uvicorn.access", "msg": "198.235.24.5:0 - \"GET /metrics HTTP/1.1\" 404"}
+{"ts": "2026-05-02T14:25:20.864190+00:00", "level": "INFO", "logger": "uvicorn.access", "msg": "205.210.31.159:0 - \"GET / HTTP/1.1\" 200"}
+{"ts": "2026-05-02T15:08:57.188646+00:00", "level": "INFO", "logger": "uvicorn.access", "msg": "198.235.24.194:0 - \"GET /metrics HTTP/1.1\" 404"}
+{"ts": "2026-05-02T17:10:02.891045+00:00", "level": "INFO", "logger": "uvicorn.access", "msg": "198.235.24.37:0 - \"GET / HTTP/1.1\" 200"}
+{"ts": "2026-05-02T19:29:02.960118+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "197.17.89.127:0 - \"WebSocket /ws\" [accepted]"}
+{"ts": "2026-05-02T19:29:02.962188+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "WS connected client_id=54630f35-c352-4a02-92d8-41ed8daf982f"}
+{"ts": "2026-05-02T19:29:02.963565+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "connection open"}
+{"ts": "2026-05-02T19:29:03.130047+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📨 WS MESSAGE RECEIVED client_id=54630f35-c352-4a02-92d8-41ed8daf982f type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}"}
+{"ts": "2026-05-02T19:29:03.131054+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📨 NOTIFICATION RECEIVED client_id=54630f35-c352-4a02-92d8-41ed8daf982f type=identify_driver data={'type': 'identify_driver', 'driver_serial': '000'}"}
+{"ts": "2026-05-02T19:29:03.131358+00:00", "level": "INFO", "logger": "services.delivery_service", "msg": "🚚 Identifying driver client_id=54630f35-c352-4a02-92d8-41ed8daf982f serial=000"}
+{"ts": "2026-05-02T19:29:03.133319+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Token valide jusqu'au 2026-05-03 12:32:37"}
+{"ts": "2026-05-02T19:29:03.133892+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Récupération des trips pour le driver: 000"}
+{"ts": "2026-05-02T19:29:03.134189+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche du driver par query: 000"}
+{"ts": "2026-05-02T19:29:03.134600+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000"}
+{"ts": "2026-05-02T19:29:03.529911+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T19:29:03.531332+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T19:29:03.531670+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche des schedules par driver serial number: 000"}
+{"ts": "2026-05-02T19:29:03.531934+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche du driver par query: 000"}
+{"ts": "2026-05-02T19:29:03.532200+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000"}
+{"ts": "2026-05-02T19:29:03.580227+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T19:29:03.580680+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche des entités par référence pour le driver ID: 69c59d19fb98e15a3cf534bb"}
+{"ts": "2026-05-02T19:29:03.581044+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche par référence: field=driver_serial_number, value=69c59d19fb98e15a3cf534bb"}
+{"ts": "2026-05-02T19:29:03.703722+00:00", "level": "INFO", "logger": "cli_logger", "msg": "2 schedule(s) trouvé(s) sur 35 entité(s)"}
+{"ts": "2026-05-02T19:29:03.704519+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: 2 schedule(s) pour le driver 69c59d19fb98e15a3cf534bb"}
+{"ts": "2026-05-02T19:29:03.705062+00:00", "level": "WARNING", "logger": "cli_logger", "msg": "Aucun schedule pour la date: 2026-05-02"}
+{"ts": "2026-05-02T19:29:03.706773+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Token valide jusqu'au 2026-05-03 12:32:37"}
+{"ts": "2026-05-02T19:29:03.707120+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche du driver par query: 000"}
+{"ts": "2026-05-02T19:29:03.707382+00:00", "level": "INFO", "logger": "cli_logger", "msg": "Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000"}
+{"ts": "2026-05-02T19:29:03.874208+00:00", "level": "INFO", "logger": "cli_logger", "msg": "✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 69c59d19fb98e15a3cf534bb)"}
+{"ts": "2026-05-02T19:29:03.878739+00:00", "level": "INFO", "logger": "services.delivery_service", "msg": "ℹ️ No trips found for driver 000"}
+{"ts": "2026-05-02T19:29:03.879204+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📤 NOTIFICATION SENT client_id=54630f35-c352-4a02-92d8-41ed8daf982f type=no_trips data={'message': \"Aucune livraison prévue pour aujourd'hui\", 'voice_message': 'Hello vivien, you have no trips scheduled for today. Have a great day.'}"}
+{"ts": "2026-05-02T19:29:03.879592+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=54630f35-c352-4a02-92d8-41ed8daf982f type=notification data={'type': 'notification', 'notification_type': 'no_trips', 'data': {'message': \"Aucune livraison prévue pour aujourd'hui\", 'voice_message': 'Hello vivien, you have no trips scheduled for today. Have a great day.'}}"}
+{"ts": "2026-05-02T19:29:03.885160+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=54630f35-c352-4a02-92d8-41ed8daf982f type=error data={'type': 'error', 'message': 'unknown type'}"}
+{"ts": "2026-05-02T19:29:03.885963+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📨 WS MESSAGE RECEIVED client_id=54630f35-c352-4a02-92d8-41ed8daf982f type=start data={'type': 'start', 'input_sample_rate': 48000}"}
+{"ts": "2026-05-02T19:29:03.886224+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "📨 NOTIFICATION RECEIVED client_id=54630f35-c352-4a02-92d8-41ed8daf982f type=start data={'type': 'start', 'input_sample_rate': 48000}"}
+{"ts": "2026-05-02T19:29:03.886814+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Audio WS session started client_id=54630f35-c352-4a02-92d8-41ed8daf982f input_sr=48000 output_sr=48000"}
+{"ts": "2026-05-02T19:29:03.887022+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=54630f35-c352-4a02-92d8-41ed8daf982f type=started data={'type': 'started', 'input_sample_rate': 48000, 'audio_output_sample_rate': 48000, 'encoding': 'pcm_s16le', 'channels': 1}"}
+{"ts": "2026-05-02T19:29:03.888022+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Sending pending voice summary client_id=54630f35-c352-4a02-92d8-41ed8daf982f"}
+{"ts": "2026-05-02T19:29:03.888267+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=54630f35-c352-4a02-92d8-41ed8daf982f type=emotion data={'type': 'emotion', 'name': 'greeting'}"}
+{"ts": "2026-05-02T19:29:03.888720+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=54630f35-c352-4a02-92d8-41ed8daf982f type=emotion data={'type': 'emotion', 'name': 'speaking'}"}
+{"ts": "2026-05-02T19:29:06.157777+00:00", "level": "INFO", "logger": "httpx", "msg": "HTTP Request: POST http://localhost:8080/v1/chat/completions \"HTTP/1.1 200 OK\""}
+{"ts": "2026-05-02T19:29:06.717352+00:00", "level": "INFO", "logger": "services.agent_service", "msg": "TTS audio chunk client_id=54630f35-c352-4a02-92d8-41ed8daf982f chunks=1 samples=8916"}
+{"ts": "2026-05-02T19:29:11.806017+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=54630f35-c352-4a02-92d8-41ed8daf982f type=emotion data={'type': 'emotion', 'name': 'idle'}"}
+{"ts": "2026-05-02T19:29:12.760650+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "VAD speech_start client_id=54630f35-c352-4a02-92d8-41ed8daf982f p=0.905"}
+{"ts": "2026-05-02T19:29:12.762089+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=54630f35-c352-4a02-92d8-41ed8daf982f type=vad data={'type': 'vad', 'event': 'speech_start', 'p': 0.90505051612854}"}
+{"ts": "2026-05-02T19:29:14.082310+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Utterance end client_id=54630f35-c352-4a02-92d8-41ed8daf982f samples=28672"}
+{"ts": "2026-05-02T19:29:14.084166+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=54630f35-c352-4a02-92d8-41ed8daf982f type=vad data={'type': 'vad', 'event': 'utterance_end', 'samples': 28672}"}
+{"ts": "2026-05-02T19:29:14.101595+00:00", "level": "INFO", "logger": "services.agent_service", "msg": "STT raw input client_id=54630f35-c352-4a02-92d8-41ed8daf982f ms=1792 rms=0.0262 peak=0.2449 n=28672 sr=16000"}
+{"ts": "2026-05-02T19:29:14.122967+00:00", "level": "INFO", "logger": "services.agent_service", "msg": "Saved STT audio compare client_id=54630f35-c352-4a02-92d8-41ed8daf982f raw=audio_54630f35-c352-4a02-92d8-41ed8daf982f_112ee4df_raw.wav denoised=audio_54630f35-c352-4a02-92d8-41ed8daf982f_112ee4df_denoised.wav raw_rms=0.026206 denoised_rms=0.026206 sr=16000"}
+{"ts": "2026-05-02T19:29:14.124047+00:00", "level": "INFO", "logger": "faster_whisper", "msg": "Processing audio with duration 00:01.792"}
+{"ts": "2026-05-02T19:29:16.016105+00:00", "level": "INFO", "logger": "services.agent_service", "msg": "STT transcript client_id=54630f35-c352-4a02-92d8-41ed8daf982f text='yeah thank you'"}
+{"ts": "2026-05-02T19:29:16.016519+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=54630f35-c352-4a02-92d8-41ed8daf982f type=transcript data={'type': 'transcript', 'text': 'yeah thank you'}"}
+{"ts": "2026-05-02T19:29:16.017045+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "📤 WS MESSAGE SENT client_id=54630f35-c352-4a02-92d8-41ed8daf982f type=emotion data={'type': 'emotion', 'name': 'speaking'}"}
+{"ts": "2026-05-02T19:29:17.324899+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Audio WS cleaned up client_id=54630f35-c352-4a02-92d8-41ed8daf982f"}
+{"ts": "2026-05-02T19:29:17.325270+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "WS disconnected client_id=54630f35-c352-4a02-92d8-41ed8daf982f"}
+{"ts": "2026-05-02T19:29:17.327762+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "connection closed"}

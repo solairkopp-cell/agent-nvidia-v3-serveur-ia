@@ -284,7 +284,9 @@ class DeliveryStateMachine:
             return fallback
 
         try:
-            reply = await llm.generate_system_reply(instruction, session=session)
+            reply = ""
+            async for chunk in llm.generate_system_reply(instruction, session=session):
+                reply += chunk
             reply = (reply or "").strip()
             return reply or fallback
         except Exception:

@@ -24,6 +24,7 @@ from typing import Optional
 
 import config
 
+logger = logging.getLogger(__name__) 
 
 @dataclass
 class TranscriptionResult:
@@ -165,7 +166,6 @@ class WhisperService:
         self._model = await asyncio.to_thread(_load)
 
     async def _transcribe_embedded_wav(self, wav_bytes: bytes) -> TranscriptionResult:
-        logger = logging.getLogger(__name__)
         import numpy as np
         import soundfile as sf
 
@@ -183,7 +183,6 @@ class WhisperService:
         return result
 
     async def _transcribe_embedded_pcm(self, samples, sample_rate: int) -> TranscriptionResult:
-        logger = logging.getLogger(__name__)
         model = self._model
         if model is None:
             raise RuntimeError("WhisperService not started (startup() not called).")

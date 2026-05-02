@@ -19,7 +19,7 @@ class PiperClientService:
         self._audio_callback = callback
 
     async def startup(self):
-        logger.info(f"Connexion au Piper Streaming Server externe sur {self.uri}")
+        logger.info("Connexion au Piper Streaming Server externe sur %s", self.uri)
         await self._connect()
         self._listen_task = asyncio.create_task(self._listen_loop())
 
@@ -35,7 +35,7 @@ class PiperClientService:
             self.ws = await websockets.connect(self.uri)
             logger.info("WebSocket Piper connecté.")
         except Exception as e:
-            logger.error(f"Erreur de connexion au serveur Piper: {e}")
+            logger.error("Erreur de connexion au serveur Piper: %s", e)
 
     async def health_check(self) -> bool:
         return self.ws is not None
@@ -62,7 +62,7 @@ class PiperClientService:
             except asyncio.CancelledError:
                 break
             except Exception as e:
-                logger.error(f"Erreur dans le listen_loop du Piper: {e}")
+                logger.error("Erreur dans le listen_loop du Piper: %s", e)
                 self.ws = None
                 await asyncio.sleep(1)
 
@@ -76,7 +76,7 @@ class PiperClientService:
                 logger.warning("Connexion Piper fermée lors de l'envoi.")
                 self.ws = None
             except Exception as e:
-                logger.error(f"Erreur d'envoi WebSocket Piper: {e}")
+                logger.error("Erreur d'envoi WebSocket Piper: %s", e)
                 self.ws = None
 
     async def interrupt(self):
