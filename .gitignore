@@ -5,6 +5,7 @@ __pycache__/
 .venv/
 venv/
 .env
+firebase_credentials.json
 assets/models
 assets/models/
 assets/

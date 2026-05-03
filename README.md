@@ -1,773 +1,457 @@
-# aiserver
+# Serveur d'agent vocal
 
-**aiserver** is a complete AI voice assistant server, designed to handle real-time conversations via WebSocket. It integrates a full pipeline from audio reception to speech synthesis with delivery management capabilities.
+![Statut](https://img.shields.io/badge/statut-en%20developpement-yellow)
+![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![Plateforme](https://img.shields.io/badge/plateforme-Jetson%20aarch64%20%7C%20Linux-green)
 
----
+Serveur FastAPI pour assistant vocal temps reel destine aux livreurs. Il recoit l'audio d'une application Android ou d'un client WebSocket, detecte les tours de parole, transcrit avec Whisper, pilote la logique livraison, genere une reponse LLM et renvoie le TTS en audio binaire. La cible principale est une Jetson sous JetPack, avec chemins de repli CPU pour le developpement.
 
-## 🚀 Features
+## Architecture globale
 
-1. **Real-time Audio**: Receives and sends audio via **WebSocket**
-2. **Voice Activity Detection**: Detects speech using **Silero VAD**
-3. **Audio Denoising**: Cleans audio with **DeepFilterNet** (streaming or utterance-level)
-4. **Speech-to-Text**: Transcribes speech with **Whisper** (embedded or HTTP mode)
-5. **Intent Detection**: Classifies user intentions using embeddings
-6. **Smart Actions**: Executes known intents locally without LLM (navigation, deliveries, etc.)
-7. **LLM Responses**: Generates intelligent responses via **Ollama** (Qwen3, Llama, etc.)
-8. **Text-to-Speech**: Synthesizes responses with **Piper TTS** or **Kokoro TTS**
-9. **Delivery Management**: Complete state machine for delivery tracking and completion
-10. **Notifications**: Real-time push notifications to connected clients
-11. **Barge-in**: Full interruption system allowing users to cut off the AI while speaking
-
----
-
-## 🏗️ Architecture
-
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                          Client (Browser)                           │
-│                       Audio WebSocket                               │
-└────────────────────────┬────────────────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                        WebSocket Service                            │
-│              Session Management + Message Routing                   │
-└────────────────────────┬────────────────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                    Audio Stream Service                             │
-│              Audio Track Handling + VAD Detection                   │
-└────────┬──────────────┬──────────────────────┬──────────────────────┘
-         │              │                      │
-         ▼              ▼                      ▼
-┌──────────────┐ ┌──────────────┐    ┌──────────────────┐
-│ VAD Service  │ │ Audio Service│    │ Denoise Service  │
-│  (Silero)    │ │  (PCM 16kHz) │    │ (DeepFilterNet)  │
-└──────┬───────┘ └──────┬───────┘    └────────┬─────────┘
-       │                │                     │
-       └────────────────┼─────────────────────┘
-                        ▼
-              ┌──────────────────┐
-              │  Whisper Service │
-              │   (STT / Text)   │
-              └────────┬─────────┘
-                       │
-                       ▼
-              ┌──────────────────┐
-              │ Intent Service   │
-              │ (Embeddings)     │
-              └────────┬─────────┘
-                       │
-          ┌────────────┴────────────┐
-          │                         │
-          ▼                         ▼
-┌─────────────────┐       ┌──────────────────┐
-│ Action Service  │       │  Agent Service   │
-│ (Known Intents) │       │  (LLM / Ollama)  │
-└────────┬────────┘       └────────┬─────────┘
-         │                         │
-         │              ┌──────────┴──────────┐
-         │              │                     │
-         │              ▼                     ▼
-         │      ┌──────────────┐    ┌────────────────┐
-         │      │ Piper TTS    │    │ Kokoro TTS     │
-         │      │ (High Qual.) │    │ (Fast/Light)   │
-         │      └──────────────┘    └────────────────┘
-         │              │                     │
-         └──────────────┼─────────────────────┘
-                        ▼
-              ┌──────────────────┐
-              │ TTS Media Player │
-              │ (PCM stream)     │
-              └────────┬─────────┘
-                       │
-                       ▼
-              ┌──────────────────┐
-              │  Delivery State  │
-              │    Machine       │
-              └────────┬─────────┘
-                       │
-                       ▼
-              ┌──────────────────┐
-              │ Notification Svc │
-              │  (Push to client)│
-              └──────────────────┘
-```
-
----
-
-## 🗂️ Project Structure
-
-```
-aiserver/
-├── main.py                  # Entry point (FastAPI + Uvicorn)
-├── config.py                # Centralized configuration (env vars)
-├── system_prompt.md         # System prompt for the AI (Rytle)
-├── requirements.txt         # Python dependencies
-├── logging_setup.py         # Logging configuration
-│
-├── services/                # Main services
-│   ├── agent_service.py     # Main orchestrator (STT → LLM → TTS)
-│   ├── ws_audio_service.py  # WebSocket audio streaming
-│   ├── websocket_service.py # WebSocket session management
-│   ├── vad_service.py       # Voice Activity Detection (Silero ONNX)
-│   ├── denoise_service.py   # Audio denoising (DeepFilterNet)
-│   ├── audio_service.py     # Audio utilities (resampling, format conversion)
-│   ├── whisper_service.py   # Speech-to-Text (faster-whisper or HTTP)
-│   ├── ollama_service.py    # LLM inference via Ollama
-│   ├── piper_tts_service.py # Text-to-Speech (Piper)
-│   ├── tts_utils.py         # TTS text segmentation utilities
-│   ├── notification_service.py  # Real-time push notifications
-│   ├── delivery_service.py  # Delivery/trip management
-│   └── delivery_state_machine.py  # Delivery completion workflow
-│
-├── experimental/            # Experimental features
-│   └── denoise_stream.py    # Real-time denoising via WebSocket
-│
-├── models/                  # Data models
-│   └── session.py           # Session model (state, interruption)
-│
-├── web/                     # Web interface
-│   ├── index.html           # Main voice assistant page
-│   └── record.html          # Audio recording page with DeepFilterNet
-│
-├── assets/                  # Static assets
-│   ├── models/              # ONNX models (TTS, VAD, etc.)
-│   └── recordings/          # Saved audio recordings
-│
-├── tests/                   # Unit tests
-│   ├── test_agent_service.py
-│   ├── test_audio_service.py
-│   ├── test_denoise_service.py
-│   ├── test_ollama_service.py
-│   ├── test_piper_service.py
-│   ├── test_vad_service.py
-│   └── test_ws_audio_service.py
-│
-├── documentations/          # Additional documentation
-│   ├── state_machine.md     # Delivery state machine docs
-│   └── AUDIO_CONTINUITY_FIX.md
-│
-└── logs/                    # Log files
-```
-
----
-
-## 🔧 Technologies Used
-
-| Technology | Role |
+| Fichier | Role |
 |---|---|
-| [Whisper / faster-whisper](https://github.com/openai/whisper) | Speech-to-Text (STT) |
-| [Ollama](https://ollama.com/) | Local LLM inference (Qwen3, Llama, etc.) |
-| [Piper TTS](https://github.com/rhasspy/piper) | High-quality Text-to-Speech |
-| [Silero VAD](https://github.com/snakers4/silero-vad) | Voice Activity Detection |
-| [DeepFilterNet](https://github.com/Rikorose/DeepFilterNet) | Audio denoising |
-| [websockets](https://websockets.readthedocs.io/) | WebSocket communication |
-| [FastAPI](https://fastapi.tiangolo.com/) | Web framework |
-| [Sentence Transformers](https://www.sbert.net/) | Intent detection embeddings |
+| `main.py` | Point d'entree FastAPI, composition des services, routes HTTP et WebSocket. |
+| `config.py` | Configuration centrale et valeurs par defaut lues depuis l'environnement. |
+| `services/websocket_service.py` | Sessions WebSocket, messages JSON, audio binaire, keep-alive et routage. |
+| `services/ws_audio_service.py` | Flux audio entrant, resampling, decoupage VAD et emission TTS. |
+| `services/audio_service.py` | Conversion PCM16/float32, WAV, resampling et normalisation. |
+| `services/vad_service.py` | Silero VAD ONNX, detection `speech_start` et `utterance_end`. |
+| `services/whisper_service.py` | STT en mode `faster-whisper`, `openai-whisper` ou HTTP. |
+| `services/agent_service.py` | Orchestration STT -> livraison/LLM -> TTS -> WebSocket. |
+| `services/ollama_service.py` | Client LLM local compatible Ollama ou serveur llama. |
+| `services/piper_client_service.py` | Client WebSocket vers le serveur Piper streaming sur `ws://localhost:9000/`. |
+| `services/denoise_service.py` | Debruitage optionnel, actuellement RNNoise dans le code runtime. |
+| `experimental/denoise_stream.py` | WebSocket experimental de debruitage base64 par chunks. |
+| `services/delivery_service.py` | Identification livreur, recuperation des trajets et notifications livraison. |
+| `services/delivery_state_machine.py` | Machine d'etat de completion de livraison. |
+| `routers/test_audio_router.py` | Points HTTP de collecte audio, debruitage, transcription et CSV de test. |
+| `models/session.py` | Etat d'une connexion client WebSocket. |
+| `web/index.html` | Client Web de test pour conversation vocale. |
+| `web/record.html` | Client Web de test pour enregistrement et debruitage. |
+| `start_api.sh` | Lancement Uvicorn sur `0.0.0.0:8000`. |
+| `start_llama.sh` | Lancement du serveur LLM local sur le port `8080`. |
 
----
+## Prerequis
 
-## ⚙️ Installation
+- Linux aarch64 sur Jetson, ou Linux x86_64 pour developpement.
+- Python 3.10 ou plus recent. Version constatee localement : `Python 3.10.12`.
+- JetPack avec CUDA si `WHISPER_DEVICE=cuda`.
+- RAM recommandee : 8 Go minimum sur Jetson Orin Nano avec modele Whisper `small.en` quantifie.
+- VRAM recommandee : 4 Go minimum pour STT CUDA leger ; utiliser `WHISPER_DEVICE=cpu` en cas d'OOM.
+- Modele Silero VAD present a `assets/models/silero_vad.onnx`.
+- Serveur LLM local accessible sur `OLLAMA_URL`, par defaut `http://localhost:8080`.
+- Serveur Piper streaming accessible sur `ws://localhost:9000/`.
+- Pour les tests Python : `pytest` doit etre installe.
 
-```bash
-# Clone the repository
-git clone https://github.com/vivien-azonnoudo2002/aiserver.git
-cd aiserver
+## Installation
 
-# Install dependencies
-pip install -r requirements.txt
-
-# Download required models (see Models section below)
-```
-
-### Prerequisites
-
-- **Python 3.10+**
-- **Ollama** running locally (default: `http://localhost:8080`)
-- **ONNX Models**: VAD, TTS (see Models section)
-
----
-
-## ▶️ Launch
-
-```bash
-python main.py
-```
-
-The server starts on `http://0.0.0.0:8000` by default.
-
-**Web interfaces:**
-- Main assistant: `http://localhost:8000/`
-- Recording page: `http://localhost:8000/record`
-
----
-
-## 🧪 Tests
+Depuis le clone local :
 
 ```bash
-pytest tests/
+cd /home/server/server
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install --upgrade pip
 ```
 
----
+Installer les dependances Python principales :
 
-## 📡 API Reference
+```bash
+python -m pip install fastapi "uvicorn[standard]" numpy soundfile httpx websockets onnxruntime faster-whisper scipy soxr librosa python-multipart pytest
+```
 
-### WebSocket Endpoints
+Installer les dependances optionnelles selon la cible :
 
-#### `POST /ws` - Main Voice Session
-Primary WebSocket endpoint for voice conversations.
-- **Protocol**: PCM16 audio + JSON/binary WebSocket messages
-- **Messages**: STT transcripts, TTS audio chunks, intent events, interruptions
+```bash
+python -m pip install openai-whisper rnnoise
+```
 
-#### `POST /ws-denoise` - Real-time Denoising
-WebSocket for streaming audio denoising.
-- **Input**: `{"audio": "<base64 PCM 16kHz>"}`
-- **Output**: `{"status": "ok", "audio": "<base64 denoised>"}`
-- **Use case**: Live denoising during recording
+Verifier les modeles locaux :
 
-### How `web/index.html` Connects and Communicates
+```bash
+cd /home/server/server
+test -f assets/models/silero_vad.onnx
+```
 
-The page in `web/index.html` uses a single WebSocket (`/ws`) for both control messages (JSON) and audio streaming (binary).
+Verifier la syntaxe Python et shell :
 
-#### 1) Connection and session startup
+```bash
+cd /home/server/server
+python -m py_compile config.py main.py services/*.py routers/*.py models/*.py experimental/*.py
+bash -n start_api.sh
+bash -n start_llama.sh
+```
 
-1. The browser computes the URL automatically:
-   - `ws://<host>/ws` on HTTP
-   - `wss://<host>/ws` on HTTPS
-2. It opens `new WebSocket(url)` and sets `binaryType = "arraybuffer"`.
-3. To initialize the audio session, the client sends:
-   - `{"type":"start","input_sample_rate":<mic_rate>}` (or just `{"type":"start"}`)
-4. The server answers with:
-   - `{"type":"started","input_sample_rate":...,"audio_output_sample_rate":48000,"encoding":"pcm_s16le","channels":1}`
-5. The page configures playback using the announced output rate.
+## Configuration
 
-#### 2) Audio upload (browser → server)
+| Variable | Description | Defaut |
+|---|---|---|
+| `LOG_LEVEL` | Niveau de logs. | `INFO` |
+| `LOG_FILE_PATH` | Fichier JSONL de logs serveur. | `logs/server-logs.jsonl` |
+| `HOST` | Adresse d'ecoute Uvicorn. | `0.0.0.0` |
+| `PORT` | Port HTTP/WebSocket. | `8000` |
+| `WHISPER_MODE` | Mode STT : `embedded` ou `http`. | `embedded` |
+| `WHISPER_URL` | URL STT HTTP si `WHISPER_MODE=http`. | `http://localhost:8080/inference` |
+| `WHISPER_TIMEOUT` | Timeout STT HTTP en secondes. | `30` |
+| `WHISPER_LANGUAGE` | Langue forcee pour Whisper ; vide pour auto. | `en` |
+| `WHISPER_MODEL` | Modele Whisper charge en embedded. | `small.en` |
+| `WHISPER_DEVICE` | Peripherique STT : `cuda` ou `cpu`. | `cuda` |
+| `WHISPER_COMPUTE_TYPE` | Type de calcul faster-whisper. | `int8` |
+| `WHISPER_BEAM_SIZE` | Beam size STT. | `1` |
+| `WHISPER_BACKEND` | Backend embedded : `faster-whisper` ou `whisper`. | `faster-whisper` |
+| `WHISPER_PROMPT` | Prompt initial court pour commandes livraison/navigation. | `delivery navigation map show the map start navigation show map delivery yes no ` |
+| `PIPER_BIN_PATH` | Chemin du binaire Piper local. | `/home/server/piper/piper/piper` |
+| `OLLAMA_URL` | URL du serveur LLM local. | `http://localhost:8080` |
+| `OLLAMA_MODEL` | Nom du modele LLM. | `Rytle:latest` |
+| `OLLAMA_STREAM` | Active le streaming LLM. | `true` |
+| `OLLAMA_TEMPERATURE` | Temperature de generation. | `0.7` |
+| `SYSTEM_PROMPT_PATH` | Fichier de prompt systeme. | `system_prompt.md` |
+| `PIPER_MODEL_PATH` | Chemin du modele Piper ONNX. | `assets/models/en_US-lessac-high.onnx` |
+| `PIPER_CONFIG_PATH` | Chemin de la config Piper JSON. | `assets/models/en_US-lessac-high.onnx.json` |
+| `TTS_FADE_OUT_MS` | Duree de fade-out en interruption TTS. | `150` |
+| `DENOISE_ENABLED` | Active le debruitage serveur. | `false` |
+| `DENOISE_BACKEND` | Nom logique du backend debruitage. | `deepfilternet` |
+| `DENOISE_BEFORE_VAD` | Debruite les chunks avant VAD. | `false` |
+| `DENOISE_FOR_STT` | Debruite l'utterance avant STT. | `false` |
+| `SAMPLE_RATE` | Frequence interne audio/VAD/STT. | `16000` |
+| `AUDIO_OUTPUT_SAMPLE_RATE` | Frequence audio TTS envoyee au client. | `48000` |
+| `VAD_CHUNK_MS` | Taille d'un chunk VAD Silero. | `32` |
+| `VAD_SILENCE_THRESHOLD` | Seuil de depart de parole. | `0.85` |
+| `VAD_START_TRIGGER_CHUNKS` | Chunks voix consecutifs avant `speech_start`. | `2` |
+| `VAD_CONTINUE_THRESHOLD` | Seuil hysteresis pendant parole. | `0.5` |
+| `VAD_SILENCE_DURATION_MS` | Silence requis pour finir une utterance. | `250` |
+| `VAD_MIN_SPEECH_MS` | Duree minimale d'une utterance acceptee. | `160` |
+| `VAD_PRE_ROLL_MS` | Audio conserve avant debut parole. | `400` |
+| `VAD_POST_ROLL_MS` | Audio conserve apres fin detectee. | `300` |
+| `VAD_MAX_UTTERANCE_MS` | Duree maximale forcee d'une utterance. | `6000` |
+| `SILERO_MODEL_PATH` | Chemin du modele Silero VAD ONNX. | `assets/models/silero_vad.onnx` |
+| `PREWARM_ON_STARTUP` | Prechauffage VAD/STT au demarrage. | `true` |
+| `PREWARM_TIMEOUT_SEC` | Timeout par etape de warmup. | `20` |
+| `PREWARM_LLM_TEXT` | Texte de warmup LLM, conserve pour compatibilite config. | `hello what's your name?` |
+| `PREWARM_TTS_TEXT` | Texte de warmup TTS, conserve pour compatibilite config. | `Warmup.` |
+| `MAX_HISTORY` | Taille max avant trim de l'historique conversation. | `3` |
+| `TRIM_TO` | Nombre de messages conserves au trim. | `30` |
+| `PIPER_NOISE_SCALE` | Parametre voix Piper. | `1.0` |
+| `PIPER_LENGTH_SCALE` | Parametre vitesse/duree Piper. | `0.9` |
+| `PIPER_NOISE_W` | Parametre prosodie Piper. | `1.0` |
+| `PIPER_SENTENCE_SILENCE` | Silence entre phrases Piper. | `0.8` |
+| `PIPER_ESPEAK_DATA` | Chemin espeak-ng sur Jetson aarch64. | `/usr/lib/aarch64-linux-gnu/espeak-ng-data` |
 
-- The microphone is captured with `getUserMedia`.
-- Audio frames are pulled in `ScriptProcessorNode`.
-- Each frame is converted from float32 `[-1,1]` to PCM16 little-endian.
-- The frame is sent as a **binary WebSocket message** (`ws.send(ArrayBuffer)`).
+## Lancement
 
-#### 3) Audio playback (server → browser)
+Demarrer le LLM local si le binaire et le modele existent :
 
-- TTS audio is received as **binary PCM16** messages.
-- The client converts PCM16 to float32.
-- It creates `AudioBuffer` chunks and schedules them in `AudioContext`.
-- On interruption (`tts_stop_now` or `interrupted`), the page stops all active playback sources immediately.
+```bash
+cd /home/server/server
+bash start_llama.sh
+```
 
-#### 4) JSON protocol used by the page
+Demarrer l'API :
 
-- **Client → Server**
-  - `{"type":"start","input_sample_rate":...}`: initialize audio session
-  - `{"type":"stop"}`: stop audio session and cleanup
-  - `{"type":"test_tts","text":"..."}`: ask server to speak arbitrary text
-- **Server → Client**
-  - `started` / `stopped`: audio session lifecycle
-  - `transcript`: STT result
-  - `response`: streamed LLM text chunks
-  - `tts_test`: streamed text chunks for test-tts mode
-  - `vad`: voice activity events (`speech_start`, `utterance_end`, etc.)
-  - `tts_stop_now`, `interrupted`, `interruption_decision`: barge-in/interruption events
-  - `error`: server-side validation/runtime errors
+```bash
+cd /home/server/server
+bash start_api.sh
+```
 
-#### 5) Typical runtime sequence
+Lancement direct equivalent :
 
-1. User clicks **Connect** → WebSocket open.
-2. User clicks **Start**:
-   - client sends `start`
-   - server returns `started`
-   - client starts mic streaming (binary PCM16 upstream)
-3. Server processes STT → LLM → TTS:
-   - text events come as JSON (`transcript`, `response`)
-   - synthesized audio comes as binary PCM16 chunks
-4. User clicks **Stop**:
-   - client stops local mic/playback
-   - client sends `stop`
-   - server returns `stopped`
+```bash
+cd /home/server/server
+python -m uvicorn main:app --host 0.0.0.0 --port 8000
+```
 
-### HTTP API
+Interfaces locales :
 
-#### `GET /health` - Health Check
-Returns status of all services:
+```bash
+curl http://localhost:8000/health
+```
+
+- Assistant Web : `http://localhost:8000/`
+- Enregistrement audio : `http://localhost:8000/record`
+- WebSocket Android : `ws://<ip-jetson>:8000/ws`
+
+## Pipeline audio
+
+Schema complet :
+
+```text
+Android/Web
+  | JSON {"type":"start","input_sample_rate":48000}
+  v
+WebSocketService /ws
+  | binaire PCM16 mono little-endian
+  v
+WebSocketAudioService
+  | decode PCM16 -> float32, resample vers 16000 Hz
+  v
+VADService Silero ONNX
+  | speech_start -> interruption TTS si besoin
+  | utterance_end -> buffer audio complet
+  v
+DenoiseService optionnel
+  | seulement si DENOISE_FOR_STT=true
+  v
+WhisperService
+  | transcript JSON {"type":"transcript","text":"..."}
+  v
+AgentService
+  | machine d'etat livraison si MODE_1, sinon LLM
+  v
+OllamaService
+  | chunks JSON {"type":"response","text":"..."}
+  v
+PiperClientService
+  | texte vers ws://localhost:9000/
+  | retour Float32 PCM depuis Piper
+  v
+AudioSocketOutput
+  | binaire PCM16 mono a AUDIO_OUTPUT_SAMPLE_RATE
+  v
+Android/Web
+```
+
+Details :
+
+- Le client envoie du PCM16 mono little-endian en messages WebSocket binaires.
+- Le serveur accepte un `input_sample_rate` client et resample vers `SAMPLE_RATE=16000`.
+- Silero traite des chunks de `32 ms`, soit `512` samples a 16 kHz.
+- `speech_start` envoie un evenement VAD et peut interrompre le TTS courant.
+- `utterance_end` cree une tache asynchrone STT -> Intent/livraison -> TTS.
+- Le TTS retourne du binaire PCM16 mono ; le client utilise `audio_output_sample_rate` annonce au demarrage.
+
+## Points de supervision
+
+| Methode | Path | Description |
+|---|---|---|
+| `GET` | `/health` | Etat global et disponibilite des services. |
+| `GET` | `/api/list-recordings` | Liste des enregistrements audio sauvegardes. |
+| `POST` | `/api/save-audio-denoised` | Sauvegarde un audio PCM16 base64 et ses metriques. |
+| `POST` | `/notifications/send/{client_id}` | Envoie une notification a une session WebSocket. |
+| `POST` | `/notifications/broadcast` | Diffuse une notification a toutes les sessions. |
+| `POST` | `/test/audio/upload` | Upload multipart audio de test, sauvegarde raw/denoised, transcrit et logue le CSV. |
+| `GET` | `/test/audio/records` | Retourne le contenu du CSV de collecte audio. |
+| `GET` | `/` | Page Web de test, hors schema API. |
+| `GET` | `/record` | Page Web d'enregistrement, hors schema API. |
+
+Exemple `GET /health` :
+
 ```json
 {
   "status": "ok",
-  "sessions": 2,
-  "audio_streams": 1,
+  "sessions": 0,
+  "audio_streams": 0,
   "services": {
     "ws": true,
     "audio_stream": true,
     "whisper": true,
-    "ollama": true,
-    "piper": true,
-    "denoise": true,
-    ...
+    "notification": true,
+    "delivery": true,
+    "state_machine": true,
+    "denoise": true
   }
 }
 ```
 
-#### `GET /api/list-recordings` - List Recordings
-Returns saved audio recordings:
+Exemple `GET /api/list-recordings` constate localement :
+
 ```json
 {
-  "files": ["recording_abc123_denoised.wav", ...]
+  "files": [
+    "audio_ff17afb2-d782-4e77-9e0f-0800f0d24c41_03ecbe53_raw.wav",
+    "audio_ff17afb2-d782-4e77-9e0f-0800f0d24c41_03ecbe53_denoised.wav",
+    "audio_fee93533-85bf-4ef7-b712-3087129dade4_f9c9717f_raw.wav"
+  ]
 }
 ```
 
-#### `POST /api/save-audio-denoised` - Save Denoised Audio
-Saves denoised audio with comparative metrics:
+Exemple `POST /api/save-audio-denoised` sans audio :
+
 ```json
 {
-  "audio": "<base64 denoised>",
-  "raw_audio": "<base64 raw PCM>"  // optional, triggers comparison
+  "error": "No audio data provided"
 }
 ```
-**Response:**
+
+Exemple `POST /api/save-audio-denoised` avec `raw_audio` ou `audio` :
+
 ```json
 {
-  "id": "abc123",
-  "filename": "recording_abc123_denoised.wav",
-  "url": "/assets/recordings/recording_abc123_denoised.wav",
-  "raw_url": "/assets/recordings/recording_abc123_raw.wav",
+  "id": "0abad7ed",
+  "filename": "recording_0abad7ed_denoised.wav",
+  "url": "/assets/recordings/recording_0abad7ed_denoised.wav",
+  "raw_filename": "recording_0abad7ed_raw.wav",
+  "raw_url": "/assets/recordings/recording_0abad7ed_raw.wav",
   "metrics": {
-    "raw": {"rms": 0.15, "peak": 0.95, "duration_ms": 3200},
-    "denoised": {"rms": 0.18, "peak": 0.85, "duration_ms": 3200}
+    "raw": {
+      "samples": 16000,
+      "duration_ms": 1000,
+      "rms": 0.0,
+      "peak": 0.0
+    },
+    "denoised": {
+      "samples": 16000,
+      "duration_ms": 1000,
+      "rms": 0.0,
+      "peak": 0.0
+    }
   }
 }
 ```
 
-#### `POST /notifications/send/{client_id}` - Send Notification
-Push notification to specific client:
-- **client_id**: Target client identifier
-- **notification_type**: Type (e.g., "new_delivery")
-- **data**: JSON payload
+Exemple `POST /notifications/send/{client_id}` si le client existe :
 
-#### `POST /notifications/broadcast` - Broadcast
-Send notification to all connected clients.
-
----
-
-## 🎯 Delivery State Machine
-
-The delivery state machine manages delivery completion workflows.
-
-### Overview
-
-**Two operational modes:**
-- **MODE_0 (Normal)**: STT → Intent Detection → Known/Unknown → TTS/LLM
-- **MODE_1 (Delivery Completion)**: STT → Normalize → Pattern matching → Action
-
-### States (MODE_1)
-
-| State | Name | Description |
-|-------|------|-------------|
-| `STATE_1` | ASK_COMPLETION | "Is the delivery completed?" |
-| `STATE_2` | ASK_REASON | "Can you tell me why?" |
-| `STATE_4` | COMPLETE | Update trip status |
-| `STATE_5` | EXIT | Return to MODE_0 |
-| `STATE_6` | ASK_PHOTO | Request photo evidence |
-
-### Workflow
-
-```
-Driver identified
-    ↓
-Trips retrieved
-    ↓
-MODE_0: Normal conversation
-    ↓
-[Delivery completion triggered]
-    ↓
-MODE_1: STATE_1 (Ask completion status)
-    ↓
-If yes → STATE_4 (Complete) → STATE_5 (Exit)
-If no  → STATE_2 (Ask reason) → STATE_6 (Ask photo) → STATE_4 → STATE_5
+```json
+{
+  "sent": true,
+  "message": "Notification sent"
+}
 ```
 
-**Full documentation**: See [documentations/state_machine.md](documentations/state_machine.md)
+Exemple `POST /notifications/send/{client_id}` si le client est absent :
 
----
-
-## 🔊 Text-to-Speech (TTS)
-
-The server uses **Piper TTS** for speech synthesis.
-
-### Piper TTS (High Quality)
-
-| Parameter | Value |
-|-----------|-------|
-| **Model** | `en_US-hfc_female-medium.onnx` (default) |
-| **Language** | English (US) 🇺🇸 |
-| **Voice** | HFC Female |
-| **Quality** | Medium-High |
-| **Sample Rate** | 22050 Hz |
-
-### TTS Configuration
-
-In `config.py`, set:
-```bash
-# For Piper
-PIPER_MODEL_PATH="assets/models/en_US-hfc_female-medium.onnx"
-PIPER_CONFIG_PATH="assets/models/en_US-hfc_female-medium.onnx.json"
-
+```json
+[
+  {
+    "sent": false,
+    "message": "Client not found"
+  },
+  404
+]
 ```
 
----
+Exemple `POST /notifications/broadcast` sans client connecte :
 
-## 🛑 Barge-in / Interruption System
-
-The server implements a complete interruption system allowing users to cut off the AI while it's speaking.
-
-### Architecture
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│ 1. User speaks while TTS is playing                             │
-└─────────────────────────────────────────────────────────────────┘
-                           ↓
-┌─────────────────────────────────────────────────────────────────┐
-│ 2. VAD detects speech_start (32ms chunks)                       │
-└─────────────────────────────────────────────────────────────────┘
-                           ↓
-┌─────────────────────────────────────────────────────────────────┐
-│ 3. agent.on_user_speech_start()                                 │
-│    - Calculate elapsed time (elapsed_ms)                        │
-│    - Set interruption_pending=True                              │
-│    - Call interrupt()                                           │
-└─────────────────────────────────────────────────────────────────┘
-                           ↓
-┌─────────────────────────────────────────────────────────────────┐
-│ 4. interrupt()                                                  │
-│    - cancel_flag=True → cancel current pipeline                 │
-│    - tts_track.clear() → empty TTS queue                        │
-│    - Send {"type": "tts_stop_now"} to client                    │
-└─────────────────────────────────────────────────────────────────┘
-                           ↓
-┌─────────────────────────────────────────────────────────────────┐
-│ 5. _decide_interruption_mode()                                  │
-│    - continuation → merge with old message                      │
-│    - interruption → replace old message                         │
-└─────────────────────────────────────────────────────────────────┘
+```json
+{
+  "sent": true,
+  "count": 0
+}
 ```
 
-### Configuration
+Exemple `GET /test/audio/records` sans CSV :
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `INTERRUPTION_SHORT_THRESHOLD_MS` | 1000 | Time threshold for short interruptions |
-| `INTERRUPTION_WORDS_EN` | `no,stop,wait,cancel,forget,never mind` | Interruption trigger words |
-| `CONTINUATION_WORDS_EN` | `also,and,plus,additionally,actually,wait and` | Continuation words |
-
-### Decision Logic
-
-```python
-if elapsed_ms < 1000ms:
-    if interruption_word:
-        return "interruption"
-    if continuation_word:
-        return "continuation"
-    return "continuation"  # Default
-else:
-    if continuation_word:
-        return "continuation"
-    return "interruption"  # Default
+```json
+{
+  "records": []
+}
 ```
 
-### Modes
+Exemple `POST /test/audio/upload` :
 
-| Mode | Behavior |
-|------|----------|
-| **interruption** | Previous message deleted, new turn |
-| **continuation** | New text merged with active user message |
+```json
+{
+  "numero": 1,
+  "raw_path": "test_data/dennoise/records/raw/rawaudio_1.wav",
+  "denoised_path": "test_data/dennoise/records/denoised/denoised_1.wav",
+  "transcription": "",
+  "nom_driver": "Alice",
+  "texte_lu": "Delivery completed",
+  "condition_lecture": "silencieux",
+  "outil_debruitage": "aucun"
+}
+```
 
-### WebSocket Events
+## WebSocket
 
-| Type | Direction | Description |
-|------|-----------|-------------|
-| `vad: speech_start` | Server → Client | Speech detection start |
-| `interruption_decision` | Server → Client | Decision (continuation/interruption) with elapsed_ms |
-| `tts_stop_now` | Server → Client | Immediate TTS stop |
-| `interrupted` | Server → Client | Interruption notification |
+| Point WebSocket | Port | Codec | Format audio | Role |
+|---|---:|---|---|---|
+| `/ws` | `8000` | PCM16 little-endian | Mono, entree annoncee par Android, traitement interne 16 kHz, sortie `AUDIO_OUTPUT_SAMPLE_RATE` | Conversation vocale complete. |
+| `/ws-denoise` | `8000` | JSON base64 PCM16 | Mono 16 kHz | Debruitage experimental par chunks. |
 
----
+Connexion Android sur `/ws` :
 
-## 🎙️ Audio Denoising
+```text
+1. Ouvrir ws://<ip-jetson>:8000/ws
+2. Envoyer {"type":"start","input_sample_rate":48000}
+3. Recevoir {"type":"started","input_sample_rate":48000,"audio_output_sample_rate":48000,"encoding":"pcm_s16le","channels":1}
+4. Envoyer les frames micro en messages binaires PCM16 mono little-endian.
+5. Ecouter les messages JSON: vad, transcript, response, emotion, notification, error.
+6. Lire les messages binaires serveur comme audio TTS PCM16 mono.
+7. Envoyer {"type":"stop"} avant fermeture propre.
+```
 
-### DeepFilterNet
+Messages JSON client vers serveur :
 
-The server uses **DeepFilterNet** for audio denoising, replacing the older RNNoise approach.
+| Message | Description |
+|---|---|
+| `{"type":"start","input_sample_rate":48000}` | Initialise le flux audio. |
+| `{"type":"stop"}` | Nettoie la session audio et retourne `{"type":"stopped"}`. |
+| `{"type":"test_tts","text":"Test audio."}` | Joue un texte via Piper, exige `start` avant. |
+| `{"type":"arrived","id":"trip_id"}` | Declenche le controle externe d'arrivee livraison. |
+| `{"type":"photo_taken"}` | Reponse positive a une demande de photo. |
+| `{"type":"photo_not_taken"}` | Reponse negative a une demande de photo. |
+| `{"type":"external_control","action":"arrived","extras":{"trip_id":"..."}}` | Controle externe generique. |
+| `{"type":"read_next_instruction"}` | Ignore volontairement par le serveur. |
 
-### Modes
+Messages JSON serveur vers client :
 
-| Mode | Description | Latency | Quality |
-|------|-------------|---------|---------|
-| **Utterance-level** | Denoise after VAD end, before STT | Low | High |
-| **Streaming** | Real-time chunk denoising before VAD | Higher | Highest |
-| **Disabled** (default for STT path) | Raw audio passthrough | Lowest | Raw |
+| Type | Exemple |
+|---|---|
+| `started` | `{"type":"started","input_sample_rate":48000,"audio_output_sample_rate":48000,"encoding":"pcm_s16le","channels":1}` |
+| `stopped` | `{"type":"stopped"}` |
+| `vad` | `{"type":"vad","event":"speech_start","p":0.91}` |
+| `transcript` | `{"type":"transcript","text":"show the map"}` |
+| `response` | `{"type":"response","text":"Starting navigation."}` |
+| `tts_test` | `{"type":"tts_test","text":"Test audio."}` |
+| `tts_stop_now` | `{"type":"tts_stop_now"}` |
+| `interrupted` | `{"type":"interrupted"}` |
+| `stt_empty` | `{"type":"stt_empty"}` |
+| `emotion` | `{"type":"emotion","name":"speaking"}` |
+| `notification` | `{"type":"notification","notification_type":"trips_list","data":{}}` |
+| `ask_photo_event` | `{"type":"ask_photo_event"}` |
+| `external_control` | `{"type":"external_control","action":"started_navigation","extras":{}}` |
+| `error` | `{"type":"error","message":"unknown type"}` |
 
-### Configuration
+WebSocket `/ws-denoise` :
+
+```text
+Client -> serveur: {"audio":"AAA="}
+Serveur -> client: {"status":"buffering","buffered_ms":0,"message":"Accumulating: 0ms / 100ms"}
+Client -> serveur: {"final":true}
+Serveur -> client: {"status":"ok","audio":"","message":"No buffered audio","final":true}
+Client -> serveur: {"reset":true}
+Serveur -> client: {"status":"ok","message":"Buffer reset"}
+```
+
+## Deploiement Jetson
+
+- Architecture cible : `aarch64`.
+- Chemin espeak par defaut : `/usr/lib/aarch64-linux-gnu/espeak-ng-data`.
+- `PIPER_BIN_PATH` pointe vers `/home/server/piper/piper/piper`; verifier que le binaire est compile pour aarch64.
+- `soxr` est utilise en priorite pour le resampling ; `scipy` puis `librosa` servent de replis.
+- `faster-whisper` utilise CTranslate2 ; sur Jetson, commencer avec `WHISPER_MODEL=small.en`, `WHISPER_COMPUTE_TYPE=int8`.
+- Si CTranslate2/CUDA est instable, passer `WHISPER_DEVICE=cpu`.
+- Le README historique mentionnait DeepFilterNet3 ; le code runtime actuel importe `rnnoise`. Garder `DENOISE_ENABLED=false` tant que le backend natif n'est pas installe et valide sur la Jetson.
+- `VADService` essaie les providers ONNX Runtime dans cet ordre si disponibles : CUDA, CPU, TensorRT ajoute en dernier.
+- Le script `start_llama.sh` attend `llama-server` et le modele `/home/server/models/Qwen_Qwen3.5-4B-Q4_K_L.gguf`.
+
+Commandes utiles Jetson :
 
 ```bash
-# Enable/disable denoising
-DENOISE_ENABLED=true
-
-# Backend
-DENOISE_BACKEND=deepfilternet
-
-# Denoise before VAD (streaming mode)
-DENOISE_BEFORE_VAD=false  # Default: denoise after VAD
-
-# Denoise final utterance before STT
-DENOISE_FOR_STT=false
-
-# Experimental streaming denoise endpoint
-# Connect to: ws://localhost:8000/ws-denoise
+uname -m
+python --version
+python -c "import onnxruntime as ort; print(ort.get_available_providers())"
+python -c "import soxr, numpy; print('soxr ok')"
 ```
 
-### Streaming Denoise WebSocket
-
-**Endpoint**: `ws://localhost:8000/ws-denoise`
-
-**Messages:**
-- **Input**: `{"audio": "<base64 PCM 16kHz>"}`
-- **Output**: `{"status": "ok", "audio": "<base64 denoised>"}`
-- **Final**: `{"final": true}` - Process remaining buffer
-- **Reset**: `{"reset": true}` - Clear buffer
-
----
-
-## 🔧 Configuration
-
-All configuration is centralized in `config.py` via environment variables.
-
-### Server
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `HOST` | `0.0.0.0` | Bind address |
-| `PORT` | `8000` | Port number |
-| `LOG_LEVEL` | `INFO` | Logging level |
-| `LOG_FILE_PATH` | `logs/server.log` | Log file path |
-
-### STT (Whisper)
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `WHISPER_MODE` | `embedded` | `embedded` or `http` |
-| `WHISPER_BACKEND` | `faster-whisper` | `whisper` or `faster-whisper` |
-| `WHISPER_MODEL` | `small.en` | Model size (tiny, base, small, medium, large-v3) |
-| `WHISPER_DEVICE` | `cuda` | `cpu` or `cuda` |
-| `WHISPER_COMPUTE_TYPE` | `int8` | `int8` (quantized) or `float16` |
-| `WHISPER_LANGUAGE` | `en` | Language code or `None` (auto) |
-
-### LLM (Ollama)
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `OLLAMA_URL` | `http://localhost:8080` | Ollama server URL |
-| `OLLAMA_MODEL` | `smollm2:360m` | Model name |
-| `OLLAMA_CONTEXT_WINDOW` | `1024` | Context window size |
-| `OLLAMA_NUM_PREDICT` | `50` | Max tokens to generate |
-| `OLLAMA_TEMPERATURE` | `0.7` | Sampling temperature |
-| `OLLAMA_THINK` | `false` | Disable thinking mode |
-
-### Audio / VAD
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `SAMPLE_RATE` | `16000` | Input sample rate |
-| `AUDIO_OUTPUT_SAMPLE_RATE` | `48000` | Output sample rate (Opus native) |
-| `VAD_CHUNK_MS` | `32` | VAD chunk size |
-| `VAD_SILENCE_THRESHOLD` | `0.8` | Voice probability threshold |
-| `VAD_CONTINUE_THRESHOLD` | `0.5` | Continuation hysteresis |
-| `VAD_SILENCE_DURATION_MS` | `250` | Silence before utterance end |
-| `VAD_MIN_SPEECH_MS` | `160` | Minimum speech duration |
-| `VAD_PRE_ROLL_MS` | `400` | Audio buffer before speech |
-| `VAD_POST_ROLL_MS` | `300` | Audio buffer after speech |
-| `VAD_MAX_UTTERANCE_MS` | `6000` | Force utterance end |
-
-### TTS
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `TTS_STREAM_WORD_CHUNK_SIZE` | `8` | Words before streaming |
-| `TTS_SEGMENT_OVERLAP_MS` | `100` | Crossfade between segments |
-| `TTS_SEGMENT_QUEUE_MAXSIZE` | `5` | Segment buffer |
-| `TTS_PLAYBACK_PREBUFFER_MS` | `1500` | Buffer before playing |
-| `TTS_BUFFER_LOW_WATERMARK_MS` | `1200` | Trigger next synthesis |
-| `TTS_FRAME_INTERVAL_MS` | `10` | Audio frame interval |
-| `TTS_TRIM_SILENCE_THRESHOLD` | `0.0001` | Silence detection threshold |
-| `TTS_TRIM_SILENCE_PAD_MS` | `80` | Padding before silence |
-| `TTS_TRIM_MIN_SILENCE_MS` | `150` | Minimum silence gap |
-
-### Warmup
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `PREWARM_ON_STARTUP` | `true` | Enable warmup |
-| `PREWARM_TIMEOUT_SEC` | `20` | Warmup timeout |
-| `PREWARM_LLM_TEXT` | `hello what's your name?` | Warmup LLM |
-| `PREWARM_TTS_TEXT` | `Warmup.` | Warmup TTS |
-
----
-
-## 📥 Download Models
-
-### Required Models
-
-After installation, download the ONNX models for TTS and VAD.
-
-#### 1. Piper TTS Voices
-
-```bash
-cd /home/server/aiserver
-mkdir -p assets/models
-
-# English voice (default) - Medium Quality
-wget -O assets/models/en_US-hfc_female-medium.onnx \
-  https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/hfc_female/medium/en_US-hfc_female-medium.onnx
-
-wget -O assets/models/en_US-hfc_female-medium.onnx.json \
-  https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/hfc_female/medium/en_US-hfc_female-medium.onnx.json
-
-```
-
-#### 2. Silero VAD
-
-```bash
-# Download Silero VAD model
-wget -O assets/models/silero_vad.onnx \
-  https://github.com/snakers4/silero-vad/raw/master/files/silero_vad.onnx
-```
-
-#### 3. Verify Models
-
-```bash
-ls -lh assets/models/
-```
-
-**Expected output:**
-```
--rw-r--r-- 1 user user 60M  Apr 02 10:00 en_US-hfc_female-medium.onnx
--rw-r--r-- 1 user user 2.5K Apr 02 10:00 en_US-hfc_female-medium.onnx.json
--rw-r--r-- 1 user user 20M  Apr 02 10:01 en_US-danny-low.onnx
--rw-r--r-- 1 user user 1.8K Apr 02 10:01 en_US-danny-low.onnx.json
--rw-r--r-- 1 user user 2.2M Apr 02 10:02 silero_vad.onnx
-```
-
----
-
-### Recommended Piper Voices by Language
-
-| Language | Voice | Quality | Size | Link |
-|----------|-------|---------|------|------|
-| 🇺🇸 English | `en_US-hfc_female-medium` | Medium | ~60 MB | [Download](https://huggingface.co/rhasspy/piper-voices/tree/main/en/en_US/hfc_female/medium) |
-| 🇺🇸 English | `en_US-danny-low` | Low | ~20 MB | [Download](https://huggingface.co/rhasspy/piper-voices/tree/main/en/en_US/danny/low) |
-| 🇫🇷 French | `fr_FR-siwis-medium` | Medium | ~60 MB | [Download](https://huggingface.co/rhasspy/piper-voices/tree/main/fr/fr_FR/siwis/medium) |
-| 🇩🇪 German | `de_DE-thorsten-medium` | Medium | ~60 MB | [Download](https://huggingface.co/rhasspy/piper-voices/tree/main/de/de_DE/thorsten/medium) |
-| 🇪🇸 Spanish | `es_ES-davefx-medium` | Medium | ~60 MB | [Download](https://huggingface.co/rhasspy/piper-voices/tree/main/es/es_ES/davefx/medium) |
-
----
-
-### Automatic Download Script
-
-Create a `download_models.sh` script:
-
-```bash
-#!/bin/bash
-# download_models.sh - Downloads all required models
-
-set -e
-
-MODEL_DIR="assets/models"
-mkdir -p "$MODEL_DIR"
-
-echo "📥 Downloading models..."
-
-# Piper TTS - English Medium
-echo "🔊 en_US-hfc_female-medium..."
-wget -q --show-progress -O "$MODEL_DIR/en_US-hfc_female-medium.onnx" \
-  https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/hfc_female/medium/en_US-hfc_female-medium.onnx
-wget -q --show-progress -O "$MODEL_DIR/en_US-hfc_female-medium.onnx.json" \
-  https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/hfc_female/medium/en_US-hfc_female-medium.onnx.json
-
-# Silero VAD
-echo "🎤 Silero VAD..."
-wget -q --show-progress -O "$MODEL_DIR/silero_vad.onnx" \
-  https://github.com/snakers4/silero-vad/raw/master/files/silero_vad.onnx
-
-echo "✅ All models downloaded to $MODEL_DIR"
-ls -lh "$MODEL_DIR"
-```
-
-**Usage:**
-```bash
-chmod +x download_models.sh
-./download_models.sh
-```
-
----
-
-## 🧠 AI Persona: Rytle
-
-The server uses **Rytle** as its AI persona for delivery assistance.
-
-**Characteristics:**
-- **Role**: Professional delivery assistant AI
-- **Style**: Friendly, calm, and efficient
-- **Communication**: Direct and concise (max 2-3 sentences)
-- **Behavior**: No emojis, no filler, no preamble
-- **Language**: English
-
-**System prompt**: See [system_prompt.md](system_prompt.md)
-
----
-
-## 📚 Additional Documentation
-
-| Document | Description |
-|----------|-------------|
-| [state_machine.md](documentations/state_machine.md) | Delivery state machine workflow |
-| [AUDIO_CONTINUITY_FIX.md](documentations/AUDIO_CONTINUITY_FIX.md) | Audio continuity improvements |
-
----
-
-## 🚀 Services Lifecycle
-
-### Startup Order
-
-1. **VAD Service** - Loads Silero ONNX model
-2. **Whisper Service** - Initializes STT (embedded or HTTP)
-3. **Ollama Service** - Connects to Ollama, verifies model
-4. **Intent Service** - Loads embedding model
-5. **Action Service** - Registers known intents
-6. **Notification Service** - Sets up WebSocket handlers
-7. **Delivery Service** - Initializes delivery management
-8. **State Machine** - Delivery workflow engine
-9. **Piper/Kokoro TTS** - Loads TTS models
-10. **Denoise Service** - Initializes DeepFilterNet
-11. **Warmup** - Preheats all services (reduces first-request latency)
-
-### Shutdown Order
-
-Reverse of startup: TTS → Denoise → State Machine → Notification → Action → Intent → Ollama → Whisper → VAD
-
----
-
-## 📄 License
-
-This project is open-source. See the license file for details.
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
----
-
-## 📞 Support
-
-For issues, questions, or suggestions, please open an issue on the repository.
+## Depannage
+
+| Erreur | Cause | Fix |
+|---|---|---|
+| `No module named pytest` | Les dependances de test ne sont pas installees dans l'environnement courant. | Activer le venv puis lancer `python -m pip install pytest`. |
+| `Dependency 'onnxruntime' is required for VADService` | ONNX Runtime absent. | Installer `onnxruntime` ou une wheel Jetson compatible. |
+| `Silero VAD ONNX model not found` | `assets/models/silero_vad.onnx` absent ou chemin incorrect. | Telecharger le modele ou definir `SILERO_MODEL_PATH`. |
+| `Dependency 'faster-whisper' is not installed` | Backend STT par defaut absent. | Installer `faster-whisper` ou definir `WHISPER_BACKEND=whisper`. |
+| `WhisperService not started` | Appel STT avant lifespan FastAPI ou startup echoue. | Demarrer via Uvicorn et verifier `/health`. |
+| `Erreur de connexion au serveur Piper` | Aucun serveur Piper streaming sur `ws://localhost:9000/`. | Demarrer le serveur Piper ou adapter `PiperClientService(uri=...)`. |
+| `Denoise streaming processor unavailable` | `DENOISE_ENABLED=false` ou backend debruitage non pret. | Installer le backend natif puis lancer avec `DENOISE_ENABLED=true`. |
+| `start failed: ...` sur WebSocket | Erreur au demarrage de session audio. | Verifier le message `error`, les logs et la valeur `input_sample_rate`. |
+| Audio trop rapide ou trop lent cote Android | Mauvais sample rate de lecture TTS. | Utiliser `audio_output_sample_rate` du message `started`. |
+| STT vide avec audio valide | VAD trop strict, parole trop courte ou gain micro faible. | Baisser `VAD_SILENCE_THRESHOLD`, augmenter gain micro, verifier `VAD_MIN_SPEECH_MS`. |
+| OOM CUDA sur Jetson | Modele STT ou provider CUDA trop lourd. | Utiliser `WHISPER_DEVICE=cpu`, `WHISPER_COMPUTE_TYPE=int8`, modele `tiny` ou `small.en`. |
+| `llama-server: command not found` | Serveur LLM local non installe dans le PATH. | Installer llama.cpp ou corriger `start_llama.sh`. |
+| `Client not found` sur notification | `client_id` absent des sessions WebSocket actives. | Reconnecter le client et utiliser son `client_id` courant cote serveur. |
+
+## Licence
+
+Licence non precisee dans ce depot. Ajouter un fichier `LICENSE` avant publication.

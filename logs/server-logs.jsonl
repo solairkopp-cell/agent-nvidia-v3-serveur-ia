@@ -462,3 +462,32 @@
 {"ts": "2026-05-02T19:29:17.324899+00:00", "level": "INFO", "logger": "services.ws_audio_service", "msg": "Audio WS cleaned up client_id=54630f35-c352-4a02-92d8-41ed8daf982f"}
 {"ts": "2026-05-02T19:29:17.325270+00:00", "level": "INFO", "logger": "services.websocket_service", "msg": "WS disconnected client_id=54630f35-c352-4a02-92d8-41ed8daf982f"}
 {"ts": "2026-05-02T19:29:17.327762+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "connection closed"}
+{"ts": "2026-05-03T08:09:59.320721+00:00", "level": "INFO", "logger": "uvicorn.access", "msg": "198.235.24.139:0 - \"GET / HTTP/1.1\" 200"}
+{"ts": "2026-05-03T09:16:57.939142+00:00", "level": "INFO", "logger": "uvicorn.access", "msg": "198.235.24.148:0 - \"GET / HTTP/1.1\" 200"}
+{"ts": "2026-05-03T09:28:21.509926+00:00", "level": "INFO", "logger": "uvicorn.access", "msg": "198.235.24.59:0 - \"GET / HTTP/1.1\" 200"}
+{"ts": "2026-05-03T11:09:01.266036+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "Handler registered for message type: identify_driver"}
+{"ts": "2026-05-03T11:09:01.267629+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "Handler registered for message type: get_trips"}
+{"ts": "2026-05-03T11:09:01.287825+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "Started server process [763]"}
+{"ts": "2026-05-03T11:09:01.288721+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "Waiting for application startup."}
+{"ts": "2026-05-03T14:19:41.733272+00:00", "level": "INFO", "logger": "httpx", "msg": "HTTP Request: GET https://huggingface.co/api/models/Systran/faster-whisper-small.en/revision/main \"HTTP/1.1 200 OK\""}
+{"ts": "2026-05-03T14:20:07.564234+00:00", "level": "ERROR", "logger": "uvicorn.error", "msg": "Traceback (most recent call last):\n  File \"/home/server/.local/lib/python3.10/site-packages/starlette/routing.py\", line 638, in lifespan\n    async with self.lifespan_context(app) as maybe_state:\n  File \"/usr/lib/python3.10/contextlib.py\", line 199, in __aenter__\n    return await anext(self.gen)\n  File \"/home/server/.local/lib/python3.10/site-packages/fastapi/routing.py\", line 216, in merged_lifespan\n    async with original_context(app) as maybe_original_state:\n  File \"/usr/lib/python3.10/contextlib.py\", line 199, in __aenter__\n    return await anext(self.gen)\n  File \"/home/server/server/main.py\", line 165, in lifespan\n    await ollama_service.startup()\n  File \"/home/server/server/services/new_ollama_service.py\", line 39, in startup\n    raise RuntimeError(\"Ollama non joignable (healthcheck KO sur /v1/models et /api/tags)\")\nRuntimeError: Ollama non joignable (healthcheck KO sur /v1/models et /api/tags)\n"}
+{"ts": "2026-05-03T14:20:07.567323+00:00", "level": "ERROR", "logger": "uvicorn.error", "msg": "Application startup failed. Exiting."}
+{"ts": "2026-05-03T14:20:39.207430+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "Handler registered for message type: identify_driver"}
+{"ts": "2026-05-03T14:20:39.210354+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "Handler registered for message type: get_trips"}
+{"ts": "2026-05-03T14:20:39.231115+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "Started server process [1436]"}
+{"ts": "2026-05-03T14:20:39.232090+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "Waiting for application startup."}
+{"ts": "2026-05-03T14:20:43.001169+00:00", "level": "INFO", "logger": "httpx", "msg": "HTTP Request: GET https://huggingface.co/api/models/Systran/faster-whisper-small.en/revision/main \"HTTP/1.1 200 OK\""}
+{"ts": "2026-05-03T14:20:50.823801+00:00", "level": "INFO", "logger": "services.new_ollama_service", "msg": "MascoteService démarré"}
+{"ts": "2026-05-03T14:20:50.824425+00:00", "level": "INFO", "logger": "services.notification_service", "msg": "NotificationService started"}
+{"ts": "2026-05-03T14:20:50.824690+00:00", "level": "INFO", "logger": "services.delivery_service", "msg": "DeliveryService started"}
+{"ts": "2026-05-03T14:20:50.824896+00:00", "level": "INFO", "logger": "services.delivery_state_machine", "msg": "DeliveryStateMachine started"}
+{"ts": "2026-05-03T14:20:50.825511+00:00", "level": "INFO", "logger": "services.piper_client_service", "msg": "Connexion au Piper Streaming Server externe sur ws://localhost:9000/"}
+{"ts": "2026-05-03T14:20:50.916963+00:00", "level": "INFO", "logger": "services.piper_client_service", "msg": "WebSocket Piper connecté."}
+{"ts": "2026-05-03T14:20:50.917475+00:00", "level": "INFO", "logger": "services.denoise_service", "msg": "Denoise disabled"}
+{"ts": "2026-05-03T14:20:50.917685+00:00", "level": "INFO", "logger": "main", "msg": "Warmup started"}
+{"ts": "2026-05-03T14:20:51.076353+00:00", "level": "INFO", "logger": "main", "msg": "Warmup vad ok in 0.16s"}
+{"ts": "2026-05-03T14:20:51.077019+00:00", "level": "INFO", "logger": "faster_whisper", "msg": "Processing audio with duration 00:01.000"}
+{"ts": "2026-05-03T14:20:55.213499+00:00", "level": "INFO", "logger": "main", "msg": "Warmup stt ok in 4.14s"}
+{"ts": "2026-05-03T14:20:55.213894+00:00", "level": "INFO", "logger": "main", "msg": "Warmup finished"}
+{"ts": "2026-05-03T14:20:55.217058+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "Application startup complete."}
+{"ts": "2026-05-03T14:20:55.223253+00:00", "level": "INFO", "logger": "uvicorn.error", "msg": "Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)"}
