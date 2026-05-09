@@ -61,6 +61,7 @@ class Session:
     active_user_message_index: Optional[int] = None
     active_user_request_id: int = 0
     active_user_text: str = ""
+    tts_feeding_done: bool = False
     # Permet d'annuler la génération en cours
     current_request_id: int = 0
     cancel_flag: bool = False
@@ -68,6 +69,10 @@ class Session:
     tts_task: Optional[asyncio.Task] = None
 
     # ── Delivery State Machine ───────────────────────────────────────────────
+    # Identification vocale du livreur avant conversation normale
+    auth_mode: str = "manual"
+    awaiting_driver_serial: bool = False
+    auth_attempts: int = 0
     # Serial du driver (pour delivery completion flow)
     driver_serial: Optional[str] = None
     # ID du trip en cours de complétion

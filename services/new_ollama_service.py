@@ -8,6 +8,8 @@ import httpx
 import requests
 
 import config
+from services.utility_service import UtilityService
+
 
 logger = logging.getLogger(__name__)
 DEFAULT_SYSTEM_PROMPT = ()
@@ -26,6 +28,7 @@ class OllamaService:
         self._ws_service = None
         self._session = None
         self._async_client = None
+        self.utility_service = UtilityService()
 
     # --- Lifecycle ---
 
@@ -90,56 +93,7 @@ class OllamaService:
             self.log(f"Erreur generate_system_reply : {e}", level="error")
             yield "I could not process that."
 
-    async def is_this_a_confirmation(self, message: str, session=None) -> bool | None:
-        text = (message or "").strip().lower()
-        yes_words = ("yes", "yep", "yeah", "yup", "done", "completed", "delivered", "sure", "correct", "affirmative")
-        no_words = ("no", "nope", "not", "negative", "failed", "couldn't", "cannot", "didn't")
-        for w in yes_words:
-            if w in text:
-                return True
-        for w in no_words:
-            if w in text:
-                return False
-        return None
     
-    async def get_delivery_failure_reason_response(
-        self,
-        message: str,
-        reasons: list[str] | tuple[str, ...],
-        session=None,
-    ) -> str:
-        try:
-            if session is not None:
-                self.set_session(session)
-
-            numbered_reasons = "\n".join(
-                f"{index}. {reason}"
-                for index, reason in enumerate(reasons, start=1)
-            )
-            max_reason = len(reasons)
-
-            messages = [
-                {
-                    "role": "user",
-                    "content": (
-                        "You analyze a delivery driver's answer after they were asked "
-                        "to choose a failure reason.\n"
-                        f"Available reasons are:\n{numbered_reasons}\n"
-                        "Rules:\n"
-                        f"- If the driver clearly chooses one reason, reply only with a number between 1 and {max_reason}.\n"
-                        "- If the driver asks for the list, options, or reasons, reply only with the numbered list.\n"
-                        "- If the driver says the reason itself instead of the number, map it to the right number.\n"
-                        f"- If the answer is unclear, reply only with: Please choose a number between 1 and {max_reason} or ask for the list."
-                    ),
-                },
-                {"role": "user", "content": message},
-            ]
-
-            return await self._run_completion(messages, include_tools=False)
-        except Exception as e:
-            self.log(f"Erreur get_delivery_failure_reason_response : {e}", level="error")
-            return f"Please choose a number between 1 and {len(reasons)} or ask for the list."
-
     # --- Utilitaires ---
 
     def log(self, message, level="info"):
@@ -162,64 +116,25 @@ class OllamaService:
             logger.warning("system_prompt.txt introuvable, fallback sur le prompt par défaut")
         except Exception as e:
             logger.warning(f"Erreur lecture system_prompt.txt : {e}")
-        return DEFAULT_SYSTEM_PROMPT
+        return DEFAULT_SYSTEM_PROMPT.__str__()
 
     # --- Les Outils ---
 
-    def _load_deliveries_list(self) -> list:
-        """Liste brute depuis data.json (même source que get_deliveries)."""
-        try:
-            with open("data.json", "r", encoding="utf-8") as f:
-                data = json.load(f)
-            return data if isinstance(data, list) else []
-        except (FileNotFoundError, json.JSONDecodeError):
-            return []
 
-    def get_current_delivery(self, delivery_id: str) -> dict:
-        with open("data.json", "r") as f:
-            deliveries = json.load(f)
-        
-        for delivery in deliveries:
-            if delivery["id"] == delivery_id:
-                return {
-                    "clientName": delivery["clientName"],
-                    "packageInfo": delivery["packageInfo"],
-                    "deliveryStatus": delivery["deliveryStatus"]
-                }
-        
-        return {"error": f"Delivery {delivery_id} not found"}
 
-    @staticmethod
-    def _first_planned_trip_id(items: list) -> str | None:
-        """Premier élément de la liste dont le statut est planned (ordre fichier)."""
-        for d in items:
-            if not isinstance(d, dict):
-                continue
-            status = d.get("deliveryStatus") or d.get("status") or d.get("delivery_status")
-            if status is None:
-                continue
-            if str(status).strip().lower() != "planned":
-                continue
-            tid = d.get("id")
-            if tid:
-                return str(tid)
-        return None
 
-    async def start_navigation(self, trip_id: str | None = None):
+    async def start_navigation(self):
         """
-        Toujours relire la liste des livraisons et démarrer la navigation vers
-        le **premier** trip à l'état ``planned``. Le ``trip_id`` éventuel du LLM est ignoré.
+        Démarre la navigation GPS vers la livraison courante (current_trip_id de UtilityService).
         """
-        items = self._load_deliveries_list()
-        resolved = self._first_planned_trip_id(items)
+        resolved = self.utility_service.current_trip_id
         if not resolved:
             self.log("Action: START_NAVIGATION aborted — no planned delivery in data.json", level="warning")
             return {
                 "error": "no_planned_delivery",
                 "message": "No delivery with status planned in today's list.",
             }
-
-        self.log(f"Action: START_NAVIGATION trip_id={resolved} (first planned in list, {len(items)} rows)")
+        
         if self._ws_service and self._session:
             await self._ws_service.send(self._session, {
                 "type": "external_control",
@@ -252,23 +167,7 @@ class OllamaService:
     async def get_deliveries(self):
         """Données livraisons uniquement (data.json) — n'ouvre pas l'UI carte."""
         self.log("Action: GET_DELIVERIES")
-        try:
-            with open('data.json', 'r', encoding='utf-8') as f:
-                deliveries = json.load(f)
-            return {
-                "deliveries": [
-                    {
-                        "clientName": d["clientName"],
-                        "address": d["address"],
-                        "packageInfo": d["packageInfo"]
-                    }
-                    for d in deliveries
-                ]
-            }
-        except FileNotFoundError:
-            return {"deliveries": []}
-        except json.JSONDecodeError:
-            return {"deliveries": []}
+        return self.utility_service.get_deliveries_summary()
 
     async def show_deliveries(self):
         """Affiche la liste des livraisons dans l’app carte (seul cet outil envoie SHOW_DELIVERIES_LIST)."""

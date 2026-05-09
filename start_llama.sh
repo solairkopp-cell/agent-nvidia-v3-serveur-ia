@@ -5,7 +5,7 @@ exec llama-server \
   --port 8080 \
   -ngl 99 \
   --flash-attn on \
-  --ctx-size 8192 \
+  --ctx-size 4096 \
   --cache-type-k q8_0 \
   --cache-type-v q8_0 \
   --threads 6 \

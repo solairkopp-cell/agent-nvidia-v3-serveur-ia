@@ -89,7 +89,7 @@ class NotificationService:
 
     # ── Réception des messages ───────────────────────────────────────────────
 
-    async def on_message(self, session: Session, message: dict) -> None:
+    async def on_message(self, session: Session, message: dict) -> bool:
         """
         Appelé par WebSocketService quand un message arrive.
         Route le message vers le handler approprié.
@@ -100,7 +100,7 @@ class NotificationService:
         """
         msg_type = message.get("type")
         if not msg_type:
-            return
+            return False
 
         # Log tous les messages reçus
         logger.info("📨 NOTIFICATION RECEIVED client_id=%s type=%s data=%r", 
@@ -112,9 +112,11 @@ class NotificationService:
                 await handler(session, message)
             except Exception:
                 logger.exception("Notification handler error client_id=%s type=%s", session.client_id, msg_type)
+            return True
         else:
             # Pas de handler → message ignoré (pas d'erreur)
             logger.debug("No handler for message type %s client_id=%s", msg_type, session.client_id)
+            return False
 
     # ── Envoi de notifications ───────────────────────────────────────────────
 

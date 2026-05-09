@@ -101,10 +101,49 @@ class DeliveryService:
 
         # Stocker dans la session pour la machine à états
         session.driver_serial = driver_serial
+        session.awaiting_driver_serial = False
+        session.auth_attempts = 0
+
+        if self.ws_service is not None:
+            await self.ws_service.send(
+                session,
+                {
+                    "type": "auth",
+                    "event": "driver_identified",
+                    "driver_serial": driver_serial,
+                },
+            )
 
         # Récupérer les trips et le nom du driver
         try:
-            trips, driver_name = await self._get_trips(driver_serial)
+            trips, driver_name, driver_exists = await self._get_trips(driver_serial)
+
+            if not driver_exists:
+                # ── Driver introuvable en base : reset de l'auth et message d'erreur ──
+                logger.warning(
+                    "🚫 Driver not found, resetting auth client_id=%s serial=%s",
+                    session.client_id, driver_serial,
+                )
+                # Réinitialiser la session pour permettre une nouvelle tentative
+                session.driver_serial = None
+                self._driver_sessions.pop(session.client_id, None)
+                session.awaiting_driver_serial = True
+                session.auth_mode = "voice_driver_serial"
+                session.auth_attempts += 1
+
+                if self.ws_service is not None:
+                    await self.ws_service.send(
+                        session,
+                        {
+                            "type": "auth",
+                            "event": "driver_not_found",
+                            "driver_serial": driver_serial,
+                            "attempts": session.auth_attempts,
+                        },
+                    )
+                    # Message vocal d'erreur + invitation à réessayer
+                    await self._send_driver_not_found_tts(session, driver_serial)
+                return
 
             if trips:
                 logger.info("✅ Found %d trips for driver %s (%s)", len(trips), driver_name, driver_serial)
@@ -134,16 +173,17 @@ class DeliveryService:
         Récupérer les trips d'un driver via PlanningService.
 
         Returns:
-            Tuple (trips, driver_name) où:
+            Tuple (trips, driver_name, driver_exists) où:
             - trips: Liste de Trip objects
             - driver_name: Nom du driver (ex: "Vivien")
+            - driver_exists: True si le driver existe en base, False sinon
         """
         # Import dynamique pour éviter les dépendances circulaires
         import sys
         sys.path.insert(0, str(Path(__file__).parent.parent / "data_base_service"))
 
         try:
-            from service.planning_service import PlanningService
+            from service.planning_service import PlanningService, DriverNotFoundError
             from service import TokenManager
             from service.logger_service import log_error
 
@@ -153,32 +193,37 @@ class DeliveryService:
             planning_service = PlanningService(token_manager)
 
             try:
-                # Utiliser la méthode get_delivery_trips avec le bon paramètre
-                # date et output_file sont automatiques
                 trips = await planning_service.get_delivery_trips(
                     driver_serial_number=driver_serial_number,
                     date=None,  # Date du jour (automatique)
                     export_json=True,
                     output_file="data.json",  # Nom fixe
                 )
-                
+
                 # Récupérer le nom du driver
                 driver_name = await self._get_driver_name(driver_serial_number)
-                
-                return trips, driver_name
+
+                return trips, driver_name, True
+
+            except DriverNotFoundError:
+                logger.warning(
+                    "🚫 Driver not found in database: %s", driver_serial_number
+                )
+                return [], "Driver", False
+
             finally:
                 await planning_service.close()
 
         except ImportError as e:
             logger.error("Failed to import PlanningService: %s", e)
-            return [], "Driver"
+            return [], "Driver", True  # On suppose que le driver existe (erreur technique)
         except Exception as e:
             logger.error("Error getting trips: %s", e)
             try:
                 log_error(f"DeliveryService error: {e}")
             except Exception:
                 pass
-            return [], "Driver"
+            return [], "Driver", True  # On suppose que le driver existe (erreur technique)
 
     async def _get_driver_name(self, driver_serial_number: str) -> str:
         """
@@ -393,6 +438,55 @@ class DeliveryService:
                 "message": message,
             },
         )
+
+    async def _send_driver_not_found_tts(self, session: Session, driver_serial: str) -> None:
+        """
+        Jouer un message vocal indiquant que le numéro de driver n'existe pas,
+        puis fermer la connexion WebSocket (le client devra se reconnecter).
+        """
+        tts_message = (
+            f"Sorry, driver number {driver_serial} was not found. "
+            "Please try again."
+        )
+        logger.info(
+            "🚫 Driver not found TTS + closing WS client_id=%s serial=%s",
+            session.client_id, driver_serial,
+        )
+        try:
+            if self.ws_service is not None and self.ws_service.audio_stream is not None:
+                agent = self.ws_service.audio_stream.agent
+                await agent.speak_instruction(
+                    session,
+                    instruction=(
+                        "You are a voice authentication system for delivery drivers. "
+                        f"The driver said their number is {driver_serial}, but it was not found in the system. "
+                        "Politely inform them and tell them to try again. "
+                        "Keep it short and clear."
+                    ),
+                    fallback=tts_message,
+                )
+            elif self.ws_service is not None:
+                await self.ws_service.send(
+                    session,
+                    {"type": "auth_prompt", "text": tts_message},
+                )
+        except Exception as e:
+            logger.error("Could not send driver_not_found TTS: %s", e)
+        finally:
+            # Fermer la connexion WebSocket après le message vocal
+            # Code 4401 = authentification échouée (custom code)
+            logger.info(
+                "🔌 Closing WS connection after driver not found client_id=%s",
+                session.client_id,
+            )
+            try:
+                import asyncio
+                # Petite pause pour laisser le temps au TTS de terminer côté client
+                await asyncio.sleep(0.5)
+                await session.websocket.close(code=4401, reason="driver_not_found")
+            except Exception as e:
+                logger.debug("WS close error (already closed?) client_id=%s: %s", session.client_id, e)
+
 
     # ── Utilitaires ──────────────────────────────────────────────────────────
 

@@ -22,6 +22,7 @@ from pathlib import Path
 import time
 from typing import TYPE_CHECKING
 import uuid
+from services.utility_service import UtilityService
 
 import numpy as np
 
@@ -36,6 +37,7 @@ if TYPE_CHECKING:
     from services.delivery_state_machine import DeliveryStateMachine
 
 import config
+from services.driver_auth_utils import extract_driver_serial_from_transcript
 
 
 logger = logging.getLogger(__name__)
@@ -61,6 +63,7 @@ class AgentService:
         self.denoise = denoise
         self.state_machine = state_machine
         self.ws_service: "WebSocketService | None" = None
+        self.utility_service = UtilityService()
 
         self.tts.set_audio_callback(self._on_tts_audio_chunk)
         self._watchdog_task = asyncio.create_task(self._tts_watchdog())
@@ -192,6 +195,10 @@ class AgentService:
         if self.ws_service is not None:
             await self.ws_service.send_transcript(session, transcript)
 
+        if getattr(session, "awaiting_driver_serial", False):
+            await self._handle_voice_driver_serial_transcript(session, request_id, transcript)
+            return
+
         # ── State Machine Processing (MODE_1) ─────────────────────────────────
         if self.state_machine is not None and self.state_machine.is_in_mode_1(session):
             if session.tts_playing:
@@ -210,7 +217,9 @@ class AgentService:
 
                 if state_result.should_handle:
                     if state_result.tts_response:
-                        await self._stream_llm_to_tts(session, request_id, state_result.tts_response)
+                        # Bypass LLM : la state machine génère des textes hardcodés,
+                        # on les envoie directement à Piper TTS sans passer par le LLM.
+                        await self._play_tts_simple(session, request_id, state_result.tts_response)
 
                     if state_result.action == "update_trip":
                         await self._handle_update_trip_action(session, state_result.action_params)
@@ -222,18 +231,19 @@ class AgentService:
                             "State machine: transitioned to %s client_id=%s",
                             state_result.next_state.value, session.client_id,
                         )
-                        if state_result.next_state.value == "state_5":
-                            ctx.reset()
-                            logger.info(
-                                "State machine: auto-reset to MODE_0 after terminal transition client_id=%s",
-                                session.client_id,
-                            )
-                            await self._drain_pending_arrived(session)
 
-                    if state_result.action == "exit_to_mode_0":
+                    if state_result.action == "exit_to_mode_0" or (
+                        state_result.next_state is not None
+                        and state_result.next_state.value == "state_5"
+                    ):
                         ctx = self.state_machine._get_context(session)
                         ctx.reset()
+                        logger.info(
+                            "State machine: exited to MODE_0 client_id=%s",
+                            session.client_id,
+                        )
                         session.clear_active_user_turn()
+                        await self._drain_pending_arrived(session)
                         return
 
                     session.clear_active_user_turn()
@@ -585,6 +595,87 @@ class AgentService:
             await self._play_tts_simple(session, request_id, text, event_type=event_type)
 
     # ── Utilitaires ──────────────────────────────────────────────────────────
+    async def start_voice_driver_auth(self, session: "Session") -> None:
+        """Démarrer l'identification vocale du driver avec une phrase fixe."""
+        session.auth_mode = "voice_driver_serial"
+        session.awaiting_driver_serial = True
+        session.auth_attempts = 0
+
+        if self.ws_service is not None:
+            await self.ws_service.send(
+                session,
+                {
+                    "type": "auth",
+                    "event": "awaiting_driver_serial",
+                    "mode": "voice_driver_serial",
+                },
+            )
+
+        await self.speak_text(
+            session,
+            "Welcome driver, identify yourself. Please say your driver number.",
+            event_type="auth_prompt",
+        )
+
+    async def _handle_voice_driver_serial_transcript(
+        self,
+        session: "Session",
+        request_id: int,
+        transcript: str,
+    ) -> None:
+        driver_serial = extract_driver_serial_from_transcript(transcript)
+
+        if not driver_serial:
+            session.auth_attempts += 1
+            if self.ws_service is not None:
+                await self.ws_service.send(
+                    session,
+                    {
+                        "type": "auth",
+                        "event": "driver_serial_not_understood",
+                        "attempts": session.auth_attempts,
+                    },
+                )
+            await self._play_tts_simple(
+                session,
+                request_id,
+                "I did not catch your driver number. Please repeat it.",
+                event_type="auth_prompt",
+            )
+            return
+
+        if self.ws_service is not None:
+            await self.ws_service.send(
+                session,
+                {
+                    "type": "auth",
+                    "event": "driver_serial_detected",
+                    "driver_serial": driver_serial,
+                    "transcript": transcript,
+                },
+            )
+
+            notification = getattr(self.ws_service, "notification", None)
+            if notification is not None:
+                await notification.on_message(
+                    session,
+                    {
+                        "type": "identify_driver",
+                        "driver_serial": driver_serial,
+                        "source": "voice",
+                    },
+                )
+                return
+
+            await self.ws_service.send(
+                session,
+                {
+                    "type": "auth",
+                    "event": "error",
+                    "message": "notification service unavailable",
+                },
+            )
+
     async def speak_instruction(
         self,
         session: "Session",
@@ -647,7 +738,7 @@ class AgentService:
             logger.warning("⚠️ arrived action: missing trip_id client_id=%s", session.client_id)
             return
 
-        logger.info("🚚 DRIVER ARRIVÉ client_id=%s trip_id=%s", session.client_id, trip_id)
+        logger.info("_handle_arrived_action: DRIVER ARRIVÉ client_id=%s trip_id=%s", session.client_id, trip_id)
 
         if self.state_machine is not None and self.state_machine.is_in_mode_1(session):
             active_trip_id = getattr(session, "current_trip_id", None)
@@ -668,13 +759,9 @@ class AgentService:
 
         if self.state_machine is not None:
             logger.info("🚀 Démarrage de la state machine pour client_id=%s", session.client_id)
-            await self.state_machine.enter_mode_1(session, trip_id)
-
-            delivery_info = self.llm.get_current_delivery(trip_id)
-            client_name = delivery_info.get('clientName', '')
-            package_info = delivery_info.get('packageInfo', '')
-            text = f"You've arrived at the delivery location. Package: {package_info} for {client_name}. Is the delivery completed?"
-
+            await self.state_machine.enter_mode_1(session)
+            self.utility_service.current_trip_id = trip_id
+            text = f"Is the  {self.utility_service.get_delivery_info(trip_id)} completed?"
             session.conversation_history.append({"role": "assistant", "content": text})
             logger.info("🗣️ TTS question de livraison client_id=%s", session.client_id)
 
@@ -683,6 +770,7 @@ class AgentService:
             await self._play_tts_simple(session, request_id, text)
         else:
             logger.warning("⚠️ State machine non disponible client_id=%s", session.client_id)
+
     async def _consume_pending_arrived(self, session: "Session") -> None:
         pending_trip_id = getattr(session, "pending_arrived_trip_id", None)
         if not pending_trip_id:

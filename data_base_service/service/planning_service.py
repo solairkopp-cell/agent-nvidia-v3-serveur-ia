@@ -10,6 +10,11 @@ Ce module fournit les fonctions essentielles pour :
 Note: Seuls les packages avec le statut 'planned' sont inclus dans les trips.
 """
 
+
+class DriverNotFoundError(Exception):
+    """Levée quand un driver_serial_number n'existe pas en base de données."""
+    pass
+
 import asyncio
 from datetime import datetime
 from typing import Optional, List
@@ -93,7 +98,7 @@ class PlanningService:
         driver = await self._crud.search_driver(driver_serial_number)
         if not driver:
             log_error(f"Driver non trouvé: {driver_serial_number}")
-            return []
+            raise DriverNotFoundError(f"Driver not found: {driver_serial_number}")
         
         log_success(f"Driver trouvé: {driver.name} (ID: {driver.id})")
         

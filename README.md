@@ -370,11 +370,119 @@ Connexion Android sur `/ws` :
 7. Envoyer {"type":"stop"} avant fermeture propre.
 ```
 
+Connexion Android avec identification du livreur :
+
+```text
+Option 1 - code tape:
+1. Ouvrir ws://<ip-jetson>:8000/ws
+2. Envoyer {"type":"start","input_sample_rate":48000}
+3. Envoyer {"type":"identify_driver","driver_serial":"00123"}
+4. Attendre une notification "trips_list", "no_trips" ou "error".
+
+Option 2 - code dicte:
+1. Ouvrir ws://<ip-jetson>:8000/ws
+2. Envoyer {"type":"start","input_sample_rate":48000,"auth_mode":"voice_driver_serial"}
+3. Lire le TTS serveur: "Welcome driver, identify yourself. Please say your driver number."
+4. Envoyer le micro en PCM16 mono comme pour une conversation normale.
+5. Le serveur transcrit avec Whisper, extrait les chiffres dans l'ordre, puis appelle identify_driver.
+6. Ecouter les evenements JSON "auth" pour afficher l'etat cote UI.
+```
+
+Texte d'integration Android :
+
+```text
+L'application peut proposer deux modes d'identification. Si le livreur tape son code, envoyer simplement {"type":"identify_driver","driver_serial":"..."} apres le message start. Si le livreur veut s'identifier a la voix, envoyer start avec "auth_mode":"voice_driver_serial", demarrer tout de suite le streaming micro PCM16 mono, puis attendre les evenements "auth". Quand le serveur detecte le numero, il envoie {"type":"auth","event":"driver_serial_detected","driver_serial":"..."} puis reutilise le flux existant de livraison: notification "trips_list" si des trajets existent, ou "no_trips" sinon.
+```
+
+Guide client Android :
+
+```text
+Connexion WebSocket:
+1. Construire l'URL: ws://<ip-jetson>:8000/ws
+2. Ouvrir un WebSocket avec OkHttp, Ktor ou la librairie WebSocket Android choisie.
+3. Attendre onOpen avant d'envoyer le premier JSON.
+
+Mode code tape:
+1. onOpen -> envoyer {"type":"start","input_sample_rate":48000}
+2. Attendre {"type":"started",...}
+3. Quand le livreur valide le champ texte, envoyer {"type":"identify_driver","driver_serial":"00123"}
+4. Attendre:
+   - {"type":"auth","event":"driver_identified","driver_serial":"00123"}
+   - puis {"type":"notification","notification_type":"trips_list",...}
+   - ou {"type":"notification","notification_type":"no_trips",...}
+   - ou {"type":"notification","notification_type":"error",...}
+
+Mode code dicte:
+1. onOpen -> envoyer {"type":"start","input_sample_rate":48000,"auth_mode":"voice_driver_serial"}
+2. Attendre {"type":"started",...}
+3. Preparer la lecture audio avec audio_output_sample_rate recu dans started.
+4. Lire les messages binaires serveur: le prompt TTS arrive en PCM16 mono.
+5. Demarrer le micro Android et envoyer les frames PCM16 mono little-endian en binaire WebSocket.
+6. Le livreur dit son numero, par exemple: "zero zero one two three".
+7. Continuer a envoyer le micro pendant que le serveur detecte VAD -> Whisper -> numero.
+8. Attendre {"type":"auth","event":"driver_serial_detected","driver_serial":"00123",...}
+9. Si le serveur envoie {"type":"auth","event":"driver_serial_not_understood",...}, garder le micro ouvert: le serveur redemande vocalement le numero.
+10. Quand {"type":"auth","event":"driver_identified",...} arrive, le livreur est connecte.
+```
+
+Pseudo-code Android :
+
+```text
+onWebSocketOpen:
+  if mode == CODE_TAPE:
+    sendText({"type":"start","input_sample_rate":48000})
+  if mode == CODE_VOCAL:
+    sendText({"type":"start","input_sample_rate":48000,"auth_mode":"voice_driver_serial"})
+
+onTextMessage(json):
+  if json.type == "started":
+    outputRate = json.audio_output_sample_rate
+    preparePcm16Player(sampleRate = outputRate, channels = 1)
+    if mode == CODE_VOCAL:
+      startMicrophonePcm16Streaming(sampleRate = 48000, channels = 1)
+
+  if json.type == "auth" and json.event == "driver_serial_detected":
+    showDetectedCode(json.driver_serial)
+
+  if json.type == "auth" and json.event == "driver_serial_not_understood":
+    showMessage("Numero non compris, repetez votre code")
+
+  if json.type == "auth" and json.event == "driver_identified":
+    showMessage("Livreur identifie")
+
+  if json.type == "notification" and json.notification_type == "trips_list":
+    displayTrips(json.data.trips)
+
+onBinaryMessage(bytes):
+  playPcm16Mono(bytes, sampleRate = outputRate)
+
+onTypedCodeValidated(code):
+  sendText({"type":"identify_driver","driver_serial":code})
+
+onMicrophoneFrame(pcm16Bytes):
+  sendBinary(pcm16Bytes)
+```
+
+Contraintes audio Android :
+
+```text
+- Envoyer uniquement du PCM16 mono little-endian.
+- Le sample rate envoye dans input_sample_rate doit correspondre au micro Android.
+- Si le micro capture en 48000 Hz, envoyer input_sample_rate=48000.
+- Ne pas encoder en WAV, AAC, Opus ou Base64 pour /ws: les frames micro sont binaires brutes.
+- La sortie TTS serveur est aussi du PCM16 mono binaire.
+- Utiliser audio_output_sample_rate du message started pour lire correctement le TTS.
+- Garder le WebSocket ouvert apres identification: la meme connexion sert ensuite a la conversation et aux evenements livraison.
+```
+
 Messages JSON client vers serveur :
 
 | Message | Description |
 |---|---|
 | `{"type":"start","input_sample_rate":48000}` | Initialise le flux audio. |
+| `{"type":"start","input_sample_rate":48000,"auth_mode":"voice_driver_serial"}` | Initialise le flux audio et demande l'identification vocale du driver. |
+| `{"type":"start_voice_auth"}` | Lance l'identification vocale apres un `start` deja effectue. |
+| `{"type":"identify_driver","driver_serial":"00123"}` | Identifie le driver avec un code tape cote client. |
 | `{"type":"stop"}` | Nettoie la session audio et retourne `{"type":"stopped"}`. |
 | `{"type":"test_tts","text":"Test audio."}` | Joue un texte via Piper, exige `start` avant. |
 | `{"type":"arrived","id":"trip_id"}` | Declenche le controle externe d'arrivee livraison. |
@@ -392,10 +500,12 @@ Messages JSON serveur vers client :
 | `vad` | `{"type":"vad","event":"speech_start","p":0.91}` |
 | `transcript` | `{"type":"transcript","text":"show the map"}` |
 | `response` | `{"type":"response","text":"Starting navigation."}` |
+| `auth_prompt` | `{"type":"auth_prompt","text":"Welcome driver, identify yourself. Please say your driver number."}` |
 | `tts_test` | `{"type":"tts_test","text":"Test audio."}` |
 | `tts_stop_now` | `{"type":"tts_stop_now"}` |
 | `interrupted` | `{"type":"interrupted"}` |
 | `stt_empty` | `{"type":"stt_empty"}` |
+| `auth` | `{"type":"auth","event":"driver_serial_detected","driver_serial":"00123","transcript":"zero zero one two three"}` |
 | `emotion` | `{"type":"emotion","name":"speaking"}` |
 | `notification` | `{"type":"notification","notification_type":"trips_list","data":{}}` |
 | `ask_photo_event` | `{"type":"ask_photo_event"}` |

@@ -149,6 +149,45 @@ class TestProcessUtterance:
         kwargs = agent._stream_response.await_args.kwargs
         assert kwargs["user_text"] == "who is next"
 
+    @pytest.mark.asyncio
+    async def test_voice_driver_auth_routes_serial_to_identify_driver(self, agent, session):
+        notification = MagicMock()
+        notification.on_message = AsyncMock()
+        agent.ws_service = MagicMock()
+        agent.ws_service.notification = notification
+        agent.ws_service.send = AsyncMock()
+        agent.ws_service.send_transcript = AsyncMock()
+        agent._stream_response = AsyncMock(return_value="")
+
+        session.awaiting_driver_serial = True
+        session.current_request_id = 3
+
+        await agent._process_transcription(session, 3, "zero zero one two three")
+
+        notification.on_message.assert_awaited_once_with(
+            session,
+            {
+                "type": "identify_driver",
+                "driver_serial": "00123",
+                "source": "voice",
+            },
+        )
+        agent._stream_response.assert_not_awaited()
+
+    @pytest.mark.asyncio
+    async def test_voice_driver_auth_retries_when_no_serial_found(self, agent, session):
+        agent.ws_service = MagicMock()
+        agent.ws_service.send = AsyncMock()
+        agent.ws_service.send_transcript = AsyncMock()
+        agent._stream_response = AsyncMock(return_value="")
+        session.awaiting_driver_serial = True
+        session.current_request_id = 4
+
+        await agent._process_transcription(session, 4, "hello")
+
+        assert session.auth_attempts == 1
+        agent._stream_response.assert_not_awaited()
+
 
 class TestInterrupt:
 

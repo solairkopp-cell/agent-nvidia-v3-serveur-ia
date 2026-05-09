@@ -208,6 +208,7 @@ class WebSocketService:
         if msg_type == "start":
             raw_rate = message.get("input_sample_rate")
             input_sample_rate = int(raw_rate) if isinstance(raw_rate, (int, float)) and int(raw_rate) > 0 else None
+            auth_mode = str(message.get("auth_mode") or message.get("authentication_mode") or "manual").strip().lower()
             try:
                 await self.audio_stream.start_session(session, input_sample_rate=input_sample_rate)
             except Exception as exc:
@@ -222,9 +223,22 @@ class WebSocketService:
                     "audio_output_sample_rate": session.audio_output_sample_rate,
                     "encoding": "pcm_s16le",
                     "channels": 1,
+                    "auth_mode": auth_mode,
                 },
             )
             asyncio.create_task(self.audio_stream.on_session_ready(session))
+            session.auth_mode = auth_mode
+            if auth_mode != "voice_driver_serial":
+                session.awaiting_driver_serial = False
+            if auth_mode == "voice_driver_serial":
+                asyncio.create_task(self.audio_stream.agent.start_voice_driver_auth(session))
+            return
+
+        if msg_type == "start_voice_auth":
+            if session.tts_track is None:
+                await self.send_error(session, "tts not ready: send start first")
+                return
+            asyncio.create_task(self.audio_stream.agent.start_voice_driver_auth(session))
             return
 
         if msg_type == "stop":
