@@ -1,6 +1,7 @@
 import sys
 import types
 from enum import Enum
+from typing import Optional
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
@@ -173,6 +174,31 @@ class TestDeliveryStateMachineEmotions:
         )
 
     @pytest.mark.asyncio
+    async def test_photo_flow_announces_next_trip_when_current_trip_exists(self, state_machine, session):
+        state_machine._send_outcome_emotions = AsyncMock()
+        state_machine._agent_service = MagicMock()
+        state_machine._agent_service.speak_text = AsyncMock()
+        state_machine.utility_service = MagicMock()
+        state_machine.utility_service.current_trip_id = "trip-2"
+        state_machine.utility_service.get_delivery.return_value = {
+            "address": "123 Main Street",
+            "clientName": "Alice",
+        }
+        state_machine.utility_service.is_last_trip.return_value = True
+
+        await state_machine._announce_next_trip_and_start_navigation(
+            session, success=True, validated_by_photo=True, was_last=True
+        )
+
+        assert state_machine._agent_service.speak_text.await_count == 1
+        actual_call = state_machine._agent_service.speak_text.await_args
+        assert actual_call.args == (
+            session,
+            "Delivery validated. You are now heading to 123 Main. The client is Alice. This is your last delivery.",
+        )
+        assert actual_call.kwargs == {}
+
+    @pytest.mark.asyncio
     async def test_state_1_uses_llm_confirmation_to_enter_reason_flow(self, state_machine, session):
         _enter_mode_1(state_machine, session, State.STATE_1)
         state_machine._agent_service = MagicMock()
@@ -222,3 +248,57 @@ class TestDeliveryStateMachineEmotions:
         assert result.next_state == State.STATE_6
         assert result.tts_response == "Please take a photo to validate the delivery."
         state_machine._send_ask_photo_event.assert_awaited_once()
+
+    @pytest.mark.asyncio
+    async def test_handle_photo_response_customer_not_available_marks_success_when_photo_taken(self, state_machine, session):
+        # Simulate that the driver selected reason #1 (Customer not available) but a photo was taken
+        _enter_mode_1(state_machine, session, State.STATE_6)
+        ctx = state_machine._get_context(session)
+        ctx.failure_reason_index = 0
+        ctx.failure_reason = "Customer not available"
+        ctx.photo_trip_id = "trip-1"
+        ctx.current_trip_id = "trip-1"
+
+        # Avoid external DB calls and announcements side-effects
+        state_machine.update_trip_status = AsyncMock(return_value=True)
+        state_machine._announce_next_trip_and_start_navigation = AsyncMock()
+        state_machine.utility_service = MagicMock()
+        state_machine.utility_service.is_last_trip.return_value = False
+        state_machine.utility_service.set_next_trip = MagicMock()
+
+        await state_machine.handle_photo_response(session, photo_taken=True)
+
+        state_machine.update_trip_status.assert_awaited_once_with(
+            driver_serial=session.driver_serial,
+            trip_id="trip-1",
+            status="COMPLETED",
+        )
+        state_machine._send_mark_delivered_event.assert_awaited_once_with(session, "trip-1")
+        state_machine._send_mark_failed_event.assert_not_awaited()
+        state_machine._announce_next_trip_and_start_navigation.assert_awaited_once_with(
+            session, success=True, validated_by_photo=True, was_last=False,
+        )
+
+    @pytest.mark.asyncio
+    async def test_handle_photo_response_skips_set_next_trip_if_current_trip_already_changed(self, state_machine, session):
+        _enter_mode_1(state_machine, session, State.STATE_6)
+        ctx = state_machine._get_context(session)
+        ctx.failure_reason_index = 0
+        ctx.failure_reason = "Customer not available"
+        ctx.photo_trip_id = "trip-1"
+        ctx.current_trip_id = "trip-1"
+
+        state_machine.update_trip_status = AsyncMock(return_value=True)
+        state_machine._announce_next_trip_and_start_navigation = AsyncMock()
+        state_machine.utility_service = MagicMock()
+        state_machine.utility_service.is_last_trip.return_value = False
+        state_machine.utility_service.current_trip_id = "trip-2"
+        state_machine.utility_service.set_next_trip = MagicMock()
+
+        await state_machine.handle_photo_response(session, photo_taken=True)
+
+        state_machine._send_mark_delivered_event.assert_awaited_once_with(session, "trip-1")
+        state_machine.utility_service.set_next_trip.assert_not_called()
+        state_machine._announce_next_trip_and_start_navigation.assert_awaited_once_with(
+            session, success=True, validated_by_photo=True, was_last=False,
+        )

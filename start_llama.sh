@@ -6,16 +6,13 @@ exec llama-server \
   -ngl 99 \
   --flash-attn on \
   --ctx-size 4096 \
-  --cache-type-k q8_0 \
-  --cache-type-v q8_0 \
-  --threads 6 \
-  --temp 0.2 \
+  --cache-type-k f16 \
+  --cache-type-v f16 \
+  --threads 2 \
+  --temp 0.0 \
   --top-p 0.1 \
-  --top-k 20 \
   --alias Rytle \
-  --cache-ram 1024 \
   --reasoning off \
-  --context-shift \
-  --cont-batching \
-  --verbosity 3 \
+  --jinja \
+  --presence-penalty 1.5 \
   --parallel 1

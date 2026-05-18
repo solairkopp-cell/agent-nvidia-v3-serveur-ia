@@ -20,14 +20,12 @@ from datetime import datetime
 from typing import Optional, List
 from pathlib import Path
 
-from service import (
-    HttpRequestServices,
-    CrudService,
-    TokenManager,
-)
+from .http_request_services import HttpRequestServices
+from .crud_service import CrudService
+from .token_manager import TokenManager
 from .logger_service import log_info, log_error, log_success, log_warning
-from entities.models import Driver, Schedule, Package, SchedulePackage, Trip, Address
-from entities.enum.package_status import PackageStatus
+from ..entities.models import Driver, Schedule, Package, SchedulePackage, Trip, Address, DeliveryFailure
+from ..entities.enum.package_status import PackageStatus
 
 
 def get_today_date() -> str:
@@ -72,25 +70,7 @@ class PlanningService:
         self,
         driver_serial_number: str,
         date: Optional[str] = None,
-        export_json: bool = True,
-        output_file: Optional[str] = None
-    ) -> List[Trip]:
-        """
-        Récupère les livraisons d'un driver et les convertit en Trips ordonnés.
-        Exporte automatiquement dans un fichier JSON.
-        
-        Args:
-            driver_serial_number: Numéro de série du driver
-            date: Date au format YYYY-MM-DD (défaut: aujourd'hui)
-            export_json: Si True, exporte les trips dans un fichier JSON (défaut: True)
-            output_file: Chemin du fichier JSON (défaut: delivery_trips_{date}.json)
-            
-        Returns:
-            Liste de Trip ordonnée par position
-            
-        Note:
-            Seuls les packages avec le statut 'planned' sont inclus.
-        """
+    ) -> bool:
         await self._init_services()
         log_info(f"Récupération des trips pour le driver: {driver_serial_number}")
         
@@ -106,7 +86,7 @@ class PlanningService:
         schedules = await self._crud.get_schedule_by_driver_serial_number(driver.serial_number)
         if not schedules:
             log_warning(f"Aucun schedule trouvé pour le driver: {driver_serial_number}")
-            return []
+            return False
         
         # 3. Filtrer par date
         target_date = date or get_today_date()
@@ -117,7 +97,7 @@ class PlanningService:
         
         if not today_schedules:
             log_warning(f"Aucun schedule pour la date: {target_date}")
-            return []
+            return False
         
         # 4. Récupérer les schedule_packages et trier par position
         all_schedule_packages = []
@@ -134,42 +114,30 @@ class PlanningService:
             if not package or package.status != PackageStatus.PLANNED:
                 continue
             
-            log_info(f"Package: {package.id}, address field: {package.address}")
-            
             address = None
             if package.address:
                 try:
-                    log_info(f"Récupération adresse: {package.address}")
                     address = await self._crud.get_address_by_id(package.address)
-                    if address:
-                        log_success(f"Adresse trouvée: {address.label}")
-                    else:
-                        log_warning(f"Adresse {package.address} existe mais retourne None")
                 except Exception as e:
-                    log_warning(f"Erreur lors de la récupération de l'adresse {package.address}: {e}")
+                    log_warning(f"Erreur adresse {package.address}: {e}")
             
-            trip = Trip.from_package(package, address)
-            log_info(f"Trip créé: id={trip.id}, name={trip.name}, lat={trip.latitude}, lng={trip.longitude}")
-            trips.append(trip)
+            trips.append(Trip.from_package(package, address))
         
-        log_success(f"{len(trips)} trip(s) créé(s) et ordonné(s) par position")
+        log_success(f"{len(trips)} trip(s) créé(s)")
         
-        # 6. Exporter automatiquement en JSON
-        if export_json and trips:
-            if output_file is None:
-                output_file = f"delivery_trips_{target_date}.json"
-            
-            import json
+        # 6. Charger dans UtilityService
+        try:
+            from services.utility_service import UtilityService
             trips_data = [trip.to_dict() for trip in trips]
-            for trip in trips_data:
-                if 'name' in trip:
-                    trip['address'] = trip.pop('name')
-            with open(output_file, 'w', encoding='utf-8') as f:
-                json.dump(trips_data, f, indent=2, ensure_ascii=False)
-            
-            log_success(f"{len(trips)} trip(s) exporté(s) vers {output_file}")
-        
-        return trips
+            for t in trips_data:
+                if "name" in t:
+                    t["address"] = t.pop("name")
+            UtilityService().load_from_trips(trips_data)
+            log_success(f"{len(trips)} trip(s) chargés en mémoire")
+            return True
+        except Exception as e:
+            log_warning(f"Impossible de charger dans UtilityService: {e}")
+            return False
     
     async def update_package_status(
         self,
@@ -208,45 +176,13 @@ class PlanningService:
         return success
     
     async def _remove_package_from_data_json(self, package_id: str) -> None:
-        """
-        Supprime l'entrée du package dans data.json.
-
-        Args:
-            package_id: ID du package à supprimer
-        """
-        data_file = Path("data.json")
-        
         try:
-            if not data_file.exists():
-                log_warning("data.json non trouvé, rien à supprimer")
-                return
-
-            import json
-
-            with open(data_file, "r", encoding="utf-8") as f:
-                data = json.load(f)
-
-            if not isinstance(data, list):
-                log_warning("data.json n'est pas une liste")
-                return
-
-            # Filtrer pour garder tous les éléments sauf celui avec cet ID
-            new_data = [item for item in data if item.get("id") != package_id]
-
-            if len(new_data) == len(data):
-                log_warning(f"Package {package_id} non trouvé dans data.json")
-                return
-
-            # Écrire le fichier mis à jour
-            with open(data_file, "w", encoding="utf-8") as f:
-                json.dump(new_data, f, indent=2, ensure_ascii=False)
-
-            log_success(f"Package {package_id} supprimé de data.json")
-
-        except json.JSONDecodeError as e:
-            log_error(f"Erreur de parsing de data.json: {e}")
+            from services.utility_service import UtilityService
+            u = UtilityService()
+            u.remove_trip(str(package_id))
+            log_success(f"Package {package_id} retiré du cache")
         except Exception as e:
-            log_error(f"Erreur lors de la suppression de {package_id} dans data.json: {e}")
+            log_warning(f"Impossible de mettre à jour UtilityService: {e}")
 
     async def add_delivery_failure(
         self,
@@ -277,7 +213,6 @@ class PlanningService:
             log_error(f"Package non trouvé: {package_id}")
             return False
         
-        from entities.models import DeliveryFailure
         delivery_failure = DeliveryFailure(package_id=package_id, cause=cause, comment=comment)
         failure_id = await self._crud.add_delivery_failure(delivery_failure)
         

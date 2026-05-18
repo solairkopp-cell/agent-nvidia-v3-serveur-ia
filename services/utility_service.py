@@ -2,78 +2,64 @@ import json
 from typing import Dict, Any, List, Optional
 
 
-
 class UtilityService:
     _instance = None
     # Correction : l'ID doit être un str si tes IDs contiennent des lettres
     current_trip_id: Optional[str] = None
+    trip_order: List[str] = []
 
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super().__new__(cls)
             cls._instance._data_cache = {}
+            cls._instance.trip_order = []
             cls._instance.current_trip_id = None
-            cls._instance._load_data()
         return cls._instance
 
-    def _load_data(self) -> None:
-        from pathlib import Path
-        path = Path(__file__).parent.parent / "data.json"
-        try:
-            with open(path, "r", encoding="utf-8") as f:
-                raw_list = json.load(f)
-
-            # Mise en cache avec ID comme clé (string)
-            self._data_cache = {
-                str(item["id"]): item 
-                for item in raw_list
-            }
-            if self._data_cache:
-                self.current_trip_id = list(self._data_cache.keys())[0]
-
-        except (FileNotFoundError, json.JSONDecodeError, KeyError) as e:
-            print(f"Erreur chargement data: {e}")
-            self._data_cache = {}
-    
     def set_next_trip(self) -> str:
-        if not self._data_cache:
+        if not self.trip_order:
             return "empty data cache, no trips available"
 
-        ids = list(self._data_cache.keys())
-
         if self.current_trip_id is None:
-            self.current_trip_id = ids[0]
+            self.current_trip_id = self.trip_order[0]
             return f"New trip: {self.current_trip_id} set"
 
         try:
-            current_index = ids.index(self.current_trip_id)
-            if current_index >= len(ids) - 1:
-                self.current_trip_id = None
-                return "No more trips, all deliveries done"
-            self.current_trip_id = ids[current_index + 1]
-        except (ValueError, KeyError):
-            self.current_trip_id = ids[0]
+            current_index = self.trip_order.index(self.current_trip_id)
+        except ValueError:
+            self.current_trip_id = self.trip_order[0]
+            return f"New trip: {self.current_trip_id} set"
 
+        if current_index >= len(self.trip_order) - 1:
+            self.current_trip_id = None
+            return "No more trips, all deliveries done"
+
+        self.current_trip_id = self.trip_order[current_index + 1]
         return f"New trip: {self.current_trip_id} set"
-    
+
     def get_delivery_info(self, target_id: str) -> str:
-        item = self._data_cache.get(target_id)
+        item = self._data_cache.get(str(target_id))
         if item:
             return f"delivery for {item.get('clientName')}"
         return "Delivery not found"
-    
+
     def get_delivery(self, target_id: str) -> Optional[Dict[str, Any]]:
         """Retourne l'objet brut. C'est la méthode la plus rapide."""
-        return self._data_cache.get(target_id)
+        return self._data_cache.get(str(target_id))
+
+    def get_all_deliveries(self) -> List[Dict[str, Any]]:
+        """Retourne la liste de tous les objets de livraison bruts."""
+        return [self._data_cache[trip_id] for trip_id in self.trip_order if trip_id in self._data_cache]
 
     def get_deliveries_summary(self) -> List[Dict[str, Any]]:
         return [
             {
-                "clientName": d.get("clientName"),
-                "address": d.get("address"),
-                "packageInfo": d.get("packageInfo")
+                "clientName": self._data_cache[trip_id].get("clientName"),
+                "address": self._data_cache[trip_id].get("address"),
+                "packageInfo": self._data_cache[trip_id].get("packageInfo"),
             }
-            for d in self._data_cache.values()
+            for trip_id in self.trip_order
+            if trip_id in self._data_cache
         ]
 
     def get_current_delivery_info(self) -> str:
@@ -81,49 +67,70 @@ class UtilityService:
         if self.current_trip_id is None:
             return "No current delivery set"
         return self.get_delivery_info(self.current_trip_id)
-    
+
     def get_next_delivery_info(self) -> str:
         """Renvoie les infos du prochain trajet sans changer l'état actuel."""
-        if not self._data_cache or self.current_trip_id is None:
+        if not self.trip_order or self.current_trip_id is None:
             return "Indisponible"
 
-        ids = list(self._data_cache.keys())
-        
         try:
-            current_index = ids.index(self.current_trip_id)
-            next_index = (current_index + 1) % len(ids)
-            next_id = ids[next_index]
-            return self.get_delivery_info(next_id)
-        except (ValueError, KeyError):
+            current_index = self.trip_order.index(self.current_trip_id)
+        except ValueError:
             return "Erreur lors de la récupération"
-    
+
+        next_index = current_index + 1
+        if next_index >= len(self.trip_order):
+            return "Indisponible"
+
+        return self.get_delivery_info(self.trip_order[next_index])
+
     def get_next_delivery(self) -> Optional[Dict[str, Any]]:
         """Retourne l'objet brut du prochain trajet sans changer l'état actuel.
         Retourne None si on est sur la dernière livraison ou si aucune livraison n'est disponible."""
-        if not self._data_cache or self.current_trip_id is None:
+        if not self.trip_order or self.current_trip_id is None:
             return None
 
-        ids = list(self._data_cache.keys())
         try:
-            current_index = ids.index(self.current_trip_id)
-            next_index = current_index + 1
-            if next_index >= len(ids):
-                return None  # Pas de prochain trajet, on est au dernier
-            return self.get_delivery(ids[next_index])
-        except (ValueError, KeyError):
+            current_index = self.trip_order.index(self.current_trip_id)
+        except ValueError:
             return None
-        
+
+        next_index = current_index + 1
+        if next_index >= len(self.trip_order):
+            return None
+        return self.get_delivery(self.trip_order[next_index])
+
     def is_last_trip(self) -> bool:
-        """Vérifie si le trajet actuel est le dernier de la liste.
-        Retourne True aussi quand current_trip_id est None (toutes les livraisons sont terminées)."""
-        if not self._data_cache:
-            return False
+        """Vérifie si le trajet actuel est le dernier de la liste."""
+        if not self.trip_order:
+            return True
 
         if self.current_trip_id is None:
-            return True  # Plus aucun trip en cours → route terminée
+            return False
 
-        ids = list(self._data_cache.keys())
         try:
-            return ids.index(self.current_trip_id) == len(ids) - 1
+            return self.trip_order.index(self.current_trip_id) == len(self.trip_order) - 1
         except ValueError:
             return False
+
+    def remove_trip(self, trip_id: str) -> None:
+        trip_id = str(trip_id)
+        if trip_id in self._data_cache:
+            self._data_cache.pop(trip_id, None)
+
+        if trip_id not in self.trip_order:
+            return
+
+        removed_index = self.trip_order.index(trip_id)
+        self.trip_order.remove(trip_id)
+
+        if self.current_trip_id == trip_id:
+            if removed_index >= len(self.trip_order):
+                self.current_trip_id = None
+            else:
+                self.current_trip_id = self.trip_order[removed_index]
+
+    def load_from_trips(self, trips_data: list[dict]) -> None:
+        self._data_cache = {str(item["id"]): item for item in trips_data}
+        self.trip_order = [str(item["id"]) for item in trips_data]
+        self.current_trip_id = self.trip_order[0] if self.trip_order else None

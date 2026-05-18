@@ -8,7 +8,7 @@ from datetime import datetime
 from typing import Optional
 from pathlib import Path
 
-from service import (
+from .service import (
     HttpRequestServices, 
     CrudService, 
     TokenManager,
@@ -16,8 +16,8 @@ from service import (
     log_error,
     log_success,
 )
-from entities.models import Package
-from entities.enum.package_status import PackageStatus
+from .entities.models import Package
+from .entities.enum.package_status import PackageStatus
 
 
 async def get_planned_packages(token_manager: TokenManager) -> Optional[list[Package]]:

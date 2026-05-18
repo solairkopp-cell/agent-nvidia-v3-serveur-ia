@@ -738,11 +738,29 @@ class AgentService:
             logger.warning("⚠️ arrived action: missing trip_id client_id=%s", session.client_id)
             return
 
+        trip_id = str(trip_id)
+        expected_trip_id = self.utility_service.current_trip_id
+
+        if expected_trip_id and expected_trip_id != trip_id:
+            if (
+                trip_id in self.utility_service.trip_order
+                and expected_trip_id in self.utility_service.trip_order
+            ):
+                expected_index = self.utility_service.trip_order.index(expected_trip_id)
+                arrived_index = self.utility_service.trip_order.index(trip_id)
+                if arrived_index > expected_index:
+                    logger.warning(
+                        "⏸️ arrived action for future trip %s while expected trip is %s; ignoring to preserve route sequence",
+                        trip_id,
+                        expected_trip_id,
+                    )
+                    return
+
         logger.info("_handle_arrived_action: DRIVER ARRIVÉ client_id=%s trip_id=%s", session.client_id, trip_id)
 
         if self.state_machine is not None and self.state_machine.is_in_mode_1(session):
             active_trip_id = getattr(session, "current_trip_id", None)
-            if active_trip_id and active_trip_id != trip_id:
+            if active_trip_id and str(active_trip_id) != trip_id:
                 session.pending_arrived_trip_id = trip_id
                 logger.info(
                     "⏸️ arrived deferred while MODE_1 active client_id=%s pending_trip_id=%s",

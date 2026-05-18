@@ -1,7 +1,7 @@
 from typing import Optional, List
 from datetime import datetime
 
-from entities.models import (
+from ..entities.models import (
     Address,
     Administrator,
     DeliveryFailure,
@@ -13,7 +13,7 @@ from entities.models import (
     UnattendedDropOff,
     Vehicle,
 )
-from entities.enum.package_status import PackageStatus
+from ..entities.enum.package_status import PackageStatus
 from .http_request_services import HttpRequestServices
 from .logger_service import log_info, log_error, log_success, log_debug, log_warning
 

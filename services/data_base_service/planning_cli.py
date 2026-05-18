@@ -12,13 +12,13 @@ import asyncio
 from datetime import datetime
 from pathlib import Path
 
-from service import (
+from .service import (
     PlanningService,
     TokenManager,
     log_info,
     log_error,
 )
-from entities.enum.package_status import PackageStatus
+from .entities.enum.package_status import PackageStatus
 
 
 # Causes d'échec de livraison

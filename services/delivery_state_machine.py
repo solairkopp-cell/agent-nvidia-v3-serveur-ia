@@ -243,6 +243,7 @@ class DeliveryStateMachine:
         self,
         success: bool,
         validated_by_photo: bool = False,
+        was_last: bool = False,
     ) -> str:
         cfg = self.config
 
@@ -253,8 +254,6 @@ class DeliveryStateMachine:
         else:
             base = cfg.delivery_failed_tts
 
-        # Après set_next_trip(), current_trip_id pointe déjà sur la prochaine livraison.
-        # On utilise get_delivery(current_trip_id) pour annoncer la vraie destination suivante.
         current_id = self.utility_service.current_trip_id
         if not current_id:
             return base + cfg.route_finished_tts
@@ -262,13 +261,37 @@ class DeliveryStateMachine:
         next_trip_info = self.utility_service.get_delivery(current_id)
         next_address = " ".join(next_trip_info.get("address").split()[:2]) if next_trip_info else None
         next_client_name = next_trip_info.get("clientName") if next_trip_info else None
-        is_last = self.utility_service.is_last_trip()
         announcement = base + cfg.next_heading_tts.format(
             address=next_address, client=next_client_name
         )
-        if is_last:
+        if was_last or self.utility_service.is_last_trip():
             announcement += cfg.last_delivery_suffix
         return announcement
+
+    def _log_trip_order_state(self, prefix: str) -> None:
+        logger.info(
+            "%s current_trip_id=%s trip_order=%s",
+            prefix,
+            self.utility_service.current_trip_id,
+            self.utility_service.trip_order,
+        )
+
+    def _advance_trip_if_needed(self, completed_trip_id: Optional[str], context: str) -> None:
+        """Advance to the next trip only when UtilityService did not already advance."""
+        if completed_trip_id is None:
+            return
+
+        current_after_update = self.utility_service.current_trip_id
+        if current_after_update == completed_trip_id:
+            self._log_trip_order_state(f"BEFORE set_next_trip [{context}]")
+            self.utility_service.set_next_trip()
+            self._log_trip_order_state(f"AFTER set_next_trip [{context}]")
+        else:
+            logger.info(
+                "SKIP set_next_trip [%s]: current_trip_id already advanced to %s after update",
+                context,
+                current_after_update,
+            )
 
     # ── State Handlers ────────────────────────────────────────────────────────
 
@@ -294,7 +317,9 @@ class DeliveryStateMachine:
 
             # Capturer is_last AVANT set_next_trip pour avoir le bon statut
             was_last_trip = self.utility_service.is_last_trip()
+            self._log_trip_order_state("BEFORE set_next_trip [STATE_1]")
             self.utility_service.set_next_trip()
+            self._log_trip_order_state("AFTER set_next_trip [STATE_1]")
 
             await self._send_outcome_emotions(
                 session,
@@ -302,7 +327,7 @@ class DeliveryStateMachine:
                 is_last=was_last_trip,
             )
 
-            announcement = self._build_announcement(success=True)
+            announcement = self._build_announcement(success=True, was_last=was_last_trip)
 
             if self.utility_service.current_trip_id:
                 asyncio.create_task(
@@ -395,7 +420,9 @@ class DeliveryStateMachine:
 
                 # Capturer is_last AVANT set_next_trip pour avoir le bon statut
                 was_last_trip = self.utility_service.is_last_trip()
+                self._log_trip_order_state("BEFORE set_next_trip [STATE_2]")
                 self.utility_service.set_next_trip()
+                self._log_trip_order_state("AFTER set_next_trip [STATE_2]")
 
                 await self._send_outcome_emotions(
                     session,
@@ -403,7 +430,7 @@ class DeliveryStateMachine:
                     is_last=was_last_trip,
                 )
 
-                announcement = self._build_announcement(success=False)
+                announcement = self._build_announcement(success=False, was_last=was_last_trip)
 
                 if self.utility_service.current_trip_id:
                     asyncio.create_task(
@@ -516,10 +543,10 @@ class DeliveryStateMachine:
                 await self._send_mark_delivered_event(session, trip_id)
 
             was_last_trip = self.utility_service.is_last_trip()
-            self.utility_service.set_next_trip()
+            self._advance_trip_if_needed(trip_id, "PHOTO_RESPONSE: success")
 
             await self._announce_next_trip_and_start_navigation(
-                session, success=True, validated_by_photo=True,
+                session, success=True, validated_by_photo=True, was_last=was_last_trip,
             )
         else:
             trip_id = ctx.photo_trip_id or ctx.current_trip_id
@@ -535,9 +562,9 @@ class DeliveryStateMachine:
                 await self._send_mark_failed_event(session, trip_id)
 
             was_last_trip = self.utility_service.is_last_trip()
-            self.utility_service.set_next_trip()
+            self._advance_trip_if_needed(trip_id, "PHOTO_RESPONSE: failure")
 
-            await self._announce_next_trip_and_start_navigation(session, success=False)
+            await self._announce_next_trip_and_start_navigation(session, success=False, was_last=was_last_trip)
 
         ctx.reset()
 
@@ -546,16 +573,18 @@ class DeliveryStateMachine:
         session: "Session",
         success: bool,
         validated_by_photo: bool = False,
+        was_last: bool = False,
     ) -> None:
         await self._send_outcome_emotions(
             session,
             success=success,
-            is_last= self.utility_service.is_last_trip(),
+            is_last=was_last,
         )
 
         announcement = self._build_announcement(
             success=success,
             validated_by_photo=validated_by_photo,
+            was_last=was_last,
         )
 
         logger.info("📢 Announcement client_id=%s: %s", session.client_id, announcement)
@@ -686,9 +715,9 @@ class DeliveryStateMachine:
 
         sys.path.insert(0, str(Path(__file__).parent.parent / "data_base_service"))
         try:
-            from data_base_service.service.planning_service import PlanningService
-            from data_base_service.service import TokenManager
-            from data_base_service.entities.enum.package_status import PackageStatus
+            from services.data_base_service.service.planning_service import PlanningService
+            from services.data_base_service.service import TokenManager
+            from services.data_base_service.entities.enum.package_status import PackageStatus
 
             script_dir = Path(__file__).parent.parent / "data_base_service"
             token_manager = TokenManager(cache_file=script_dir / "token_cache.md")

@@ -188,6 +188,21 @@ class TestProcessUtterance:
         assert session.auth_attempts == 1
         agent._stream_response.assert_not_awaited()
 
+    @pytest.mark.asyncio
+    async def test_handle_arrived_action_ignores_future_trip_when_expected_trip_exists(self, agent, session):
+        agent.state_machine = MagicMock()
+        agent.state_machine.is_in_mode_1.return_value = False
+        agent.state_machine.enter_mode_1 = AsyncMock()
+        agent.utility_service.trip_order = ["trip-1", "trip-2", "trip-3"]
+        agent.utility_service.current_trip_id = "trip-2"
+        session.current_trip_id = "trip-2"
+
+        await agent._handle_arrived_action(session, {"trip_id": "trip-3"})
+
+        agent.state_machine.enter_mode_1.assert_not_awaited()
+        assert session.current_trip_id == "trip-2"
+        assert agent.utility_service.current_trip_id == "trip-2"
+
 
 class TestInterrupt:
 

@@ -19,6 +19,8 @@ import logging
 from typing import TYPE_CHECKING, Optional
 from pathlib import Path
 
+from services.utility_service import UtilityService
+
 if TYPE_CHECKING:
     from models.session import Session
     from services.websocket_service import WebSocketService
@@ -116,8 +118,7 @@ class DeliveryService:
 
         # Récupérer les trips et le nom du driver
         try:
-            trips, driver_name, driver_exists = await self._get_trips(driver_serial)
-
+            istrue, driver_name, driver_exists, trips = await self._get_trips(driver_serial)
             if not driver_exists:
                 # ── Driver introuvable en base : reset de l'auth et message d'erreur ──
                 logger.warning(
@@ -168,75 +169,72 @@ class DeliveryService:
             logger.exception("❌ Error identifying driver client_id=%s: %s", session.client_id, e)
             await self._send_error_notification(session, f"Erreur lors de l'identification: {e}")
 
-    async def _get_trips(self, driver_serial_number: str) -> tuple:
+    async def _get_trips(self, driver_serial_number: str) -> tuple[bool, str, bool, list]:
         """
-        Récupérer les trips d'un driver via PlanningService.
-
         Returns:
-            Tuple (trips, driver_name, driver_exists) où:
-            - trips: Liste de Trip objects
-            - driver_name: Nom du driver (ex: "Vivien")
-            - driver_exists: True si le driver existe en base, False sinon
+            Tuple (success, driver_name, driver_exists, trips)
+            - trips: liste d'objets Trip (vide si echec)
         """
-        # Import dynamique pour éviter les dépendances circulaires
-        import sys
-        sys.path.insert(0, str(Path(__file__).parent.parent / "data_base_service"))
 
         try:
-            from service.planning_service import PlanningService, DriverNotFoundError
-            from service import TokenManager
-            from service.logger_service import log_error
+            from .data_base_service.service.planning_service import PlanningService, DriverNotFoundError
+            from .data_base_service.service import TokenManager
+            from .data_base_service.entities.models import Trip
 
-            # Créer un nouveau PlanningService pour cette requête
-            script_dir = Path(__file__).parent.parent / "data_base_service"
+            script_dir = Path(__file__).parent / "data_base_service"
             token_manager = TokenManager(cache_file=script_dir / "token_cache.md")
             planning_service = PlanningService(token_manager)
 
             try:
-                trips = await planning_service.get_delivery_trips(
+                success = await planning_service.get_delivery_trips(
                     driver_serial_number=driver_serial_number,
-                    date=None,  # Date du jour (automatique)
-                    export_json=True,
-                    output_file="data.json",  # Nom fixe
+                    date=None,
                 )
 
-                # Récupérer le nom du driver
-                driver_name = await self._get_driver_name(driver_serial_number)
+                # Reconstruire les objets Trip depuis le cache UtilityService
+                # (get_delivery_trips() a déjà chargé les données dans UtilityService)
+                trips: list = []
+                if success:
+                    raw_items = UtilityService().get_all_deliveries()  # liste de dicts
+                    for item in raw_items:
+                        try:
+                            # Le cache stocke des dicts avec clé "address" (renommé depuis "name")
+                            # On reconstruit un dict compatible avec Trip.from_dict()
+                            trip_data = dict(item)
+                            if "address" in trip_data and "name" not in trip_data:
+                                trip_data["name"] = trip_data["address"]
+                            trips.append(Trip.from_dict(trip_data))
+                        except Exception as e_trip:
+                            logger.warning("Could not reconstruct Trip from dict: %s – %s", item, e_trip)
 
-                return trips, driver_name, True
+                driver_name = await self._get_driver_name(driver_serial_number)
+                return success, driver_name, True, trips
 
             except DriverNotFoundError:
-                logger.warning(
-                    "🚫 Driver not found in database: %s", driver_serial_number
-                )
-                return [], "Driver", False
+                logger.warning("🚫 Driver not found in database: %s", driver_serial_number)
+                return False, "Driver", False, []
 
             finally:
                 await planning_service.close()
 
         except ImportError as e:
             logger.error("Failed to import PlanningService: %s", e)
-            return [], "Driver", True  # On suppose que le driver existe (erreur technique)
+            return False, "Driver", True, []
         except Exception as e:
             logger.error("Error getting trips: %s", e)
-            try:
-                log_error(f"DeliveryService error: {e}")
-            except Exception:
-                pass
-            return [], "Driver", True  # On suppose que le driver existe (erreur technique)
+            return False, "Driver", True, []
 
     async def _get_driver_name(self, driver_serial_number: str) -> str:
         """
         Récupérer le nom du driver par son numéro de série.
         """
-        import sys
-        sys.path.insert(0, str(Path(__file__).parent.parent / "data_base_service"))
+
 
         try:
-            from service.planning_service import PlanningService
-            from service import TokenManager
+            from .data_base_service.service.planning_service import PlanningService
+            from .data_base_service.service import TokenManager
 
-            script_dir = Path(__file__).parent.parent / "data_base_service"
+            script_dir = Path(__file__).parent / "data_base_service"
             token_manager = TokenManager(cache_file=script_dir / "token_cache.md")
             planning_service = PlanningService(token_manager)
 
@@ -286,17 +284,32 @@ class DeliveryService:
 
         trips_data = []
         for trip in trips:
-            # Trip object from planning_service has methods like get_id(), get_name(), etc.
-            trip_dict = {
-                "id": getattr(trip, 'id', None) or getattr(trip, 'get_id', lambda: None)(),
-                "name": getattr(trip, 'name', None) or getattr(trip, 'get_name', lambda: None)(),
-                "latitude": getattr(trip, 'latitude', None) or getattr(trip, 'get_latitude', lambda: None)(),
-                "longitude": getattr(trip, 'longitude', None) or getattr(trip, 'get_longitude', lambda: None)(),
-                "clientName": getattr(trip, 'client_name', None) or getattr(trip, 'get_client_name', lambda: None)(),
-                "packageInfo": getattr(trip, 'package_info', None) or getattr(trip, 'get_package_info', lambda: None)(),
-                "deliveryStatus": getattr(trip, 'status', None) or getattr(trip, 'get_delivery_status', lambda: None)(),
-                "isFragile": "Fragile" in (getattr(trip, 'package_info', None) or getattr(trip, 'get_package_info', lambda: "")() or ""),
-            }
+            # Support Trip objects (dataclass) AND plain dicts (legacy)
+            if isinstance(trip, dict):
+                pkg_info = trip.get("packageInfo") or trip.get("package_info", "")
+                trip_dict = {
+                    "id": trip.get("id"),
+                    "name": trip.get("name") or trip.get("address"),
+                    "latitude": trip.get("latitude"),
+                    "longitude": trip.get("longitude"),
+                    "clientName": trip.get("clientName") or trip.get("client_name"),
+                    "packageInfo": pkg_info,
+                    "deliveryStatus": trip.get("deliveryStatus") or trip.get("delivery_status"),
+                    "isFragile": "Fragile" in (pkg_info or ""),
+                }
+            else:
+                # Trip dataclass object
+                pkg_info = trip.package_info or ""
+                trip_dict = {
+                    "id": trip.id,
+                    "name": trip.name,
+                    "latitude": trip.latitude,
+                    "longitude": trip.longitude,
+                    "clientName": trip.client_name,
+                    "packageInfo": trip.package_info,
+                    "deliveryStatus": trip.delivery_status,
+                    "isFragile": "Fragile" in pkg_info,
+                }
             trips_data.append(trip_dict)
 
         await self.notification_service.send(
@@ -318,33 +331,6 @@ class DeliveryService:
         if self.ws_service is None:
             return
 
-        trip_count = len(trips)
-
-        # Récupérer les infos du premier trip
-        first_trip = trips[0] if trips else None
-        client_name = None
-        package_info = None
-
-        if first_trip:
-            client_name = getattr(first_trip, 'client_name', None) or getattr(first_trip, 'get_client_name', lambda: None)()
-            package_info = getattr(first_trip, 'package_info', None) or getattr(first_trip, 'get_package_info', lambda: None)()
-
-        # Construire le message vocal
-        if first_trip and client_name and package_info:
-            summary_text = (
-                f"Hello {driver_name}, you have {trip_count} trips. "
-                f"The first one is a {package_info} for {client_name}. "
-                f"Have a great day."
-            )
-        elif first_trip and client_name:
-            summary_text = (
-                f"Hello {driver_name}, you have {trip_count} trips. "
-                f"The first one is for {client_name}. "
-                f"Have a great day."
-            )
-        else:
-            summary_text = f"Hello {driver_name}, you have {trip_count} trips. Have a great day."
-
         # Envoyer l'émotion greeting avant le message vocal
         try:
             await self.ws_service.send(session, {"type": "emotion", "name": "greeting"})
@@ -356,20 +342,29 @@ class DeliveryService:
         try:
             if self.ws_service is not None and self.ws_service.audio_stream is not None:
                 agent = self.ws_service.audio_stream.agent
-                await agent.speak_instruction(
+
+                # Extraire les infos du premier trip (Trip objet ou dict)
+                first_trip = trips[0] if trips else None
+                if isinstance(first_trip, dict):
+                    first_pkg_info = first_trip.get("packageInfo") or first_trip.get("package_info") or "delivery"
+                    first_client = first_trip.get("clientName") or first_trip.get("client_name") or "a client"
+                elif first_trip is not None:
+                    first_pkg_info = first_trip.package_info or "delivery"
+                    first_client = first_trip.client_name or "a client"
+                else:
+                    first_pkg_info = "delivery"
+                    first_client = "a client"
+
+                await agent.speak_text(
                     session,
-                    instruction=(
-                        "You are a delivery assistant greeting the driver. "
-                        f"Driver name: {driver_name}. Number of trips: {trip_count}. "
-                        f"First trip client: {client_name or 'unknown'}. "
-                        f"First trip package info: {package_info or 'not specified'}. "
-                        "Produce one friendly welcome sentence."
+                    text=(
+                        f"Hello {driver_name}, you have {len(trips)} trip{'s' if len(trips) > 1 else ''}. "
+                        f"The first one is a {first_pkg_info} for {first_client}. "
+                        "Have a great day."
                     ),
-                    fallback=summary_text,
                 )
-                logger.info("🔊 Voice summary sent: %s", summary_text)
         except Exception as e:
-            logger.debug("Could not send voice summary: %s", e)
+            logger.error("Could not send voice summary: %s", e)
 
     async def _send_no_trips_notification(self, session: Session, driver_name: str = "Driver") -> None:
         """
@@ -389,14 +384,6 @@ class DeliveryService:
             },
         )
 
-        # Stocker le message vocal en attente (à envoyer après ouverture du flux audio)
-        session._pending_voice_summary = {
-            "trips": [],
-            "driver_name": driver_name,
-            "no_trips": True,
-            "voice_message": voice_message,
-        }
-
         # Si le flux audio est déjà prêt, envoyer le message vocal immédiatement
         if session.tts_track is not None:
             # Envoyer l'émotion greeting avant le message vocal
@@ -410,17 +397,7 @@ class DeliveryService:
             try:
                 if self.ws_service is not None and self.ws_service.audio_stream is not None:
                     agent = self.ws_service.audio_stream.agent
-                    await agent.speak_instruction(
-                        session,
-                        instruction=(
-                            "You are a delivery assistant greeting the driver. "
-                            f"Driver name: {driver_name}. "
-                            "There are no trips scheduled today. "
-                            "Produce one short friendly spoken message."
-                        ),
-                        fallback=voice_message,
-                    )
-                    logger.info("🔊 No trips voice message sent: %s", voice_message)
+                    await agent.speak_text(session, text=voice_message)
             except Exception as e:
                 logger.error("Could not send no trips voice message: %s", e)
 
@@ -530,12 +507,18 @@ class DeliveryService:
         
         # Si trip_id non spécifié, récupérer le premier trip non complété
         if not trip_id:
-            trips, _driver_name = await self._get_trips(driver_serial)
+            _success, _driver_name, _exists, trips = await self._get_trips(driver_serial)
             for trip in trips:
-                status = getattr(trip, 'status', None)
+                # Support Trip objects (dataclass) AND plain dicts
+                if isinstance(trip, dict):
+                    status = trip.get("deliveryStatus") or trip.get("delivery_status")
+                    trip_id = trip.get("id")
+                else:
+                    status = trip.delivery_status
+                    trip_id = trip.id
                 if status != "COMPLETED":
-                    trip_id = getattr(trip, 'id', None)
                     break
+                trip_id = None  # reset if COMPLETED, continue loop
         
         if not trip_id:
             logger.warning(
