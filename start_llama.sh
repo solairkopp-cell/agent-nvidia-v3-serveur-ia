@@ -1,18 +1,22 @@
 #!/bin/bash
 
 exec llama-server \
-  -m /home/server/models/Qwen_Qwen3.5-4B-Q4_K_L.gguf \
-  --port 8080 \
+  -m /home/server/models/Qwen3.5-4B-Q4_0.gguf \
   -ngl 99 \
-  --flash-attn on \
-  --ctx-size 4096 \
-  --cache-type-k f16 \
-  --cache-type-v f16 \
-  --threads 2 \
-  --temp 0.0 \
-  --top-p 0.1 \
-  --alias Rytle \
+  --flash-attn 1 \
+  -ctk f16 \
+  -ctv f16 \
+  -c 4096 \
+  -b 512 \
+  -ub 512 \
+  --threads 4 \
+  -np 1 \
+  --host 0.0.0.0 \
+  --port 8080 \
+  --temp 0.7 \
+  --top-p 0.8 \
   --reasoning off \
   --jinja \
-  --presence-penalty 1.5 \
-  --parallel 1
+  --no-mmap \
+  --chat-template-kwargs '{"enable_thinking":false}' \
+  --kv-unified

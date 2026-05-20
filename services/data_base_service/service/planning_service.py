@@ -179,7 +179,7 @@ class PlanningService:
         try:
             from services.utility_service import UtilityService
             u = UtilityService()
-            u.remove_trip(str(package_id))
+            #u.remove_trip(str(package_id))#
             log_success(f"Package {package_id} retiré du cache")
         except Exception as e:
             log_warning(f"Impossible de mettre à jour UtilityService: {e}")

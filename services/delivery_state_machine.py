@@ -540,7 +540,9 @@ class DeliveryStateMachine:
                     trip_id=trip_id,
                     status="COMPLETED",
                 )
+                self.utility_service.set_delivery_status(trip_id, "COMPLETED")
                 await self._send_mark_delivered_event(session, trip_id)
+                
 
             was_last_trip = self.utility_service.is_last_trip()
             self._advance_trip_if_needed(trip_id, "PHOTO_RESPONSE: success")
@@ -559,6 +561,7 @@ class DeliveryStateMachine:
                     cause=(ctx.failure_reason_index + 1) if ctx.failure_reason_index is not None else None,
                     reason=reason,
                 )
+                self.utility_service.set_delivery_status(trip_id, "FAILED")
                 await self._send_mark_failed_event(session, trip_id)
 
             was_last_trip = self.utility_service.is_last_trip()
@@ -726,8 +729,10 @@ class DeliveryStateMachine:
             try:
                 if status == "COMPLETED":
                     package_status = PackageStatus.DELIVERED_SUCCESSFULLY
+                    print(self.utility_service.set_delivery_status(trip_id, "COMPLETED"))
                 elif status == "FAILED":
                     package_status = PackageStatus.DELIVERY_FAILURE
+                    print(self.utility_service.set_delivery_status(trip_id, "FAILED"))
                 else:
                     package_status = PackageStatus.PLANNED
 

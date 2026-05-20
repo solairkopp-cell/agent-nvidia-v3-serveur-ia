@@ -10126,3 +10126,459 @@
 2026-05-17 22:41:18 - INFO - Recherche du driver par query: 002
 2026-05-17 22:41:18 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=002
 2026-05-17 22:41:18 - INFO - ✅ SUCCÈS: Driver trouvé: Marouane (serial: 002, ID: 69ce5c8bfb98e15a3cf53539)
+2026-05-20 00:23:49 - ERROR - Erreur lors de la lecture du cache: name 'log_warning' is not defined
+2026-05-20 00:23:49 - INFO - Token non valide ou absent, récupération d'un nouveau token...
+2026-05-20 00:23:49 - INFO - Tentative de connexion à l'API Fleet...
+2026-05-20 00:23:49 - INFO - ✅ SUCCÈS: Authentification réussie auprès de l'API Fleet
+2026-05-20 00:23:49 - INFO - ✅ SUCCÈS: Token sauvegardé (valide jusqu'au 2026-05-21 00:23:49)
+2026-05-20 00:23:49 - INFO - Récupération des trips pour le driver: 000
+2026-05-20 00:23:49 - INFO - Recherche du driver par query: 000
+2026-05-20 00:23:49 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 00:23:49 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 00:23:49 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 00:23:49 - INFO - Recherche des schedules par driver serial number: 000
+2026-05-20 00:23:49 - INFO - Recherche du driver par query: 000
+2026-05-20 00:23:49 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 00:23:49 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 00:23:49 - INFO - Recherche des entités par référence pour le driver ID: 6a086d7ef55a356c2954cd25
+2026-05-20 00:23:49 - INFO - Recherche par référence: field=driver_serial_number, value=6a086d7ef55a356c2954cd25
+2026-05-20 00:23:49 - INFO - 1 schedule(s) trouvé(s) sur 10 entité(s)
+2026-05-20 00:23:49 - INFO - ✅ SUCCÈS: 1 schedule(s) pour le driver 6a086d7ef55a356c2954cd25
+2026-05-20 00:23:49 - WARNING - Aucun schedule pour la date: 2026-05-20
+2026-05-20 00:23:49 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-05-21 00:23:49
+2026-05-20 00:23:49 - INFO - Recherche du driver par query: 000
+2026-05-20 00:23:49 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 00:23:49 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 00:40:00 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-05-21 00:23:49
+2026-05-20 00:40:00 - INFO - Récupération des trips pour le driver: 000
+2026-05-20 00:40:00 - INFO - Recherche du driver par query: 000
+2026-05-20 00:40:00 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 00:40:00 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 00:40:00 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 00:40:00 - INFO - Recherche des schedules par driver serial number: 000
+2026-05-20 00:40:00 - INFO - Recherche du driver par query: 000
+2026-05-20 00:40:00 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 00:40:00 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 00:40:00 - INFO - Recherche des entités par référence pour le driver ID: 6a086d7ef55a356c2954cd25
+2026-05-20 00:40:00 - INFO - Recherche par référence: field=driver_serial_number, value=6a086d7ef55a356c2954cd25
+2026-05-20 00:40:00 - INFO - 1 schedule(s) trouvé(s) sur 10 entité(s)
+2026-05-20 00:40:00 - INFO - ✅ SUCCÈS: 1 schedule(s) pour le driver 6a086d7ef55a356c2954cd25
+2026-05-20 00:40:00 - WARNING - Aucun schedule pour la date: 2026-05-20
+2026-05-20 00:40:00 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-05-21 00:23:49
+2026-05-20 00:40:00 - INFO - Recherche du driver par query: 000
+2026-05-20 00:40:00 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 00:40:00 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 00:42:16 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-05-21 00:23:49
+2026-05-20 00:42:16 - INFO - Récupération des trips pour le driver: 000
+2026-05-20 00:42:16 - INFO - Recherche du driver par query: 000
+2026-05-20 00:42:16 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 00:42:17 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 00:42:17 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 00:42:17 - INFO - Recherche des schedules par driver serial number: 000
+2026-05-20 00:42:17 - INFO - Recherche du driver par query: 000
+2026-05-20 00:42:17 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 00:42:17 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 00:42:17 - INFO - Recherche des entités par référence pour le driver ID: 6a086d7ef55a356c2954cd25
+2026-05-20 00:42:17 - INFO - Recherche par référence: field=driver_serial_number, value=6a086d7ef55a356c2954cd25
+2026-05-20 00:42:17 - INFO - 1 schedule(s) trouvé(s) sur 10 entité(s)
+2026-05-20 00:42:17 - INFO - ✅ SUCCÈS: 1 schedule(s) pour le driver 6a086d7ef55a356c2954cd25
+2026-05-20 00:42:17 - INFO - Recherche des packages pour le schedule: 6a0ce73ef55a356c2954cd9b
+2026-05-20 00:42:17 - INFO - Recherche par référence: field=schedule_id, value=6a0ce73ef55a356c2954cd9b
+2026-05-20 00:42:17 - INFO - ✅ SUCCÈS: 2 package(s) trouvé(s) pour le schedule 6a0ce73ef55a356c2954cd9b
+2026-05-20 00:42:17 - INFO - Récupération du package par ID: 6a09c88bf55a356c2954cd66
+2026-05-20 00:42:17 - INFO - Récupération de l'instance: 6a09c88bf55a356c2954cd66
+2026-05-20 00:42:17 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 00:42:17 - INFO - ✅ SUCCÈS: Package trouvé: 6a09c88bf55a356c2954cd66
+2026-05-20 00:42:17 - INFO - Récupération de l'adresse par ID: 6a09c88bf55a356c2954cd65
+2026-05-20 00:42:17 - INFO - Récupération de l'instance: 6a09c88bf55a356c2954cd65
+2026-05-20 00:42:17 - INFO - ✅ SUCCÈS: Adresse trouvée: 6a09c88bf55a356c2954cd65
+2026-05-20 00:42:17 - INFO - Récupération du package par ID: 6a0a2747f55a356c2954cd70
+2026-05-20 00:42:17 - INFO - Récupération de l'instance: 6a0a2747f55a356c2954cd70
+2026-05-20 00:42:17 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 00:42:17 - INFO - ✅ SUCCÈS: Package trouvé: 6a0a2747f55a356c2954cd70
+2026-05-20 00:42:17 - INFO - Récupération de l'adresse par ID: 6a0a2747f55a356c2954cd6f
+2026-05-20 00:42:17 - INFO - Récupération de l'instance: 6a0a2747f55a356c2954cd6f
+2026-05-20 00:42:17 - INFO - ✅ SUCCÈS: Adresse trouvée: 6a0a2747f55a356c2954cd6f
+2026-05-20 00:42:17 - INFO - ✅ SUCCÈS: 2 trip(s) créé(s)
+2026-05-20 00:42:17 - INFO - ✅ SUCCÈS: 2 trip(s) chargés en mémoire
+2026-05-20 00:42:17 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-05-21 00:23:49
+2026-05-20 00:42:17 - INFO - Recherche du driver par query: 000
+2026-05-20 00:42:17 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 00:42:17 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 00:45:42 - INFO - Token non valide ou absent, récupération d'un nouveau token...
+2026-05-20 00:45:42 - INFO - Tentative de connexion à l'API Fleet...
+2026-05-20 00:45:43 - INFO - ✅ SUCCÈS: Authentification réussie auprès de l'API Fleet
+2026-05-20 00:45:43 - ERROR - Erreur lors de la sauvegarde du token: [Errno 2] No such file or directory: '/home/server/server/data_base_service/token_cache.md'
+2026-05-20 00:45:43 - INFO - Mise à jour du package 6a09c88bf55a356c2954cd66 vers: delivered_successfully
+2026-05-20 00:45:43 - INFO - Récupération du package par ID: 6a09c88bf55a356c2954cd66
+2026-05-20 00:45:43 - INFO - Récupération de l'instance: 6a09c88bf55a356c2954cd66
+2026-05-20 00:45:43 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 00:45:43 - INFO - ✅ SUCCÈS: Package trouvé: 6a09c88bf55a356c2954cd66
+2026-05-20 00:45:43 - INFO - Mise à jour de l'instance: 6a09c88bf55a356c2954cd66
+2026-05-20 00:45:43 - INFO - ✅ SUCCÈS: Instance 6a09c88bf55a356c2954cd66 mise à jour
+2026-05-20 00:45:43 - INFO - ✅ SUCCÈS: Package 6a09c88bf55a356c2954cd66 mis à jour: planned -> delivered_successfully
+2026-05-20 00:45:43 - INFO - ✅ SUCCÈS: Package 6a09c88bf55a356c2954cd66 retiré du cache
+2026-05-20 00:56:29 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-05-21 00:23:49
+2026-05-20 00:56:29 - INFO - Récupération des trips pour le driver: 000
+2026-05-20 00:56:29 - INFO - Recherche du driver par query: 000
+2026-05-20 00:56:29 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 00:56:30 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 00:56:30 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 00:56:30 - INFO - Recherche des schedules par driver serial number: 000
+2026-05-20 00:56:30 - INFO - Recherche du driver par query: 000
+2026-05-20 00:56:30 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 00:56:30 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 00:56:30 - INFO - Recherche des entités par référence pour le driver ID: 6a086d7ef55a356c2954cd25
+2026-05-20 00:56:30 - INFO - Recherche par référence: field=driver_serial_number, value=6a086d7ef55a356c2954cd25
+2026-05-20 00:56:30 - INFO - 1 schedule(s) trouvé(s) sur 10 entité(s)
+2026-05-20 00:56:30 - INFO - ✅ SUCCÈS: 1 schedule(s) pour le driver 6a086d7ef55a356c2954cd25
+2026-05-20 00:56:30 - INFO - Recherche des packages pour le schedule: 6a0cea91f55a356c2954cd9e
+2026-05-20 00:56:30 - INFO - Recherche par référence: field=schedule_id, value=6a0cea91f55a356c2954cd9e
+2026-05-20 00:56:30 - INFO - ✅ SUCCÈS: 3 package(s) trouvé(s) pour le schedule 6a0cea91f55a356c2954cd9e
+2026-05-20 00:56:30 - INFO - Récupération du package par ID: 6a09b40af55a356c2954cd4b
+2026-05-20 00:56:30 - INFO - Récupération de l'instance: 6a09b40af55a356c2954cd4b
+2026-05-20 00:56:30 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 00:56:30 - INFO - ✅ SUCCÈS: Package trouvé: 6a09b40af55a356c2954cd4b
+2026-05-20 00:56:30 - INFO - Récupération de l'adresse par ID: 6a09b40af55a356c2954cd4a
+2026-05-20 00:56:30 - INFO - Récupération de l'instance: 6a09b40af55a356c2954cd4a
+2026-05-20 00:56:30 - INFO - ✅ SUCCÈS: Adresse trouvée: 6a09b40af55a356c2954cd4a
+2026-05-20 00:56:30 - INFO - Récupération du package par ID: 6a0a2747f55a356c2954cd70
+2026-05-20 00:56:30 - INFO - Récupération de l'instance: 6a0a2747f55a356c2954cd70
+2026-05-20 00:56:30 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 00:56:30 - INFO - ✅ SUCCÈS: Package trouvé: 6a0a2747f55a356c2954cd70
+2026-05-20 00:56:30 - INFO - Récupération de l'adresse par ID: 6a0a2747f55a356c2954cd6f
+2026-05-20 00:56:30 - INFO - Récupération de l'instance: 6a0a2747f55a356c2954cd6f
+2026-05-20 00:56:30 - INFO - ✅ SUCCÈS: Adresse trouvée: 6a0a2747f55a356c2954cd6f
+2026-05-20 00:56:30 - INFO - Récupération du package par ID: 6a09c88bf55a356c2954cd66
+2026-05-20 00:56:30 - INFO - Récupération de l'instance: 6a09c88bf55a356c2954cd66
+2026-05-20 00:56:30 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 00:56:30 - INFO - ✅ SUCCÈS: Package trouvé: 6a09c88bf55a356c2954cd66
+2026-05-20 00:56:30 - INFO - Récupération de l'adresse par ID: 6a09c88bf55a356c2954cd65
+2026-05-20 00:56:30 - INFO - Récupération de l'instance: 6a09c88bf55a356c2954cd65
+2026-05-20 00:56:30 - INFO - ✅ SUCCÈS: Adresse trouvée: 6a09c88bf55a356c2954cd65
+2026-05-20 00:56:30 - INFO - ✅ SUCCÈS: 3 trip(s) créé(s)
+2026-05-20 00:56:30 - INFO - ✅ SUCCÈS: 3 trip(s) chargés en mémoire
+2026-05-20 00:56:30 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-05-21 00:23:49
+2026-05-20 00:56:30 - INFO - Recherche du driver par query: 000
+2026-05-20 00:56:30 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 00:56:30 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 01:15:49 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-05-21 00:23:49
+2026-05-20 01:15:49 - INFO - Récupération des trips pour le driver: 000
+2026-05-20 01:15:49 - INFO - Recherche du driver par query: 000
+2026-05-20 01:15:49 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 01:15:50 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 01:15:50 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 01:15:50 - INFO - Recherche des schedules par driver serial number: 000
+2026-05-20 01:15:50 - INFO - Recherche du driver par query: 000
+2026-05-20 01:15:50 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 01:15:50 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 01:15:50 - INFO - Recherche des entités par référence pour le driver ID: 6a086d7ef55a356c2954cd25
+2026-05-20 01:15:50 - INFO - Recherche par référence: field=driver_serial_number, value=6a086d7ef55a356c2954cd25
+2026-05-20 01:15:50 - INFO - 1 schedule(s) trouvé(s) sur 10 entité(s)
+2026-05-20 01:15:50 - INFO - ✅ SUCCÈS: 1 schedule(s) pour le driver 6a086d7ef55a356c2954cd25
+2026-05-20 01:15:50 - INFO - Recherche des packages pour le schedule: 6a0cea91f55a356c2954cd9e
+2026-05-20 01:15:50 - INFO - Recherche par référence: field=schedule_id, value=6a0cea91f55a356c2954cd9e
+2026-05-20 01:15:51 - INFO - ✅ SUCCÈS: 3 package(s) trouvé(s) pour le schedule 6a0cea91f55a356c2954cd9e
+2026-05-20 01:15:51 - INFO - Récupération du package par ID: 6a09b40af55a356c2954cd4b
+2026-05-20 01:15:51 - INFO - Récupération de l'instance: 6a09b40af55a356c2954cd4b
+2026-05-20 01:15:51 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 01:15:51 - INFO - ✅ SUCCÈS: Package trouvé: 6a09b40af55a356c2954cd4b
+2026-05-20 01:15:51 - INFO - Récupération de l'adresse par ID: 6a09b40af55a356c2954cd4a
+2026-05-20 01:15:51 - INFO - Récupération de l'instance: 6a09b40af55a356c2954cd4a
+2026-05-20 01:15:51 - INFO - ✅ SUCCÈS: Adresse trouvée: 6a09b40af55a356c2954cd4a
+2026-05-20 01:15:51 - INFO - Récupération du package par ID: 6a0a2747f55a356c2954cd70
+2026-05-20 01:15:51 - INFO - Récupération de l'instance: 6a0a2747f55a356c2954cd70
+2026-05-20 01:15:51 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 01:15:51 - INFO - ✅ SUCCÈS: Package trouvé: 6a0a2747f55a356c2954cd70
+2026-05-20 01:15:51 - INFO - Récupération de l'adresse par ID: 6a0a2747f55a356c2954cd6f
+2026-05-20 01:15:51 - INFO - Récupération de l'instance: 6a0a2747f55a356c2954cd6f
+2026-05-20 01:15:51 - INFO - ✅ SUCCÈS: Adresse trouvée: 6a0a2747f55a356c2954cd6f
+2026-05-20 01:15:51 - INFO - Récupération du package par ID: 6a09c88bf55a356c2954cd66
+2026-05-20 01:15:51 - INFO - Récupération de l'instance: 6a09c88bf55a356c2954cd66
+2026-05-20 01:15:51 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 01:15:51 - INFO - ✅ SUCCÈS: Package trouvé: 6a09c88bf55a356c2954cd66
+2026-05-20 01:15:51 - INFO - Récupération de l'adresse par ID: 6a09c88bf55a356c2954cd65
+2026-05-20 01:15:51 - INFO - Récupération de l'instance: 6a09c88bf55a356c2954cd65
+2026-05-20 01:15:51 - INFO - ✅ SUCCÈS: Adresse trouvée: 6a09c88bf55a356c2954cd65
+2026-05-20 01:15:51 - INFO - ✅ SUCCÈS: 3 trip(s) créé(s)
+2026-05-20 01:15:51 - INFO - ✅ SUCCÈS: 3 trip(s) chargés en mémoire
+2026-05-20 01:15:51 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-05-21 00:23:49
+2026-05-20 01:15:51 - INFO - Recherche du driver par query: 000
+2026-05-20 01:15:51 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 01:15:51 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 01:22:56 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-05-21 00:23:49
+2026-05-20 01:22:56 - INFO - Récupération des trips pour le driver: 000
+2026-05-20 01:22:56 - INFO - Recherche du driver par query: 000
+2026-05-20 01:22:56 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 01:22:56 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 01:22:56 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 01:22:56 - INFO - Recherche des schedules par driver serial number: 000
+2026-05-20 01:22:56 - INFO - Recherche du driver par query: 000
+2026-05-20 01:22:56 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 01:22:56 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 01:22:56 - INFO - Recherche des entités par référence pour le driver ID: 6a086d7ef55a356c2954cd25
+2026-05-20 01:22:56 - INFO - Recherche par référence: field=driver_serial_number, value=6a086d7ef55a356c2954cd25
+2026-05-20 01:22:56 - INFO - 1 schedule(s) trouvé(s) sur 10 entité(s)
+2026-05-20 01:22:56 - INFO - ✅ SUCCÈS: 1 schedule(s) pour le driver 6a086d7ef55a356c2954cd25
+2026-05-20 01:22:56 - INFO - Recherche des packages pour le schedule: 6a0cea91f55a356c2954cd9e
+2026-05-20 01:22:56 - INFO - Recherche par référence: field=schedule_id, value=6a0cea91f55a356c2954cd9e
+2026-05-20 01:22:56 - INFO - ✅ SUCCÈS: 3 package(s) trouvé(s) pour le schedule 6a0cea91f55a356c2954cd9e
+2026-05-20 01:22:56 - INFO - Récupération du package par ID: 6a09b40af55a356c2954cd4b
+2026-05-20 01:22:56 - INFO - Récupération de l'instance: 6a09b40af55a356c2954cd4b
+2026-05-20 01:22:56 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 01:22:57 - INFO - ✅ SUCCÈS: Package trouvé: 6a09b40af55a356c2954cd4b
+2026-05-20 01:22:57 - INFO - Récupération de l'adresse par ID: 6a09b40af55a356c2954cd4a
+2026-05-20 01:22:57 - INFO - Récupération de l'instance: 6a09b40af55a356c2954cd4a
+2026-05-20 01:22:57 - INFO - ✅ SUCCÈS: Adresse trouvée: 6a09b40af55a356c2954cd4a
+2026-05-20 01:22:57 - INFO - Récupération du package par ID: 6a0a2747f55a356c2954cd70
+2026-05-20 01:22:57 - INFO - Récupération de l'instance: 6a0a2747f55a356c2954cd70
+2026-05-20 01:22:57 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 01:22:57 - INFO - ✅ SUCCÈS: Package trouvé: 6a0a2747f55a356c2954cd70
+2026-05-20 01:22:57 - INFO - Récupération de l'adresse par ID: 6a0a2747f55a356c2954cd6f
+2026-05-20 01:22:57 - INFO - Récupération de l'instance: 6a0a2747f55a356c2954cd6f
+2026-05-20 01:22:57 - INFO - ✅ SUCCÈS: Adresse trouvée: 6a0a2747f55a356c2954cd6f
+2026-05-20 01:22:57 - INFO - Récupération du package par ID: 6a09c88bf55a356c2954cd66
+2026-05-20 01:22:57 - INFO - Récupération de l'instance: 6a09c88bf55a356c2954cd66
+2026-05-20 01:22:57 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 01:22:57 - INFO - ✅ SUCCÈS: Package trouvé: 6a09c88bf55a356c2954cd66
+2026-05-20 01:22:57 - INFO - Récupération de l'adresse par ID: 6a09c88bf55a356c2954cd65
+2026-05-20 01:22:57 - INFO - Récupération de l'instance: 6a09c88bf55a356c2954cd65
+2026-05-20 01:22:57 - INFO - ✅ SUCCÈS: Adresse trouvée: 6a09c88bf55a356c2954cd65
+2026-05-20 01:22:57 - INFO - ✅ SUCCÈS: 3 trip(s) créé(s)
+2026-05-20 01:22:57 - INFO - ✅ SUCCÈS: 3 trip(s) chargés en mémoire
+2026-05-20 01:22:57 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-05-21 00:23:49
+2026-05-20 01:22:57 - INFO - Recherche du driver par query: 000
+2026-05-20 01:22:57 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 01:22:57 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 01:28:54 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-05-21 00:23:49
+2026-05-20 01:28:54 - INFO - Récupération des trips pour le driver: 000
+2026-05-20 01:28:54 - INFO - Recherche du driver par query: 000
+2026-05-20 01:28:54 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 01:28:54 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 01:28:54 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 01:28:54 - INFO - Recherche des schedules par driver serial number: 000
+2026-05-20 01:28:54 - INFO - Recherche du driver par query: 000
+2026-05-20 01:28:54 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 01:28:54 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 01:28:54 - INFO - Recherche des entités par référence pour le driver ID: 6a086d7ef55a356c2954cd25
+2026-05-20 01:28:54 - INFO - Recherche par référence: field=driver_serial_number, value=6a086d7ef55a356c2954cd25
+2026-05-20 01:28:54 - INFO - 1 schedule(s) trouvé(s) sur 10 entité(s)
+2026-05-20 01:28:54 - INFO - ✅ SUCCÈS: 1 schedule(s) pour le driver 6a086d7ef55a356c2954cd25
+2026-05-20 01:28:54 - INFO - Recherche des packages pour le schedule: 6a0cea91f55a356c2954cd9e
+2026-05-20 01:28:54 - INFO - Recherche par référence: field=schedule_id, value=6a0cea91f55a356c2954cd9e
+2026-05-20 01:28:54 - INFO - ✅ SUCCÈS: 3 package(s) trouvé(s) pour le schedule 6a0cea91f55a356c2954cd9e
+2026-05-20 01:28:54 - INFO - Récupération du package par ID: 6a09b40af55a356c2954cd4b
+2026-05-20 01:28:54 - INFO - Récupération de l'instance: 6a09b40af55a356c2954cd4b
+2026-05-20 01:28:55 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 01:28:55 - INFO - ✅ SUCCÈS: Package trouvé: 6a09b40af55a356c2954cd4b
+2026-05-20 01:28:55 - INFO - Récupération de l'adresse par ID: 6a09b40af55a356c2954cd4a
+2026-05-20 01:28:55 - INFO - Récupération de l'instance: 6a09b40af55a356c2954cd4a
+2026-05-20 01:28:55 - INFO - ✅ SUCCÈS: Adresse trouvée: 6a09b40af55a356c2954cd4a
+2026-05-20 01:28:55 - INFO - Récupération du package par ID: 6a0a2747f55a356c2954cd70
+2026-05-20 01:28:55 - INFO - Récupération de l'instance: 6a0a2747f55a356c2954cd70
+2026-05-20 01:28:55 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 01:28:55 - INFO - ✅ SUCCÈS: Package trouvé: 6a0a2747f55a356c2954cd70
+2026-05-20 01:28:55 - INFO - Récupération de l'adresse par ID: 6a0a2747f55a356c2954cd6f
+2026-05-20 01:28:55 - INFO - Récupération de l'instance: 6a0a2747f55a356c2954cd6f
+2026-05-20 01:28:55 - INFO - ✅ SUCCÈS: Adresse trouvée: 6a0a2747f55a356c2954cd6f
+2026-05-20 01:28:55 - INFO - Récupération du package par ID: 6a09c88bf55a356c2954cd66
+2026-05-20 01:28:55 - INFO - Récupération de l'instance: 6a09c88bf55a356c2954cd66
+2026-05-20 01:28:55 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 01:28:55 - INFO - ✅ SUCCÈS: Package trouvé: 6a09c88bf55a356c2954cd66
+2026-05-20 01:28:55 - INFO - Récupération de l'adresse par ID: 6a09c88bf55a356c2954cd65
+2026-05-20 01:28:55 - INFO - Récupération de l'instance: 6a09c88bf55a356c2954cd65
+2026-05-20 01:28:55 - INFO - ✅ SUCCÈS: Adresse trouvée: 6a09c88bf55a356c2954cd65
+2026-05-20 01:28:55 - INFO - ✅ SUCCÈS: 3 trip(s) créé(s)
+2026-05-20 01:28:55 - INFO - ✅ SUCCÈS: 3 trip(s) chargés en mémoire
+2026-05-20 01:28:55 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-05-21 00:23:49
+2026-05-20 01:28:55 - INFO - Recherche du driver par query: 000
+2026-05-20 01:28:55 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 01:28:55 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 01:35:59 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-05-21 00:23:49
+2026-05-20 01:35:59 - INFO - Récupération des trips pour le driver: 000
+2026-05-20 01:35:59 - INFO - Recherche du driver par query: 000
+2026-05-20 01:35:59 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 01:36:09 - ERROR - GET entity-instances/entity/69bd744efb98e15a3cf53374/search?query=000 - Exception: Cannot connect to host v2.fleet.akkurad-engineering.com:443 ssl:default [Temporary failure in name resolution]
+2026-05-20 01:36:09 - WARNING - Driver non trouvé: 000
+2026-05-20 01:36:09 - ERROR - Driver non trouvé: 000
+2026-05-20 01:36:28 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-05-21 00:23:49
+2026-05-20 01:36:28 - INFO - Récupération des trips pour le driver: 000
+2026-05-20 01:36:28 - INFO - Recherche du driver par query: 000
+2026-05-20 01:36:28 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 01:36:38 - ERROR - GET entity-instances/entity/69bd744efb98e15a3cf53374/search?query=000 - Exception: Cannot connect to host v2.fleet.akkurad-engineering.com:443 ssl:default [Temporary failure in name resolution]
+2026-05-20 01:36:38 - WARNING - Driver non trouvé: 000
+2026-05-20 01:36:38 - ERROR - Driver non trouvé: 000
+2026-05-20 01:37:58 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-05-21 00:23:49
+2026-05-20 01:37:58 - INFO - Récupération des trips pour le driver: 000
+2026-05-20 01:37:58 - INFO - Recherche du driver par query: 000
+2026-05-20 01:37:58 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 01:37:58 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 01:37:58 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 01:37:58 - INFO - Recherche des schedules par driver serial number: 000
+2026-05-20 01:37:58 - INFO - Recherche du driver par query: 000
+2026-05-20 01:37:58 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 01:37:58 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 01:37:58 - INFO - Recherche des entités par référence pour le driver ID: 6a086d7ef55a356c2954cd25
+2026-05-20 01:37:58 - INFO - Recherche par référence: field=driver_serial_number, value=6a086d7ef55a356c2954cd25
+2026-05-20 01:37:58 - INFO - 1 schedule(s) trouvé(s) sur 10 entité(s)
+2026-05-20 01:37:58 - INFO - ✅ SUCCÈS: 1 schedule(s) pour le driver 6a086d7ef55a356c2954cd25
+2026-05-20 01:37:58 - INFO - Recherche des packages pour le schedule: 6a0cea91f55a356c2954cd9e
+2026-05-20 01:37:58 - INFO - Recherche par référence: field=schedule_id, value=6a0cea91f55a356c2954cd9e
+2026-05-20 01:37:58 - INFO - ✅ SUCCÈS: 3 package(s) trouvé(s) pour le schedule 6a0cea91f55a356c2954cd9e
+2026-05-20 01:37:58 - INFO - Récupération du package par ID: 6a09b40af55a356c2954cd4b
+2026-05-20 01:37:58 - INFO - Récupération de l'instance: 6a09b40af55a356c2954cd4b
+2026-05-20 01:37:58 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 01:37:58 - INFO - ✅ SUCCÈS: Package trouvé: 6a09b40af55a356c2954cd4b
+2026-05-20 01:37:58 - INFO - Récupération de l'adresse par ID: 6a09b40af55a356c2954cd4a
+2026-05-20 01:37:58 - INFO - Récupération de l'instance: 6a09b40af55a356c2954cd4a
+2026-05-20 01:37:58 - INFO - ✅ SUCCÈS: Adresse trouvée: 6a09b40af55a356c2954cd4a
+2026-05-20 01:37:58 - INFO - Récupération du package par ID: 6a0a2747f55a356c2954cd70
+2026-05-20 01:37:58 - INFO - Récupération de l'instance: 6a0a2747f55a356c2954cd70
+2026-05-20 01:37:58 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 01:37:58 - INFO - ✅ SUCCÈS: Package trouvé: 6a0a2747f55a356c2954cd70
+2026-05-20 01:37:58 - INFO - Récupération de l'adresse par ID: 6a0a2747f55a356c2954cd6f
+2026-05-20 01:37:58 - INFO - Récupération de l'instance: 6a0a2747f55a356c2954cd6f
+2026-05-20 01:37:58 - INFO - ✅ SUCCÈS: Adresse trouvée: 6a0a2747f55a356c2954cd6f
+2026-05-20 01:37:58 - INFO - Récupération du package par ID: 6a09c88bf55a356c2954cd66
+2026-05-20 01:37:58 - INFO - Récupération de l'instance: 6a09c88bf55a356c2954cd66
+2026-05-20 01:37:59 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 01:37:59 - INFO - ✅ SUCCÈS: Package trouvé: 6a09c88bf55a356c2954cd66
+2026-05-20 01:37:59 - INFO - Récupération de l'adresse par ID: 6a09c88bf55a356c2954cd65
+2026-05-20 01:37:59 - INFO - Récupération de l'instance: 6a09c88bf55a356c2954cd65
+2026-05-20 01:37:59 - INFO - ✅ SUCCÈS: Adresse trouvée: 6a09c88bf55a356c2954cd65
+2026-05-20 01:37:59 - INFO - ✅ SUCCÈS: 3 trip(s) créé(s)
+2026-05-20 01:37:59 - INFO - ✅ SUCCÈS: 3 trip(s) chargés en mémoire
+2026-05-20 01:37:59 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-05-21 00:23:49
+2026-05-20 01:37:59 - INFO - Recherche du driver par query: 000
+2026-05-20 01:37:59 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 01:37:59 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 01:38:20 - INFO - Token non valide ou absent, récupération d'un nouveau token...
+2026-05-20 01:38:20 - INFO - Tentative de connexion à l'API Fleet...
+2026-05-20 01:38:22 - INFO - ✅ SUCCÈS: Authentification réussie auprès de l'API Fleet
+2026-05-20 01:38:22 - ERROR - Erreur lors de la sauvegarde du token: [Errno 2] No such file or directory: '/home/server/server/data_base_service/token_cache.md'
+2026-05-20 01:38:22 - INFO - Mise à jour du package 6a09b40af55a356c2954cd4b vers: delivered_successfully
+2026-05-20 01:38:22 - INFO - Récupération du package par ID: 6a09b40af55a356c2954cd4b
+2026-05-20 01:38:22 - INFO - Récupération de l'instance: 6a09b40af55a356c2954cd4b
+2026-05-20 01:38:22 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 01:38:22 - INFO - ✅ SUCCÈS: Package trouvé: 6a09b40af55a356c2954cd4b
+2026-05-20 01:38:22 - INFO - Mise à jour de l'instance: 6a09b40af55a356c2954cd4b
+2026-05-20 01:38:23 - INFO - ✅ SUCCÈS: Instance 6a09b40af55a356c2954cd4b mise à jour
+2026-05-20 01:38:23 - INFO - ✅ SUCCÈS: Package 6a09b40af55a356c2954cd4b mis à jour: planned -> delivered_successfully
+2026-05-20 01:38:23 - INFO - ✅ SUCCÈS: Package 6a09b40af55a356c2954cd4b retiré du cache
+2026-05-20 01:52:24 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-05-21 00:23:49
+2026-05-20 01:52:24 - INFO - Récupération des trips pour le driver: 000
+2026-05-20 01:52:24 - INFO - Recherche du driver par query: 000
+2026-05-20 01:52:24 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 01:52:26 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 01:52:26 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 01:52:26 - INFO - Recherche des schedules par driver serial number: 000
+2026-05-20 01:52:26 - INFO - Recherche du driver par query: 000
+2026-05-20 01:52:26 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 01:52:26 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 01:52:26 - INFO - Recherche des entités par référence pour le driver ID: 6a086d7ef55a356c2954cd25
+2026-05-20 01:52:26 - INFO - Recherche par référence: field=driver_serial_number, value=6a086d7ef55a356c2954cd25
+2026-05-20 01:52:27 - INFO - 1 schedule(s) trouvé(s) sur 10 entité(s)
+2026-05-20 01:52:27 - INFO - ✅ SUCCÈS: 1 schedule(s) pour le driver 6a086d7ef55a356c2954cd25
+2026-05-20 01:52:27 - INFO - Recherche des packages pour le schedule: 6a0cea91f55a356c2954cd9e
+2026-05-20 01:52:27 - INFO - Recherche par référence: field=schedule_id, value=6a0cea91f55a356c2954cd9e
+2026-05-20 01:52:27 - INFO - ✅ SUCCÈS: 3 package(s) trouvé(s) pour le schedule 6a0cea91f55a356c2954cd9e
+2026-05-20 01:52:27 - INFO - Récupération du package par ID: 6a09b40af55a356c2954cd4b
+2026-05-20 01:52:27 - INFO - Récupération de l'instance: 6a09b40af55a356c2954cd4b
+2026-05-20 01:52:27 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 01:52:27 - INFO - ✅ SUCCÈS: Package trouvé: 6a09b40af55a356c2954cd4b
+2026-05-20 01:52:27 - INFO - Récupération du package par ID: 6a0a2747f55a356c2954cd70
+2026-05-20 01:52:27 - INFO - Récupération de l'instance: 6a0a2747f55a356c2954cd70
+2026-05-20 01:52:27 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 01:52:27 - INFO - ✅ SUCCÈS: Package trouvé: 6a0a2747f55a356c2954cd70
+2026-05-20 01:52:27 - INFO - Récupération de l'adresse par ID: 6a0a2747f55a356c2954cd6f
+2026-05-20 01:52:27 - INFO - Récupération de l'instance: 6a0a2747f55a356c2954cd6f
+2026-05-20 01:52:27 - INFO - ✅ SUCCÈS: Adresse trouvée: 6a0a2747f55a356c2954cd6f
+2026-05-20 01:52:27 - INFO - Récupération du package par ID: 6a09c88bf55a356c2954cd66
+2026-05-20 01:52:27 - INFO - Récupération de l'instance: 6a09c88bf55a356c2954cd66
+2026-05-20 01:52:27 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 01:52:28 - INFO - ✅ SUCCÈS: Package trouvé: 6a09c88bf55a356c2954cd66
+2026-05-20 01:52:28 - INFO - Récupération de l'adresse par ID: 6a09c88bf55a356c2954cd65
+2026-05-20 01:52:28 - INFO - Récupération de l'instance: 6a09c88bf55a356c2954cd65
+2026-05-20 01:52:28 - INFO - ✅ SUCCÈS: Adresse trouvée: 6a09c88bf55a356c2954cd65
+2026-05-20 01:52:28 - INFO - ✅ SUCCÈS: 2 trip(s) créé(s)
+2026-05-20 01:52:28 - INFO - ✅ SUCCÈS: 2 trip(s) chargés en mémoire
+2026-05-20 01:52:28 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-05-21 00:23:49
+2026-05-20 01:52:28 - INFO - Recherche du driver par query: 000
+2026-05-20 01:52:28 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 01:52:28 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 02:03:45 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-05-21 00:23:49
+2026-05-20 02:03:45 - INFO - Récupération des trips pour le driver: 000
+2026-05-20 02:03:45 - INFO - Recherche du driver par query: 000
+2026-05-20 02:03:45 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 02:03:46 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 02:03:46 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 02:03:46 - INFO - Recherche des schedules par driver serial number: 000
+2026-05-20 02:03:46 - INFO - Recherche du driver par query: 000
+2026-05-20 02:03:46 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 02:03:46 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 02:03:46 - INFO - Recherche des entités par référence pour le driver ID: 6a086d7ef55a356c2954cd25
+2026-05-20 02:03:46 - INFO - Recherche par référence: field=driver_serial_number, value=6a086d7ef55a356c2954cd25
+2026-05-20 02:03:46 - INFO - 1 schedule(s) trouvé(s) sur 10 entité(s)
+2026-05-20 02:03:46 - INFO - ✅ SUCCÈS: 1 schedule(s) pour le driver 6a086d7ef55a356c2954cd25
+2026-05-20 02:03:46 - WARNING - Aucun schedule pour la date: 2026-05-20
+2026-05-20 02:03:46 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-05-21 00:23:49
+2026-05-20 02:03:46 - INFO - Recherche du driver par query: 000
+2026-05-20 02:03:46 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 02:03:46 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 02:05:01 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-05-21 00:23:49
+2026-05-20 02:05:01 - INFO - Récupération des trips pour le driver: 000
+2026-05-20 02:05:01 - INFO - Recherche du driver par query: 000
+2026-05-20 02:05:01 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 02:05:01 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 02:05:01 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 02:05:01 - INFO - Recherche des schedules par driver serial number: 000
+2026-05-20 02:05:01 - INFO - Recherche du driver par query: 000
+2026-05-20 02:05:01 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 02:05:01 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 02:05:01 - INFO - Recherche des entités par référence pour le driver ID: 6a086d7ef55a356c2954cd25
+2026-05-20 02:05:01 - INFO - Recherche par référence: field=driver_serial_number, value=6a086d7ef55a356c2954cd25
+2026-05-20 02:05:01 - INFO - 1 schedule(s) trouvé(s) sur 10 entité(s)
+2026-05-20 02:05:01 - INFO - ✅ SUCCÈS: 1 schedule(s) pour le driver 6a086d7ef55a356c2954cd25
+2026-05-20 02:05:01 - INFO - Recherche des packages pour le schedule: 6a0cfaa9f55a356c2954cda6
+2026-05-20 02:05:01 - INFO - Recherche par référence: field=schedule_id, value=6a0cfaa9f55a356c2954cda6
+2026-05-20 02:05:01 - INFO - ✅ SUCCÈS: 3 package(s) trouvé(s) pour le schedule 6a0cfaa9f55a356c2954cda6
+2026-05-20 02:05:01 - INFO - Récupération du package par ID: 6a09c88bf55a356c2954cd66
+2026-05-20 02:05:01 - INFO - Récupération de l'instance: 6a09c88bf55a356c2954cd66
+2026-05-20 02:05:01 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 02:05:02 - INFO - ✅ SUCCÈS: Package trouvé: 6a09c88bf55a356c2954cd66
+2026-05-20 02:05:02 - INFO - Récupération de l'adresse par ID: 6a09c88bf55a356c2954cd65
+2026-05-20 02:05:02 - INFO - Récupération de l'instance: 6a09c88bf55a356c2954cd65
+2026-05-20 02:05:02 - INFO - ✅ SUCCÈS: Adresse trouvée: 6a09c88bf55a356c2954cd65
+2026-05-20 02:05:02 - INFO - Récupération du package par ID: 6a0a2747f55a356c2954cd70
+2026-05-20 02:05:02 - INFO - Récupération de l'instance: 6a0a2747f55a356c2954cd70
+2026-05-20 02:05:02 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 02:05:02 - INFO - ✅ SUCCÈS: Package trouvé: 6a0a2747f55a356c2954cd70
+2026-05-20 02:05:02 - INFO - Récupération de l'adresse par ID: 6a0a2747f55a356c2954cd6f
+2026-05-20 02:05:02 - INFO - Récupération de l'instance: 6a0a2747f55a356c2954cd6f
+2026-05-20 02:05:02 - INFO - ✅ SUCCÈS: Adresse trouvée: 6a0a2747f55a356c2954cd6f
+2026-05-20 02:05:02 - INFO - Récupération du package par ID: 6a09b40af55a356c2954cd4b
+2026-05-20 02:05:02 - INFO - Récupération de l'instance: 6a09b40af55a356c2954cd4b
+2026-05-20 02:05:02 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 02:05:02 - INFO - ✅ SUCCÈS: Package trouvé: 6a09b40af55a356c2954cd4b
+2026-05-20 02:05:02 - INFO - Récupération de l'adresse par ID: 6a09b40af55a356c2954cd4a
+2026-05-20 02:05:02 - INFO - Récupération de l'instance: 6a09b40af55a356c2954cd4a
+2026-05-20 02:05:02 - INFO - ✅ SUCCÈS: Adresse trouvée: 6a09b40af55a356c2954cd4a
+2026-05-20 02:05:02 - INFO - ✅ SUCCÈS: 3 trip(s) créé(s)
+2026-05-20 02:05:02 - INFO - ✅ SUCCÈS: 3 trip(s) chargés en mémoire
+2026-05-20 02:05:02 - INFO - ✅ SUCCÈS: Token valide jusqu'au 2026-05-21 00:23:49
+2026-05-20 02:05:02 - INFO - Recherche du driver par query: 000
+2026-05-20 02:05:02 - INFO - Recherche pour l'entité 69bd744efb98e15a3cf53374: query=000
+2026-05-20 02:05:02 - INFO - ✅ SUCCÈS: Driver trouvé: vivien (serial: 000, ID: 6a086d7ef55a356c2954cd25)
+2026-05-20 02:06:03 - INFO - Token non valide ou absent, récupération d'un nouveau token...
+2026-05-20 02:06:03 - INFO - Tentative de connexion à l'API Fleet...
+2026-05-20 02:06:04 - INFO - ✅ SUCCÈS: Authentification réussie auprès de l'API Fleet
+2026-05-20 02:06:04 - ERROR - Erreur lors de la sauvegarde du token: [Errno 2] No such file or directory: '/home/server/server/data_base_service/token_cache.md'
+2026-05-20 02:06:04 - INFO - Mise à jour du package 6a09c88bf55a356c2954cd66 vers: delivered_successfully
+2026-05-20 02:06:04 - INFO - Récupération du package par ID: 6a09c88bf55a356c2954cd66
+2026-05-20 02:06:04 - INFO - Récupération de l'instance: 6a09c88bf55a356c2954cd66
+2026-05-20 02:06:04 - INFO - Récupération des instances pour l'entité: 69c06c22fb98e15a3cf533a5
+2026-05-20 02:06:04 - INFO - ✅ SUCCÈS: Package trouvé: 6a09c88bf55a356c2954cd66
+2026-05-20 02:06:04 - INFO - Mise à jour de l'instance: 6a09c88bf55a356c2954cd66
+2026-05-20 02:06:04 - INFO - ✅ SUCCÈS: Instance 6a09c88bf55a356c2954cd66 mise à jour
+2026-05-20 02:06:04 - INFO - ✅ SUCCÈS: Package 6a09c88bf55a356c2954cd66 mis à jour: planned -> delivered_successfully
+2026-05-20 02:06:04 - INFO - ✅ SUCCÈS: Package 6a09c88bf55a356c2954cd66 retiré du cache

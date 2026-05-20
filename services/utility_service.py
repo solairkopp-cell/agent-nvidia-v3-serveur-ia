@@ -52,11 +52,13 @@ class UtilityService:
         return [self._data_cache[trip_id] for trip_id in self.trip_order if trip_id in self._data_cache]
 
     def get_deliveries_summary(self) -> List[Dict[str, Any]]:
+        print (self._data_cache)
         return [
             {
                 "clientName": self._data_cache[trip_id].get("clientName"),
-                "address": self._data_cache[trip_id].get("address"),
-                "packageInfo": self._data_cache[trip_id].get("packageInfo"),
+                "address": " ".join(self._data_cache[trip_id].get("address", "").split()[:2]),
+                "packageInfo": self._data_cache[trip_id].get("packageInfo") or "no package for this one",
+                "deliveryStatus": self._data_cache[trip_id].get("deliveryStatus"),
             }
             for trip_id in self.trip_order
             if trip_id in self._data_cache
@@ -134,3 +136,19 @@ class UtilityService:
         self._data_cache = {str(item["id"]): item for item in trips_data}
         self.trip_order = [str(item["id"]) for item in trips_data]
         self.current_trip_id = self.trip_order[0] if self.trip_order else None
+    
+    def update_current_delivery_status(self, status: str) -> str:
+        if self.current_trip_id is None:
+            return "No current delivery set"
+        item = self._data_cache.get(self.current_trip_id)
+        if item is None:
+            return f"Trip {self.current_trip_id} not found"
+        item["deliveryStatus"] = status
+        return f"Status updated to '{status}' for trip {self.current_trip_id}"
+    
+    def set_delivery_status(self, trip_id: str, status: str) -> str:
+        item = self._data_cache.get(str(trip_id))
+        if item is None:
+            return f"Trip {trip_id} not found"
+        item["deliveryStatus"] = status
+        return f"Status updated to '{status}' for trip {trip_id}"
